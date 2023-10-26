@@ -1,5 +1,5 @@
 // import { initializeApp } from 'firebase/app';
-// import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+// import { getFirestore, collection, getDocs, query, limit } from 'firebase/firestore';
 
 
 // const firebaseConfig = {
@@ -17,10 +17,10 @@
 // const db = getFirestore(app)
 
 // async function getCoolers(db) {
-//     const coolers = collection(db, 'console-coolers');
+//     const coolers = query(collection(db, 'console-coolers'), limit(1));
 //     const coolersSnapshot = await getDocs(coolers);
 //     const coolerList = coolersSnapshot.docs.map(doc => doc.data());
-//     console.log('Coolers data:', coolerList); // Agrega esta línea para depuración
+//     console.log('Coolers data:', coolerList);
 //     return coolerList;
 // }
 // export { getCoolers, db };
