@@ -17,6 +17,7 @@
     "@tabler/icons": "^2.39.0",
     "@tabler/icons-react": "^2.39.0",
     "@tanstack/react-query": "^5.0.0",
+    "axios": "^1.6.0",
     "exceljs": "^4.4.0",
     "firebase": "^9.23.0",
     "react": "^18.2.0",

@@ -1,5 +1,5 @@
 // import { initializeApp } from 'firebase/app';
-// import { getFirestore, collection, getDocs, query, limit } from 'firebase/firestore';
+// import { getFirestore, collection, getDocs, query, limit, orderBy } from 'firebase/firestore';
 
 
 // const firebaseConfig = {
@@ -17,7 +17,8 @@
 // const db = getFirestore(app)
 
 // async function getCoolers(db) {
-//     const coolers = query(collection(db, 'console-coolers'), limit(1));
+//     const orderByField = "manufactured"; //ordenar por fecha de manufactured
+//     const coolers = query(collection(db, 'console-coolers'), orderBy(orderByField), limit(110));
 //     const coolersSnapshot = await getDocs(coolers);
 //     const coolerList = coolersSnapshot.docs.map(doc => doc.data());
 //     console.log('Coolers data:', coolerList);
