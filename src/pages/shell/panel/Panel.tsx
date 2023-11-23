@@ -1,13 +1,7 @@
 import React from "react";
-import Page from "../../../components/page";
+
+import PageFilter from "../../../components/pageFilter";
 
 export default function Panel() {
-  return (
-    <Page
-      current="Panel"
-      paths={[{ name: "Consola", to: "/" }]}
-      view=""
-      controls={[]}
-    ></Page>
-  );
+  return <PageFilter></PageFilter>;
 }

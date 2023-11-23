@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Page from "../../../components/page";
+import PageFilter from "../../../components/pageFilter";
 import { IconSearch, IconDownload } from "@tabler/icons-react";
 import {
   Card,
@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import ExcelJS from "exceljs";
 
-export default function Coolers() {
+export default function Fails() {
   interface Cooler {
     serial_number: string;
     device_id: string;
@@ -94,7 +94,6 @@ export default function Coolers() {
     ? filterCoolers(coolersData, searchValue)
     : [];
 
-  // Actualiza el estado "noInfoToShow" si no se encontraron resultados
   useEffect(() => {
     setNoInfoToShow(filteredCoolers.length === 0);
   }, [filteredCoolers]);
@@ -105,76 +104,20 @@ export default function Coolers() {
     setTotalFilteredRecords(filteredCoolers.length);
   }, [filteredCoolers]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
+  const [totalRecords, setTotalRecords] = useState(0);
+  useEffect(() => {
+    document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
+
+    return () => {
+      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+    };
+  }, []);
+
   return (
     <div>
-      <Page
-        current="Enfriadores"
-        paths={[{ name: "Consola", to: "/" }]}
-        view=""
-        controls={[]}
-      >
-        <TextInput
-          placeholder="Buscar id coolector"
-          mb="md"
-          icon={<IconSearch size={14} stroke={1.5} />}
-          value={searchValue} // Asociar el valor del campo de búsqueda al estado
-          onChange={handleSearchChange} // Manejar cambios en el campo de búsqueda
-        />
-        <br></br>
-        {/* Mostrar el número total de registros filtrados */}
-        <Text style={{ textAlign: "left" }}>
-          {totalFilteredRecords} Enfriadores
-        </Text>
-        <br></br>
-        <Table>
-          <thead>
-            <tr>
-              <th>
-                <center>Código enfriador</center>
-              </th>
-              <th>
-                <center>Mac</center>
-              </th>
-              <th>
-                <center>Modelo</center>
-              </th>
-              <th>
-                <center>Última visita</center>
-              </th>
-              <th>
-                <center>Punto de venta</center>
-              </th>
-              <th>
-                <center>Región</center>
-              </th>
-              <th>
-                <center>Ruta</center>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {coolersData ? (
-              filteredCoolers.map((cooler, index) => (
-                <tr key={index}>
-                  <td>{cooler.serial_number}</td>
-                  <td>{cooler.device_id}</td>
-                  <td>{cooler.model_id}</td>
-                  <td>{""}</td>
-                  <td>{cooler.outlet_name}</td>
-                  <td>{cooler.region}</td>
-                  <td>{cooler.route}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={7} style={{ textAlign: "center" }}>
-                  <Loader size="md" color="#ff4c8c" />
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
-      </Page>
+      <PageFilter /> {/* Componente de barra filter */}
     </div>
   );
 }

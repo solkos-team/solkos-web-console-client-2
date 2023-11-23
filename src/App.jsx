@@ -20,6 +20,19 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import { IconWifi, IconCircle } from "@tabler/icons-react";
+import solkosSymbol from "./sampleData/solkosSymbol.png";
+import coolers from "./sampleData/coolers.png";
+import clt from "./sampleData/clt.png";
+import pv from "./sampleData/pv.png";
+import boards from "./sampleData/boards.png";
+import collab from "./sampleData/collab.png";
+import arrows from "./sampleData/arrows.png";
+import arrow2 from "./sampleData/arrow2.png";
+import arrow_1 from "./sampleData/arrow_1.png";
+import arrow_2 from "./sampleData/arrow_2.png";
+import alert from "./sampleData/alert.png";
+import fails from "./sampleData/fails.png";
+import ind from "./sampleData/ind.png";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -90,11 +103,8 @@ const useStyles = createStyles((theme, _params, getRef) => {
         backgroundColor:
           theme.colorScheme === "dark"
             ? theme.fn.rgba(theme.colors[theme.primaryColor][8], 0.25)
-            : theme.colors[theme.primaryColor][0],
-        color:
-          theme.colorScheme === "dark"
-            ? theme.white
-            : theme.colors[theme.primaryColor][7],
+            : "#E6E6E6",
+        color: theme.colorScheme === "dark" ? theme.white : "dark",
         [`& .${icon}`]: {
           color:
             theme.colors[theme.primaryColor][
@@ -121,52 +131,106 @@ const useStyles = createStyles((theme, _params, getRef) => {
 
 const routes = [
   {
-    link: "/coolers",
-    label: "Enfriadores",
-    icon: <IconCircle size={24} />,
+    label: "Cooler Insights",
+    icon: <img src={coolers} />,
+    initiallyOpened: true,
+    links: [
+      {
+        label: "Alertas",
+        link: "/alerts",
+        icon: <img src={alert} />,
+      },
+      {
+        label: "Fallas",
+        link: "/fails",
+        icon: <img src={fails} />,
+      },
+      {
+        label: "Indicadores",
+        link: "/indicator",
+        icon: <img src={ind} />,
+      },
+    ],
   },
   {
-    link: "/alerts",
-    label: "Alertas",
-    icon: <IconCircle size={24} />,
+    link: "/clt",
+    label: "Cooler Life Tracking",
+    icon: <img src={clt} />,
   },
   {
     link: "/outlets",
-    label: "Punto de venta",
-    icon: <IconCircle size={24} />,
+    label: "Puntos de venta",
+    icon: <img src={pv} />,
   },
   {
     link: "/panel",
-    label: "Panel",
-    icon: <IconCircle size={24} />,
+    label: "Tableros",
+    icon: <img src={boards} />,
   },
   {
     link: "/users",
     label: "Colaboradores",
-    icon: <IconCircle size={24} />,
+    icon: <img src={collab} />,
   },
 ];
 
 function App() {
-  const [coolersData, setCoolersData] = useState([]);
-  const [count, setCount] = useState(0);
   const { classes, cx } = useStyles();
-  const links = routes.map((item) => (
-    // <Visible organization={item.organization} roles={item.roles}>
+  const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(false);
 
-    <NavLink
-      className={({ isActive }) =>
-        cx(classes.link, { [classes.linkActive]: isActive })
-      }
-      to={item.link}
-      key={item.label}
-      onClick={() => setActive(item.label)}
-    >
-      {/* <item.icon className={classes.linkIcon} /> */}
-      {item.icon}
-      <span style={{ marginLeft: 10 }}>{item.label}</span>
-    </NavLink>
-    // </Visible>
+  // Estados para realizar un seguimiento de las secciones activas
+  const [alertsActive, setAlertsActive] = useState(false);
+  const [failsActive, setFailsActive] = useState(false);
+  const [indicatorsActive, setIndicatorsActive] = useState(false);
+
+  const links = routes.map((item) => (
+    <div key={item.label}>
+      {item.links ? (
+        <div>
+          <div
+            onClick={() => setCoolerInsightsOpen(!coolerInsightsOpen)}
+            className={cx(classes.link, {
+              [classes.linkActive]: coolerInsightsOpen,
+            })}
+          >
+            {item.icon}
+            <span style={{ marginLeft: 10 }}>{item.label}</span>
+            {coolerInsightsOpen ? (
+              <img src={arrow_1} style={{ marginLeft: 90 }} />
+            ) : (
+              <img src={arrow_2} style={{ marginLeft: 90 }} />
+            )}
+          </div>
+
+          {coolerInsightsOpen && (
+            <div style={{ marginLeft: 20 }}>
+              {item.links.map((option) => (
+                <NavLink
+                  to={option.link}
+                  className={classes.link}
+                  key={option.label}
+                >
+                  {option.icon && option.icon}{" "}
+                  {/* Agrega el icono de la opción */}
+                  <span style={{ marginLeft: 10 }}>{option.label}</span>
+                </NavLink>
+              ))}
+            </div>
+          )}
+        </div>
+      ) : (
+        <NavLink
+          className={({ isActive }) =>
+            cx(classes.link, { [classes.linkActive]: isActive })
+          }
+          to={item.link || "/"}
+          onClick={() => setActive(item.label)}
+        >
+          {item.icon}
+          <span style={{ marginLeft: 10 }}>{item.label}</span>
+        </NavLink>
+      )}
+    </div>
   ));
 
   return (
@@ -179,16 +243,87 @@ function App() {
           <Navbar width={{ base: 300 }} p={"md"}>
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
-                <Group>
-                  <Avatar src={""} alt="" />
-                  <Stack spacing={0}>
-                    <Text size={"lg"}> Consola</Text>
-                    <Text size={"xs"} color={"dimmed"} transform={"uppercase"}>
-                      {"Solkos"}
-                    </Text>
-                  </Stack>
-                </Group>
-                <Code sx={{ fontWeight: 700 }}>v2.0.0</Code>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "10px",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "16px",
+                      flex: 100,
+                      width: "180px",
+                      height: "44px",
+                    }}
+                  >
+                    <img
+                      style={{ width: "24px", height: "24px" }}
+                      src={solkosSymbol}
+                    />
+
+                    <div style={{ textAlign: "left" }}>
+                      <span
+                        style={{
+                          color: "#000005",
+                          fontSize: "16px",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "155%",
+                          // fontFamily: "DM Sans",
+                        }}
+                      >
+                        Consola Solkos
+                      </span>
+                      <br></br>
+                      <span
+                        style={{
+                          color: "#3A3A3F",
+                          fontSize: "12px",
+                          fontStyle: "normal",
+                          fontWeight: 300,
+                          lineHeight: "155%",
+                          textTransform: "uppercase",
+                          // fontFamily: "DM Mono",
+                        }}
+                      >
+                        BY IMBERA
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "4px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: "3px",
+                      background: "#D4DAE3",
+                      width: "41px",
+                      height: "16px",
+                      marginLeft: "10px",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      V2.0.0
+                    </div>
+                  </div>
+                </div>
               </Group>
               {links}
             </Navbar.Section>
@@ -197,35 +332,98 @@ function App() {
               <Menu shadow="md" width={200} position={"right-end"}>
                 <Menu.Target>
                   <UnstyledButton className={classes.user}>
-                    <Group>
-                      <Avatar src={""} radius="xl" color={"brand"} />
-                      <div style={{ flex: 1 }}>
-                        <Text size="sm" weight={500}>
-                          {/* {auth.user?.organization_name} */}
-                        </Text>
-                        {/* <Text color="dimmed" size="xs">
-                          {auth.user?.name}
-                        </Text> */}
-                        <Text color="dimmed" size="xs">
-                          {"Mayra Barrón"}
-                        </Text>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "10px",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        flexDirection: "row",
+                        height: "16px",
+                      }}
+                    >
+                      {/* CONTENT */}
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "16px",
+                          flex: "100",
+                        }}
+                      >
+                        {/* AVATAR */}
+                        <div
+                          style={{
+                            display: "flex",
+                            width: "38px",
+                            height: "38px",
+                            padding: "1px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "10px",
+                            borderRadius: "32px",
+                            background: "#E6E6E6",
+                          }}
+                        >
+                          MB
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column", // Cambiado a dirección de columna
+                            alignItems: "flex-start",
+                          }}
+                        >
+                          <Text
+                            style={{
+                              // alignSelf: "stretch",
+                              color: "#000005",
+                              // fontFamily: "DM Sans",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 600,
+                              lineHeight: "155%",
+                            }}
+                          >
+                            Mayra Barrón
+                          </Text>
+                          <div
+                            style={{
+                              display: "flex",
+                              padding: "4px",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              borderRadius: "3px",
+                              background: "#D4DAE3",
+                              width: 50,
+                            }}
+                          >
+                            <Text
+                              style={{
+                                color: "#313A49",
+                                // fontFamily: "Space Mono",
+                                fontSize: "12px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "14px",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              IMBERA
+                            </Text>
+                          </div>
+                        </div>
                       </div>
-                      {/* <IconChevronRight size={14} stroke={1.5} /> */}
-                    </Group>
+                      <img src={arrows} />
+                    </div>
                   </UnstyledButton>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  <Menu.Label>
-                    {/* {auth.user?.organization_name} */}
-                  </Menu.Label>
-                  <Menu.Item
-                  // icon={<IconUser size={14} />}
-                  // component={Link}
-                  // to={`/users/${auth.user.user_id}`}
-                  >
-                    Perfil
-                  </Menu.Item>
-                  <Menu.Item
+                  {/* <Menu.Label> */}
+                  {/* {auth.user?.organization_name} */}
+                  {/* </Menu.Label> */}
+                  {/* <Menu.Item
                     // icon={<IconLogout size={14} />}
                     onClick={() => {
                       auth.signout(() => navigate("/login"));
@@ -233,28 +431,173 @@ function App() {
                     }}
                   >
                     Cerrar sesión
-                  </Menu.Item>
+                  </Menu.Item> */}
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 600,
+                        lineHeight: "16px",
+                      }}
+                    >
+                      Cambiar de organización
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "10px 12px",
+                      alignItems: "center",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        flex: "100",
+                        fontSize: "14px",
+                      }}
+                    >
+                      KOF
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "10px 12px",
+                      alignItems: "center",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        flex: "100",
+                        fontSize: "14px",
+                      }}
+                    >
+                      HEINEKEN
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "190px",
+                        height: "1px",
+                        background: "#CACACA",
+                      }}
+                    ></div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 600,
+                        lineHeight: "16px",
+                      }}
+                    >
+                      Sistema
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "10px 12px",
+                      alignItems: "center",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#000005",
+                        // fontFamily: "DM Sans",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "16px",
+                      }}
+                    >
+                      Mi cuenta
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "10px 12px",
+                      alignItems: "center",
+                      gap: "10px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                        flex: "100",
+                      }}
+                    >
+                      <img
+                        src={arrow2}
+                        style={{ width: "18px", height: "18px" }}
+                      />
+                      <Text
+                        style={{
+                          color: "#F93448",
+                          // fontFamily: "DM Sans",
+                          fontSize: "14px",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "16px",
+                        }}
+                      >
+                        Cerrar sesión
+                      </Text>
+                    </div>
+                  </div>
                 </Menu.Dropdown>
               </Menu>
             </Navbar.Section>
           </Navbar>
-        }
-        footer={
-          <Footer height={64} p="md">
-            <Group spacing={6}>
-              <Text size={"sm"}>Consola</Text>
-              <Text size={"xs"} color={"dimmed"}>
-                ·
-              </Text>
-              <Text size={"xs"} transform={"uppercase"} color={"dimmed"}>
-                by Solkos
-              </Text>
-              <Text size={"xs"} color={"dimmed"}>
-                ·
-              </Text>
-              <Text size={"sm"}>{dayjs().year()}</Text>
-            </Group>
-          </Footer>
         }
         header={<Header height={0}></Header>}
       >

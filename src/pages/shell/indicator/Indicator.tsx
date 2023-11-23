@@ -14,7 +14,7 @@ import {
 } from "@mantine/core";
 import ExcelJS from "exceljs";
 
-export default function Outlets() {
+export default function Panel() {
   interface Cooler {
     serial_number: string;
     device_id: string;
