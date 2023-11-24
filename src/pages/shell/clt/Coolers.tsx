@@ -200,7 +200,7 @@ export default function Coolers() {
                 type="text"
                 placeholder="Busca por..."
                 style={{
-                  color: "#ADBACC",
+                  // color: "#ADBACC",
                   // fontFamily: "DM Sans",
                   fontSize: "16px",
                   fontStyle: "normal",
@@ -266,10 +266,10 @@ export default function Coolers() {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
+                      width: "1000px",
                     }}
                   >
-                    Loading...
-                    {/* <IconLoader size={14} /> */}
+                    <IconLoader size={35} />
                   </div>
                 ) : filteredCoolers.length > 0 ? (
                   <Card>

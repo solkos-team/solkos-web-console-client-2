@@ -29,6 +29,7 @@ export default function ({}) {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
   const [value, setValue] = React.useState("");
+
   return (
     <>
       <br></br>
@@ -211,7 +212,19 @@ export default function ({}) {
                     borderRadius: "8px",
                     border: "1px solid #CACACA",
                   }}
-                ></div>
+                >
+                  <div>
+                    <iframe
+                      title="Google Map"
+                      width="520"
+                      height="450"
+                      loading="lazy"
+                      allowFullScreen
+                      frameBorder="0"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.408643182943!2d-122.41941688468014!3d37.77492957975748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858096f6c6c8cf%3A0x7cfb66c2de942607!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1638258396954!5m2!1sen!2sus"
+                    ></iframe>
+                  </div>
+                </div>
                 <div
                   style={{
                     display: "flex",
