@@ -1,31 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { AreaChart, BarChart, Card, Flex, Switch, Title } from "@tremor/react";
-import {
-  IconSearch,
-  IconArrowNarrowLeft,
-  IconLock,
-  IconChevronRight,
-  IconCircleX,
-  IconCirclePlus,
-  IconArrowDownRight,
-  IconArrowRight,
-} from "@tabler/icons-react";
+import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
 import { Text } from "@mantine/core";
-import {
-  Table,
-  Pagination,
-  Select,
-  Loader,
-  TextInput,
-  Paper,
-  Tooltip,
-  Tabs,
-} from "@mantine/core";
+import { Tabs } from "@mantine/core";
 
 export default function ({}) {
-  // ***************************************************************************************
-
-  // ***************************************************************************************
   return (
     <div>
       <div
@@ -687,6 +666,336 @@ export default function ({}) {
                 </Tabs.Panel>
               </div>
             </Tabs>
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "16px",
+            alignSelf: "stretch",
+          }}
+        >
+          {/* Movimientos */}
+          <div
+            style={{
+              display: "flex",
+              padding: "24px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "16px",
+              borderRadius: "8px",
+              border: "1px solid #88888B",
+              width: "100%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "4px",
+                alignSelf: "stretch",
+              }}
+            >
+              <img src={"../../sampleData/commerce.png"} alt="cooler"></img>
+              <div
+                style={{
+                  color: "#3A3A3F",
+                  // fontFamily: "DM Sans",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                }}
+              >
+                Movimientos
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                padding: "16px",
+                alignItems: "flex-start",
+                gap: "16px",
+                alignSelf: "stretch",
+                borderRadius: "8px",
+                border: "1px solid #CACACA",
+                background: "#F4F4F4",
+              }}
+            >
+              {/* ORDEN */}
+              <div
+                style={{
+                  display: "flex",
+                  padding: "16px",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "4px",
+                  alignSelf: "stretch",
+                  borderRadius: "5px",
+                  background: "#FFF",
+                  boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                  width: "400px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      flex: 100,
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      lineHeight: "normal",
+                      textAlign: "left",
+                    }}
+                  >
+                    Orden REY0791626
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      borderRadius: "2px",
+                      background: "#D4DAE3",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "10px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "10px",
+                      }}
+                    >
+                      CERRADA
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    flex: 100,
+                    color: "#000005",
+                    // fontFamily: "DM Sans",
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                  }}
+                >
+                  $100.00
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#3E83FF",
+                      // fontFamily: "Inter",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    1 de diciembre de 2021 00:00
+                  </div>
+                </div>
+                <div
+                  style={{
+                    color: "#88888B",
+                    // fontFamily: "Inter",
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Se conecta con extensión
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* ------------------------------------------------------- */}
+          {/* ------------------------------------------------------- */}
+
+          {/* Ordenes de servicios */}
+          <div
+            style={{
+              display: "flex",
+              padding: "24px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "16px",
+              borderRadius: "8px",
+              border: "1px solid #88888B",
+              width: "100%",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "4px",
+                alignSelf: "stretch",
+              }}
+            >
+              <img src={"../../sampleData/commerce.png"} alt="cooler"></img>
+              <div
+                style={{
+                  color: "#3A3A3F",
+                  // fontFamily: "DM Sans",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                }}
+              >
+                Ordenes de servicio
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                padding: "16px",
+                alignItems: "flex-start",
+                gap: "16px",
+                alignSelf: "stretch",
+                borderRadius: "8px",
+                border: "1px solid #CACACA",
+                background: "#F4F4F4",
+              }}
+            >
+              {/* ORDEN */}
+              <div
+                style={{
+                  display: "flex",
+                  padding: "16px",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "4px",
+                  alignSelf: "stretch",
+                  borderRadius: "5px",
+                  background: "#FFF",
+                  boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                  width: "400px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      flex: 100,
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      lineHeight: "normal",
+                      textAlign: "left",
+                    }}
+                  >
+                    Orden REY0791626
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      borderRadius: "2px",
+                      background: "#D4DAE3",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "10px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "10px",
+                      }}
+                    >
+                      CERRADA
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    flex: 100,
+                    color: "#000005",
+                    // fontFamily: "DM Sans",
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                  }}
+                >
+                  $100.00
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#3E83FF",
+                      // fontFamily: "Inter",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    1 de diciembre de 2021 00:00
+                  </div>
+                </div>
+                <div
+                  style={{
+                    color: "#88888B",
+                    // fontFamily: "Inter",
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Se conecta con extensión
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

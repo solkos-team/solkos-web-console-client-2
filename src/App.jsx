@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import { useLocation } from "react-router-dom";
 import {
-  Avatar,
-  Code,
   Group,
   Navbar,
-  Stack,
   Text,
   UnstyledButton,
   AppShell,
   createStyles,
   Menu,
-  Footer,
   Header,
 } from "@mantine/core";
 import { NavLink, Outlet } from "react-router-dom";
@@ -19,7 +16,6 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
-import { IconWifi, IconCircle } from "@tabler/icons-react";
 import solkosSymbol from "./sampleData/solkosSymbol.png";
 import coolers from "./sampleData/coolers.png";
 import clt from "./sampleData/clt.png";
@@ -136,6 +132,11 @@ const routes = [
     initiallyOpened: true,
     links: [
       {
+        label: "Insights",
+        link: "/insights",
+        icon: <img src={"../../sampleData/system_3.png"} alt="cooler"></img>,
+      },
+      {
         label: "Alertas",
         link: "/alerts",
         icon: <img src={alert} />,
@@ -176,19 +177,26 @@ const routes = [
 
 function App() {
   const { classes, cx } = useStyles();
-  const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(false);
+  const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
+  const location = useLocation();
 
-  // Estados para realizar un seguimiento de las secciones activas
-  const [alertsActive, setAlertsActive] = useState(false);
-  const [failsActive, setFailsActive] = useState(false);
-  const [indicatorsActive, setIndicatorsActive] = useState(false);
+  const closeCoolerInsights = () => {
+    setCoolerInsightsOpen(false);
+  };
+
+  useEffect(() => {
+    // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
+    setCoolerInsightsOpen(location.pathname === "/");
+  }, [location.pathname]);
 
   const links = routes.map((item) => (
     <div key={item.label}>
       {item.links ? (
         <div>
           <div
-            onClick={() => setCoolerInsightsOpen(!coolerInsightsOpen)}
+            onClick={() => {
+              setCoolerInsightsOpen(!coolerInsightsOpen);
+            }}
             className={cx(classes.link, {
               [classes.linkActive]: coolerInsightsOpen,
             })}
@@ -209,9 +217,11 @@ function App() {
                   to={option.link}
                   className={classes.link}
                   key={option.label}
+                  // Añade la prop "activate" para que el menú se active al cargar la página
+                  activate
+                  onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
                 >
                   {option.icon && option.icon}{" "}
-                  {/* Agrega el icono de la opción */}
                   <span style={{ marginLeft: 10 }}>{option.label}</span>
                 </NavLink>
               ))}
@@ -224,7 +234,10 @@ function App() {
             cx(classes.link, { [classes.linkActive]: isActive })
           }
           to={item.link || "/"}
-          onClick={() => setActive(item.label)}
+          onClick={() => {
+            setActive(item.label);
+            closeCoolerInsights();
+          }}
         >
           {item.icon}
           <span style={{ marginLeft: 10 }}>{item.label}</span>
@@ -420,18 +433,6 @@ function App() {
                   </UnstyledButton>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  {/* <Menu.Label> */}
-                  {/* {auth.user?.organization_name} */}
-                  {/* </Menu.Label> */}
-                  {/* <Menu.Item
-                    // icon={<IconLogout size={14} />}
-                    onClick={() => {
-                      auth.signout(() => navigate("/login"));
-                      updateUnits("fahrenheit");
-                    }}
-                  >
-                    Cerrar sesión
-                  </Menu.Item> */}
                   <div
                     style={{
                       display: "flex",

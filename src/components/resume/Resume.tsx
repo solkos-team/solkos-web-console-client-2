@@ -1,34 +1,43 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import {
-  IconSearch,
-  IconArrowNarrowLeft,
-  IconLock,
-  IconChevronRight,
   IconCircleX,
   IconCirclePlus,
   IconArrowDownRight,
   IconArrowRight,
 } from "@tabler/icons-react";
-import { Text } from "@mantine/core";
-import { Flex } from "@tremor/react";
-import {
-  Card,
-  Table,
-  Pagination,
-  Select,
-  Loader,
-  TextInput,
-  Paper,
-  Tooltip,
-  Tabs,
-} from "@mantine/core";
-import { wrap } from "module";
+import { Tabs } from "@mantine/core";
 
 export default function ({}) {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
-  const [value, setValue] = React.useState("");
+  // ****************************************************************************************
+  // ****************************************************************************************
+  const { serialNumber } = useParams();
+  const [coolerDetails, setCoolerDetails] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serialNumber}`;
+
+        // Realizar la solicitud al servidor
+        const response = await axios.get(url);
+
+        // Guardar los detalles del enfriador en el estado
+        setCoolerDetails(response.data);
+      } catch (error) {
+        console.error("Error al obtener los detalles del enfriador:", error);
+      }
+    };
+
+    fetchData();
+  }, [serialNumber]);
+
+  // ****************************************************************************************
+  // ****************************************************************************************
 
   return (
     <>
@@ -919,7 +928,6 @@ export default function ({}) {
                 </div>
                 <IconArrowRight
                   style={{ color: "#3E83FF", width: "16px", height: "16px" }}
-                  onClick={() => setValue("tree")}
                 />
               </div>
             </div>
