@@ -20,7 +20,7 @@ import {
 } from "@mantine/core";
 import { Text } from "@mantine/core";
 
-export default function ({}) {
+const Energy = ({ coolersData }) => {
   return (
     <div
       style={{
@@ -127,7 +127,7 @@ export default function ({}) {
                 lineHeight: "28px",
               }}
             >
-              $18,405.29
+              $------
             </div>
           </div>
           <div
@@ -161,7 +161,7 @@ export default function ({}) {
                 lineHeight: "28px",
               }}
             >
-              4.72 KW/h
+              ----- KW/h
             </div>
           </div>
           <div
@@ -195,7 +195,7 @@ export default function ({}) {
                 lineHeight: "28px",
               }}
             >
-              10.12 KW/h
+              ------ KW/h
             </div>
           </div>
           <div
@@ -229,7 +229,7 @@ export default function ({}) {
                 lineHeight: "28px",
               }}
             >
-              2.34 Kg/día
+              ----- Kg/día
             </div>
           </div>
         </div>
@@ -303,7 +303,7 @@ export default function ({}) {
           >
             Consumo de energía por mes
           </div>
-          v
+
           <div
             style={{
               color: "#88888B",
@@ -343,4 +343,5 @@ export default function ({}) {
       </div>
     </div>
   );
-}
+};
+export default Energy;

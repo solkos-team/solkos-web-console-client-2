@@ -10,35 +10,11 @@ import {
 } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 
-export default function ({}) {
+const Resume = ({ coolersData }) => {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
-  // ****************************************************************************************
-  // ****************************************************************************************
-  const { serialNumber } = useParams();
-  const [coolerDetails, setCoolerDetails] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serialNumber}`;
-
-        // Realizar la solicitud al servidor
-        const response = await axios.get(url);
-
-        // Guardar los detalles del enfriador en el estado
-        setCoolerDetails(response.data);
-      } catch (error) {
-        console.error("Error al obtener los detalles del enfriador:", error);
-      }
-    };
-
-    fetchData();
-  }, [serialNumber]);
-
-  // ****************************************************************************************
-  // ****************************************************************************************
-
+  // console.log(coolersData?.cooler?.outlet_name);
   return (
     <>
       <br></br>
@@ -116,7 +92,7 @@ export default function ({}) {
                     lineHeight: "14px",
                   }}
                 >
-                  SIN ACCIONES
+                  -----
                 </div>
               </div>
             </div>
@@ -155,7 +131,9 @@ export default function ({}) {
                 lineHeight: "20px",
               }}
             >
-              CHINOS PIZZA / 120151181
+              {coolersData?.cooler?.outlet_name === ""
+                ? "Sin registro"
+                : coolersData?.cooler?.outlet_name}
             </div>
           </div>
           <div
@@ -191,7 +169,9 @@ export default function ({}) {
                 lineHeight: "20px",
               }}
             >
-              CHINOS PIZZA / 120151181
+              {coolersData?.cooler?.outlet_address === ""
+                ? "Sin registro"
+                : coolersData?.cooler?.outlet_address}
             </div>
           </div>
           {/* ********** */}
@@ -353,7 +333,15 @@ export default function ({}) {
                       marginLeft: "auto",
                     }}
                   >
-                    (19.353958, -990247744)
+                    {"("}{" "}
+                    {coolersData?.cooler?.latitude === ""
+                      ? "Sin registro"
+                      : coolersData?.cooler?.latitude}{" "}
+                    {","}
+                    {coolersData?.cooler?.longitude === ""
+                      ? "Sin registro"
+                      : coolersData?.cooler?.longitude}
+                    {")"}
                   </div>
                 </div>
                 <div
@@ -388,7 +376,7 @@ export default function ({}) {
                       marginLeft: "auto",
                     }}
                   >
-                    (19.353958, -990247744)
+                    (----, ----)
                   </div>
                 </div>
                 <div
@@ -423,7 +411,7 @@ export default function ({}) {
                       marginLeft: "auto",
                     }}
                   >
-                    17 metros
+                    -- metros
                   </div>
                 </div>
               </Tabs.Panel>
@@ -491,7 +479,12 @@ export default function ({}) {
                 </div>
               </div>
               <div style={{ height: "290px", alignSelf: "stretch" }}>
-                <img src={a} width={"100%"} alt="cooler"></img>
+                <img
+                  src={"../../sampleData/cooler_c.png"}
+                  width={"100%"}
+                  alt="cooler"
+                  onError={() => console.log("Error al cargar la imagen")}
+                />
               </div>
               <div
                 style={{
@@ -526,7 +519,9 @@ export default function ({}) {
                     lineHeight: "20px",
                   }}
                 >
-                  A86200103820
+                  {coolersData?.cooler?.serial_number === ""
+                    ? "Sin registro"
+                    : coolersData?.cooler?.serial_number}
                 </div>
               </div>
               <div
@@ -562,7 +557,9 @@ export default function ({}) {
                     lineHeight: "20px",
                   }}
                 >
-                  90:20:30:BA:12
+                  {coolersData?.cooler?.device_id === ""
+                    ? "Sin registro"
+                    : coolersData?.cooler?.device_id}
                 </div>
               </div>
               <div
@@ -598,7 +595,9 @@ export default function ({}) {
                     lineHeight: "20px",
                   }}
                 >
-                  326
+                  {coolersData?.cooler?.model_id === ""
+                    ? "Sin registro"
+                    : coolersData?.cooler?.model_id}
                 </div>
               </div>
             </div>
@@ -689,7 +688,7 @@ export default function ({}) {
                       lineHeight: "14px",
                     }}
                   >
-                    $1,551,73
+                    $-------
                   </div>
                 </div>
               </div>
@@ -736,7 +735,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $18,405.29
+                  $-----
                 </div>
               </div>
               <div
@@ -770,7 +769,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $18,405.29
+                  $------
                 </div>
               </div>
               <div
@@ -804,7 +803,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $14,936.00
+                  $-------
                 </div>
               </div>
             </div>
@@ -901,7 +900,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $18,405.29
+                  $-------
                 </div>
               </div>
 
@@ -937,4 +936,5 @@ export default function ({}) {
       <br></br>
     </>
   );
-}
+};
+export default Resume;

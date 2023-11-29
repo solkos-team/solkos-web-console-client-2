@@ -28,6 +28,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/alerts" element={<Alerts />} />
                 <Route path="/clt" element={<Coolers />} />
                 <Route path="/coolerDetail" element={<CoolerDetail />} />
+                <Route
+                  path="/coolerDetail/:serial_number"
+                  element={<CoolerDetail />}
+                />
                 <Route path="/insights" element={<Insights />} />
                 <Route path="/fails" element={<Fails />} />
                 <Route path="/indicator" element={<Indicator />} />

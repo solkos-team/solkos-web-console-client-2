@@ -4,7 +4,18 @@ import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
 import { Text } from "@mantine/core";
 import { Tabs } from "@mantine/core";
 
-export default function ({}) {
+const EconomicDetail = ({ coolersData }) => {
+  const formatCreatedAt = (createdAt) => {
+    const date = new Date(createdAt);
+    const formattedDate = date.toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+    return formattedDate;
+  };
   return (
     <div>
       <div
@@ -107,7 +118,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $18,405.29
+                  $----
                 </div>
                 <div
                   style={{
@@ -178,7 +189,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $14,936.00
+                  $------
                 </div>
               </div>
               <div
@@ -213,7 +224,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  $3,469.29
+                  $-----
                 </div>
               </div>
             </div>
@@ -296,7 +307,7 @@ export default function ({}) {
                       lineHeight: "normal",
                     }}
                   >
-                    $10,862.12
+                    $-----
                   </div>
                   <div
                     style={{
@@ -345,7 +356,7 @@ export default function ({}) {
                       lineHeight: "14px",
                     }}
                   >
-                    $1,551.73
+                    $-----
                   </div>
                   <div
                     style={{
@@ -419,7 +430,7 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  2020
+                  -----
                 </div>
               </div>
               <div
@@ -452,7 +463,9 @@ export default function ({}) {
                     lineHeight: "normal",
                   }}
                 >
-                  10 años
+                  {coolersData?.cooler?.customer === "HEINEKEN"
+                    ? "5 años"
+                    : "10 años"}
                 </div>
               </div>
             </div>
@@ -564,7 +577,7 @@ export default function ({}) {
                   lineHeight: "normal",
                 }}
               >
-                $3,469.29
+                $-----
               </div>
               <div
                 style={{
@@ -611,7 +624,7 @@ export default function ({}) {
                   lineHeight: "14px",
                 }}
               >
-                (+ $1,551.73)
+                (+ $-----)
               </div>
               <div
                 style={{
@@ -725,113 +738,146 @@ export default function ({}) {
               }}
             >
               {/* ORDEN */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "16px",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "4px",
-                  alignSelf: "stretch",
-                  borderRadius: "5px",
-                  background: "#FFF",
-                  boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                  width: "400px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                  }}
-                >
-                  <div
-                    style={{
-                      flex: 100,
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 600,
-                      lineHeight: "normal",
-                      textAlign: "left",
-                    }}
-                  >
-                    Orden REY0791626
+              <div>
+                {coolersData?.service_orders && (
+                  <div>
+                    {coolersData.service_orders
+                      .filter(
+                        (order) =>
+                          order.service_id === "1003" && order.status === "D,D"
+                      )
+                      .map((order) => (
+                        <>
+                          <div key={order.id}>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "16px",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+                                gap: "4px",
+                                alignSelf: "stretch",
+                                borderRadius: "5px",
+                                background: "#FFF",
+                                boxShadow:
+                                  "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                width: "400px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "8px",
+                                  alignSelf: "stretch",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    flex: 100,
+                                    color: "#000005",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "normal",
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  Orden{" "}
+                                  {order.id === "" ? "Sin registro" : order.id}
+                                </div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    padding: "8px",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    borderRadius: "2px",
+                                    background: "#D4DAE3",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      color: "#313A49",
+                                      // fontFamily: "Space Mono",
+                                      fontSize: "10px",
+                                      fontStyle: "normal",
+                                      fontWeight: 400,
+                                      lineHeight: "10px",
+                                    }}
+                                  >
+                                    CERRADA
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  flex: 100,
+                                  color: "#000005",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                }}
+                              >
+                                $-----
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  alignSelf: "stretch",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#3E83FF",
+                                    // fontFamily: "Inter",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 500,
+                                    lineHeight: "normal",
+                                  }}
+                                >
+                                  {order.created_at === ""
+                                    ? "Sin registro"
+                                    : formatCreatedAt(order.created_at)}
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  color: "#88888B",
+                                  // fontFamily: "Inter",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 500,
+                                  lineHeight: "normal",
+                                  textAlign: "left",
+                                }}
+                              >
+                                {order.description === ""
+                                  ? "Sin registro"
+                                  : order.description}
+                              </div>
+                            </div>
+                          </div>
+                          <br></br>
+                        </>
+                      ))}
+                    {coolersData.service_orders.filter(
+                      (order) =>
+                        order.service_id === "1003" && order.status === "D,D"
+                    ).length === 0 && (
+                      <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                        Sin órdenes de movimiento
+                      </p>
+                    )}
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "8px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
-                      background: "#D4DAE3",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#313A49",
-                        // fontFamily: "Space Mono",
-                        fontSize: "10px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "10px",
-                      }}
-                    >
-                      CERRADA
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    flex: 100,
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  $100.00
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                    alignSelf: "stretch",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#3E83FF",
-                      // fontFamily: "Inter",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    1 de diciembre de 2021 00:00
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "Inter",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Se conecta con extensión
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -887,113 +933,151 @@ export default function ({}) {
               }}
             >
               {/* ORDEN */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "16px",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "4px",
-                  alignSelf: "stretch",
-                  borderRadius: "5px",
-                  background: "#FFF",
-                  boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                  width: "400px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                  }}
-                >
-                  <div
-                    style={{
-                      flex: 100,
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 600,
-                      lineHeight: "normal",
-                      textAlign: "left",
-                    }}
-                  >
-                    Orden REY0791626
+              <div>
+                {coolersData?.service_orders && (
+                  <div>
+                    {coolersData.service_orders
+                      .filter(
+                        (order) =>
+                          order.service_id === "1001" ||
+                          order.service_id === "1002" ||
+                          (order.service_id === "1005" &&
+                            order.status === "D,D")
+                      )
+                      .map((order) => (
+                        <>
+                          <div key={order.id}>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "16px",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+                                gap: "4px",
+                                alignSelf: "stretch",
+                                borderRadius: "5px",
+                                background: "#FFF",
+                                boxShadow:
+                                  "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                width: "400px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "8px",
+                                  alignSelf: "stretch",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    flex: 100,
+                                    color: "#000005",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "normal",
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  Orden{" "}
+                                  {order.id === "" ? "Sin registro" : order.id}
+                                </div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    padding: "8px",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    borderRadius: "2px",
+                                    background: "#D4DAE3",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      color: "#313A49",
+                                      // fontFamily: "Space Mono",
+                                      fontSize: "10px",
+                                      fontStyle: "normal",
+                                      fontWeight: 400,
+                                      lineHeight: "10px",
+                                    }}
+                                  >
+                                    CERRADA
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  flex: 100,
+                                  color: "#000005",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                }}
+                              >
+                                $-----
+                              </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  alignSelf: "stretch",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#3E83FF",
+                                    // fontFamily: "Inter",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 500,
+                                    lineHeight: "normal",
+                                  }}
+                                >
+                                  {order.created_at === ""
+                                    ? "Sin registro"
+                                    : formatCreatedAt(order.created_at)}
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  color: "#88888B",
+                                  // fontFamily: "Inter",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 500,
+                                  lineHeight: "normal",
+                                  textAlign: "left",
+                                }}
+                              >
+                                {order.description === ""
+                                  ? "Sin registro"
+                                  : order.description}
+                              </div>
+                            </div>
+                          </div>
+                          <br></br>
+                        </>
+                      ))}
+                    {coolersData.service_orders.filter(
+                      (order) =>
+                        order.service_id === "1001" ||
+                        order.service_id === "1002" ||
+                        (order.service_id === "1005" && order.status === "D,D")
+                    ).length === 0 && (
+                      <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                        Sin órdenes de servicio
+                      </p>
+                    )}
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "8px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
-                      background: "#D4DAE3",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#313A49",
-                        // fontFamily: "Space Mono",
-                        fontSize: "10px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "10px",
-                      }}
-                    >
-                      CERRADA
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    flex: 100,
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  $100.00
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                    alignSelf: "stretch",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#3E83FF",
-                      // fontFamily: "Inter",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    1 de diciembre de 2021 00:00
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "Inter",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Se conecta con extensión
-                </div>
+                )}
               </div>
             </div>
           </div>
@@ -1001,4 +1085,5 @@ export default function ({}) {
       </div>
     </div>
   );
-}
+};
+export default EconomicDetail;
