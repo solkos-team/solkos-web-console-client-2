@@ -11,9 +11,29 @@ import {
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
 
+async function validarExistenciaImagen(url) {
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+
+    if (response.ok) {
+      console.log("La imagen existe.");
+    } else {
+      console.log("La imagen no existe. Código de respuesta:", response.status);
+    }
+  } catch (error) {
+    console.error(
+      "Error al intentar validar la existencia de la imagen:",
+      error
+    );
+  }
+}
+
 const Resume = ({ coolersData }) => {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
+  const urlImagen = coolersData?.cooler?.asset_url;
+
+  validarExistenciaImagen(urlImagen);
 
   // console.log(coolersData?.cooler?.outlet_name);
   return (
@@ -279,7 +299,39 @@ const Resume = ({ coolersData }) => {
                       gap: "4px",
                     }}
                   >
-                    <IconCircleX />
+                    {/* <IconCircleX /> */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px", // Espacio entre los bloques
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "10px", // Ancho de cada bloque
+                          height: "4px",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                      &nbsp;
+                      <div
+                        style={{
+                          width: "10px", // Ancho de cada bloque
+                          height: "4px",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                      &nbsp;
+                      <div
+                        style={{
+                          width: "10px", // Ancho de cada bloque
+                          height: "4px",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                    </div>
+
                     <div
                       style={{
                         color: "#88888B",
@@ -907,6 +959,7 @@ const Resume = ({ coolersData }) => {
                   alignItems: "center",
                   gap: "4px",
                   flex: 100,
+                  cursor: "pointer",
                 }}
               >
                 <div
