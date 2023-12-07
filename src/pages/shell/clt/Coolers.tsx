@@ -60,12 +60,6 @@ export default function Coolers() {
       "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
     const headers = {
       "Content-Type": "application/json",
-      "Content-Length": "4830",
-      Vary: "Origin",
-      "Access-Control-Allow-Origin": "*",
-      "Pagination-Count": "5817",
-      "Pagination-Page": "10",
-      "Pagination-Limit": "1",
     };
 
     const data = {
@@ -166,9 +160,19 @@ export default function Coolers() {
 
   // -------------------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------------------
+
+  // Page (Body)
+  useEffect(() => {
+    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
+
+    return () => {
+      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+    };
+  }, []);
   return (
     <div>
       <PageFilter />
+
       <br></br>
       <div
         style={{

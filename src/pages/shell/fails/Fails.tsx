@@ -1,114 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { IconSearch, IconDownload } from "@tabler/icons-react";
-import {
-  Card,
-  Table,
-  Pagination,
-  Select,
-  Loader,
-  TextInput,
-  Paper,
-  Tooltip,
-  Text,
-} from "@mantine/core";
-import ExcelJS from "exceljs";
 
 export default function Fails() {
-  interface Cooler {
-    serial_number: string;
-    device_id: string;
-    model_id: string;
-    outlet_name: string;
-    region: string;
-    route: string;
-  }
-
-  const [searchValue, setSearchValue] = useState("");
-  const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-  const [noInfoToShow, setNoInfoToShow] = useState(false);
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-    setNoInfoToShow(false); // Restablecer el estado cuando se realiza una nueva búsqueda
-  };
-
-  const filterCoolers = (data, searchQuery) => {
-    const filteredData = data.filter((item) => {
-      const searchString = searchQuery.toLowerCase();
-      const codeEnfriador = item.serial_number.toLowerCase();
-      const deviceId = item.device_id.toLowerCase();
-      return (
-        codeEnfriador.includes(searchString) || deviceId.includes(searchString)
-      );
-    });
-    return filteredData;
-  };
-
-  const fetchCoolersFromAPI = async () => {
-    const url =
-      "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      customer: "KOF",
-      class: "STK",
-      algorithm: ["INSTALLATION"],
-      page_size: 10,
-      page_number: 1,
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de los enfriadores");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
-
+  // Page (Body)
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCoolersFromAPI();
-        setCoolersData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const filteredCoolers = coolersData
-    ? filterCoolers(coolersData, searchValue)
-    : [];
-
-  useEffect(() => {
-    setNoInfoToShow(filteredCoolers.length === 0);
-  }, [filteredCoolers]);
-
-  const [totalFilteredRecords, setTotalFilteredRecords] = useState(0);
-
-  useEffect(() => {
-    setTotalFilteredRecords(filteredCoolers.length);
-  }, [filteredCoolers]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(5);
-  const [totalRecords, setTotalRecords] = useState(0);
-  useEffect(() => {
-    document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
+    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
 
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
@@ -117,7 +13,702 @@ export default function Fails() {
 
   return (
     <div>
-      <PageFilter /> {/* Componente de barra filter */}
+      <PageFilter />
+      <br></br>
+      <div
+        style={{
+          display: "flex",
+          padding: "10px 0px",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: "16px",
+          flex: 100,
+          alignSelf: "stretch",
+          background: "#FFF",
+          marginLeft: -50,
+        }}
+      >
+        {/* title */}
+        <div
+          style={{
+            display: "flex",
+            padding: "0px 0px",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            alignSelf: "stretch",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                color: "#000005",
+                // fontFamily: "DM Sans",
+                fontSize: "26px",
+                fontStyle: "normal",
+                fontWeight: 700,
+                lineHeight: "155%",
+              }}
+            >
+              Cooler Insights
+            </div>
+            <div
+              style={{
+                display: "flex",
+                padding: "4px",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "4px",
+                borderRadius: "2px",
+                background: "#FFC7CD",
+              }}
+            >
+              <img
+                src={"../../sampleData/fails2.png"}
+                alt="Descripción de la imagen"
+              />
+              <div
+                style={{
+                  color: "#F93448",
+                  // fontFamily: "Space Mono",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "14px",
+                }}
+              >
+                FALLAS
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              color: "#88888B",
+              // fontFamily: "DM Sans",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "155%",
+            }}
+          >
+            Identifica los enfriadores que tienen falla para realizar las
+            acciones necesarias.
+          </div>
+          <br></br>
+          <div
+            style={{
+              display: "flex",
+              padding: "16px 5px",
+              alignItems: "flex-start",
+              alignContent: "flex-start",
+              gap: "16px",
+              flex: 100,
+              alignSelf: "stretch",
+              flexWrap: "wrap",
+            }}
+          >
+            {/* Indicador */}
+            <div
+              style={{
+                display: "flex",
+                width: "260px",
+                padding: "24px",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "16px",
+                borderRadius: "8px",
+                border: "1px solid #88888B",
+                background: "#FFF",
+              }}
+            >
+              {/* Descrip */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "8px",
+                  alignSelf: "stretch",
+                }}
+              >
+                {/* icono */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "2px",
+                      alignItems: "center",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background: "#FFC7CD",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/compressor2.png"}
+                      alt="Descripción de la imagen"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      color: "#3A3A3F",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Falla asociada al compresor
+                  </div>
+                </div>
+                {/* Siguiente */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    alignContent: "flex-end",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "26px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    440
+                  </div>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    de 3,203 enfriadores
+                  </div>
+                </div>
+                {/* ***** */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "flex-start" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "8px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "4px",
+                        borderRadius: "8px",
+                        background: "#C0F2C8",
+                      }}
+                    >
+                      <img
+                        src={"../../sampleData/arrow_gr.png"}
+                        alt="Descripción de la imagen"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      color: "#31B648",
+                      // fontFamily: "DM Sans",
+                      fontSize: "16px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    -10
+                  </div>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    desde ayer
+                  </div>
+                </div>
+                {/* ********** */}
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "4px 0px",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      height: "1px",
+                      background: "#CACACA",
+                      width: "100%",
+                    }}
+                  ></div>
+                </div>
+                {/* ******* */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    gap: "4px",
+                    flex: 100,
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#3E83FF",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                      marginLeft: 140,
+                    }}
+                  >
+                    Ver enfriadores
+                  </div>
+                  <img
+                    src={"../../sampleData/dess.png"}
+                    alt="Descripción de la imagen"
+                    style={{ marginLeft: "4px" }}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* Indicador */}
+            <div
+              style={{
+                display: "flex",
+                width: "260px",
+                padding: "24px",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "16px",
+                borderRadius: "8px",
+                border: "1px solid #88888B",
+                background: "#FFF",
+              }}
+            >
+              {/* Descrip */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "8px",
+                  alignSelf: "stretch",
+                }}
+              >
+                {/* icono */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "2px",
+                      alignItems: "center",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background: "#FFC7CD",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/weather2.png"}
+                      alt="Descripción de la imagen"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      color: "#3A3A3F",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Alta temperatura
+                  </div>
+                </div>
+                {/* Siguiente */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    alignContent: "flex-end",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "26px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    440
+                  </div>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    de 3,203 enfriadores
+                  </div>
+                </div>
+                {/* ***** */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "flex-start" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "8px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "4px",
+                        borderRadius: "8px",
+                        background: "#FFC7CD",
+                      }}
+                    >
+                      <img
+                        src={"../../sampleData/arrow_4.png"}
+                        alt="Descripción de la imagen"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      color: "#F93448",
+                      // fontFamily: "DM Sans",
+                      fontSize: "16px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    +10
+                  </div>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    desde ayer
+                  </div>
+                </div>
+                {/* ********** */}
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "4px 0px",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      height: "1px",
+                      background: "#CACACA",
+                      width: "100%",
+                    }}
+                  ></div>
+                </div>
+                {/* ******* */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    gap: "4px",
+                    flex: 100,
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#3E83FF",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                      marginLeft: 140,
+                    }}
+                  >
+                    Ver enfriadores
+                  </div>
+                  <img
+                    src={"../../sampleData/dess.png"}
+                    alt="Descripción de la imagen"
+                    style={{ marginLeft: "4px" }}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* Indicador */}
+            <div
+              style={{
+                display: "flex",
+                width: "260px",
+                padding: "24px",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "16px",
+                borderRadius: "8px",
+                border: "1px solid #88888B",
+                background: "#FFF",
+              }}
+            >
+              {/* Descrip */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "8px",
+                  alignSelf: "stretch",
+                }}
+              >
+                {/* icono */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "2px",
+                      alignItems: "center",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background: "#FFC7CD",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/elect2.png"}
+                      alt="Descripción de la imagen"
+                    />
+                  </div>
+                  <div
+                    style={{
+                      color: "#3A3A3F",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Posible daño eléctrico
+                  </div>
+                </div>
+                {/* Siguiente */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-end",
+                    alignContent: "flex-end",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "26px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    440
+                  </div>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    de 3,203 enfriadores
+                  </div>
+                </div>
+                {/* ***** */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "flex-start" }}>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "8px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "4px",
+                        borderRadius: "8px",
+                        background: "#ADBACC",
+                      }}
+                    >
+                      <img
+                        src={"../../sampleData/arrow_3.png"}
+                        alt="Descripción de la imagen"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      color: "#313A49",
+                      // fontFamily: "DM Sans",
+                      fontSize: "16px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    0
+                  </div>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    desde ayer
+                  </div>
+                </div>
+                {/* ********** */}
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "4px 0px",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      height: "1px",
+                      background: "#CACACA",
+                      width: "100%",
+                    }}
+                  ></div>
+                </div>
+                {/* ******* */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    gap: "4px",
+                    flex: 100,
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#3E83FF",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                      marginLeft: 140,
+                    }}
+                  >
+                    Ver enfriadores
+                  </div>
+                  <img
+                    src={"../../sampleData/dess.png"}
+                    alt="Descripción de la imagen"
+                    style={{ marginLeft: "4px" }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
