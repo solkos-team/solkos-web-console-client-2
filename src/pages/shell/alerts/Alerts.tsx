@@ -261,12 +261,13 @@ export default function Alerts() {
                                 alt="Descripción de la imagen"
                               />
                             </>
-                          ) : cooler.algorithm.includes("VOLTAGE") ? (
-                            <img
-                              src={"../../sampleData/arrows.png"}
-                              alt="Descripción de la imagen"
-                            />
-                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : // cooler.algorithm.includes("VOLTAGE") ? (
+                          //   <img
+                          //     src={"../../sampleData/arrows.png"}
+                          //     alt="Descripción de la imagen"
+                          //   />
+                          // ) :
+                          cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
                               src={"../../sampleData/weather.png"}
                               alt="Descripción de la imagen"
