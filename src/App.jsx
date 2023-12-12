@@ -217,8 +217,7 @@ function App() {
                   to={option.link}
                   className={classes.link}
                   key={option.label}
-                  // Añade la prop "activate" para que el menú se active al cargar la página
-                  activate
+                  activate={true.toString()} // Convert boolean to string
                   onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
                 >
                   {option.icon && option.icon}{" "}
