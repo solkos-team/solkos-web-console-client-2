@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import {
   Card,
@@ -14,8 +13,6 @@ import {
   TableRow,
 } from "@tremor/react";
 import ExcelJS from "exceljs";
-import { _Center } from "@mantine/core/lib/Center/Center";
-import { Pagination } from "@mantine/core";
 
 export default function Coolers() {
   interface Cooler {
@@ -37,6 +34,7 @@ export default function Coolers() {
   >(null);
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Added loading state
+  const [highlightedRow, setHighlightedRow] = useState(-1);
   const navigate = useNavigate();
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -103,7 +101,7 @@ export default function Coolers() {
     fetchData();
   }, []);
 
-  // *************************************
+  ////////////////////////////////////////////////////////////
   const fetchCoolersFromAPI2 = async (serial_number) => {
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
     const headers = {
@@ -147,7 +145,7 @@ export default function Coolers() {
     fetchData();
   }, [coolersData]);
 
-  // *************************************
+  /////////////////////////////////////////////////////////////
   const filteredCoolers = coolersData
     ? filterCoolers(coolersData, searchValue)
     : [];
@@ -155,11 +153,6 @@ export default function Coolers() {
   useEffect(() => {
     setNoInfoToShow(filteredCoolers.length === 0);
   }, [filteredCoolers]);
-
-  const [highlightedRow, setHighlightedRow] = useState(-1);
-
-  // -------------------------------------------------------------------------------------------
-  // --------------------------------------------------------------------------------------------
 
   // Page (Body)
   useEffect(() => {
@@ -389,12 +382,17 @@ export default function Coolers() {
                             style={{
                               marginBottom: "20px",
                               borderCollapse: "collapse",
+                              width: "910px",
                             }}
                           >
                             <TableHead>
                               <TableRow>
-                                <TableHeaderCell style={{ textAlign: "left" }}>
-                                  {"Estatus"}
+                                <TableHeaderCell
+                                  style={{
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  Estatus
                                 </TableHeaderCell>
                                 <TableHeaderCell style={{ textAlign: "left" }}>
                                   Serie
@@ -450,12 +448,17 @@ export default function Coolers() {
                                   onMouseEnter={() => setHighlightedRow(index)}
                                   onMouseLeave={() => setHighlightedRow(-1)}
                                 >
-                                  <TableCell style={{ paddingRight: "30px" }}>
+                                  <TableCell
+                                    style={{
+                                      paddingRight: "30px",
+                                      textAlign: "left",
+                                    }}
+                                  >
                                     <div
                                       style={{
                                         display: "flex",
                                         padding: "4px",
-                                        justifyContent: "center",
+                                        // justifyContent: "center",
                                         alignItems: "center",
                                         gap: "4px",
                                         borderRadius: "2px",
@@ -480,7 +483,7 @@ export default function Coolers() {
                                           lineHeight: "14px",
                                         }}
                                       >
-                                        -------------
+                                        FUNCIONANDO ---
                                       </div>
                                     </div>
                                   </TableCell>
@@ -488,6 +491,7 @@ export default function Coolers() {
                                     style={{
                                       paddingRight: "30px",
                                       fontSize: "15px",
+                                      textAlign: "left",
                                     }}
                                   >
                                     {cooler.serial_number === ""
@@ -498,6 +502,7 @@ export default function Coolers() {
                                     style={{
                                       paddingRight: "30px",
                                       fontSize: "15px",
+                                      textAlign: "left",
                                     }}
                                   >
                                     {cooler.model_id === ""
@@ -508,6 +513,7 @@ export default function Coolers() {
                                     style={{
                                       paddingRight: "30px",
                                       fontSize: "15px",
+                                      textAlign: "left",
                                     }}
                                   >
                                     <div
@@ -536,7 +542,12 @@ export default function Coolers() {
                                       </div>
                                     </div>
                                   </TableCell>
-                                  <TableCell style={{ paddingRight: "30px" }}>
+                                  <TableCell
+                                    style={{
+                                      paddingRight: "30px",
+                                      textAlign: "left",
+                                    }}
+                                  >
                                     <div
                                       style={{
                                         display: "flex",
@@ -563,11 +574,16 @@ export default function Coolers() {
                                       </div>
                                     </div>
                                   </TableCell>
-                                  <TableCell style={{ paddingRight: "30px" }}>
+                                  <TableCell
+                                    style={{
+                                      paddingRight: "30px",
+                                      textAlign: "left",
+                                    }}
+                                  >
                                     <div
                                       style={{
                                         display: "flex",
-                                        justifyContent: "flex-end",
+                                        // justifyContent: "flex-end",
                                         alignItems: "center",
                                         gap: "4px",
                                         flex: 100,
