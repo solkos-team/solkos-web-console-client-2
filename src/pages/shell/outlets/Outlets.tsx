@@ -3,6 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
+import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
 import {
   Card,
   Table,
@@ -107,6 +108,10 @@ export default function Outlets() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedOutletDetails, setSelectedOutletDetails] =
+    useState<Outlet | null>(null);
 
   return (
     <div>
@@ -409,15 +414,7 @@ export default function Outlets() {
                                       ? "Sin registro"
                                       : outlet.num_coolers}
                                   </TableCell>
-                                  <TableCell
-                                    style={{
-                                      paddingRight: "30px",
-                                      fontSize: "15px",
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    ----------
-                                  </TableCell>
+
                                   <TableCell
                                     style={{
                                       paddingRight: "30px",
@@ -434,6 +431,7 @@ export default function Outlets() {
                                         gap: "4px",
                                         borderRadius: "2px",
                                         background: "#D4DAE3",
+                                        width: "60px",
                                       }}
                                     >
                                       <div
@@ -447,7 +445,7 @@ export default function Outlets() {
                                         }}
                                       >
                                         {" "}
-                                        --- DÍAS
+                                        - DÍAS
                                       </div>
                                     </div>
                                   </TableCell>
@@ -499,7 +497,13 @@ export default function Outlets() {
                                         height: "40px",
                                       }}
                                     >
-                                      <Link to="/coolerDetail">
+                                      <Link
+                                        to="/coolerDetail"
+                                        onClick={() => {
+                                          setSelectedOutletDetails(outlet);
+                                          setIsDrawerOpen(true);
+                                        }}
+                                      >
                                         <div
                                           style={{
                                             color: "#3E83FF",
@@ -551,6 +555,16 @@ export default function Outlets() {
           </div>
         </div>
       </div>
+      {selectedOutletDetails && (
+        <Drawer
+          isOpen={isDrawerOpen}
+          onClose={() => {
+            setIsDrawerOpen(false);
+            setSelectedOutletDetails(null);
+          }}
+          outletDetails={selectedOutletDetails}
+        />
+      )}
     </div>
   );
 }

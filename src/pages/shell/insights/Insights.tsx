@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import DrInsights from "../../../components/drawerInsights/DraweInsights";
 
 export default function Insights() {
   // Page (Body)
@@ -895,7 +894,7 @@ export default function Insights() {
                 style={{ marginTop: 5 }}
               />
             </div>
-            {drawerAbierto && <DrInsights cerrarDrawer={cerrarDrawer} />}
+            {/* DRAWER */}
           </div>
 
           {/* Alertas */}
