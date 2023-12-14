@@ -7,11 +7,18 @@ import {
   IconCircleX,
   IconCirclePlus,
 } from "@tabler/icons-react";
-import { Text } from "@mantine/core";
+import { Text, Popover, Select } from "@mantine/core";
+import { useSetState } from "@mantine/hooks";
 
-export default function ({}) {
+export default function ({ }) {
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
-
+  const [value, setValue] = useState<string | null>('');
+  const [opened, setOpened] = useState(false);
+  const [statusDelete, setStatusDelete] = useState(false)
+  const [dataZone, setDataZone] = useState([['Morelia', 'Monarca', 'Quinceo', 'Queretaro'], ['RMorelia', 'RMonarca', 'RQuinceo', 'RQueretaro'], ['UOMorelia', 'UOMonarca', 'UOQuinceo', 'UOQueretaro'], ['R2Morelia', 'R2Monarca', 'R2Quinceo', 'R2Queretaro']])
+  const [data, setData] = useState<string[]>([])
+  const [index, setIndex] = useState(0)
+  const [filterVisibility, setFilterVisibility] = useState(true)
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
   };
@@ -22,6 +29,9 @@ export default function ({}) {
 
   // Ctrl + x
   useEffect(() => {
+    if (index == 4) {
+      setFilterVisibility(false)
+    }
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "x") {
         setMostrarVentanaEmergente(true);
@@ -31,11 +41,13 @@ export default function ({}) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [statusDelete]);
 
   const ventanaEmergenteRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    verSelectData(value)
+
     const handleCloseOnOutsideClick = (event) => {
       if (
         mostrarVentanaEmergente &&
@@ -53,7 +65,35 @@ export default function ({}) {
     return () => {
       document.body.removeEventListener("click", handleCloseOnOutsideClick);
     };
-  }, [mostrarVentanaEmergente]);
+  }, [mostrarVentanaEmergente, value]);
+
+  const verSelectData = (value) => {
+    if (value != '') {
+      setData(current => [...current, value])
+      setOpened(false)
+      if (index != 3) {
+        setIndex(index + 1)
+        setStatusDelete(false)
+      }
+      if (index == 3) {
+        setFilterVisibility(false)
+        setStatusDelete(false)
+      }
+      setStatusDelete(false)
+    }
+
+  }
+  const deleteFilter = (i) => {
+    // alert(i)t
+
+    data.splice(i, 1)
+    setStatusDelete(!statusDelete)
+    setIndex(data.length)
+    if (i == 3) {
+      setFilterVisibility(true)
+    }
+  }
+
 
   return (
     <div>
@@ -140,206 +180,109 @@ export default function ({}) {
               }}
             />
           </div>
-          {/* ZONA */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "8px",
-                border: "1px solid #313A49",
-                padding: "3px 7px",
-              }}
-            >
-              <IconCircleX
-                style={{
-                  color: "#313A49",
-                  width: "16px",
-                  height: "16px",
-                  marginRight: "3px",
-                }}
-              />
-              <Text
-                style={{
-                  color: "#313A49",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                  textTransform: "uppercase",
-                }}
-              >
-                ZONA
-              </Text>
-            </div>
-            <IconChevronRight
-              style={{
-                color: "#ADBACC",
-                width: "16px",
-                height: "16px",
-                marginLeft: "3px",
-              }}
-            />
-          </div>
-          {/* REGION */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "8px",
-                border: "1px solid #313A49",
-                padding: "3px 7px",
-              }}
-            >
-              <IconCircleX
-                style={{
-                  color: "#313A49",
-                  width: "16px",
-                  height: "16px",
-                  marginRight: "3px",
-                }}
-              />
-              <Text
-                style={{
-                  color: "#313A49",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                  textTransform: "uppercase",
-                }}
-              >
-                REGIÓN
-              </Text>
-            </div>
-            <IconChevronRight
-              style={{
-                color: "#ADBACC",
-                width: "16px",
-                height: "16px",
-                marginLeft: "3px",
-              }}
-            />
-          </div>
-          {/* UO */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "8px",
-                border: "1px solid #313A49",
-                padding: "3px 7px",
-              }}
-            >
-              <IconCircleX
-                style={{
-                  color: "#313A49",
-                  width: "16px",
-                  height: "16px",
-                  marginRight: "3px",
-                }}
-              />
-              <Text
-                style={{
-                  color: "#313A49",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                  textTransform: "uppercase",
-                }}
-              >
-                UNIDAD OPERATIVA
-              </Text>
-            </div>
-            <IconChevronRight
-              style={{
-                color: "#ADBACC",
-                width: "16px",
-                height: "16px",
-                marginLeft: "3px",
-              }}
-            />
-          </div>
-          {/* RUTA */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "8px",
-                border: "1px solid #313A49",
-                padding: "3px 7px",
-              }}
-            >
-              <IconCircleX
-                style={{
-                  color: "#313A49",
-                  width: "16px",
-                  height: "16px",
-                  marginRight: "3px",
-                }}
-              />
-              <Text
-                style={{
-                  color: "#313A49",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                  textTransform: "uppercase",
-                }}
-              >
-                RUTA
-              </Text>
-            </div>
-            <IconChevronRight
-              style={{
-                color: "#ADBACC",
-                width: "16px",
-                height: "16px",
-                marginLeft: "3px",
-              }}
-            />
-          </div>
+          {
+            data
+              .map((item, i) => (
+                <div style={{ display: "flex", alignItems: "center" }} key={i}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      border: "1px solid #313A49",
+                      padding: "3px 7px",
+                    }}
+
+                  >
+                    <IconCircleX
+                      style={{
+                        color: "#313A49",
+                        width: "16px",
+                        height: "16px",
+                        marginRight: "3px",
+                      }}
+                      onClick={() => { deleteFilter(i) }}
+                      onClickCapture={((o) => !o)}
+                    />
+                    <Text
+                      style={{
+                        color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {item}
+                    </Text>
+                  </div>
+                  <IconChevronRight
+                    style={{
+                      color: "#ADBACC",
+                      width: "16px",
+                      height: "16px",
+                      marginLeft: "3px",
+                    }}
+                  />
+                </div>
+              ))}
+
+
           {/* ---------------------- */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "3px 7px",
-              }}
-            >
-              <IconCirclePlus
+          {filterVisibility
+            ? <div style={{ display: "flex", alignItems: "center" }} >
+              <div
                 style={{
-                  color: "#313A49",
-                  width: "16px",
-                  height: "16px",
-                  marginRight: "3px",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "3px 7px",
                 }}
-              />
-              <Text
-                style={{
-                  color: "#313A49",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                  textTransform: "uppercase",
-                }}
+                onClick={() => setOpened((o) => !o)}
               >
-                AÑADIR FILTRO
-              </Text>
+                <IconCirclePlus
+                  style={{
+                    color: "#313A49",
+                    width: "16px",
+                    height: "16px",
+                    marginRight: "3px",
+                  }}
+                />
+                <Popover position="bottom" withArrow shadow="md" opened={opened} onClose={() => setOpened(false)} onChange={(opened) => { setOpened(opened) }}>
+                  <Popover.Target>
+                    <Text
+                      style={{
+                        color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                        userSelect: "none",
+
+                      }}
+
+                    >
+                      AÑADIR FILTRO
+                    </Text>
+                  </Popover.Target>
+                  <Popover.Dropdown>
+                    <Select
+                      label="Selecciona tu Zona"
+                      placeholder="Pick value"
+                      data={dataZone[index]}
+                      searchable
+                      value={value} onChange={setValue}
+                    />
+                  </Popover.Dropdown>
+                </Popover>
+
+              </div>
             </div>
-          </div>
+            : ""
+          }
         </div>
         <div>
           <div
