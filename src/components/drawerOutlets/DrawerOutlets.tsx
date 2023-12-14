@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import MapComponent from "../map";
 
 export default function Drawer({ isOpen, onClose, outletDetails }) {
   const drawerRef = useRef(null);
@@ -16,8 +17,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
         boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
         transform: `translateX(${isOpen ? "0" : "100%"})`,
         transition: "transform 0.3s ease-in-out",
-        // overflowY: "auto",
         padding: "10px",
+        overflowY: "auto", // Agregado para permitir el scroll vertical
+        maxHeight: "100vh",
       }}
     >
       <div
@@ -409,7 +411,249 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
           <div
             style={{ width: "100%", height: "1px", background: "#CACACA" }}
           ></div>
+          <div
+            style={{
+              display: "flex",
+              padding: "0px 64px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "10px",
+              alignSelf: "stretch",
+            }}
+          >
+            {/* Map */}
+            <div
+              style={{
+                display: "flex",
+                height: "550px",
+                padding: "24px",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "8px",
+                alignSelf: "stretch",
+                borderRadius: "8px",
+                border: "1px solid #88888B",
+                background: "#FFF",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "4px",
+                  alignSelf: "stretch",
+                }}
+              >
+                <img
+                  src={"../../sampleData/map.png"}
+                  alt="Descripción de la imagen"
+                  style={{ marginRight: 490 }}
+                />
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <MapComponent latitude={20.6928} longitude={-99.8181} />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px",
+                    alignItems: "center",
+                    alignContent: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/filled.png"}
+                      width={"100%"}
+                      alt="cooler"
+                    ></img>
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Instalación
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/pin_filled.png"}
+                      width={"24px"}
+                      alt="cooler"
+                    ></img>
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Última ubicación
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    {/* <IconCircleX /> */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px", // Espacio entre los bloques
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "10px", // Ancho de cada bloque
+                          height: "4px",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                      &nbsp;
+                      <div
+                        style={{
+                          width: "10px", // Ancho de cada bloque
+                          height: "4px",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                      &nbsp;
+                      <div
+                        style={{
+                          width: "10px", // Ancho de cada bloque
+                          height: "4px",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                    </div>
+
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Distancia entre puntos
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div
+          style={{
+            display: "flex",
+            padding: "0px 64px",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <div
+              style={{
+                color: "#88888B",
+                // fontFamily: "DM Sans",
+                fontSize: "12px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "155%",
+              }}
+            >
+              TABLA
+            </div>
+            <div
+              style={{
+                color: "#000005",
+                // fontFamily: "DM Sans",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 300,
+                lineHeight: "155%",
+              }}
+            >
+              ENFRIADORES
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              marginLeft: 350,
+            }}
+          >
+            <div
+              style={{
+                color: "#3E83FF",
+                // fontFamily: "DM Sans",
+                fontSize: "16px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "26px",
+              }}
+            >
+              Descargar
+            </div>
+            <img
+              src={"../../sampleData/download.png"}
+              width={"22px"}
+              alt="cooler"
+            ></img>
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: "32px",
+          }}
+        ></div>
       </div>
     </div>
   );

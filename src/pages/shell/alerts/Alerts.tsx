@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
+import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { IconSearch, IconDownload } from "@tabler/icons-react";
 import {
   Card,
@@ -81,6 +82,15 @@ export default function Alerts() {
   }, []);
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
+    null
+  );
+  const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
+    value: number;
+    delta: number;
+  } | null>(null);
 
   return (
     <div>
@@ -453,6 +463,15 @@ export default function Alerts() {
                           alignItems: "center",
                           gap: "4px",
                           flex: 100,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setSelectedAlgorithm(cooler.algorithm);
+                          setSelectedAlgorithmValues({
+                            value: cooler.value,
+                            delta: cooler.delta,
+                          });
+                          setIsDrawerOpen(true);
                         }}
                       >
                         <div
@@ -481,6 +500,15 @@ export default function Alerts() {
           </div>
         </div>
       </div>
+      {isDrawerOpen && selectedAlgorithmValues && (
+        <DrawerA
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          selectedAlgorithm={selectedAlgorithm}
+          value={selectedAlgorithmValues.value}
+          delta={selectedAlgorithmValues.delta}
+        ></DrawerA>
+      )}
     </div>
   );
 }

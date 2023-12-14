@@ -225,8 +225,8 @@ const Resume = ({ coolersData }) => {
                 >
                   <div>
                     <MapComponent
-                      latitude={coolersData?.cooler?.latitude} // Ajusta el valor predeterminado según tus necesidades
-                      longitude={coolersData?.cooler?.longitude} // Ajusta el valor predeterminado según tus necesidades
+                      latitude={coolersData?.cooler?.latitude}
+                      longitude={coolersData?.cooler?.longitude}
                     />
                   </div>
                 </div>
