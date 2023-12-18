@@ -77,8 +77,8 @@ export default function CoolerDetail() {
   console.log(coolersData?.cooler?.outlet_name);
   return (
     <div>
-      <PageFilter />
-      <br></br>
+      <PageFilter path="clt"/>
+      <br />      
       <div>
         {/* *********************************************************** */}
         <div

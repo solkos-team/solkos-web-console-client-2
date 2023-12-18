@@ -23,7 +23,7 @@ export default function Insights() {
 
   return (
     <div>
-      <PageFilter />
+      <PageFilter status="false" />
       <br></br>
       <div
         style={{

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   IconSearch,
   IconArrowNarrowLeft,
@@ -9,16 +10,20 @@ import {
 } from "@tabler/icons-react";
 import { Text, Popover, Select } from "@mantine/core";
 import { useSetState } from "@mantine/hooks";
+import PageFilter from "./PageFilter";
 
-export default function ({ }) {
+export default function (props) {
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
   const [value, setValue] = useState<string | null>('');
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false)
+  const [statusButton,setStatusButton] = useState(true)
   const [dataZone, setDataZone] = useState([['Morelia', 'Monarca', 'Quinceo', 'Queretaro'], ['RMorelia', 'RMonarca', 'RQuinceo', 'RQueretaro'], ['UOMorelia', 'UOMonarca', 'UOQuinceo', 'UOQueretaro'], ['R2Morelia', 'R2Monarca', 'R2Quinceo', 'R2Queretaro']])
   const [data, setData] = useState<string[]>([])
   const [index, setIndex] = useState(0)
   const [filterVisibility, setFilterVisibility] = useState(true)
+  const navigate = useNavigate();
+  
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
   };
@@ -47,7 +52,9 @@ export default function ({ }) {
 
   useEffect(() => {
     verSelectData(value)
-
+    const storedTodos = localStorage.getItem('PATH')
+    const todoArr = storedTodos !== null ? JSON.parse(storedTodos) : [];
+    setData(todoArr)
     const handleCloseOnOutsideClick = (event) => {
       if (
         mostrarVentanaEmergente &&
@@ -66,10 +73,11 @@ export default function ({ }) {
       document.body.removeEventListener("click", handleCloseOnOutsideClick);
     };
   }, [mostrarVentanaEmergente, value]);
-
+  
   const verSelectData = (value) => {
     if (value != '') {
-      setData(current => [...current, value])
+      setData(current => [...current, value]) 
+      localStorage.setItem('PATH', JSON.stringify([...data,value]))        
       setOpened(false)
       if (index != 3) {
         setIndex(index + 1)
@@ -81,20 +89,26 @@ export default function ({ }) {
       }
       setStatusDelete(false)
     }
-
   }
   const deleteFilter = (i) => {
-    // alert(i)t
-
+    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')|| '')
+    dataLocalStorage.splice(i,1)    
+    localStorage.setItem('PATH',JSON.stringify(dataLocalStorage))
     data.splice(i, 1)
     setStatusDelete(!statusDelete)
     setIndex(data.length)
     if (i == 3) {
       setFilterVisibility(true)
     }
+    setValue('')
   }
-
-
+  const getPath = ({path}) => { 
+    return (typeof(path) === 'undefined') ? "" : path
+  }
+  const bloqPath = (i) => {
+    return (i == data.length-1) ? false : (true)
+  }
+        
   return (
     <div>
       <div
@@ -111,21 +125,24 @@ export default function ({ }) {
           whiteSpace: "nowrap",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "32px",
-            height: "32px",
-            strokeWidth: "0.5",
-            border: "0.5px solid #ADBACC",
-            borderRadius: "4px",
-            // boxSizing: "border-box",
-          }}
-        >
-          <IconArrowNarrowLeft />
-        </div>
+        <section
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "32px",
+          height: "32px",
+          strokeWidth: "0.5",
+          border: "0.5px solid #ADBACC",
+          borderRadius: "4px",
+          // boxSizing: "border-box",
+          visibility : 
+          props.status == 'false' ? 'hidden' : "visible"
+        }}
+        onClick={()=>{navigate(`/`+ getPath(props))}}
+      >          
+        <IconArrowNarrowLeft />
+      </section>
         <div
           style={{
             display: "flex",
@@ -134,7 +151,7 @@ export default function ({ }) {
             gap: "8px",
             // flex: "100",
             border: "0.5px solid #ADBACC",
-            width: "fit-content",
+            width: "100%",            
             borderRadius: "4px",
           }}
         >
@@ -166,6 +183,7 @@ export default function ({ }) {
                   fontWeight: 400,
                   lineHeight: "14px",
                   textTransform: "uppercase",
+                  userSelect : "none"
                 }}
               >
                 CLIENTE
@@ -184,15 +202,18 @@ export default function ({ }) {
             data
               .map((item, i) => (
                 <div style={{ display: "flex", alignItems: "center" }} key={i}>
-                  <div
+                  <button
                     style={{
                       display: "flex",
                       alignItems: "center",
                       borderRadius: "8px",
-                      border: "1px solid #313A49",
+                      border: "1px solid #ADBACC",                      
                       padding: "3px 7px",
+                      background : 
+                      bloqPath(i) == false ? '' : '#D4DAE3',
                     }}
-
+                    disabled={bloqPath(i)}
+                    type="button"
                   >
                     <IconCircleX
                       style={{
@@ -200,24 +221,29 @@ export default function ({ }) {
                         width: "16px",
                         height: "16px",
                         marginRight: "3px",
+                        visibility :
+                        bloqPath(i) == false ? 'visible' : 'hidden'
                       }}
                       onClick={() => { deleteFilter(i) }}
                       onClickCapture={((o) => !o)}
                     />
                     <Text
                       style={{
-                        color: "#313A49",
+                        // color: "#313A49",
                         // fontFamily: "Space Mono",
                         fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 400,
                         lineHeight: "14px",
                         textTransform: "uppercase",
+                        userSelect : 'none',
+                        color : 
+                        bloqPath(i) == false ? '#313A49' : '#ADBACC'
                       }}
                     >
                       {item}
                     </Text>
-                  </div>
+                  </button>
                   <IconChevronRight
                     style={{
                       color: "#ADBACC",
@@ -227,7 +253,9 @@ export default function ({ }) {
                     }}
                   />
                 </div>
-              ))}
+              ))
+            
+          }
 
 
           {/* ---------------------- */}
@@ -239,7 +267,7 @@ export default function ({ }) {
                   alignItems: "center",
                   padding: "3px 7px",
                 }}
-                onClick={() => setOpened((o) => !o)}
+                
               >
                 <IconCirclePlus
                   style={{
@@ -248,6 +276,7 @@ export default function ({ }) {
                     height: "16px",
                     marginRight: "3px",
                   }}
+                  onClick={() => setOpened((o) => !o)}
                 />
                 <Popover position="bottom" withArrow shadow="md" opened={opened} onClose={() => setOpened(false)} onChange={(opened) => { setOpened(opened) }}>
                   <Popover.Target>
@@ -260,10 +289,9 @@ export default function ({ }) {
                         fontWeight: 400,
                         lineHeight: "14px",
                         textTransform: "uppercase",
-                        userSelect: "none",
-
+                        userSelect : "none"
                       }}
-
+                      onClick={() => setOpened((o) => !o)}
                     >
                       AÑADIR FILTRO
                     </Text>
@@ -272,9 +300,12 @@ export default function ({ }) {
                     <Select
                       label="Selecciona tu Zona"
                       placeholder="Pick value"
-                      data={dataZone[index]}
                       searchable
-                      value={value} onChange={setValue}
+                      defaultChecked
+                      data={dataZone[index]}                      
+                      // value={value} 
+                      onChange={setValue}
+                      nothingFound='Dato no encontrado'
                     />
                   </Popover.Dropdown>
                 </Popover>
@@ -454,18 +485,19 @@ export default function ({ }) {
                         src={"../../sampleData/filter.png"}
                         alt="Descripción de la imagen"
                       />
-                      <div
+                      <Text
                         style={{
                           color: "#ADBACC",
                           // fontFamily: "Space Mono",
                           fontSize: "12px",
                           fontStyle: "normal",
                           fontWeight: 400,
-                          lineHeight: "14px",
+                          lineHeight: "14px",   
+                          userSelect : "none"                                               
                         }}
-                      >
+                      >                        
                         CLIENTE
-                      </div>
+                      </Text>
                     </div>
                   </div>
                 </div>
@@ -477,3 +509,4 @@ export default function ({ }) {
     </div>
   );
 }
+
