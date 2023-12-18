@@ -34,7 +34,8 @@ export default function (props) {
 
   // Ctrl + x
   useEffect(() => {
-    if (index == 4) {
+    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'')    
+    if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
       setFilterVisibility(false)
     }
     const handleKeyDown = (event) => {
@@ -55,6 +56,10 @@ export default function (props) {
     const storedTodos = localStorage.getItem('PATH')
     const todoArr = storedTodos !== null ? JSON.parse(storedTodos) : [];
     setData(todoArr)
+    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'')      
+    if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
+      setFilterVisibility(false)
+    }
     const handleCloseOnOutsideClick = (event) => {
       if (
         mostrarVentanaEmergente &&
@@ -91,7 +96,7 @@ export default function (props) {
     }
   }
   const deleteFilter = (i) => {
-    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')|| '')
+    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'')
     dataLocalStorage.splice(i,1)    
     localStorage.setItem('PATH',JSON.stringify(dataLocalStorage))
     data.splice(i, 1)
@@ -108,7 +113,7 @@ export default function (props) {
   const bloqPath = (i) => {
     return (i == data.length-1) ? false : (true)
   }
-        
+
   return (
     <div>
       <div
