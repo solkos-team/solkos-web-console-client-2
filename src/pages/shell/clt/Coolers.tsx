@@ -3,6 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
+import { fetchCoolers, fetchCoolerDetails } from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -53,45 +54,13 @@ export default function Coolers() {
     return filteredData;
   };
 
-  const fetchCoolersFromAPI = async () => {
-    const url =
-      "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      customer: "KOF",
-      class: "STK",
-      algorithm: ["INSTALLED"],
-      page_size: 100,
-      page_number: 1,
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de los enfriadores");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchCoolersFromAPI();
+        const data = await fetchCoolers();
         setCoolersData(data);
         console.log("Setting isLoading to false after fetching coolers");
+        console.log(data);
         setIsLoading(false); // Set isLoading to false after fetching coolers
       } catch (error) {
         console.error("Error fetching coolers:", error);
@@ -101,36 +70,11 @@ export default function Coolers() {
     fetchData();
   }, []);
 
-  ////////////////////////////////////////////////////////////
-  const fetchCoolersFromAPI2 = async (serial_number) => {
-    const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos del enfriador");
-      }
-
-      const responseData = await response.json();
-      console.log(responseData);
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (coolersData && coolersData.length > 0) {
-          const data = await fetchCoolersFromAPI2(coolersData[0].serial_number);
+          const data = await fetchCoolerDetails(coolersData[0].serial_number);
           setCoolersDataDeatil(data);
           console.log(
             "Setting isLoading to false after fetching cooler details"

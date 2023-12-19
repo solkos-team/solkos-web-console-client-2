@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
+import { fetchOutlets } from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -45,41 +46,10 @@ export default function Outlets() {
     return filteredData;
   };
 
-  const fetchOutletsFromAPI = async () => {
-    const url =
-      "https://universal-console-server-b7agk5thba-uc.a.run.app/outlets";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      customer: "KOF",
-      page_size: 100,
-      page_number: 1,
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de los puntos de venta");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchOutletsFromAPI();
+        const data = await fetchOutlets();
         setOutletsData(data);
         console.log(data);
         console.log("Setting isLoading to false after fetching outlets");

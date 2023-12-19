@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { IconSearch, IconDownload } from "@tabler/icons-react";
+import { fetchAlerts } from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -24,44 +25,15 @@ export default function Alerts() {
     delta: number;
   }
 
-  const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-
-  const fetchCoolersFromAPI = async () => {
-    const url =
-      "https://universal-console-server-b7agk5thba-uc.a.run.app/alerts";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      customer: "KOF",
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-      console.log("After fetch");
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de insights");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
+  const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true); // Indicar que la carga está en curso
-        const data = await fetchCoolersFromAPI();
+        const data = await fetchAlerts();
         console.log(data);
-        setCoolersData(data);
+        setAlertsData(data);
       } catch (error) {
         console.error("Error:", error);
       } finally {
@@ -205,8 +177,8 @@ export default function Alerts() {
               </>
             ) : (
               // Mostrar las tarjetas una vez que la carga ha terminado
-              coolersData &&
-              coolersData
+              alertsData &&
+              alertsData
                 .filter(
                   (cooler) =>
                     cooler.class === "OPE" && cooler.algorithm.endsWith("ALERT")
