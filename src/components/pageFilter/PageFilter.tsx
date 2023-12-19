@@ -13,6 +13,7 @@ import { useSetState } from "@mantine/hooks";
 import PageFilter from "./PageFilter";
 
 export default function (props) {
+  
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
   const [value, setValue] = useState<string | null>('');
   const [opened, setOpened] = useState(false);
@@ -34,7 +35,11 @@ export default function (props) {
 
   // Ctrl + x
   useEffect(() => {
-    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'')    
+    const storage = localStorage.getItem('PATH')
+    if(storage == null){
+      localStorage.setItem('PATH','')      
+    }
+    const dataLocalStorage:any = JSON.parse(localStorage.getItem('PATH')||'[]')    
     if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
       setFilterVisibility(false)
     }
@@ -54,9 +59,9 @@ export default function (props) {
   useEffect(() => {
     verSelectData(value)
     const storedTodos = localStorage.getItem('PATH')
-    const todoArr = storedTodos !== null ? JSON.parse(storedTodos) : [];
+    const todoArr = storedTodos !== null ? JSON.parse(storedTodos||'[]') : [];
     setData(todoArr)
-    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'')      
+    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'[]')      
     if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
       setFilterVisibility(false)
     }
@@ -81,6 +86,10 @@ export default function (props) {
   
   const verSelectData = (value) => {
     if (value != '') {
+      if (index >= 4 || data.length >= 4) {
+        alert('Filtros excedidos')
+        return
+      }
       setData(current => [...current, value]) 
       localStorage.setItem('PATH', JSON.stringify([...data,value]))        
       setOpened(false)
