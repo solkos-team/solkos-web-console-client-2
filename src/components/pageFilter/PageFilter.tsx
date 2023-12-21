@@ -9,14 +9,11 @@ import {
   IconCirclePlus,
 } from "@tabler/icons-react";
 import { Text, Popover, Select } from "@mantine/core";
-import { useSetState } from "@mantine/hooks";
-import PageFilter from "./PageFilter";
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addPath } from "../../app/works";
 
 export default function (props) {
   const dispatch = useDispatch();
-  const dis = useDispatch()
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
   const [value, setValue] = useState<string | null>('');
   const [opened, setOpened] = useState(false);

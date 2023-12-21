@@ -85,7 +85,6 @@ export default function Coolers() {
       if (!response.ok) {
         throw new Error("Error al obtener los datos de los enfriadores");
       }
-
       const responseData = await response.json();
       return responseData;
     } catch (error) {

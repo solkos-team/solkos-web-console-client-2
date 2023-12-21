@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-var valores = '[]'
+var valores = localStorage.getItem('PATH') || '[]'
 
 export const works = createSlice({
     name:"works",
     initialState : valores,
     reducers: {
         addPath : ():string =>{
-            const data = localStorage.getItem('PATH' || '[]')
-            const dt = (data == null) ? '[]' : data
-            // console.log('funciona metodo',dt)
+            const data = localStorage.getItem('PATH')
+            const dt = (data == null) ? '[]' : data            
             valores = valores + dt
             return dt
         }
