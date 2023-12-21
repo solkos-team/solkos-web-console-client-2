@@ -11,15 +11,18 @@ import {
 import { Text, Popover, Select } from "@mantine/core";
 import { useSetState } from "@mantine/hooks";
 import PageFilter from "./PageFilter";
+import { useSelector,useDispatch } from "react-redux";
+import { addPath } from "../../app/works";
 
 export default function (props) {
-  
+  const dispatch = useDispatch();
+  const dis = useDispatch()
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
   const [value, setValue] = useState<string | null>('');
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false)
   const [statusButton,setStatusButton] = useState(true)
-  const [dataZone, setDataZone] = useState([['Morelia', 'Monarca', 'Quinceo', 'Queretaro'], ['RMorelia', 'RMonarca', 'RQuinceo', 'RQueretaro'], ['UOMorelia', 'UOMonarca', 'UOQuinceo', 'UOQueretaro'], ['R2Morelia', 'R2Monarca', 'R2Quinceo', 'R2Queretaro']])
+  const [dataZone, setDataZone] = useState([["Morelia", "Golfo", "Quinceo", "Queretaro"], ["RMorelia", "RMonarca", 'RQuinceo', 'RQueretaro'], ['UOMorelia', 'UOMonarca', 'UOQuinceo', 'UOQueretaro'], ['R2Morelia', 'R2Monarca', 'R2Quinceo', 'R2Queretaro']])
   const [data, setData] = useState<string[]>([])
   const [index, setIndex] = useState(0)
   const [filterVisibility, setFilterVisibility] = useState(true)
@@ -35,6 +38,7 @@ export default function (props) {
 
   // Ctrl + x
   useEffect(() => {
+    dispatch(addPath())
     const storage = localStorage.getItem('PATH')
     if(storage == null){
       localStorage.setItem('PATH','')      
@@ -58,6 +62,7 @@ export default function (props) {
 
   useEffect(() => {
     verSelectData(value)
+    dispatch(addPath())
     const storedTodos = localStorage.getItem('PATH')
     const todoArr = storedTodos !== null ? JSON.parse(storedTodos||'[]') : [];
     setData(todoArr)
@@ -320,6 +325,7 @@ export default function (props) {
                       // value={value} 
                       onChange={setValue}
                       nothingFound='Dato no encontrado'
+                      
                     />
                   </Popover.Dropdown>
                 </Popover>

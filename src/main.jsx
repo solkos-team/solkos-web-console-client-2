@@ -15,9 +15,12 @@ import Fails from "/src/pages/shell/fails";
 import Indicator from "/src/pages/shell/indicator";
 import CoolerDetail from "./pages/shell/coolerDetail";
 import Insights from "./pages/shell/insights";
+import { Provider } from "react-redux";
+import { store } from "./app/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <Provider store={store}>
     <MantineProvider>
       <ModalsProvider>
         <NotificationsProvider>
@@ -44,5 +47,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </NotificationsProvider>
       </ModalsProvider>
     </MantineProvider>
+    </Provider>
   </React.StrictMode>
 );

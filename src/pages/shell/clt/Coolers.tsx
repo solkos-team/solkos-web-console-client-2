@@ -13,7 +13,8 @@ import {
   TableRow,
 } from "@tremor/react";
 import ExcelJS from "exceljs";
-
+import { useSelector,useDispatch } from "react-redux";
+import { addPath } from "../../../app/works";
 export default function Coolers() {
   interface Cooler {
     serial_number: string;
@@ -26,7 +27,8 @@ export default function Coolers() {
   interface CoolerDetail {
     serial_number: string;
   }
-
+  const dt = useSelector((state:any)=> state.works)  
+  console.log('valor inicial works',dt) 
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [coolersDataDeatil, setCoolersDataDeatil] = useState<
@@ -53,7 +55,11 @@ export default function Coolers() {
     return filteredData;
   };
 
-  const fetchCoolersFromAPI = async () => {
+  const pathVerify = () =>{
+    return (dt.length == 0) ? "[]" : JSON.parse(dt)
+  }
+  const fetchCoolersFromAPI = async (path) => {
+    console.log('path ->',path)
     const url =
       "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
     const headers = {
@@ -66,15 +72,16 @@ export default function Coolers() {
       algorithm: ["INSTALLED"],
       page_size: 100,
       page_number: 1,
+      path:path
     };
-
+    console.log(data)
     try {
       const response = await fetch(url, {
         method: "POST",
         headers,
         body: JSON.stringify(data),
       });
-
+      console.log(data)
       if (!response.ok) {
         throw new Error("Error al obtener los datos de los enfriadores");
       }
@@ -83,23 +90,26 @@ export default function Coolers() {
       return responseData;
     } catch (error) {
       throw error;
-    }
+    }    
   };
 
-  useEffect(() => {
+  useEffect(() => {    
+    
     const fetchData = async () => {
       try {
-        const data = await fetchCoolersFromAPI();
+        
+        const data = await fetchCoolersFromAPI(pathVerify());
         setCoolersData(data);
         console.log("Setting isLoading to false after fetching coolers");
         setIsLoading(false); // Set isLoading to false after fetching coolers
       } catch (error) {
         console.error("Error fetching coolers:", error);
       }
+      
     };
 
     fetchData();
-  }, []);
+  }, [dt]);
 
   ////////////////////////////////////////////////////////////
   const fetchCoolersFromAPI2 = async (serial_number) => {
@@ -162,6 +172,8 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
+  
+ 
   return (
     <div>
       <PageFilter />
