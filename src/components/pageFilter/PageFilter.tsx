@@ -18,7 +18,6 @@ export default function (props) {
   const [value, setValue] = useState<string | null>('');
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false)
-  const [statusButton,setStatusButton] = useState(true)
   const [dataZone, setDataZone] = useState([["Morelia", "Golfo", "Quinceo", "Queretaro"], ["RMorelia", "RMonarca", 'RQuinceo', 'RQueretaro'], ['UOMorelia', 'UOMonarca', 'UOQuinceo', 'UOQueretaro'], ['R2Morelia', 'R2Monarca', 'R2Quinceo', 'R2Queretaro']])
   const [data, setData] = useState<string[]>([])
   const [index, setIndex] = useState(0)
@@ -34,12 +33,13 @@ export default function (props) {
   };
 
   // Ctrl + x
-  useEffect(() => {
+  useEffect(() => {    
     dispatch(addPath())
     const storage = localStorage.getItem('PATH')
     if(storage == null){
       localStorage.setItem('PATH','')      
     }
+    setIndex(JSON.parse(storage||'[]').length)     
     const dataLocalStorage:any = JSON.parse(localStorage.getItem('PATH')||'[]')    
     if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
       setFilterVisibility(false)
@@ -56,6 +56,7 @@ export default function (props) {
   }, [statusDelete]);
 
   const ventanaEmergenteRef = useRef<HTMLDivElement | null>(null);
+  
 
   useEffect(() => {
     verSelectData(value)
@@ -86,7 +87,7 @@ export default function (props) {
     };
   }, [mostrarVentanaEmergente, value]);
   
-  const verSelectData = (value) => {
+  const verSelectData = (value) => {    
     if (value != '') {
       if (index >= 4 || data.length >= 4) {
         alert('Filtros excedidos')
@@ -124,7 +125,6 @@ export default function (props) {
   const bloqPath = (i) => {
     return (i == data.length-1) ? false : (true)
   }
-
   return (
     <div>
       <div

@@ -28,7 +28,6 @@ export default function Coolers() {
     serial_number: string;
   }
   const dt = useSelector((state:any)=> state.works)  
-  console.log('valor inicial works',dt) 
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [coolersDataDeatil, setCoolersDataDeatil] = useState<
@@ -58,8 +57,7 @@ export default function Coolers() {
   const pathVerify = () =>{
     return (dt.length == 0) ? "[]" : JSON.parse(dt)
   }
-  const fetchCoolersFromAPI = async (path) => {
-    console.log('path ->',path)
+  const fetchCoolersFromAPI = async (path) => {    
     const url =
       "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
     const headers = {
@@ -74,14 +72,12 @@ export default function Coolers() {
       page_number: 1,
       path:path
     };
-    console.log(data)
     try {
       const response = await fetch(url, {
         method: "POST",
         headers,
         body: JSON.stringify(data),
       });
-      console.log(data)
       if (!response.ok) {
         throw new Error("Error al obtener los datos de los enfriadores");
       }
@@ -99,7 +95,6 @@ export default function Coolers() {
         
         const data = await fetchCoolersFromAPI(pathVerify());
         setCoolersData(data);
-        console.log("Setting isLoading to false after fetching coolers");
         setIsLoading(false); // Set isLoading to false after fetching coolers
       } catch (error) {
         console.error("Error fetching coolers:", error);
@@ -128,7 +123,6 @@ export default function Coolers() {
       }
 
       const responseData = await response.json();
-      console.log(responseData);
       return responseData;
     } catch (error) {
       throw error;
@@ -141,9 +135,6 @@ export default function Coolers() {
         if (coolersData && coolersData.length > 0) {
           const data = await fetchCoolersFromAPI2(coolersData[0].serial_number);
           setCoolersDataDeatil(data);
-          console.log(
-            "Setting isLoading to false after fetching cooler details"
-          );
           setIsLoading(false); // Set isLoading to false after fetching cooler details
         }
       } catch (error) {
