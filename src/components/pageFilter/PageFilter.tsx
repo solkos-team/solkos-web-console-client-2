@@ -11,6 +11,7 @@ import {
 import { Text, Popover, Select } from "@mantine/core";
 import { useDispatch } from "react-redux";
 import { addPath } from "../../app/works";
+import { fetchPath } from "./getPath";
 
 export default function (props) {
   const dispatch = useDispatch();
@@ -18,11 +19,12 @@ export default function (props) {
   const [value, setValue] = useState<string | null>('');
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false)
-  const [dataZone, setDataZone] = useState([["Morelia", "Golfo", "Quinceo", "Queretaro"], ["RMorelia", "RMonarca", 'RQuinceo', 'RQueretaro'], ['UOMorelia', 'UOMonarca', 'UOQuinceo', 'UOQueretaro'], ['R2Morelia', 'R2Monarca', 'R2Quinceo', 'R2Queretaro']])
+  const [dataZone, setDataZone] = useState([['']])
   const [data, setData] = useState<string[]>([])
   const [index, setIndex] = useState(0)
   const [filterVisibility, setFilterVisibility] = useState(true)
   const navigate = useNavigate();
+  
   
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
@@ -31,9 +33,18 @@ export default function (props) {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-
+  const getPaths = async (dataLocalStorage?) =>{
+    try{
+      const data = await fetchPath(dataLocalStorage)
+      //dataZone.push(data)
+      dataZone.unshift(data) // solucion path desde api
+    }catch(error){console.log("Error fetching path",error)}
+  }
+  useEffect(()=>{    
+    getPaths()
+  },[])
   // Ctrl + x
-  useEffect(() => {    
+  useEffect(() => {         
     dispatch(addPath())
     const storage = localStorage.getItem('PATH')
     if(storage == null){
@@ -94,7 +105,7 @@ export default function (props) {
         return
       }
       setData(current => [...current, value]) 
-      localStorage.setItem('PATH', JSON.stringify([...data,value]))        
+      localStorage.setItem('PATH', JSON.stringify([...data,value]))            
       setOpened(false)
       if (index != 3) {
         setIndex(index + 1)
@@ -104,7 +115,7 @@ export default function (props) {
         setFilterVisibility(false)
         setStatusDelete(false)
       }
-      setStatusDelete(false)
+      setStatusDelete(false)      
     }
   }
   const deleteFilter = (i) => {
@@ -118,6 +129,7 @@ export default function (props) {
       setFilterVisibility(true)
     }
     setValue('')
+    getPaths(data)
   }
   const getPath = ({path}) => { 
     return (typeof(path) === 'undefined') ? "" : path
@@ -125,6 +137,7 @@ export default function (props) {
   const bloqPath = (i) => {
     return (i == data.length-1) ? false : (true)
   }
+  data.length > 0 ? getPaths(data) : ''
   return (
     <div>
       <div
@@ -266,6 +279,8 @@ export default function (props) {
                       width: "16px",
                       height: "16px",
                       marginLeft: "3px",
+                      visibility :
+                        i == 3 ? 'hidden' : 'visible'
                     }}
                   />
                 </div>
