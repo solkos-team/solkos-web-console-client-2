@@ -11,10 +11,13 @@ import {
   TableHead,
   TableHeaderCell,
   TableRow,
+  TableFoot,
+  TableFooterCell
 } from "@tremor/react";
 import ExcelJS from "exceljs";
 import { useSelector,useDispatch } from "react-redux";
 import { addPath } from "../../../app/works";
+import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 export default function Coolers() {
   interface Cooler {
     serial_number: string;
@@ -36,7 +39,11 @@ export default function Coolers() {
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [highlightedRow, setHighlightedRow] = useState(-1);
+  const [currentPage,setCurrentPage] = useState(1)  
   const navigate = useNavigate();
+  const datosPorPagina = 10;
+  const lastIndex = currentPage * datosPorPagina;
+  const firstIndex = lastIndex - datosPorPagina;
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -163,7 +170,6 @@ export default function Coolers() {
     };
   }, []);
   
- 
   return (
     <div>
       <PageFilter />
@@ -425,7 +431,9 @@ export default function Coolers() {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {filteredCoolers.map((cooler, index) => (
+                              {filteredCoolers
+                              .slice(firstIndex,lastIndex)
+                              .map((cooler, index) => (
                                 <TableRow
                                   key={index}
                                   style={{
@@ -620,7 +628,13 @@ export default function Coolers() {
                                 </TableRow>
                               ))}
                             </TableBody>
+                            <TableFoot>
+                              <TableFooterCell>
+                              
+                              </TableFooterCell>
+                            </TableFoot>
                           </Table>
+                          <PaginationComponent accion={setCurrentPage} totalDatos={filteredCoolers.length} datosPorPagina={datosPorPagina}/>
                         </Card>
                       ) : (
                         <div
@@ -644,6 +658,7 @@ export default function Coolers() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

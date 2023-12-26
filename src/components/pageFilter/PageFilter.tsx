@@ -20,6 +20,7 @@ export default function (props) {
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false)
   const [dataZone, setDataZone] = useState([['']])
+  const [dataSelect,setDataSelect] = useState(['Zona','Region','Unidad Operativa','Ruta'])
   const [data, setData] = useState<string[]>([])
   const [index, setIndex] = useState(0)
   const [filterVisibility, setFilterVisibility] = useState(true)
@@ -329,7 +330,7 @@ export default function (props) {
                   </Popover.Target>
                   <Popover.Dropdown>
                     <Select
-                      label="Selecciona tu Zona"
+                      label={`Selecciona tu ${dataSelect[index]}`}
                       placeholder="Pick value"
                       searchable
                       defaultChecked
