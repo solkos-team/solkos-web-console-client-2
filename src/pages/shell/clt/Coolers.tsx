@@ -18,6 +18,7 @@ import ExcelJS from "exceljs";
 import { useSelector,useDispatch } from "react-redux";
 import { addPath } from "../../../app/works";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
+import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 export default function Coolers() {
   interface Cooler {
     serial_number: string;
@@ -75,7 +76,7 @@ export default function Coolers() {
       customer: "KOF",
       class: "STK",
       algorithm: ["INSTALLED"],
-      page_size: 100,
+      page_size: 3000,
       page_number: 1,
       path:path
     };
@@ -630,7 +631,7 @@ export default function Coolers() {
                             </TableBody>
                             <TableFoot>
                               <TableFooterCell>
-                              
+                              <ExportToExcel datos={filteredCoolers} nombre={"Coolers.csv"}/>
                               </TableFooterCell>
                             </TableFoot>
                           </Table>
