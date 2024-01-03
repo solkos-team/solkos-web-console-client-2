@@ -3,6 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
+import { fetchCoolers, fetchCoolerDetails } from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -63,6 +64,7 @@ export default function Coolers() {
     return filteredData;
   };
 
+<<<<<<< HEAD
   const pathVerify = () =>{
     return (dt.length == 0) ? "[]" : JSON.parse(dt)
   }
@@ -104,6 +106,15 @@ export default function Coolers() {
       try {        
         const data = await fetchCoolersFromAPI(pathVerify());
         setCoolersData(data);
+=======
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchCoolers();
+        setCoolersData(data);
+        console.log("Setting isLoading to false after fetching coolers");
+        console.log(data);
+>>>>>>> main
         setIsLoading(false); // Set isLoading to false after fetching coolers
       } catch (error) {
         console.error("Error fetching coolers:", error);
@@ -114,6 +125,7 @@ export default function Coolers() {
     fetchData();
   }, [dt]);
 
+<<<<<<< HEAD
   ////////////////////////////////////////////////////////////
   const fetchCoolersFromAPI2 = async (serial_number) => {
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
@@ -138,11 +150,13 @@ export default function Coolers() {
     }
   };
 
+=======
+>>>>>>> main
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (coolersData && coolersData.length > 0) {
-          const data = await fetchCoolersFromAPI2(coolersData[0].serial_number);
+          const data = await fetchCoolerDetails(coolersData[0].serial_number);
           setCoolersDataDeatil(data);
           setIsLoading(false); // Set isLoading to false after fetching cooler details
         }
