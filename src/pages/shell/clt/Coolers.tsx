@@ -41,10 +41,11 @@ export default function Coolers() {
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [highlightedRow, setHighlightedRow] = useState(-1);
   const [currentPage,setCurrentPage] = useState(1)  
+  const [datosPorPagina,setNumero] = useState(10)
   const navigate = useNavigate();
-  const datosPorPagina = 10;
-  const lastIndex = currentPage * datosPorPagina;
-  const firstIndex = lastIndex - datosPorPagina;
+  // const datosPorPagina = 10;
+  const lastIndex = currentPage * Number(datosPorPagina);
+  const firstIndex = lastIndex - Number(datosPorPagina);
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -66,6 +67,7 @@ export default function Coolers() {
     return (dt.length == 0) ? "[]" : JSON.parse(dt)
   }
   const fetchCoolersFromAPI = async (path) => {    
+    setIsLoading(!false)
     const url =
       "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
     const headers = {
@@ -99,8 +101,7 @@ export default function Coolers() {
   useEffect(() => {    
     
     const fetchData = async () => {
-      try {
-        
+      try {        
         const data = await fetchCoolersFromAPI(pathVerify());
         setCoolersData(data);
         setIsLoading(false); // Set isLoading to false after fetching coolers
@@ -171,6 +172,7 @@ export default function Coolers() {
     };
   }, []);
   
+  
   return (
     <div>
       <PageFilter />
@@ -207,7 +209,7 @@ export default function Coolers() {
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "155%",
-              marginLeft: -80,
+              marginLeft: -55,
             }}
           >
             Cooler Life Tracking
@@ -220,7 +222,7 @@ export default function Coolers() {
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "155%",
-              marginLeft: -80,
+              marginLeft: -55,
             }}
           >
             Haz seguimiento de todos los parámetros de cada uno de tus
@@ -340,7 +342,7 @@ export default function Coolers() {
                 fontStyle: "normal",
                 fontWeight: 500,
                 lineHeight: "155%",
-                marginLeft: -80,
+                marginLeft: -55,
               }}
             >
               TABLA
@@ -353,7 +355,7 @@ export default function Coolers() {
                 fontStyle: "normal",
                 fontWeight: 300,
                 lineHeight: "155%",
-                marginLeft: -80,
+                marginLeft: -55,
               }}
             >
               Enfriadores
@@ -369,7 +371,7 @@ export default function Coolers() {
             <div style={{}}>
               <div>
                 <div>
-                  {isLoading && filteredCoolers.length === 0 && (
+                  {/* {isLoading && filteredCoolers.length === 0 && (
                     <div
                       style={{
                         display: "flex",
@@ -382,7 +384,19 @@ export default function Coolers() {
                     >
                       Cargando...
                     </div>
-                  )}
+                  )} */}
+                  {isLoading == true || filteredCoolers.length === 0 ? <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginLeft: 400,
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                      }}
+                    >
+                      Cargando...
+                    </div> : ""}
                   {!isLoading && (
                     <>
                       {filteredCoolers.length > 0 ? (
@@ -391,22 +405,24 @@ export default function Coolers() {
                             style={{
                               marginBottom: "20px",
                               borderCollapse: "collapse",
-                              width: "910px",
-                            }}
+                              // width: "910px",
+                              height : "400px"
+                            }}                            
                           >
-                            <TableHead>
+                            <TableHead style={{display:"block"}}>
                               <TableRow>
                                 <TableHeaderCell
                                   style={{
                                     textAlign: "left",
+                                    width : "10rem"
                                   }}
                                 >
                                   Estatus
                                 </TableHeaderCell>
-                                <TableHeaderCell style={{ textAlign: "left" }}>
+                                <TableHeaderCell style={{ textAlign: "left" ,width : "10rem"}}>
                                   Serie
                                 </TableHeaderCell>
-                                <TableHeaderCell style={{ textAlign: "left" }}>
+                                <TableHeaderCell style={{ textAlign: "left" ,width : "6rem"}}>
                                   Modelo
                                 </TableHeaderCell>
                                 <TableHeaderCell
@@ -431,7 +447,7 @@ export default function Coolers() {
                                 </TableHeaderCell>
                               </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody style={{display:"block",height:"450px",minWidth:"900px",overflowY:"auto"}}> 
                               {filteredCoolers
                               .slice(firstIndex,lastIndex)
                               .map((cooler, index) => (
@@ -446,7 +462,7 @@ export default function Coolers() {
                                         ? "#CCCCCC"
                                         : index % 2 === 0
                                         ? "#FFF"
-                                        : "#F4F4F4",
+                                        : "#F4F4F4",                                    
                                   }}
                                   onClick={() => {
                                     navigate(
@@ -635,7 +651,7 @@ export default function Coolers() {
                               </TableFooterCell>
                             </TableFoot>
                           </Table>
-                          <PaginationComponent accion={setCurrentPage} totalDatos={filteredCoolers.length} datosPorPagina={datosPorPagina}/>
+                          <PaginationComponent accion={setCurrentPage} totalDatos={filteredCoolers.length} datosPorPagina={datosPorPagina} numero={setNumero}/>
                         </Card>
                       ) : (
                         <div

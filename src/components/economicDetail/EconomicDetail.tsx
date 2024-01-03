@@ -53,9 +53,11 @@ const EconomicDetail = ({ coolersData }) => {
           display: "flex",
           padding: "16px 0px",
           flexDirection: "column",
-          alignItems: "flex-start",
+          // alignItems: "flex-start",
           gap: "16px",
-          alignSelf: "stretch",
+          // alignSelf: "stretch",
+          // width : "138vh",
+          
         }}
       >
         <div
@@ -64,6 +66,7 @@ const EconomicDetail = ({ coolersData }) => {
             alignItems: "flex-start",
             gap: "16px",
             alignSelf: "stretch",
+            width : "100%",            
           }}
         >
           {/* Inversion total */}
@@ -78,6 +81,7 @@ const EconomicDetail = ({ coolersData }) => {
               alignSelf: "stretch",
               borderRadius: "8px",
               border: "1px solid #88888B",
+              width : "100%"
             }}
           >
             <div
@@ -131,11 +135,11 @@ const EconomicDetail = ({ coolersData }) => {
                 style={{
                   display: "flex",
                   minWidth: "160px",
-                  maxWidth: "500px",
+                  maxWidth: "400px",
                   alignItems: "flex-end",
                   alignContent: "flex-end",
                   gap: "12px",
-                  flexWrap: "wrap",
+                  flexWrap: "wrap",          
                 }}
               >
                 <div
@@ -271,7 +275,8 @@ const EconomicDetail = ({ coolersData }) => {
               alignSelf: "stretch",
               borderRadius: "8px",
               border: "1px solid #88888B",
-              width: "700px",
+              width: "100%",
+              
             }}
           >
             <div
@@ -579,7 +584,7 @@ const EconomicDetail = ({ coolersData }) => {
                         border: "1px solid #88888B",
                         // zIndex: 999, // Ajusta este valor según sea necesario para superponer correctamente
                         background: "#FFF",
-                        width: "1000px",
+                        width: "500px",
                       }}
                     >
                       <div
@@ -706,9 +711,10 @@ const EconomicDetail = ({ coolersData }) => {
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "16px",
-            alignSelf: "stretch",
+            // alignSelf: "stretch",
             borderRadius: "8px",
             border: "1px solid #88888B",
+            width : "95%"
           }}
         >
           <div
@@ -916,7 +922,7 @@ const EconomicDetail = ({ coolersData }) => {
               gap: "16px",
               borderRadius: "8px",
               border: "1px solid #88888B",
-              width: "100%",
+              width: "45%",
             }}
           >
             <div
@@ -948,7 +954,7 @@ const EconomicDetail = ({ coolersData }) => {
                 padding: "16px",
                 alignItems: "flex-start",
                 gap: "16px",
-                alignSelf: "stretch",
+                // alignSelf: "stretch",
                 borderRadius: "8px",
                 border: "1px solid #CACACA",
                 background: "#F4F4F4",
@@ -978,7 +984,8 @@ const EconomicDetail = ({ coolersData }) => {
                                 background: "#FFF",
                                 boxShadow:
                                   "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                width: "400px",
+                                width: "100%",
+                                backgroundColor : "#FFF"
                               }}
                             >
                               <div
@@ -1111,7 +1118,7 @@ const EconomicDetail = ({ coolersData }) => {
               gap: "16px",
               borderRadius: "8px",
               border: "1px solid #88888B",
-              width: "100%",
+              width: "45%",
             }}
           >
             <div
@@ -1176,7 +1183,7 @@ const EconomicDetail = ({ coolersData }) => {
                                 background: "#FFF",
                                 boxShadow:
                                   "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                width: "400px",
+                                width: "90%",
                               }}
                             >
                               <div

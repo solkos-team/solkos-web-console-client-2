@@ -252,7 +252,7 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: 300 }} p={"md"}>
+          <Navbar width={{ base: 270 }} p={"md"}>
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
@@ -270,7 +270,7 @@ function App() {
                       alignItems: "center",
                       gap: "16px",
                       flex: 100,
-                      width: "180px",
+                      // width: "180px",
                       height: "44px",
                     }}
                   >

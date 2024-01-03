@@ -45,7 +45,7 @@ const Energy = ({ coolersData }) => {
           borderRadius: "8px",
           border: "1px solid #88888B",
           background: "#FFF",
-          width: "920px",
+          width: "790px",
         }}
       >
         <div
@@ -267,7 +267,7 @@ const Energy = ({ coolersData }) => {
       <div
         style={{
           display: "flex",
-          width: "900px",
+          width: "790px",
           padding: "24px",
           flexDirection: "column",
           alignItems: "flex-start",

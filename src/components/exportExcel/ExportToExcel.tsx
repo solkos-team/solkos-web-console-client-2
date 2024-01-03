@@ -7,6 +7,7 @@ export const ExportToExcel = (props) => {
     return (
         <Group>
         <CSVLink data={props.datos} filename={props.nombre || 'console2.0'}>
+            <br />
                 <Button >Descargar&nbsp;<IconDownload size={15} /></Button>
             </CSVLink>            
         </Group>

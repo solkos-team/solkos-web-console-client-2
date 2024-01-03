@@ -49,7 +49,7 @@ const Resume = ({ coolersData }) => {
         <div
           style={{
             display: "flex",
-            width: "550px",
+            width: "90%",
             padding: "24px",
             flexDirection: "column",
             alignItems: "flex-start",
@@ -216,7 +216,7 @@ const Resume = ({ coolersData }) => {
               <Tabs.Panel value="first" pt="xs">
                 <div
                   style={{
-                    width: "525px",
+                    width: "95%",
                     height: "450px",
                     flexShrink: 0,
                     borderRadius: "8px",
@@ -655,7 +655,7 @@ const Resume = ({ coolersData }) => {
           {/* ********** */}
           <div
             style={{
-              width: "385px",
+              width: "88%",
               display: "flex",
               padding: "24px",
               flexDirection: "column",

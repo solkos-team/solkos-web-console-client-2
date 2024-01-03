@@ -67,7 +67,7 @@ const MapComponent = ({ latitude, longitude }) => {
     <div
       style={{
         position: "relative",
-        width: "525px",
+        width: "100%",
         height: "450px",
         flexShrink: 0,
         borderRadius: "8px",

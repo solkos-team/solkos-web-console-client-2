@@ -9,11 +9,15 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFoot,
+  TableFooterCell,
   TableHead,
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
 import ExcelJS from "exceljs";
+import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
+import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 
 export default function Outlets() {
   interface Outlet {
@@ -27,7 +31,12 @@ export default function Outlets() {
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [highlightedRow, setHighlightedRow] = useState(-1);
+  const [currentPage,setCurrentPage] = useState(1)  
+  const [datosPorPagina,setNumero] = useState(10)
   const navigate = useNavigate();
+  // const datosPorPagina = 10;  
+  const lastIndex = currentPage * Number(datosPorPagina);
+  const firstIndex = lastIndex - Number(datosPorPagina);
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -149,7 +158,7 @@ export default function Outlets() {
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "155%",
-              marginLeft: -80,
+              marginLeft: -55,
             }}
           >
             Puntos de venta
@@ -162,7 +171,7 @@ export default function Outlets() {
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "155%",
-              marginLeft: -80,
+              marginLeft: -55,
             }}
           >
             Catálogo de los puntos de venta, realiza el seguimiento adecuado
@@ -282,7 +291,7 @@ export default function Outlets() {
                 fontStyle: "normal",
                 fontWeight: 500,
                 lineHeight: "155%",
-                marginLeft: -80,
+                marginLeft: -55,
               }}
             >
               TABLA
@@ -295,7 +304,7 @@ export default function Outlets() {
                 fontStyle: "normal",
                 fontWeight: 300,
                 lineHeight: "155%",
-                marginLeft: -80,
+                marginLeft: -55,
               }}
             >
               Puntos de venta
@@ -333,7 +342,7 @@ export default function Outlets() {
                             style={{
                               marginBottom: "20px",
                               borderCollapse: "collapse",
-                              width: "910px",
+                              // width: "910px",
                             }}
                           >
                             <TableHead>
@@ -372,7 +381,9 @@ export default function Outlets() {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {filteredOutlets.map((outlet, index) => (
+                              {filteredOutlets
+                              .slice(firstIndex,lastIndex)
+                              .map((outlet, index) => (
                                 <TableRow
                                   key={index}
                                   style={{
@@ -387,8 +398,7 @@ export default function Outlets() {
                                         : "#F4F4F4",
                                   }}
                                   onClick={() => {
-                                    navigate("");
-                                    console.log("");
+                                    navigate("");                                    
                                   }}
                                   onMouseEnter={() => setHighlightedRow(index)}
                                   onMouseLeave={() => setHighlightedRow(-1)}
@@ -531,7 +541,13 @@ export default function Outlets() {
                                 </TableRow>
                               ))}
                             </TableBody>
+                            <TableFoot>
+                              <TableFooterCell>
+                                <ExportToExcel datos={filteredOutlets} nombre={"Outlets.csv"}/>
+                              </TableFooterCell>
+                            </TableFoot>
                           </Table>
+                          <PaginationComponent accion={setCurrentPage} totalDatos={filteredOutlets.length} datosPorPagina={datosPorPagina} numero={setNumero}/>
                         </Card>
                       ) : (
                         <div

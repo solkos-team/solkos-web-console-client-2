@@ -97,17 +97,18 @@ export default function Alerts() {
       <PageFilter />
       <br></br>
       <div
-        style={{
-          display: "flex",
-          padding: "10px 0px",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "16px",
-          flex: 100,
-          alignSelf: "stretch",
-          background: "#FFF",
-          marginLeft: -50,
-        }}
+        // style={{
+        //   display: "flex",
+        //   padding: "10px 0px",
+        //   flexDirection: "column",
+        //   alignItems: "flex-start",
+        //   gap: "16px",
+        //   flex: 100,
+        //   alignSelf: "stretch",
+        //   background: "#FFF",
+        //   marginLeft: -50,
+        // }}
+        className="principal-titl"
       >
         {/* title */}
         <div

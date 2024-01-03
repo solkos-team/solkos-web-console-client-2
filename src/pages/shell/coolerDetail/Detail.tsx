@@ -89,6 +89,7 @@ export default function CoolerDetail() {
             marginLeft: -85,
             gap: "8px",
             alignSelf: "stretch",
+            width : "96%",            
           }}
         >
           <img src={b} width={"60px"} alt="cooler"></img>
@@ -477,20 +478,21 @@ export default function CoolerDetail() {
         {/* *********************************************************** */}
         <br></br>
         <div
-          style={{
+          style={{ // SE QUITA BACKGROUND Y HEIGHT PARA QUITAR SEGUNDO SCROLL
             display: "flex",
-            height: "36px",
-            width: "1015px",
-            padding: "0px 32px",
+            // height: "36px",
+            width: "100%",
+            // padding: "0px 01px 0px 0px",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            background: "#D4DAE3",
+            // background: "#D4DAE3",
             flex: 1, // Añade esta línea
-            marginLeft: "-75px",
+            marginLeft: "-40px",
+            
           }}
         >
           {" "}
-          <Tabs color="teal" defaultValue="first">
+          <Tabs color="teal" defaultValue="first" >
             <Tabs.List>
               <Tabs.Tab value="first">Resumen</Tabs.Tab>
               <Tabs.Tab value="second">Desglose economico </Tabs.Tab>

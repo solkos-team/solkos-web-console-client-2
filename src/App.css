@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -39,4 +40,24 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.principal-titl {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  margin-left: -25px;
+  width: 90%;
+}
+.principal-content {
+  display: flex;
+  padding: 16px 0px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 20px;
+  align-self: stretch;
+  flex-wrap: wrap;
+  margin-left: -25px;
+  width: 96.7%;
 }

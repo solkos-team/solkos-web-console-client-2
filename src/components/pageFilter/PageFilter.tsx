@@ -145,12 +145,12 @@ export default function (props) {
         style={{
           display: "flex",
           // padding: "0px 32px",
-          marginLeft: -60,
+          marginLeft: -35,
           alignItems: "center",
           gap: "32px",
           alignSelf: "stretch",
           marginTop: -30,
-          maxWidth: "100%",
+          maxWidth: "97%",
           // overflowX: "auto",
           whiteSpace: "nowrap",
         }}
