@@ -343,13 +343,15 @@ export default function Outlets() {
                               marginBottom: "20px",
                               borderCollapse: "collapse",
                               // width: "910px",
+                              height : "400px"
                             }}
                           >
-                            <TableHead>
+                            <TableHead style={{display:"block"}}>
                               <TableRow>
                                 <TableHeaderCell
                                   style={{
                                     textAlign: "left",
+                                    width : "10rem"
                                   }}
                                 >
                                   Nombre
@@ -380,7 +382,7 @@ export default function Outlets() {
                                 </TableHeaderCell>
                               </TableRow>
                             </TableHead>
-                            <TableBody>
+                            <TableBody style={{display:"block",height:"450px",minWidth:"900px",overflowY:"auto"}}>
                               {filteredOutlets
                               .slice(firstIndex,lastIndex)
                               .map((outlet, index) => (
