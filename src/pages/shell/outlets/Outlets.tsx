@@ -19,6 +19,7 @@ import {
 import ExcelJS from "exceljs";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
+import { TextInput } from "@mantine/core";
 
 export default function Outlets() {
   interface Outlet {
@@ -32,10 +33,10 @@ export default function Outlets() {
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [highlightedRow, setHighlightedRow] = useState(-1);
-  const [currentPage,setCurrentPage] = useState(1)  
-  const [datosPorPagina,setNumero] = useState(10)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [datosPorPagina, setNumero] = useState(50);
   const navigate = useNavigate();
-  // const datosPorPagina = 10;  
+  // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const handleSearchChange = (event) => {
@@ -181,11 +182,11 @@ export default function Outlets() {
                   alignSelf: "stretch",
                 }}
               >
-                <input
+                <TextInput
                   value={searchValue}
                   onChange={handleSearchChange}
                   type="text"
-                  placeholder="Busca por..."
+                  placeholder="Busca por punto de venta"
                   style={{
                     fontSize: "14px",
                     fontStyle: "normal",
@@ -196,18 +197,10 @@ export default function Outlets() {
                     margin: 0, // Elimina el margen
                   }}
                 />
-                <img
-                  src={"../../sampleData/filter.png"}
-                  alt="Descripción de la imagen"
-                  style={{
-                    position: "absolute",
-                    right: "10px",
-                  }}
-                />
               </div>
             </div>
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 padding: "1px 18px",
@@ -232,7 +225,7 @@ export default function Outlets() {
               >
                 Buscar
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Tabla */}
@@ -313,20 +306,22 @@ export default function Outlets() {
                               marginBottom: "20px",
                               borderCollapse: "collapse",
                               // width: "910px",
-                              height : "400px"
+                              height: "400px",
                             }}
                           >
-                            <TableHead style={{display:"block"}}>
+                            <TableHead style={{ display: "block" }}>
                               <TableRow>
                                 <TableHeaderCell
                                   style={{
                                     textAlign: "left",
-                                    width : "10rem"
+                                    width: "220px",
                                   }}
                                 >
                                   Nombre
                                 </TableHeaderCell>
-                                <TableHeaderCell style={{ textAlign: "left" }}>
+                                <TableHeaderCell
+                                  style={{ textAlign: "left", width: "160px" }}
+                                >
                                   # Enfriadores
                                 </TableHeaderCell>
 
@@ -334,6 +329,7 @@ export default function Outlets() {
                                   style={{
                                     textAlign: "left",
                                     paddingRight: "9px",
+                                    width: "160px",
                                   }}
                                 >
                                   Días sin visita
@@ -342,184 +338,218 @@ export default function Outlets() {
                                   style={{
                                     textAlign: "left",
                                     paddingRight: "30px",
+                                    width: "160px",
                                   }}
                                 >
                                   {" "}
                                   Prioridad
                                 </TableHeaderCell>
-                                <TableHeaderCell style={{ textAlign: "left" }}>
+                                <TableHeaderCell
+                                  style={{ textAlign: "left", width: "150px" }}
+                                >
                                   Acciones
                                 </TableHeaderCell>
                               </TableRow>
                             </TableHead>
-                            <TableBody style={{display:"block",height:"450px",minWidth:"900px",overflowY:"auto"}}>
+                            <TableBody
+                              style={{
+                                display: "block",
+                                height: "450px",
+                                minWidth: "900px",
+                                overflowY: "auto",
+                              }}
+                            >
                               {filteredOutlets
-                              .slice(firstIndex,lastIndex)
-                              .map((outlet, index) => (
-                                <TableRow
-                                  key={index}
-                                  style={{
-                                    backgroundColor:
-                                      index % 2 === 0 ? "#FFF" : "#F4F4F4",
-                                    borderBottom: "1px solid #CACACA",
-                                    background:
-                                      index === highlightedRow
-                                        ? "#CCCCCC"
-                                        : index % 2 === 0
-                                        ? "#FFF"
-                                        : "#F4F4F4",
-                                  }}
-                                  onClick={() => {
-                                    navigate("");                                    
-                                  }}
-                                  onMouseEnter={() => setHighlightedRow(index)}
-                                  onMouseLeave={() => setHighlightedRow(-1)}
-                                >
-                                  <TableCell
+                                .slice(firstIndex, lastIndex)
+                                .map((outlet, index) => (
+                                  <TableRow
+                                    key={index}
                                     style={{
-                                      fontSize: "15px",
-                                      textAlign: "left",
+                                      backgroundColor:
+                                        index % 2 === 0 ? "#FFF" : "#F4F4F4",
+                                      borderBottom: "1px solid #CACACA",
+                                      background:
+                                        index === highlightedRow
+                                          ? "#CCCCCC"
+                                          : index % 2 === 0
+                                          ? "#FFF"
+                                          : "#F4F4F4",
                                     }}
-                                  >
-                                    {outlet.outlet_name === ""
-                                      ? "Sin registro"
-                                      : outlet.outlet_name}
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      paddingRight: "30px",
-                                      fontSize: "15px",
-                                      textAlign: "left",
+                                    onClick={() => {
+                                      navigate("");
                                     }}
+                                    onMouseEnter={() =>
+                                      setHighlightedRow(index)
+                                    }
+                                    onMouseLeave={() => setHighlightedRow(-1)}
                                   >
-                                    {outlet.num_coolers === ""
-                                      ? "Sin registro"
-                                      : outlet.num_coolers}
-                                  </TableCell>
+                                    <TableCell
+                                      style={{
+                                        fontSize: "15px",
+                                        textAlign: "left",
+                                        width: "250px",
+                                      }}
+                                    >
+                                      {outlet.outlet_name === ""
+                                        ? "Sin registro"
+                                        : outlet.outlet_name}
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "30px",
+                                        fontSize: "15px",
+                                        textAlign: "left",
+                                        width: "120px",
+                                      }}
+                                    >
+                                      {outlet.num_coolers === ""
+                                        ? "Sin registro"
+                                        : outlet.num_coolers}
+                                    </TableCell>
 
-                                  <TableCell
-                                    style={{
-                                      paddingRight: "30px",
-                                      fontSize: "15px",
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    <div
+                                    <TableCell
                                       style={{
-                                        display: "flex",
-                                        padding: "4px",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        gap: "4px",
-                                        borderRadius: "2px",
-                                        background: "#D4DAE3",
-                                        width: "60px",
+                                        paddingRight: "30px",
+                                        fontSize: "15px",
+                                        textAlign: "left",
+                                        width: "120px",
                                       }}
                                     >
                                       <div
                                         style={{
-                                          color: "#313A49",
-                                          // fontFamily: "Space Mono",
-                                          fontSize: "12px",
-                                          fontStyle: "normal",
-                                          fontWeight: 400,
-                                          lineHeight: "14px",
-                                        }}
-                                      >
-                                        {" "}
-                                        - DÍAS
-                                      </div>
-                                    </div>
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      paddingRight: "30px",
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        padding: "4px",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        gap: "4px",
-                                        borderRadius: "2px",
-                                        border: "1.5px solid #0F9F67",
-                                        background: "#FFF",
-                                      }}
-                                    >
-                                      <div
-                                        style={{
-                                          color: "#0F9F67",
-                                          // fontFamily: "DM Sans",
-                                          fontSize: "12px",
-                                          fontStyle: "normal",
-                                          fontWeight: 600,
-                                          lineHeight: "14px",
-                                        }}
-                                      >
-                                        -----------
-                                      </div>
-                                    </div>
-                                  </TableCell>
-                                  <TableCell
-                                    style={{
-                                      paddingRight: "30px",
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        // justifyContent: "flex-end",
-                                        alignItems: "center",
-                                        gap: "4px",
-                                        flex: 100,
-                                        height: "40px",
-                                      }}
-                                    >
-                                      <Link
-                                        to="/coolerDetail"
-                                        onClick={() => {
-                                          setSelectedOutletDetails(outlet);
-                                          setIsDrawerOpen(true);
+                                          display: "flex",
+                                          padding: "4px",
+                                          justifyContent: "center",
+                                          alignItems: "center",
+                                          gap: "4px",
+                                          borderRadius: "2px",
+                                          background: "#D4DAE3",
+                                          width: "60px",
                                         }}
                                       >
                                         <div
                                           style={{
-                                            color: "#3E83FF",
-                                            fontSize: "14px",
+                                            color: "#313A49",
+                                            // fontFamily: "Space Mono",
+                                            fontSize: "12px",
                                             fontStyle: "normal",
                                             fontWeight: 400,
-                                            lineHeight: "20px",
-                                            display: "flex",
-                                            marginRight: "6px",
+                                            lineHeight: "14px",
                                           }}
                                         >
-                                          Ver más{" "}
-                                          <IconArrowRight
+                                          {" "}
+                                          - DÍAS
+                                        </div>
+                                      </div>
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "30px",
+                                        textAlign: "left",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          padding: "4px",
+                                          justifyContent: "center",
+                                          alignItems: "center",
+                                          gap: "4px",
+                                          borderRadius: "2px",
+                                          border: "1.5px solid #0F9F67",
+                                          background: "#FFF",
+                                        }}
+                                      >
+                                        <div
+                                          style={{
+                                            color: "#0F9F67",
+                                            // fontFamily: "DM Sans",
+                                            fontSize: "12px",
+                                            fontStyle: "normal",
+                                            fontWeight: 600,
+                                            lineHeight: "14px",
+                                          }}
+                                        >
+                                          -----------
+                                        </div>
+                                      </div>
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "70px",
+                                        textAlign: "left",
+                                        width: "150px",
+                                        paddingLeft: "10px",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "flex-end",
+                                          alignItems: "center",
+                                          gap: "4px",
+                                          flex: 100,
+                                          height: "40px",
+                                          marginRight: -70,
+                                        }}
+                                      >
+                                        <Link
+                                          to="/coolerDetail"
+                                          onClick={() => {
+                                            setSelectedOutletDetails(outlet);
+                                            setIsDrawerOpen(true);
+                                          }}
+                                        >
+                                          <div
                                             style={{
                                               color: "#3E83FF",
-                                              width: "16px",
-                                              height: "16px",
-                                              marginTop: "2px",
+                                              fontSize: "14px",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                              lineHeight: "20px",
+                                              display: "flex",
+                                              marginRight: "66px",
                                             }}
-                                          />
-                                        </div>
-                                      </Link>
-                                    </div>
-                                  </TableCell>
-                                </TableRow>
-                              ))}
+                                          >
+                                            Ver más{" "}
+                                            <IconArrowRight
+                                              style={{
+                                                color: "#3E83FF",
+                                                width: "16px",
+                                                height: "16px",
+                                                marginTop: "2px",
+                                              }}
+                                            />
+                                          </div>
+                                        </Link>
+                                      </div>
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
                             </TableBody>
                             <TableFoot>
                               <TableFooterCell>
-                                <ExportToExcel datos={filteredOutlets} nombre={"Outlets.csv"}/>
+                                <ExportToExcel
+                                  datos={filteredOutlets}
+                                  nombre={"Outlets.csv"}
+                                />
                               </TableFooterCell>
                             </TableFoot>
                           </Table>
-                          <PaginationComponent accion={setCurrentPage} totalDatos={filteredOutlets.length} datosPorPagina={datosPorPagina} numero={setNumero}/>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end", // Alinea la paginación a la derecha
+                              marginTop: "16px", // Espacio superior para separar la paginación de la tabla
+                            }}
+                          >
+                            <PaginationComponent
+                              accion={setCurrentPage}
+                              totalDatos={filteredOutlets.length}
+                              datosPorPagina={datosPorPagina}
+                              numero={setNumero}
+                            />
+                          </div>
                         </Card>
                       ) : (
                         <div

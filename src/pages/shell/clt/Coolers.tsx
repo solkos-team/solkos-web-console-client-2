@@ -71,7 +71,7 @@ export default function Coolers() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchCoolers(pathVerify(),setIsLoading);
+        const data = await fetchCoolers(pathVerify(), setIsLoading);
         setCoolersData(data);
         console.log(data);
         setIsLoading(false); // Set isLoading to false after fetching coolers
