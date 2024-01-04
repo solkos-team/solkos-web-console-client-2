@@ -1,8 +1,8 @@
 // apiUtils.js
 const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
-export const fetchCoolers = async (path,setIsLoading) => {
-  setIsLoading(!false)
+export const fetchCoolers = async (path, setIsLoading) => {
+  setIsLoading(!false);
   const url = `${baseUrl}/coolers`;
   const headers = {
     "Content-Type": "application/json",
@@ -54,10 +54,8 @@ export const fetchCoolerDetails = async (serialNumber) => {
 
     const responseData = await response.json();
 
-    // Incluir el número de serie en la respuesta
     return {
       serial_number: serialNumber,
-      // Otras propiedades del enfriador
       ...responseData,
     };
   } catch (error) {
@@ -114,6 +112,34 @@ export const fetchAlerts = async () => {
 
     if (!response.ok) {
       throw new Error("Error fetching alerts data");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchInsights = async () => {
+  const url = `${baseUrl}/insights`;
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  const data = {
+    customer: "KOF",
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error fetching insights");
     }
 
     const responseData = await response.json();

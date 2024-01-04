@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
+import { fetchInsights } from "../../../utils/apiUtils";
+import { useNavigate } from "react-router-dom";
 
 export default function Insights() {
+  interface InsightsData {
+    alert: string;
+  }
+
+  const [insightsData, setInsightsData] = useState<InsightsData[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
@@ -21,6 +31,23 @@ export default function Insights() {
     setDrawerAbierto(false);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchInsights();
+        setInsightsData(data);
+        console.log(data);
+        console.log("Setting isLoading to false after fetching outlets");
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching outlets:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // console.log(insightsData.alert);
   return (
     <div>
       <PageFilter status="false" />
@@ -876,7 +903,11 @@ export default function Insights() {
                 }}
               >
                 <div
-                  style={{ width: "420px", height: "1px", background: "#CACACA" }}
+                  style={{
+                    width: "420px",
+                    height: "1px",
+                    background: "#CACACA",
+                  }}
                 ></div>
               </div>
               <div
@@ -885,10 +916,10 @@ export default function Insights() {
                   justifyContent: "flex-end",
                   alignItems: "center",
                   gap: "4px",
-                  marginLeft: 320,
+                  marginLeft: 270,
                   cursor: "pointer",
                 }}
-                onClick={abrirDrawer}
+                onClick={() => navigate("/indicator")}
               >
                 <div
                   style={{
@@ -1222,7 +1253,11 @@ export default function Insights() {
                 }}
               >
                 <div
-                  style={{ width: "420px", height: "1px", background: "#CACACA" }}
+                  style={{
+                    width: "420px",
+                    height: "1px",
+                    background: "#CACACA",
+                  }}
                 ></div>
               </div>
               <div
@@ -1231,8 +1266,10 @@ export default function Insights() {
                   justifyContent: "flex-end",
                   alignItems: "center",
                   gap: "4px",
-                  marginLeft: 320,
+                  marginLeft: 270,
+                  cursor: "pointer",
                 }}
+                onClick={() => navigate("/alerts")}
               >
                 <div
                   style={{
@@ -1564,7 +1601,11 @@ export default function Insights() {
                 }}
               >
                 <div
-                  style={{ width: "420px", height: "1px", background: "#CACACA" }}
+                  style={{
+                    width: "420px",
+                    height: "1px",
+                    background: "#CACACA",
+                  }}
                 ></div>
               </div>
               <div
@@ -1573,8 +1614,10 @@ export default function Insights() {
                   justifyContent: "flex-end",
                   alignItems: "center",
                   gap: "4px",
-                  marginLeft: 320,
+                  marginLeft: 270,
+                  cursor: "pointer",
                 }}
+                onClick={() => navigate("/fails")}
               >
                 <div
                   style={{
@@ -1597,13 +1640,14 @@ export default function Insights() {
             </div>
             {/* Enfriadores */}
             <div
-              style={{                
+              style={{
                 width: "47.3%",
-                height: "100%",                
+                height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                gap: "16px"
-              }}>
+                gap: "16px",
+              }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -1799,15 +1843,14 @@ export default function Insights() {
             </div>
           </div>
           {/* CARDS  */}
-          
-       
         </div>
       </div>
     </div>
   );
 }
 
-{/* <div
+{
+  /* <div
             style={{
               display: "flex",
               flexDirection: "row",
@@ -1816,198 +1859,201 @@ export default function Insights() {
               flex: 100,
             }}
           >
-            {/* Card 1 */}
-            // <div
-            //   style={{
-            //     display: "flex",
-            //     width: "42.3%",
-            //     height: "100%",
-            //     padding: "24px",
-            //     flexDirection: "column",
-            //     alignItems: "flex-start",
-            //     gap: "16px",
-            //     flexShrink: 0,
-            //     borderRadius: "8px",
-            //     border: "1px solid #88888B",
-            //     background: "#FFF",
-            //   }}
-            // >
-            //   <div
-            //     style={{
-            //       display: "flex",
-            //       flexDirection: "column",
-            //       alignItems: "flex-start",
-            //       gap: "8px",
-            //       alignSelf: "stretch",
-            //     }}
-            //   >
-            //     <div
-            //       style={{
-            //         display: "flex",
-            //         alignItems: "center",
-            //         gap: "16px",
-            //         alignSelf: "stretch",
-            //       }}
-            //     >
-            //       <img
-            //         src={"../../sampleData/coolersg.png"}
-            //         alt="Descripción de la imagen"
-            //       />
-            //       <div
-            //         style={{
-            //           color: "#3A3A3F",
-            //           // fontFamily: "DM Sans",
-            //           fontSize: "16px",
-            //           fontStyle: "normal",
-            //           fontWeight: 500,
-            //           lineHeight: "normal",
-            //         }}
-            //       >
-            //         Enfriadores funcionando
-            //       </div>
-            //     </div>
-            //     <div
-            //       style={{
-            //         display: "flex",
-            //         alignItems: "center",
-            //         alignContent: "center",
-            //         gap: "10px",
-            //         alignSelf: "stretch",
-            //         flexWrap: "wrap",
-            //       }}
-            //     >
-            //       <div
-            //         style={{
-            //           display: "flex",
-            //           minWidth: "200px",
-            //           flexDirection: "column",
-            //           justifyContent: "flex-end",
-            //           alignItems: "flex-start",
-            //         }}
-            //       >
-            //         <div
-            //           style={{
-            //             color: "#88888B",
-            //             // fontFamily: "DM Sans",
-            //             fontSize: "14px",
-            //             fontStyle: "normal",
-            //             fontWeight: 400,
-            //             lineHeight: "normal",
-            //           }}
-            //         >
-            //           Enfriadores
-            //         </div>
-            //         <div
-            //           style={{
-            //             color: "#000005",
-            //             // fontFamily: "DM Sans",
-            //             fontSize: "26px",
-            //             fontStyle: "normal",
-            //             fontWeight: 500,
-            //             lineHeight: "normal",
-            //           }}
-            //         >
-            //           4,291
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </div>
-            {/* Card 2 */}
-            // <div
-            //   style={{
-            //     display: "flex",
-            //     width: "42.3%",
-            //     height: "100%",
-            //     padding: "24px",
-            //     flexDirection: "column",
-            //     alignItems: "flex-start",
-            //     gap: "16px",
-            //     flexShrink: 0,
-            //     borderRadius: "8px",
-            //     border: "1px solid #88888B",
-            //     background: "#FFF",
-            //   }}
-            // >
-            //   <div
-            //     style={{
-            //       display: "flex",
-            //       flexDirection: "column",
-            //       alignItems: "flex-start",
-            //       gap: "8px",
-            //       alignSelf: "stretch",
-            //     }}
-            //   >
-            //     <div
-            //       style={{
-            //         display: "flex",
-            //         alignItems: "center",
-            //         gap: "16px",
-            //         alignSelf: "stretch",
-            //       }}
-            //     >
-            //       <img
-            //         src={"../../sampleData/coolersr.png"}
-            //         alt="Descripción de la imagen"
-            //       />
-            //       <div
-            //         style={{
-            //           color: "#3A3A3F",
-            //           // fontFamily: "DM Sans",
-            //           fontSize: "16px",
-            //           fontStyle: "normal",
-            //           fontWeight: 500,
-            //           lineHeight: "normal",
-            //         }}
-            //       >
-            //         Enfriadores sin datos
-            //       </div>
-            //     </div>
-            //     <div
-            //       style={{
-            //         display: "flex",
-            //         alignItems: "center",
-            //         alignContent: "center",
-            //         gap: "10px",
-            //         alignSelf: "stretch",
-            //         flexWrap: "wrap",
-            //       }}
-            //     >
-            //       <div
-            //         style={{
-            //           display: "flex",
-            //           minWidth: "200px",
-            //           flexDirection: "column",
-            //           justifyContent: "flex-end",
-            //           alignItems: "flex-start",
-            //         }}
-            //       >
-            //         <div
-            //           style={{
-            //             color: "#88888B",
-            //             // fontFamily: "DM Sans",
-            //             fontSize: "14px",
-            //             fontStyle: "normal",
-            //             fontWeight: 400,
-            //             lineHeight: "normal",
-            //           }}
-            //         >
-            //           Enfriadores
-            //         </div>
-            //         <div
-            //           style={{
-            //             color: "#000005",
-            //             // fontFamily: "DM Sans",
-            //             fontSize: "26px",
-            //             fontStyle: "normal",
-            //             fontWeight: 500,
-            //             lineHeight: "normal",
-            //           }}
-            //         >
-            //           2,102
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </div>
-            // </div>
+            {/* Card 1 */
+}
+// <div
+//   style={{
+//     display: "flex",
+//     width: "42.3%",
+//     height: "100%",
+//     padding: "24px",
+//     flexDirection: "column",
+//     alignItems: "flex-start",
+//     gap: "16px",
+//     flexShrink: 0,
+//     borderRadius: "8px",
+//     border: "1px solid #88888B",
+//     background: "#FFF",
+//   }}
+// >
+//   <div
+//     style={{
+//       display: "flex",
+//       flexDirection: "column",
+//       alignItems: "flex-start",
+//       gap: "8px",
+//       alignSelf: "stretch",
+//     }}
+//   >
+//     <div
+//       style={{
+//         display: "flex",
+//         alignItems: "center",
+//         gap: "16px",
+//         alignSelf: "stretch",
+//       }}
+//     >
+//       <img
+//         src={"../../sampleData/coolersg.png"}
+//         alt="Descripción de la imagen"
+//       />
+//       <div
+//         style={{
+//           color: "#3A3A3F",
+//           // fontFamily: "DM Sans",
+//           fontSize: "16px",
+//           fontStyle: "normal",
+//           fontWeight: 500,
+//           lineHeight: "normal",
+//         }}
+//       >
+//         Enfriadores funcionando
+//       </div>
+//     </div>
+//     <div
+//       style={{
+//         display: "flex",
+//         alignItems: "center",
+//         alignContent: "center",
+//         gap: "10px",
+//         alignSelf: "stretch",
+//         flexWrap: "wrap",
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           minWidth: "200px",
+//           flexDirection: "column",
+//           justifyContent: "flex-end",
+//           alignItems: "flex-start",
+//         }}
+//       >
+//         <div
+//           style={{
+//             color: "#88888B",
+//             // fontFamily: "DM Sans",
+//             fontSize: "14px",
+//             fontStyle: "normal",
+//             fontWeight: 400,
+//             lineHeight: "normal",
+//           }}
+//         >
+//           Enfriadores
+//         </div>
+//         <div
+//           style={{
+//             color: "#000005",
+//             // fontFamily: "DM Sans",
+//             fontSize: "26px",
+//             fontStyle: "normal",
+//             fontWeight: 500,
+//             lineHeight: "normal",
+//           }}
+//         >
+//           4,291
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+{
+  /* Card 2 */
+}
+// <div
+//   style={{
+//     display: "flex",
+//     width: "42.3%",
+//     height: "100%",
+//     padding: "24px",
+//     flexDirection: "column",
+//     alignItems: "flex-start",
+//     gap: "16px",
+//     flexShrink: 0,
+//     borderRadius: "8px",
+//     border: "1px solid #88888B",
+//     background: "#FFF",
+//   }}
+// >
+//   <div
+//     style={{
+//       display: "flex",
+//       flexDirection: "column",
+//       alignItems: "flex-start",
+//       gap: "8px",
+//       alignSelf: "stretch",
+//     }}
+//   >
+//     <div
+//       style={{
+//         display: "flex",
+//         alignItems: "center",
+//         gap: "16px",
+//         alignSelf: "stretch",
+//       }}
+//     >
+//       <img
+//         src={"../../sampleData/coolersr.png"}
+//         alt="Descripción de la imagen"
+//       />
+//       <div
+//         style={{
+//           color: "#3A3A3F",
+//           // fontFamily: "DM Sans",
+//           fontSize: "16px",
+//           fontStyle: "normal",
+//           fontWeight: 500,
+//           lineHeight: "normal",
+//         }}
+//       >
+//         Enfriadores sin datos
+//       </div>
+//     </div>
+//     <div
+//       style={{
+//         display: "flex",
+//         alignItems: "center",
+//         alignContent: "center",
+//         gap: "10px",
+//         alignSelf: "stretch",
+//         flexWrap: "wrap",
+//       }}
+//     >
+//       <div
+//         style={{
+//           display: "flex",
+//           minWidth: "200px",
+//           flexDirection: "column",
+//           justifyContent: "flex-end",
+//           alignItems: "flex-start",
+//         }}
+//       >
+//         <div
+//           style={{
+//             color: "#88888B",
+//             // fontFamily: "DM Sans",
+//             fontSize: "14px",
+//             fontStyle: "normal",
+//             fontWeight: 400,
+//             lineHeight: "normal",
+//           }}
+//         >
+//           Enfriadores
+//         </div>
+//         <div
+//           style={{
+//             color: "#000005",
+//             // fontFamily: "DM Sans",
+//             fontSize: "26px",
+//             fontStyle: "normal",
+//             fontWeight: 500,
+//             lineHeight: "normal",
+//           }}
+//         >
+//           2,102
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
 // </div> */}

@@ -259,7 +259,7 @@ export default function Outlets() {
             >
               TABLA
             </div>
-            <div style={{ display: "flex", width: "470%", marginLeft: -55, }}>
+            <div style={{ display: "flex", width: "470%", marginLeft: -55 }}>
               <div
                 style={{
                   color: "#000005",
@@ -276,7 +276,8 @@ export default function Outlets() {
                 <ExportToExcel
                   datos={filteredOutlets}
                   nombre={"Puntos de Venta"}
-                /></div>
+                />
+              </div>
             </div>
           </div>
           <div
@@ -533,14 +534,6 @@ export default function Outlets() {
                                   </TableRow>
                                 ))}
                             </TableBody>
-                            <TableFoot>
-                              <TableFooterCell>
-                                <ExportToExcel
-                                  datos={filteredOutlets}
-                                  nombre={"Outlets.csv"}
-                                />
-                              </TableFooterCell>
-                            </TableFoot>
                           </Table>
                           <div
                             style={{

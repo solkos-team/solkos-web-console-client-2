@@ -192,7 +192,7 @@ function App() {
   const links = routes.map((item) => (
     <div key={item.label}>
       {item.links ? (
-        <div>
+        <div style={{ whiteSpace: "nowrap" }}>
           <div
             onClick={() => {
               setCoolerInsightsOpen(!coolerInsightsOpen);
@@ -204,9 +204,9 @@ function App() {
             {item.icon}
             <span style={{ marginLeft: 10 }}>{item.label}</span>
             {coolerInsightsOpen ? (
-              <img src={arrow_1} style={{ marginLeft: 90 }} />
+              <img src={arrow_1} style={{ marginLeft: 70 }} />
             ) : (
-              <img src={arrow_2} style={{ marginLeft: 90 }} />
+              <img src={arrow_2} style={{ marginLeft: 70 }} />
             )}
           </div>
 

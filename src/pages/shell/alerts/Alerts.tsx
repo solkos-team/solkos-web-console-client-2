@@ -189,7 +189,7 @@ export default function Alerts() {
                     key={index}
                     style={{
                       display: "flex",
-                      width: "260px",
+                      width: "280px",
                       padding: "24px",
                       flexDirection: "column",
                       alignItems: "flex-start",
@@ -424,7 +424,7 @@ export default function Alerts() {
                           style={{
                             height: "1px",
                             background: "#CACACA",
-                            width: "100%",
+                            width: "110%",
                           }}
                         ></div>
                       </div>
@@ -455,7 +455,7 @@ export default function Alerts() {
                             fontStyle: "normal",
                             fontWeight: 400,
                             lineHeight: "normal",
-                            marginLeft: 140,
+                            marginLeft: 160,
                           }}
                         >
                           Ver enfriadores
