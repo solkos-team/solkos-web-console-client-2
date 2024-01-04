@@ -1,7 +1,8 @@
 // apiUtils.js
 const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
-export const fetchCoolers = async () => {
+export const fetchCoolers = async (path,setIsLoading) => {
+  setIsLoading(!false)
   const url = `${baseUrl}/coolers`;
   const headers = {
     "Content-Type": "application/json",
@@ -13,6 +14,7 @@ export const fetchCoolers = async () => {
     algorithm: ["INSTALLED"],
     page_size: 100,
     page_number: 1,
+    path: path,
   };
 
   try {

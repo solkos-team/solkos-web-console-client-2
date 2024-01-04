@@ -68,42 +68,10 @@ export default function Coolers() {
   const pathVerify = () => {
     return dt.length == 0 ? "[]" : JSON.parse(dt);
   };
-  const fetchCoolersFromAPI = async (path) => {
-    setIsLoading(!false);
-    const url =
-      "https://universal-console-server-b7agk5thba-uc.a.run.app/coolers";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      customer: "KOF",
-      class: "STK",
-      algorithm: ["INSTALLED"],
-      page_size: 3000,
-      page_number: 1,
-      path: path,
-    };
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de los enfriadores");
-      }
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchCoolersFromAPI(pathVerify());
+        const data = await fetchCoolers(pathVerify(),setIsLoading);
         setCoolersData(data);
         console.log(data);
         setIsLoading(false); // Set isLoading to false after fetching coolers
@@ -114,31 +82,6 @@ export default function Coolers() {
 
     fetchData();
   }, [dt]);
-
-  ////////////////////////////////////////////////////////////
-  const fetchCoolersFromAPI2 = async (serial_number) => {
-    const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos del enfriador");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -156,7 +99,6 @@ export default function Coolers() {
     fetchData();
   }, [coolersData]);
 
-  /////////////////////////////////////////////////////////////
   const filteredCoolers = coolersData
     ? filterCoolers(coolersData, searchValue)
     : [];
