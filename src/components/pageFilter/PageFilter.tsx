@@ -16,17 +16,21 @@ import { fetchPath } from "./getPath";
 export default function (props) {
   const dispatch = useDispatch();
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
-  const [value, setValue] = useState<string | null>('');
+  const [value, setValue] = useState<string | null>("");
   const [opened, setOpened] = useState(false);
-  const [statusDelete, setStatusDelete] = useState(false)
-  const [dataZone, setDataZone] = useState([['']])
-  const [dataSelect,setDataSelect] = useState(['Zona','Region','Unidad Operativa','Ruta'])
-  const [data, setData] = useState<string[]>([])
-  const [index, setIndex] = useState(0)
-  const [filterVisibility, setFilterVisibility] = useState(true)
+  const [statusDelete, setStatusDelete] = useState(false);
+  const [dataZone, setDataZone] = useState([[""]]);
+  const [dataSelect, setDataSelect] = useState([
+    "Zona",
+    "Region",
+    "Unidad Operativa",
+    "Ruta",
+  ]);
+  const [data, setData] = useState<string[]>([]);
+  const [index, setIndex] = useState(0);
+  const [filterVisibility, setFilterVisibility] = useState(true);
   const navigate = useNavigate();
-  
-  
+
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
   };
@@ -34,27 +38,31 @@ export default function (props) {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-  const getPaths = async (dataLocalStorage?) =>{
-    try{
-      const data = await fetchPath(dataLocalStorage)
+  const getPaths = async (dataLocalStorage?) => {
+    try {
+      const data = await fetchPath(dataLocalStorage);
       //dataZone.push(data)
-      dataZone.unshift(data) // solucion path desde api
-    }catch(error){console.log("Error fetching path",error)}
-  }
-  useEffect(()=>{    
-    getPaths()
-  },[])
-  // Ctrl + x
-  useEffect(() => {         
-    dispatch(addPath())
-    const storage = localStorage.getItem('PATH')
-    if(storage == null){
-      localStorage.setItem('PATH','')      
+      dataZone.unshift(data); // solucion path desde api
+    } catch (error) {
+      console.log("Error fetching path", error);
     }
-    setIndex(JSON.parse(storage||'[]').length)     
-    const dataLocalStorage:any = JSON.parse(localStorage.getItem('PATH')||'[]')    
+  };
+  useEffect(() => {
+    getPaths();
+  }, []);
+  // Ctrl + x
+  useEffect(() => {
+    dispatch(addPath());
+    const storage = localStorage.getItem("PATH");
+    if (storage == null) {
+      localStorage.setItem("PATH", "");
+    }
+    setIndex(JSON.parse(storage || "[]").length);
+    const dataLocalStorage: any = JSON.parse(
+      localStorage.getItem("PATH") || "[]"
+    );
     if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
-      setFilterVisibility(false)
+      setFilterVisibility(false);
     }
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "x") {
@@ -68,17 +76,16 @@ export default function (props) {
   }, [statusDelete]);
 
   const ventanaEmergenteRef = useRef<HTMLDivElement | null>(null);
-  
 
   useEffect(() => {
-    verSelectData(value)
-    dispatch(addPath())
-    const storedTodos = localStorage.getItem('PATH')
-    const todoArr = storedTodos !== null ? JSON.parse(storedTodos||'[]') : [];
-    setData(todoArr)
-    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'[]')      
+    verSelectData(value);
+    dispatch(addPath());
+    const storedTodos = localStorage.getItem("PATH");
+    const todoArr = storedTodos !== null ? JSON.parse(storedTodos || "[]") : [];
+    setData(todoArr);
+    const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
     if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
-      setFilterVisibility(false)
+      setFilterVisibility(false);
     }
     const handleCloseOnOutsideClick = (event) => {
       if (
@@ -98,47 +105,47 @@ export default function (props) {
       document.body.removeEventListener("click", handleCloseOnOutsideClick);
     };
   }, [mostrarVentanaEmergente, value]);
-  
-  const verSelectData = (value) => {    
-    if (value != '') {
+
+  const verSelectData = (value) => {
+    if (value != "") {
       if (index >= 4 || data.length >= 4) {
-        alert('Filtros excedidos')
-        return
+        alert("Filtros excedidos");
+        return;
       }
-      setData(current => [...current, value]) 
-      localStorage.setItem('PATH', JSON.stringify([...data,value]))            
-      setOpened(false)
+      setData((current) => [...current, value]);
+      localStorage.setItem("PATH", JSON.stringify([...data, value]));
+      setOpened(false);
       if (index != 3) {
-        setIndex(index + 1)
-        setStatusDelete(false)
+        setIndex(index + 1);
+        setStatusDelete(false);
       }
       if (index == 3) {
-        setFilterVisibility(false)
-        setStatusDelete(false)
+        setFilterVisibility(false);
+        setStatusDelete(false);
       }
-      setStatusDelete(false)      
+      setStatusDelete(false);
     }
-  }
+  };
   const deleteFilter = (i) => {
-    const dataLocalStorage = JSON.parse(localStorage.getItem('PATH')||'')
-    dataLocalStorage.splice(i,1)    
-    localStorage.setItem('PATH',JSON.stringify(dataLocalStorage))
-    data.splice(i, 1)
-    setStatusDelete(!statusDelete)
-    setIndex(data.length)
+    const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
+    dataLocalStorage.splice(i, 1);
+    localStorage.setItem("PATH", JSON.stringify(dataLocalStorage));
+    data.splice(i, 1);
+    setStatusDelete(!statusDelete);
+    setIndex(data.length);
     if (i == 3) {
-      setFilterVisibility(true)
+      setFilterVisibility(true);
     }
-    setValue('')
-    getPaths(data)
-  }
-  const getPath = ({path}) => { 
-    return (typeof(path) === 'undefined') ? "" : path
-  }
+    setValue("");
+    getPaths(data);
+  };
+  const getPath = ({ path }) => {
+    return typeof path === "undefined" ? "" : path;
+  };
   const bloqPath = (i) => {
-    return (i == data.length-1) ? false : (true)
-  }
-  data.length > 0 ? getPaths(data) : ''
+    return i == data.length - 1 ? false : true;
+  };
+  data.length > 0 ? getPaths(data) : "";
   return (
     <div>
       <div
@@ -156,23 +163,24 @@ export default function (props) {
         }}
       >
         <section
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "32px",
-          height: "32px",
-          strokeWidth: "0.5",
-          border: "0.5px solid #ADBACC",
-          borderRadius: "4px",
-          // boxSizing: "border-box",
-          visibility : 
-          props.status == 'false' ? 'hidden' : "visible"
-        }}
-        onClick={()=>{navigate(`/`+ getPath(props))}}
-      >          
-        <IconArrowNarrowLeft />
-      </section>
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "32px",
+            height: "32px",
+            strokeWidth: "0.5",
+            border: "0.5px solid #ADBACC",
+            borderRadius: "4px",
+            // boxSizing: "border-box",
+            visibility: props.status == "false" ? "hidden" : "visible",
+          }}
+          onClick={() => {
+            navigate(`/` + getPath(props));
+          }}
+        >
+          <IconArrowNarrowLeft />
+        </section>
         <div
           style={{
             display: "flex",
@@ -181,7 +189,7 @@ export default function (props) {
             gap: "8px",
             // flex: "100",
             border: "0.5px solid #ADBACC",
-            width: "100%",            
+            width: "100%",
             borderRadius: "4px",
           }}
         >
@@ -213,7 +221,7 @@ export default function (props) {
                   fontWeight: 400,
                   lineHeight: "14px",
                   textTransform: "uppercase",
-                  userSelect : "none"
+                  userSelect: "none",
                 }}
               >
                 CLIENTE
@@ -228,78 +236,70 @@ export default function (props) {
               }}
             />
           </div>
-          {
-            data
-              .map((item, i) => (
-                <div style={{ display: "flex", alignItems: "center" }} key={i}>
-                  <button
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      border: "1px solid #ADBACC",                      
-                      padding: "3px 7px",
-                      background : 
-                      bloqPath(i) == false ? '' : '#D4DAE3',
-                    }}
-                    disabled={bloqPath(i)}
-                    type="button"
-                  >
-                    <IconCircleX
-                      style={{
-                        color: "#313A49",
-                        width: "16px",
-                        height: "16px",
-                        marginRight: "3px",
-                        visibility :
-                        bloqPath(i) == false ? 'visible' : 'hidden'
-                      }}
-                      onClick={() => { deleteFilter(i) }}
-                      onClickCapture={((o) => !o)}
-                    />
-                    <Text
-                      style={{
-                        // color: "#313A49",
-                        // fontFamily: "Space Mono",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
-                        userSelect : 'none',
-                        color : 
-                        bloqPath(i) == false ? '#313A49' : '#ADBACC'
-                      }}
-                    >
-                      {item}
-                    </Text>
-                  </button>
-                  <IconChevronRight
-                    style={{
-                      color: "#ADBACC",
-                      width: "16px",
-                      height: "16px",
-                      marginLeft: "3px",
-                      visibility :
-                        i == 3 ? 'hidden' : 'visible'
-                    }}
-                  />
-                </div>
-              ))
-            
-          }
-
+          {data.map((item, i) => (
+            <div style={{ display: "flex", alignItems: "center" }} key={i}>
+              <button
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  borderRadius: "8px",
+                  border: "1px solid #ADBACC",
+                  padding: "3px 7px",
+                  background: bloqPath(i) == false ? "" : "#D4DAE3",
+                }}
+                disabled={bloqPath(i)}
+                type="button"
+              >
+                <IconCircleX
+                  style={{
+                    color: "#313A49",
+                    width: "16px",
+                    height: "16px",
+                    marginRight: "3px",
+                    visibility: bloqPath(i) == false ? "visible" : "hidden",
+                  }}
+                  onClick={() => {
+                    deleteFilter(i);
+                  }}
+                  onClickCapture={(o) => !o}
+                />
+                <Text
+                  style={{
+                    // color: "#313A49",
+                    // fontFamily: "Space Mono",
+                    fontSize: "12px",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "14px",
+                    textTransform: "uppercase",
+                    userSelect: "none",
+                    color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
+                  }}
+                >
+                  {item}
+                </Text>
+              </button>
+              <IconChevronRight
+                style={{
+                  color: "#ADBACC",
+                  width: "16px",
+                  height: "16px",
+                  marginLeft: "3px",
+                  visibility: i == 3 ? "hidden" : "visible",
+                }}
+              />
+            </div>
+          ))}
 
           {/* ---------------------- */}
-          {filterVisibility
-            ? <div style={{ display: "flex", alignItems: "center" }} >
+          {filterVisibility ? (
+            <div style={{ display: "flex", alignItems: "center" }}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   padding: "3px 7px",
                 }}
-                
               >
                 <IconCirclePlus
                   style={{
@@ -310,7 +310,16 @@ export default function (props) {
                   }}
                   onClick={() => setOpened((o) => !o)}
                 />
-                <Popover position="bottom" withArrow shadow="md" opened={opened} onClose={() => setOpened(false)} onChange={(opened) => { setOpened(opened) }}>
+                <Popover
+                  position="bottom"
+                  withArrow
+                  shadow="md"
+                  opened={opened}
+                  onClose={() => setOpened(false)}
+                  onChange={(opened) => {
+                    setOpened(opened);
+                  }}
+                >
                   <Popover.Target>
                     <Text
                       style={{
@@ -321,7 +330,7 @@ export default function (props) {
                         fontWeight: 400,
                         lineHeight: "14px",
                         textTransform: "uppercase",
-                        userSelect : "none"
+                        userSelect: "none",
                       }}
                       onClick={() => setOpened((o) => !o)}
                     >
@@ -330,23 +339,22 @@ export default function (props) {
                   </Popover.Target>
                   <Popover.Dropdown>
                     <Select
-                      label={`Selecciona tu ${dataSelect[index]}`}
-                      placeholder="Pick value"
+                      label={`Selecciona la ${dataSelect[index]}`}
+                      placeholder="Seleccionar"
                       searchable
                       defaultChecked
-                      data={dataZone[index]}                      
-                      // value={value} 
+                      data={dataZone[index]}
+                      // value={value}
                       onChange={setValue}
-                      nothingFound='Dato no encontrado'
-                      
+                      nothingFound="Dato no encontrado"
                     />
                   </Popover.Dropdown>
                 </Popover>
-
               </div>
             </div>
-            : ""
-          }
+          ) : (
+            ""
+          )}
         </div>
         <div>
           <div
@@ -525,10 +533,10 @@ export default function (props) {
                           fontSize: "12px",
                           fontStyle: "normal",
                           fontWeight: 400,
-                          lineHeight: "14px",   
-                          userSelect : "none"                                               
+                          lineHeight: "14px",
+                          userSelect: "none",
                         }}
-                      >                        
+                      >
                         CLIENTE
                       </Text>
                     </div>
@@ -542,4 +550,3 @@ export default function (props) {
     </div>
   );
 }
-

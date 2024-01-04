@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addPath } from "../../../app/works";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
+import { TextInput } from "@mantine/core";
 export default function Coolers() {
   interface Cooler {
     serial_number: string;
@@ -42,7 +43,7 @@ export default function Coolers() {
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [highlightedRow, setHighlightedRow] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [datosPorPagina, setNumero] = useState(10);
+  const [datosPorPagina, setNumero] = useState(50);
   const navigate = useNavigate();
   // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
@@ -104,6 +105,7 @@ export default function Coolers() {
       try {
         const data = await fetchCoolersFromAPI(pathVerify());
         setCoolersData(data);
+        console.log(data);
         setIsLoading(false); // Set isLoading to false after fetching coolers
       } catch (error) {
         console.error("Error fetching coolers:", error);
@@ -143,6 +145,7 @@ export default function Coolers() {
         if (coolersData && coolersData.length > 0) {
           const data = await fetchCoolerDetails(coolersData[0].serial_number);
           setCoolersDataDeatil(data);
+          console.log(data);
           setIsLoading(false); // Set isLoading to false after fetching cooler details
         }
       } catch (error) {
@@ -260,11 +263,11 @@ export default function Coolers() {
                   alignSelf: "stretch",
                 }}
               >
-                <input
+                <TextInput
                   value={searchValue}
                   onChange={handleSearchChange}
                   type="text"
-                  placeholder="Busca por..."
+                  placeholder="Busca por Id Coolector / Mac"
                   style={{
                     fontSize: "14px",
                     fontStyle: "normal",
@@ -272,21 +275,15 @@ export default function Coolers() {
                     lineHeight: "28px",
                     width: "400px",
                     paddingRight: "40px",
-                    margin: 0, // Elimina el margen
-                  }}
-                />
-                <img
-                  src={"../../sampleData/filter.png"}
-                  alt="Descripción de la imagen"
-                  style={{
-                    position: "absolute",
-                    right: "10px",
+                    margin: 0,
+                    borderRadius: "4px",
+                    color: "#88888B",
                   }}
                 />
               </div>
             </div>
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 padding: "1px 18px",
@@ -311,7 +308,7 @@ export default function Coolers() {
               >
                 Buscar
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Tabla */}
@@ -405,8 +402,9 @@ export default function Coolers() {
                         <Card>
                           <Table
                             style={{
-                              marginBottom: "20px",
                               borderCollapse: "collapse",
+                              width: "100%", // Cambiado a 100% para que la tabla sea receptiva
+                              maxWidth: "1000px",
                               // width: "910px",
                               height: "400px",
                             }}
@@ -416,25 +414,25 @@ export default function Coolers() {
                                 <TableHeaderCell
                                   style={{
                                     textAlign: "left",
-                                    width: "10rem",
+                                    width: "150px",
                                   }}
                                 >
                                   Estatus
                                 </TableHeaderCell>
                                 <TableHeaderCell
-                                  style={{ textAlign: "left", width: "10rem" }}
+                                  style={{ textAlign: "left", width: "150px" }}
                                 >
                                   Serie
                                 </TableHeaderCell>
                                 <TableHeaderCell
-                                  style={{ textAlign: "left", width: "6rem" }}
+                                  style={{ textAlign: "left", width: "150px" }}
                                 >
                                   Modelo
                                 </TableHeaderCell>
                                 <TableHeaderCell
                                   style={{
                                     textAlign: "left",
-                                    paddingRight: "9px",
+                                    width: "150px",
                                   }}
                                 >
                                   Días sin visita
@@ -442,13 +440,15 @@ export default function Coolers() {
                                 <TableHeaderCell
                                   style={{
                                     textAlign: "left",
-                                    paddingRight: "30px",
+                                    width: "150px",
                                   }}
                                 >
                                   {" "}
                                   Prioridad
                                 </TableHeaderCell>
-                                <TableHeaderCell style={{ textAlign: "left" }}>
+                                <TableHeaderCell
+                                  style={{ textAlign: "left", width: "150px" }}
+                                >
                                   Acciones
                                 </TableHeaderCell>
                               </TableRow>
@@ -494,6 +494,7 @@ export default function Coolers() {
                                       style={{
                                         paddingRight: "30px",
                                         textAlign: "left",
+                                        width: "150px",
                                       }}
                                     >
                                       <div
@@ -534,6 +535,7 @@ export default function Coolers() {
                                         paddingRight: "30px",
                                         fontSize: "15px",
                                         textAlign: "left",
+                                        width: "150px",
                                       }}
                                     >
                                       {cooler.serial_number === ""
@@ -542,8 +544,9 @@ export default function Coolers() {
                                     </TableCell>
                                     <TableCell
                                       style={{
-                                        paddingRight: "30px",
+                                        paddingRight: "50px",
                                         fontSize: "15px",
+                                        width: "180px",
                                         textAlign: "left",
                                       }}
                                     >
@@ -553,8 +556,9 @@ export default function Coolers() {
                                     </TableCell>
                                     <TableCell
                                       style={{
-                                        paddingRight: "30px",
+                                        paddingRight: "80px",
                                         fontSize: "15px",
+                                        width: "150px",
                                         textAlign: "left",
                                       }}
                                     >
@@ -586,8 +590,9 @@ export default function Coolers() {
                                     </TableCell>
                                     <TableCell
                                       style={{
-                                        paddingRight: "30px",
+                                        paddingRight: "60px",
                                         textAlign: "left",
+                                        width: "150px",
                                       }}
                                     >
                                       <div
@@ -618,14 +623,15 @@ export default function Coolers() {
                                     </TableCell>
                                     <TableCell
                                       style={{
-                                        paddingRight: "30px",
+                                        paddingRight: "70px",
                                         textAlign: "left",
+                                        width: "150px",
                                       }}
                                     >
                                       <div
                                         style={{
                                           display: "flex",
-                                          // justifyContent: "flex-end",
+                                          justifyContent: "flex-end",
                                           alignItems: "center",
                                           gap: "4px",
                                           flex: 100,
@@ -669,12 +675,21 @@ export default function Coolers() {
                               </TableFooterCell>
                             </TableFoot>
                           </Table>
-                          <PaginationComponent
-                            accion={setCurrentPage}
-                            totalDatos={filteredCoolers.length}
-                            datosPorPagina={datosPorPagina}
-                            numero={setNumero}
-                          />
+                          <br></br>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end", // Alinea la paginación a la derecha
+                              marginTop: "16px", // Espacio superior para separar la paginación de la tabla
+                            }}
+                          >
+                            <PaginationComponent
+                              accion={setCurrentPage}
+                              totalDatos={filteredCoolers.length}
+                              datosPorPagina={datosPorPagina}
+                              numero={setNumero}
+                            />
+                          </div>
                         </Card>
                       ) : (
                         <div

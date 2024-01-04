@@ -1,30 +1,39 @@
-import React, { useState } from 'react'
-import { Pagination, Select } from '@mantine/core'
-import { Text } from '@mantine/core'
-export const PaginationComponent = ({ accion, totalDatos, datosPorPagina, numero }) => {
-
-  const [data, setData] = useState(["10","20","5"])
-  const [value, setValue] = useState<string | null>("10");
+import React, { useState } from "react";
+import { Pagination, Select } from "@mantine/core";
+import { Text } from "@mantine/core";
+export const PaginationComponent = ({
+  accion,
+  totalDatos,
+  datosPorPagina,
+  numero,
+}) => {
+  const [data, setData] = useState(["50", "100", "200"]);
+  const [value, setValue] = useState<string | null>("50");
   // const npage = Math.ceil(totalDatos/datosPorPagina)
-  const npage = Math.ceil(totalDatos / datosPorPagina)
+  const npage = Math.ceil(totalDatos / datosPorPagina);
   const handlePageChange = (pageNum) => {
-    accion(pageNum)
-  }
+    accion(pageNum);
+  };
   return (
-    <section style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
+    <section style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
       <Pagination total={npage} onChange={handlePageChange} />
-      <Text>Registros por Pagina</Text>
-      <div >
+      <br></br>
+
+      <Text>Por Página</Text>
+      <div>
         <Select
-        checked={true}
+          checked={true}
           // size="xs"
-          radius="xl"          
+          radius="md"
           placeholder="Select placeholder"
           data={data}
-          defaultValue={"10"}
+          defaultValue={"50"}
           onChange={numero}
+          style={{
+            width: "80px", // Establece el ancho deseado
+          }}
         />
       </div>
     </section>
-  )
-}
+  );
+};
