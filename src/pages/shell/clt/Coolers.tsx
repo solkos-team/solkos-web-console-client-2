@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IconDownload, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import { fetchCoolers, fetchCoolerDetails } from "../../../utils/apiUtils";
 import {
   Card,
@@ -11,13 +11,9 @@ import {
   TableCell,
   TableHead,
   TableHeaderCell,
-  TableRow,
-  TableFoot,
-  TableFooterCell,
+  TableRow
 } from "@tremor/react";
-import ExcelJS from "exceljs";
 import { useSelector, useDispatch } from "react-redux";
-import { addPath } from "../../../app/works";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
@@ -284,18 +280,24 @@ export default function Coolers() {
             >
               TABLA
             </div>
-            <div
-              style={{
-                color: "#000005",
-                // fontFamily: "DM Sans",
-                fontSize: "18px",
-                fontStyle: "normal",
-                fontWeight: 300,
-                lineHeight: "155%",
-                marginLeft: -55,
-              }}
-            >
-              Enfriadores
+            <div style={{ display: "flex", width: "570%", marginLeft: -55, }}>
+              <div
+                style={{
+                  color: "#000005",
+                  // fontFamily: "DM Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 300,
+                  lineHeight: "155%",
+                }}
+              >
+                Enfriadores
+              </div>
+              <div style={{ marginLeft: "auto" }}>
+                <ExportToExcel
+                  datos={filteredCoolers}
+                  nombre={"Coolers"}
+                /></div>
             </div>
           </div>
           <div
@@ -416,8 +418,8 @@ export default function Coolers() {
                                         index === highlightedRow
                                           ? "#CCCCCC"
                                           : index % 2 === 0
-                                          ? "#FFF"
-                                          : "#F4F4F4",
+                                            ? "#FFF"
+                                            : "#F4F4F4",
                                     }}
                                     onClick={() => {
                                       navigate(
@@ -607,15 +609,7 @@ export default function Coolers() {
                                     </TableCell>
                                   </TableRow>
                                 ))}
-                            </TableBody>
-                            <TableFoot>
-                              <TableFooterCell>
-                                <ExportToExcel
-                                  datos={filteredCoolers}
-                                  nombre={"Coolers.csv"}
-                                />
-                              </TableFooterCell>
-                            </TableFoot>
+                            </TableBody>                            
                           </Table>
                           <br></br>
                           <div

@@ -259,18 +259,24 @@ export default function Outlets() {
             >
               TABLA
             </div>
-            <div
-              style={{
-                color: "#000005",
-                // fontFamily: "DM Sans",
-                fontSize: "18px",
-                fontStyle: "normal",
-                fontWeight: 300,
-                lineHeight: "155%",
-                marginLeft: -55,
-              }}
-            >
-              Puntos de venta
+            <div style={{ display: "flex", width: "470%", marginLeft: -55, }}>
+              <div
+                style={{
+                  color: "#000005",
+                  // fontFamily: "DM Sans",
+                  fontSize: "18px",
+                  fontStyle: "normal",
+                  fontWeight: 300,
+                  lineHeight: "155%",
+                }}
+              >
+                Puntos de Venta
+              </div>
+              <div style={{ marginLeft: "auto" }}>
+                <ExportToExcel
+                  datos={filteredOutlets}
+                  nombre={"Puntos de Venta"}
+                /></div>
             </div>
           </div>
           <div
