@@ -750,54 +750,62 @@ export default function Insights() {
               </div>
               {/* Indicador barra */}
               {insightsData?.insights.INDICATOR.algorithms.map(
-                (algorithm, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      display: "flex",
-                      padding: "0px",
-                      gap: "16px",
-                      alignSelf: "stretch",
-                    }}
-                  >
+                (algorithm, index) => {
+                  const max = Math.max(
+                    ...insightsData.insights.INDICATOR.algorithms.map(
+                      (alg) => alg.value
+                    )
+                  );
+
+                  return (
                     <div
+                      key={index}
                       style={{
-                        width: "250px",
-                        height: "36px",
-                        borderRadius: "4px",
-                        background: "#BCDAFF",
                         display: "flex",
-                        alignItems: "center",
-                        paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
+                        padding: "0px",
+                        gap: "16px",
+                        alignSelf: "stretch",
                       }}
                     >
                       <div
                         style={{
-                          color: "#142257",
-                          fontSize: "14px",
-                          fontWeight: 400,
-                          lineHeight: "20px",
-                          whiteSpace: "nowrap",
+                          width: `${(algorithm.value / max) * 100}%`,
+                          height: "36px",
+                          borderRadius: "4px",
+                          background: "#BCDAFF",
+                          display: "flex",
+                          alignItems: "center",
+                          paddingLeft: "16px",
                         }}
                       >
-                        {algorithm.algorithm === "INSTALLED"
-                          ? "Instalado"
-                          : algorithm.algorithm}
+                        <div
+                          style={{
+                            color: "#142257",
+                            fontSize: "14px",
+                            fontWeight: 400,
+                            lineHeight: "20px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {algorithm.algorithm === "INSTALLED"
+                            ? "Instalado"
+                            : algorithm.algorithm}
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          color: "#000005",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          lineHeight: "normal",
+                          marginLeft: "auto",
+                        }}
+                      >
+                        {algorithm.value.toLocaleString()}
                       </div>
                     </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        fontSize: "14px",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                        marginLeft: "auto",
-                      }}
-                    >
-                      {algorithm.value.toLocaleString()}
-                    </div>
-                  </div>
-                )
+                  );
+                }
               )}
 
               <div
@@ -975,65 +983,73 @@ export default function Insights() {
               </div>
               {/* Indicador barra */}
               {insightsData?.insights.ALERT.algorithms.map(
-                (algorithm, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      display: "flex",
-                      padding: "0px",
-                      gap: "16px",
-                      alignSelf: "stretch",
-                    }}
-                  >
+                (algorithm, index) => {
+                  const max = Math.max(
+                    ...insightsData.insights.ALERT.algorithms.map(
+                      (alg) => alg.value
+                    )
+                  );
+
+                  return (
                     <div
+                      key={index}
                       style={{
-                        width: "250px",
-                        height: "36px",
-                        borderRadius: "4px",
-                        background: "#FEF5C7",
                         display: "flex",
-                        alignItems: "center",
-                        paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
+                        padding: "0px",
+                        gap: "16px",
+                        alignSelf: "stretch",
                       }}
                     >
                       <div
                         style={{
-                          color: "#142257",
-                          fontSize: "14px",
-                          fontWeight: 400,
-                          lineHeight: "20px",
-                          whiteSpace: "nowrap",
+                          width: `${(algorithm.value / max) * 100}%`,
+                          height: "36px",
+                          borderRadius: "4px",
+                          background: "#FEF5C7",
+                          display: "flex",
+                          alignItems: "center",
+                          paddingLeft: "16px",
                         }}
                       >
-                        {algorithm.algorithm ===
-                        "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                          ? "Alta demanda del compresor"
-                          : algorithm.algorithm === "LOW_VOLTAGE_ALERT"
-                          ? "Bajo voltaje"
-                          : algorithm.algorithm === "HIGH_VOLTAGE_ALERT"
-                          ? "Alto voltaje"
-                          : algorithm.algorithm === "MOVED_VISIT_ALERT"
-                          ? "Movimiento"
-                          : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
-                          ? "Alta temperatura"
-                          : algorithm.algorithm === "DISCONNECTION_ALERT"
-                          ? "Desconexión"
-                          : algorithm.algorithm}
+                        <div
+                          style={{
+                            color: "#142257",
+                            fontSize: "14px",
+                            fontWeight: 400,
+                            lineHeight: "20px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {algorithm.algorithm ===
+                          "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                            ? "Alta demanda del compresor"
+                            : algorithm.algorithm === "LOW_VOLTAGE_ALERT"
+                            ? "Bajo voltaje"
+                            : algorithm.algorithm === "HIGH_VOLTAGE_ALERT"
+                            ? "Alto voltaje"
+                            : algorithm.algorithm === "MOVED_VISIT_ALERT"
+                            ? "Movimiento"
+                            : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
+                            ? "Alta temperatura"
+                            : algorithm.algorithm === "DISCONNECTION_ALERT"
+                            ? "Desconexión"
+                            : algorithm.algorithm}
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          color: "#000005",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          lineHeight: "normal",
+                          marginLeft: "auto",
+                        }}
+                      >
+                        {algorithm.value.toLocaleString()}
                       </div>
                     </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        fontSize: "14px",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                        marginLeft: "auto",
-                      }}
-                    >
-                      {algorithm.value.toLocaleString()}
-                    </div>
-                  </div>
-                )
+                  );
+                }
               )}
 
               <div
@@ -1209,60 +1225,68 @@ export default function Insights() {
               </div>
               {/* Indicador barra */}
               {insightsData?.insights.FAIL.algorithms.map(
-                (algorithm, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      display: "flex",
-                      padding: "0px",
-                      gap: "16px",
-                      alignSelf: "stretch",
-                    }}
-                  >
+                (algorithm, index) => {
+                  const max = Math.max(
+                    ...insightsData.insights.FAIL.algorithms.map(
+                      (alg) => alg.value
+                    )
+                  );
+
+                  return (
                     <div
+                      key={index}
                       style={{
-                        width: "250px",
-                        height: "36px",
-                        borderRadius: "4px",
-                        background: "#FFC7CD",
                         display: "flex",
-                        alignItems: "center",
-                        paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
+                        padding: "0px",
+                        gap: "16px",
+                        alignSelf: "stretch",
                       }}
                     >
                       <div
                         style={{
-                          color: "#142257",
-                          fontSize: "14px",
-                          fontWeight: 400,
-                          lineHeight: "20px",
-                          whiteSpace: "nowrap",
+                          width: `${(algorithm.value / max) * 100}%`,
+                          height: "36px",
+                          borderRadius: "4px",
+                          background: "#FFC7CD",
+                          display: "flex",
+                          alignItems: "center",
+                          paddingLeft: "16px",
                         }}
                       >
-                        {algorithm.algorithm === "TEMPERATURE_FAIL"
-                          ? "Falla de temperatura"
-                          : algorithm.algorithm === "COMPRESSOR_FAIL"
-                          ? "Falla asociada al compresor"
-                          : algorithm.algorithm === "DISCONNECTIONS_FAIL"
-                          ? "Desconexión"
-                          : algorithm.algorithm === "VOLTAGE_FAIL"
-                          ? "Falla de voltaje"
-                          : algorithm.algorithm}
+                        <div
+                          style={{
+                            color: "#142257",
+                            fontSize: "14px",
+                            fontWeight: 400,
+                            lineHeight: "20px",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {algorithm.algorithm === "TEMPERATURE_FAIL"
+                            ? "Falla de temperatura"
+                            : algorithm.algorithm === "COMPRESSOR_FAIL"
+                            ? "Falla asociada al compresor"
+                            : algorithm.algorithm === "DISCONNECTIONS_FAIL"
+                            ? "Desconexión"
+                            : algorithm.algorithm === "VOLTAGE_FAIL"
+                            ? "Falla de voltaje"
+                            : algorithm.algorithm}
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          color: "#000005",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          lineHeight: "normal",
+                          marginLeft: "auto",
+                        }}
+                      >
+                        {algorithm.value.toLocaleString()}
                       </div>
                     </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        fontSize: "14px",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                        marginLeft: "auto",
-                      }}
-                    >
-                      {algorithm.value.toLocaleString()}
-                    </div>
-                  </div>
-                )
+                  );
+                }
               )}
 
               <div
