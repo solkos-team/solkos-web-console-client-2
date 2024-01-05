@@ -4,11 +4,36 @@ import { fetchInsights } from "../../../utils/apiUtils";
 import { useNavigate } from "react-router-dom";
 
 export default function Insights() {
-  interface InsightsData {
-    alert: string;
+  interface Algorithm {
+    level: string;
+    class: string;
+    algorithm: string;
+    value: number;
   }
 
-  const [insightsData, setInsightsData] = useState<InsightsData[] | null>(null);
+  interface InsightLevel {
+    ALERT: {
+      level: string;
+      total: number;
+      algorithms: Algorithm[];
+    };
+    FAIL: {
+      level: string;
+      total: number;
+      algorithms: Algorithm[];
+    };
+    INDICATOR: {
+      level: string;
+      total: number;
+      algorithms: Algorithm[];
+    };
+  }
+
+  interface InsightsData {
+    [key: string]: InsightLevel;
+  }
+
+  const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -37,7 +62,7 @@ export default function Insights() {
         const data = await fetchInsights();
         setInsightsData(data);
         console.log(data);
-        console.log("Setting isLoading to false after fetching outlets");
+        console.log("Setting isLoading to false after fetching insights");
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching outlets:", error);
@@ -47,7 +72,16 @@ export default function Insights() {
     fetchData();
   }, []);
 
-  // console.log(insightsData.alert);
+  console.log("Alert", insightsData?.insights.ALERT.total);
+
+  // if (insightsData && insightsData.insights && insightsData.insights.ALERT) {
+  //   const { total, algorithms } = insightsData.insights.ALERT;
+  //   console.log("Total:", total);
+  //   console.log("Algorithms:", algorithms);
+  // } else {
+  //   console.log("No entro");
+  // }
+
   return (
     <div>
       <PageFilter status="false" />
@@ -664,7 +698,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    1,556
+                    {insightsData?.insights.INDICATOR.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -676,7 +710,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    total de alertas
+                    total de indicadores
                   </div>
                 </div>
               </div>
@@ -715,181 +749,56 @@ export default function Insights() {
                 </div>
               </div>
               {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "250px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#BCDAFF",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
+              {insightsData?.insights.INDICATOR.algorithms.map(
+                (algorithm, index) => (
                   <div
+                    key={index}
                     style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
+                      display: "flex",
+                      padding: "0px",
+                      gap: "16px",
+                      alignSelf: "stretch",
                     }}
                   >
-                    Alta demanda de compresor
+                    <div
+                      style={{
+                        width: "250px",
+                        height: "36px",
+                        borderRadius: "4px",
+                        background: "#BCDAFF",
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#142257",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          lineHeight: "20px",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {algorithm.algorithm === "INSTALLED"
+                          ? "Instalado"
+                          : algorithm.algorithm}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color: "#000005",
+                        fontSize: "14px",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                        marginLeft: "auto",
+                      }}
+                    >
+                      {algorithm.value.toLocaleString()}
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "220px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#BCDAFF",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Alta temperatura
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "170px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#BCDAFF",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Desconexión
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "130px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#BCDAFF",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Prioridad alta por desconexión
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
+                )
+              )}
 
               <div
                 style={{
@@ -1014,7 +923,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    1,556
+                    {insightsData?.insights.ALERT.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -1065,181 +974,67 @@ export default function Insights() {
                 </div>
               </div>
               {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "250px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FEF5C7",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
+              {insightsData?.insights.ALERT.algorithms.map(
+                (algorithm, index) => (
                   <div
+                    key={index}
                     style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
+                      display: "flex",
+                      padding: "0px",
+                      gap: "16px",
+                      alignSelf: "stretch",
                     }}
                   >
-                    Alta demanda de compresor
+                    <div
+                      style={{
+                        width: "250px",
+                        height: "36px",
+                        borderRadius: "4px",
+                        background: "#FEF5C7",
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#142257",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          lineHeight: "20px",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {algorithm.algorithm ===
+                        "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                          ? "Alta demanda del compresor"
+                          : algorithm.algorithm === "LOW_VOLTAGE_ALERT"
+                          ? "Bajo voltaje"
+                          : algorithm.algorithm === "HIGH_VOLTAGE_ALERT"
+                          ? "Alto voltaje"
+                          : algorithm.algorithm === "MOVED_VISIT_ALERT"
+                          ? "Movimiento"
+                          : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
+                          ? "Alta temperatura"
+                          : algorithm.algorithm === "DISCONNECTION_ALERT"
+                          ? "Desconexión"
+                          : algorithm.algorithm}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color: "#000005",
+                        fontSize: "14px",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                        marginLeft: "auto",
+                      }}
+                    >
+                      {algorithm.value.toLocaleString()}
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "220px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FEF5C7",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Alta temperatura
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "170px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FEF5C7",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Desconexión
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "130px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FEF5C7",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Prioridad alta por desconexión
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
+                )
+              )}
 
               <div
                 style={{
@@ -1362,7 +1157,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    1,556
+                    {insightsData?.insights.FAIL.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -1374,7 +1169,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    total de alertas
+                    total de fallas
                   </div>
                 </div>
               </div>
@@ -1413,181 +1208,62 @@ export default function Insights() {
                 </div>
               </div>
               {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "250px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FFC7CD",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
+              {insightsData?.insights.FAIL.algorithms.map(
+                (algorithm, index) => (
                   <div
+                    key={index}
                     style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
+                      display: "flex",
+                      padding: "0px",
+                      gap: "16px",
+                      alignSelf: "stretch",
                     }}
                   >
-                    Alta demanda de compresor
+                    <div
+                      style={{
+                        width: "250px",
+                        height: "36px",
+                        borderRadius: "4px",
+                        background: "#FFC7CD",
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#142257",
+                          fontSize: "14px",
+                          fontWeight: 400,
+                          lineHeight: "20px",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {algorithm.algorithm === "TEMPERATURE_FAIL"
+                          ? "Falla de temperatura"
+                          : algorithm.algorithm === "COMPRESSOR_FAIL"
+                          ? "Falla asociada al compresor"
+                          : algorithm.algorithm === "DISCONNECTIONS_FAIL"
+                          ? "Desconexión"
+                          : algorithm.algorithm === "VOLTAGE_FAIL"
+                          ? "Falla de voltaje"
+                          : algorithm.algorithm}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color: "#000005",
+                        fontSize: "14px",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                        marginLeft: "auto",
+                      }}
+                    >
+                      {algorithm.value.toLocaleString()}
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "220px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FFC7CD",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Alta temperatura
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "170px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FFC7CD",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Desconexión
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
-              {/* Indicador barra */}
-              <div
-                style={{
-                  display: "flex",
-                  padding: "0px",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "130px",
-                    height: "36px",
-                    borderRadius: "4px",
-                    background: "#FFC7CD",
-                    display: "flex",
-                    alignItems: "center",
-                    paddingLeft: "16px", // Ajusta el espacio interior según sea necesario
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#142257",
-                      fontSize: "14px",
-                      fontWeight: 400,
-                      lineHeight: "20px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    Prioridad alta por desconexión
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "14px",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    marginLeft: "auto",
-                  }}
-                >
-                  600
-                </div>
-              </div>
+                )
+              )}
 
               <div
                 style={{

@@ -172,6 +172,7 @@ export default function (props) {
             strokeWidth: "0.5",
             border: "0.5px solid #ADBACC",
             borderRadius: "4px",
+            cursor: "pointer",
             // boxSizing: "border-box",
             visibility: props.status == "false" ? "hidden" : "visible",
           }}

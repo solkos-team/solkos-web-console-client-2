@@ -273,7 +273,7 @@ export default function Fails() {
                             ? "Falla de temperatura"
                             : cooler.algorithm === "VOLTAGE_FAIL"
                             ? "Falla de voltaje"
-                            : ""}
+                            : cooler.algorithm}
                         </div>
                       </div>
                       {/* Siguiente */}
