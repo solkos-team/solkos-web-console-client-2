@@ -79,7 +79,9 @@ export default function DrawerA({
                   alignItems: "center",
                   gap: "10px",
                   borderRadius: "4px",
-                  background: "#FEF5C7",
+                  background: selectedAlgorithm.endsWith("ALERT")
+                    ? "#FEF5C7"
+                    : "#FFC7CD",
                 }}
               >
                 {selectedAlgorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
@@ -99,16 +101,21 @@ export default function DrawerA({
                       style={{ width: "44px", height: "44px" }}
                     />
                   </>
-                ) : // cooler.algorithm.includes("VOLTAGE") ? (
-                //   <img
-                //     src={"../../sampleData/arrows.png"}
-                //     alt="Descripción de la imagen"
-                //     style={{ width: "44px", height: "44px" }}
-                //   />
-                // ) :
-                selectedAlgorithm.includes("TEMPERATURE") ? (
+                ) : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT" ? (
                   <img
                     src={"../../sampleData/weather.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "44px", height: "44px" }}
+                  />
+                ) : selectedAlgorithm === "COMPRESSOR_FAIL" ? (
+                  <img
+                    src={"../../sampleData/compressor2.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "44px", height: "44px" }}
+                  />
+                ) : selectedAlgorithm === "TEMPERATURE_FAIL" ? (
+                  <img
+                    src={"../../sampleData/weather2.png"}
                     alt="Descripción de la imagen"
                     style={{ width: "44px", height: "44px" }}
                   />
@@ -133,15 +140,26 @@ export default function DrawerA({
                   alignItems: "center",
                   gap: "4px",
                   borderRadius: "2px",
-                  background: "#FEF5C7",
+                  background: selectedAlgorithm.endsWith("ALERT")
+                    ? "#FEF5C7"
+                    : "#FFC7CD",
                   height: 8,
                 }}
               >
-                <img
-                  src={"../../sampleData/alert_y.png"}
-                  alt="Descripción de la imagen"
-                  style={{ width: "16px", height: "16px" }}
-                />
+                {selectedAlgorithm.endsWith("ALERT") ? (
+                  <img
+                    src={"../../sampleData/alert_y.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "16px", height: "16px" }}
+                  />
+                ) : (
+                  <img
+                    src={"../../sampleData/fails2.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "16px", height: "16px" }}
+                  />
+                )}
+
                 <div
                   style={{
                     color: "#451C03",
@@ -152,7 +170,7 @@ export default function DrawerA({
                     lineHeight: "14px",
                   }}
                 >
-                  ALERTA
+                  {selectedAlgorithm.endsWith("ALERT") ? "ALERTA" : "FALLA"}
                 </div>
               </div>
               <div
@@ -177,7 +195,15 @@ export default function DrawerA({
                       ? "Alto voltaje"
                       : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
                       ? "Bajo voltaje"
-                      : ""}
+                      : selectedAlgorithm === "DISCONNECTIONS_FAIL"
+                      ? "Desconexión"
+                      : selectedAlgorithm === "TEMPERATURE_FAIL"
+                      ? "Falla de temperatura"
+                      : selectedAlgorithm === "VOLTAGE_FAIL"
+                      ? "Falla de voltaje"
+                      : selectedAlgorithm === "COMPRESSOR_FAIL"
+                      ? "Falla asociada al compresor"
+                      : selectedAlgorithm}
                   </div>
                 )}
               </div>
@@ -326,6 +352,74 @@ export default function DrawerA({
           <div
             style={{ width: "100%", height: "1px", background: "#CACACA" }}
           ></div>
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          padding: "0px 64px",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <div
+            style={{
+              color: "#88888B",
+              // fontFamily: "DM Sans",
+              fontSize: "12px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "155%",
+            }}
+          >
+            TABLA
+          </div>
+          <div
+            style={{
+              color: "#000005",
+              // fontFamily: "DM Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 300,
+              lineHeight: "155%",
+            }}
+          >
+            ENFRIADORES
+          </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "4px",
+            marginLeft: 350,
+          }}
+        >
+          <div
+            style={{
+              color: "#3E83FF",
+              // fontFamily: "DM Sans",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "26px",
+              cursor: "pointer",
+            }}
+          >
+            Descargar
+          </div>
+          <img
+            src={"../../sampleData/download.png"}
+            width={"22px"}
+            alt="cooler"
+          ></img>
         </div>
       </div>
     </div>

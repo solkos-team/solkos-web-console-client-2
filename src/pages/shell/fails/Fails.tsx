@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-
+import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 export default function Fails() {
   interface Cooler {
     class: string;
@@ -67,6 +67,16 @@ export default function Fails() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
+
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
+    null
+  );
+  const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
+    value: number;
+    delta: number;
+  } | null>(null);
+
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <div>
@@ -229,27 +239,28 @@ export default function Fails() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
-                            background: "#FEF5C7",
+                            background: "#FFC7CD",
                           }}
                         >
                           {cooler.algorithm === "COMPRESSOR_FAIL" ? (
                             <>
                               <img
-                                src={"../../sampleData/devices_2.png"}
+                                src={"../../sampleData/compressor2.png"}
                                 alt="Descripción de la imagen"
                               />
                             </>
-                          ) : cooler.algorithm === "DISCONNECTIONS_FAIL" ? (
-                            <>
-                              {" "}
-                              <img
-                                src={"../../sampleData/disconnection.png"}
-                                alt="Descripción de la imagen"
-                              />
-                            </>
-                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : // cooler.algorithm === "DISCONNECTIONS_FAIL" ? (
+                          //   <>
+                          //     {" "}
+                          //     <img
+                          //       src={"../../sampleData/disconnection.png"}
+                          //       alt="Descripción de la imagen"
+                          //     />
+                          //   </>
+                          // ) :
+                          cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
-                              src={"../../sampleData/weather.png"}
+                              src={"../../sampleData/weather2.png"}
                               alt="Descripción de la imagen"
                             />
                           ) : (
@@ -430,6 +441,15 @@ export default function Fails() {
                           alignItems: "center",
                           gap: "4px",
                           flex: 100,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          setSelectedAlgorithm(cooler.algorithm);
+                          setSelectedAlgorithmValues({
+                            value: cooler.value,
+                            delta: cooler.delta,
+                          });
+                          setIsDrawerOpen(true);
                         }}
                       >
                         <div
@@ -458,6 +478,15 @@ export default function Fails() {
           </div>
         </div>
       </div>
+      {isDrawerOpen && selectedAlgorithmValues && (
+        <DrawerA
+          isOpen={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          selectedAlgorithm={selectedAlgorithm}
+          value={selectedAlgorithmValues.value}
+          delta={selectedAlgorithmValues.delta}
+        ></DrawerA>
+      )}
     </div>
   );
 }
