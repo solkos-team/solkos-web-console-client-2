@@ -5,21 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
 import { fetchOutlets } from "../../../utils/apiUtils";
-import {
-  Card,
-  Table,
-  TableBody,
-  TableCell,
-  TableFoot,
-  TableFooterCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
-import ExcelJS from "exceljs";
+import { Card, Table, TableBody, TableCell, TableFoot, TableFooterCell, TableHead, TableHeaderCell, TableRow, } from "@tremor/react";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
+import { useSelector } from "react-redux";
 
 export default function Outlets() {
   interface Outlet {
@@ -39,6 +29,7 @@ export default function Outlets() {
   // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
+  const dt = useSelector((state: any) => state.works)
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -55,11 +46,13 @@ export default function Outlets() {
     });
     return filteredData;
   };
-
+  const pathVerify = () => {
+    return dt.length == 0 ? "[]" : JSON.parse(dt);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchOutlets();
+        const data = await fetchOutlets(pathVerify());
         setOutletsData(data);
         console.log(data);
         console.log("Setting isLoading to false after fetching outlets");
@@ -70,7 +63,7 @@ export default function Outlets() {
     };
 
     fetchData();
-  }, []);
+  }, [dt]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)
@@ -92,7 +85,6 @@ export default function Outlets() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedOutletDetails, setSelectedOutletDetails] =
     useState<Outlet | null>(null);
-
   return (
     <div>
       <PageFilter />
@@ -379,8 +371,8 @@ export default function Outlets() {
                                         index === highlightedRow
                                           ? "#CCCCCC"
                                           : index % 2 === 0
-                                          ? "#FFF"
-                                          : "#F4F4F4",
+                                            ? "#FFF"
+                                            : "#F4F4F4",
                                     }}
                                     onClick={() => {
                                       navigate("");

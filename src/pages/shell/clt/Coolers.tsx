@@ -111,7 +111,6 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-
   return (
     <div>
       <PageFilter />

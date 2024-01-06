@@ -1,9 +1,35 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { IconArrowRight } from "@tabler/icons-react";
+import { useSelector } from "react-redux";
 import MapComponent from "../map";
+import { Card, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from "@tremor/react";
+import { fetchCoolers } from "../../utils/apiUtils";
+import { CoolerInterface } from "./CoolerInterface";
 
 export default function Drawer({ isOpen, onClose, outletDetails }) {
+  const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
+  const { region, route, zone,outlet_id } = outletDetails
+  const id = outlet_id
   const drawerRef = useRef(null);
-
+  const navigate = useNavigate();
+  const dt = useSelector((state: any) => state.works);
+  const pathVerify = () => {
+    return dt.length == 0 ? "[]" : JSON.parse(dt);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchCoolers(pathVerify(), null);
+        setCoolersData(data);
+      } catch (error) {
+        console.error("Error fetching coolers:", error);
+      }
+    };
+    fetchData()
+  }, [dt])
+  
   return (
     <div
       ref={drawerRef}
@@ -299,7 +325,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  -----
+                  {region}
                 </div>
               </div>
             </div>
@@ -345,7 +371,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  -----
+                  {route}
                 </div>
               </div>
             </div>
@@ -391,7 +417,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  -----
+                  {zone}
                 </div>
               </div>
             </div>
@@ -440,7 +466,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "center",
+                  // alignItems: "center",
                   gap: "4px",
                   alignSelf: "stretch",
                 }}
@@ -652,8 +678,172 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "32px",
+            padding: "0px 24px",
           }}
-        ></div>
+        >
+          <Card>
+            <Table
+              style={{
+                borderCollapse: "collapse",
+                width: "100%", // Cambiado a 100% para que la tabla sea receptiva
+                maxWidth: "1000px",
+                // width: "910px",
+                height: "400px",
+              }}
+            >
+              <TableHead style={{ display: "block" }}>
+                <TableRow>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "6.2rem" }}>Estatus</TableHeaderCell>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "7rem" }}>Serie</TableHeaderCell>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "9rem" }}>Modelo</TableHeaderCell>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>Dias sin visita</TableHeaderCell>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "5rem" }}>Prioridad</TableHeaderCell>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>Acciones</TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              <TableBody style={{ display: "block", height: "10rem", overflowY: "auto" }}>
+                {
+                  coolersData                           
+                  .map((cooler, index) => (
+                    <TableRow key={index}
+                      onClick={() => {
+                        navigate(
+                          `/coolerDetail/${cooler.serial_number}`
+                        );
+                      }}
+                    >
+                      <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "6rem" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "4px",
+                            // justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            background: "#B6FEDB",
+                            width: "fit-content"
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: "4px",
+                              height: "4px",
+                              borderRadius: "5px",
+                              background: "#31B648",
+                            }}
+                          ></div>
+                          <div
+                            style={{
+                              color: "#028053",
+                              width: "100%",
+                              fontSize: ".5rem",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "14px",
+                            }}
+                          >
+                            FUNCIONANDO ---
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "7rem" }}>
+                        {cooler.serial_number === "" ? "Sin registro" : cooler.serial_number}</TableCell>
+                      <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "9rem" }}>{cooler.model_id}</TableCell>
+                      <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "4px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            background: "#D4DAE3",
+                            width: "3rem"
+                          }}
+                        >
+                          <div
+                            style={{
+                              color: "#313A49",
+                              // fontFamily: "Space Mono",
+                              fontSize: "12px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "14px",
+                            }}
+                          >
+                            {" "}
+                            --- DÍAS
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "5rem" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "4px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            border: "1.5px solid #0F9F67",
+                            background: "#FFF",
+                            width: "3rem"
+                          }}
+                        >
+                          <div
+                            style={{
+                              color: "#0F9F67",
+                              // fontFamily: "DM Sans",
+                              fontSize: "12px",
+                              fontStyle: "normal",
+                              fontWeight: 600,
+                              lineHeight: "14px",
+                            }}
+                          >
+                            {cooler.priority}                            
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "4px",
+                          }}
+                        >
+                          <Link to="/coolerDetail">
+                            <div
+                              style={{
+                                color: "#3E83FF",
+                                fontSize: "14px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "20px",
+                                display: "flex",
+                                marginRight: "6px",
+                              }}
+                            >
+                              Ver más{" "}
+                              <IconArrowRight
+                                style={{
+                                  color: "#3E83FF",
+
+                                }}
+                              />
+                            </div>
+                          </Link>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                }
+              </TableBody>
+            </Table>
+          </Card>
+        </div>
       </div>
     </div>
   );
