@@ -608,23 +608,14 @@ export default function Coolers() {
                                     </TableCell>
                                   </TableRow>
                                 ))}
-                            </TableBody>                            
+                            </TableBody>
                           </Table>
-                          <br></br>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end", // Alinea la paginación a la derecha
-                              marginTop: "16px", // Espacio superior para separar la paginación de la tabla
-                            }}
-                          >
-                            <PaginationComponent
-                              accion={setCurrentPage}
-                              totalDatos={filteredCoolers.length}
-                              datosPorPagina={datosPorPagina}
-                              numero={setNumero}
-                            />
-                          </div>
+                          <PaginationComponent
+                            accion={setCurrentPage}
+                            totalDatos={filteredCoolers.length}
+                            datosPorPagina={datosPorPagina}
+                            numero={setNumero}
+                          />
                         </Card>
                       ) : (
                         <div

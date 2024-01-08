@@ -15,10 +15,10 @@ export const PaginationComponent = ({
     accion(pageNum);
   };
   return (
-    <section style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
+    <section style={{ display: "flex", flexDirection: "row",justifyContent:"flex-end", gap: "10px",marginTop:"16px" }}>
+      <br />
       <Pagination total={npage} onChange={handlePageChange} />
-      <br></br>
-
+      <br />
       <Text>Por Página</Text>
       <div>
         <Select

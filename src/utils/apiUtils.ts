@@ -15,7 +15,7 @@ export const fetchCoolers = async (path, setIsLoading?) => {
     class: "STK",
     algorithm: ["INSTALLED"],
     path: path,
-    page_size: 100,
+    page_size: 1000,
     page_number: 1  
   };
   console.log(data)

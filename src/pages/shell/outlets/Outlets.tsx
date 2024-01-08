@@ -10,16 +10,12 @@ import { PaginationComponent } from "../../../components/Pagination/PaginationCo
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
 import { useSelector } from "react-redux";
+import { CoolerInterface } from "../../../components/drawerOutlets/CoolerInterface";
 
 export default function Outlets() {
-  interface Outlet {
-    outlet_name: string;
-    outlet_id: string;
-    num_coolers: number;
-  }
 
   const [searchValue, setSearchValue] = useState("");
-  const [outletsData, setOutletsData] = useState<Outlet[] | null>(null);
+  const [outletsData, setOutletsData] = useState<CoolerInterface[] | null>(null);
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [highlightedRow, setHighlightedRow] = useState(-1);
@@ -84,7 +80,8 @@ export default function Outlets() {
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedOutletDetails, setSelectedOutletDetails] =
-    useState<Outlet | null>(null);
+    useState<CoolerInterface | null>(null);
+  console.log(outletsData)
   return (
     <div>
       <PageFilter />
