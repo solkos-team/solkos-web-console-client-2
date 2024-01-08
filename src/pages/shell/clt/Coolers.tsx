@@ -37,7 +37,6 @@ export default function Coolers() {
   >(null);
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Added loading state
-  const [highlightedRow, setHighlightedRow] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
   const navigate = useNavigate();
@@ -409,17 +408,7 @@ export default function Coolers() {
                                 .map((cooler, index) => (
                                   <TableRow
                                     key={index}
-                                    style={{
-                                      backgroundColor:
-                                        index % 2 === 0 ? "#FFF" : "#F4F4F4",
-                                      borderBottom: "1px solid #CACACA",
-                                      background:
-                                        index === highlightedRow
-                                          ? "#CCCCCC"
-                                          : index % 2 === 0
-                                            ? "#FFF"
-                                            : "#F4F4F4",
-                                    }}
+                                    className="Tabla"
                                     onClick={() => {
                                       navigate(
                                         `/coolerDetail/${cooler.serial_number}`
@@ -428,10 +417,6 @@ export default function Coolers() {
                                         `Se hizo clic en la fila con serial_number: ${cooler.serial_number}`
                                       );
                                     }}
-                                    onMouseEnter={() =>
-                                      setHighlightedRow(index)
-                                    }
-                                    onMouseLeave={() => setHighlightedRow(-1)}
                                   >
                                     <TableCell
                                       style={{
@@ -469,7 +454,7 @@ export default function Coolers() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          FUNCIONANDO ---
+                                          FUNCIONANDO --
                                         </div>
                                       </div>
                                     </TableCell>

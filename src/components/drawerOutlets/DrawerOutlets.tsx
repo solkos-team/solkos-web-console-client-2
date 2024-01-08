@@ -14,7 +14,6 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-  const [highlightedRow, setHighlightedRow] = useState(-1);
   const { region, route, zone, outlet_id, latitude, longitude } = outletDetails;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
@@ -36,11 +35,8 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
       }
     };
     fetchData()
-  }, [dt])
+  }, [dt])    
   console.log(coolersData)
-  console.log(id)
-
-  const prueba = coolersData.filter(cooler => cooler.outlet_id.includes(id))
   return (
     <div
       ref={drawerRef}
@@ -707,21 +703,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     .slice(firstIndex, lastIndex)
                     .map((cooler, index) => (
                       <TableRow key={index}
-                        style={{
-                          backgroundColor:
-                            index % 2 === 0 ? "#FFF" : "#F4F4F4",
-                          borderBottom: "1px solid #CACACA",
-                          background:
-                            index === highlightedRow
-                              ? "#CCCCCC"
-                              : index % 2 === 0
-                                ? "#FFF"
-                                : "#F4F4F4",
-                        }}
-                        onMouseEnter={() =>
-                          setHighlightedRow(index)
-                        }
-                        onMouseLeave={() => setHighlightedRow(-1)}
+                        className="Tabla"
                         onClick={() => {
                           navigate(
                             `/coolerDetail/${cooler.serial_number}`

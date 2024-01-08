@@ -61,3 +61,12 @@
   margin-left: -25px;
   width: 96.7%;
 }
+.Tabla{
+  border-bottom: 1px solid #CACACA;
+}
+.Tabla:nth-child(even) {
+  background-color: #F4F4F4;
+}
+.Tabla:hover{
+  background-color: #CCCCCC;
+}

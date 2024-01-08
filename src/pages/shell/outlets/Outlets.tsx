@@ -12,13 +12,13 @@ import { TextInput } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../components/drawerOutlets/CoolerInterface";
 
+
 export default function Outlets() {
 
   const [searchValue, setSearchValue] = useState("");
   const [outletsData, setOutletsData] = useState<CoolerInterface[] | null>(null);
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [highlightedRow, setHighlightedRow] = useState(-1);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
   const navigate = useNavigate();
@@ -50,8 +50,6 @@ export default function Outlets() {
       try {
         const data = await fetchOutlets(pathVerify());
         setOutletsData(data);
-        console.log(data);
-        console.log("Setting isLoading to false after fetching outlets");
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching outlets:", error);
@@ -81,7 +79,7 @@ export default function Outlets() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedOutletDetails, setSelectedOutletDetails] =
     useState<CoolerInterface | null>(null);
-  console.log(outletsData)
+  console.log(filteredOutlets)
   return (
     <div>
       <PageFilter />
@@ -359,25 +357,11 @@ export default function Outlets() {
                                 .slice(firstIndex, lastIndex)
                                 .map((outlet, index) => (
                                   <TableRow
-                                    key={index}
-                                    style={{
-                                      backgroundColor:
-                                        index % 2 === 0 ? "#FFF" : "#F4F4F4",
-                                      borderBottom: "1px solid #CACACA",
-                                      background:
-                                        index === highlightedRow
-                                          ? "#CCCCCC"
-                                          : index % 2 === 0
-                                            ? "#FFF"
-                                            : "#F4F4F4",
-                                    }}
+                                  className="Tabla"
+                                    key={index}                                    
                                     onClick={() => {
                                       navigate("");
-                                    }}
-                                    onMouseEnter={() =>
-                                      setHighlightedRow(index)
-                                    }
-                                    onMouseLeave={() => setHighlightedRow(-1)}
+                                    }}                                    
                                   >
                                     <TableCell
                                       style={{
