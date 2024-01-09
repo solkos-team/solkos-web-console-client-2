@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight,IconCircleCheck } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import MapComponent from "../map";
 import { Card, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from "@tremor/react";
@@ -34,6 +34,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
     };
     fetchData()
   }, [dt])    
+  
   return (
     <div
       ref={drawerRef}
@@ -145,6 +146,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   src={"../../sampleData/a.png"}
                   alt="Descripción de la imagen"
                 /> */}
+                <IconCircleCheck width={"1rem"} color="#0F9F67"/> 
                   <div
                     style={{
                       color: "#0F9F67",
@@ -152,10 +154,10 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                       fontSize: "12px",
                       fontStyle: "normal",
                       fontWeight: 600,
-                      lineHeight: "14px",
+                      lineHeight: "12px",
                     }}
                   >
-                    ----
+                    SIN ACCIONES
                   </div>
                 </div>
               </div>
@@ -169,7 +171,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   lineHeight: "20px",
                 }}
               >
-                --------
+                {outletDetails.outlet_address || "Sin datos"}
               </div>
             </div>
             <div
@@ -202,7 +204,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   lineHeight: "normal",
                 }}
               >
-                -- -- ----- --- -- -----
+                -- -- ----- ---
               </div>
               <div
                 style={{
@@ -222,7 +224,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     fontSize: "12px",
                     fontStyle: "normal",
                     fontWeight: 500,
-                    lineHeight: "14px",
+                    lineHeight: "12px",
                     height: "10px",
                   }}
                 >
@@ -679,14 +681,13 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               style={{
                 borderCollapse: "collapse",
                 width: "100%", // Cambiado a 100% para que la tabla sea receptiva
-                maxWidth: "1000px",
-                // width: "910px",
-                height: "400px",
+                maxWidth: "1000px",                
+                height: "12rem",
               }}
             >
               <TableHead style={{ display: "block" }}>
                 <TableRow >
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "6.2rem" }}>Estatus</TableHeaderCell>
+                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "6.2rem"}}>Estatus</TableHeaderCell>
                   <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "7rem" }}>Serie</TableHeaderCell>
                   <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "9rem" }}>Modelo</TableHeaderCell>
                   <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>Dias sin visita</TableHeaderCell>
@@ -694,7 +695,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>Acciones</TableHeaderCell>
                 </TableRow>
               </TableHead>
-              <TableBody style={{ display: "block", height: "90%", overflowY: "auto" }}>
+              <TableBody style={{ display: "block", height: "90%", overflowY: "auto"}}>
                 {
                   coolersData
                     .slice(firstIndex, lastIndex)
@@ -707,7 +708,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                           );
                         }}
                       >
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "6rem" }}>
+                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "5.8rem" }}>
                           <div
                             style={{
                               display: "flex",
@@ -742,7 +743,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "7rem" }}>
+                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "6.5rem" }}>
                           {cooler.serial_number === "" ? "Sin registro" : cooler.serial_number}</TableCell>
                         <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "9rem" }}>{cooler.model_id}</TableCell>
                         <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>
@@ -755,7 +756,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                               gap: "4px",
                               borderRadius: "2px",
                               background: "#D4DAE3",
-                              width: "3rem"
+                              width: "6rem"
                             }}
                           >
                             <div
@@ -801,7 +802,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                             </div>
                           </div>
                         </TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>
+                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" ,height:"3rem"}}>
                           <div
                             style={{
                               display: "flex",
@@ -825,13 +826,13 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                                 <IconArrowRight
                                   style={{
                                     color: "#3E83FF",
-
+                                    width:"1.2rem",                                    
                                   }}
                                 />
                               </div>
                             </Link>
                           </div>
-                        </TableCell>
+                        </TableCell>                                                
                       </TableRow>
                     ))
                 }

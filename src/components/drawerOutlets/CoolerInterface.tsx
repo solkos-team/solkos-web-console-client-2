@@ -16,7 +16,7 @@ export interface CoolerInterface {
     longitude:      number;
     class:          Class;
     algorithm:      Algorithm;
-    priority:       number;
+    priority?:       number;
     created_at:     string;
     updated_at:     string;
     notified_at:    string;

@@ -22,7 +22,6 @@ export default function Outlets() {
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
   const navigate = useNavigate();
-  // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works)
@@ -449,7 +448,7 @@ export default function Outlets() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          -----------
+                                          {outlet.priority || '---------'}
                                         </div>
                                       </div>
                                     </TableCell>

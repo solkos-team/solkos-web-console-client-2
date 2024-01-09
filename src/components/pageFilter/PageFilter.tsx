@@ -386,6 +386,7 @@ export default function (props) {
               strokeWidth: "0.5",
               border: "0.5px solid #ADBACC",
               borderRadius: "4px",
+              visibility : "hidden"
             }}
           >
             <div
@@ -394,7 +395,7 @@ export default function (props) {
                 padding: "1px 10px",
                 alignItems: "center",
                 gap: "10px",
-                flex: "100",
+                flex: "100"                
               }}
               onClick={handleClick}
             >
