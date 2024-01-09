@@ -39,11 +39,14 @@ export default function (props) {
     setMostrarVentanaEmergente(false);
   };
   const getPaths = async (dataLocalStorage?) => {
-    if (data.length < 4) {
+    if (data.length < 4) {      
       try {
         const data = await fetchPath(dataLocalStorage);
-        //dataZone.push(data)
-        dataZone.unshift(data); // solucion path desde api           
+        //dataZone.push(data)      
+        dataZone.unshift(data); // solucion path desde api     
+        if(dataLocalStorage.length<3) {
+          setFilterVisibility(true)
+        }
       } catch (error) {
         console.log("Error fetching path", error);
       }
@@ -108,11 +111,15 @@ export default function (props) {
     };
   }, [mostrarVentanaEmergente, value]);
 
-  const verSelectData = (value) => {
+  const verSelectData = (value) => { // Add new PATH
     if (value != "") {
       if (index >= 4 || data.length >= 4) {
         alert("Filtros excedidos");
         return;
+      }
+      if (index == 3) {
+        setFilterVisibility(false);
+        setStatusDelete(false);
       }
       setData((current) => [...current, value]);
       localStorage.setItem("PATH", JSON.stringify([...data, value]));
@@ -121,13 +128,10 @@ export default function (props) {
         setIndex(index + 1);
         setStatusDelete(false);
       }
-      if (index == 3) {
-        setFilterVisibility(false);
-        setStatusDelete(false);
-      }
       setStatusDelete(false);
+      setFilterVisibility(false)
     }
-  };
+  };  
   const deleteFilter = (i) => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
     dataLocalStorage.splice(i, 1);
@@ -307,7 +311,7 @@ export default function (props) {
           ))}
 
           {/* ---------------------- */}
-          {filterVisibility && props.loading == false ? (
+          {filterVisibility ? (
             <div style={{ display: "flex", alignItems: "center" }}>
               <div
                 style={{
