@@ -11,7 +11,7 @@ import {
   TableCell,
   TableHead,
   TableHeaderCell,
-  TableRow
+  TableRow,
 } from "@tremor/react";
 import { useSelector, useDispatch } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
@@ -76,6 +76,7 @@ export default function Coolers() {
 
     fetchData();
   }, [dt]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -277,7 +278,7 @@ export default function Coolers() {
             >
               TABLA
             </div>
-            <div style={{ display: "flex", width: "570%", marginLeft: -55, }}>
+            <div style={{ display: "flex", width: "570%", marginLeft: -55 }}>
               <div
                 style={{
                   color: "#000005",
@@ -291,10 +292,8 @@ export default function Coolers() {
                 Enfriadores
               </div>
               <div style={{ marginLeft: "auto" }}>
-                <ExportToExcel
-                  datos={filteredCoolers}
-                  nombre={"Coolers"}
-                /></div>
+                <ExportToExcel datos={filteredCoolers} nombre={"Coolers"} />
+              </div>
             </div>
           </div>
           <div

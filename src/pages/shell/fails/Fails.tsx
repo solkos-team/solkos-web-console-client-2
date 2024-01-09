@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
+import { useSelector } from "react-redux";
+import { fetchAlerts } from "../../../utils/apiUtils";
+
 export default function Fails() {
   interface Cooler {
     class: string;
@@ -11,51 +14,27 @@ export default function Fails() {
 
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
 
-  const fetchCoolersFromAPI = async () => {
-    const url =
-      "https://universal-console-server-b7agk5thba-uc.a.run.app/alerts";
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    const data = {
-      customer: "KOF",
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-      console.log("After fetch");
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos de insights");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
+  const dt = useSelector((state: any) => state.works);
+  const pathVerify = () => {
+    return dt.length == 0 ? "[]" : JSON.parse(dt);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true); // Indicar que la carga está en curso
-        const data = await fetchCoolersFromAPI();
+        setIsLoading(true);
+        const data = await fetchAlerts(pathVerify());
         console.log(data);
         setCoolersData(data);
       } catch (error) {
         console.error("Error:", error);
       } finally {
-        setIsLoading(false); // Indicar que la carga ha terminado, ya sea exitosa o con error
+        setIsLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [dt]);
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 

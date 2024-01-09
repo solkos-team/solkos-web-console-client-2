@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { fetchInsights } from "../../../utils/apiUtils";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Insights() {
   interface Algorithm {
@@ -56,10 +57,15 @@ export default function Insights() {
     setDrawerAbierto(false);
   };
 
+  const dt = useSelector((state: any) => state.works);
+  const pathVerify = () => {
+    return dt.length == 0 ? "[]" : JSON.parse(dt);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchInsights();
+        const data = await fetchInsights(pathVerify());
         setInsightsData(data);
         console.log(data);
         console.log("Setting isLoading to false after fetching insights");
@@ -70,7 +76,7 @@ export default function Insights() {
     };
 
     fetchData();
-  }, []);
+  }, [dt]);
 
   console.log("Alert", insightsData?.insights.ALERT.total);
 

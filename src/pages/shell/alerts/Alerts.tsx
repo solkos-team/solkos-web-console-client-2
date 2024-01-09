@@ -34,14 +34,14 @@ export default function Alerts() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true); // Indicar que la carga está en curso
+        setIsLoading(true);
         const data = await fetchAlerts(pathVerify());
         console.log(data);
         setAlertsData(data);
       } catch (error) {
         console.error("Error:", error);
       } finally {
-        setIsLoading(false); // Indicar que la carga ha terminado, ya sea exitosa o con error
+        setIsLoading(false);
       }
     };
 
