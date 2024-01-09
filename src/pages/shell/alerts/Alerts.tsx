@@ -27,7 +27,7 @@ export default function Alerts() {
   }
 
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
-  const dt = useSelector((state: any) => state.works)
+  const dt = useSelector((state: any) => state.works);
   const pathVerify = () => {
     return dt.length == 0 ? "[]" : JSON.parse(dt);
   };
@@ -307,7 +307,7 @@ export default function Alerts() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.value}
+                          {cooler.value.toLocaleString()}
                         </div>
                         <div
                           style={{

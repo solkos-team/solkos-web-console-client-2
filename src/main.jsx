@@ -17,36 +17,38 @@ import CoolerDetail from "./pages/shell/coolerDetail";
 import Insights from "./pages/shell/insights";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
+import { Login } from "./pages/main/login/Login.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-    <MantineProvider>
-      <ModalsProvider>
-        <NotificationsProvider>
-          <Router>
-            <Routes>
-              <Route path="" element={<App />}>
-                <Route index element={<Insights />} />
-                <Route path="/alerts" element={<Alerts />} />
-                <Route path="/clt" element={<Coolers />} />
-                <Route path="/coolerDetail" element={<CoolerDetail />} />
-                <Route
-                  path="/coolerDetail/:serial_number"
-                  element={<CoolerDetail />}
-                />
-                <Route path="/insights" element={<Insights />} />
-                <Route path="/fails" element={<Fails />} />
-                <Route path="/indicator" element={<Indicator />} />
-                <Route path="/outlets" element={<Outlets />} />
-                <Route path="/panel" element={<Panel />} />
-                <Route path="/users" element={<Users />} />
-              </Route>
-            </Routes>
-          </Router>
-        </NotificationsProvider>
-      </ModalsProvider>
-    </MantineProvider>
+      <MantineProvider>
+        <ModalsProvider>
+          <NotificationsProvider>
+            <Router>
+              <Routes>
+                <Route path="/login" element={<Login />} />{" "}
+                <Route path="" element={<App />}>
+                  <Route index element={<Insights />} />
+                  <Route path="/alerts" element={<Alerts />} />
+                  <Route path="/clt" element={<Coolers />} />
+                  <Route path="/coolerDetail" element={<CoolerDetail />} />
+                  <Route
+                    path="/coolerDetail/:serial_number"
+                    element={<CoolerDetail />}
+                  />
+                  <Route path="/insights" element={<Insights />} />
+                  <Route path="/fails" element={<Fails />} />
+                  <Route path="/indicator" element={<Indicator />} />
+                  <Route path="/outlets" element={<Outlets />} />
+                  <Route path="/panel" element={<Panel />} />
+                  <Route path="/users" element={<Users />} />
+                </Route>
+              </Routes>
+            </Router>
+          </NotificationsProvider>
+        </ModalsProvider>
+      </MantineProvider>
     </Provider>
   </React.StrictMode>
 );

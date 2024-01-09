@@ -308,7 +308,7 @@ export default function Fails() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.value}
+                          {cooler.value.toLocaleString()}
                         </div>
                         <div
                           style={{
