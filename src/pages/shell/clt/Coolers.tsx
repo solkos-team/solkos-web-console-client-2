@@ -68,7 +68,6 @@ export default function Coolers() {
       try {
         const data = await fetchCoolers(pathVerify(), setIsLoading);
         setCoolersData(data);
-        console.log(data);
         setIsLoading(false); // Set isLoading to false after fetching coolers
       } catch (error) {
         console.error("Error fetching coolers:", error);

@@ -39,12 +39,14 @@ export default function (props) {
     setMostrarVentanaEmergente(false);
   };
   const getPaths = async (dataLocalStorage?) => {
-    try {
-      const data = await fetchPath(dataLocalStorage);
-      //dataZone.push(data)
-      dataZone.unshift(data); // solucion path desde api
-    } catch (error) {
-      console.log("Error fetching path", error);
+    if (data.length < 4) {
+      try {
+        const data = await fetchPath(dataLocalStorage);
+        //dataZone.push(data)
+        dataZone.unshift(data); // solucion path desde api           
+      } catch (error) {
+        console.log("Error fetching path", error);
+      }
     }
   };
   useEffect(() => {
@@ -251,19 +253,31 @@ export default function (props) {
                 disabled={bloqPath(i)}
                 type="button"
               >
-                <IconCircleX
-                  style={{
-                    color: "#313A49",
-                    width: "16px",
-                    height: "16px",
-                    marginRight: "3px",
-                    visibility: bloqPath(i) == false ? "visible" : "hidden",
-                  }}
-                  onClick={() => {
-                    deleteFilter(i);
-                  }}
-                  onClickCapture={(o) => !o}
-                />
+                {bloqPath(i) == false ?
+                  <IconCircleX
+                    style={{
+                      color: "#313A49",
+                      width: "16px",
+                      height: "16px",
+                      marginRight: "3px",
+                      visibility: bloqPath(i) == false ? "visible" : "hidden",
+                    }}
+                    onClick={() => {
+                      deleteFilter(i);
+                    }}
+                    onClickCapture={(o) => !o}
+                  />
+                  :
+                  <IconLock
+                    style={{
+                      color: "#ADBACC",
+                      width: "16px",
+                      height: "16px",
+                      marginRight: "3px",
+                    }}
+                  />
+                }
+
                 <Text
                   style={{
                     // color: "#313A49",
@@ -293,7 +307,7 @@ export default function (props) {
           ))}
 
           {/* ---------------------- */}
-          {filterVisibility ? (
+          {filterVisibility && props.loading == false ? (
             <div style={{ display: "flex", alignItems: "center" }}>
               <div
                 style={{

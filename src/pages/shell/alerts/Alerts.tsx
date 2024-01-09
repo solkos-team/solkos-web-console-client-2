@@ -16,6 +16,7 @@ import {
   Center,
 } from "@mantine/core";
 import ExcelJS from "exceljs";
+import { useSelector } from "react-redux";
 
 export default function Alerts() {
   interface Cooler {
@@ -26,12 +27,15 @@ export default function Alerts() {
   }
 
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
-
+  const dt = useSelector((state: any) => state.works)
+  const pathVerify = () => {
+    return dt.length == 0 ? "[]" : JSON.parse(dt);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true); // Indicar que la carga está en curso
-        const data = await fetchAlerts();
+        const data = await fetchAlerts(pathVerify());
         console.log(data);
         setAlertsData(data);
       } catch (error) {
@@ -42,7 +46,7 @@ export default function Alerts() {
     };
 
     fetchData();
-  }, []);
+  }, [dt]);
 
   // Page (Body)
   useEffect(() => {

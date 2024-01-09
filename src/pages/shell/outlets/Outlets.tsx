@@ -48,7 +48,7 @@ export default function Outlets() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchOutlets(pathVerify());
+        const data = await fetchOutlets(pathVerify(),setIsLoading);
         setOutletsData(data);
         setIsLoading(false);
       } catch (error) {
@@ -79,10 +79,9 @@ export default function Outlets() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedOutletDetails, setSelectedOutletDetails] =
     useState<CoolerInterface | null>(null);
-  console.log(filteredOutlets)
   return (
     <div>
-      <PageFilter />
+      <PageFilter loading={isLoading}/>
 
       <br></br>
       <div
@@ -277,7 +276,7 @@ export default function Outlets() {
             <div style={{}}>
               <div>
                 <div>
-                  {isLoading && filteredOutlets.length === 0 && (
+                  {isLoading == true || filteredOutlets.length === 0 ? (
                     <div
                       style={{
                         display: "flex",
@@ -290,7 +289,7 @@ export default function Outlets() {
                     >
                       Cargando...
                     </div>
-                  )}
+                  ): ("")}
                   {!isLoading && (
                     <>
                       {filteredOutlets.length > 0 ? (

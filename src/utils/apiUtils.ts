@@ -1,7 +1,7 @@
 // apiUtils.js
 const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
-export const fetchCoolers = async (path, setIsLoading?) => {  
+export const fetchCoolers = async (path, setIsLoading?,id?) => {  
   if(setIsLoading){
     setIsLoading(!false);
   }
@@ -16,9 +16,9 @@ export const fetchCoolers = async (path, setIsLoading?) => {
     algorithm: ["INSTALLED"],
     path: path,
     page_size: 1000,
-    page_number: 1  
-  };
-  console.log(data)
+    page_number: 1  ,
+    outlet_id : id
+  };  
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -65,7 +65,10 @@ export const fetchCoolerDetails = async (serialNumber) => {
   }
 };
 
-export const fetchOutlets = async (path) => {
+export const fetchOutlets = async (path,setIsLoading?) => {
+  if(setIsLoading){
+    setIsLoading(!false);
+  }
   const url = `${baseUrl}/outlets`;
   const headers = {
     "Content-Type": "application/json",
@@ -96,7 +99,7 @@ export const fetchOutlets = async (path) => {
   }
 };
 
-export const fetchAlerts = async () => {
+export const fetchAlerts = async (path) => {
   const url = `${baseUrl}/alerts`;
   const headers = {
     "Content-Type": "application/json",
@@ -104,6 +107,7 @@ export const fetchAlerts = async () => {
 
   const data = {
     customer: "KOF",
+    path:path
   };
 
   try {

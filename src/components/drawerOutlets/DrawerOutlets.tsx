@@ -17,8 +17,6 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const { region, route, zone, outlet_id, latitude, longitude } = outletDetails;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
-  const id = outlet_id
-
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
@@ -28,7 +26,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchCoolers(pathVerify());
+        const data = await fetchCoolers(pathVerify(),null,outlet_id);
         setCoolersData(data);
       } catch (error) {
         console.error("Error fetching coolers:", error);
@@ -36,7 +34,6 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
     };
     fetchData()
   }, [dt])    
-  console.log(coolersData)
   return (
     <div
       ref={drawerRef}
