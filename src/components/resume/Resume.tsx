@@ -35,7 +35,7 @@ const Resume = ({ coolersData }) => {
 
   validarExistenciaImagen(urlImagen);
 
-  // console.log(coolersData?.cooler?.outlet_name);
+  console.log(coolersData?.cooler?.asset_url);
   return (
     <>
       <br></br>
@@ -806,7 +806,7 @@ const Resume = ({ coolersData }) => {
                   }}
                 >
                   {" "}
-                  Gasto total de propiedad
+                  Precio de venta
                 </div>
                 <div
                   style={{

@@ -1,10 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IconArrowRight,IconCircleCheck } from "@tabler/icons-react";
+import { IconArrowRight, IconCircleCheck } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import MapComponent from "../map";
-import { Card, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from "@tremor/react";
+import {
+  Card,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+} from "@tremor/react";
 import { fetchCoolers } from "../../utils/apiUtils";
 import { CoolerInterface } from "./CoolerInterface";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
@@ -26,15 +34,15 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchCoolers(pathVerify(),null,outlet_id);
+        const data = await fetchCoolers(pathVerify(), null, outlet_id);
         setCoolersData(data);
       } catch (error) {
         console.error("Error fetching coolers:", error);
       }
     };
-    fetchData()
-  }, [dt])    
-  
+    fetchData();
+  }, [dt]);
+
   return (
     <div
       ref={drawerRef}
@@ -146,7 +154,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   src={"../../sampleData/a.png"}
                   alt="Descripción de la imagen"
                 /> */}
-                <IconCircleCheck width={"1rem"} color="#0F9F67"/> 
+                  <IconCircleCheck width={"1rem"} color="#0F9F67" />
                   <div
                     style={{
                       color: "#0F9F67",
@@ -662,7 +670,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
             <div style={{ marginLeft: "auto" }}>
               <ExportToExcel
                 datos={coolersData}
-                nombre={"Coolers_Puntos_de_Venta"}
+                nombre={"Enfriadores_Puntos_de_Venta"}
               />
             </div>
           </div>
@@ -681,161 +689,250 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               style={{
                 borderCollapse: "collapse",
                 width: "100%", // Cambiado a 100% para que la tabla sea receptiva
-                maxWidth: "1000px",                
+                maxWidth: "1000px",
                 height: "12rem",
               }}
             >
               <TableHead style={{ display: "block" }}>
-                <TableRow >
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "6.2rem"}}>Estatus</TableHeaderCell>
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "7rem" }}>Serie</TableHeaderCell>
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "9rem" }}>Modelo</TableHeaderCell>
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>Dias sin visita</TableHeaderCell>
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "5rem" }}>Prioridad</TableHeaderCell>
-                  <TableHeaderCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>Acciones</TableHeaderCell>
+                <TableRow>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "6.2rem",
+                    }}
+                  >
+                    Estatus
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "7rem",
+                    }}
+                  >
+                    Serie
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "9rem",
+                    }}
+                  >
+                    Modelo
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "8rem",
+                    }}
+                  >
+                    Dias sin visita
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "5rem",
+                    }}
+                  >
+                    Prioridad
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "8rem",
+                    }}
+                  >
+                    Acciones
+                  </TableHeaderCell>
                 </TableRow>
               </TableHead>
-              <TableBody style={{ display: "block", height: "90%", overflowY: "auto"}}>
-                {
-                  coolersData
-                    .slice(firstIndex, lastIndex)
-                    .map((cooler, index) => (
-                      <TableRow key={index}
-                        className="Tabla"
-                        onClick={() => {
-                          navigate(
-                            `/coolerDetail/${cooler.serial_number}`
-                          );
+              <TableBody
+                style={{ display: "block", height: "90%", overflowY: "auto" }}
+              >
+                {coolersData
+                  .slice(firstIndex, lastIndex)
+                  .map((cooler, index) => (
+                    <TableRow
+                      key={index}
+                      className="Tabla"
+                      onClick={() => {
+                        navigate(`/coolerDetail/${cooler.serial_number}`);
+                      }}
+                    >
+                      <TableCell
+                        style={{
+                          fontSize: ".84rem",
+                          textAlign: "left",
+                          width: "5.8rem",
                         }}
                       >
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "5.8rem" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "4px",
+                            // justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            background: "#B6FEDB",
+                            width: "fit-content",
+                          }}
+                        >
                           <div
                             style={{
-                              display: "flex",
-                              padding: "4px",
-                              // justifyContent: "center",
-                              alignItems: "center",
-                              gap: "4px",
-                              borderRadius: "2px",
-                              background: "#B6FEDB",
-                              width: "fit-content"
+                              width: "4px",
+                              height: "4px",
+                              borderRadius: "5px",
+                              background: "#31B648",
+                            }}
+                          ></div>
+                          <div
+                            style={{
+                              color: "#028053",
+                              width: "100%",
+                              fontSize: ".5rem",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "14px",
                             }}
                           >
+                            FUNCIONANDO ---
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: ".84rem",
+                          textAlign: "left",
+                          width: "6.5rem",
+                        }}
+                      >
+                        {cooler.serial_number === ""
+                          ? "Sin registro"
+                          : cooler.serial_number}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: ".84rem",
+                          textAlign: "left",
+                          width: "9rem",
+                        }}
+                      >
+                        {cooler.model_id}
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: ".84rem",
+                          textAlign: "left",
+                          width: "8rem",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "4px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            background: "#D4DAE3",
+                            width: "6rem",
+                          }}
+                        >
+                          <div
+                            style={{
+                              color: "#313A49",
+                              // fontFamily: "Space Mono",
+                              fontSize: "12px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "14px",
+                            }}
+                          >
+                            {" "}
+                            --- DÍAS
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: ".84rem",
+                          textAlign: "left",
+                          width: "5rem",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "4px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            border: "1.5px solid #0F9F67",
+                            background: "#FFF",
+                            width: "3rem",
+                          }}
+                        >
+                          <div
+                            style={{
+                              color: "#0F9F67",
+                              // fontFamily: "DM Sans",
+                              fontSize: "12px",
+                              fontStyle: "normal",
+                              fontWeight: 600,
+                              lineHeight: "14px",
+                            }}
+                          >
+                            {cooler.priority}
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: ".84rem",
+                          textAlign: "left",
+                          width: "8rem",
+                          height: "3rem",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "4px",
+                          }}
+                        >
+                          <Link to="/coolerDetail">
                             <div
                               style={{
-                                width: "4px",
-                                height: "4px",
-                                borderRadius: "5px",
-                                background: "#31B648",
-                              }}
-                            ></div>
-                            <div
-                              style={{
-                                color: "#028053",
-                                width: "100%",
-                                fontSize: ".5rem",
+                                color: "#3E83FF",
+                                fontSize: "14px",
                                 fontStyle: "normal",
                                 fontWeight: 400,
-                                lineHeight: "14px",
+                                lineHeight: "20px",
+                                display: "flex",
+                                marginRight: "6px",
                               }}
                             >
-                              FUNCIONANDO ---
-                            </div>
-                          </div>
-                        </TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "6.5rem" }}>
-                          {cooler.serial_number === "" ? "Sin registro" : cooler.serial_number}</TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "9rem" }}>{cooler.model_id}</TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" }}>
-                          <div
-                            style={{
-                              display: "flex",
-                              padding: "4px",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              gap: "4px",
-                              borderRadius: "2px",
-                              background: "#D4DAE3",
-                              width: "6rem"
-                            }}
-                          >
-                            <div
-                              style={{
-                                color: "#313A49",
-                                // fontFamily: "Space Mono",
-                                fontSize: "12px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "14px",
-                              }}
-                            >
-                              {" "}
-                              --- DÍAS
-                            </div>
-                          </div>
-                        </TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "5rem" }}>
-                          <div
-                            style={{
-                              display: "flex",
-                              padding: "4px",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              gap: "4px",
-                              borderRadius: "2px",
-                              border: "1.5px solid #0F9F67",
-                              background: "#FFF",
-                              width: "3rem"
-                            }}
-                          >
-                            <div
-                              style={{
-                                color: "#0F9F67",
-                                // fontFamily: "DM Sans",
-                                fontSize: "12px",
-                                fontStyle: "normal",
-                                fontWeight: 600,
-                                lineHeight: "14px",
-                              }}
-                            >
-                              {cooler.priority}
-                            </div>
-                          </div>
-                        </TableCell>
-                        <TableCell style={{ fontSize: ".84rem", textAlign: "left", width: "8rem" ,height:"3rem"}}>
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "4px",
-                            }}
-                          >
-                            <Link to="/coolerDetail">
-                              <div
+                              Ver más{" "}
+                              <IconArrowRight
                                 style={{
                                   color: "#3E83FF",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "20px",
-                                  display: "flex",
-                                  marginRight: "6px",
+                                  width: "1.0rem",
                                 }}
-                              >
-                                Ver más{" "}
-                                <IconArrowRight
-                                  style={{
-                                    color: "#3E83FF",
-                                    width:"1.2rem",                                    
-                                  }}
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                        </TableCell>                                                
-                      </TableRow>
-                    ))
-                }
+                              />
+                            </div>
+                          </Link>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
               </TableBody>
             </Table>
             <PaginationComponent

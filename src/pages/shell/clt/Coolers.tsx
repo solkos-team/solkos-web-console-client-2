@@ -68,7 +68,8 @@ export default function Coolers() {
       try {
         const data = await fetchCoolers(pathVerify(), setIsLoading);
         setCoolersData(data);
-        setIsLoading(false); // Set isLoading to false after fetching coolers
+        console.log(data);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching coolers:", error);
       }
@@ -306,20 +307,6 @@ export default function Coolers() {
             <div style={{}}>
               <div>
                 <div>
-                  {/* {isLoading && filteredCoolers.length === 0 && (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: 400,
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                      }}
-                    >
-                      Cargando...
-                    </div>
-                  )} */}
                   {isLoading == true || filteredCoolers.length === 0 ? (
                     <div
                       style={{

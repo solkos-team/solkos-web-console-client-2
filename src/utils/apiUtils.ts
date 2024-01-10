@@ -37,6 +37,49 @@ export const fetchCoolers = async (path, setIsLoading?, id?) => {
   }
 };
 
+// apiUtils.js
+
+export const fetchCoolersDrawer = async (
+  path,
+  setIsLoading?,
+  id?,
+  selectedAlgorithm?
+) => {
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
+  const url = `${baseUrl}/coolers`;
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  const data = {
+    customer: "KOF",
+    class: "OPE",
+    algorithm: [selectedAlgorithm],
+    path: path,
+    page_size: 1000,
+    page_number: 1,
+    outlet_id: id,
+  };
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error fetching coolers");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // En tu función fetchCoolerDetails
 export const fetchCoolerDetails = async (serialNumber) => {
   const url = `${baseUrl}/coolers/${serialNumber}`;
