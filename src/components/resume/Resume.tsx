@@ -784,7 +784,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $-----
+                  { coolersData?.cooler?.total_ownership_expense == undefined  ||  coolersData?.cooler?.total_ownership_expense == "" ? "Sin datos" : `${coolersData?.cooler?.total_ownership_expense}`} 
                 </div>
               </div>
               <div
@@ -818,7 +818,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $------
+                  { coolersData?.cooler?.sale_price == undefined  ||  coolersData?.cooler?.sale_price == "" ? "Sin datos" : `${coolersData?.cooler?.sale_price}`} 
                 </div>
               </div>
               <div
@@ -852,7 +852,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $-------
+                  { coolersData?.cooler?.total_expense_service == undefined  ||  coolersData?.cooler?.total_expense_service == "" ? "Sin datos" : `${coolersData?.cooler?.total_expense_service}`} 
                 </div>
               </div>
             </div>
@@ -949,7 +949,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $-------
+                  { coolersData?.cooler?.energy_consumption == undefined  ||  coolersData?.cooler?.energy_consumption == "" ? "Sin datos" : `${coolersData?.cooler?.energy_consumption}`} 
                 </div>
               </div>
 

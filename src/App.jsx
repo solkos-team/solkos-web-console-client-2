@@ -181,7 +181,8 @@ const routes = [
 function App() {
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
-  const [data, setData] = useState(['KOF', 'HEINEKEN'])
+  const [data, setData] = useState(['KOF', 'HEINEKEN','PEÑAFIEL','MONDELEZ','AGA','ECO'])
+  const [opened, setOpened] = useState(false); // state of menu
   const location = useLocation();
   const [value, setValue] = useState();
   const closeCoolerInsights = () => {
@@ -256,6 +257,7 @@ function App() {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
       dispatch(addOrg())
+      setOpened(false)
     }
   }  
   const initOrg = () => {
@@ -263,6 +265,7 @@ function App() {
     ? console.log(dt)
     : saveOrganization("KOF")
   }
+    
   return (
     <>
       <AppShell
@@ -359,7 +362,7 @@ function App() {
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
-              <Menu shadow="md" width={200} position={"right-end"}>
+              <Menu shadow="md" width={200} position={"right-end"} opened={opened} onChange={setOpened}>
                 <Menu.Target>
                   <UnstyledButton className={classes.user}>
                     <div

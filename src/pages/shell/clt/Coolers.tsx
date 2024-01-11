@@ -439,7 +439,7 @@ export default function Coolers() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          FUNCIONANDO --
+                                          {cooler.status == undefined || cooler.status == "" ? "Sin Datos" : cooler.status}&nbsp;
                                         </div>
                                       </div>
                                     </TableCell>
@@ -496,8 +496,8 @@ export default function Coolers() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          {" "}
-                                          --- DÍAS
+                                          {cooler.days_without_visit == undefined || cooler.days_without_visit == "" ? "Sin Datos " : cooler.days_without_visit}
+                                        DÍAS
                                         </div>
                                       </div>
                                     </TableCell>

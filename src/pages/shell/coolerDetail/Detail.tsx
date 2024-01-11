@@ -16,6 +16,12 @@ export default function CoolerDetail() {
       region: string;
       route: string;
       zone: string;
+      days_without_visit : string;
+      last_read : string;
+      total_ownership_expense:number;
+      sale_price : number;
+      total_expense_service :string;
+      energy_consumption : string;
     };
     service_orders?: Array<{ description: string }>; // Ajusta según la estructura real
     tracking?: Array<{ class: string; algorithm: string }>; // Ajusta según la estructura real
@@ -232,7 +238,7 @@ export default function CoolerDetail() {
                   lineHeight: "normal",
                 }}
               >
-                -----
+                { coolersData?.cooler?.last_read == undefined  ||  coolersData?.cooler?.last_read == "" ? "Sin datos" : `${coolersData?.cooler?.last_read}`} 
               </div>
               <div
                 style={{
@@ -256,7 +262,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {" "}
-                  --- días sin visita
+                  { coolersData?.cooler?.days_without_visit == undefined  ||  coolersData?.cooler?.days_without_visit == "" ? "Sin datos" : `${coolersData?.cooler?.days_without_visit} dias sin visita`} 
                 </div>
               </div>
             </div>
