@@ -1,8 +1,7 @@
 import { Button } from "@mantine/core";
 import React from "react";
-import { Link } from "react-router-dom";
 
-export const Login = () => {
+export const RecoverPassword = () => {
   return (
     // General
     <>
@@ -15,10 +14,8 @@ export const Login = () => {
             justifyContent: "space-between",
             alignItems: "flex-start",
             background: "#FFF",
-            margin: "0 auto",
           }}
         >
-          {/* title */}
           <div
             style={{ display: "flex", alignItems: "flex-start", gap: "32px" }}
           >
@@ -67,7 +64,7 @@ export const Login = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              gap: "20px",
+              gap: "64px",
               alignSelf: "stretch",
             }}
           >
@@ -75,50 +72,50 @@ export const Login = () => {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "8px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#000005",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "23px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "155%",
-                  marginRight: 280,
-                }}
-              >
-                Inicia Sesión
-              </div>
-              <div
-                style={{
-                  color: "#88888B",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "13px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "155%",
-                  marginRight: 70,
-                }}
-              >
-                Utiliza las credenciales proporcionadas por tu administrador
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                width: "420px",
-                flexDirection: "column",
                 alignItems: "flex-start",
                 gap: "8px",
               }}
             >
               <div
                 style={{
+                  color: "#000005",
+                  // fontFamily: "DM Sans",
+                  fontSize: "26px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "155%",
+                }}
+              >
+                Recuperar contraseña
+              </div>
+              <div
+                style={{
+                  color: "#88888B",
+                  // fontFamily: "DM Sans",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "155%",
+                }}
+              >
+                Ingresa el correo electrónico con el que te inscribiste en la
+                plataforma.
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "8px",
+                marginLeft: -60,
+              }}
+            >
+              <div
+                style={{
                   color: "#3A3A3F",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "14px",
+                  // fontFamily: "DM Sans",
+                  fontSize: "16px",
                   fontStyle: "normal",
                   fontWeight: 700,
                   lineHeight: "normal",
@@ -141,104 +138,11 @@ export const Login = () => {
                 }}
               />
             </div>
-            <div
-              style={{
-                display: "flex",
-                width: "420px",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "8px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#3A3A3F",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "normal",
-                }}
-              >
-                Contraseña
-              </div>
-              <input
-                type="text"
-                // value={searchValue}
-                // onChange={handleChange}
-                style={{
-                  color: "#ADBACC",
-                  // fontFamily: "DM Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: 430,
-                }}
-              />
-              <div>
-                <Link to="/recover">
-                  <div
-                    style={{
-                      alignSelf: "stretch",
-                      color: "#ED5079",
-                      marginLeft: 295,
-                      //   fontFamily: "DM Sans",
-                      fontSize: "13px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "155%",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Olvide mi contraseña
-                  </div>
-                </Link>
-              </div>
-            </div>
             <Button
-              style={{ background: "#ED5079", width: "440px", marginLeft: 10 }}
+              style={{ background: "#ED5079", width: "440px", marginLeft: -60 }}
             >
-              Iniciar sesión
+              Enviar código de recuperación
             </Button>
-          </div>
-          <div
-            style={{
-              width: "430px",
-              height: "0.5px",
-              background: "#88888B",
-              marginLeft: 90,
-            }}
-          ></div>
-
-          <div
-            style={{
-              marginLeft: 230,
-              color: "#88888B",
-              textAlign: "center",
-              //   fontFamily: "DM Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              marginBottom: 0,
-            }}
-          >
-            ¿No tienes una cuenta?
-          </div>
-          <div
-            style={{
-              marginLeft: 270,
-              color: "#ED5079",
-              textAlign: "center",
-              //   fontFamily: "DM Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              marginBottom: 0,
-              cursor: "pointer",
-            }}
-          >
-            Solicita una
           </div>
 
           <div
@@ -254,7 +158,7 @@ export const Login = () => {
             © Imbera 2024
           </div>
         </div>
-        <div style={{ background: "#FCCFD9", width: "1500px" }}></div>
+        <div style={{ background: "#ADBACC", width: "800px" }}></div>
       </div>
     </>
   );

@@ -22,7 +22,8 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-  const { region, route, zone, outlet_id, latitude, longitude } = outletDetails;
+  const { region, route, zone, outlet_id, latitude, longitude, channel } =
+    outletDetails;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const drawerRef = useRef(null);
@@ -293,7 +294,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  -----
+                  {channel}
                 </div>
               </div>
             </div>

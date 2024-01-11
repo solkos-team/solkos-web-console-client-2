@@ -18,6 +18,7 @@ import Insights from "./pages/shell/insights";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 import { Login } from "./pages/main/login/Login.tsx";
+import { RecoverPassword } from "./pages/main/recover/RecoverPassword.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -27,7 +28,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <NotificationsProvider>
             <Router>
               <Routes>
-                <Route path="/login" element={<Login />} />{" "}
+                <Route path="/login" element={<Login />} />
+                <Route path="/recover" element={<RecoverPassword />} />
                 <Route path="" element={<App />}>
                   <Route index element={<Insights />} />
                   <Route path="/alerts" element={<Alerts />} />

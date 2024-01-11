@@ -5,18 +5,28 @@ import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
 import { fetchOutlets } from "../../../utils/apiUtils";
-import { Card, Table, TableBody, TableCell, TableFoot, TableFooterCell, TableHead, TableHeaderCell, TableRow, } from "@tremor/react";
+import {
+  Card,
+  Table,
+  TableBody,
+  TableCell,
+  TableFoot,
+  TableFooterCell,
+  TableHead,
+  TableHeaderCell,
+  TableRow,
+} from "@tremor/react";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../components/drawerOutlets/CoolerInterface";
 
-
 export default function Outlets() {
-
   const [searchValue, setSearchValue] = useState("");
-  const [outletsData, setOutletsData] = useState<CoolerInterface[] | null>(null);
+  const [outletsData, setOutletsData] = useState<CoolerInterface[] | null>(
+    null
+  );
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,7 +34,7 @@ export default function Outlets() {
   const navigate = useNavigate();
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
-  const dt = useSelector((state: any) => state.works)
+  const dt = useSelector((state: any) => state.works);
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -47,7 +57,7 @@ export default function Outlets() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetchOutlets(pathVerify(),setIsLoading);
+        const data = await fetchOutlets(pathVerify(), setIsLoading);
         setOutletsData(data);
         setIsLoading(false);
       } catch (error) {
@@ -80,7 +90,7 @@ export default function Outlets() {
     useState<CoolerInterface | null>(null);
   return (
     <div>
-      <PageFilter loading={isLoading}/>
+      <PageFilter loading={isLoading} />
 
       <br></br>
       <div
@@ -288,7 +298,9 @@ export default function Outlets() {
                     >
                       Cargando...
                     </div>
-                  ): ("")}
+                  ) : (
+                    ""
+                  )}
                   {!isLoading && (
                     <>
                       {filteredOutlets.length > 0 ? (
@@ -355,11 +367,11 @@ export default function Outlets() {
                                 .slice(firstIndex, lastIndex)
                                 .map((outlet, index) => (
                                   <TableRow
-                                  className="Tabla"
-                                    key={index}                                    
+                                    className="Tabla"
+                                    key={index}
                                     onClick={() => {
                                       navigate("");
-                                    }}                                    
+                                    }}
                                   >
                                     <TableCell
                                       style={{
@@ -448,7 +460,7 @@ export default function Outlets() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          {outlet.priority || '---------'}
+                                          {outlet.priority || "---------"}
                                         </div>
                                       </div>
                                     </TableCell>
