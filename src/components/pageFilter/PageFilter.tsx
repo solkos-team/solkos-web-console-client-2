@@ -9,11 +9,13 @@ import {
   IconCirclePlus,
 } from "@tabler/icons-react";
 import { Text, Popover, Select } from "@mantine/core";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addPath } from "../../app/works";
 import { fetchPath } from "./getPath";
+import { useStorage } from "reactfire";
 
 export default function (props) {
+  const dto = useSelector((state:any)=>state.organization)
   const dispatch = useDispatch();
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
   const [value, setValue] = useState<string | null>("");
@@ -29,6 +31,7 @@ export default function (props) {
   const [data, setData] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
   const [filterVisibility, setFilterVisibility] = useState(true);
+  const [customer,setCustomer] = useState(dto)
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -37,8 +40,20 @@ export default function (props) {
 
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
-  };
-  const getPaths = async (dataLocalStorage?) => {
+  };    
+    
+  const clearPath = () => {          
+    setCustomer(dto)
+    setData([])     
+    dispatch(addPath());
+    setIndex(0);
+    getPaths()
+    setValue("");
+    setFilterVisibility(true)
+    localStorage.setItem("PATH","")
+  }
+  const getPaths = async (dataLocalStorage?) => {  
+    dataLocalStorage === undefined ? dataLocalStorage = [] : dataLocalStorage
     if (data.length < 4) {      
       try {
         const data = await fetchPath(dataLocalStorage);
@@ -52,6 +67,8 @@ export default function (props) {
       }
     }
   };
+  index == 0 ? getPaths() : ""
+  dto === customer ? "" : clearPath()
   useEffect(() => {
     getPaths();
   }, []);
@@ -133,10 +150,12 @@ export default function (props) {
     }
   };  
   const deleteFilter = (i) => {
+    console.log(i)
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
     dataLocalStorage.splice(i, 1);
     localStorage.setItem("PATH", JSON.stringify(dataLocalStorage));
     data.splice(i, 1);
+    dataZone.splice(i,1)
     setStatusDelete(!statusDelete);
     setIndex(data.length);
     if (i == 3) {
@@ -151,6 +170,7 @@ export default function (props) {
   const bloqPath = (i) => {
     return i == data.length - 1 ? false : true;
   };
+  
   data.length > 0 ? getPaths(data) : "";
   return (
     <div>

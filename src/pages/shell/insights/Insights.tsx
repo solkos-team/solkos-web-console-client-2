@@ -61,13 +61,11 @@ export default function Insights() {
   const pathVerify = () => {
     return dt.length == 0 ? "[]" : JSON.parse(dt);
   };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchInsights(pathVerify());
         setInsightsData(data);
-        console.log(data);
         console.log("Setting isLoading to false after fetching insights");
         setIsLoading(false);
       } catch (error) {
@@ -78,7 +76,7 @@ export default function Insights() {
     fetchData();
   }, [dt]);
 
-  console.log("Alert", insightsData?.insights.ALERT.total);
+  
 
   // if (insightsData && insightsData.insights && insightsData.insights.ALERT) {
   //   const { total, algorithms } = insightsData.insights.ALERT;

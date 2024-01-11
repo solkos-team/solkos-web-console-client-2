@@ -2,6 +2,7 @@
 const baseUrl:string = "https://universal-console-server-b7agk5thba-uc.a.run.app/paths";
 
 export const fetchPath = async (path?:[]) => {
+  path === undefined ? [] : path  
   const url = `${baseUrl}`;
   const headers = {
     "Content-Type": "application/json",

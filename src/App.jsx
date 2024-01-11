@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import { useLocation } from "react-router-dom";
 import {
@@ -10,6 +11,8 @@ import {
   createStyles,
   Menu,
   Header,
+  Select,
+  Button,
 } from "@mantine/core";
 import { NavLink, Outlet } from "react-router-dom";
 import dayjs from "dayjs";
@@ -29,6 +32,8 @@ import arrow_2 from "./sampleData/arrow_2.png";
 import alert from "./sampleData/alert.png";
 import fails from "./sampleData/fails.png";
 import ind from "./sampleData/ind.png";
+import { addOrg } from "./app/organization";
+
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -41,21 +46,19 @@ const useStyles = createStyles((theme, _params, getRef) => {
       overflowY: "hidden",
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
-      borderBottom: `1px solid ${
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[4]
-          : theme.colors.gray[2]
-      }`,
+      borderBottom: `1px solid ${theme.colorScheme === "dark"
+        ? theme.colors.dark[4]
+        : theme.colors.gray[2]
+        }`,
     },
 
     footer: {
       paddingTop: theme.spacing.md,
       marginTop: theme.spacing.md,
-      borderTop: `1px solid ${
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[4]
-          : theme.colors.gray[2]
-      }`,
+      borderTop: `1px solid ${theme.colorScheme === "dark"
+        ? theme.colors.dark[4]
+        : theme.colors.gray[2]
+        }`,
     },
 
     link: {
@@ -104,7 +107,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
         [`& .${icon}`]: {
           color:
             theme.colors[theme.primaryColor][
-              theme.colorScheme === "dark" ? 5 : 7
+            theme.colorScheme === "dark" ? 5 : 7
             ],
         },
       },
@@ -178,8 +181,9 @@ const routes = [
 function App() {
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
+  const [data, setData] = useState(['KOF', 'HEINEKEN'])
   const location = useLocation();
-
+  const [value, setValue] = useState();
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
   };
@@ -187,6 +191,7 @@ function App() {
   useEffect(() => {
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
     setCoolerInsightsOpen(location.pathname === "/");
+    initOrg()
   }, [location.pathname]);
 
   const links = routes.map((item) => (
@@ -244,7 +249,20 @@ function App() {
       )}
     </div>
   ));
+  const dispatch = useDispatch();
+  const dt = useSelector((state) => state.organization)
 
+  const saveOrganization = (ORG) => {
+    if (ORG) {
+      localStorage.setItem("ORG", ORG);
+      dispatch(addOrg())
+    }
+  }  
+  const initOrg = () => {
+    dt == []
+    ? console.log(dt)
+    : saveOrganization("KOF")
+  }
   return (
     <>
       <AppShell
@@ -454,48 +472,36 @@ function App() {
                       Cambiar de organización
                     </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "10px 12px",
-                      alignItems: "center",
-                      gap: "10px",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        flex: "100",
-                        fontSize: "14px",
-                      }}
-                    >
-                      KOF
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "10px 12px",
-                      alignItems: "center",
-                      gap: "10px",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "10px",
-                        flex: "100",
-                        fontSize: "14px",
-                      }}
-                    >
-                      HEINEKEN
-                    </div>
-                  </div>
+                  {
+                    data.map((nombre, index) => (
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "10px 12px",
+                          alignItems: "center",
+                          gap: "10px",
+                          alignSelf: "stretch",
+                        }}
+                        key={index}
+                        onChange={setData}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            flex: "100",
+                            fontSize: "14px",
+                            textDecorationColor: dt === nombre ? "#ec547c" : "",
+                            color: dt === nombre ? "#ec547c" : ""
+                          }}
+                          onClick={() => { saveOrganization(nombre) }}
+                        >
+                          {nombre}
+                        </div>
+                      </div>
+                    ))
+                  }
                   <div
                     style={{
                       display: "flex",
