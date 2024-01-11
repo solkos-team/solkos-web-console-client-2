@@ -25,18 +25,19 @@ export default function Alerts() {
     value: number;
     delta: number;
   }
-
+  
+  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state:any)=>state.organization)
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
   };
   useEffect(() => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await fetchAlerts(pathVerify());
-        console.log(data);
+        const data = await fetchAlerts(pathVerify(),dto);
         setAlertsData(data);
       } catch (error) {
         console.error("Error:", error);
@@ -46,7 +47,7 @@ export default function Alerts() {
     };
 
     fetchData();
-  }, [dt]);
+  }, [dt,dto]);
 
   // Page (Body)
   useEffect(() => {
@@ -57,7 +58,6 @@ export default function Alerts() {
     };
   }, []);
 
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(

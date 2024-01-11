@@ -40,7 +40,7 @@ export const fetchCoolers = async (path, setIsLoading?, id?) => {
 // apiUtils.js
 
 export const fetchCoolersDrawer = async (
-  path,
+  path?,
   setIsLoading?,
   id?,
   selectedAlgorithm?
@@ -142,17 +142,16 @@ export const fetchOutlets = async (path, setIsLoading?) => {
   }
 };
 
-export const fetchAlerts = async (path) => {
+export const fetchAlerts = async (path,dto) => {
   const url = `${baseUrl}/alerts`;
   const headers = {
     "Content-Type": "application/json",
   };
 
   const data = {
-    customer: "KOF",
-    path: path,
+    customer: dto,
+    path,
   };
-
   try {
     const response = await fetch(url, {
       method: "POST",

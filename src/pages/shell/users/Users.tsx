@@ -150,7 +150,7 @@ export default function Users() {
             >
               TABLA
             </div>
-            <div style={{ display: "flex", width: "570%", marginLeft: -55 }}>
+            <div style={{ display: "flex", width: "470%", marginLeft: -55 }}>
               <div
                 style={{
                   color: "#000005",
@@ -164,7 +164,7 @@ export default function Users() {
                 Colaboradores
               </div>
               <div style={{ marginLeft: "auto" }}>
-                <ExportToExcel datos={""} nombre={"Coolers"} />
+                <ExportToExcel datos={""} nombre={"Users"} />
               </div>
             </div>
           </div>
