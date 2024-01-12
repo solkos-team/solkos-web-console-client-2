@@ -251,7 +251,7 @@ export default function (props) {
                   userSelect: "none",
                 }}
               >
-                CLIENTE
+                {dto || 'CLIENTE'}
               </Text>
             </div>
             <IconChevronRight
@@ -370,6 +370,7 @@ export default function (props) {
                         lineHeight: "14px",
                         textTransform: "uppercase",
                         userSelect: "none",
+                        cursor:"pointer"
                       }}
                       onClick={() => setOpened((o) => !o)}
                     >

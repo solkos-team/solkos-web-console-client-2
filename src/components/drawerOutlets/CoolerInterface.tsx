@@ -20,6 +20,7 @@ export interface CoolerInterface {
   created_at: string;
   updated_at: string;
   notified_at: string;
+  days_without_visit: string;
   days_without_visitC: string;
   status: string;
 }
