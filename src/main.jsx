@@ -19,6 +19,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.js";
 import { Login } from "./pages/main/login/Login.tsx";
 import { RecoverPassword } from "./pages/main/recover/RecoverPassword.tsx";
+import { NewPassword } from "./pages/main/newPassword/NewPassword.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/recover" element={<RecoverPassword />} />
+                <Route path="/newPassword" element={<NewPassword />}></Route>
                 <Route path="" element={<App />}>
                   <Route index element={<Insights />} />
                   <Route path="/alerts" element={<Alerts />} />

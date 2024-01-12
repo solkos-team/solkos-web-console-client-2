@@ -22,12 +22,19 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-<<<<<<< HEAD
-  const { region, route, zone, outlet_id, latitude, longitude, channel } =
-    outletDetails;
-=======
-  const { region, route, zone, outlet_id, latitude, longitude,channel,outlet_name,outlet_address,days_without_visitC,last_read_coolerC } = outletDetails;
->>>>>>> 6284cfc2e1b8efc4da47bb80841d2a030e669674
+  const {
+    region,
+    route,
+    zone,
+    outlet_id,
+    latitude,
+    longitude,
+    channel,
+    outlet_name,
+    outlet_address,
+    days_without_visitC,
+    last_read_coolerC,
+  } = outletDetails;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const drawerRef = useRef(null);
@@ -184,7 +191,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   lineHeight: "20px",
                 }}
               >
-                { outlet_address == undefined  ||  outlet_address == "" ? "Sin datos" : `${outlet_address}`} 
+                {outlet_address == undefined || outlet_address == ""
+                  ? "Sin datos"
+                  : `${outlet_address}`}
               </div>
             </div>
             <div
@@ -217,7 +226,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   lineHeight: "normal",
                 }}
               >
-                { last_read_coolerC == undefined  ||  last_read_coolerC == "" ? "Sin datos" : `${last_read_coolerC}`} 
+                {last_read_coolerC == undefined || last_read_coolerC == ""
+                  ? "Sin datos"
+                  : `${last_read_coolerC}`}
               </div>
               <div
                 style={{
@@ -241,7 +252,10 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     height: "10px",
                   }}
                 >
-                  { days_without_visitC == undefined  ||  days_without_visitC == "" ? "Sin datos" : `${days_without_visitC}`}  DÍAS SIN VISITA
+                  {days_without_visitC == undefined || days_without_visitC == ""
+                    ? "Sin datos"
+                    : `${days_without_visitC}`}{" "}
+                  DÍAS SIN VISITA
                 </div>
               </div>
             </div>
@@ -298,11 +312,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-<<<<<<< HEAD
                   {channel}
-=======
-                  { channel == undefined  ||  channel == "" ? "Sin datos" : `${channel}`} 
->>>>>>> 6284cfc2e1b8efc4da47bb80841d2a030e669674
                 </div>
               </div>
             </div>
@@ -348,7 +358,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  { region == undefined  ||  region == "" ? "Sin datos" : `${region}`} 
+                  {region == undefined || region == ""
+                    ? "Sin datos"
+                    : `${region}`}
                 </div>
               </div>
             </div>
@@ -394,7 +406,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  { route == undefined  ||  route == "" ? "Sin datos" : `${route}`} 
+                  {route == undefined || route == "" ? "Sin datos" : `${route}`}
                 </div>
               </div>
             </div>
@@ -440,7 +452,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  { zone == undefined  ||  zone == "" ? "Sin datos" : `${zone}`} 
+                  {zone == undefined || zone == "" ? "Sin datos" : `${zone}`}
                 </div>
               </div>
             </div>
@@ -810,7 +822,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                               lineHeight: "14px",
                             }}
                           >
-                            { cooler.status == undefined  ||  cooler.status == "" ? "Sin datos" : `${cooler.status}`} 
+                            {cooler.status == undefined || cooler.status == ""
+                              ? "Sin datos"
+                              : `${cooler.status}`}
                           </div>
                         </div>
                       </TableCell>
@@ -832,7 +846,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                           width: "9rem",
                         }}
                       >
-                        { cooler.model_id == undefined  ||  cooler.model_id == "" ? "Sin datos" : `${cooler.model_id}`} 
+                        {cooler.model_id == undefined || cooler.model_id == ""
+                          ? "Sin datos"
+                          : `${cooler.model_id}`}
                       </TableCell>
                       <TableCell
                         style={{
@@ -864,7 +880,10 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                             }}
                           >
                             {" "}
-                            { cooler.days_without_visit == undefined  ||  cooler.days_without_visit == "" ? "Sin datos" : `${cooler.days_without_visit} DÍAS`} 
+                            {cooler.days_without_visitC == undefined ||
+                            cooler.days_without_visitC == ""
+                              ? "Sin datos"
+                              : `${cooler.days_without_visitC} DÍAS`}
                           </div>
                         </div>
                       </TableCell>
