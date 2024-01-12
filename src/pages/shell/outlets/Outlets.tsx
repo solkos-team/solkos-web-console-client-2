@@ -427,8 +427,8 @@ export default function Outlets() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          {" "}
-                                          - DÍAS
+                                          {" "}                                          
+                                          {outlet.days_without_visitC === undefined  ||outlet.days_without_visitC === "" ? "Sin datos" : `${outlet.days_without_visitC} DÍAS`}
                                         </div>
                                       </div>
                                     </TableCell>
@@ -460,7 +460,7 @@ export default function Outlets() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          {outlet.priority || "---------"}
+                                          {outlet.priority === undefined  ||outlet.priority === "" ? "Sin datos" : outlet.priority}
                                         </div>
                                       </div>
                                     </TableCell>

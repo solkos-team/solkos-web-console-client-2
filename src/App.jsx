@@ -496,7 +496,8 @@ function App() {
                             flex: "100",
                             fontSize: "14px",
                             textDecorationColor: dt === nombre ? "#ec547c" : "",
-                            color: dt === nombre ? "#ec547c" : ""
+                            color: dt === nombre ? "#ec547c" : "",
+                            cursor:"pointer"
                           }}
                           onClick={() => { saveOrganization(nombre) }}
                         >
