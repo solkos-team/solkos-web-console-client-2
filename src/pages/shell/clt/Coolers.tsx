@@ -3,7 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
-import { fetchCoolers, fetchCoolerDetails } from "../../../utils/apiUtils";
+import { fetchCoolers, fetchCoolerDetails, fetchUniversal } from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -30,6 +30,7 @@ export default function Coolers() {
     serial_number: string;
   }
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state:any)=>state.organization)
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [coolersDataDeatil, setCoolersDataDeatil] = useState<
@@ -61,30 +62,30 @@ export default function Coolers() {
   };
 
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+  const body = {customer:dto,class:"STK",algorithm: ["INSTALLED"],path:pathVerify(),page_size: 1000,page_number: 1}
+  const fetchData = async () => {
+    try {
+      const data = await fetchUniversal('coolers', body,setIsLoading);
+      setCoolersData(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching coolers:", error);
+    }
   };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCoolers(pathVerify(), setIsLoading);
-        setCoolersData(data);
-        console.log(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching coolers:", error);
-      }
-    };
 
     fetchData();
-  }, [dt]);
+  }, [dt,dto]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (coolersData && coolersData.length > 0) {
-          const data = await fetchCoolerDetails(coolersData[0].serial_number);
+          // const data = await fetchCoolerDetails(coolersData[0].serial_number);
+          const data = await fetchUniversal('coolers',coolersData[0].serial_number);
           setCoolersDataDeatil(data);
-          console.log(data);
           setIsLoading(false); // Set isLoading to false after fetching cooler details
         }
       } catch (error) {

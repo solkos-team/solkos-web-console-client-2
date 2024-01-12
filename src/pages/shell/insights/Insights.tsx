@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { fetchInsights } from "../../../utils/apiUtils";
+import { fetchInsights,fetchUniversal } from "../../../utils/apiUtils";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -58,23 +58,23 @@ export default function Insights() {
   };
 
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state:any)=>state.organization)
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+  const body = {customer: dto, path: pathVerify()}
+  const fetchData = async () => {
+    try {
+      const data = await fetchUniversal('insights',body);
+      setInsightsData(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching outlets:", error);
+    }
   };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchInsights(pathVerify());
-        setInsightsData(data);
-        console.log("Setting isLoading to false after fetching insights");
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching outlets:", error);
-      }
-    };
-
     fetchData();
-  }, [dt]);
+  }, [dt,dto]);
 
   
 

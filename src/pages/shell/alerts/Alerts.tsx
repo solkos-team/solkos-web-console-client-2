@@ -2,20 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { IconSearch, IconDownload } from "@tabler/icons-react";
-import { fetchAlerts } from "../../../utils/apiUtils";
-import {
-  Card,
-  Table,
-  Pagination,
-  Select,
-  Loader,
-  TextInput,
-  Paper,
-  Tooltip,
-  Text,
-  Center,
-} from "@mantine/core";
-import ExcelJS from "exceljs";
+import { fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 
 export default function Alerts() {
@@ -33,18 +20,19 @@ export default function Alerts() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
+  const body = { customer: dto,path:pathVerify()}
+  const fetchData = async () => {
+    try {
+      setIsLoading(true)      
+      const data = await fetchUniversal('alerts',body);
+      setAlertsData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const data = await fetchAlerts(pathVerify(),dto);
-        setAlertsData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
 
     fetchData();
   }, [dt,dto]);
@@ -72,18 +60,7 @@ export default function Alerts() {
     <div>
       <PageFilter />
       <br></br>
-      <div
-        // style={{
-        //   display: "flex",
-        //   padding: "10px 0px",
-        //   flexDirection: "column",
-        //   alignItems: "flex-start",
-        //   gap: "16px",
-        //   flex: 100,
-        //   alignSelf: "stretch",
-        //   background: "#FFF",
-        //   marginLeft: -50,
-        // }}
+      <div       
         className="principal-titl"
       >
         {/* title */}

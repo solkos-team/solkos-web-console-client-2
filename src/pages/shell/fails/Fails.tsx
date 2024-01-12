@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { useSelector } from "react-redux";
-import { fetchAlerts } from "../../../utils/apiUtils";
+import { fetchAlerts ,fetchUniversal} from "../../../utils/apiUtils";
 
 export default function Fails() {
   interface Cooler {
@@ -15,26 +15,25 @@ export default function Fails() {
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
 
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state:any)=>state.organization)
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
   };
-
+  const body = { customer: dto,path:pathVerify()}
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const data = await fetchUniversal('alerts',body);
+      setCoolersData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const data = await fetchAlerts(pathVerify());
-        console.log(data);
-        setCoolersData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchData();
-  }, [dt]);
+  }, [dt,dto]);
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 

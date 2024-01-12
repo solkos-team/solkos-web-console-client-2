@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
-import { fetchOutlets } from "../../../utils/apiUtils";
+import { fetchUniversal } from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -35,6 +35,7 @@ export default function Outlets() {
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state:any)=>state.organization)
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -52,21 +53,22 @@ export default function Outlets() {
     return filteredData;
   };
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+  const body = {customer:dto,page_size: 100,page_number: 1, path: pathVerify()}
+  const fetchData = async () => {
+    try {
+      // const data = await fetchOutlets(pathVerify(), setIsLoading);
+      const data = await fetchUniversal('outlets', body,setIsLoading);
+      setOutletsData(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching outlets:", error);
+    }
   };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchOutlets(pathVerify(), setIsLoading);
-        setOutletsData(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching outlets:", error);
-      }
-    };
-
     fetchData();
-  }, [dt]);
+  }, [dt,dto]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)

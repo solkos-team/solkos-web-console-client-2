@@ -13,7 +13,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-import { fetchCoolers } from "../../utils/apiUtils";
+import { fetchCoolers, fetchUniversal } from "../../utils/apiUtils";
 import { CoolerInterface } from "./CoolerInterface";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
@@ -42,18 +42,21 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state:any)=>state.organization)
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+  const body = {customer:dto,class: "STK",algorithm: ["INSTALLED"],path: pathVerify(),page_size: 1000,page_number: 1,outlet_id: outlet_id}
+  const fetchData = async () => {
+    try {
+      // const data = await fetchCoolers(pathVerify(), null, outlet_id);
+      const data = await fetchUniversal('coolers',body);
+      setCoolersData(data);
+    } catch (error) {
+      console.error("Error fetching coolers:", error);
+    }
   };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCoolers(pathVerify(), null, outlet_id);
-        setCoolersData(data);
-      } catch (error) {
-        console.error("Error fetching coolers:", error);
-      }
-    };
     fetchData();
   }, [dt]);
 

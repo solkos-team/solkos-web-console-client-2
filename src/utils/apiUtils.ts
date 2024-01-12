@@ -1,4 +1,3 @@
-// apiUtils.js
 const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
 export const fetchCoolers = async (path, setIsLoading?, id?) => {
@@ -37,7 +36,7 @@ export const fetchCoolers = async (path, setIsLoading?, id?) => {
   }
 };
 
-// apiUtils.js
+
 
 export const fetchCoolersDrawer = async (
   path?,
@@ -80,7 +79,7 @@ export const fetchCoolersDrawer = async (
   }
 };
 
-// En tu función fetchCoolerDetails
+
 export const fetchCoolerDetails = async (serialNumber) => {
   const url = `${baseUrl}/coolers/${serialNumber}`;
   const headers = {
@@ -190,6 +189,33 @@ export const fetchInsights = async (path) => {
 
     if (!response.ok) {
       throw new Error("Error fetching insights");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchUniversal = async (componentURL,data?,setIsLoading?,detailsID?) => {
+  const url = `${baseUrl}/${componentURL}`;
+  detailsID ? url+'/'+detailsID : url
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error fetching alerts data");
     }
 
     const responseData = await response.json();

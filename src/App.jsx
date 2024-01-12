@@ -192,7 +192,11 @@ function App() {
   useEffect(() => {
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
     setCoolerInsightsOpen(location.pathname === "/");
-    initOrg()
+    const storage = localStorage.getItem("ORG");
+    if (storage == null) {
+      localStorage.setItem("ORG", "KOF");
+      dispatch(addOrg())
+    }
   }, [location.pathname]);
 
   const links = routes.map((item) => (
