@@ -22,12 +22,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-<<<<<<< HEAD
-  const { region, route, zone, outlet_id, latitude, longitude, channel } =
-    outletDetails;
-=======
+
   const { region, route, zone, outlet_id, latitude, longitude,channel,outlet_name,outlet_address,days_without_visitC,last_read_coolerC } = outletDetails;
->>>>>>> 6284cfc2e1b8efc4da47bb80841d2a030e669674
+
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const drawerRef = useRef(null);
@@ -298,11 +295,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-<<<<<<< HEAD
-                  {channel}
-=======
                   { channel == undefined  ||  channel == "" ? "Sin datos" : `${channel}`} 
->>>>>>> 6284cfc2e1b8efc4da47bb80841d2a030e669674
                 </div>
               </div>
             </div>
@@ -864,7 +857,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                             }}
                           >
                             {" "}
-                            { cooler.days_without_visit == undefined  ||  cooler.days_without_visit == "" ? "Sin datos" : `${cooler.days_without_visit} DÍAS`} 
+                            { cooler.days_without_visitC == undefined  ||  cooler.days_without_visitC == "" ? "Sin datos" : `${cooler.days_without_visitC} DÍAS`} 
                           </div>
                         </div>
                       </TableCell>
