@@ -36,8 +36,6 @@ export const fetchCoolers = async (path, setIsLoading?, id?) => {
   }
 };
 
-
-
 export const fetchCoolersDrawer = async (
   path?,
   setIsLoading?,
@@ -57,7 +55,7 @@ export const fetchCoolersDrawer = async (
     class: "OPE",
     algorithm: [selectedAlgorithm],
     path: path,
-    page_size: 1000,
+    page_size: 50000,
     page_number: 1,
     outlet_id: id,
   };
@@ -78,7 +76,6 @@ export const fetchCoolersDrawer = async (
     throw error;
   }
 };
-
 
 export const fetchCoolerDetails = async (serialNumber) => {
   const url = `${baseUrl}/coolers/${serialNumber}`;
@@ -141,7 +138,7 @@ export const fetchOutlets = async (path, setIsLoading?) => {
   }
 };
 
-export const fetchAlerts = async (path,dto) => {
+export const fetchAlerts = async (path, dto) => {
   const url = `${baseUrl}/alerts`;
   const headers = {
     "Content-Type": "application/json",
@@ -198,9 +195,14 @@ export const fetchInsights = async (path) => {
   }
 };
 
-export const fetchUniversal = async (componentURL,data?,setIsLoading?,detailsID?) => {
+export const fetchUniversal = async (
+  componentURL,
+  data?,
+  setIsLoading?,
+  detailsID?
+) => {
   const url = `${baseUrl}/${componentURL}`;
-  detailsID ? url+'/'+detailsID : url
+  detailsID ? url + "/" + detailsID : url;
   if (setIsLoading) {
     setIsLoading(!false);
   }

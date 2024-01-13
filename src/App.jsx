@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./App.css";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Group,
   Navbar,
@@ -34,7 +35,6 @@ import fails from "./sampleData/fails.png";
 import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
 
-
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
@@ -46,19 +46,21 @@ const useStyles = createStyles((theme, _params, getRef) => {
       overflowY: "hidden",
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
-      borderBottom: `1px solid ${theme.colorScheme === "dark"
-        ? theme.colors.dark[4]
-        : theme.colors.gray[2]
-        }`,
+      borderBottom: `1px solid ${
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[4]
+          : theme.colors.gray[2]
+      }`,
     },
 
     footer: {
       paddingTop: theme.spacing.md,
       marginTop: theme.spacing.md,
-      borderTop: `1px solid ${theme.colorScheme === "dark"
-        ? theme.colors.dark[4]
-        : theme.colors.gray[2]
-        }`,
+      borderTop: `1px solid ${
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[4]
+          : theme.colors.gray[2]
+      }`,
     },
 
     link: {
@@ -107,11 +109,12 @@ const useStyles = createStyles((theme, _params, getRef) => {
         [`& .${icon}`]: {
           color:
             theme.colors[theme.primaryColor][
-            theme.colorScheme === "dark" ? 5 : 7
+              theme.colorScheme === "dark" ? 5 : 7
             ],
         },
       },
     },
+
     user: {
       display: "block",
       width: "100%",
@@ -181,10 +184,18 @@ const routes = [
 function App() {
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
-  const [data, setData] = useState(['KOF', 'HEINEKEN','PEÑAFIEL','MONDELEZ','AGA','ECO'])
+  const [data, setData] = useState([
+    "KOF",
+    "HEINEKEN",
+    "PEÑAFIEL",
+    "MONDELEZ",
+    "AGA",
+    "ECO",
+  ]);
   const [opened, setOpened] = useState(false); // state of menu
   const location = useLocation();
   const [value, setValue] = useState();
+  const navigate = useNavigate();
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
   };
@@ -195,7 +206,7 @@ function App() {
     const storage = localStorage.getItem("ORG");
     if (storage == null) {
       localStorage.setItem("ORG", "KOF");
-      dispatch(addOrg())
+      dispatch(addOrg());
     }
   }, [location.pathname]);
 
@@ -255,21 +266,19 @@ function App() {
     </div>
   ));
   const dispatch = useDispatch();
-  const dt = useSelector((state) => state.organization)
+  const dt = useSelector((state) => state.organization);
 
   const saveOrganization = (ORG) => {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
-      dispatch(addOrg())
-      setOpened(false)
+      dispatch(addOrg());
+      setOpened(false);
     }
-  }  
+  };
   const initOrg = () => {
-    dt == []
-    ? console.log(dt)
-    : saveOrganization("KOF")
-  }
-    
+    dt == [] ? console.log(dt) : saveOrganization("KOF");
+  };
+
   return (
     <>
       <AppShell
@@ -366,7 +375,13 @@ function App() {
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
-              <Menu shadow="md" width={200} position={"right-end"} opened={opened} onChange={setOpened}>
+              <Menu
+                shadow="md"
+                width={200}
+                position={"right-end"}
+                opened={opened}
+                onChange={setOpened}
+              >
                 <Menu.Target>
                   <UnstyledButton className={classes.user}>
                     <div
@@ -479,37 +494,37 @@ function App() {
                       Cambiar de organización
                     </div>
                   </div>
-                  {
-                    data.map((nombre, index) => (
+                  {data.map((nombre, index) => (
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "10px 12px",
+                        alignItems: "center",
+                        gap: "10px",
+                        alignSelf: "stretch",
+                      }}
+                      key={index}
+                      onChange={setData}
+                    >
                       <div
                         style={{
                           display: "flex",
-                          padding: "10px 12px",
                           alignItems: "center",
                           gap: "10px",
-                          alignSelf: "stretch",
+                          flex: "100",
+                          fontSize: "14px",
+                          textDecorationColor: dt === nombre ? "#ec547c" : "",
+                          color: dt === nombre ? "#ec547c" : "",
+                          cursor: "pointer",
                         }}
-                        key={index}
-                        onChange={setData}
+                        onClick={() => {
+                          saveOrganization(nombre);
+                        }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                            flex: "100",
-                            fontSize: "14px",
-                            textDecorationColor: dt === nombre ? "#ec547c" : "",
-                            color: dt === nombre ? "#ec547c" : "",
-                            cursor:"pointer"
-                          }}
-                          onClick={() => { saveOrganization(nombre) }}
-                        >
-                          {nombre}
-                        </div>
+                        {nombre}
                       </div>
-                    ))
-                  }
+                    </div>
+                  ))}
                   <div
                     style={{
                       display: "flex",
@@ -551,7 +566,7 @@ function App() {
                       Sistema
                     </div>
                   </div>
-                  <div
+                  {/* <div
                     style={{
                       display: "flex",
                       padding: "10px 12px",
@@ -563,16 +578,16 @@ function App() {
                     <div
                       style={{
                         color: "#000005",
-                        // fontFamily: "DM Sans",
                         fontSize: "14px",
                         fontStyle: "normal",
                         fontWeight: 400,
                         lineHeight: "16px",
+                        cursor: "pointer",
                       }}
                     >
                       Mi cuenta
                     </div>
-                  </div>
+                  </div> */}
                   <div
                     style={{
                       display: "flex",
@@ -589,6 +604,9 @@ function App() {
                         gap: "10px",
                         flex: "100",
                       }}
+                      onClick={() => {
+                        navigate("/login");
+                      }}
                     >
                       <img
                         src={arrow2}
@@ -602,6 +620,7 @@ function App() {
                           fontStyle: "normal",
                           fontWeight: 400,
                           lineHeight: "16px",
+                          cursor: "pointer",
                         }}
                       >
                         Cerrar sesión

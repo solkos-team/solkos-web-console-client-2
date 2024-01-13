@@ -1,8 +1,33 @@
 import { Button } from "@mantine/core";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const correctCredentials = {
+    email: "prueba@gmail.com",
+    password: "123abc",
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    if (email === "prueba@gmail.com" && password === "123abc") {
+      navigate("/insights");
+      console.log("Attempting login...");
+    } else {
+      setErrorMessage("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+    }
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
     // General
     <>
@@ -128,10 +153,10 @@ export const Login = () => {
               </div>
               <input
                 type="text"
-                // value={searchValue}
-                // onChange={handleChange}
+                value={email}
+                onChange={handleEmailChange}
                 style={{
-                  color: "#ADBACC",
+                  color: "#000",
                   // fontFamily: "DM Sans",
                   fontSize: "14px",
                   fontStyle: "normal",
@@ -163,11 +188,11 @@ export const Login = () => {
                 Contraseña
               </div>
               <input
-                type="text"
-                // value={searchValue}
-                // onChange={handleChange}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 style={{
-                  color: "#ADBACC",
+                  color: "#000",
                   // fontFamily: "DM Sans",
                   fontSize: "14px",
                   fontStyle: "normal",
@@ -176,6 +201,17 @@ export const Login = () => {
                   width: 430,
                 }}
               />
+              {errorMessage && (
+                <div
+                  style={{
+                    color: "red",
+                    fontSize: "14px",
+                    marginTop: "8px",
+                  }}
+                >
+                  {errorMessage}
+                </div>
+              )}
               <div>
                 <Link to="/recover">
                   <div
@@ -198,6 +234,7 @@ export const Login = () => {
             </div>
             <Button
               style={{ background: "#ED5079", width: "440px", marginLeft: 10 }}
+              onClick={handleLogin}
             >
               Iniciar sesión
             </Button>
