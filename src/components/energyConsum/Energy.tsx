@@ -127,7 +127,7 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              $------
+              {coolersData?.cooler?.energy_cost == null || coolersData?.cooler?.energy_cost == undefined ? "Sin datos" : '$'+`${coolersData?.cooler?.energy_cost}`}
             </div>
           </div>
           <div
@@ -161,7 +161,7 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              ----- KW/h
+              {coolersData?.cooler?.energy_consumption == null || coolersData?.cooler?.energy_consumption == undefined ? "Sin datos" : `${coolersData?.cooler?.energy_consumption}`+`KW/h`}
             </div>
           </div>
           <div
@@ -195,7 +195,7 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              ------ KW/h
+              {coolersData?.cooler?.power_consumption_reference == null || coolersData?.cooler?.power_consumption_reference == undefined ? "Sin datos" : `${coolersData?.cooler?.power_consumption_reference}`+`KW/h`}
             </div>
           </div>
           <div
@@ -229,7 +229,7 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              ----- Kg/día
+              {coolersData?.cooler?.average_C02_emissions == null || coolersData?.cooler?.average_C02_emissions == undefined ? "Sin datos" : `${coolersData?.cooler?.average_C02_emissions}`+`Kg/día`}
             </div>
           </div>
         </div>

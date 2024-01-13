@@ -34,8 +34,7 @@ const Resume = ({ coolersData }) => {
   const urlImagen = coolersData?.cooler?.asset_url;
 
   validarExistenciaImagen(urlImagen);
-
-  console.log(coolersData?.cooler?.asset_url);
+  
   return (
     <>
       <br></br>
@@ -152,7 +151,7 @@ const Resume = ({ coolersData }) => {
                 lineHeight: "20px",
               }}
             >
-              {coolersData?.cooler?.outlet_name === ""
+              {coolersData?.cooler?.outlet_name === "" || coolersData?.cooler?.outlet_name == undefined
                 ? "Sin registro"
                 : coolersData?.cooler?.outlet_name}
             </div>
@@ -190,7 +189,7 @@ const Resume = ({ coolersData }) => {
                 lineHeight: "20px",
               }}
             >
-              {coolersData?.cooler?.outlet_address === ""
+              {coolersData?.cooler?.outlet_address === "" || coolersData?.cooler?.outlet_address == undefined
                 ? "Sin registro"
                 : coolersData?.cooler?.outlet_address}
             </div>
@@ -568,7 +567,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "20px",
                   }}
                 >
-                  {coolersData?.cooler?.serial_number === ""
+                  {coolersData?.cooler?.serial_number === "" || coolersData?.cooler?.serial_number == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.serial_number}
                 </div>
@@ -606,7 +605,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "20px",
                   }}
                 >
-                  {coolersData?.cooler?.device_id === ""
+                  {coolersData?.cooler?.device_id === "" || coolersData?.cooler?.device_id == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.device_id}
                 </div>
@@ -644,7 +643,7 @@ const Resume = ({ coolersData }) => {
                     lineHeight: "20px",
                   }}
                 >
-                  {coolersData?.cooler?.model_id === ""
+                  {coolersData?.cooler?.model_id === "" || coolersData?.cooler?.model_id == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.model_id}
                 </div>

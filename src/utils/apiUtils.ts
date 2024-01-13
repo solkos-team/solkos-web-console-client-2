@@ -195,26 +195,46 @@ export const fetchInsights = async (path) => {
   }
 };
 
-export const fetchUniversal = async (
-  componentURL,
-  data?,
-  setIsLoading?,
-  detailsID?
-) => {
+export const fetchUniversal = async (componentURL,data?,setIsLoading?,detailsID?,CRUD?) => {
   const url = `${baseUrl}/${componentURL}`;
-  detailsID ? url + "/" + detailsID : url;
+  detailsID ? url+'/'+detailsID : url
+  
   if (setIsLoading) {
     setIsLoading(!false);
   }
   const headers = {
     "Content-Type": "application/json",
   };
+  const cuerpo = {
+    method: CRUD ? CRUD : "POST",
+    headers,      
+    body: JSON.stringify(data),    
+  }  
   try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(url,cuerpo );
+
+    if (!response.ok) {
+      throw new Error("Error fetching alerts data");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchUniversalDetails = async (componentURL,detailsID?,CRUD?) => {
+  const url = `${baseUrl}/${componentURL}/${detailsID}`;  
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const cuerpo = {
+    method: CRUD ? CRUD : "POST",
+    headers,
+  }
+  try {
+    const response = await fetch(url,cuerpo );
 
     if (!response.ok) {
       throw new Error("Error fetching alerts data");

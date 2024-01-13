@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BarChart, Card, Title } from "@tremor/react";
+import { BarChart, Card, Title, LineChart } from "@tremor/react";
 import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 
 const EconomicDetail = ({ coolersData }) => {
+  console.log(coolersData)
   const formatCreatedAt = (createdAt) => {
     const date = new Date(createdAt);
     const formattedDate = date.toLocaleDateString("es-ES", {
@@ -22,6 +23,45 @@ const EconomicDetail = ({ coolersData }) => {
     { name: "Category B", value: 20 },
     // ... otros datos
   ];
+  // data de ejemplo para grafica
+  const chartdata4 = [
+    {
+      date: "Jan 23",
+      Running: 167,
+    },
+    {
+      date: "Feb 23",
+      Running: 125,
+    },
+    {
+      date: "Mar 23",
+      Running: 156,
+    },
+    {
+      date: "Apr 23",
+      Running: 165,
+    },
+    {
+      date: "May 23",
+      Running: 153,
+    },
+    {
+      date: "Jun 23",
+      Running: 124,
+    },
+    {
+      date: "Jul 23",
+      Running: 164,
+    },
+    {
+      date: "Aug 23",
+      Running: 123,
+    },
+    {
+      date: "Sep 23",
+      Running: 132,
+    },
+  ];
 
   const valueFormatter = (number) => {
     console.log("Valor sin formato:", number);
@@ -32,10 +72,6 @@ const EconomicDetail = ({ coolersData }) => {
     return formattedValue;
   };
 
-  console.log("Chart data:", chartData);
-  console.log("Value formatter function:", valueFormatter);
-
-  // ***************
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
 
   const handleClick = () => {
@@ -57,7 +93,7 @@ const EconomicDetail = ({ coolersData }) => {
           gap: "16px",
           // alignSelf: "stretch",
           // width : "138vh",
-          
+
         }}
       >
         <div
@@ -66,7 +102,7 @@ const EconomicDetail = ({ coolersData }) => {
             alignItems: "flex-start",
             gap: "16px",
             alignSelf: "stretch",
-            width : "100%",            
+            width: "100%",
           }}
         >
           {/* Inversion total */}
@@ -81,7 +117,7 @@ const EconomicDetail = ({ coolersData }) => {
               alignSelf: "stretch",
               borderRadius: "8px",
               border: "1px solid #88888B",
-              width : "100%"
+              width: "100%"
             }}
           >
             <div
@@ -139,7 +175,7 @@ const EconomicDetail = ({ coolersData }) => {
                   alignItems: "flex-end",
                   alignContent: "flex-end",
                   gap: "12px",
-                  flexWrap: "wrap",          
+                  flexWrap: "wrap",
                 }}
               >
                 <div
@@ -152,7 +188,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $----
+                  {coolersData?.cooler?.total_ownership_expense == null || coolersData?.cooler?.total_ownership_expense == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.total_ownership_expense}`}
                 </div>
                 <div
                   style={{
@@ -223,7 +259,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $------
+                  {coolersData?.cooler?.sale_price == null || coolersData?.cooler?.sale_price == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.sale_price}`}
                 </div>
               </div>
               <div
@@ -258,7 +294,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  $-----
+                  {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.total_expense_service}`}
                 </div>
               </div>
             </div>
@@ -276,7 +312,7 @@ const EconomicDetail = ({ coolersData }) => {
               borderRadius: "8px",
               border: "1px solid #88888B",
               width: "100%",
-              
+
             }}
           >
             <div
@@ -342,7 +378,7 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "normal",
                     }}
                   >
-                    $-----
+                    {coolersData?.cooler?.present_value_of_depreciation == null || coolersData?.cooler?.present_value_of_depreciation == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.present_value_of_depreciation}`}
                   </div>
                   <div
                     style={{
@@ -391,7 +427,7 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "14px",
                     }}
                   >
-                    $-----
+                    {coolersData?.cooler?.annual_decrement == null || coolersData?.cooler?.annual_decrement == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.annual_decrement}`}
                   </div>
                   <div
                     style={{
@@ -465,7 +501,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  -----
+                  {coolersData?.cooler?.year_of_production == null || coolersData?.cooler?.year_of_production == undefined ? "Sin datos" : `${coolersData?.cooler?.year_of_production}`}
                 </div>
               </div>
               <div
@@ -714,7 +750,7 @@ const EconomicDetail = ({ coolersData }) => {
             // alignSelf: "stretch",
             borderRadius: "8px",
             border: "1px solid #88888B",
-            width : "95%"
+            width: "95%"
           }}
         >
           <div
@@ -785,7 +821,7 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "normal",
                 }}
               >
-                $-----
+                {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.total_expense_service}`}
               </div>
               <div
                 style={{
@@ -879,7 +915,24 @@ const EconomicDetail = ({ coolersData }) => {
                 }}
               >
                 <Tabs.Panel value="first" pt="xs">
-                  <div></div>
+                  <div style={{ position: 'relative', width: '50rem',height:"30rem", paddingBottom: '250px'}}>
+                    <Card style={{                      
+                      width : "100%",
+                      height:"100%"                    
+                    }}>
+
+                      <Title>Average BPM</Title>
+                      {/* <LineChart
+                        className="h-72 mt-4"
+                        data={chartdata4}
+                        index="date"
+                        categories={["Running"]}
+                        colors={["blue"]}
+                        yAxisWidth={30}                        
+                        style={{width:"100%",height:"20%"}}
+                      /> */}
+                    </Card>
+                  </div>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="second" pt="xs">
@@ -985,7 +1038,7 @@ const EconomicDetail = ({ coolersData }) => {
                                 boxShadow:
                                   "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
                                 width: "100%",
-                                backgroundColor : "#FFF"
+                                backgroundColor: "#FFF"
                               }}
                             >
                               <div
@@ -1096,10 +1149,10 @@ const EconomicDetail = ({ coolersData }) => {
                       (order) =>
                         order.service_id === "1003" && order.status === "D,D"
                     ).length === 0 && (
-                      <p style={{ marginLeft: 90, fontWeight: "bold" }}>
-                        Sin órdenes de movimiento
-                      </p>
-                    )}
+                        <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                          Sin órdenes de movimiento
+                        </p>
+                      )}
                   </div>
                 )}
               </div>
@@ -1296,10 +1349,10 @@ const EconomicDetail = ({ coolersData }) => {
                         order.service_id === "1002" ||
                         (order.service_id === "1005" && order.status === "D,D")
                     ).length === 0 && (
-                      <p style={{ marginLeft: 90, fontWeight: "bold" }}>
-                        Sin órdenes de servicio
-                      </p>
-                    )}
+                        <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                          Sin órdenes de servicio
+                        </p>
+                      )}
                   </div>
                 )}
               </div>

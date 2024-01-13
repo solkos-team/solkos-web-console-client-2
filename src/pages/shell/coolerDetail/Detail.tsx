@@ -5,6 +5,7 @@ import EconomicDetail from "../../../components/economicDetail/EconomicDetail";
 import Energy from "../../../components/energyConsum";
 import { Tabs } from "@mantine/core";
 import { useParams } from "react-router-dom";
+import { fetchUniversal, fetchUniversalDetails } from "../../../utils/apiUtils";
 
 export default function CoolerDetail() {
   interface CoolerData {
@@ -37,6 +38,7 @@ export default function CoolerDetail() {
   };
 
   const fetchCoolersFromAPI = async (serial_number) => {
+    console.log(serial_number)
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
 
     const headers = {
@@ -60,17 +62,17 @@ export default function CoolerDetail() {
       throw error;
     }
   };
-
+  
+  const fetchData = async () => {
+    try {
+      // const data = await fetchCoolersFromAPI(serial_number);
+      const data = await fetchUniversalDetails("coolers",serial_number,"GET");
+      setCoolersData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchCoolersFromAPI(serial_number);
-        setCoolersData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -79,8 +81,7 @@ export default function CoolerDetail() {
   useEffect(() => {
     console.log(`Serial number from the route: ${serial_number}`);
   }, [serial_number, coolersData]);
-
-  console.log(coolersData?.cooler?.outlet_name);
+  
   return (
     <div>
       <PageFilter path="clt"/>
@@ -374,7 +375,7 @@ export default function CoolerDetail() {
                     lineHeight: "14px",
                   }}
                 >
-                  {coolersData?.cooler?.region === ""
+                  {coolersData?.cooler?.region === "" || coolersData?.cooler?.region == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.region}
                 </div>
@@ -424,7 +425,7 @@ export default function CoolerDetail() {
                     lineHeight: "14px",
                   }}
                 >
-                  {coolersData?.cooler?.route === ""
+                  {coolersData?.cooler?.route === "" || coolersData?.cooler?.route == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.route}
                 </div>
@@ -473,7 +474,7 @@ export default function CoolerDetail() {
                     lineHeight: "14px",
                   }}
                 >
-                  {coolersData?.cooler?.zone === ""
+                  {coolersData?.cooler?.zone === "" || coolersData?.cooler?.zone == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.zone}
                 </div>

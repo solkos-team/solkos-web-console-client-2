@@ -30,10 +30,17 @@ export default function (props) {
   ]);
   const [data, setData] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
-  const [filterVisibility, setFilterVisibility] = useState(true);
+  const [filterVisibility, setFilterVisibility] = useState<boolean>(true);
   const [customer,setCustomer] = useState(dto)
   const navigate = useNavigate();
-
+  const checkVisibilityPath = () => {
+    const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
+    if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {   
+      setFilterVisibility(false);
+    }else{
+      setFilterVisibility(true)
+    }
+  }
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
   };
@@ -49,19 +56,17 @@ export default function (props) {
     setIndex(0);
     getPaths()
     setValue("");
-    setFilterVisibility(true)
+    checkVisibilityPath();
     localStorage.setItem("PATH","")
   }
   const getPaths = async (dataLocalStorage?) => {  
-    dataLocalStorage === undefined ? dataLocalStorage = [] : dataLocalStorage
+    dataLocalStorage === undefined ? dataLocalStorage = [] : dataLocalStorage  
     if (data.length < 4) {      
       try {
         const data = await fetchPath(dataLocalStorage);
         //dataZone.push(data)      
         dataZone.unshift(data); // solucion path desde api     
-        if(dataLocalStorage.length<3) {
-          setFilterVisibility(true)
-        }
+        checkVisibilityPath()
       } catch (error) {
         console.log("Error fetching path", error);
       }
@@ -98,17 +103,14 @@ export default function (props) {
   }, [statusDelete]);
 
   const ventanaEmergenteRef = useRef<HTMLDivElement | null>(null);
-
+  
   useEffect(() => {
     verSelectData(value);
     dispatch(addPath());
     const storedTodos = localStorage.getItem("PATH");
     const todoArr = storedTodos !== null ? JSON.parse(storedTodos || "[]") : [];
-    setData(todoArr);
-    const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
-    if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
-      setFilterVisibility(false);
-    }
+    setData(todoArr);    
+    checkVisibilityPath()    
     const handleCloseOnOutsideClick = (event) => {
       if (
         mostrarVentanaEmergente &&
@@ -150,7 +152,6 @@ export default function (props) {
     }
   };  
   const deleteFilter = (i) => {
-    console.log(i)
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
     dataLocalStorage.splice(i, 1);
     localStorage.setItem("PATH", JSON.stringify(dataLocalStorage));
@@ -332,7 +333,7 @@ export default function (props) {
 
           {/* ---------------------- */}
           {filterVisibility ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center"}}>
               <div
                 style={{
                   display: "flex",

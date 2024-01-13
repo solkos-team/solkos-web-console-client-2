@@ -33,9 +33,6 @@ export default function Coolers() {
   const dto = useSelector((state:any)=>state.organization)
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-  const [coolersDataDeatil, setCoolersDataDeatil] = useState<
-    CoolerDetail[] | null
-  >(null);
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,23 +75,6 @@ export default function Coolers() {
 
     fetchData();
   }, [dt,dto]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (coolersData && coolersData.length > 0) {
-          // const data = await fetchCoolerDetails(coolersData[0].serial_number);
-          const data = await fetchUniversal('coolers',coolersData[0].serial_number);
-          setCoolersDataDeatil(data);
-          setIsLoading(false); // Set isLoading to false after fetching cooler details
-        }
-      } catch (error) {
-        console.error("Error fetching cooler details:", error);
-      }
-    };
-
-    fetchData();
-  }, [coolersData]);
 
   const filteredCoolers = coolersData
     ? filterCoolers(coolersData, searchValue)
@@ -308,7 +288,7 @@ export default function Coolers() {
             <div style={{}}>
               <div>
                 <div>
-                  {isLoading == true || filteredCoolers.length === 0 ? (
+                  {isLoading == true ? (
                     <div
                       style={{
                         display: "flex",
