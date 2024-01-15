@@ -46,7 +46,20 @@ export default function Users() {
     });
     return filteredData;
   };
-  const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
+  const filterUsersDataDownload = (data) => {
+    !data ? [] : data
+    return data.map((user) => ({
+      Nombre: user.name,
+      Email: user.email,
+      Cliente: user.customer,
+      Path: user.path.toString(),
+      // Fecha_Actualizacion: user.updated_at,
+      // Fecha_Creacion: user.created_at
+    }))
+  }
+  const filteredUsers = dataUsers
+    ? filterCoolers(dataUsers, searchValue)
+    : [];
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
@@ -200,7 +213,7 @@ export default function Users() {
                 Colaboradores
               </div>
               <div style={{ marginLeft: 480 }}>
-                <ExportToExcel datos={dataUsers} nombre={"Users"} />
+                <ExportToExcel datos={filterUsersDataDownload(dataUsers)} nombre={"Users"} />
               </div>
               <Button style={{ background: "#ED5079" }} onClick={openDrawer2}>
                 Nuevo colaborador
@@ -325,99 +338,100 @@ export default function Users() {
                       overflowY: "auto",
                     }}
                   >
-                    {filteredUsers
-                      .slice(firstIndex, lastIndex)
-                      .map((user, index) => (
-                        <TableRow key={index} style={{ userSelect: "none" }}>
-                          <TableCell
-                            style={{
-                              paddingRight: "30px",
-                              fontSize: "15px",
-                              textAlign: "left",
-                              width: "8rem",
-                            }}
-                          >
-                            {user.name}
-                          </TableCell>
-                          <TableCell
-                            style={{
-                              paddingRight: "30px",
-                              fontSize: "15px",
-                              textAlign: "left",
-                              width: "8rem",
-                            }}
-                          >
-                            {user.email}
-                          </TableCell>
-                          <TableCell
-                            style={{
-                              paddingLeft: "2.5rem",
-                              fontSize: "15px",
-                              textAlign: "left",
-                              width: "150px",
-                            }}
-                          >
-                            {user.customer}
-                          </TableCell>
-                          <TableCell
-                            style={{
-                              paddingRight: "30px",
-                              fontSize: "15px",
-                              textAlign: "left",
-                              width: "150px",
-                            }}
-                          >
-                            {user.path}
-                          </TableCell>
-                          <TableCell
-                            style={{
-                              paddingRight: "50px",
-                              fontSize: "15px",
-                              width: "180px",
-                              textAlign: "left",
-                              cursor: "pointer",
-                            }}
-                            onClick={openDrawer}
-                          >
-                            <div
+                    {
+                      filteredUsers
+                        .slice(firstIndex, lastIndex)
+                        .map((user, index) => (
+                          <TableRow key={index} style={{ userSelect: "none" }}>
+                            <TableCell
                               style={{
-                                display: "flex",
-                                justifyContent: "flex-end",
-                                alignItems: "center",
-                                gap: "4px",
-                                flex: 100,
-                                height: "40px",
+                                paddingRight: "30px",
+                                fontSize: "15px",
+                                textAlign: "left",
+                                width: "8rem",
                               }}
+                            >
+                              {user.name}
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                paddingRight: "30px",
+                                fontSize: "15px",
+                                textAlign: "left",
+                                width: "8rem",
+                              }}
+                            >
+                              {user.email}
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                paddingLeft: "2.5rem",
+                                fontSize: "15px",
+                                textAlign: "left",
+                                width: "150px",
+                              }}
+                            >
+                              {user.customer}
+                            </TableCell>
+                            <TableCell
+
+                              style={{
+                                paddingRight: "30px",
+                                fontSize: "15px",
+                                textAlign: "left",
+                                width: "150px",
+                              }}
+                            >
+                              {user.path}
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                paddingRight: "50px",
+                                fontSize: "15px",
+                                width: "180px",
+                                textAlign: "left",
+                                cursor: "pointer",
+                              }}
+                              onClick={openDrawer}
                             >
                               <div
                                 style={{
-                                  color: "#3E83FF",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "20px",
                                   display: "flex",
-                                  marginRight: "90px",
+                                  justifyContent: "flex-end",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  flex: 100,
+                                  height: "40px",
                                 }}
                               >
-                                Ver más{" "}
-                                <IconArrowRight
+                                <div
                                   style={{
                                     color: "#3E83FF",
-                                    width: "1.0rem",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                    display: "flex",
+                                    marginRight: "90px",
                                   }}
-                                />
+                                >
+                                  Ver más{" "}
+                                  <IconArrowRight
+                                    style={{
+                                      color: "#3E83FF",
+                                      width: "1.0rem",
+                                    }}
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <DrawerUsers
-                              isOpen={isDrawerOpen}
-                              onClose={closeDrawer}
-                            >
-                              {""}
-                            </DrawerUsers>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                              <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer}>
+                                {""}
+                              </DrawerUsers>
+                            </TableCell>
+                          </TableRow>
+
+                        ))
+                    }
                     <DrawerNewUser
                       isOpen={isDrawerOpen2}
                       onClose={closeDrawer2}
