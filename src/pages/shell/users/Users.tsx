@@ -22,32 +22,31 @@ import { PaginationComponent } from "../../../components/Pagination/PaginationCo
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([])
+  const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([]);
   const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-  const dto = useSelector((state: any) => state.organization)
-  const dt = useSelector((state: any) => state.works)
+  const dto = useSelector((state: any) => state.organization);
+  const dt = useSelector((state: any) => state.works);
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
 
   const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);    
+    setSearchValue(event.target.value);
   };
   const filterCoolers = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
-      const searchString = searchQuery?.toLowerCase() || ""
-      const codeUsersName = item?.name?.toLowerCase() || ""
+      const searchString = searchQuery?.toLowerCase() || "";
+      const codeUsersName = item?.name?.toLowerCase() || "";
       const codeUsersEmail = item?.email?.toLowerCase();
       return (
-        codeUsersName.includes(searchString) || codeUsersEmail.includes(searchString)
+        codeUsersName.includes(searchString) ||
+        codeUsersEmail.includes(searchString)
       );
     });
     return filteredData;
   };
-  const filteredUsers = dataUsers
-    ? filterCoolers(dataUsers, searchValue)
-    : [];
+  const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
@@ -57,7 +56,6 @@ export default function Users() {
       setIsDrawerOpen(false);
     }, 5);
   };
-
 
   const openDrawer2 = () => {
     setIsDrawerOpen2(true);
@@ -75,23 +73,26 @@ export default function Users() {
     customer: dto,
     page_number: 1,
     page_size: 10,
-    path: pathVerify()
-  }
+    path: pathVerify(),
+  };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("users", body)
-      setDataUsers(data)
+      const data = await fetchUniversal("users", body);
+      setDataUsers(data);
+    } catch (error) {
+      console.log("Error", error);
     }
-    catch (error) {
-      console.log("Error", error)
-    }
-  }
+  };
+  const handleReloadUsers = () => {
+    fetchData();
+  };
+
   useEffect(() => {
-    fetchData()
+    fetchData();
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [dt,dto]);
+  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina]);
   return (
     <div>
       <PageFilter />
@@ -324,11 +325,10 @@ export default function Users() {
                       overflowY: "auto",
                     }}
                   >
-                    {
-                      filteredUsers
+                    {filteredUsers
                       .slice(firstIndex, lastIndex)
                       .map((user, index) => (
-                        <TableRow key={index} style={{userSelect: "none"}}>
+                        <TableRow key={index} style={{ userSelect: "none" }}>
                           <TableCell
                             style={{
                               paddingRight: "30px",
@@ -360,7 +360,6 @@ export default function Users() {
                             {user.customer}
                           </TableCell>
                           <TableCell
-
                             style={{
                               paddingRight: "30px",
                               fontSize: "15px",
@@ -410,17 +409,19 @@ export default function Users() {
                                 />
                               </div>
                             </div>
-                            <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer}>
+                            <DrawerUsers
+                              isOpen={isDrawerOpen}
+                              onClose={closeDrawer}
+                            >
                               {""}
                             </DrawerUsers>
                           </TableCell>
                         </TableRow>
-
-                      ))
-                    }
+                      ))}
                     <DrawerNewUser
                       isOpen={isDrawerOpen2}
                       onClose={closeDrawer2}
+                      reloadUsers={handleReloadUsers}
                     >
                       {""}
                     </DrawerNewUser>

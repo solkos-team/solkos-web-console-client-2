@@ -9,10 +9,6 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const correctCredentials = {
-    email: "prueba@gmail.com",
-    password: "123abc",
-  };
 
   const handleLogin = () => {
     const body = {

@@ -1,14 +1,46 @@
 import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from "@mantine/core";
+import { fetchUniversal } from "../../utils/apiUtils";
+import { useState, useEffect } from "react";
 
-export default function DrawerNewUser({ isOpen, onClose, children }) {
+export default function DrawerNewUser({
+  isOpen,
+  onClose,
+  reloadUsers,
+  children,
+}) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const dt = useSelector((state: any) => state.works);
   const pathVerify = () => {
     return dt.length === 0 ? "[]" : JSON.parse(dt);
+  };
+
+  const handleLogin = () => {
+    const body = {
+      customer: "KOF",
+      email: email,
+      name: name,
+      password: "123abc",
+      path: ["REGION"],
+    };
+    const fetchData = async () => {
+      try {
+        const data = await fetchUniversal("users/add", body);
+        console.log(data);
+        onClose();
+      } catch (error) {
+        console.error("Error fetching :", error);
+      }
+    };
+
+    fetchData();
   };
 
   return (
@@ -94,7 +126,102 @@ export default function DrawerNewUser({ isOpen, onClose, children }) {
           </div>
         </div>
       </div>
-      {children}
+      <div
+        style={{
+          display: "flex",
+          width: "450px",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "32px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            width: "450px",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            gap: "15px",
+          }}
+        >
+          <div
+            style={{
+              color: "#3A3A3F",
+              // fontFamily: "DM Sans",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 700,
+              lineHeight: "normal",
+              marginLeft: -120,
+            }}
+          >
+            Nombre
+          </div>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{
+              color: "#000",
+              // fontFamily: "DM Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "28px",
+              width: 430,
+              marginLeft: 250,
+            }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: "450px",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            gap: "15px",
+          }}
+        >
+          <div
+            style={{
+              color: "#3A3A3F",
+              // fontFamily: "DM Sans",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 700,
+              lineHeight: "normal",
+              marginLeft: -130,
+            }}
+          >
+            Correo
+          </div>
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              color: "#000",
+              // fontFamily: "DM Sans",
+              fontSize: "14px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "28px",
+              width: 430,
+              marginLeft: 250,
+            }}
+          />
+        </div>
+        <br></br>
+        <Button
+          style={{ background: "#ED5079", width: "440px", marginLeft: 260 }}
+          onClick={handleLogin}
+        >
+          Crear usuario
+        </Button>
+      </div>
     </div>
   );
 }
