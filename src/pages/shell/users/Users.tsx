@@ -14,10 +14,40 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
+import { fetchUniversal } from "../../../utils/apiUtils";
+import { useSelector } from "react-redux";
+import { UsersInterfaces } from "./UsersInterfaces";
+import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([])
+  const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [datosPorPagina, setNumero] = useState(50);
+  const dto = useSelector((state: any) => state.organization)
+  const dt = useSelector((state: any) => state.works)
+  const lastIndex = currentPage * Number(datosPorPagina);
+  const firstIndex = lastIndex - Number(datosPorPagina);
 
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);    
+  };
+  const filterCoolers = (data, searchQuery) => {
+    const filteredData = data.filter((item) => {
+      const searchString = searchQuery?.toLowerCase() || ""
+      const codeUsersName = item?.name?.toLowerCase() || ""
+      const codeUsersEmail = item?.email?.toLowerCase();
+      return (
+        codeUsersName.includes(searchString) || codeUsersEmail.includes(searchString)
+      );
+    });
+    return filteredData;
+  };
+  const filteredUsers = dataUsers
+    ? filterCoolers(dataUsers, searchValue)
+    : [];
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
@@ -28,7 +58,6 @@ export default function Users() {
     }, 5);
   };
 
-  const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
 
   const openDrawer2 = () => {
     setIsDrawerOpen2(true);
@@ -39,12 +68,30 @@ export default function Users() {
       setIsDrawerOpen2(false);
     }, 5);
   };
-
+  const pathVerify = () => {
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+  const body = {
+    customer: dto,
+    page_number: 1,
+    page_size: 10,
+    path: pathVerify()
+  }
+  const fetchData = async () => {
+    try {
+      const data = await fetchUniversal("users", body)
+      setDataUsers(data)
+    }
+    catch (error) {
+      console.log("Error", error)
+    }
+  }
   useEffect(() => {
+    fetchData()
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [dt,dto]);
   return (
     <div>
       <PageFilter />
@@ -152,7 +199,7 @@ export default function Users() {
                 Colaboradores
               </div>
               <div style={{ marginLeft: 480 }}>
-                <ExportToExcel datos={""} nombre={"Users"} />
+                <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
               <Button style={{ background: "#ED5079" }} onClick={openDrawer2}>
                 Nuevo colaborador
@@ -193,7 +240,8 @@ export default function Users() {
                   }}
                 >
                   <TextInput
-                    value={""}
+                    value={searchValue}
+                    onChange={handleSearchChange}
                     type="text"
                     placeholder="Busca por cualquier campo "
                     style={{
@@ -271,143 +319,105 @@ export default function Users() {
                   <TableBody
                     style={{
                       display: "block",
-                      height: "450px",
+                      height: "100%",
                       minWidth: "900px",
                       overflowY: "auto",
                     }}
                   >
-                    <TableCell
-                      style={{
-                        paddingRight: "30px",
-                        fontSize: "15px",
-                        textAlign: "left",
-                        width: "150px",
-                      }}
-                    >
-                      Mayra Barrón
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        paddingRight: "30px",
-                        fontSize: "15px",
-                        textAlign: "left",
-                        width: "150px",
-                      }}
-                    >
-                      mayrabarron91@gmail.com
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        paddingLeft: "39px",
-                        fontSize: "15px",
-                        width: "180px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "8px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "4px",
-                          borderRadius: "2px",
-                          background: "#FCCFD9",
-                          width: 50,
-                        }}
-                      >
-                        <div
-                          style={{
-                            color: "#ED5079",
-                            // fontFamily: "Space Mono",
-                            fontSize: "12px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "14px",
-                          }}
-                        >
-                          IMBERA
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        paddingRight: "50px",
-                        fontSize: "15px",
-                        width: "180px",
-                        textAlign: "left",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "8px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "4px",
-                          borderRadius: "2px",
-                          background: "#D4DAE3",
-                          width: 50,
-                        }}
-                      >
-                        <div
-                          style={{
-                            color: "#313A49",
-                            // fontFamily: "Space Mono",
-                            fontSize: "12px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "14px",
-                          }}
-                        >
-                          CLIENTE
-                        </div>
-                      </div>
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        paddingRight: "50px",
-                        fontSize: "15px",
-                        width: "180px",
-                        textAlign: "left",
-                        cursor: "pointer",
-                      }}
-                      onClick={openDrawer}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "flex-end",
-                          alignItems: "center",
-                          gap: "4px",
-                          flex: 100,
-                          height: "40px",
-                        }}
-                      >
-                        <div
-                          style={{
-                            color: "#3E83FF",
-                            fontSize: "14px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "20px",
-                            display: "flex",
-                            marginRight: "90px",
-                          }}
-                        >
-                          Ver más{" "}
-                          <IconArrowRight
+                    {
+                      filteredUsers
+                      .slice(firstIndex, lastIndex)
+                      .map((user, index) => (
+                        <TableRow key={index} style={{userSelect: "none"}}>
+                          <TableCell
                             style={{
-                              color: "#3E83FF",
-                              width: "1.0rem",
+                              paddingRight: "30px",
+                              fontSize: "15px",
+                              textAlign: "left",
+                              width: "8rem",
                             }}
-                          />
-                        </div>
-                      </div>
-                      <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer}>
-                        {""}
-                      </DrawerUsers>
-                    </TableCell>
+                          >
+                            {user.name}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              paddingRight: "30px",
+                              fontSize: "15px",
+                              textAlign: "left",
+                              width: "8rem",
+                            }}
+                          >
+                            {user.email}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              paddingLeft: "2.5rem",
+                              fontSize: "15px",
+                              textAlign: "left",
+                              width: "150px",
+                            }}
+                          >
+                            {user.customer}
+                          </TableCell>
+                          <TableCell
+
+                            style={{
+                              paddingRight: "30px",
+                              fontSize: "15px",
+                              textAlign: "left",
+                              width: "150px",
+                            }}
+                          >
+                            {user.path}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              paddingRight: "50px",
+                              fontSize: "15px",
+                              width: "180px",
+                              textAlign: "left",
+                              cursor: "pointer",
+                            }}
+                            onClick={openDrawer}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                alignItems: "center",
+                                gap: "4px",
+                                flex: 100,
+                                height: "40px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  color: "#3E83FF",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "20px",
+                                  display: "flex",
+                                  marginRight: "90px",
+                                }}
+                              >
+                                Ver más{" "}
+                                <IconArrowRight
+                                  style={{
+                                    color: "#3E83FF",
+                                    width: "1.0rem",
+                                  }}
+                                />
+                              </div>
+                            </div>
+                            <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer}>
+                              {""}
+                            </DrawerUsers>
+                          </TableCell>
+                        </TableRow>
+
+                      ))
+                    }
                     <DrawerNewUser
                       isOpen={isDrawerOpen2}
                       onClose={closeDrawer2}
@@ -416,6 +426,12 @@ export default function Users() {
                     </DrawerNewUser>
                   </TableBody>
                 </Table>
+                <PaginationComponent
+                  accion={setCurrentPage}
+                  totalDatos={dataUsers.length}
+                  datosPorPagina={datosPorPagina}
+                  numero={setNumero}
+                />
               </Card>
             </div>
           </div>

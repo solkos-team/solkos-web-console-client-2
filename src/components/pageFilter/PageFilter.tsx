@@ -11,8 +11,7 @@ import {
 import { Text, Popover, Select } from "@mantine/core";
 import { useDispatch,useSelector } from "react-redux";
 import { addPath } from "../../app/works";
-import { fetchPath } from "./getPath";
-import { useStorage } from "reactfire";
+import { fetchUniversal } from "../../utils/apiUtils";
 
 export default function (props) {
   const dto = useSelector((state:any)=>state.organization)
@@ -61,9 +60,10 @@ export default function (props) {
   }
   const getPaths = async (dataLocalStorage?) => {  
     dataLocalStorage === undefined ? dataLocalStorage = [] : dataLocalStorage  
+    const body = {customer: dto,path: dataLocalStorage };
     if (data.length < 4) {      
       try {
-        const data = await fetchPath(dataLocalStorage);
+        const data = await fetchUniversal('paths',body);
         //dataZone.push(data)      
         dataZone.unshift(data); // solucion path desde api     
         checkVisibilityPath()
