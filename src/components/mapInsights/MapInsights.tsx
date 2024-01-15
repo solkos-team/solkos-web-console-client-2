@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
-import { IconMap, IconMap2 } from "@tabler/icons-react";
+import { IconMap } from "@tabler/icons-react";
 
-const MapComponent = ({ latitude, longitude }) => {
+const MapInsightsComponent = ({ markers }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const [map, setMap] = useState(null);
 
@@ -32,25 +32,23 @@ const MapComponent = ({ latitude, longitude }) => {
 
     const iconUrl = "../../sampleData/filled.png";
 
-    new maps.Marker({
-      position: { lat: latitude, lng: longitude },
-      map,
-      title: "Mi Marcador Fijo",
-      icon: {
-        url: iconUrl,
-        scaledSize: new maps.Size(32, 32),
-      },
+    markers.forEach(({ latitude, longitude }, index) => {
+      new maps.Marker({
+        position: { lat: latitude, lng: longitude },
+        map,
+        title: `Marcador ${index + 1}`,
+        icon: {
+          url: iconUrl,
+          scaledSize: new maps.Size(32, 32),
+        },
+      });
     });
   };
-
-  if (!googleMapsLoaded) {
-    return <div>Error al cargar Google Maps</div>;
-  }
 
   const openGoogleMaps = () => {
     //@ts-ignore
     if (window.google && window.google.maps) {
-      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      const url = `https://www.google.com/maps/search/?api=1&query=${markers[0].latitude},${markers[0].longitude}`;
       window.open(url, "_blank");
     } else {
       console.error("La API de Google Maps no se ha cargado completamente.");
@@ -77,7 +75,11 @@ const MapComponent = ({ latitude, longitude }) => {
         bootstrapURLKeys={{
           key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
         }}
-        center={{ lat: latitude, lng: longitude }}
+        center={
+          markers.length > 0
+            ? { lat: markers[0].latitude, lng: markers[0].longitude }
+            : { lat: 0, lng: 0 }
+        }
         defaultZoom={20}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
@@ -103,4 +105,4 @@ const MapComponent = ({ latitude, longitude }) => {
   );
 };
 
-export default MapComponent;
+export default MapInsightsComponent;

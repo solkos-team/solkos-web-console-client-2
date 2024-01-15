@@ -55,7 +55,7 @@ export const fetchCoolersDrawer = async (
     class: "OPE",
     algorithm: [selectedAlgorithm],
     path: path,
-    page_size: 50000,
+    page_size: 1000,
     page_number: 1,
     outlet_id: id,
   };
@@ -195,10 +195,16 @@ export const fetchInsights = async (path) => {
   }
 };
 
-export const fetchUniversal = async (componentURL,data?,setIsLoading?,detailsID?,CRUD?) => {
+export const fetchUniversal = async (
+  componentURL,
+  data?,
+  setIsLoading?,
+  detailsID?,
+  CRUD?
+) => {
   const url = `${baseUrl}/${componentURL}`;
-  detailsID ? url+'/'+detailsID : url
-  
+  detailsID ? url + "/" + detailsID : url;
+
   if (setIsLoading) {
     setIsLoading(!false);
   }
@@ -207,11 +213,11 @@ export const fetchUniversal = async (componentURL,data?,setIsLoading?,detailsID?
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
-    headers,      
-    body: JSON.stringify(data),    
-  }  
+    headers,
+    body: JSON.stringify(data),
+  };
   try {
-    const response = await fetch(url,cuerpo );
+    const response = await fetch(url, cuerpo);
 
     if (!response.ok) {
       throw new Error("Error fetching alerts data");
@@ -224,17 +230,21 @@ export const fetchUniversal = async (componentURL,data?,setIsLoading?,detailsID?
   }
 };
 
-export const fetchUniversalDetails = async (componentURL,detailsID?,CRUD?) => {
-  const url = `${baseUrl}/${componentURL}/${detailsID}`;  
+export const fetchUniversalDetails = async (
+  componentURL,
+  detailsID?,
+  CRUD?
+) => {
+  const url = `${baseUrl}/${componentURL}/${detailsID}`;
   const headers = {
     "Content-Type": "application/json",
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
     headers,
-  }
+  };
   try {
-    const response = await fetch(url,cuerpo );
+    const response = await fetch(url, cuerpo);
 
     if (!response.ok) {
       throw new Error("Error fetching alerts data");

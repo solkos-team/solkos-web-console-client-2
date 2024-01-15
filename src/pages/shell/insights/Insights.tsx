@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { fetchInsights,fetchUniversal } from "../../../utils/apiUtils";
+import { fetchInsights, fetchUniversal } from "../../../utils/apiUtils";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import MapInsightsComponent from "../../../components/mapInsights";
 
 export default function Insights() {
   interface Algorithm {
@@ -27,6 +28,15 @@ export default function Insights() {
       level: string;
       total: number;
       algorithms: Algorithm[];
+    };
+    DATA: {
+      coolers_total: string;
+      routes_total: string;
+      operativ_u_total: string;
+      region_total: string;
+      zone_total: string;
+      coolers_data: string;
+      coolers_no_data: string;
     };
   }
 
@@ -58,15 +68,16 @@ export default function Insights() {
   };
 
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state:any)=>state.organization)
+  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = {customer: dto, path: pathVerify()}
+  const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal('insights',body);
+      const data = await fetchUniversal("insights", body);
       setInsightsData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -74,17 +85,9 @@ export default function Insights() {
   };
   useEffect(() => {
     fetchData();
-  }, [dt,dto]);
+  }, [dt, dto]);
 
-  
-
-  // if (insightsData && insightsData.insights && insightsData.insights.ALERT) {
-  //   const { total, algorithms } = insightsData.insights.ALERT;
-  //   console.log("Total:", total);
-  //   console.log("Algorithms:", algorithms);
-  // } else {
-  //   console.log("No entro");
-  // }
+  // console.log(insightsData?.insights?.DATA?.coolers_total);
 
   return (
     <div>
@@ -272,7 +275,11 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    12,283
+                    {insightsData?.insights?.DATA?.coolers_total ===
+                      undefined ||
+                    insightsData?.insights?.DATA?.coolers_total === ""
+                      ? "Sin registro"
+                      : insightsData?.insights?.DATA?.coolers_total}
                   </div>
                 </div>
                 <div
@@ -306,7 +313,10 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    562
+                    {insightsData?.insights?.DATA?.routes_total === undefined ||
+                    insightsData?.insights?.DATA?.routes_total === ""
+                      ? "Sin registro"
+                      : insightsData?.insights?.DATA?.routes_total}
                   </div>
                 </div>
                 <div
@@ -340,7 +350,11 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    94
+                    {insightsData?.insights?.DATA?.operativ_u_total ===
+                      undefined ||
+                    insightsData?.insights?.DATA?.operativ_u_total === ""
+                      ? "Sin registro"
+                      : insightsData?.insights?.DATA?.operativ_u_total}
                   </div>
                 </div>
                 <div
@@ -374,7 +388,10 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    30
+                    {insightsData?.insights?.DATA?.region_total === undefined ||
+                    insightsData?.insights?.DATA?.region_total === ""
+                      ? "Sin registro"
+                      : insightsData?.insights?.DATA?.region_total}
                   </div>
                 </div>
                 <div
@@ -408,7 +425,10 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    8
+                    {insightsData?.insights?.DATA?.zone_total === undefined ||
+                    insightsData?.insights?.DATA?.zone_total === ""
+                      ? "Sin registro"
+                      : insightsData?.insights?.DATA?.zone_total}
                   </div>
                 </div>
               </div>
@@ -463,6 +483,7 @@ export default function Insights() {
                         flexDirection: "column",
                         alignItems: "center",
                         background: "#E6E6E6",
+                        cursor: "pointer",
                       }}
                     >
                       <div
@@ -496,7 +517,7 @@ export default function Insights() {
                       </div>
                     </div>
                     {/* Alerts */}
-                    <div
+                    {/* <div
                       style={{
                         display: "flex",
                         padding: "2px",
@@ -534,9 +555,9 @@ export default function Insights() {
                           Alertas
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* Fails */}
-                    <div
+                    {/* <div
                       style={{
                         display: "flex",
                         padding: "2px",
@@ -574,9 +595,9 @@ export default function Insights() {
                           Fallas
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* Indic */}
-                    <div
+                    {/* <div
                       style={{
                         display: "flex",
                         padding: "2px",
@@ -614,7 +635,7 @@ export default function Insights() {
                           Indicadores
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <br></br>
@@ -623,10 +644,17 @@ export default function Insights() {
                     borderRadius: "8px",
                     border: "1px solid #CACACA",
                     width: "100%",
-                    height: "500px",
+                    height: "450px",
                   }}
                 >
                   {/* MAPA */}
+                  <MapInsightsComponent
+                    markers={[
+                      { latitude: 20.6904037, longitude: -99.8208632 },
+                      { latitude: 20.70686, longitude: -99.83713 },
+                      { latitude: 20.3915, longitude: -99.9814 },
+                    ]}
+                  />
                 </div>
               </div>
             </div>
@@ -702,7 +730,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights.INDICATOR.total.toLocaleString()}
+                    {insightsData?.insights.INDICATOR.total === undefined
+                      ? "Sin registro"
+                      : insightsData?.insights.INDICATOR.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -805,7 +835,9 @@ export default function Insights() {
                           marginLeft: "auto",
                         }}
                       >
-                        {algorithm.value.toLocaleString()}
+                        {algorithm.value === undefined
+                          ? "Sin registro"
+                          : algorithm.value.toLocaleString()}
                       </div>
                     </div>
                   );
@@ -935,7 +967,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights.ALERT.total.toLocaleString()}
+                    {insightsData?.insights.ALERT.total === undefined
+                      ? "Sin registro"
+                      : insightsData?.insights.ALERT.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -1049,7 +1083,9 @@ export default function Insights() {
                           marginLeft: "auto",
                         }}
                       >
-                        {algorithm.value.toLocaleString()}
+                        {algorithm.value === undefined
+                          ? "Sin registro"
+                          : algorithm.value.toLocaleString()}
                       </div>
                     </div>
                   );
@@ -1177,7 +1213,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights.FAIL.total.toLocaleString()}
+                    {insightsData?.insights.FAIL.total === undefined
+                      ? "Sin registro"
+                      : insightsData?.insights.FAIL.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -1286,7 +1324,9 @@ export default function Insights() {
                           marginLeft: "auto",
                         }}
                       >
-                        {algorithm.value.toLocaleString()}
+                        {algorithm.value === undefined
+                          ? "Sin registro"
+                          : algorithm.value}
                       </div>
                     </div>
                   );
@@ -1442,7 +1482,11 @@ export default function Insights() {
                           lineHeight: "normal",
                         }}
                       >
-                        4,291
+                        {insightsData?.insights?.DATA?.coolers_data ===
+                          undefined ||
+                        insightsData?.insights?.DATA?.coolers_data === ""
+                          ? "Sin registro"
+                          : insightsData?.insights?.DATA?.coolers_data}
                       </div>
                     </div>
                   </div>
@@ -1538,7 +1582,11 @@ export default function Insights() {
                           lineHeight: "normal",
                         }}
                       >
-                        2,102
+                        {insightsData?.insights?.DATA?.coolers_no_data ===
+                          undefined ||
+                        insightsData?.insights?.DATA?.coolers_no_data === ""
+                          ? "Sin registro"
+                          : insightsData?.insights?.DATA?.coolers_no_data}
                       </div>
                     </div>
                   </div>
@@ -1546,218 +1594,8 @@ export default function Insights() {
               </div>
             </div>
           </div>
-          {/* CARDS  */}
         </div>
       </div>
     </div>
   );
 }
-
-{
-  /* <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "flex-start",
-              gap: "16px",
-              flex: 100,
-            }}
-          >
-            {/* Card 1 */
-}
-// <div
-//   style={{
-//     display: "flex",
-//     width: "42.3%",
-//     height: "100%",
-//     padding: "24px",
-//     flexDirection: "column",
-//     alignItems: "flex-start",
-//     gap: "16px",
-//     flexShrink: 0,
-//     borderRadius: "8px",
-//     border: "1px solid #88888B",
-//     background: "#FFF",
-//   }}
-// >
-//   <div
-//     style={{
-//       display: "flex",
-//       flexDirection: "column",
-//       alignItems: "flex-start",
-//       gap: "8px",
-//       alignSelf: "stretch",
-//     }}
-//   >
-//     <div
-//       style={{
-//         display: "flex",
-//         alignItems: "center",
-//         gap: "16px",
-//         alignSelf: "stretch",
-//       }}
-//     >
-//       <img
-//         src={"../../sampleData/coolersg.png"}
-//         alt="Descripción de la imagen"
-//       />
-//       <div
-//         style={{
-//           color: "#3A3A3F",
-//           // fontFamily: "DM Sans",
-//           fontSize: "16px",
-//           fontStyle: "normal",
-//           fontWeight: 500,
-//           lineHeight: "normal",
-//         }}
-//       >
-//         Enfriadores funcionando
-//       </div>
-//     </div>
-//     <div
-//       style={{
-//         display: "flex",
-//         alignItems: "center",
-//         alignContent: "center",
-//         gap: "10px",
-//         alignSelf: "stretch",
-//         flexWrap: "wrap",
-//       }}
-//     >
-//       <div
-//         style={{
-//           display: "flex",
-//           minWidth: "200px",
-//           flexDirection: "column",
-//           justifyContent: "flex-end",
-//           alignItems: "flex-start",
-//         }}
-//       >
-//         <div
-//           style={{
-//             color: "#88888B",
-//             // fontFamily: "DM Sans",
-//             fontSize: "14px",
-//             fontStyle: "normal",
-//             fontWeight: 400,
-//             lineHeight: "normal",
-//           }}
-//         >
-//           Enfriadores
-//         </div>
-//         <div
-//           style={{
-//             color: "#000005",
-//             // fontFamily: "DM Sans",
-//             fontSize: "26px",
-//             fontStyle: "normal",
-//             fontWeight: 500,
-//             lineHeight: "normal",
-//           }}
-//         >
-//           4,291
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// </div>
-{
-  /* Card 2 */
-}
-// <div
-//   style={{
-//     display: "flex",
-//     width: "42.3%",
-//     height: "100%",
-//     padding: "24px",
-//     flexDirection: "column",
-//     alignItems: "flex-start",
-//     gap: "16px",
-//     flexShrink: 0,
-//     borderRadius: "8px",
-//     border: "1px solid #88888B",
-//     background: "#FFF",
-//   }}
-// >
-//   <div
-//     style={{
-//       display: "flex",
-//       flexDirection: "column",
-//       alignItems: "flex-start",
-//       gap: "8px",
-//       alignSelf: "stretch",
-//     }}
-//   >
-//     <div
-//       style={{
-//         display: "flex",
-//         alignItems: "center",
-//         gap: "16px",
-//         alignSelf: "stretch",
-//       }}
-//     >
-//       <img
-//         src={"../../sampleData/coolersr.png"}
-//         alt="Descripción de la imagen"
-//       />
-//       <div
-//         style={{
-//           color: "#3A3A3F",
-//           // fontFamily: "DM Sans",
-//           fontSize: "16px",
-//           fontStyle: "normal",
-//           fontWeight: 500,
-//           lineHeight: "normal",
-//         }}
-//       >
-//         Enfriadores sin datos
-//       </div>
-//     </div>
-//     <div
-//       style={{
-//         display: "flex",
-//         alignItems: "center",
-//         alignContent: "center",
-//         gap: "10px",
-//         alignSelf: "stretch",
-//         flexWrap: "wrap",
-//       }}
-//     >
-//       <div
-//         style={{
-//           display: "flex",
-//           minWidth: "200px",
-//           flexDirection: "column",
-//           justifyContent: "flex-end",
-//           alignItems: "flex-start",
-//         }}
-//       >
-//         <div
-//           style={{
-//             color: "#88888B",
-//             // fontFamily: "DM Sans",
-//             fontSize: "14px",
-//             fontStyle: "normal",
-//             fontWeight: 400,
-//             lineHeight: "normal",
-//           }}
-//         >
-//           Enfriadores
-//         </div>
-//         <div
-//           style={{
-//             color: "#000005",
-//             // fontFamily: "DM Sans",
-//             fontSize: "26px",
-//             fontStyle: "normal",
-//             fontWeight: 500,
-//             lineHeight: "normal",
-//           }}
-//         >
-//           2,102
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// </div>
-// </div> */}

@@ -17,12 +17,12 @@ export default function CoolerDetail() {
       region: string;
       route: string;
       zone: string;
-      days_without_visit : string;
-      last_read : string;
-      total_ownership_expense:number;
-      sale_price : number;
-      total_expense_service :string;
-      energy_consumption : string;
+      days_without_visit: string;
+      last_read: string;
+      total_ownership_expense: number;
+      sale_price: number;
+      total_expense_service: string;
+      energy_consumption: string;
     };
     service_orders?: Array<{ description: string }>; // Ajusta según la estructura real
     tracking?: Array<{ class: string; algorithm: string }>; // Ajusta según la estructura real
@@ -38,7 +38,7 @@ export default function CoolerDetail() {
   };
 
   const fetchCoolersFromAPI = async (serial_number) => {
-    console.log(serial_number)
+    console.log(serial_number);
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
 
     const headers = {
@@ -62,11 +62,11 @@ export default function CoolerDetail() {
       throw error;
     }
   };
-  
+
   const fetchData = async () => {
     try {
       // const data = await fetchCoolersFromAPI(serial_number);
-      const data = await fetchUniversalDetails("coolers",serial_number,"GET");
+      const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -81,11 +81,11 @@ export default function CoolerDetail() {
   useEffect(() => {
     console.log(`Serial number from the route: ${serial_number}`);
   }, [serial_number, coolersData]);
-  
+
   return (
     <div>
-      <PageFilter path="clt"/>
-      <br />      
+      <PageFilter path="clt" />
+      <br />
       <div>
         {/* *********************************************************** */}
         <div
@@ -96,7 +96,7 @@ export default function CoolerDetail() {
             marginLeft: -85,
             gap: "8px",
             alignSelf: "stretch",
-            width : "96%",            
+            width: "96%",
           }}
         >
           <img src={b} width={"60px"} alt="cooler"></img>
@@ -239,7 +239,10 @@ export default function CoolerDetail() {
                   lineHeight: "normal",
                 }}
               >
-                { coolersData?.cooler?.last_read == undefined  ||  coolersData?.cooler?.last_read == "" ? "Sin datos" : `${coolersData?.cooler?.last_read}`} 
+                {coolersData?.cooler?.last_read == undefined ||
+                coolersData?.cooler?.last_read == ""
+                  ? "Sin registro"
+                  : `${coolersData?.cooler?.last_read}`}
               </div>
               <div
                 style={{
@@ -263,7 +266,10 @@ export default function CoolerDetail() {
                   }}
                 >
                   {" "}
-                  { coolersData?.cooler?.days_without_visit == undefined  ||  coolersData?.cooler?.days_without_visit == "" ? "Sin datos" : `${coolersData?.cooler?.days_without_visit} dias sin visita`} 
+                  {coolersData?.cooler?.days_without_visit == undefined ||
+                  coolersData?.cooler?.days_without_visit == ""
+                    ? "Sin registro días sin visita"
+                    : `${coolersData?.cooler?.days_without_visit} dias sin visita`}
                 </div>
               </div>
             </div>
@@ -375,7 +381,8 @@ export default function CoolerDetail() {
                     lineHeight: "14px",
                   }}
                 >
-                  {coolersData?.cooler?.region === "" || coolersData?.cooler?.region == undefined
+                  {coolersData?.cooler?.region === "" ||
+                  coolersData?.cooler?.region == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.region}
                 </div>
@@ -425,7 +432,8 @@ export default function CoolerDetail() {
                     lineHeight: "14px",
                   }}
                 >
-                  {coolersData?.cooler?.route === "" || coolersData?.cooler?.route == undefined
+                  {coolersData?.cooler?.route === "" ||
+                  coolersData?.cooler?.route == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.route}
                 </div>
@@ -474,7 +482,8 @@ export default function CoolerDetail() {
                     lineHeight: "14px",
                   }}
                 >
-                  {coolersData?.cooler?.zone === "" || coolersData?.cooler?.zone == undefined
+                  {coolersData?.cooler?.zone === "" ||
+                  coolersData?.cooler?.zone == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.zone}
                 </div>
@@ -485,7 +494,8 @@ export default function CoolerDetail() {
         {/* *********************************************************** */}
         <br></br>
         <div
-          style={{ // SE QUITA BACKGROUND Y HEIGHT PARA QUITAR SEGUNDO SCROLL
+          style={{
+            // SE QUITA BACKGROUND Y HEIGHT PARA QUITAR SEGUNDO SCROLL
             display: "flex",
             // height: "36px",
             width: "100%",
@@ -495,11 +505,10 @@ export default function CoolerDetail() {
             // background: "#D4DAE3",
             flex: 1, // Añade esta línea
             marginLeft: "-40px",
-            
           }}
         >
           {" "}
-          <Tabs color="teal" defaultValue="first" >
+          <Tabs color="teal" defaultValue="first">
             <Tabs.List>
               <Tabs.Tab value="first">Resumen</Tabs.Tab>
               <Tabs.Tab value="second">Desglose economico </Tabs.Tab>

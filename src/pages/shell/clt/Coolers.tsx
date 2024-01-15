@@ -3,7 +3,11 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
-import { fetchCoolers, fetchCoolerDetails, fetchUniversal } from "../../../utils/apiUtils";
+import {
+  fetchCoolers,
+  fetchCoolerDetails,
+  fetchUniversal,
+} from "../../../utils/apiUtils";
 import {
   Card,
   Table,
@@ -30,7 +34,7 @@ export default function Coolers() {
     serial_number: string;
   }
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state:any)=>state.organization)
+  const dto = useSelector((state: any) => state.organization);
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [noInfoToShow, setNoInfoToShow] = useState(false);
@@ -61,10 +65,17 @@ export default function Coolers() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = {customer:dto,class:"STK",algorithm: ["INSTALLED"],path:pathVerify(),page_size: 1000,page_number: 1}
+  const body = {
+    customer: dto,
+    class: "STK",
+    algorithm: ["INSTALLED"],
+    path: pathVerify(),
+    page_size: 1000,
+    page_number: 1,
+  };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal('coolers', body,setIsLoading);
+      const data = await fetchUniversal("coolers", body, setIsLoading);
       setCoolersData(data);
       setIsLoading(false);
     } catch (error) {
@@ -72,9 +83,8 @@ export default function Coolers() {
     }
   };
   useEffect(() => {
-
     fetchData();
-  }, [dt,dto]);
+  }, [dt, dto]);
 
   const filteredCoolers = coolersData
     ? filterCoolers(coolersData, searchValue)
@@ -420,7 +430,11 @@ export default function Coolers() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          {cooler.status == undefined || cooler.status == "" ? "Sin Datos" : cooler.status}&nbsp;
+                                          {cooler.status == undefined ||
+                                          cooler.status == ""
+                                            ? "Sin Datos"
+                                            : cooler.status}
+                                          &nbsp;
                                         </div>
                                       </div>
                                     </TableCell>
@@ -456,31 +470,37 @@ export default function Coolers() {
                                         textAlign: "left",
                                       }}
                                     >
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "4px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background: "#D4DAE3",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            color: "#313A49",
-                                            // fontFamily: "Space Mono",
-                                            fontSize: "12px",
-                                            fontStyle: "normal",
-                                            fontWeight: 400,
-                                            lineHeight: "14px",
-                                          }}
-                                        >
-                                          {cooler.days_without_visit == undefined || cooler.days_without_visit == "" ? "Sin Datos " : cooler.days_without_visit}
-                                        DÍAS
-                                        </div>
-                                      </div>
+                                      {cooler.days_without_visit == undefined ||
+                                      cooler.days_without_visit == "" ? (
+                                        "Sin registro"
+                                      ) : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              background: "#D4DAE3",
+                                            }}
+                                          >
+                                            <div
+                                              style={{
+                                                color: "#313A49",
+                                                // fontFamily: "Space Mono",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 400,
+                                                lineHeight: "14px",
+                                              }}
+                                            >
+                                              {cooler.days_without_visit} DÍAS
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       style={{

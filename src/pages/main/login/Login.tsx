@@ -1,27 +1,38 @@
 import { Button } from "@mantine/core";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { fetchUniversal } from "../../../utils/apiUtils";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const navigate = useNavigate();
   const correctCredentials = {
     email: "prueba@gmail.com",
     password: "123abc",
   };
 
-  const navigate = useNavigate();
-
   const handleLogin = () => {
-    if (email === "prueba@gmail.com" && password === "123abc") {
-      navigate("/insights");
-      console.log("Attempting login...");
-    } else {
-      setErrorMessage("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
-    }
+    const body = {
+      email: email,
+      password: password,
+    };
+    const fetchData = async () => {
+      try {
+        const data = await fetchUniversal("login", body);
+        console.log(data);
+        navigate("/insights");
+      } catch (error) {
+        console.error("Error fetching login:", error);
+        setErrorMessage(
+          "Usuario o contraseña incorrectos. Inténtalo de nuevo."
+        );
+      }
+    };
+
+    fetchData();
   };
 
   const handleEmailChange = (e) => {
