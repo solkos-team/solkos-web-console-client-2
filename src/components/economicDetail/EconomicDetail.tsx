@@ -18,11 +18,38 @@ const EconomicDetail = ({ coolersData }) => {
   };
 
   // *************
-  const chartData = [
-    { name: "Category A", value: 10 },
-    { name: "Category B", value: 20 },
-    // ... otros datos
+  const chartdata = [
+    {
+      name: "Amphibians",
+      "Number of threatened species": 2488,
+    },
+    {
+      name: "Birds",
+      "Number of threatened species": 1445,
+    },
+    {
+      name: "Crustaceans",
+      "Number of threatened species": 743,
+    },
+    {
+      name: "Ferns",
+      "Number of threatened species": 281,
+    },
+    {
+      name: "Arachnids",
+      "Number of threatened species": 251,
+    },
+    {
+      name: "Corals",
+      "Number of threatened species": 232,
+    },
+    {
+      name: "Algae",
+      "Number of threatened species": 98,
+    },
   ];
+
+  const valueFormatter = (number) => `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
   // data de ejemplo para grafica
   const chartdata4 = [
     {
@@ -63,14 +90,6 @@ const EconomicDetail = ({ coolersData }) => {
     },
   ];
 
-  const valueFormatter = (number) => {
-    console.log("Valor sin formato:", number);
-    const formattedValue = `$ ${new Intl.NumberFormat("us")
-      .format(number)
-      .toString()}`;
-    console.log("Valor formateado:", formattedValue);
-    return formattedValue;
-  };
 
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
 
@@ -915,43 +934,44 @@ const EconomicDetail = ({ coolersData }) => {
                 }}
               >
                 <Tabs.Panel value="first" pt="xs">
-                  <div style={{ position: 'relative', width: '50rem',height:"30rem", paddingBottom: '250px'}}>
-                    <Card style={{                      
-                      width : "100%",
-                      height:"100%"                    
+                  <div style={{ position: 'relative', width: '49rem', height: "30rem" }}>
+                    <Card style={{
+                      width: "100%",
+                      height: "100%"
                     }}>
 
                       <Title>Average BPM</Title>
-                      {/* <LineChart
+                      <LineChart
                         className="h-72 mt-4"
                         data={chartdata4}
                         index="date"
                         categories={["Running"]}
                         colors={["blue"]}
-                        yAxisWidth={30}                        
-                        style={{width:"100%",height:"20%"}}
-                      /> */}
+                        yAxisWidth={30}
+                        style={{height:"95%"}}
+                      />
                     </Card>
                   </div>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="second" pt="xs">
-                  <div style={{ width: "100%", height: "400px" }}>
-                    <Card>
+                  <div style={{ width: "49rem", height: "30rem" }}>
+                    <Card style={{ width: "100%", height: "100%" }}>
                       <Title>
                         Number of species threatened with extinction (2021)
                       </Title>
                       <BarChart
                         className="mt-6"
-                        data={chartData}
+                        data={chartdata}
                         index="name"
                         categories={["Number of threatened species"]}
                         colors={["blue"]}
                         valueFormatter={valueFormatter}
                         yAxisWidth={48}
+                        style={{height:"95%"}}
                       />
                     </Card>
-                  </div>
+                  </div>                  
                 </Tabs.Panel>
               </div>
             </Tabs>

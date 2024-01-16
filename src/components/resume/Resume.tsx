@@ -28,7 +28,7 @@ async function validarExistenciaImagen(url) {
   }
 }
 
-const Resume = ({ coolersData }) => {
+const Resume = ({ coolersData,tabValue }) => {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
   const urlImagen = coolersData?.cooler?.asset_url;
@@ -979,7 +979,7 @@ const Resume = ({ coolersData }) => {
                   cursor: "pointer",
                 }}
               >
-                <div
+                <button
                   style={{
                     color: "#3E83FF",
                     // fontFamily: "DM Sans",
@@ -988,9 +988,10 @@ const Resume = ({ coolersData }) => {
                     fontWeight: 400,
                     lineHeight: "normal",
                   }}
+                onClick={()=>tabValue('tree')}               
                 >
                   Ver detalles
-                </div>
+                </button>
                 <IconArrowRight
                   style={{ color: "#3E83FF", width: "16px", height: "16px" }}
                 />
