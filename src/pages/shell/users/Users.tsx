@@ -36,14 +36,12 @@ export default function Users() {
   };
   const filterCoolers = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
-      const searchString = searchQuery?.toLowerCase();
-      const codeUsersName = item?.name?.toLowerCase();
+      const searchString = searchQuery?.toLowerCase() || "";
+      const codeUsersName = item?.name?.toLowerCase() || "";
       const codeUsersEmail = item?.email?.toLowerCase();
-      const codeUsersPath = item?.path?.toString().toLowerCase()
       return (
         codeUsersName.includes(searchString) ||
-        codeUsersEmail.includes(searchString) ||
-        codeUsersPath.includes(searchString)
+        codeUsersEmail.includes(searchString)
       );
     });
     return filteredData;
@@ -60,13 +58,12 @@ export default function Users() {
     }))
   }
   const filteredUsers = dataUsers
-  ? filterCoolers(dataUsers, searchValue)
-  : [];
+    ? filterCoolers(dataUsers, searchValue)
+    : [];
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
-  console.log(filteredUsers)
-  
+
   const closeDrawer = () => {
     setTimeout(() => {
       setIsDrawerOpen(false);
@@ -427,7 +424,7 @@ export default function Users() {
                                   />
                                 </div>
                               </div>
-                              <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer} data={user}>
+                              <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer}>
                                 {""}
                               </DrawerUsers>
                             </TableCell>

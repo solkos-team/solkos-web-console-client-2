@@ -56,6 +56,7 @@ export default function CoolerDetail() {
       }
 
       const responseData = await response.json();
+      console.log(responseData);
       return responseData;
     } catch (error) {
       throw error;
@@ -71,15 +72,16 @@ export default function CoolerDetail() {
       console.error("Error:", error);
     }
   };
-  const [valueTab,setValueTab] = useState<string | undefined>()
   useEffect(() => {
-    fetchData();    
+    fetchData();
   }, []);
 
   const { serial_number } = useParams();
 
-  useEffect(() => {  
+  useEffect(() => {
+    console.log(`Serial number from the route: ${serial_number}`);
   }, [serial_number, coolersData]);
+
   return (
     <div>
       <PageFilter path="clt" />
@@ -506,15 +508,15 @@ export default function CoolerDetail() {
           }}
         >
           {" "}
-          <Tabs color="teal" defaultValue={"first"} value={valueTab}>
+          <Tabs color="teal" defaultValue="first">
             <Tabs.List>
-              <Tabs.Tab value="first" onClick={()=>setValueTab('first')}>Resumen</Tabs.Tab>
-              <Tabs.Tab value="second" onClick={()=>setValueTab('second')}>Desglose economico </Tabs.Tab>
-              <Tabs.Tab value="tree"  onClick={()=>setValueTab('tree')}>Gasto de energía </Tabs.Tab>
+              <Tabs.Tab value="first">Resumen</Tabs.Tab>
+              <Tabs.Tab value="second">Desglose economico </Tabs.Tab>
+              <Tabs.Tab value="tree">Gasto de energía </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="first" pt="xs">
-              <Resume coolersData={coolersData} tabValue={setValueTab} />
+              <Resume coolersData={coolersData} />
             </Tabs.Panel>
 
             <Tabs.Panel value="second" pt="xs">
