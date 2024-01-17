@@ -237,8 +237,6 @@ export const fetchUniversalDetails = async (
 ) => {
   detailsID == undefined ? detailsID = "" : detailsID
   const url = `${baseUrl}/${componentURL}/${detailsID}`;
-  
-  console.log(url)
   const headers = {
     "Content-Type": "application/json",
   };

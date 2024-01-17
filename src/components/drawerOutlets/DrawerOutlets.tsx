@@ -17,11 +17,13 @@ import { fetchCoolers, fetchUniversal } from "../../utils/apiUtils";
 import { CoolerInterface } from "./CoolerInterface";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
+import { TextInput } from "@mantine/core";
 
 export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
+  const [searchValue, setSearchValue] = useState("");
 
   const {
     region,
@@ -46,6 +48,20 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+  const filterOutlets = (data, searchQuery) => {
+    const filteredData = data.filter((item) => {
+      const searchString = searchQuery.toLowerCase();
+      const coolerSerial = item.serial_number.toLowerCase();
+      const coolerId = item.device_id.toLowerCase();
+      return (
+        coolerSerial.includes(searchString) || coolerId.includes(searchString)
+      );
+    });
+    return filteredData;
+  };
   const body = { customer: dto, class: "STK", algorithm: ["INSTALLED"], path: pathVerify(), page_size: 1000, page_number: 1, outlet_id: outlet_id }
   const fetchData = async () => {
     try {
@@ -56,6 +72,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
       console.error("Error fetching coolers:", error);
     }
   };
+  const filteredCoolers = coolersData
+    ? filterOutlets(coolersData, searchValue)
+    : [];    
   useEffect(() => {
     fetchData();
   }, [dt]);
@@ -723,6 +742,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
             padding: "0px 24px",
           }}
         >
+          <section style={{visibility: coolersData.length > 10 ? "visible" : "hidden"}}>
+            <TextInput placeholder="Busca por Serie o Modelo" value={searchValue} onChange={handleSearchChange} type="text" style={{width:"330%"}}  />
+          </section>
           <Card>
             <Table
               style={{
@@ -793,8 +815,8 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               <TableBody
                 style={{ display: "block", height: "90%", overflowY: "auto" }}
               >
-                {coolersData == undefined ? "Sin registros" :
-                coolersData
+                {filteredCoolers == undefined ? "Sin registros" :
+                filteredCoolers
                   .slice(firstIndex, lastIndex)
                   .map((cooler, index) => (
                     <TableRow
