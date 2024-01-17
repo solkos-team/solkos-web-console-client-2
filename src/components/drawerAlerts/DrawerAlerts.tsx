@@ -16,7 +16,8 @@ import {
   TableRow,
 } from "@tremor/react";
 import { flushSync } from "react-dom";
-import { fetchCoolersDrawer } from "../../utils/apiUtils";
+import { fetchCoolersDrawer, fetchUniversal } from "../../utils/apiUtils";
+import { CoolerInterface } from "../drawerOutlets/CoolerInterface";
 
 export default function DrawerA({
   isOpen,
@@ -24,51 +25,36 @@ export default function DrawerA({
   selectedAlgorithm,
   value,
   delta,
-}) {
+}) {  
   const drawerRef = useRef(null);
   const navigate = useNavigate();
-
-  interface Cooler {
-    serial_number: string;
-    device_id: string;
-    model_id: string;
-    priority: number;
-    zone: string;
-    region: string;
-    operative_unit: string;
-    route: string;
-    outlet_name: string;
-    outlet_address: string;
-    latitude: string;
-    longitude: string;
-    notified_at: string;
-  }
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-  const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
+  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(null);
   const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-
+  const body = {
+  customer: dto,
+  class: "OPE",
+  algorithm: [selectedAlgorithm],
+  path: pathVerify(),
+  page_size: Number(value),
+  page_number: 1}
+  const fetchData = async () => {
+    try {
+      setIsLoading(true);
+      const data = await fetchUniversal("coolers",body)
+      setCoolersData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const data = await fetchCoolersDrawer(
-          pathVerify(),
-          undefined,
-          undefined,
-          selectedAlgorithm
-        );
-        console.log(data);
-        setCoolersData(data);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
 
     fetchData();
   }, [dt]);
@@ -619,38 +605,43 @@ export default function DrawerA({
                           width: "100px",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px",
-                            // justifyContent: "center",
-                            alignItems: "center",
-                            gap: "4px",
-                            borderRadius: "2px",
-                            background: "#B6FEDB",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: "4px",
-                              height: "4px",
-                              borderRadius: "5px",
-                              background: "#31B648",
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              color: "#028053",
-                              // fontFamily: "Space Mono",
-                              fontSize: "8px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "14px",
-                            }}
-                          >
-                            FUNCIONANDO --
-                          </div>
-                        </div>
+                        {cooler.status == undefined  || cooler.status == null ? ("Sin registros" )
+                        : (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "4px",
+                                // justifyContent: "center",
+                                alignItems: "center",
+                                gap: "4px",
+                                borderRadius: "2px",
+                                background: "#B6FEDB",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "4px",
+                                  height: "4px",
+                                  borderRadius: "5px",
+                                  background: "#31B648",
+                                }}
+                              ></div>
+                              <div
+                                style={{
+                                  color: "#028053",
+                                  // fontFamily: "Space Mono",
+                                  fontSize: "8px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "14px",
+                                }}
+                              >
+                                {cooler.status}
+                              </div>
+                            </div>
+                          </>
+                        )}
                       </TableCell>
                       <TableCell
                         style={{
@@ -677,32 +668,37 @@ export default function DrawerA({
                           width: "9rem",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "4px",
-                            borderRadius: "2px",
-                            background: "#D4DAE3",
-                            width: "80px",
-                          }}
-                        >
-                          <div
+                        {cooler.days_without_visit == undefined || cooler.days_without_visit == "" ? ("Sin registros") 
+                        : (
+                          <>
+                          <div                          
                             style={{
-                              color: "#313A49",
-                              // fontFamily: "Space Mono",
-                              fontSize: "10px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "14px",
+                              display: "flex",
+                              padding: "4px",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              borderRadius: "2px",
+                              background: "#D4DAE3",
+                              width: "80px",
                             }}
                           >
-                            {" "}
-                            --- DÍAS
+                            <div
+                              style={{
+                                color: "#313A49",
+                                // fontFamily: "Space Mono",
+                                fontSize: "10px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "14px",
+                              }}
+                            >
+                              {" "}
+                              {`${cooler.days_without_visit} DÍAS`}
+                            </div>
                           </div>
-                        </div>
+                          </>
+                        )}
                       </TableCell>
                       <TableCell
                         style={{
@@ -711,32 +707,37 @@ export default function DrawerA({
                           width: "5rem",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "4px",
-                            borderRadius: "2px",
-                            border: "1.5px solid #0F9F67",
-                            background: "#FFF",
-                            width: "3rem",
-                          }}
-                        >
-                          <div
-                            style={{
-                              color: "#0F9F67",
-                              // fontFamily: "DM Sans",
-                              fontSize: "12px",
-                              fontStyle: "normal",
-                              fontWeight: 600,
-                              lineHeight: "14px",
-                            }}
-                          >
-                            {cooler.priority}
-                          </div>
-                        </div>
+                        {cooler.priority == undefined || cooler.priority == null ? ("Sin registros") 
+                        : (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "4px",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "4px",
+                                borderRadius: "2px",
+                                border: "1.5px solid #0F9F67",
+                                background: "#FFF",
+                                width: "3rem",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  color: "#0F9F67",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "12px",
+                                  fontStyle: "normal",
+                                  fontWeight: 600,
+                                  lineHeight: "14px",
+                                }}
+                              >
+                                {cooler.priority}
+                              </div>
+                            </div>
+                          </>
+                        ) }
                       </TableCell>
                       <TableCell
                         style={{

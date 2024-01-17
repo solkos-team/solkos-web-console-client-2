@@ -27,7 +27,6 @@ export default function Alerts() {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
       setAlertsData(data);
-      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -157,7 +156,7 @@ export default function Alerts() {
               </>
             ) : (
               // Mostrar las tarjetas una vez que la carga ha terminado
-              alertsData &&
+              alertsData == null ? ("Sin registros") :
               alertsData
                 .filter((cooler) => cooler.level === "ALERT")
                 .map((cooler, index) => (
