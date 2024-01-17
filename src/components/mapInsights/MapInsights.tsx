@@ -56,7 +56,7 @@ const MapInsightsComponent = ({ markers }) => {
   };
 
   if (!googleMapsLoaded) {
-    return <div>Error al cargar Google Maps</div>;
+    return <div></div>;
   }
 
   return (

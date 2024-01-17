@@ -48,7 +48,7 @@ export default function DrawerA({
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const dt = useSelector((state: any) => state.works);
   const pathVerify = () => {
-    return dt.length == 0 ? "[]" : JSON.parse(dt);
+    return dt.length == 0 ? [] : JSON.parse(dt);
   };
 
   useEffect(() => {

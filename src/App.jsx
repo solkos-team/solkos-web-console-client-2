@@ -193,13 +193,13 @@ function App() {
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
   };
-  const fetctData = async () =>{
-    const data = await fetchUniversalDetails("customers")
-    setData(data)
-  }
-  useEffect(() => {    
+  const fetctData = async () => {
+    const data = await fetchUniversalDetails("customers");
+    setData(data);
+  };
+  useEffect(() => {
     // fetch get customers
-    fetctData()
+    fetctData();
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
     setCoolerInsightsOpen(location.pathname === "/");
     const storage = localStorage.getItem("ORG");
@@ -493,37 +493,40 @@ function App() {
                       Cambiar de organización
                     </div>
                   </div>
-                  {data.map((nombre, index) => (
-                    <div
-                      style={{
-                        display: "flex",
-                        padding: "10px 12px",
-                        alignItems: "center",
-                        gap: "10px",
-                        alignSelf: "stretch",
-                      }}
-                      key={index}
-                      onChange={setData}
-                    >
+                  <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+                    {/* Contenido del menú de cambio de organización */}
+                    {data.map((nombre, index) => (
                       <div
                         style={{
                           display: "flex",
+                          padding: "10px 12px",
                           alignItems: "center",
                           gap: "10px",
-                          flex: "100",
-                          fontSize: "14px",
-                          textDecorationColor: dt === nombre ? "#ec547c" : "",
-                          color: dt === nombre ? "#ec547c" : "",
-                          cursor: "pointer",
+                          alignSelf: "stretch",
                         }}
-                        onClick={() => {
-                          saveOrganization(nombre);
-                        }}
+                        key={index}
+                        onChange={setData}
                       >
-                        {nombre}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            flex: "100",
+                            fontSize: "14px",
+                            textDecorationColor: dt === nombre ? "#ec547c" : "",
+                            color: dt === nombre ? "#ec547c" : "",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            saveOrganization(nombre);
+                          }}
+                        >
+                          {nombre}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                   <div
                     style={{
                       display: "flex",

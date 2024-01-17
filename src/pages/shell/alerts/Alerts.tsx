@@ -11,21 +11,23 @@ export default function Alerts() {
     algorithm: string;
     value: number;
     delta: number;
+    level: string;
   }
-  
+
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state:any)=>state.organization)
+  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = { customer: dto,path:pathVerify()}
+  const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
-      setIsLoading(true)      
-      const data = await fetchUniversal('alerts',body);
+      setIsLoading(true);
+      const data = await fetchUniversal("alerts", body);
       setAlertsData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -33,9 +35,8 @@ export default function Alerts() {
     }
   };
   useEffect(() => {
-
     fetchData();
-  }, [dt,dto]);
+  }, [dt, dto]);
 
   // Page (Body)
   useEffect(() => {
@@ -45,7 +46,6 @@ export default function Alerts() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
@@ -60,9 +60,7 @@ export default function Alerts() {
     <div>
       <PageFilter />
       <br></br>
-      <div       
-        className="principal-titl"
-      >
+      <div className="principal-titl">
         {/* title */}
         <div
           style={{
@@ -161,10 +159,7 @@ export default function Alerts() {
               // Mostrar las tarjetas una vez que la carga ha terminado
               alertsData &&
               alertsData
-                .filter(
-                  (cooler) =>
-                    cooler.class === "OPE" && cooler.algorithm.endsWith("ALERT")
-                )
+                .filter((cooler) => cooler.level === "ALERT")
                 .map((cooler, index) => (
                   <div
                     key={index}

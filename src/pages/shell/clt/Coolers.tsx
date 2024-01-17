@@ -3,6 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
+import { SkeletonTable } from "../../../components/skeletonTable/SkeletonTable";
 import {
   fetchCoolers,
   fetchCoolerDetails,
@@ -102,7 +103,7 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-  console.log(filteredCoolers)
+  console.log(filteredCoolers);
   return (
     <div>
       <PageFilter />
@@ -211,33 +212,6 @@ export default function Coolers() {
                 />
               </div>
             </div>
-
-            {/* <div
-              style={{
-                display: "flex",
-                padding: "1px 18px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "18px",
-                flex: 100,
-                alignSelf: "stretch",
-                borderRadius: "0px 2px 2px 0px",
-                background: "#313A49",
-                margin: 0, // Elimina el margen
-              }}
-            >
-              <div
-                style={{
-                  color: "#D4DAE3",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 600,
-                  lineHeight: "normal",
-                }}
-              >
-                Buscar
-              </div>
-            </div> */}
           </div>
         </div>
         {/* Tabla */}
@@ -299,79 +273,82 @@ export default function Coolers() {
             <div style={{}}>
               <div>
                 <div>
-                  {isLoading == true ? (
-                    <div
+                  <Card>
+                    <Table
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: 400,
-                        fontWeight: "bold",
-                        fontSize: "18px",
+                        borderCollapse: "collapse",
+                        width: "100%",
+                        maxWidth: "1000px",
+                        height: "400px",
                       }}
                     >
-                      Cargando...
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  {!isLoading && (
-                    <>
-                      {filteredCoolers.length > 0 ? (
-                        <Card style={{width:"90%"}}>
-                          <Table
+                      <TableHead style={{ display: "block" }}>
+                        <TableRow>
+                          <TableHeaderCell
                             style={{
-                              borderCollapse: "collapse",
-                              width: "100%", // Cambiado a 100% para que la tabla sea receptiva
-                              maxWidth: "1000px",
-                              // width: "910px",
-                              height: "400px",
+                              textAlign: "left",
+                              width: "150px",
                             }}
                           >
-                            <TableHead style={{ display: "block" }}>
-                              <TableRow>
-                                <TableHeaderCell
-                                  style={{
-                                    textAlign: "left",
-                                    width: "150px",
-                                  }}
-                                >
-                                  Estatus
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{ textAlign: "left", width: "150px" }}
-                                >
-                                  Serie
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{ textAlign: "left", width: "150px" }}
-                                >
-                                  Modelo
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{
-                                    textAlign: "left",
-                                    width: "150px",
-                                  }}
-                                >
-                                  Días sin visita
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{
-                                    textAlign: "left",
-                                    width: "150px",
-                                  }}
-                                >
-                                  {" "}
-                                  Prioridad
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{ textAlign: "left", width: "150px" }}
-                                >
-                                  Acciones
-                                </TableHeaderCell>
-                              </TableRow>
-                            </TableHead>
+                            Estatus
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{ textAlign: "left", width: "150px" }}
+                          >
+                            Serie
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{ textAlign: "left", width: "150px" }}
+                          >
+                            Modelo
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{
+                              textAlign: "left",
+                              width: "150px",
+                            }}
+                          >
+                            Días sin visita
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{
+                              textAlign: "left",
+                              width: "150px",
+                            }}
+                          >
+                            {" "}
+                            Prioridad
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{ textAlign: "left", width: "150px" }}
+                          >
+                            Acciones
+                          </TableHeaderCell>
+                        </TableRow>
+                      </TableHead>
+                      {isLoading == true ? (
+                        <>
+                          <br></br>
+                          <br></br>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginLeft: 10,
+                              fontWeight: "bold",
+                              fontSize: "18px",
+                            }}
+                          >
+                            <SkeletonTable></SkeletonTable>
+                          </div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                      {!isLoading && (
+                        <>
+                          {filteredCoolers.length > 0 ? (
                             <TableBody
                               style={{
                                 display: "block",
@@ -402,43 +379,45 @@ export default function Coolers() {
                                         width: "150px",
                                       }}
                                     >
-                                      {cooler.status == undefined || cooler.status == "" ? ("Sin registro") : (
-                                            <>
+                                      {cooler.status == undefined ||
+                                      cooler.status == "" ? (
+                                        "Sin registro"
+                                      ) : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              // justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              background: "#B6FEDB",
+                                            }}
+                                          >
                                             <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "4px",
-                                          // justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background: "#B6FEDB",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            width: "4px",
-                                            height: "4px",
-                                            borderRadius: "5px",
-                                            background: "#31B648",
-                                          }}
-                                        ></div>
-                                        <div
-                                          style={{
-                                            color: "#028053",
-                                            // fontFamily: "Space Mono",
-                                            fontSize: "12px",
-                                            fontStyle: "normal",
-                                            fontWeight: 400,
-                                            lineHeight: "14px",
-                                          }}
-                                        >
-                                          {cooler.status}
-                                          
-                                        </div>
-                                      </div>
-                                            </>
-                                          )}
+                                              style={{
+                                                width: "4px",
+                                                height: "4px",
+                                                borderRadius: "5px",
+                                                background: "#31B648",
+                                              }}
+                                            ></div>
+                                            <div
+                                              style={{
+                                                color: "#028053",
+                                                // fontFamily: "Space Mono",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 400,
+                                                lineHeight: "14px",
+                                              }}
+                                            >
+                                              {cooler.status}
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       style={{
@@ -511,9 +490,12 @@ export default function Coolers() {
                                         width: "150px",
                                       }}
                                     >
-                                      {cooler.priority == undefined || cooler.priority == "" ? ("Sin registro") : (
-                                            <>
-                                            <div 
+                                      {cooler.priority == undefined ||
+                                      cooler.priority == "" ? (
+                                        "Sin registro"
+                                      ) : (
+                                        <>
+                                          <div
                                             style={{
                                               display: "flex",
                                               padding: "4px",
@@ -523,8 +505,9 @@ export default function Coolers() {
                                               borderRadius: "2px",
                                               border: "1.5px solid #0F9F67",
                                               background: "#FFF",
-                                            }}>
-                                              <div
+                                            }}
+                                          >
+                                            <div
                                               style={{
                                                 color: "#0F9F67",
                                                 // fontFamily: "DM Sans",
@@ -532,12 +515,13 @@ export default function Coolers() {
                                                 fontStyle: "normal",
                                                 fontWeight: 600,
                                                 lineHeight: "14px",
-                                              }}>
-                                                {cooler.priority}
-                                                </div>                                              
+                                              }}
+                                            >
+                                              {cooler.priority}
                                             </div>
-                                            </>
-                                          )}
+                                          </div>
+                                        </>
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       style={{
@@ -584,30 +568,30 @@ export default function Coolers() {
                                   </TableRow>
                                 ))}
                             </TableBody>
-                          </Table>
-                          <PaginationComponent
-                            accion={setCurrentPage}
-                            totalDatos={filteredCoolers.length}
-                            datosPorPagina={datosPorPagina}
-                            numero={setNumero}
-                          />
-                        </Card>
-                      ) : (
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginLeft: 250,
-                            fontWeight: "bold",
-                            fontSize: "18px",
-                          }}
-                        >
-                          <p>No hay datos de coolers disponibles.</p>
-                        </div>
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginLeft: 250,
+                                fontWeight: "bold",
+                                fontSize: "18px",
+                              }}
+                            >
+                              <p>No hay datos de coolers disponibles.</p>
+                            </div>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
+                    </Table>
+                    <PaginationComponent
+                      accion={setCurrentPage}
+                      totalDatos={filteredCoolers.length}
+                      datosPorPagina={datosPorPagina}
+                      numero={setNumero}
+                    />
+                  </Card>
                 </div>
               </div>
             </div>
