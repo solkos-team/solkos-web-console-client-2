@@ -70,7 +70,7 @@ export default function Coolers() {
     class: "STK",
     algorithm: ["INSTALLED"],
     path: pathVerify(),
-    page_size: 1000,
+    page_size: 100,
     page_number: 1,
   };
   const fetchData = async () => {
@@ -102,6 +102,7 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
+  console.log(filteredCoolers)
   return (
     <div>
       <PageFilter />
@@ -317,7 +318,7 @@ export default function Coolers() {
                   {!isLoading && (
                     <>
                       {filteredCoolers.length > 0 ? (
-                        <Card>
+                        <Card style={{width:"90%"}}>
                           <Table
                             style={{
                               borderCollapse: "collapse",
@@ -401,7 +402,9 @@ export default function Coolers() {
                                         width: "150px",
                                       }}
                                     >
-                                      <div
+                                      {cooler.status == undefined || cooler.status == "" ? ("Sin registro") : (
+                                            <>
+                                            <div
                                         style={{
                                           display: "flex",
                                           padding: "4px",
@@ -430,13 +433,12 @@ export default function Coolers() {
                                             lineHeight: "14px",
                                           }}
                                         >
-                                          {cooler.status == undefined ||
-                                          cooler.status == ""
-                                            ? "Sin Datos"
-                                            : cooler.status}
-                                          &nbsp;
+                                          {cooler.status}
+                                          
                                         </div>
                                       </div>
+                                            </>
+                                          )}
                                     </TableCell>
                                     <TableCell
                                       style={{
@@ -509,31 +511,33 @@ export default function Coolers() {
                                         width: "150px",
                                       }}
                                     >
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "4px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          border: "1.5px solid #0F9F67",
-                                          background: "#FFF",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            color: "#0F9F67",
-                                            // fontFamily: "DM Sans",
-                                            fontSize: "12px",
-                                            fontStyle: "normal",
-                                            fontWeight: 600,
-                                            lineHeight: "14px",
-                                          }}
-                                        >
-                                          -----------
-                                        </div>
-                                      </div>
+                                      {cooler.priority == undefined || cooler.priority == "" ? ("Sin registro") : (
+                                            <>
+                                            <div 
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              border: "1.5px solid #0F9F67",
+                                              background: "#FFF",
+                                            }}>
+                                              <div
+                                              style={{
+                                                color: "#0F9F67",
+                                                // fontFamily: "DM Sans",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 600,
+                                                lineHeight: "14px",
+                                              }}>
+                                                {cooler.priority}
+                                                </div>                                              
+                                            </div>
+                                            </>
+                                          )}
                                     </TableCell>
                                     <TableCell
                                       style={{

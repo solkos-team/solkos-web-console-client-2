@@ -42,15 +42,15 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state:any)=>state.organization)
+  const dto = useSelector((state: any) => state.organization)
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = {customer:dto,class: "STK",algorithm: ["INSTALLED"],path: pathVerify(),page_size: 1000,page_number: 1,outlet_id: outlet_id}
+  const body = { customer: dto, class: "STK", algorithm: ["INSTALLED"], path: pathVerify(), page_size: 1000, page_number: 1, outlet_id: outlet_id }
   const fetchData = async () => {
     try {
       // const data = await fetchCoolers(pathVerify(), null, outlet_id);
-      const data = await fetchUniversal('coolers',body);
+      const data = await fetchUniversal('coolers', body);
       setCoolersData(data);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -59,7 +59,6 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   useEffect(() => {
     fetchData();
   }, [dt]);
-
   return (
     <div
       ref={drawerRef}
@@ -186,20 +185,24 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   </div>
                 </div>
               </div>
-              <div
-                style={{
-                  color: "#88888B",
-                  // fontFamily: "DM Sans",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "20px",
-                }}
-              >
-                {outlet_address == undefined || outlet_address == ""
-                  ? "Sin datos"
-                  : `${outlet_address}`}
-              </div>
+              {outlet_address == undefined || outlet_address == ""
+                ? ("Sin registros")
+                : (
+                  <>
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "20px",
+                      }}
+                    >
+                      {outlet_address}
+                    </div>
+                  </>
+                )}
             </div>
             <div
               style={{
@@ -221,48 +224,56 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               >
                 Leído por última vez el:
               </div>
-              <div
-                style={{
-                  color: "#000005",
-                  // fontFamily: "Inter",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
-                }}
-              >
-                {last_read_coolerC == undefined || last_read_coolerC == ""
-                  ? "Sin datos"
-                  : `${last_read_coolerC}`}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "8px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "4px",
-                  borderRadius: "2px",
-                  background: "#D4DAE3",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#313A49",
-                    // fontFamily: "DM Mono",
-                    fontSize: "12px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "12px",
-                    height: "10px",
-                  }}
-                >
-                  {days_without_visitC == undefined || days_without_visitC == ""
-                    ? "Sin datos"
-                    : `${days_without_visitC}`}{" "}
-                  DÍAS SIN VISITA
-                </div>
-              </div>
+              {last_read_coolerC == undefined || last_read_coolerC == ""
+                ? ("Sin registros")
+                : (
+                  <>
+                    <div
+                      style={{
+                        color: "#000005",
+                        // fontFamily: "Inter",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      {last_read_coolerC}
+                    </div>
+                  </>
+                )}
+              &nbsp;
+              {days_without_visitC == undefined || days_without_visitC == ""
+                ? ("Sin registros")
+                : (
+                  <>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "8px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "4px",
+                        borderRadius: "2px",
+                        background: "#D4DAE3",
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#313A49",
+                          // fontFamily: "DM Mono",
+                          fontSize: "12px",
+                          fontStyle: "normal",
+                          fontWeight: 500,
+                          lineHeight: "12px",
+                          height: "10px",
+                        }}
+                      >
+                        {`${days_without_visitC} DÍAS SIN VISITA`}
+                      </div>
+                    </div>
+                  </>
+                )}
             </div>
           </div>
           {/* 3 */}
@@ -318,7 +329,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   }}
                 >
                   {channel == undefined || channel == ""
-                    ? "Sin datos"
+                    ? "Sin registros"
                     : `${channel}`}
                 </div>
               </div>
@@ -366,7 +377,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   }}
                 >
                   {region == undefined || region == ""
-                    ? "Sin datos"
+                    ? "Sin registros"
                     : `${region}`}
                 </div>
               </div>
@@ -413,7 +424,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  {route == undefined || route == "" ? "Sin datos" : `${route}`}
+                  {route == undefined || route == "" ? "Sin registros" : `${route}`}
                 </div>
               </div>
             </div>
@@ -459,7 +470,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  {zone == undefined || zone == "" ? "Sin datos" : `${zone}`}
+                  {zone == undefined || zone == "" ? "Sin registros" : `${zone}`}
                 </div>
               </div>
             </div>
@@ -782,7 +793,8 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               <TableBody
                 style={{ display: "block", height: "90%", overflowY: "auto" }}
               >
-                {coolersData
+                {coolersData == undefined ? "Sin registros" :
+                coolersData
                   .slice(firstIndex, lastIndex)
                   .map((cooler, index) => (
                     <TableRow
@@ -799,41 +811,45 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                           width: "5.8rem",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px",
-                            // justifyContent: "center",
-                            alignItems: "center",
-                            gap: "4px",
-                            borderRadius: "2px",
-                            background: "#B6FEDB",
-                            width: "fit-content",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: "4px",
-                              height: "4px",
-                              borderRadius: "5px",
-                              background: "#31B648",
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              color: "#028053",
-                              width: "100%",
-                              fontSize: ".5rem",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "14px",
-                            }}
-                          >
-                            {cooler.status == undefined || cooler.status == ""
-                              ? "Sin datos"
-                              : `${cooler.status}`}
-                          </div>
-                        </div>
+                        {cooler.status == undefined || cooler.status == ""
+                          ? ("Sin registros")
+                          : (
+                            <>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "4px",
+                                  // justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  borderRadius: "2px",
+                                  background: "#B6FEDB",
+                                  width: "fit-content",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    width: "4px",
+                                    height: "4px",
+                                    borderRadius: "5px",
+                                    background: "#31B648",
+                                  }}
+                                ></div>
+                                <div
+                                  style={{
+                                    color: "#028053",
+                                    width: "100%",
+                                    fontSize: ".5rem",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "14px",
+                                  }}
+                                >
+                                  {`${cooler.status}`}
+                                </div>
+                              </div>
+                            </>
+                          )}
                       </TableCell>
                       <TableCell
                         style={{
@@ -854,7 +870,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                         }}
                       >
                         {cooler.model_id == undefined || cooler.model_id == ""
-                          ? "Sin datos"
+                          ? "Sin registros"
                           : `${cooler.model_id}`}
                       </TableCell>
                       <TableCell
@@ -864,35 +880,39 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                           width: "8rem",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "4px",
-                            borderRadius: "2px",
-                            background: "#D4DAE3",
-                            width: "6rem",
-                          }}
-                        >
-                          <div
-                            style={{
-                              color: "#313A49",
-                              // fontFamily: "Space Mono",
-                              fontSize: "12px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "14px",
-                            }}
-                          >
-                            {" "}
-                            {cooler.days_without_visitC == undefined ||
-                            cooler.days_without_visitC == ""
-                              ? "Sin datos"
-                              : `${cooler.days_without_visitC} DÍAS`}
-                          </div>
-                        </div>
+                        {cooler.days_without_visitC == undefined ||
+                          cooler.days_without_visitC == ""
+                          ? ("Sin registros")
+                          : (
+                            <>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "4px",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  borderRadius: "2px",
+                                  background: "#D4DAE3",
+                                  width: "6rem",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#313A49",
+                                    // fontFamily: "Space Mono",
+                                    fontSize: "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "14px",
+                                  }}
+                                >
+                                  {" "}
+                                  {`${cooler.days_without_visitC} DÍAS`}
+                                </div>
+                              </div>
+                            </>
+                          )}
                       </TableCell>
                       <TableCell
                         style={{
@@ -901,32 +921,38 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                           width: "5rem",
                         }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "4px",
-                            borderRadius: "2px",
-                            border: "1.5px solid #0F9F67",
-                            background: "#FFF",
-                            width: "3rem",
-                          }}
-                        >
-                          <div
-                            style={{
-                              color: "#0F9F67",
-                              // fontFamily: "DM Sans",
-                              fontSize: "12px",
-                              fontStyle: "normal",
-                              fontWeight: 600,
-                              lineHeight: "14px",
-                            }}
-                          >
-                            {cooler.priority}
-                          </div>
-                        </div>
+                        {cooler.priority == undefined || cooler.priority == null
+                          ? ("Sin registros")
+                          : (
+                            <>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "4px",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  borderRadius: "2px",
+                                  border: "1.5px solid #0F9F67",
+                                  background: "#FFF",
+                                  width: "3rem",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#0F9F67",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "14px",
+                                  }}
+                                >
+                                  {cooler.priority}
+                                </div>
+                              </div>
+                            </>
+                          )}
                       </TableCell>
                       <TableCell
                         style={{

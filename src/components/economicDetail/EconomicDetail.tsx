@@ -188,7 +188,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.total_ownership_expense == null || coolersData?.cooler?.total_ownership_expense == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.total_ownership_expense}`}
+                  {coolersData?.cooler?.total_ownership_expense == null || coolersData?.cooler?.total_ownership_expense == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.total_ownership_expense}`}
                 </div>
                 <div
                   style={{
@@ -259,7 +259,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.sale_price == null || coolersData?.cooler?.sale_price == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.sale_price}`}
+                  {coolersData?.cooler?.sale_price == null || coolersData?.cooler?.sale_price == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.sale_price}`}
                 </div>
               </div>
               <div
@@ -294,7 +294,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.total_expense_service}`}
+                  {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.total_expense_service}`}
                 </div>
               </div>
             </div>
@@ -378,7 +378,7 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "normal",
                     }}
                   >
-                    {coolersData?.cooler?.present_value_of_depreciation == null || coolersData?.cooler?.present_value_of_depreciation == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.present_value_of_depreciation}`}
+                    {coolersData?.cooler?.present_value_of_depreciation == null || coolersData?.cooler?.present_value_of_depreciation == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.present_value_of_depreciation}`}
                   </div>
                   <div
                     style={{
@@ -427,7 +427,7 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "14px",
                     }}
                   >
-                    {coolersData?.cooler?.annual_decrement == null || coolersData?.cooler?.annual_decrement == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.annual_decrement}`}
+                    {coolersData?.cooler?.annual_decrement == null || coolersData?.cooler?.annual_decrement == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.annual_decrement}`}
                   </div>
                   <div
                     style={{
@@ -501,7 +501,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.year_of_production == null || coolersData?.cooler?.year_of_production == undefined ? "Sin datos" : `${coolersData?.cooler?.year_of_production}`}
+                  {coolersData?.cooler?.year_of_production == null || coolersData?.cooler?.year_of_production == undefined ? "Sin registro" : `${coolersData?.cooler?.year_of_production}`}
                 </div>
               </div>
               <div
@@ -821,7 +821,7 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "normal",
                 }}
               >
-                {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin datos" : '$' + `${coolersData?.cooler?.total_expense_service}`}
+                {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.total_expense_service}`}
               </div>
               <div
                 style={{

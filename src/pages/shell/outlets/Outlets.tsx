@@ -35,7 +35,7 @@ export default function Outlets() {
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state:any)=>state.organization)
+  const dto = useSelector((state: any) => state.organization)
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -55,11 +55,11 @@ export default function Outlets() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = {customer:dto,page_size: 100,page_number: 1, path: pathVerify()}
+  const body = { customer: dto, page_size: 100, page_number: 1, path: pathVerify() }
   const fetchData = async () => {
     try {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
-      const data = await fetchUniversal('outlets', body,setIsLoading);
+      const data = await fetchUniversal('outlets', body, setIsLoading);
       setOutletsData(data);
       setIsLoading(false);
     } catch (error) {
@@ -68,7 +68,7 @@ export default function Outlets() {
   };
   useEffect(() => {
     fetchData();
-  }, [dt,dto]);
+  }, [dt, dto]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)
@@ -196,33 +196,6 @@ export default function Outlets() {
                 />
               </div>
             </div>
-
-            {/* <div
-              style={{
-                display: "flex",
-                padding: "1px 18px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "18px",
-                flex: 100,
-                alignSelf: "stretch",
-                borderRadius: "0px 2px 2px 0px",
-                background: "#313A49",
-                margin: 0, // Elimina el margen
-              }}
-            >
-              <div
-                style={{
-                  color: "#D4DAE3",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 600,
-                  lineHeight: "normal",
-                }}
-              >
-                Buscar
-              </div>
-            </div> */}
           </div>
         </div>
         {/* Tabla */}
@@ -407,64 +380,76 @@ export default function Outlets() {
                                         width: "120px",
                                       }}
                                     >
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "4px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background: "#D4DAE3",
-                                          width: "60px",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            color: "#313A49",
-                                            // fontFamily: "Space Mono",
-                                            fontSize: "12px",
-                                            fontStyle: "normal",
-                                            fontWeight: 400,
-                                            lineHeight: "14px",
-                                          }}
-                                        >
-                                          {" "}                                          
-                                          {outlet.days_without_visitC === undefined  ||outlet.days_without_visitC === "" ? "Sin datos" : `${outlet.days_without_visitC} DÍAS`}
-                                        </div>
-                                      </div>
+                                      {outlet.days_without_visitC === undefined || outlet.days_without_visitC === "" ? ("Sin registro") : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              background: "#D4DAE3",
+                                              width: "60px",
+                                            }}
+                                          >
+                                            <div
+                                              style={{
+                                                color: "#313A49",
+                                                // fontFamily: "Space Mono",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 400,
+                                                lineHeight: "14px",
+                                              }}
+                                            >
+                                              {" "}
+                                              {outlet.days_without_visitC}
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
+
                                     </TableCell>
                                     <TableCell
                                       style={{
                                         paddingRight: "30px",
-                                        textAlign: "left",
+                                        textAlign: "center",
+                                        fontSize: "15px",
+                                        width: "78px",
                                       }}
                                     >
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "4px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          border: "1.5px solid #0F9F67",
-                                          background: "#FFF",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            color: "#0F9F67",
-                                            // fontFamily: "DM Sans",
-                                            fontSize: "12px",
-                                            fontStyle: "normal",
-                                            fontWeight: 600,
-                                            lineHeight: "14px",
-                                          }}
-                                        >
-                                          {outlet.priority === undefined  ||outlet.priority === "" ? "Sin datos" : outlet.priority}
-                                        </div>
-                                      </div>
+                                      {outlet.priority === undefined || outlet.priority === "" ? ("Sin registro") : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              border: "1.5px solid #0F9F67",
+                                              background: "#FFF",
+                                            }}
+                                          >
+                                            <div
+                                              style={{
+                                                color: "#0F9F67",
+                                                // fontFamily: "DM Sans",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 600,
+                                                lineHeight: "12px",
+                                              }}
+                                            >
+                                              {" "}
+                                              {outlet.priority}
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
                                     </TableCell>
                                     <TableCell
                                       style={{

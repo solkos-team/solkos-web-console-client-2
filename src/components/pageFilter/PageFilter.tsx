@@ -23,8 +23,8 @@ export default function (props) {
   const [statusDelete, setStatusDelete] = useState(false);
   const [dataZone, setDataZone] = useState([[""]]);
   const [dataSelect, setDataSelect] = useState([
-    "Zona",
     "Region",
+    "Zona",
     "Unidad Operativa",
     "Ruta",
   ]);

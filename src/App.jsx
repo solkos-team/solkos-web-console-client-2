@@ -34,6 +34,7 @@ import alert from "./sampleData/alert.png";
 import fails from "./sampleData/fails.png";
 import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
+import { fetchUniversalDetails } from "./utils/apiUtils";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -184,14 +185,7 @@ const routes = [
 function App() {
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
-  const [data, setData] = useState([
-    "KOF",
-    "HEINEKEN",
-    "PEÑAFIEL",
-    "MONDELEZ",
-    "AGA",
-    "ECO",
-  ]);
+  const [data, setData] = useState([]);
   const [opened, setOpened] = useState(false); // state of menu
   const location = useLocation();
   const [value, setValue] = useState();
@@ -199,8 +193,13 @@ function App() {
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
   };
-
-  useEffect(() => {
+  const fetctData = async () =>{
+    const data = await fetchUniversalDetails("customers")
+    setData(data)
+  }
+  useEffect(() => {    
+    // fetch get customers
+    fetctData()
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
     setCoolerInsightsOpen(location.pathname === "/");
     const storage = localStorage.getItem("ORG");

@@ -36,12 +36,14 @@ export default function Users() {
   };
   const filterCoolers = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
-      const searchString = searchQuery?.toLowerCase() || "";
-      const codeUsersName = item?.name?.toLowerCase() || "";
+      const searchString = searchQuery?.toLowerCase()
+      const codeUsersName = item?.name?.toLowerCase()
       const codeUsersEmail = item?.email?.toLowerCase();
+      const codeUsersPath = item?.path.toString().toLowerCase()
       return (
         codeUsersName.includes(searchString) ||
-        codeUsersEmail.includes(searchString)
+        codeUsersEmail.includes(searchString) ||
+        codeUsersPath.includes(searchString)
       );
     });
     return filteredData;

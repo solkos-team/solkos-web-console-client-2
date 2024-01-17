@@ -78,10 +78,9 @@ export default function CoolerDetail() {
 
   const { serial_number } = useParams();
 
-  useEffect(() => {
-    console.log(`Serial number from the route: ${serial_number}`);
+  useEffect(() => {  
   }, [serial_number, coolersData]);
-
+  const [tabs, setTabs] = useState<string | undefined>()
   return (
     <div>
       <PageFilter path="clt" />
@@ -240,7 +239,7 @@ export default function CoolerDetail() {
                 }}
               >
                 {coolersData?.cooler?.last_read == undefined ||
-                coolersData?.cooler?.last_read == ""
+                  coolersData?.cooler?.last_read == ""
                   ? "Sin registro"
                   : `${coolersData?.cooler?.last_read}`}
               </div>
@@ -267,7 +266,7 @@ export default function CoolerDetail() {
                 >
                   {" "}
                   {coolersData?.cooler?.days_without_visit == undefined ||
-                  coolersData?.cooler?.days_without_visit == ""
+                    coolersData?.cooler?.days_without_visit == ""
                     ? "Sin registro días sin visita"
                     : `${coolersData?.cooler?.days_without_visit} dias sin visita`}
                 </div>
@@ -382,7 +381,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.region === "" ||
-                  coolersData?.cooler?.region == undefined
+                    coolersData?.cooler?.region == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.region}
                 </div>
@@ -433,7 +432,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.route === "" ||
-                  coolersData?.cooler?.route == undefined
+                    coolersData?.cooler?.route == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.route}
                 </div>
@@ -483,7 +482,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.zone === "" ||
-                  coolersData?.cooler?.zone == undefined
+                    coolersData?.cooler?.zone == undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.zone}
                 </div>
@@ -508,15 +507,15 @@ export default function CoolerDetail() {
           }}
         >
           {" "}
-          <Tabs color="teal" defaultValue="first">
+          <Tabs color="teal" defaultValue="first" value={tabs}>
             <Tabs.List>
-              <Tabs.Tab value="first">Resumen</Tabs.Tab>
-              <Tabs.Tab value="second">Desglose economico </Tabs.Tab>
-              <Tabs.Tab value="tree">Gasto de energía </Tabs.Tab>
+              <Tabs.Tab value="first" onClick={()=>setTabs('first')}>Resumen</Tabs.Tab>
+              <Tabs.Tab value="second"onClick={()=>setTabs('second')}>Desglose economico </Tabs.Tab>
+              <Tabs.Tab value="tree" onClick={()=>setTabs('tree')}>Gasto de energía </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="first" pt="xs">
-              <Resume coolersData={coolersData} />
+              <Resume coolersData={coolersData} setTab={setTabs}/>
             </Tabs.Panel>
 
             <Tabs.Panel value="second" pt="xs">

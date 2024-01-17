@@ -235,12 +235,15 @@ export const fetchUniversalDetails = async (
   detailsID?,
   CRUD?
 ) => {
+  detailsID == undefined ? detailsID = "" : detailsID
   const url = `${baseUrl}/${componentURL}/${detailsID}`;
+  
+  console.log(url)
   const headers = {
     "Content-Type": "application/json",
   };
   const cuerpo = {
-    method: CRUD ? CRUD : "POST",
+    method: "GET",
     headers,
   };
   try {

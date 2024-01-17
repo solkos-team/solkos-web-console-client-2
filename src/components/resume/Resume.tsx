@@ -28,7 +28,7 @@ async function validarExistenciaImagen(url) {
   }
 }
 
-const Resume = ({ coolersData }) => {
+const Resume = ({ coolersData,setTab }) => {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
   const urlImagen = coolersData?.cooler?.asset_url;
@@ -988,6 +988,7 @@ const Resume = ({ coolersData }) => {
                     fontWeight: 400,
                     lineHeight: "normal",
                   }}
+                  onClick={()=>{setTab('tree')}}
                 >
                   Ver detalles
                 </div>

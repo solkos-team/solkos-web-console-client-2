@@ -89,7 +89,11 @@ export default function DrawerUsers({ isOpen, onClose, children }) {
           </div>
         </div>
       </div>
+      <hr />
       {children}
+      <div
+        style={{ width: "100%", height: "1px", background: "#CACACA" }}
+      ></div>
     </div>
   );
 }
