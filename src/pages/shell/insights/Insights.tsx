@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
+import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
 
 export default function Insights() {
   interface Algorithm {
@@ -44,15 +45,31 @@ export default function Insights() {
   interface InsightsData {
     [key: string]: InsightLevel;
   }
+  interface Cooler {
+    serial_number: string;
+    device_id: string;
+    model_id: string;
+    outlet_name: string;
+    region: string;
+    route: string;
+    latitude: string;
+    longitude: string;
+  }
 
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
+  const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+  const [mapKey, setMapKey] = useState(0);
+
+  const handleMapKeyChange = () => {
+    console.log("Calling handleMapKeyChange");
+    setMapKey((prevKey) => prevKey + 1);
+  };
+
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
@@ -83,9 +100,49 @@ export default function Insights() {
       console.error("Error fetching outlets:", error);
     }
   };
+
+  const body2 = {
+    customer: dto,
+    class: "STK",
+    algorithm: ["INSTALLED"],
+    path: pathVerify(),
+    page_size: 1000,
+    page_number: 1,
+  };
+  const fetchData2 = async () => {
+    try {
+      const data = await fetchUniversal("coolers", body2, setIsLoading);
+      setCoolersData(data);
+      console.log(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching coolers:", error);
+    }
+  };
   useEffect(() => {
     fetchData();
+    fetchData2();
+    handleMapKeyChange();
   }, [dt, dto]);
+
+  const filteredMarkers = coolersData
+    ? coolersData
+        .filter(
+          (cooler) =>
+            parseFloat(cooler.latitude) !== 0 &&
+            parseFloat(cooler.longitude) !== 0
+        )
+        .map((cooler) => ({
+          latitude: parseFloat(cooler.latitude),
+          longitude: parseFloat(cooler.longitude),
+        }))
+    : [];
+
+  const markers = filteredMarkers;
+
+  useEffect(() => {
+    console.log(markers);
+  }, [markers]);
 
   return (
     <div>
@@ -103,17 +160,7 @@ export default function Insights() {
         }}
       >
         {/* Titl */}
-        <div
-          // style={{
-          //   display: "flex",
-          //   padding: "0px 32px",
-          //   flexDirection: "column",
-          //   alignItems: "flex-start",
-          //   alignSelf: "stretch",
-          //   marginLeft: -55,
-          // }}
-          className="principal-titl"
-        >
+        <div className="principal-titl">
           <div
             style={{
               color: "#000005",
@@ -141,19 +188,7 @@ export default function Insights() {
           </div>
         </div>
         {/* principal */}
-        <div
-          // style={{
-          //   display: "flex",
-          //   padding: "16px 0px",
-          //   alignItems: "flex-start",
-          //   alignContent: "flex-start",
-          //   gap: "20px",
-          //   alignSelf: "stretch",
-          //   flexWrap: "wrap",
-          //   marginLeft: -25,
-          // }}
-          className="principal-content"
-        >
+        <div className="principal-content">
           <div
             style={{
               display: "flex",
@@ -514,126 +549,6 @@ export default function Insights() {
                         </div>
                       </div>
                     </div>
-                    {/* Alerts */}
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        padding: "2px",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        background: "#E6E6E6",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "5px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "7px",
-                          alignSelf: "stretch",
-                          borderRadius: "2px",
-                          background: "#E6E6E6",
-                        }}
-                      >
-                        <img
-                          src={"../../sampleData/alerts1.png"}
-                          alt="Descripción de la imagen"
-                        />
-                        <div
-                          style={{
-                            color: "#88888B",
-                            // fontFamily: "DM Sans",
-                            fontSize: "13px",
-                            fontStyle: "normal",
-                            fontWeight: 500,
-                            lineHeight: "14px",
-                          }}
-                        >
-                          Alertas
-                        </div>
-                      </div>
-                    </div> */}
-                    {/* Fails */}
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        padding: "2px",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        background: "#E6E6E6",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "5px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "7px",
-                          alignSelf: "stretch",
-                          borderRadius: "2px",
-                          background: "#E6E6E6",
-                        }}
-                      >
-                        <img
-                          src={"../../sampleData/fail2.png"}
-                          alt="Descripción de la imagen"
-                        />
-                        <div
-                          style={{
-                            color: "#88888B",
-                            // fontFamily: "DM Sans",
-                            fontSize: "13px",
-                            fontStyle: "normal",
-                            fontWeight: 500,
-                            lineHeight: "14px",
-                          }}
-                        >
-                          Fallas
-                        </div>
-                      </div>
-                    </div> */}
-                    {/* Indic */}
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        padding: "2px",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        background: "#E6E6E6",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "5px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "7px",
-                          alignSelf: "stretch",
-                          borderRadius: "2px",
-                          background: "#E6E6E6",
-                        }}
-                      >
-                        <img
-                          src={"../../sampleData/ind2.png"}
-                          alt="Descripción de la imagen"
-                        />
-                        <div
-                          style={{
-                            color: "#88888B",
-                            // fontFamily: "DM Sans",
-                            fontSize: "13px",
-                            fontStyle: "normal",
-                            fontWeight: 500,
-                            lineHeight: "14px",
-                          }}
-                        >
-                          Indicadores
-                        </div>
-                      </div>
-                    </div> */}
                   </div>
                 </div>
                 <br></br>
@@ -646,13 +561,19 @@ export default function Insights() {
                   }}
                 >
                   {/* MAPA */}
-                  <MapInsightsComponent
+                  {/* <MapInsightsComponent
                     markers={[
                       { latitude: 20.6904037, longitude: -99.8208632 },
                       { latitude: 20.70686, longitude: -99.83713 },
                       { latitude: 20.3915, longitude: -99.9814 },
                     ]}
-                  />
+                  /> */}
+
+                  {markers && markers.length > 0 ? (
+                    <MapInsightsComponent key={mapKey} markers={markers} />
+                  ) : (
+                    <SkeletonMapInsights />
+                  )}
                 </div>
               </div>
             </div>
@@ -836,6 +757,21 @@ export default function Insights() {
                                 >
                                   {algorithm.algorithm === "INSTALLED"
                                     ? "Instalado"
+                                    : algorithm.algorithm ===
+                                      "Indicador de Riesgo Nivel: 0"
+                                    ? "Sin riesgo"
+                                    : algorithm.algorithm ===
+                                      "Indicador de Riesgo Nivel: 1"
+                                    ? "Visitar punto de venta"
+                                    : algorithm.algorithm ===
+                                      "Indicador de Riesgo Nivel: 2"
+                                    ? "Requiere actualizar información"
+                                    : algorithm.algorithm ===
+                                      "Indicador de Riesgo Nivel: 3"
+                                    ? "Tomar acción urgente"
+                                    : algorithm.algorithm ===
+                                      "Indicador de Riesgo Nivel: 4"
+                                    ? "En riesgo"
                                     : algorithm.algorithm}
                                 </div>
                               </div>
@@ -912,7 +848,6 @@ export default function Insights() {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        marginLeft: 250,
                         fontWeight: "bold",
                         fontSize: "18px",
                       }}
@@ -1196,7 +1131,6 @@ export default function Insights() {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        marginLeft: 250,
                         fontWeight: "bold",
                         fontSize: "18px",
                       }}
@@ -1470,7 +1404,6 @@ export default function Insights() {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        marginLeft: 250,
                         fontWeight: "bold",
                         fontSize: "18px",
                       }}

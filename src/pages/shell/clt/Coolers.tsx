@@ -71,13 +71,14 @@ export default function Coolers() {
     class: "STK",
     algorithm: ["INSTALLED"],
     path: pathVerify(),
-    page_size: 100,
+    page_size: 1000,
     page_number: 1,
   };
   const fetchData = async () => {
     try {
       const data = await fetchUniversal("coolers", body, setIsLoading);
       setCoolersData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);

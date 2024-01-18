@@ -62,13 +62,13 @@ export default function (props) {
   };
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
-    const body = {customer : dto,path:dataLocalStorage}
+    const body = { customer: dto, path: dataLocalStorage };
     if (data.length < 4) {
       try {
         // const data = await fetchPath(dataLocalStorage);
-        const data = await fetchUniversal('paths',body);
-        const v1 = data === null ? [""] : data
-        console.log(v1)
+        const data = await fetchUniversal("paths", body);
+        const v1 = data === null ? [""] : data;
+        // console.log(v1)
         //dataZone.push(data)
         dataZone.unshift(v1); // solucion path desde api
         checkVisibilityPath();
@@ -270,74 +270,75 @@ export default function (props) {
               }}
             />
           </div>
-          {
-            data === null || data === undefined ? [] :
-          data.map((item, i) => (
-            <div style={{ display: "flex", alignItems: "center" }} key={i}>
-              <button
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  borderRadius: "8px",
-                  border: "1px solid #ADBACC",
-                  padding: "3px 7px",
-                  background: bloqPath(i) == false ? "" : "#D4DAE3",
-                }}
-                disabled={bloqPath(i)}
-                type="button"
-              >
-                {bloqPath(i) == false ? (
-                  <IconCircleX
+          {data === null || data === undefined
+            ? []
+            : data.map((item, i) => (
+                <div style={{ display: "flex", alignItems: "center" }} key={i}>
+                  <button
                     style={{
-                      color: "#313A49",
-                      width: "16px",
-                      height: "16px",
-                      marginRight: "3px",
-                      visibility: bloqPath(i) == false ? "visible" : "hidden",
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      border: "1px solid #ADBACC",
+                      padding: "3px 7px",
+                      background: bloqPath(i) == false ? "" : "#D4DAE3",
                     }}
-                    onClick={() => {
-                      deleteFilter(i);
-                    }}
-                    onClickCapture={(o) => !o}
-                  />
-                ) : (
-                  <IconLock
+                    disabled={bloqPath(i)}
+                    type="button"
+                  >
+                    {bloqPath(i) == false ? (
+                      <IconCircleX
+                        style={{
+                          color: "#313A49",
+                          width: "16px",
+                          height: "16px",
+                          marginRight: "3px",
+                          visibility:
+                            bloqPath(i) == false ? "visible" : "hidden",
+                        }}
+                        onClick={() => {
+                          deleteFilter(i);
+                        }}
+                        onClickCapture={(o) => !o}
+                      />
+                    ) : (
+                      <IconLock
+                        style={{
+                          color: "#ADBACC",
+                          width: "16px",
+                          height: "16px",
+                          marginRight: "3px",
+                        }}
+                      />
+                    )}
+
+                    <Text
+                      style={{
+                        // color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "14px",
+                        textTransform: "uppercase",
+                        userSelect: "none",
+                        color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
+                      }}
+                    >
+                      {item}
+                    </Text>
+                  </button>
+                  <IconChevronRight
                     style={{
                       color: "#ADBACC",
                       width: "16px",
                       height: "16px",
-                      marginRight: "3px",
+                      marginLeft: "3px",
+                      visibility: i == 3 ? "hidden" : "visible",
                     }}
                   />
-                )}
-
-                <Text
-                  style={{
-                    // color: "#313A49",
-                    // fontFamily: "Space Mono",
-                    fontSize: "12px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "14px",
-                    textTransform: "uppercase",
-                    userSelect: "none",
-                    color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
-                  }}
-                >
-                  {item}
-                </Text>
-              </button>
-              <IconChevronRight
-                style={{
-                  color: "#ADBACC",
-                  width: "16px",
-                  height: "16px",
-                  marginLeft: "3px",
-                  visibility: i == 3 ? "hidden" : "visible",
-                }}
-              />
-            </div>
-          ))}
+                </div>
+              ))}
 
           {/* ---------------------- */}
           {filterVisibility ? (

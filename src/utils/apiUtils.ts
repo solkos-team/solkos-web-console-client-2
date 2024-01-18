@@ -115,7 +115,7 @@ export const fetchOutlets = async (path, setIsLoading?) => {
 
   const data = {
     customer: "KOF",
-    page_size: 100,
+    page_size: 1000,
     page_number: 1,
     path: path,
   };
@@ -235,7 +235,7 @@ export const fetchUniversalDetails = async (
   detailsID?,
   CRUD?
 ) => {
-  detailsID == undefined ? detailsID = "" : detailsID
+  detailsID == undefined ? (detailsID = "") : detailsID;
   const url = `${baseUrl}/${componentURL}/${detailsID}`;
   const headers = {
     "Content-Type": "application/json",

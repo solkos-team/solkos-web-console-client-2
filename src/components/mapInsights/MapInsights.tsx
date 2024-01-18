@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
-import { IconMap } from "@tabler/icons-react";
 
 const MapInsightsComponent = ({ markers }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
@@ -30,19 +29,27 @@ const MapInsightsComponent = ({ markers }) => {
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/filled.png";
+    const bounds = new maps.LatLngBounds();
 
     markers.forEach(({ latitude, longitude }, index) => {
-      new maps.Marker({
+      const marker = new maps.Marker({
         position: { lat: latitude, lng: longitude },
         map,
         title: `Marcador ${index + 1}`,
         icon: {
-          url: iconUrl,
-          scaledSize: new maps.Size(32, 32),
+          path: maps.SymbolPath.CIRCLE,
+          fillColor: "#ec5078", // Color de relleno del círculo
+          fillOpacity: 1.0,
+          scale: 2, // Tamaño del círculo
+          strokeColor: "#000000", // Color del borde del círculo
+          strokeWeight: 0.1, // Grosor del borde del círculo
         },
       });
+
+      bounds.extend(marker.getPosition());
     });
+
+    map.fitBounds(bounds);
   };
 
   const openGoogleMaps = () => {
@@ -95,11 +102,11 @@ const MapInsightsComponent = ({ markers }) => {
           right: "10px",
         }}
       >
-        <IconMap
+        {/* <IconMap
           size={30}
           style={{ color: "#666666", cursor: "pointer" }}
           onClick={openGoogleMaps}
-        />
+        /> */}
       </div>
     </div>
   );
