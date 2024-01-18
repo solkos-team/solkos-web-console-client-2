@@ -77,7 +77,6 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body);
       setInsightsData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -730,9 +729,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights.INDICATOR.total === undefined
+                    {insightsData?.insights?.INDICATOR?.total === undefined
                       ? "Sin registro"
-                      : insightsData?.insights.INDICATOR.total.toLocaleString()}
+                      : insightsData?.insights?.INDICATOR?.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -783,7 +782,7 @@ export default function Insights() {
                 </div>
               </div>
               {/* Indicador barra */}
-              {insightsData?.insights.INDICATOR.algorithms.map(
+              {insightsData?.insights?.INDICATOR?.algorithms.map(
                 (algorithm, index) => {
                   const max = Math.max(
                     ...insightsData.insights.INDICATOR.algorithms.map(
@@ -967,9 +966,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights.ALERT.total === undefined
+                    {insightsData?.insights?.ALERT?.total === undefined
                       ? "Sin registro"
-                      : insightsData?.insights.ALERT.total.toLocaleString()}
+                      : insightsData?.insights?.ALERT?.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -1020,10 +1019,10 @@ export default function Insights() {
                 </div>
               </div>
               {/* Indicador barra */}
-              {insightsData?.insights.ALERT.algorithms.map(
+              {insightsData?.insights?.ALERT?.algorithms.map(
                 (algorithm, index) => {
                   const max = Math.max(
-                    ...insightsData.insights.ALERT.algorithms.map(
+                    ...insightsData.insights?.ALERT?.algorithms.map(
                       (alg) => alg.value
                     )
                   );
@@ -1213,9 +1212,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights.FAIL.total === undefined
+                    {insightsData?.insights?.FAIL?.total === undefined
                       ? "Sin registro"
-                      : insightsData?.insights.FAIL.total.toLocaleString()}
+                      : insightsData?.insights?.FAIL?.total.toLocaleString()}
                   </div>
                   <div
                     style={{
@@ -1266,10 +1265,10 @@ export default function Insights() {
                 </div>
               </div>
               {/* Indicador barra */}
-              {insightsData?.insights.FAIL.algorithms.map(
+              {insightsData?.insights?.FAIL?.algorithms.map(
                 (algorithm, index) => {
                   const max = Math.max(
-                    ...insightsData.insights.FAIL.algorithms.map(
+                    ...insightsData.insights?.FAIL?.algorithms.map(
                       (alg) => alg.value
                     )
                   );

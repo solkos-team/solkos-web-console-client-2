@@ -208,7 +208,6 @@ function App() {
       dispatch(addOrg());
     }
   }, [location.pathname]);
-
   const links = routes.map((item) => (
     <div key={item.label}>
       {item.links ? (
@@ -266,6 +265,9 @@ function App() {
   ));
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
+  const dto = useSelector((state) => state.works);
+  // console.log(dt,JSON.parse(dto).length || 0)
+  // console.log(dt,JSON.parse(dto))
 
   const saveOrganization = (ORG) => {
     if (ORG) {
@@ -277,7 +279,7 @@ function App() {
   const initOrg = () => {
     dt == [] ? console.log(dt) : saveOrganization("KOF");
   };
-
+const validPath = dto.length == 0 ? [] : JSON.parse(dto)
   return (
     <>
       <AppShell
@@ -480,6 +482,7 @@ function App() {
                       alignSelf: "stretch",
                     }}
                   >
+                    
                     <div
                       style={{
                         color: "#88888B",
@@ -487,14 +490,17 @@ function App() {
                         fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 600,
-                        lineHeight: "16px",
+                        lineHeight: "16px",                        
                       }}
                     >
                       Cambiar de organización
                     </div>
                   </div>
                   <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-                    {data.map((nombre, index) => (
+                    {/* Contenido del menú de cambio de organización */}
+                    {data == undefined ? ("Sin registros") :
+                    data.map((nombre, index) => (
+
                       <div
                         style={{
                           display: "flex",
@@ -502,6 +508,7 @@ function App() {
                           alignItems: "center",
                           gap: "10px",
                           alignSelf: "stretch",
+                          display : validPath.length >= 1 && dt !== nombre ? 'none' :'',
                         }}
                         key={index}
                         onChange={setData}
@@ -514,7 +521,7 @@ function App() {
                             flex: "100",
                             fontSize: "14px",
                             textDecorationColor: dt === nombre ? "#ec547c" : "",
-                            color: dt === nombre ? "#ec547c" : "",
+                            color: dt === nombre ? "#ec547c" : "",                            
                             cursor: "pointer",
                           }}
                           onClick={() => {

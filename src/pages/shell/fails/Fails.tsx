@@ -55,7 +55,7 @@ export default function Fails() {
   } | null>(null);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+console.log(coolersData)
   return (
     <div>
       <PageFilter />
@@ -170,7 +170,7 @@ export default function Fails() {
               </>
             ) : (
               // Mostrar las tarjetas una vez que la carga ha terminado
-              coolersData &&
+              coolersData == null ? ("Sin registros") : 
               coolersData
                 .filter(
                   (cooler) =>

@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addPath } from "../../app/works";
 import { fetchPath } from "./getPath";
 import { useStorage } from "reactfire";
+import { fetchUniversal } from "../../utils/apiUtils";
 
 export default function (props) {
   const dto = useSelector((state: any) => state.organization);
@@ -61,11 +62,15 @@ export default function (props) {
   };
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
+    const body = {customer : dto,path:dataLocalStorage}
     if (data.length < 4) {
       try {
-        const data = await fetchPath(dataLocalStorage);
+        // const data = await fetchPath(dataLocalStorage);
+        const data = await fetchUniversal('paths',body);
+        const v1 = data === null ? [""] : data
+        console.log(v1)
         //dataZone.push(data)
-        dataZone.unshift(data); // solucion path desde api
+        dataZone.unshift(v1); // solucion path desde api
         checkVisibilityPath();
       } catch (error) {
         console.log("Error fetching path", error);
@@ -265,7 +270,9 @@ export default function (props) {
               }}
             />
           </div>
-          {data.map((item, i) => (
+          {
+            data === null || data === undefined ? [] :
+          data.map((item, i) => (
             <div style={{ display: "flex", alignItems: "center" }} key={i}>
               <button
                 style={{

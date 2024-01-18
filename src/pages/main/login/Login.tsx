@@ -10,23 +10,29 @@ export const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  const pushUserConfig = (data) =>{
+    const {user} = data
+    const {Customer,Path} = user
+    localStorage.setItem("PATH", JSON.stringify(Path));
+    localStorage.setItem("ORG", Customer);
+    navigate("/insights");
+  }
+  const body = {
+    email: email,
+    password: password,
+  };
+  const fetchData = async () => {
+    try {
+      const data = await fetchUniversal("login", body);      
+      pushUserConfig(data)
+    } catch (error) {
+      console.error("Error fetching login:", error);
+      setErrorMessage(
+        "Usuario o contraseña incorrectos. Inténtalo de nuevo."
+      );
+    }
+  };
   const handleLogin = () => {
-    const body = {
-      email: email,
-      password: password,
-    };
-    const fetchData = async () => {
-      try {
-        const data = await fetchUniversal("login", body);
-        console.log(data);
-        navigate("/insights");
-      } catch (error) {
-        console.error("Error fetching login:", error);
-        setErrorMessage(
-          "Usuario o contraseña incorrectos. Inténtalo de nuevo."
-        );
-      }
-    };
 
     fetchData();
   };

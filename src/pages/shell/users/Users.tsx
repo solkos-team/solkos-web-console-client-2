@@ -51,8 +51,7 @@ export default function Users() {
     return filteredData;
   };
   const filterUsersDataDownload = (data) => {
-    !data ? [] : data;
-    return data.map((user) => ({
+    data === null || data === undefined ? [] : data.map((user) => ({
       Nombre: user.name,
       Email: user.email,
       Cliente: user.customer,
@@ -478,7 +477,7 @@ export default function Users() {
                 </Table>
                 <PaginationComponent
                   accion={setCurrentPage}
-                  totalDatos={dataUsers.length}
+                  totalDatos={dataUsers === null ? 0 : dataUsers.length}
                   datosPorPagina={datosPorPagina}
                   numero={setNumero}
                 />
