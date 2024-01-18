@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/recover" element={<RecoverPassword />} />
                 <Route path="/newPassword" element={<NewPassword />}></Route>
                 <Route path="" element={<App />}>
-                  <Route index element={<Login />} />
+                  <Route index element={<Insights />} />
                   <Route path="/alerts" element={<Alerts />} />
                   <Route path="/clt" element={<Coolers />} />
                   <Route path="/coolerDetail" element={<CoolerDetail />} />

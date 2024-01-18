@@ -18,6 +18,7 @@ import { fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { UsersInterfaces } from "./UsersInterfaces";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
+import { SkeletonTableUsers } from "../../../components/skeletonTableUsers/SkeletonTableUsers";
 
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -30,16 +31,17 @@ export default function Users() {
   const dt = useSelector((state: any) => state.works);
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };
   const filterCoolers = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
-      const searchString = searchQuery?.toLowerCase()
-      const codeUsersName = item?.name?.toLowerCase()
+      const searchString = searchQuery?.toLowerCase();
+      const codeUsersName = item?.name?.toLowerCase();
       const codeUsersEmail = item?.email?.toLowerCase();
-      const codeUsersPath = item?.path.toString().toLowerCase()
+      const codeUsersPath = item?.path.toString().toLowerCase();
       return (
         codeUsersName.includes(searchString) ||
         codeUsersEmail.includes(searchString) ||
@@ -49,7 +51,7 @@ export default function Users() {
     return filteredData;
   };
   const filterUsersDataDownload = (data) => {
-    !data ? [] : data
+    !data ? [] : data;
     return data.map((user) => ({
       Nombre: user.name,
       Email: user.email,
@@ -57,11 +59,9 @@ export default function Users() {
       Path: user.path.toString(),
       // Fecha_Actualizacion: user.updated_at,
       // Fecha_Creacion: user.created_at
-    }))
-  }
-  const filteredUsers = dataUsers
-    ? filterCoolers(dataUsers, searchValue)
-    : [];
+    }));
+  };
+  const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const openDrawer = () => {
     setIsDrawerOpen(true);
   };
@@ -92,8 +92,9 @@ export default function Users() {
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("users", body);
+      const data = await fetchUniversal("users", body, setIsLoading);
       setDataUsers(data);
+      setIsLoading(false);
     } catch (error) {
       console.log("Error", error);
     }
@@ -110,7 +111,7 @@ export default function Users() {
   }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina]);
   return (
     <div>
-      <PageFilter />
+      <PageFilter loading={isLoading} />
       <br></br>
       <div
         style={{
@@ -215,7 +216,10 @@ export default function Users() {
                 Colaboradores
               </div>
               <div style={{ marginLeft: 480 }}>
-                <ExportToExcel datos={filterUsersDataDownload(dataUsers)} nombre={"Users"} />
+                <ExportToExcel
+                  datos={filterUsersDataDownload(dataUsers)}
+                  nombre={"Users"}
+                />
               </div>
               <Button style={{ background: "#ED5079" }} onClick={openDrawer2}>
                 Nuevo colaborador
@@ -332,116 +336,145 @@ export default function Users() {
                       </TableHeaderCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody
-                    style={{
-                      display: "block",
-                      height: "100%",
-                      minWidth: "900px",
-                      overflowY: "auto",
-                    }}
-                  >
-                    {
-                      filteredUsers
-                        .slice(firstIndex, lastIndex)
-                        .map((user, index) => (
-                          <TableRow key={index} style={{ userSelect: "none" }}>
-                            <TableCell
-                              style={{
-                                paddingRight: "30px",
-                                fontSize: "15px",
-                                textAlign: "left",
-                                width: "8rem",
-                              }}
-                            >
-                              {user.name}
-                            </TableCell>
-                            <TableCell
-                              style={{
-                                paddingRight: "30px",
-                                fontSize: "15px",
-                                textAlign: "left",
-                                width: "8rem",
-                              }}
-                            >
-                              {user.email}
-                            </TableCell>
-                            <TableCell
-                              style={{
-                                paddingLeft: "2.5rem",
-                                fontSize: "15px",
-                                textAlign: "left",
-                                width: "150px",
-                              }}
-                            >
-                              {user.customer}
-                            </TableCell>
-                            <TableCell
-
-                              style={{
-                                paddingRight: "30px",
-                                fontSize: "15px",
-                                textAlign: "left",
-                                width: "150px",
-                              }}
-                            >
-                              {user.path}
-                            </TableCell>
-                            <TableCell
-                              style={{
-                                paddingRight: "50px",
-                                fontSize: "15px",
-                                width: "180px",
-                                textAlign: "left",
-                                cursor: "pointer",
-                              }}
-                              onClick={openDrawer}
-                            >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "flex-end",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  flex: 100,
-                                  height: "40px",
-                                }}
+                  {isLoading == true ? (
+                    <>
+                      <br></br>
+                      <br></br>
+                      <div style={{ marginBottom: -40 }}></div>
+                      <SkeletonTableUsers></SkeletonTableUsers>
+                    </>
+                  ) : (
+                    ""
+                  )}
+                  {!isLoading && (
+                    <>
+                      {filteredUsers.length > 0 ? (
+                        <TableBody
+                          style={{
+                            display: "block",
+                            height: "100%",
+                            minWidth: "900px",
+                            overflowY: "auto",
+                          }}
+                        >
+                          {filteredUsers
+                            .slice(firstIndex, lastIndex)
+                            .map((user, index) => (
+                              <TableRow
+                                key={index}
+                                style={{ userSelect: "none" }}
                               >
-                                <div
+                                <TableCell
                                   style={{
-                                    color: "#3E83FF",
-                                    fontSize: "14px",
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    lineHeight: "20px",
-                                    display: "flex",
-                                    marginRight: "90px",
+                                    paddingRight: "30px",
+                                    fontSize: "15px",
+                                    textAlign: "left",
+                                    width: "8rem",
                                   }}
                                 >
-                                  Ver más{" "}
-                                  <IconArrowRight
+                                  {user.name}
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    paddingRight: "30px",
+                                    fontSize: "15px",
+                                    textAlign: "left",
+                                    width: "8rem",
+                                  }}
+                                >
+                                  {user.email}
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    paddingLeft: "2.5rem",
+                                    fontSize: "15px",
+                                    textAlign: "left",
+                                    width: "150px",
+                                  }}
+                                >
+                                  {user.customer}
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    paddingRight: "30px",
+                                    fontSize: "15px",
+                                    textAlign: "left",
+                                    width: "150px",
+                                  }}
+                                >
+                                  {user.path}
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    paddingRight: "50px",
+                                    fontSize: "15px",
+                                    width: "180px",
+                                    textAlign: "left",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={openDrawer}
+                                >
+                                  <div
                                     style={{
-                                      color: "#3E83FF",
-                                      width: "1.0rem",
+                                      display: "flex",
+                                      justifyContent: "flex-end",
+                                      alignItems: "center",
+                                      gap: "4px",
+                                      flex: 100,
+                                      height: "40px",
                                     }}
-                                  />
-                                </div>
-                              </div>
-                              <DrawerUsers isOpen={isDrawerOpen} onClose={closeDrawer}>
-                                {""}
-                              </DrawerUsers>
-                            </TableCell>
-                          </TableRow>
-
-                        ))
-                    }
-                    <DrawerNewUser
-                      isOpen={isDrawerOpen2}
-                      onClose={closeDrawer2}
-                      reloadUsers={handleReloadUsers}
-                    >
-                      {""}
-                    </DrawerNewUser>
-                  </TableBody>
+                                  >
+                                    <div
+                                      style={{
+                                        color: "#3E83FF",
+                                        fontSize: "14px",
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        lineHeight: "20px",
+                                        display: "flex",
+                                        marginRight: "90px",
+                                      }}
+                                    >
+                                      Ver más{" "}
+                                      <IconArrowRight
+                                        style={{
+                                          color: "#3E83FF",
+                                          width: "1.0rem",
+                                        }}
+                                      />
+                                    </div>
+                                  </div>
+                                  <DrawerUsers
+                                    isOpen={isDrawerOpen}
+                                    onClose={closeDrawer}
+                                  ></DrawerUsers>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          <DrawerNewUser
+                            isOpen={isDrawerOpen2}
+                            onClose={closeDrawer2}
+                            reloadUsers={handleReloadUsers}
+                          >
+                            {""}
+                          </DrawerNewUser>
+                        </TableBody>
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            marginLeft: 250,
+                            fontWeight: "bold",
+                            fontSize: "18px",
+                          }}
+                        >
+                          <p>No hay datos de coolers disponibles.</p>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </Table>
                 <PaginationComponent
                   accion={setCurrentPage}

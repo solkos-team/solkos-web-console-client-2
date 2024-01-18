@@ -21,6 +21,7 @@ import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../components/drawerOutlets/CoolerInterface";
+import { SkeletonTableOutlets } from "../../../components/skeletonTableOutlets/SkeletonTableOutlets";
 
 export default function Outlets() {
   const [searchValue, setSearchValue] = useState("");
@@ -35,7 +36,7 @@ export default function Outlets() {
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization)
+  const dto = useSelector((state: any) => state.organization);
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -55,11 +56,16 @@ export default function Outlets() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = { customer: dto, page_size: 100, page_number: 1, path: pathVerify() }
+  const body = {
+    customer: dto,
+    page_size: 100,
+    page_number: 1,
+    path: pathVerify(),
+  };
   const fetchData = async () => {
     try {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
-      const data = await fetchUniversal('outlets', body, setIsLoading);
+      const data = await fetchUniversal("outlets", body, setIsLoading);
       setOutletsData(data);
       setIsLoading(false);
     } catch (error) {
@@ -260,76 +266,70 @@ export default function Outlets() {
             <div style={{}}>
               <div>
                 <div>
-                  {isLoading == true || filteredOutlets.length === 0 ? (
-                    <div
+                  <Card>
+                    <Table
                       style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: 400,
-                        fontWeight: "bold",
-                        fontSize: "18px",
+                        marginBottom: "20px",
+                        borderCollapse: "collapse",
+                        // width: "910px",
+                        height: "400px",
                       }}
                     >
-                      Cargando...
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                  {!isLoading && (
-                    <>
-                      {filteredOutlets.length > 0 ? (
-                        <Card>
-                          <Table
+                      <TableHead style={{ display: "block" }}>
+                        <TableRow>
+                          <TableHeaderCell
                             style={{
-                              marginBottom: "20px",
-                              borderCollapse: "collapse",
-                              // width: "910px",
-                              height: "400px",
+                              textAlign: "left",
+                              width: "220px",
                             }}
                           >
-                            <TableHead style={{ display: "block" }}>
-                              <TableRow>
-                                <TableHeaderCell
-                                  style={{
-                                    textAlign: "left",
-                                    width: "220px",
-                                  }}
-                                >
-                                  Nombre
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{ textAlign: "left", width: "160px" }}
-                                >
-                                  # Enfriadores
-                                </TableHeaderCell>
+                            Nombre
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{ textAlign: "left", width: "160px" }}
+                          >
+                            # Enfriadores
+                          </TableHeaderCell>
 
-                                <TableHeaderCell
-                                  style={{
-                                    textAlign: "left",
-                                    paddingRight: "9px",
-                                    width: "160px",
-                                  }}
-                                >
-                                  Días sin visita
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{
-                                    textAlign: "left",
-                                    paddingRight: "30px",
-                                    width: "160px",
-                                  }}
-                                >
-                                  {" "}
-                                  Prioridad
-                                </TableHeaderCell>
-                                <TableHeaderCell
-                                  style={{ textAlign: "left", width: "150px" }}
-                                >
-                                  Acciones
-                                </TableHeaderCell>
-                              </TableRow>
-                            </TableHead>
+                          <TableHeaderCell
+                            style={{
+                              textAlign: "left",
+                              paddingRight: "9px",
+                              width: "160px",
+                            }}
+                          >
+                            Días sin visita
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{
+                              textAlign: "left",
+                              paddingRight: "30px",
+                              width: "160px",
+                            }}
+                          >
+                            {" "}
+                            Prioridad
+                          </TableHeaderCell>
+                          <TableHeaderCell
+                            style={{ textAlign: "left", width: "150px" }}
+                          >
+                            Acciones
+                          </TableHeaderCell>
+                        </TableRow>
+                      </TableHead>
+                      {isLoading == true ? (
+                        <>
+                          <br></br>
+                          <br></br>
+                          <div style={{ marginBottom: -40 }}></div>
+                          <SkeletonTableOutlets></SkeletonTableOutlets>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                      {!isLoading && (
+                        <>
+                          {filteredOutlets.length > 0 ? (
                             <TableBody
                               style={{
                                 display: "block",
@@ -380,7 +380,11 @@ export default function Outlets() {
                                         width: "120px",
                                       }}
                                     >
-                                      {outlet.days_without_visitC === undefined || outlet.days_without_visitC === "" ? ("Sin registro") : (
+                                      {outlet.days_without_visitC ===
+                                        undefined ||
+                                      outlet.days_without_visitC === "" ? (
+                                        "Sin registro"
+                                      ) : (
                                         <>
                                           <div
                                             style={{
@@ -410,7 +414,6 @@ export default function Outlets() {
                                           </div>
                                         </>
                                       )}
-
                                     </TableCell>
                                     <TableCell
                                       style={{
@@ -420,7 +423,10 @@ export default function Outlets() {
                                         width: "78px",
                                       }}
                                     >
-                                      {outlet.priority === undefined || outlet.priority === "" ? ("Sin registro") : (
+                                      {outlet.priority === undefined ||
+                                      outlet.priority === "" ? (
+                                        "Sin registro"
+                                      ) : (
                                         <>
                                           <div
                                             style={{
@@ -504,38 +510,30 @@ export default function Outlets() {
                                   </TableRow>
                                 ))}
                             </TableBody>
-                          </Table>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end", // Alinea la paginación a la derecha
-                              marginTop: "16px", // Espacio superior para separar la paginación de la tabla
-                            }}
-                          >
-                            <PaginationComponent
-                              accion={setCurrentPage}
-                              totalDatos={filteredOutlets.length}
-                              datosPorPagina={datosPorPagina}
-                              numero={setNumero}
-                            />
-                          </div>
-                        </Card>
-                      ) : (
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginLeft: 250,
-                            fontWeight: "bold",
-                            fontSize: "18px",
-                          }}
-                        >
-                          <p>No hay datos de outlets disponibles.</p>
-                        </div>
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginLeft: 250,
+                                fontWeight: "bold",
+                                fontSize: "18px",
+                              }}
+                            >
+                              <p>No hay datos de coolers disponibles.</p>
+                            </div>
+                          )}
+                        </>
                       )}
-                    </>
-                  )}
+                    </Table>
+                    <PaginationComponent
+                      accion={setCurrentPage}
+                      totalDatos={filteredOutlets.length}
+                      datosPorPagina={datosPorPagina}
+                      numero={setNumero}
+                    />
+                  </Card>
                 </div>
               </div>
             </div>

@@ -494,7 +494,6 @@ function App() {
                     </div>
                   </div>
                   <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-                    {/* Contenido del menú de cambio de organización */}
                     {data.map((nombre, index) => (
                       <div
                         style={{

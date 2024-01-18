@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function DrawerUsers({ isOpen, onClose, children }) {
+export default function DrawerUsers({ isOpen, onClose }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function DrawerUsers({ isOpen, onClose, children }) {
         transform: `translateX(${isOpen ? "0" : "100%"})`,
         transition: "transform 0.3s ease-in-out",
         padding: "10px",
-        overflowY: "auto",
+        overflowY: "auto", // Agregado para permitir el scroll vertical
         maxHeight: "100vh",
       }}
     >
@@ -90,7 +90,6 @@ export default function DrawerUsers({ isOpen, onClose, children }) {
         </div>
       </div>
       <hr />
-      {children}
       <div
         style={{ width: "100%", height: "1px", background: "#CACACA" }}
       ></div>

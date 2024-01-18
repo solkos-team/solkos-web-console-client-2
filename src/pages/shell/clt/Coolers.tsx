@@ -330,18 +330,8 @@ export default function Coolers() {
                         <>
                           <br></br>
                           <br></br>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              marginLeft: 10,
-                              fontWeight: "bold",
-                              fontSize: "18px",
-                            }}
-                          >
-                            <SkeletonTable></SkeletonTable>
-                          </div>
+                          <div style={{ marginBottom: -40 }}></div>
+                          <SkeletonTable></SkeletonTable>
                         </>
                       ) : (
                         ""
