@@ -4,6 +4,7 @@ import { fetchInsights, fetchUniversal } from "../../../utils/apiUtils";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
+import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
 
 export default function Insights() {
   interface Algorithm {
@@ -85,8 +86,6 @@ export default function Insights() {
   useEffect(() => {
     fetchData();
   }, [dt, dto]);
-
-  // console.log(insightsData?.insights?.DATA?.coolers_total);
 
   return (
     <div>
@@ -699,199 +698,230 @@ export default function Insights() {
                   Indicadores
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "8px",
-                  flex: 100,
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    alignContent: "flex-end",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "26px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {insightsData?.insights?.INDICATOR?.total === undefined
-                      ? "Sin registro"
-                      : insightsData?.insights?.INDICATOR?.total.toLocaleString()}
-                  </div>
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    total de indicadores
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "8px 0px",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "20px",
-                  }}
-                >
-                  Tipo
-                </div>
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "20px",
-                  }}
-                >
-                  Cantidad
-                </div>
-              </div>
-              {/* Indicador barra */}
-              {insightsData?.insights?.INDICATOR?.algorithms.map(
-                (algorithm, index) => {
-                  const max = Math.max(
-                    ...insightsData.insights.INDICATOR.algorithms.map(
-                      (alg) => alg.value
-                    )
-                  );
-
-                  return (
-                    <div
-                      key={index}
-                      style={{
-                        display: "flex",
-                        padding: "0px",
-                        gap: "16px",
-                        alignSelf: "stretch",
-                      }}
-                    >
+              {isLoading == true ? (
+                <>
+                  <br></br>
+                  <div style={{ marginBottom: -40 }}></div>
+                  <SkeletonInsights></SkeletonInsights>
+                </>
+              ) : (
+                ""
+              )}
+              {!isLoading && (
+                <>
+                  {insightsData && insightsData?.insights != undefined ? (
+                    <>
+                      {/* ******************************** */}
                       <div
                         style={{
-                          width: `${(algorithm.value / max) * 100}%`,
-                          height: "36px",
-                          borderRadius: "4px",
-                          background: "#BCDAFF",
                           display: "flex",
-                          alignItems: "center",
-                          paddingLeft: "16px",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          gap: "8px",
+                          flex: 100,
+                          alignSelf: "stretch",
                         }}
                       >
                         <div
                           style={{
-                            color: "#142257",
-                            fontSize: "14px",
-                            fontWeight: 400,
-                            lineHeight: "20px",
-                            whiteSpace: "nowrap",
+                            display: "flex",
+                            alignItems: "flex-end",
+                            alignContent: "flex-end",
+                            gap: "8px",
+                            alignSelf: "stretch",
+                            flexWrap: "wrap",
                           }}
                         >
-                          {algorithm.algorithm === "INSTALLED"
-                            ? "Instalado"
-                            : algorithm.algorithm}
+                          <div
+                            style={{
+                              color: "#000005",
+                              // fontFamily: "DM Sans",
+                              fontSize: "26px",
+                              fontStyle: "normal",
+                              fontWeight: 500,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            {insightsData?.insights?.INDICATOR?.total ===
+                            undefined
+                              ? "Sin registro"
+                              : insightsData?.insights?.INDICATOR?.total.toLocaleString()}
+                          </div>
+                          <div
+                            style={{
+                              color: "#88888B",
+                              // fontFamily: "DM Sans",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            total de indicadores
+                          </div>
                         </div>
                       </div>
                       <div
                         style={{
-                          color: "#000005",
-                          fontSize: "14px",
-                          fontWeight: 400,
-                          lineHeight: "normal",
-                          marginLeft: "auto",
+                          display: "flex",
+                          padding: "8px 0px",
+                          justifyContent: "space-between",
+                          alignItems: "flex-start",
+                          alignSelf: "stretch",
                         }}
                       >
-                        {algorithm.value === undefined
-                          ? "Sin registro"
-                          : algorithm.value.toLocaleString()}
+                        <div
+                          style={{
+                            color: "#3A3A3F",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Tipo
+                        </div>
+                        <div
+                          style={{
+                            color: "#3A3A3F",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Cantidad
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-              )}
+                      {/* Indicador barra */}
+                      {insightsData?.insights?.INDICATOR?.algorithms.map(
+                        (algorithm, index) => {
+                          const max = Math.max(
+                            ...insightsData.insights.INDICATOR.algorithms.map(
+                              (alg) => alg.value
+                            )
+                          );
 
-              <div
-                style={{
-                  display: "flex",
-                  padding: "4px 0px",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "10px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "420px",
-                    height: "1px",
-                    background: "#CACACA",
-                  }}
-                ></div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  gap: "4px",
-                  marginLeft: 270,
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate("/indicator")}
-              >
-                <div
-                  style={{
-                    color: "#3E83FF",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Ver detalles
-                </div>
-                <img
-                  src={"../../sampleData/arrow_b.png"}
-                  alt="Descripción de la imagen"
-                  style={{ marginTop: 5 }}
-                />
-              </div>
-              {/* DRAWER */}
+                          return (
+                            <div
+                              key={index}
+                              style={{
+                                display: "flex",
+                                padding: "0px",
+                                gap: "16px",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: `${(algorithm.value / max) * 100}%`,
+                                  height: "36px",
+                                  borderRadius: "4px",
+                                  background: "#BCDAFF",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  paddingLeft: "16px",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#142257",
+                                    fontSize: "14px",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                >
+                                  {algorithm.algorithm === "INSTALLED"
+                                    ? "Instalado"
+                                    : algorithm.algorithm}
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  color: "#000005",
+                                  fontSize: "14px",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                  marginLeft: "auto",
+                                }}
+                              >
+                                {algorithm.value === undefined
+                                  ? "Sin registro"
+                                  : algorithm.value.toLocaleString()}
+                              </div>
+                            </div>
+                          );
+                        }
+                      )}
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "4px 0px",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "10px",
+                          alignSelf: "stretch",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "420px",
+                            height: "1px",
+                            background: "#CACACA",
+                          }}
+                        ></div>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                          gap: "4px",
+                          marginLeft: 270,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => navigate("/indicator")}
+                      >
+                        <div
+                          style={{
+                            color: "#3E83FF",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "normal",
+                          }}
+                        >
+                          Ver detalles
+                        </div>
+                        <img
+                          src={"../../sampleData/arrow_b.png"}
+                          alt="Descripción de la imagen"
+                          style={{ marginTop: 5 }}
+                        />
+                      </div>
+                      {/* ******************************** */}
+                    </>
+                  ) : (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginLeft: 250,
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                      }}
+                    >
+                      <p>No hay datos de coolers disponibles.</p>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
 
             {/* Alertas */}
@@ -936,209 +966,246 @@ export default function Insights() {
                   Alertas
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "8px",
-                  flex: 100,
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    alignContent: "flex-end",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "26px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {insightsData?.insights?.ALERT?.total === undefined
-                      ? "Sin registro"
-                      : insightsData?.insights?.ALERT?.total.toLocaleString()}
-                  </div>
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    total de alertas
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "8px 0px",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "20px",
-                  }}
-                >
-                  Tipo
-                </div>
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "20px",
-                  }}
-                >
-                  Cantidad
-                </div>
-              </div>
-              {/* Indicador barra */}
-              {insightsData?.insights?.ALERT?.algorithms.map(
-                (algorithm, index) => {
-                  const max = Math.max(
-                    ...insightsData.insights?.ALERT?.algorithms.map(
-                      (alg) => alg.value
-                    )
-                  );
+              {isLoading == true ? (
+                <>
+                  <br></br>
+                  <div style={{ marginBottom: -40 }}></div>
+                  <SkeletonInsights></SkeletonInsights>
+                </>
+              ) : (
+                ""
+              )}
 
-                  return (
-                    <div
-                      key={index}
-                      style={{
-                        display: "flex",
-                        padding: "0px",
-                        gap: "16px",
-                        alignSelf: "stretch",
-                      }}
-                    >
+              {!isLoading && (
+                <>
+                  {insightsData && insightsData?.insights != undefined ? (
+                    <>
+                      {/* ************************** */}
                       <div
                         style={{
-                          width: `${(algorithm.value / max) * 100}%`,
-                          height: "36px",
-                          borderRadius: "4px",
-                          background: "#FEF5C7",
                           display: "flex",
-                          alignItems: "center",
-                          paddingLeft: "16px",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          gap: "8px",
+                          flex: 100,
+                          alignSelf: "stretch",
                         }}
                       >
                         <div
                           style={{
-                            color: "#142257",
-                            fontSize: "14px",
-                            fontWeight: 400,
-                            lineHeight: "20px",
-                            whiteSpace: "nowrap",
+                            display: "flex",
+                            alignItems: "flex-end",
+                            alignContent: "flex-end",
+                            gap: "8px",
+                            alignSelf: "stretch",
+                            flexWrap: "wrap",
                           }}
                         >
-                          {algorithm.algorithm ===
-                          "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                            ? "Alta demanda del compresor"
-                            : algorithm.algorithm === "LOW_VOLTAGE_ALERT"
-                            ? "Bajo voltaje"
-                            : algorithm.algorithm === "HIGH_VOLTAGE_ALERT"
-                            ? "Alto voltaje"
-                            : algorithm.algorithm === "MOVED_VISIT_ALERT"
-                            ? "Movimiento"
-                            : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
-                            ? "Alta temperatura"
-                            : algorithm.algorithm === "DISCONNECTION_ALERT"
-                            ? "Desconexión"
-                            : algorithm.algorithm}
+                          <div
+                            style={{
+                              color: "#000005",
+                              // fontFamily: "DM Sans",
+                              fontSize: "26px",
+                              fontStyle: "normal",
+                              fontWeight: 500,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            {insightsData?.insights?.ALERT?.total === undefined
+                              ? "Sin registro"
+                              : insightsData?.insights?.ALERT?.total.toLocaleString()}
+                          </div>
+                          <div
+                            style={{
+                              color: "#88888B",
+                              // fontFamily: "DM Sans",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            total de alertas
+                          </div>
                         </div>
                       </div>
                       <div
                         style={{
-                          color: "#000005",
-                          fontSize: "14px",
-                          fontWeight: 400,
-                          lineHeight: "normal",
-                          marginLeft: "auto",
+                          display: "flex",
+                          padding: "8px 0px",
+                          justifyContent: "space-between",
+                          alignItems: "flex-start",
+                          alignSelf: "stretch",
                         }}
                       >
-                        {algorithm.value === undefined
-                          ? "Sin registro"
-                          : algorithm.value.toLocaleString()}
+                        <div
+                          style={{
+                            color: "#3A3A3F",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Tipo
+                        </div>
+                        <div
+                          style={{
+                            color: "#3A3A3F",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Cantidad
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-              )}
+                      {/* Indicador barra */}
+                      {insightsData?.insights?.ALERT?.algorithms.map(
+                        (algorithm, index) => {
+                          const max = Math.max(
+                            ...insightsData.insights?.ALERT?.algorithms.map(
+                              (alg) => alg.value
+                            )
+                          );
 
-              <div
-                style={{
-                  display: "flex",
-                  padding: "4px 0px",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "10px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "420px",
-                    height: "1px",
-                    background: "#CACACA",
-                  }}
-                ></div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  gap: "4px",
-                  marginLeft: 270,
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate("/alerts")}
-              >
-                <div
-                  style={{
-                    color: "#3E83FF",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Ver detalles
-                </div>
-                <img
-                  src={"../../sampleData/arrow_b.png"}
-                  alt="Descripción de la imagen"
-                  style={{ marginTop: 5 }}
-                />
-              </div>
+                          return (
+                            <div
+                              key={index}
+                              style={{
+                                display: "flex",
+                                padding: "0px",
+                                gap: "16px",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: `${(algorithm.value / max) * 100}%`,
+                                  height: "36px",
+                                  borderRadius: "4px",
+                                  background: "#FEF5C7",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  paddingLeft: "16px",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#142257",
+                                    fontSize: "14px",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                >
+                                  {algorithm.algorithm ===
+                                  "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                    ? "Alta demanda del compresor"
+                                    : algorithm.algorithm ===
+                                      "LOW_VOLTAGE_ALERT"
+                                    ? "Bajo voltaje"
+                                    : algorithm.algorithm ===
+                                      "HIGH_VOLTAGE_ALERT"
+                                    ? "Alto voltaje"
+                                    : algorithm.algorithm ===
+                                      "MOVED_VISIT_ALERT"
+                                    ? "Movimiento"
+                                    : algorithm.algorithm ===
+                                      "HIGH_TEMPERATURE_ALERT"
+                                    ? "Alta temperatura"
+                                    : algorithm.algorithm ===
+                                      "DISCONNECTION_ALERT"
+                                    ? "Desconexión"
+                                    : algorithm.algorithm}
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  color: "#000005",
+                                  fontSize: "14px",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                  marginLeft: "auto",
+                                }}
+                              >
+                                {algorithm.value === undefined
+                                  ? "Sin registro"
+                                  : algorithm.value.toLocaleString()}
+                              </div>
+                            </div>
+                          );
+                        }
+                      )}
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "4px 0px",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "10px",
+                          alignSelf: "stretch",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "420px",
+                            height: "1px",
+                            background: "#CACACA",
+                          }}
+                        ></div>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                          gap: "4px",
+                          marginLeft: 270,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => navigate("/alerts")}
+                      >
+                        <div
+                          style={{
+                            color: "#3E83FF",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "normal",
+                          }}
+                        >
+                          Ver detalles
+                        </div>
+                        <img
+                          src={"../../sampleData/arrow_b.png"}
+                          alt="Descripción de la imagen"
+                          style={{ marginTop: 5 }}
+                        />
+                      </div>
+                      {/* ************************** */}
+                    </>
+                  ) : (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginLeft: 250,
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                      }}
+                    >
+                      <p>No hay datos de coolers disponibles.</p>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
             {/* Fallas */}
             <div
@@ -1182,204 +1249,237 @@ export default function Insights() {
                   Fallas
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "8px",
-                  flex: 100,
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    alignContent: "flex-end",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "26px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {insightsData?.insights?.FAIL?.total === undefined
-                      ? "Sin registro"
-                      : insightsData?.insights?.FAIL?.total.toLocaleString()}
-                  </div>
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    total de fallas
-                  </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "8px 0px",
-                  justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "20px",
-                  }}
-                >
-                  Tipo
-                </div>
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "20px",
-                  }}
-                >
-                  Cantidad
-                </div>
-              </div>
-              {/* Indicador barra */}
-              {insightsData?.insights?.FAIL?.algorithms.map(
-                (algorithm, index) => {
-                  const max = Math.max(
-                    ...insightsData.insights?.FAIL?.algorithms.map(
-                      (alg) => alg.value
-                    )
-                  );
 
-                  return (
-                    <div
-                      key={index}
-                      style={{
-                        display: "flex",
-                        padding: "0px",
-                        gap: "16px",
-                        alignSelf: "stretch",
-                      }}
-                    >
+              {isLoading == true ? (
+                <>
+                  <br></br>
+                  <div style={{ marginBottom: -40 }}></div>
+                  <SkeletonInsights></SkeletonInsights>
+                </>
+              ) : (
+                ""
+              )}
+              {!isLoading && (
+                <>
+                  {insightsData && insightsData?.insights != undefined ? (
+                    <>
+                      {/* ********************* */}
                       <div
                         style={{
-                          width: `${(algorithm.value / max) * 100}%`,
-                          height: "36px",
-                          borderRadius: "4px",
-                          background: "#FFC7CD",
                           display: "flex",
-                          alignItems: "center",
-                          paddingLeft: "16px",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          gap: "8px",
+                          flex: 100,
+                          alignSelf: "stretch",
                         }}
                       >
                         <div
                           style={{
-                            color: "#142257",
-                            fontSize: "14px",
-                            fontWeight: 400,
-                            lineHeight: "20px",
-                            whiteSpace: "nowrap",
+                            display: "flex",
+                            alignItems: "flex-end",
+                            alignContent: "flex-end",
+                            gap: "8px",
+                            alignSelf: "stretch",
+                            flexWrap: "wrap",
                           }}
                         >
-                          {algorithm.algorithm === "TEMPERATURE_FAIL"
-                            ? "Falla de temperatura"
-                            : algorithm.algorithm === "COMPRESSOR_FAIL"
-                            ? "Falla asociada al compresor"
-                            : algorithm.algorithm === "DISCONNECTIONS_FAIL"
-                            ? "Desconexión"
-                            : algorithm.algorithm === "VOLTAGE_FAIL"
-                            ? "Falla de voltaje"
-                            : algorithm.algorithm}
+                          <div
+                            style={{
+                              color: "#000005",
+                              // fontFamily: "DM Sans",
+                              fontSize: "26px",
+                              fontStyle: "normal",
+                              fontWeight: 500,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            {insightsData?.insights?.FAIL?.total === undefined
+                              ? "Sin registro"
+                              : insightsData?.insights?.FAIL?.total.toLocaleString()}
+                          </div>
+                          <div
+                            style={{
+                              color: "#88888B",
+                              // fontFamily: "DM Sans",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            total de fallas
+                          </div>
                         </div>
                       </div>
                       <div
                         style={{
-                          color: "#000005",
-                          fontSize: "14px",
-                          fontWeight: 400,
-                          lineHeight: "normal",
-                          marginLeft: "auto",
+                          display: "flex",
+                          padding: "8px 0px",
+                          justifyContent: "space-between",
+                          alignItems: "flex-start",
+                          alignSelf: "stretch",
                         }}
                       >
-                        {algorithm.value === undefined
-                          ? "Sin registro"
-                          : algorithm.value}
+                        <div
+                          style={{
+                            color: "#3A3A3F",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Tipo
+                        </div>
+                        <div
+                          style={{
+                            color: "#3A3A3F",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "20px",
+                          }}
+                        >
+                          Cantidad
+                        </div>
                       </div>
-                    </div>
-                  );
-                }
-              )}
+                      {/* Indicador barra */}
+                      {insightsData?.insights?.FAIL?.algorithms.map(
+                        (algorithm, index) => {
+                          const max = Math.max(
+                            ...insightsData.insights?.FAIL?.algorithms.map(
+                              (alg) => alg.value
+                            )
+                          );
 
-              <div
-                style={{
-                  display: "flex",
-                  padding: "4px 0px",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "10px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    width: "420px",
-                    height: "1px",
-                    background: "#CACACA",
-                  }}
-                ></div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "center",
-                  gap: "4px",
-                  marginLeft: 270,
-                  cursor: "pointer",
-                }}
-                onClick={() => navigate("/fails")}
-              >
-                <div
-                  style={{
-                    color: "#3E83FF",
-                    // fontFamily: "DM Sans",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Ver detalles
-                </div>
-                <img
-                  src={"../../sampleData/arrow_b.png"}
-                  alt="Descripción de la imagen"
-                  style={{ marginTop: 5 }}
-                />
-              </div>
+                          return (
+                            <div
+                              key={index}
+                              style={{
+                                display: "flex",
+                                padding: "0px",
+                                gap: "16px",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: `${(algorithm.value / max) * 100}%`,
+                                  height: "36px",
+                                  borderRadius: "4px",
+                                  background: "#FFC7CD",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  paddingLeft: "16px",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#142257",
+                                    fontSize: "14px",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                >
+                                  {algorithm.algorithm === "TEMPERATURE_FAIL"
+                                    ? "Falla de temperatura"
+                                    : algorithm.algorithm === "COMPRESSOR_FAIL"
+                                    ? "Falla asociada al compresor"
+                                    : algorithm.algorithm ===
+                                      "DISCONNECTIONS_FAIL"
+                                    ? "Desconexión"
+                                    : algorithm.algorithm === "VOLTAGE_FAIL"
+                                    ? "Falla de voltaje"
+                                    : algorithm.algorithm}
+                                </div>
+                              </div>
+                              <div
+                                style={{
+                                  color: "#000005",
+                                  fontSize: "14px",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                  marginLeft: "auto",
+                                }}
+                              >
+                                {algorithm.value === undefined
+                                  ? "Sin registro"
+                                  : algorithm.value}
+                              </div>
+                            </div>
+                          );
+                        }
+                      )}
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "4px 0px",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "10px",
+                          alignSelf: "stretch",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "420px",
+                            height: "1px",
+                            background: "#CACACA",
+                          }}
+                        ></div>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          alignItems: "center",
+                          gap: "4px",
+                          marginLeft: 270,
+                          cursor: "pointer",
+                        }}
+                        onClick={() => navigate("/fails")}
+                      >
+                        <div
+                          style={{
+                            color: "#3E83FF",
+                            // fontFamily: "DM Sans",
+                            fontSize: "14px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "normal",
+                          }}
+                        >
+                          Ver detalles
+                        </div>
+                        <img
+                          src={"../../sampleData/arrow_b.png"}
+                          alt="Descripción de la imagen"
+                          style={{ marginTop: 5 }}
+                        />
+                      </div>
+                      {/* ********************* */}
+                    </>
+                  ) : (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        marginLeft: 250,
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                      }}
+                    >
+                      <p>No hay datos de coolers disponibles.</p>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
             {/* Enfriadores */}
             <div
