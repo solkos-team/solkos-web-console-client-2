@@ -13,9 +13,6 @@ export default function Panel() {
   }, []);
   return (
     <>
-      <PageFilter />
-      <br></br>
-      <br></br>
       <iframe
         src="https://tableau.efemsa.com/views/KOF_Nacional/KOF?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
         title="iframe Example 1"
