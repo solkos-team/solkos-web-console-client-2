@@ -59,7 +59,7 @@ export const SkeletonTableUsers = () => {
         >
           <Skeleton height={30} mt={6} width="90%" />
         </TableCell>
-        <TableCell
+        {/* <TableCell
           style={{
             paddingLeft: "100px",
             textAlign: "center",
@@ -67,7 +67,7 @@ export const SkeletonTableUsers = () => {
           }}
         >
           <Skeleton height={30} mt={6} width="90%" />
-        </TableCell>
+        </TableCell> */}
       </TableRow>
     );
   };

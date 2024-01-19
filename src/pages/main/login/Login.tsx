@@ -3,42 +3,45 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchUniversal } from "../../../utils/apiUtils";
+import { IconEarOff, IconEaseIn } from "@tabler/icons-react";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const pushUserConfig = (data) =>{
-    const {user} = data
-    const {Customer,Path} = user
+  const pushUserConfig = (data) => {
+    const { user } = data;
+    const { Customer, Path } = user;
     localStorage.setItem("PATH", JSON.stringify(Path));
     localStorage.setItem("ORG", Customer);
     navigate("/insights");
-  }
+  };
   const body = {
     email: email,
     password: password,
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("login", body);      
-      pushUserConfig(data)
+      const data = await fetchUniversal("login", body);
+      pushUserConfig(data);
     } catch (error) {
       console.error("Error fetching login:", error);
-      setErrorMessage(
-        "Usuario o contraseña incorrectos. Inténtalo de nuevo."
-      );
+      setErrorMessage("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
     }
   };
   const handleLogin = () => {
-
     fetchData();
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+  };
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -214,6 +217,17 @@ export const Login = () => {
                   width: 430,
                 }}
               />
+              {/* {showPassword ? (
+                <IconEarOff
+                  style={{ marginLeft: "5px", cursor: "pointer" }}
+                  onClick={handleTogglePasswordVisibility}
+                />
+              ) : (
+                <IconEaseIn
+                  style={{ marginLeft: "5px", cursor: "pointer" }}
+                  onClick={handleTogglePasswordVisibility}
+                />
+              )} */}
               {errorMessage && (
                 <div
                   style={{
@@ -225,7 +239,7 @@ export const Login = () => {
                   {errorMessage}
                 </div>
               )}
-              <div>
+              {/* <div>
                 <Link to="/recover">
                   <div
                     style={{
@@ -243,7 +257,7 @@ export const Login = () => {
                     Olvide mi contraseña
                   </div>
                 </Link>
-              </div>
+              </div> */}
             </div>
             <Button
               style={{ background: "#ED5079", width: "440px", marginLeft: 10 }}
@@ -252,16 +266,16 @@ export const Login = () => {
               Iniciar sesión
             </Button>
           </div>
-          <div
+          {/* <div
             style={{
               width: "430px",
               height: "0.5px",
               background: "#88888B",
               marginLeft: 90,
             }}
-          ></div>
+          ></div> */}
 
-          <div
+          {/* <div
             style={{
               marginLeft: 230,
               color: "#88888B",
@@ -274,8 +288,8 @@ export const Login = () => {
             }}
           >
             ¿No tienes una cuenta?
-          </div>
-          <div
+          </div> */}
+          {/* <div
             style={{
               marginLeft: 270,
               color: "#ED5079",
@@ -289,7 +303,7 @@ export const Login = () => {
             }}
           >
             Solicita una
-          </div>
+          </div> */}
 
           <div
             style={{
