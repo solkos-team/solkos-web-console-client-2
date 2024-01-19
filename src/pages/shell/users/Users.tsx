@@ -59,6 +59,7 @@ export default function Users() {
       // Fecha_Actualizacion: user.updated_at,
       // Fecha_Creacion: user.created_at
     }));
+    return data
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const openDrawer = () => {
