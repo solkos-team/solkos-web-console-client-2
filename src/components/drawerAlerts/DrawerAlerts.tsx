@@ -18,6 +18,7 @@ import {
 import { flushSync } from "react-dom";
 import { fetchCoolersDrawer, fetchUniversal } from "../../utils/apiUtils";
 import { CoolerInterface } from "../drawerOutlets/CoolerInterface";
+import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
 
 export default function DrawerA({
   isOpen,
@@ -62,7 +63,7 @@ export default function DrawerA({
     fetchData();
   }, [dt]);
 
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
+  const [isLoading, setIsLoading] = useState(true);
 
   const filterCoolersDataDownload = (coolersData) => {
     if (!coolersData) return [];
@@ -195,6 +196,19 @@ export default function DrawerA({
                     alt="Descripción de la imagen"
                     style={{ width: "44px", height: "44px" }}
                   />
+                ) : selectedAlgorithm === "MOVED_VISIT_ALERT" ? (
+                  <img
+                    src={"../../sampleData/devices_2.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "44px", height: "44px" }}
+                  />
+                ) : selectedAlgorithm === "HIGH_VOLTAGE_ALERT" ||
+                  selectedAlgorithm === "LOW_VOLTAGE_ALERT" ? (
+                  <img
+                    src={"../../sampleData/devices_2.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "44px", height: "44px" }}
+                  />
                 ) : (
                   <img
                     src={"../../sampleData/indc2.png"}
@@ -269,7 +283,7 @@ export default function DrawerA({
                 style={{
                   color: "#000",
                   // fontFamily: "DM Sans",
-                  fontSize: "20px",
+                  fontSize: "18px",
                   fontStyle: "normal",
                   fontWeight: 600,
                   lineHeight: "normal",
@@ -295,6 +309,8 @@ export default function DrawerA({
                       ? "Falla de voltaje"
                       : selectedAlgorithm === "COMPRESSOR_FAIL"
                       ? "Falla asociada al compresor"
+                      : selectedAlgorithm === "MOVED_VISIT_ALERT"
+                      ? "Movimiento"
                       : selectedAlgorithm}
                   </div>
                 )}
@@ -602,6 +618,17 @@ export default function DrawerA({
                 </TableHeaderCell>
               </TableRow>
             </TableHead>
+            {isLoading == true ? (
+              <>
+                <br></br>
+                <br></br>
+                <div style={{ marginBottom: -10 }}></div>
+                <SkeletonTableInsights></SkeletonTableInsights>
+              </>
+            ) : (
+              ""
+            )}
+
             <TableBody
               style={{ display: "block", height: "90%", overflowY: "auto" }}
             >
@@ -627,7 +654,7 @@ export default function DrawerA({
                         }}
                       >
                         {cooler.status == undefined || cooler.status == null ? (
-                          "Sin registros"
+                          <div style={{ fontSize: 13 }}>Sin registro</div>
                         ) : (
                           <>
                             <div
@@ -692,7 +719,7 @@ export default function DrawerA({
                       >
                         {cooler.days_without_visit == undefined ||
                         cooler.days_without_visit == "" ? (
-                          "Sin registros"
+                          "Sin registro"
                         ) : (
                           <>
                             <div
@@ -731,8 +758,9 @@ export default function DrawerA({
                           width: "5rem",
                         }}
                       >
-                        {cooler.priority == undefined ||
-                        cooler.priority == null ? (
+                        <div style={{ fontSize: 12 }}>Sin registro</div>
+                        {/* {cooler.priority === undefined ||
+                        cooler.priority === null ? (
                           "Sin registros"
                         ) : (
                           <>
@@ -763,7 +791,7 @@ export default function DrawerA({
                               </div>
                             </div>
                           </>
-                        )}
+                        )} */}
                       </TableCell>
                       <TableCell
                         style={{
