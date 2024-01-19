@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { useSelector } from "react-redux";
-import { fetchAlerts ,fetchUniversal} from "../../../utils/apiUtils";
+import { fetchAlerts, fetchUniversal } from "../../../utils/apiUtils";
+import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 
 export default function Fails() {
   interface Cooler {
@@ -15,15 +16,15 @@ export default function Fails() {
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
 
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state:any)=>state.organization)
+  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = { customer: dto,path:pathVerify()}
+  const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const data = await fetchUniversal('alerts',body);
+      const data = await fetchUniversal("alerts", body);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -33,7 +34,7 @@ export default function Fails() {
   };
   useEffect(() => {
     fetchData();
-  }, [dt,dto]);
+  }, [dt, dto]);
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 
@@ -55,7 +56,7 @@ export default function Fails() {
   } | null>(null);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-console.log(coolersData)
+  console.log(coolersData);
   return (
     <div>
       <PageFilter />
@@ -155,22 +156,11 @@ console.log(coolersData)
             {/* Indicador */}
             {isLoading ? (
               <>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginLeft: 400,
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  Cargando...
-                </div>
+                <SkeletonCards></SkeletonCards>
               </>
+            ) : coolersData == null ? (
+              "Sin registros"
             ) : (
-              // Mostrar las tarjetas una vez que la carga ha terminado
-              coolersData == null ? ("Sin registros") : 
               coolersData
                 .filter(
                   (cooler) =>
@@ -242,7 +232,10 @@ console.log(coolersData)
                               alt="Descripción de la imagen"
                             />
                           ) : (
-                            ""
+                            <img
+                              src={"../../sampleData/compressor2.png"}
+                              alt="Descripción de la imagen"
+                            />
                           )}
                         </div>
                         <div

@@ -6,6 +6,9 @@ import Energy from "../../../components/energyConsum";
 import { Tabs } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { fetchUniversal, fetchUniversalDetails } from "../../../utils/apiUtils";
+import { format } from "date-fns";
+import moment from "moment";
+import "moment/locale/es";
 
 export default function CoolerDetail() {
   interface CoolerData {
@@ -23,9 +26,15 @@ export default function CoolerDetail() {
       sale_price: number;
       total_expense_service: string;
       energy_consumption: string;
+      status: string;
     };
-    service_orders?: Array<{ description: string }>; // Ajusta según la estructura real
-    tracking?: Array<{ class: string; algorithm: string }>; // Ajusta según la estructura real
+    properties: {
+      description: string;
+      name: string;
+      value: number;
+    };
+    service_orders?: Array<{ description: string }>;
+    tracking?: Array<{ class: string; algorithm: string }>;
   }
 
   const b = "../../sampleData/devices.png";
@@ -79,9 +88,13 @@ export default function CoolerDetail() {
 
   const { serial_number } = useParams();
 
-  useEffect(() => {  
-  }, [serial_number, coolersData]);
-  const [tabs, setTabs] = useState<string | undefined>()
+  useEffect(() => {}, [serial_number, coolersData]);
+  const [tabs, setTabs] = useState<string | undefined>();
+
+  console.log(coolersData?.properties);
+
+  console.log(moment.locale()); // Esto debería imprimir "es"
+
   return (
     <div>
       <PageFilter path="clt" />
@@ -176,38 +189,45 @@ export default function CoolerDetail() {
                 ? "Sin registro"
                 : coolersData?.cooler?.model_id}
             </div>
-            <div
-              style={{
-                display: "flex",
-                padding: "4px",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "4px",
-                borderRadius: "2px",
-                background: "#B6FEDB",
-              }}
-            >
-              <div
-                style={{
-                  width: "4px",
-                  height: "4px",
-                  borderRadius: "5px",
-                  background: "#31B648",
-                }}
-              ></div>
-              <div
-                style={{
-                  color: "#028053",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                }}
-              >
-                ------
-              </div>
-            </div>
+            {coolersData?.cooler?.status == undefined ||
+            coolersData?.cooler.status == "" ? (
+              "Sin registro"
+            ) : (
+              <>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "4px",
+                    // justifyContent: "center",
+                    alignItems: "center",
+                    gap: "4px",
+                    borderRadius: "2px",
+                    background: "#B6FEDB",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "4px",
+                      height: "4px",
+                      borderRadius: "5px",
+                      background: "#31B648",
+                    }}
+                  ></div>
+                  <div
+                    style={{
+                      color: "#028053",
+                      // fontFamily: "Space Mono",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "14px",
+                    }}
+                  >
+                    {coolersData?.cooler?.status}
+                  </div>
+                </div>
+              </>
+            )}
             <div
               style={{
                 display: "flex",
@@ -240,9 +260,11 @@ export default function CoolerDetail() {
                 }}
               >
                 {coolersData?.cooler?.last_read == undefined ||
-                  coolersData?.cooler?.last_read == ""
+                coolersData?.cooler?.last_read == null
                   ? "Sin registro"
-                  : `${coolersData?.cooler?.last_read}`}
+                  : moment(new Date(coolersData?.cooler?.last_read)).format(
+                      "D [de] MMMM [de] YYYY [a las] h:mm A"
+                    )}
               </div>
               <div
                 style={{
@@ -266,10 +288,10 @@ export default function CoolerDetail() {
                   }}
                 >
                   {" "}
-                  {coolersData?.cooler?.days_without_visit == undefined ||
-                    coolersData?.cooler?.days_without_visit == ""
-                    ? "Sin registro días sin visita"
-                    : `${coolersData?.cooler?.days_without_visit} dias sin visita`}
+                  {coolersData?.cooler?.days_without_visit === null
+                    ? "Sin registro"
+                    : coolersData?.cooler?.days_without_visit +
+                      "días sin visita"}
                 </div>
               </div>
             </div>
@@ -283,7 +305,7 @@ export default function CoolerDetail() {
               alignSelf: "stretch",
             }}
           >
-            {coolersData?.cooler?.customer !== "KOF" ? (
+            {coolersData?.cooler?.customer != "KOF" ? (
               <>
                 <div
                   style={{
@@ -382,7 +404,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.region === "" ||
-                    coolersData?.cooler?.region == undefined
+                  coolersData?.cooler?.region === undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.region}
                 </div>
@@ -433,7 +455,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.route === "" ||
-                    coolersData?.cooler?.route == undefined
+                  coolersData?.cooler?.route === undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.route}
                 </div>
@@ -483,7 +505,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.zone === "" ||
-                    coolersData?.cooler?.zone == undefined
+                  coolersData?.cooler?.zone === undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.zone}
                 </div>
@@ -510,13 +532,19 @@ export default function CoolerDetail() {
           {" "}
           <Tabs color="teal" defaultValue="first" value={tabs}>
             <Tabs.List>
-              <Tabs.Tab value="first" onClick={()=>setTabs('first')}>Resumen</Tabs.Tab>
-              <Tabs.Tab value="second"onClick={()=>setTabs('second')}>Desglose economico </Tabs.Tab>
-              <Tabs.Tab value="tree" onClick={()=>setTabs('tree')}>Gasto de energía </Tabs.Tab>
+              <Tabs.Tab value="first" onClick={() => setTabs("first")}>
+                Resumen
+              </Tabs.Tab>
+              <Tabs.Tab value="second" onClick={() => setTabs("second")}>
+                Desglose economico{" "}
+              </Tabs.Tab>
+              <Tabs.Tab value="tree" onClick={() => setTabs("tree")}>
+                Gasto de energía{" "}
+              </Tabs.Tab>
             </Tabs.List>
 
             <Tabs.Panel value="first" pt="xs">
-              <Resume coolersData={coolersData} setTab={setTabs}/>
+              <Resume coolersData={coolersData} setTab={setTabs} />
             </Tabs.Panel>
 
             <Tabs.Panel value="second" pt="xs">

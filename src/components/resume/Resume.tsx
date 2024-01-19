@@ -28,15 +28,157 @@ async function validarExistenciaImagen(url) {
   }
 }
 
-const Resume = ({ coolersData,setTab }) => {
+const formatCreatedAt = (createdAt) => {
+  const date = new Date(createdAt);
+  const formattedDate = date.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
+  return formattedDate;
+};
+
+const Resume = ({ coolersData, setTab }) => {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
   const urlImagen = coolersData?.cooler?.asset_url;
 
   validarExistenciaImagen(urlImagen);
 
+  console.log(coolersData?.tracking);
+
+  const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
+    // Convertir las fechas a milisegundos
+    const dateA = new Date(a.notified_at).getTime();
+    const dateB = new Date(b.notified_at).getTime();
+
+    // Comparar las fechas (de la más reciente a la más antigua)
+    return dateB - dateA;
+  });
+
   return (
     <>
+      <br></br>
+
+      <div
+        style={{
+          display: "flex",
+          padding: "24px",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          gap: "16px",
+          alignSelf: "stretch",
+          borderRadius: "8px",
+          border: "1px solid #88888B",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "16px",
+            alignSelf: "stretch",
+          }}
+        >
+          <img src={"../../sampleData/actividad.png"} alt="cooler"></img>
+          <div
+            style={{
+              color: "#3A3A3F",
+              // fontFamily: "DM Sans",
+              fontSize: "16px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "normal",
+            }}
+          >
+            Actividad del enfriador
+          </div>
+        </div>
+        {sortedTracking?.map((cooler, index) => (
+          <div
+            key={index}
+            style={{
+              display: "flex",
+              padding: "16px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "6px",
+              alignSelf: "stretch",
+              borderRadius: "8px",
+              borderLeft: "4px solid #3E83FF",
+              background: "#EEF6FF",
+            }}
+          >
+            <div
+              style={{
+                color: "#3E83FF",
+                // fontFamily: "DM Sans",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 700,
+                lineHeight: "normal",
+              }}
+            >
+              {cooler.algorithm === "Indicador de Riesgo Nivel: 0"
+                ? "Indicador: Sin riesgo"
+                : cooler.algorithm === "Indicador de Riesgo Nivel: 1"
+                ? "Indicador: Visitar punto de venta"
+                : cooler.algorithm === "Indicador de Riesgo Nivel: 2"
+                ? "Indicador: Requiere actualizar información"
+                : cooler.algorithm === "Indicador de Riesgo Nivel: 3"
+                ? "Indicador: Tomar acción urgente"
+                : cooler.algorithm === "Indicador de Riesgo Nivel: 4"
+                ? "Indicador: En riesgo"
+                : cooler.algorithm === "OWNED"
+                ? "Indicador: En propiedad"
+                : cooler.algorithm === "INSTALLED"
+                ? "Indicador: Instalado"
+                : cooler.algorithm === "LOCATION"
+                ? "Indicador: Ubicado"
+                : cooler.algorithm === "TELEMETRY"
+                ? "Indicador: Telemetría"
+                : cooler.algorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                ? "Alerta: Alta demanda del compresor"
+                : cooler.algorithm === "LOW_VOLTAGE_ALERT"
+                ? "Alerta: Bajo voltaje"
+                : cooler.algorithm === "HIGH_VOLTAGE_ALERT"
+                ? "Alerta: Alto voltaje"
+                : cooler.algorithm === "MOVED_VISIT_ALERT"
+                ? "Alerta: Movimiento"
+                : cooler.algorithm === "HIGH_TEMPERATURE_ALERT"
+                ? "Alerta: Alta temperatura"
+                : cooler.algorithm === "DISCONNECTION_ALERT"
+                ? "Alerta: Desconexión"
+                : cooler.algorithm === "TEMPERATURE_FAIL"
+                ? "Falla de temperatura"
+                : cooler.algorithm === "COMPRESSOR_FAIL"
+                ? "Falla asociada al compresor"
+                : cooler.algorithm === "DISCONNECTIONS_FAIL"
+                ? "Falla de desconexión"
+                : cooler.algorithm === "VOLTAGE_FAIL"
+                ? "Falla de voltaje"
+                : cooler.algorithm === "FREEZING_FAIL"
+                ? "Falla de congelación"
+                : cooler.algorithm}
+            </div>
+            <div
+              style={{
+                color: "#3E83FF",
+                // fontFamily: "DM Sans",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+              }}
+            >
+              {formatCreatedAt(cooler.notified_at)}
+            </div>
+          </div>
+        ))}
+      </div>
+
       <br></br>
       <div
         style={{
@@ -86,34 +228,7 @@ const Resume = ({ coolersData,setTab }) => {
                   lineHeight: "normal",
                 }}
               >
-                Acerca del punto de venta
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "4px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "4px",
-                  borderRadius: "2px",
-                  border: "1.5px solid #0F9F67",
-                  background: "#FFF",
-                  marginTop: 5,
-                  marginLeft: -240,
-                }}
-              >
-                <div
-                  style={{
-                    color: "#0F9F67",
-                    // fontFamily: "DM Sans",
-                    fontSize: "12px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "14px",
-                  }}
-                >
-                  -----
-                </div>
+                Acerca de la ubicación
               </div>
             </div>
           </div>
@@ -426,7 +541,12 @@ const Resume = ({ coolersData,setTab }) => {
                       marginLeft: "auto",
                     }}
                   >
-                    (----, ----)
+                    {"("}{" "}
+                    {coolersData?.cooler?.last_latitude === undefined ||
+                    coolersData?.cooler?.last_longitude === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.last_latitude}{" "}
+                    {")"}
                   </div>
                 </div>
                 <div
@@ -461,7 +581,9 @@ const Resume = ({ coolersData,setTab }) => {
                       marginLeft: "auto",
                     }}
                   >
-                    -- metros
+                    {coolersData?.cooler?.distance === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.last_latitude + "metros"}
                   </div>
                 </div>
               </Tabs.Panel>
@@ -657,6 +779,216 @@ const Resume = ({ coolersData,setTab }) => {
           </div>
           {/* **************** */}
 
+          {/* ************************************************* */}
+          {/* Ordenes de servicios */}
+          <div
+            style={{
+              display: "flex",
+              padding: "24px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "16px",
+              borderRadius: "8px",
+              border: "1px solid #88888B",
+              width: 380,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "4px",
+                alignSelf: "stretch",
+              }}
+            >
+              <img src={"../../sampleData/commerce.png"} alt="cooler"></img>
+              <div
+                style={{
+                  color: "#3A3A3F",
+                  // fontFamily: "DM Sans",
+                  fontSize: "16px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                }}
+              >
+                Ordenes de servicio
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                padding: "16px",
+                alignItems: "flex-start",
+                gap: "16px",
+                alignSelf: "stretch",
+                borderRadius: "8px",
+                border: "1px solid #CACACA",
+                background: "#F4F4F4",
+              }}
+            >
+              {/* ORDEN */}
+              <div>
+                {coolersData?.service_orders === null ? (
+                  <>
+                    <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                      Sin ordenes de servicio
+                    </p>
+                  </>
+                ) : (
+                  coolersData?.service_orders && (
+                    <div>
+                      {coolersData.service_orders
+                        .filter(
+                          (order) =>
+                            order.service_id === "1001" ||
+                            order.service_id === "1002" ||
+                            (order.service_id === "1005" &&
+                              order.status === "D,D")
+                        )
+                        .map((order) => (
+                          <>
+                            <div key={order.id}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "16px",
+                                  flexDirection: "column",
+                                  alignItems: "flex-start",
+                                  gap: "4px",
+                                  alignSelf: "stretch",
+                                  borderRadius: "5px",
+                                  background: "#FFF",
+                                  boxShadow:
+                                    "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                  width: "90%",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "8px",
+                                    alignSelf: "stretch",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      flex: 100,
+                                      color: "#000005",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: "14px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "normal",
+                                      textAlign: "left",
+                                    }}
+                                  >
+                                    Orden{" "}
+                                    {order.id === ""
+                                      ? "Sin registro"
+                                      : order.id}
+                                  </div>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      padding: "8px",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      gap: "4px",
+                                      borderRadius: "2px",
+                                      background: "#D4DAE3",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        color: "#313A49",
+                                        // fontFamily: "Space Mono",
+                                        fontSize: "10px",
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        lineHeight: "10px",
+                                      }}
+                                    >
+                                      CERRADA
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  style={{
+                                    flex: 100,
+                                    color: "#000005",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "normal",
+                                  }}
+                                >
+                                  $-----
+                                </div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    alignSelf: "stretch",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      color: "#3E83FF",
+                                      // fontFamily: "Inter",
+                                      fontSize: "14px",
+                                      fontStyle: "normal",
+                                      fontWeight: 500,
+                                      lineHeight: "normal",
+                                    }}
+                                  >
+                                    {order.created_at === ""
+                                      ? "Sin registro"
+                                      : formatCreatedAt(order.created_at)}
+                                  </div>
+                                </div>
+                                <div
+                                  style={{
+                                    color: "#88888B",
+                                    // fontFamily: "Inter",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 500,
+                                    lineHeight: "normal",
+                                    textAlign: "left",
+                                  }}
+                                >
+                                  {order.description === ""
+                                    ? "Sin registro"
+                                    : order.description}
+                                </div>
+                              </div>
+                            </div>
+                            <br></br>
+                          </>
+                        ))}
+                      {/* {coolersData.service_orders.filter(
+                        (order) =>
+                          order.service_id === "1001" ||
+                          order.service_id === "1002" ||
+                          (order.service_id === "1005" &&
+                            order.status === "D,D")
+                      ).length === 0 && (
+                        <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                          Sin órdenes de servicio
+                        </p>
+                      )} */}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+          </div>
+          {/* ************************************************* */}
           {/* ********** */}
           <div
             style={{
@@ -788,10 +1120,9 @@ const Resume = ({ coolersData,setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.total_ownership_expense == undefined ||
-                  coolersData?.cooler?.total_ownership_expense == ""
+                  {coolersData?.properties?.[0].value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.cooler?.total_ownership_expense}`}
+                    : `${coolersData?.properties?.[0].value}`}
                 </div>
               </div>
               <div
@@ -825,10 +1156,9 @@ const Resume = ({ coolersData,setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.sale_price == undefined ||
-                  coolersData?.cooler?.sale_price == ""
+                  {coolersData?.properties?.[1].value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.cooler?.sale_price}`}
+                    : `${coolersData?.properties?.[1].value}`}
                 </div>
               </div>
               <div
@@ -862,10 +1192,9 @@ const Resume = ({ coolersData,setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.total_expense_service == undefined ||
-                  coolersData?.cooler?.total_expense_service == ""
+                  {coolersData?.properties?.[2].value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.cooler?.total_expense_service}`}
+                    : `${coolersData?.properties?.[2].value}`}
                 </div>
               </div>
             </div>
@@ -962,10 +1291,9 @@ const Resume = ({ coolersData,setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.energy_consumption == undefined ||
-                  coolersData?.cooler?.energy_consumption == ""
+                  {coolersData?.properties?.[3].value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.cooler?.energy_consumption}`}
+                    : `${coolersData?.properties?.[3].value}`}
                 </div>
               </div>
 
@@ -988,7 +1316,9 @@ const Resume = ({ coolersData,setTab }) => {
                     fontWeight: 400,
                     lineHeight: "normal",
                   }}
-                  onClick={()=>{setTab('tree')}}
+                  onClick={() => {
+                    setTab("tree");
+                  }}
                 >
                   Ver detalles
                 </div>

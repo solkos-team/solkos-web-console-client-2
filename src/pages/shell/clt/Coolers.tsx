@@ -309,7 +309,7 @@ export default function Coolers() {
                               width: "150px",
                             }}
                           >
-                            Días sin visita
+                            Última visita
                           </TableHeaderCell>
                           <TableHeaderCell
                             style={{
@@ -442,8 +442,8 @@ export default function Coolers() {
                                         textAlign: "left",
                                       }}
                                     >
-                                      {cooler.days_without_visit == undefined ||
-                                      cooler.days_without_visit == "" ? (
+                                      {cooler.last_read == undefined ||
+                                      cooler.last_read == "" ? (
                                         "Sin registro"
                                       ) : (
                                         <>
@@ -481,8 +481,8 @@ export default function Coolers() {
                                         width: "150px",
                                       }}
                                     >
-                                      {cooler.priority == undefined ||
-                                      cooler.priority == "" ? (
+                                      {cooler.priority_status == undefined ||
+                                      cooler.priority_status == "" ? (
                                         "Sin registro"
                                       ) : (
                                         <>
@@ -508,7 +508,7 @@ export default function Coolers() {
                                                 lineHeight: "14px",
                                               }}
                                             >
-                                              {cooler.priority}
+                                              {cooler.priority_status}
                                             </div>
                                           </div>
                                         </>
@@ -565,7 +565,6 @@ export default function Coolers() {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                marginLeft: 250,
                                 fontWeight: "bold",
                                 fontSize: "18px",
                               }}

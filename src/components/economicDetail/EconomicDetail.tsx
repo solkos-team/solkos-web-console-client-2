@@ -4,7 +4,7 @@ import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 
 const EconomicDetail = ({ coolersData }) => {
-  console.log(coolersData)
+  console.log(coolersData);
   const formatCreatedAt = (createdAt) => {
     const date = new Date(createdAt);
     const formattedDate = date.toLocaleDateString("es-ES", {
@@ -93,7 +93,6 @@ const EconomicDetail = ({ coolersData }) => {
           gap: "16px",
           // alignSelf: "stretch",
           // width : "138vh",
-
         }}
       >
         <div
@@ -117,7 +116,7 @@ const EconomicDetail = ({ coolersData }) => {
               alignSelf: "stretch",
               borderRadius: "8px",
               border: "1px solid #88888B",
-              width: "100%"
+              width: "100%",
             }}
           >
             <div
@@ -188,7 +187,9 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.total_ownership_expense == null || coolersData?.cooler?.total_ownership_expense == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.total_ownership_expense}`}
+                  {coolersData?.properties?.[0].value == undefined
+                    ? "Sin registro"
+                    : `${coolersData?.properties?.[0].value}`}
                 </div>
                 <div
                   style={{
@@ -257,9 +258,12 @@ const EconomicDetail = ({ coolersData }) => {
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
+                    marginRight: 75,
                   }}
                 >
-                  {coolersData?.cooler?.sale_price == null || coolersData?.cooler?.sale_price == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.sale_price}`}
+                  {coolersData?.properties?.[1].value == undefined
+                    ? "Sin registro"
+                    : `${coolersData?.properties?.[1].value}`}
                 </div>
               </div>
               <div
@@ -294,7 +298,9 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.total_expense_service}`}
+                  {coolersData?.properties?.[2].value == undefined
+                    ? "Sin registro"
+                    : `${coolersData?.properties?.[2].value}`}
                 </div>
               </div>
             </div>
@@ -312,7 +318,6 @@ const EconomicDetail = ({ coolersData }) => {
               borderRadius: "8px",
               border: "1px solid #88888B",
               width: "100%",
-
             }}
           >
             <div
@@ -378,7 +383,9 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "normal",
                     }}
                   >
-                    {coolersData?.cooler?.present_value_of_depreciation == null || coolersData?.cooler?.present_value_of_depreciation == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.present_value_of_depreciation}`}
+                    {coolersData?.properties?.[4].value == undefined
+                      ? "Sin registro"
+                      : `${coolersData?.properties?.[4].value}`}
                   </div>
                   <div
                     style={{
@@ -427,7 +434,9 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "14px",
                     }}
                   >
-                    {coolersData?.cooler?.annual_decrement == null || coolersData?.cooler?.annual_decrement == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.annual_decrement}`}
+                    {coolersData?.properties?.[5].value == undefined
+                      ? "Sin registro"
+                      : `${coolersData?.properties?.[5].value}`}
                   </div>
                   <div
                     style={{
@@ -501,7 +510,9 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.year_of_production == null || coolersData?.cooler?.year_of_production == undefined ? "Sin registro" : `${coolersData?.cooler?.year_of_production}`}
+                  {coolersData?.properties?.[6].value == undefined
+                    ? "Sin registro"
+                    : `${coolersData?.properties?.[6].value}`}
                 </div>
               </div>
               <div
@@ -715,7 +726,7 @@ const EconomicDetail = ({ coolersData }) => {
                               lineHeight: "20px",
                             }}
                           >
-                            ----
+                            Sin registro
                           </div>
                           <div
                             style={{
@@ -728,7 +739,7 @@ const EconomicDetail = ({ coolersData }) => {
                               lineHeight: "20px",
                             }}
                           >
-                            $ -----
+                            Sin registro
                           </div>
                         </div>
                       </div>
@@ -750,7 +761,7 @@ const EconomicDetail = ({ coolersData }) => {
             // alignSelf: "stretch",
             borderRadius: "8px",
             border: "1px solid #88888B",
-            width: "95%"
+            width: "95%",
           }}
         >
           <div
@@ -821,7 +832,9 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "normal",
                 }}
               >
-                {coolersData?.cooler?.total_expense_service == null || coolersData?.cooler?.total_expense_service == undefined ? "Sin registro" : '$' + `${coolersData?.cooler?.total_expense_service}`}
+                {coolersData?.properties?.[2].value == undefined
+                  ? "Sin registro"
+                  : `${coolersData?.properties?.[2].value}`}
               </div>
               <div
                 style={{
@@ -868,7 +881,11 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "14px",
                 }}
               >
-                (+ $-----)
+                (+ $
+                {coolersData?.properties?.[5].value == undefined
+                  ? "Sin registro"
+                  : `${coolersData?.properties?.[5].value}`}
+                )
               </div>
               <div
                 style={{
@@ -880,7 +897,7 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "14px",
                 }}
               >
-                $0.00
+                0
               </div>
               <div
                 style={{
@@ -915,42 +932,14 @@ const EconomicDetail = ({ coolersData }) => {
                 }}
               >
                 <Tabs.Panel value="first" pt="xs">
-                  <div style={{ position: 'relative', width: '50rem',height:"30rem", paddingBottom: '250px'}}>
-                    <Card style={{                      
-                      width : "100%",
-                      height:"100%"                    
-                    }}>
-
-                      <Title>Average BPM</Title>
-                      {/* <LineChart
-                        className="h-72 mt-4"
-                        data={chartdata4}
-                        index="date"
-                        categories={["Running"]}
-                        colors={["blue"]}
-                        yAxisWidth={30}                        
-                        style={{width:"100%",height:"20%"}}
-                      /> */}
-                    </Card>
+                  <div style={{ width: "100%", height: "100px" }}>
+                    <div style={{ marginLeft: 400 }}>Sin registros</div>
                   </div>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="second" pt="xs">
-                  <div style={{ width: "100%", height: "400px" }}>
-                    <Card>
-                      <Title>
-                        Number of species threatened with extinction (2021)
-                      </Title>
-                      <BarChart
-                        className="mt-6"
-                        data={chartData}
-                        index="name"
-                        categories={["Number of threatened species"]}
-                        colors={["blue"]}
-                        valueFormatter={valueFormatter}
-                        yAxisWidth={48}
-                      />
-                    </Card>
+                  <div style={{ width: "100%", height: "100px" }}>
+                    <div style={{ marginLeft: 400 }}>Sin registros</div>
                   </div>
                 </Tabs.Panel>
               </div>
@@ -1011,44 +1000,95 @@ const EconomicDetail = ({ coolersData }) => {
                 borderRadius: "8px",
                 border: "1px solid #CACACA",
                 background: "#F4F4F4",
+                width: 350,
               }}
             >
               {/* ORDEN */}
               <div>
-                {coolersData?.service_orders && (
-                  <div>
-                    {coolersData.service_orders
-                      .filter(
-                        (order) =>
-                          order.service_id === "1003" && order.status === "D,D"
-                      )
-                      .map((order) => (
-                        <>
-                          <div key={order.id}>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "16px",
-                                flexDirection: "column",
-                                alignItems: "flex-start",
-                                gap: "4px",
-                                alignSelf: "stretch",
-                                borderRadius: "5px",
-                                background: "#FFF",
-                                boxShadow:
-                                  "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                width: "100%",
-                                backgroundColor: "#FFF"
-                              }}
-                            >
+                {coolersData?.service_orders === null ? (
+                  <>
+                    <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                      Sin ordenes de movimiento
+                    </p>
+                  </>
+                ) : (
+                  coolersData?.service_orders && (
+                    <div>
+                      {coolersData.service_orders
+                        .filter(
+                          (order) =>
+                            order.service_id === "1003" &&
+                            order.status === "D,D"
+                        )
+                        .map((order) => (
+                          <>
+                            <div key={order.id}>
                               <div
                                 style={{
                                   display: "flex",
-                                  alignItems: "center",
-                                  gap: "8px",
+                                  padding: "16px",
+                                  flexDirection: "column",
+                                  alignItems: "flex-start",
+                                  gap: "4px",
                                   alignSelf: "stretch",
+                                  borderRadius: "5px",
+                                  background: "#FFF",
+                                  boxShadow:
+                                    "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                  width: "100%",
+                                  backgroundColor: "#FFF",
                                 }}
                               >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "8px",
+                                    alignSelf: "stretch",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      flex: 100,
+                                      color: "#000005",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: "14px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "normal",
+                                      textAlign: "left",
+                                    }}
+                                  >
+                                    Orden{" "}
+                                    {order.id === ""
+                                      ? "Sin registro"
+                                      : order.id}
+                                  </div>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      padding: "8px",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      gap: "4px",
+                                      borderRadius: "2px",
+                                      background: "#D4DAE3",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        color: "#313A49",
+                                        // fontFamily: "Space Mono",
+                                        fontSize: "10px",
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        lineHeight: "10px",
+                                      }}
+                                    >
+                                      CERRADA
+                                    </div>
+                                  </div>
+                                </div>
                                 <div
                                   style={{
                                     flex: 100,
@@ -1056,104 +1096,66 @@ const EconomicDetail = ({ coolersData }) => {
                                     // fontFamily: "DM Sans",
                                     fontSize: "14px",
                                     fontStyle: "normal",
-                                    fontWeight: 600,
+                                    fontWeight: 400,
                                     lineHeight: "normal",
-                                    textAlign: "left",
                                   }}
                                 >
-                                  Orden{" "}
-                                  {order.id === "" ? "Sin registro" : order.id}
+                                  $-----
                                 </div>
                                 <div
                                   style={{
                                     display: "flex",
-                                    padding: "8px",
-                                    justifyContent: "center",
                                     alignItems: "center",
                                     gap: "4px",
-                                    borderRadius: "2px",
-                                    background: "#D4DAE3",
+                                    alignSelf: "stretch",
                                   }}
                                 >
                                   <div
                                     style={{
-                                      color: "#313A49",
-                                      // fontFamily: "Space Mono",
-                                      fontSize: "10px",
+                                      color: "#3E83FF",
+                                      // fontFamily: "Inter",
+                                      fontSize: "14px",
                                       fontStyle: "normal",
-                                      fontWeight: 400,
-                                      lineHeight: "10px",
+                                      fontWeight: 500,
+                                      lineHeight: "normal",
                                     }}
                                   >
-                                    CERRADA
+                                    {order.created_at === ""
+                                      ? "Sin registro"
+                                      : formatCreatedAt(order.created_at)}
                                   </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  flex: 100,
-                                  color: "#000005",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "normal",
-                                }}
-                              >
-                                $-----
-                              </div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  alignSelf: "stretch",
-                                }}
-                              >
                                 <div
                                   style={{
-                                    color: "#3E83FF",
+                                    color: "#88888B",
                                     // fontFamily: "Inter",
                                     fontSize: "14px",
                                     fontStyle: "normal",
                                     fontWeight: 500,
                                     lineHeight: "normal",
+                                    textAlign: "left",
                                   }}
                                 >
-                                  {order.created_at === ""
+                                  {order.description === ""
                                     ? "Sin registro"
-                                    : formatCreatedAt(order.created_at)}
+                                    : order.description}
                                 </div>
                               </div>
-                              <div
-                                style={{
-                                  color: "#88888B",
-                                  // fontFamily: "Inter",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 500,
-                                  lineHeight: "normal",
-                                  textAlign: "left",
-                                }}
-                              >
-                                {order.description === ""
-                                  ? "Sin registro"
-                                  : order.description}
-                              </div>
                             </div>
-                          </div>
-                          <br></br>
-                        </>
-                      ))}
-                    {coolersData.service_orders.filter(
-                      (order) =>
-                        order.service_id === "1003" && order.status === "D,D"
-                    ).length === 0 && (
-                        <p style={{ marginLeft: 90, fontWeight: "bold" }}>
-                          Sin órdenes de movimiento
-                        </p>
-                      )}
-                  </div>
+                            <br></br>
+                          </>
+                        ))}
+                      {/* {coolersData.service_orders.filter(
+                          (order) =>
+                            order.service_id === "1003" &&
+                            order.status === "D,D"
+                        ).length === 0 && (
+                          <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                            Sin órdenes de movimiento
+                          </p>
+                        )} */}
+                    </div>
+                  )
                 )}
               </div>
             </div>
@@ -1211,42 +1213,91 @@ const EconomicDetail = ({ coolersData }) => {
             >
               {/* ORDEN */}
               <div>
-                {coolersData?.service_orders && (
-                  <div>
-                    {coolersData.service_orders
-                      .filter(
-                        (order) =>
-                          order.service_id === "1001" ||
-                          order.service_id === "1002" ||
-                          (order.service_id === "1005" &&
-                            order.status === "D,D")
-                      )
-                      .map((order) => (
-                        <>
-                          <div key={order.id}>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "16px",
-                                flexDirection: "column",
-                                alignItems: "flex-start",
-                                gap: "4px",
-                                alignSelf: "stretch",
-                                borderRadius: "5px",
-                                background: "#FFF",
-                                boxShadow:
-                                  "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                width: "90%",
-                              }}
-                            >
+                {coolersData?.service_orders === null ? (
+                  <>
+                    <p style={{ marginLeft: 90, fontWeight: "bold" }}>
+                      Sin ordenes de servicio
+                    </p>
+                  </>
+                ) : (
+                  coolersData?.service_orders && (
+                    <div>
+                      {coolersData.service_orders
+                        .filter(
+                          (order) =>
+                            order.service_id === "1001" ||
+                            order.service_id === "1002" ||
+                            (order.service_id === "1005" &&
+                              order.status === "D,D")
+                        )
+                        .map((order) => (
+                          <>
+                            <div key={order.id}>
                               <div
                                 style={{
                                   display: "flex",
-                                  alignItems: "center",
-                                  gap: "8px",
+                                  padding: "16px",
+                                  flexDirection: "column",
+                                  alignItems: "flex-start",
+                                  gap: "4px",
                                   alignSelf: "stretch",
+                                  borderRadius: "5px",
+                                  background: "#FFF",
+                                  boxShadow:
+                                    "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                  width: "90%",
                                 }}
                               >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "8px",
+                                    alignSelf: "stretch",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      flex: 100,
+                                      color: "#000005",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: "14px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "normal",
+                                      textAlign: "left",
+                                    }}
+                                  >
+                                    Orden{" "}
+                                    {order.id === ""
+                                      ? "Sin registro"
+                                      : order.id}
+                                  </div>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      padding: "8px",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                      gap: "4px",
+                                      borderRadius: "2px",
+                                      background: "#D4DAE3",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        color: "#313A49",
+                                        // fontFamily: "Space Mono",
+                                        fontSize: "10px",
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        lineHeight: "10px",
+                                      }}
+                                    >
+                                      CERRADA
+                                    </div>
+                                  </div>
+                                </div>
                                 <div
                                   style={{
                                     flex: 100,
@@ -1254,106 +1305,68 @@ const EconomicDetail = ({ coolersData }) => {
                                     // fontFamily: "DM Sans",
                                     fontSize: "14px",
                                     fontStyle: "normal",
-                                    fontWeight: 600,
+                                    fontWeight: 400,
                                     lineHeight: "normal",
-                                    textAlign: "left",
                                   }}
                                 >
-                                  Orden{" "}
-                                  {order.id === "" ? "Sin registro" : order.id}
+                                  $-----
                                 </div>
                                 <div
                                   style={{
                                     display: "flex",
-                                    padding: "8px",
-                                    justifyContent: "center",
                                     alignItems: "center",
                                     gap: "4px",
-                                    borderRadius: "2px",
-                                    background: "#D4DAE3",
+                                    alignSelf: "stretch",
                                   }}
                                 >
                                   <div
                                     style={{
-                                      color: "#313A49",
-                                      // fontFamily: "Space Mono",
-                                      fontSize: "10px",
+                                      color: "#3E83FF",
+                                      // fontFamily: "Inter",
+                                      fontSize: "14px",
                                       fontStyle: "normal",
-                                      fontWeight: 400,
-                                      lineHeight: "10px",
+                                      fontWeight: 500,
+                                      lineHeight: "normal",
                                     }}
                                   >
-                                    CERRADA
+                                    {order.created_at === ""
+                                      ? "Sin registro"
+                                      : formatCreatedAt(order.created_at)}
                                   </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  flex: 100,
-                                  color: "#000005",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "normal",
-                                }}
-                              >
-                                $-----
-                              </div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  alignSelf: "stretch",
-                                }}
-                              >
                                 <div
                                   style={{
-                                    color: "#3E83FF",
+                                    color: "#88888B",
                                     // fontFamily: "Inter",
                                     fontSize: "14px",
                                     fontStyle: "normal",
                                     fontWeight: 500,
                                     lineHeight: "normal",
+                                    textAlign: "left",
                                   }}
                                 >
-                                  {order.created_at === ""
+                                  {order.description === ""
                                     ? "Sin registro"
-                                    : formatCreatedAt(order.created_at)}
+                                    : order.description}
                                 </div>
                               </div>
-                              <div
-                                style={{
-                                  color: "#88888B",
-                                  // fontFamily: "Inter",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 500,
-                                  lineHeight: "normal",
-                                  textAlign: "left",
-                                }}
-                              >
-                                {order.description === ""
-                                  ? "Sin registro"
-                                  : order.description}
-                              </div>
                             </div>
-                          </div>
-                          <br></br>
-                        </>
-                      ))}
-                    {coolersData.service_orders.filter(
-                      (order) =>
-                        order.service_id === "1001" ||
-                        order.service_id === "1002" ||
-                        (order.service_id === "1005" && order.status === "D,D")
-                    ).length === 0 && (
+                            <br></br>
+                          </>
+                        ))}
+                      {/* {coolersData.service_orders.filter(
+                        (order) =>
+                          order.service_id === "1001" ||
+                          order.service_id === "1002" ||
+                          (order.service_id === "1005" &&
+                            order.status === "D,D")
+                      ).length === 0 && (
                         <p style={{ marginLeft: 90, fontWeight: "bold" }}>
                           Sin órdenes de servicio
                         </p>
-                      )}
-                  </div>
+                      )} */}
+                    </div>
+                  )
                 )}
               </div>
             </div>

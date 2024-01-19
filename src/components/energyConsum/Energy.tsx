@@ -127,7 +127,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.cooler?.energy_cost == null || coolersData?.cooler?.energy_cost == undefined ? "Sin registro" : '$'+`${coolersData?.cooler?.energy_cost}`}
+              {coolersData?.properties?.[7].value == undefined
+                ? "Sin registro"
+                : `${coolersData?.properties?.[7].value}`}
             </div>
           </div>
           <div
@@ -161,7 +163,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.cooler?.energy_consumption == null || coolersData?.cooler?.energy_consumption == undefined ? "Sin registro" : `${coolersData?.cooler?.energy_consumption}`+`KW/h`}
+              {coolersData?.properties?.[3].value == undefined
+                ? "Sin registro"
+                : `${coolersData?.properties?.[3].value}`}
             </div>
           </div>
           <div
@@ -195,7 +199,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.cooler?.power_consumption_reference == null || coolersData?.cooler?.power_consumption_reference == undefined ? "Sin registro" : `${coolersData?.cooler?.power_consumption_reference}`+`KW/h`}
+              {coolersData?.properties?.[8].value == undefined
+                ? "Sin registro"
+                : `${coolersData?.properties?.[8].value}`}
             </div>
           </div>
           <div
@@ -229,7 +235,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.cooler?.average_C02_emissions == null || coolersData?.cooler?.average_C02_emissions == undefined ? "Sin registro" : `${coolersData?.cooler?.average_C02_emissions}`+`Kg/día`}
+              {coolersData?.properties?.[9].value == undefined
+                ? "Sin registro"
+                : `${coolersData?.properties?.[9].value}`}
             </div>
           </div>
         </div>
@@ -335,7 +343,9 @@ const Energy = ({ coolersData }) => {
               }}
             >
               <Tabs.Panel value="first" pt="xs">
-                <div></div>
+                <div style={{ width: "100%", height: "100px" }}>
+                  <div style={{ marginLeft: 400 }}>Sin registros</div>
+                </div>
               </Tabs.Panel>
             </div>
           </Tabs>

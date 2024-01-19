@@ -3,6 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { useSelector } from "react-redux";
 import { fetchAlerts, fetchUniversal } from "../../../utils/apiUtils";
+import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 
 export default function Indicator() {
   interface Cooler {
@@ -125,7 +126,7 @@ export default function Indicator() {
               lineHeight: "155%",
             }}
           >
-            Identifica los enfriadores ---------
+            Identifica los enfriadores
           </div>
           <br></br>
           <div
@@ -143,18 +144,7 @@ export default function Indicator() {
             {/* Indicador */}
             {isLoading ? (
               <>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginLeft: 400,
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  Cargando...
-                </div>
+                <SkeletonCards></SkeletonCards>
               </>
             ) : (
               coolersData &&
@@ -201,7 +191,7 @@ export default function Indicator() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
-                            background: "#FFC7CD",
+                            background: "#BCDAFF",
                           }}
                         >
                           {cooler.algorithm === "COMPRESSOR_FAIL" ? (
@@ -226,7 +216,11 @@ export default function Indicator() {
                               alt="Descripción de la imagen"
                             />
                           ) : (
-                            ""
+                            <img
+                              src={"../../sampleData/indc2.png"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
                           )}
                         </div>
                         <div
@@ -238,14 +232,29 @@ export default function Indicator() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.algorithm === "COMPRESSOR_FAIL"
-                            ? "Falla asociada al compresor"
-                            : cooler.algorithm === "DISCONNECTIONS_FAIL"
-                            ? "Desconexión"
-                            : cooler.algorithm === "TEMPERATURE_FAIL"
-                            ? "Falla de temperatura"
-                            : cooler.algorithm === "VOLTAGE_FAIL"
-                            ? "Falla de voltaje"
+                          {cooler.algorithm === "INSTALLED"
+                            ? "Instalado"
+                            : cooler.algorithm ===
+                              "Indicador de Riesgo Nivel: 0"
+                            ? "Sin riesgo"
+                            : cooler.algorithm ===
+                              "Indicador de Riesgo Nivel: 1"
+                            ? "Visitar punto de venta"
+                            : cooler.algorithm ===
+                              "Indicador de Riesgo Nivel: 2"
+                            ? "Requiere actualizar información"
+                            : cooler.algorithm ===
+                              "Indicador de Riesgo Nivel: 3"
+                            ? "Tomar acción urgente"
+                            : cooler.algorithm ===
+                              "Indicador de Riesgo Nivel: 4"
+                            ? "En riesgo"
+                            : cooler.algorithm === "OWNED"
+                            ? "En propiedad"
+                            : cooler.algorithm === "LOCATION"
+                            ? "Ubicado"
+                            : cooler.algorithm === "TELEMETRY"
+                            ? "Telemetría"
                             : cooler.algorithm}
                         </div>
                       </div>

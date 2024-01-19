@@ -772,6 +772,12 @@ export default function Insights() {
                                     : algorithm.algorithm ===
                                       "Indicador de Riesgo Nivel: 4"
                                     ? "En riesgo"
+                                    : algorithm.algorithm === "OWNED"
+                                    ? "En propiedad"
+                                    : algorithm.algorithm === "LOCATION"
+                                    ? "Ubicado"
+                                    : algorithm.algorithm === "TELEMETRY"
+                                    ? "Telemetría"
                                     : algorithm.algorithm}
                                 </div>
                               </div>
@@ -1325,9 +1331,11 @@ export default function Insights() {
                                     ? "Falla asociada al compresor"
                                     : algorithm.algorithm ===
                                       "DISCONNECTIONS_FAIL"
-                                    ? "Desconexión"
+                                    ? "Falla de desconexión"
                                     : algorithm.algorithm === "VOLTAGE_FAIL"
                                     ? "Falla de voltaje"
+                                    : algorithm.algorithm === "FREEZING_FAIL"
+                                    ? "Falla de congelación"
                                     : algorithm.algorithm}
                                 </div>
                               </div>

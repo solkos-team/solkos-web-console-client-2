@@ -4,6 +4,7 @@ import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { IconSearch, IconDownload } from "@tabler/icons-react";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
+import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 
 export default function Alerts() {
   interface Cooler {
@@ -141,7 +142,7 @@ export default function Alerts() {
             {/* Indicador */}
             {isLoading ? (
               <>
-                <div
+                {/* <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
@@ -152,11 +153,13 @@ export default function Alerts() {
                   }}
                 >
                   Cargando...
-                </div>
+                </div> */}
+                <SkeletonCards></SkeletonCards>
               </>
+            ) : // Mostrar las tarjetas una vez que la carga ha terminado
+            alertsData == null ? (
+              "Sin registros"
             ) : (
-              // Mostrar las tarjetas una vez que la carga ha terminado
-              alertsData == null ? ("Sin registros") :
               alertsData
                 .filter((cooler) => cooler.level === "ALERT")
                 .map((cooler, index) => (
@@ -231,7 +234,10 @@ export default function Alerts() {
                               alt="Descripción de la imagen"
                             />
                           ) : (
-                            ""
+                            <img
+                              src={"../../sampleData/devices_2.png"}
+                              alt="Descripción de la imagen"
+                            />
                           )}
                         </div>
                         <div
@@ -254,7 +260,9 @@ export default function Alerts() {
                             ? "Alto voltaje"
                             : cooler.algorithm === "LOW_VOLTAGE_ALERT"
                             ? "Bajo voltaje"
-                            : ""}
+                            : cooler.algorithm === "MOVED_VISIT_ALERT"
+                            ? "Movimiento"
+                            : cooler.algorithm}
                         </div>
                       </div>
                       {/* Siguiente */}

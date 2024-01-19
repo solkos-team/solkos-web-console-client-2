@@ -25,28 +25,32 @@ export default function DrawerA({
   selectedAlgorithm,
   value,
   delta,
-}) {  
+}) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(null);
+  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(
+    null
+  );
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
   const body = {
-  customer: dto,
-  class: "OPE",
-  algorithm: [selectedAlgorithm],
-  path: pathVerify(),
-  page_size: Number(value),
-  page_number: 1}
+    customer: dto,
+    class: "OPE",
+    algorithm: [selectedAlgorithm],
+    path: pathVerify(),
+    page_size: Number(value),
+    page_number: 1,
+  };
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const data = await fetchUniversal("coolers",body)
+      const data = await fetchUniversal("coolers", body);
+      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -55,7 +59,6 @@ export default function DrawerA({
     }
   };
   useEffect(() => {
-
     fetchData();
   }, [dt]);
 
@@ -152,7 +155,9 @@ export default function DrawerA({
                   borderRadius: "4px",
                   background: selectedAlgorithm.endsWith("ALERT")
                     ? "#FEF5C7"
-                    : "#FFC7CD",
+                    : selectedAlgorithm.endsWith("ALERT")
+                    ? "#FFC7CD"
+                    : "#BCDAFF",
                 }}
               >
                 {selectedAlgorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
@@ -191,7 +196,11 @@ export default function DrawerA({
                     style={{ width: "44px", height: "44px" }}
                   />
                 ) : (
-                  ""
+                  <img
+                    src={"../../sampleData/indc2.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "44px", height: "44px" }}
+                  />
                 )}
               </div>
             </div>
@@ -213,7 +222,9 @@ export default function DrawerA({
                   borderRadius: "2px",
                   background: selectedAlgorithm.endsWith("ALERT")
                     ? "#FEF5C7"
-                    : "#FFC7CD",
+                    : selectedAlgorithm.endsWith("FAIL")
+                    ? "#FFC7CD"
+                    : "#BCDAFF",
                   height: 8,
                 }}
               >
@@ -223,9 +234,15 @@ export default function DrawerA({
                     alt="Descripción de la imagen"
                     style={{ width: "16px", height: "16px" }}
                   />
-                ) : (
+                ) : selectedAlgorithm.endsWith("FAIL") ? (
                   <img
                     src={"../../sampleData/fails2.png"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "16px", height: "16px" }}
+                  />
+                ) : (
+                  <img
+                    src={"../../sampleData/indc2.png"}
                     alt="Descripción de la imagen"
                     style={{ width: "16px", height: "16px" }}
                   />
@@ -241,7 +258,11 @@ export default function DrawerA({
                     lineHeight: "14px",
                   }}
                 >
-                  {selectedAlgorithm.endsWith("ALERT") ? "ALERTA" : "FALLA"}
+                  {selectedAlgorithm.endsWith("ALERT")
+                    ? "ALERTA"
+                    : selectedAlgorithm.endsWith("FAIL")
+                    ? "FALLA"
+                    : "INDICADOR"}
                 </div>
               </div>
               <div
@@ -605,8 +626,9 @@ export default function DrawerA({
                           width: "100px",
                         }}
                       >
-                        {cooler.status == undefined  || cooler.status == null ? ("Sin registros" )
-                        : (
+                        {cooler.status == undefined || cooler.status == null ? (
+                          "Sin registros"
+                        ) : (
                           <>
                             <div
                               style={{
@@ -668,35 +690,37 @@ export default function DrawerA({
                           width: "9rem",
                         }}
                       >
-                        {cooler.days_without_visit == undefined || cooler.days_without_visit == "" ? ("Sin registros") 
-                        : (
+                        {cooler.days_without_visit == undefined ||
+                        cooler.days_without_visit == "" ? (
+                          "Sin registros"
+                        ) : (
                           <>
-                          <div                          
-                            style={{
-                              display: "flex",
-                              padding: "4px",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              gap: "4px",
-                              borderRadius: "2px",
-                              background: "#D4DAE3",
-                              width: "80px",
-                            }}
-                          >
                             <div
                               style={{
-                                color: "#313A49",
-                                // fontFamily: "Space Mono",
-                                fontSize: "10px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "14px",
+                                display: "flex",
+                                padding: "4px",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "4px",
+                                borderRadius: "2px",
+                                background: "#D4DAE3",
+                                width: "80px",
                               }}
                             >
-                              {" "}
-                              {`${cooler.days_without_visit} DÍAS`}
+                              <div
+                                style={{
+                                  color: "#313A49",
+                                  // fontFamily: "Space Mono",
+                                  fontSize: "10px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "14px",
+                                }}
+                              >
+                                {" "}
+                                {`${cooler.days_without_visit} DÍAS`}
+                              </div>
                             </div>
-                          </div>
                           </>
                         )}
                       </TableCell>
@@ -707,8 +731,10 @@ export default function DrawerA({
                           width: "5rem",
                         }}
                       >
-                        {cooler.priority == undefined || cooler.priority == null ? ("Sin registros") 
-                        : (
+                        {cooler.priority == undefined ||
+                        cooler.priority == null ? (
+                          "Sin registros"
+                        ) : (
                           <>
                             <div
                               style={{
@@ -737,7 +763,7 @@ export default function DrawerA({
                               </div>
                             </div>
                           </>
-                        ) }
+                        )}
                       </TableCell>
                       <TableCell
                         style={{
