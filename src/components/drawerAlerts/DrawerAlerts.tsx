@@ -283,7 +283,7 @@ export default function DrawerA({
                 style={{
                   color: "#000",
                   // fontFamily: "DM Sans",
-                  fontSize: "18px",
+                  fontSize: "16px",
                   fontStyle: "normal",
                   fontWeight: 600,
                   lineHeight: "normal",
@@ -311,6 +311,24 @@ export default function DrawerA({
                       ? "Falla asociada al compresor"
                       : selectedAlgorithm === "MOVED_VISIT_ALERT"
                       ? "Movimiento"
+                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 0"
+                      ? "Sin riesgo"
+                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 1"
+                      ? "Visitar punto de venta"
+                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 2"
+                      ? "Requiere actualizar información"
+                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 3"
+                      ? "Tomar acción urgente"
+                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 4"
+                      ? "En riesgo"
+                      : selectedAlgorithm === "LOCATION"
+                      ? "Ubicado"
+                      : selectedAlgorithm === "TELEMETRY"
+                      ? "Telemetría"
+                      : selectedAlgorithm === "INSTALLED"
+                      ? "Instalado"
+                      : selectedAlgorithm === "OWNED"
+                      ? "En propiedad"
                       : selectedAlgorithm}
                   </div>
                 )}

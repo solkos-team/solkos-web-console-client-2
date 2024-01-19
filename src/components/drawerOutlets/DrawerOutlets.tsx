@@ -44,7 +44,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization)
+  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -62,11 +62,19 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
     });
     return filteredData;
   };
-  const body = { customer: dto, class: "STK", algorithm: ["INSTALLED"], path: pathVerify(), page_size: 1000, page_number: 1, outlet_id: outlet_id }
+  const body = {
+    customer: dto,
+    class: "STK",
+    algorithm: ["INSTALLED"],
+    path: pathVerify(),
+    page_size: 1000,
+    page_number: 1,
+    outlet_id: outlet_id,
+  };
   const fetchData = async () => {
     try {
       // const data = await fetchCoolers(pathVerify(), null, outlet_id);
-      const data = await fetchUniversal('coolers', body);
+      const data = await fetchUniversal("coolers", body);
       setCoolersData(data);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -74,7 +82,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   };
   const filteredCoolers = coolersData
     ? filterOutlets(coolersData, searchValue)
-    : [];    
+    : [];
   useEffect(() => {
     fetchData();
   }, [dt]);
@@ -163,7 +171,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "20px",
+                    fontSize: "16px",
                     fontStyle: "normal",
                     fontWeight: 700,
                     lineHeight: "normal",
@@ -171,7 +179,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                 >
                   {outlet_name}
                 </div>
-                <div
+                {/* <div
                   style={{
                     display: "flex",
                     height: "0.6rem",
@@ -184,11 +192,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     background: "#FFF",
                   }}
                 >
-                  {/* <img
-                  onClick={onClose}
-                  src={"../../sampleData/a.png"}
-                  alt="Descripción de la imagen"
-                /> */}
+                  
                   <IconCircleCheck width={"1rem"} color="#0F9F67" />
                   <div
                     style={{
@@ -202,26 +206,28 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                   >
                     SIN ACCIONES
                   </div>
-                </div>
+                </div> */}
               </div>
-              {outlet_address == undefined || outlet_address == ""
-                ? ("Sin registros")
-                : (
-                  <>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "20px",
-                      }}
-                    >
-                      {outlet_address}
-                    </div>
-                  </>
-                )}
+              {outlet_address === undefined ||
+              outlet_address === "" ||
+              outlet_address === null ? (
+                "Sin registros"
+              ) : (
+                <>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "20px",
+                    }}
+                  >
+                    {outlet_address}
+                  </div>
+                </>
+              )}
             </div>
             <div
               style={{
@@ -243,56 +249,60 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               >
                 Leído por última vez el:
               </div>
-              {last_read_coolerC == undefined || last_read_coolerC == ""
-                ? ("Sin registros")
-                : (
-                  <>
+              {last_read_coolerC === undefined ||
+              last_read_coolerC === "" ||
+              last_read_coolerC === null ? (
+                "Sin registros"
+              ) : (
+                <>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "Inter",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {last_read_coolerC}
+                  </div>
+                </>
+              )}
+              &nbsp;
+              {days_without_visitC === undefined ||
+              days_without_visitC === "" ||
+              days_without_visitC === null ? (
+                "Sin registros"
+              ) : (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      borderRadius: "2px",
+                      background: "#D4DAE3",
+                    }}
+                  >
                     <div
                       style={{
-                        color: "#000005",
-                        // fontFamily: "Inter",
-                        fontSize: "14px",
+                        color: "#313A49",
+                        // fontFamily: "DM Mono",
+                        fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 500,
-                        lineHeight: "normal",
+                        lineHeight: "12px",
+                        height: "10px",
                       }}
                     >
-                      {last_read_coolerC}
+                      {`${days_without_visitC} DÍAS SIN VISITA`}
                     </div>
-                  </>
-                )}
-              &nbsp;
-              {days_without_visitC == undefined || days_without_visitC == ""
-                ? ("Sin registros")
-                : (
-                  <>
-                    <div
-                      style={{
-                        display: "flex",
-                        padding: "8px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "4px",
-                        borderRadius: "2px",
-                        background: "#D4DAE3",
-                      }}
-                    >
-                      <div
-                        style={{
-                          color: "#313A49",
-                          // fontFamily: "DM Mono",
-                          fontSize: "12px",
-                          fontStyle: "normal",
-                          fontWeight: 500,
-                          lineHeight: "12px",
-                          height: "10px",
-                        }}
-                      >
-                        {`${days_without_visitC} DÍAS SIN VISITA`}
-                      </div>
-                    </div>
-                  </>
-                )}
+                  </div>
+                </>
+              )}
             </div>
           </div>
           {/* 3 */}
@@ -347,7 +357,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  {channel == undefined || channel == ""
+                  {channel === undefined || channel === "" || channel === null
                     ? "Sin registros"
                     : `${channel}`}
                 </div>
@@ -395,7 +405,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  {region == undefined || region == ""
+                  {region === undefined || region === "" || region === null
                     ? "Sin registros"
                     : `${region}`}
                 </div>
@@ -443,7 +453,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  {route == undefined || route == "" ? "Sin registros" : `${route}`}
+                  {route === undefined || route === "" || route === null
+                    ? "Sin registros"
+                    : `${route}`}
                 </div>
               </div>
             </div>
@@ -489,7 +501,9 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                     lineHeight: "14px",
                   }}
                 >
-                  {zone == undefined || zone == "" ? "Sin registros" : `${zone}`}
+                  {zone === undefined || zone === "" || zone === null
+                    ? "Sin registros"
+                    : `${zone}`}
                 </div>
               </div>
             </div>
@@ -742,8 +756,18 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
             padding: "0px 24px",
           }}
         >
-          <section style={{visibility: coolersData.length > 10 ? "visible" : "hidden"}}>
-            <TextInput placeholder="Busca por Serie o Modelo" value={searchValue} onChange={handleSearchChange} type="text" style={{width:"330%"}}  />
+          <section
+            style={{
+              visibility: coolersData.length > 10 ? "visible" : "hidden",
+            }}
+          >
+            <TextInput
+              placeholder="Busca por Serie o Modelo"
+              value={searchValue}
+              onChange={handleSearchChange}
+              type="text"
+              style={{ width: "330%" }}
+            />
           </section>
           <Card>
             <Table
@@ -815,207 +839,218 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
               <TableBody
                 style={{ display: "block", height: "90%", overflowY: "auto" }}
               >
-                {filteredCoolers == undefined ? "Sin registros" :
-                filteredCoolers
-                  .slice(firstIndex, lastIndex)
-                  .map((cooler, index) => (
-                    <TableRow
-                      key={index}
-                      className="Tabla"
-                      onClick={() => {
-                        navigate(`/coolerDetail/${cooler.serial_number}`);
-                      }}
-                    >
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "5.8rem",
-                        }}
-                      >
-                        {cooler.status == undefined || cooler.status == ""
-                          ? ("Sin registros")
-                          : (
-                            <>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "4px",
-                                  // justifyContent: "center",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  borderRadius: "2px",
-                                  background: "#B6FEDB",
-                                  width: "fit-content",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    width: "4px",
-                                    height: "4px",
-                                    borderRadius: "5px",
-                                    background: "#31B648",
-                                  }}
-                                ></div>
-                                <div
-                                  style={{
-                                    color: "#028053",
-                                    width: "100%",
-                                    fontSize: ".5rem",
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    lineHeight: "14px",
-                                  }}
-                                >
-                                  {`${cooler.status}`}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "6.5rem",
-                        }}
-                      >
-                        {cooler.serial_number === ""
-                          ? "Sin registro"
-                          : cooler.serial_number}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "9rem",
-                        }}
-                      >
-                        {cooler.model_id == undefined || cooler.model_id == ""
-                          ? "Sin registros"
-                          : `${cooler.model_id}`}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "8rem",
-                        }}
-                      >
-                        {cooler.days_without_visitC == undefined ||
-                          cooler.days_without_visitC == ""
-                          ? ("Sin registros")
-                          : (
-                            <>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "4px",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  borderRadius: "2px",
-                                  background: "#D4DAE3",
-                                  width: "6rem",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    color: "#313A49",
-                                    // fontFamily: "Space Mono",
-                                    fontSize: "12px",
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    lineHeight: "14px",
-                                  }}
-                                >
-                                  {" "}
-                                  {`${cooler.days_without_visitC} DÍAS`}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "5rem",
-                        }}
-                      >
-                        {cooler.priority == undefined || cooler.priority == null
-                          ? ("Sin registros")
-                          : (
-                            <>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "4px",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  borderRadius: "2px",
-                                  border: "1.5px solid #0F9F67",
-                                  background: "#FFF",
-                                  width: "3rem",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    color: "#0F9F67",
-                                    // fontFamily: "DM Sans",
-                                    fontSize: "12px",
-                                    fontStyle: "normal",
-                                    fontWeight: 600,
-                                    lineHeight: "14px",
-                                  }}
-                                >
-                                  {cooler.priority}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "8rem",
-                          height: "3rem",
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "4px",
+                {filteredCoolers == undefined
+                  ? "Sin registros"
+                  : filteredCoolers
+                      .slice(firstIndex, lastIndex)
+                      .map((cooler, index) => (
+                        <TableRow
+                          key={index}
+                          className="Tabla"
+                          onClick={() => {
+                            navigate(`/coolerDetail/${cooler.serial_number}`);
                           }}
                         >
-                          <Link to="/coolerDetail">
+                          <TableCell
+                            style={{
+                              fontSize: ".84rem",
+                              textAlign: "left",
+                              width: "5.8rem",
+                            }}
+                          >
+                            {cooler.status === undefined ||
+                            cooler.status === "" ||
+                            cooler.status === null ? (
+                              "Sin registros"
+                            ) : (
+                              <>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    padding: "4px",
+                                    // justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    borderRadius: "2px",
+                                    background: "#B6FEDB",
+                                    width: "fit-content",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      width: "4px",
+                                      height: "4px",
+                                      borderRadius: "5px",
+                                      background: "#31B648",
+                                    }}
+                                  ></div>
+                                  <div
+                                    style={{
+                                      color: "#028053",
+                                      width: "100%",
+                                      fontSize: ".5rem",
+                                      fontStyle: "normal",
+                                      fontWeight: 400,
+                                      lineHeight: "14px",
+                                    }}
+                                  >
+                                    {`${cooler.status}`}
+                                  </div>
+                                </div>
+                              </>
+                            )}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontSize: ".84rem",
+                              textAlign: "left",
+                              width: "6.5rem",
+                            }}
+                          >
+                            {cooler.serial_number === "" ||
+                            cooler.serial_number === undefined ||
+                            cooler.serial_number === null
+                              ? "Sin registro"
+                              : cooler.serial_number}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontSize: ".84rem",
+                              textAlign: "left",
+                              width: "9rem",
+                            }}
+                          >
+                            {cooler.model_id === undefined ||
+                            cooler.model_id === "" ||
+                            cooler.model_id === null
+                              ? "Sin registros"
+                              : `${cooler.model_id}`}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontSize: ".84rem",
+                              textAlign: "left",
+                              width: "8rem",
+                            }}
+                          >
+                            {cooler.days_without_visitC === undefined ||
+                            cooler.days_without_visitC === "" ||
+                            cooler.days_without_visitC === null ? (
+                              "Sin registros"
+                            ) : (
+                              <>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    padding: "4px",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    borderRadius: "2px",
+                                    background: "#D4DAE3",
+                                    width: "6rem",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      color: "#313A49",
+                                      // fontFamily: "Space Mono",
+                                      fontSize: "12px",
+                                      fontStyle: "normal",
+                                      fontWeight: 400,
+                                      lineHeight: "14px",
+                                    }}
+                                  >
+                                    {" "}
+                                    {`${cooler.days_without_visitC} DÍAS`}
+                                  </div>
+                                </div>
+                              </>
+                            )}
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontSize: ".84rem",
+                              textAlign: "left",
+                              width: "5rem",
+                            }}
+                          >
+                            {/* {cooler.priority === undefined ||
+                            cooler.priority === null ||
+                            cooler.priority === "" ? (
+                              "Sin registros"
+                            ) : (
+                              <>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    padding: "4px",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    borderRadius: "2px",
+                                    border: "1.5px solid #0F9F67",
+                                    background: "#FFF",
+                                    width: "3rem",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      color: "#0F9F67",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: "12px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "14px",
+                                    }}
+                                  >
+                                    {cooler.priority}
+                                  </div>
+                                </div>
+                              </>
+                            )} */}
+                            Sin registro
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontSize: ".84rem",
+                              textAlign: "left",
+                              width: "8rem",
+                              height: "3rem",
+                            }}
+                          >
                             <div
                               style={{
-                                color: "#3E83FF",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "20px",
                                 display: "flex",
-                                marginRight: "6px",
+                                alignItems: "center",
+                                gap: "4px",
                               }}
                             >
-                              Ver más{" "}
-                              <IconArrowRight
-                                style={{
-                                  color: "#3E83FF",
-                                  width: "1.0rem",
-                                }}
-                              />
+                              <Link to="/coolerDetail">
+                                <div
+                                  style={{
+                                    color: "#3E83FF",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                    display: "flex",
+                                    marginRight: "6px",
+                                  }}
+                                >
+                                  Ver más{" "}
+                                  <IconArrowRight
+                                    style={{
+                                      color: "#3E83FF",
+                                      width: "1.0rem",
+                                    }}
+                                  />
+                                </div>
+                              </Link>
                             </div>
-                          </Link>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                          </TableCell>
+                        </TableRow>
+                      ))}
               </TableBody>
             </Table>
             <PaginationComponent

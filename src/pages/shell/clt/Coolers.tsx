@@ -260,7 +260,7 @@ export default function Coolers() {
                 Enfriadores
               </div>
               <div style={{ marginLeft: "auto" }}>
-                <ExportToExcel datos={filteredCoolers} nombre={"Coolers"} />
+                <ExportToExcel datos={filteredCoolers} nombre={"Enfriadores"} />
               </div>
             </div>
           </div>
