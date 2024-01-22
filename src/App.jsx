@@ -276,8 +276,10 @@ function App() {
       setOpened(false);
     }
   };
-JSON.parse(dto).length == 0 ? localStorage.setItem('ROOT',1) : ""
-const validPath = localStorage.getItem('ROOT')
+  const initOrg = () => {
+    dt == [] ? console.log(dt) : saveOrganization("KOF");
+  };
+const validPath = dto.length == 0 ? [] : JSON.parse(dto)
   return (
     <>
       <AppShell
@@ -491,15 +493,14 @@ const validPath = localStorage.getItem('ROOT')
                         lineHeight: "16px",                        
                       }}
                     >
-                      {validPath == null ? "Tú organización" : "Cambiar de organización"}                      
-                      
+                      Cambiar de organización
                     </div>
                   </div>
                   <div style={{ maxHeight: "300px", overflowY: "auto" }}>
                     {/* Contenido del menú de cambio de organización */}
                     {data == undefined ? ("Sin registros") :
                     data.map((nombre, index) => (
-                      validPath == null || validPath == 'null' ?
+
                       <div
                         style={{
                           display: "flex",
@@ -507,37 +508,7 @@ const validPath = localStorage.getItem('ROOT')
                           alignItems: "center",
                           gap: "10px",
                           alignSelf: "stretch",
-                          display : dt == nombre ? "" : "none"
-                        }}
-                        key={index}
-                        onChange={setData}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                            flex: "100",
-                            fontSize: "14px",
-                            textDecorationColor: dt === nombre ? "#ec547c" : "",
-                            color: dt === nombre ? "#ec547c" : "",                            
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            saveOrganization(nombre);
-                          }}
-                        >
-                          {nombre}
-                        </div>
-                      </div>
-                      :
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "10px 12px",
-                          alignItems: "center",
-                          gap: "10px",
-                          alignSelf: "stretch",                          
+                          display : validPath.length >= 1 && dt !== nombre ? 'none' :'',
                         }}
                         key={index}
                         onChange={setData}
@@ -643,8 +614,6 @@ const validPath = localStorage.getItem('ROOT')
                       }}
                       onClick={() => {
                         navigate("/login");
-                        localStorage.setItem('ROOT',null)
-                        localStorage.setItem('PATH',null)
                       }}
                     >
                       <img
