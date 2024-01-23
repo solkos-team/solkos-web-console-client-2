@@ -110,7 +110,7 @@ export default function (props) {
   const ventanaEmergenteRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    verSelectData(value);
+    verSelectData(value);     
     dispatch(addPath());
     const storedTodos = localStorage.getItem("PATH");
     const todoArr = storedTodos !== null ? JSON.parse(storedTodos || "[]") : [];
@@ -149,13 +149,15 @@ export default function (props) {
       setData((current) => [...current, value]);
       localStorage.setItem("PATH", JSON.stringify([...data, value]));
       setOpened(false);
+      setValue('')
       if (index != 3) {
         setIndex(index + 1);
         setStatusDelete(false);
       }
       setStatusDelete(false);
-      setFilterVisibility(false);
+      setFilterVisibility(false);      
     }
+        
   };
   const deleteFilter = (i) => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
@@ -184,7 +186,7 @@ export default function (props) {
       return i >= validaUser?.length && i == data.length - 1 ? false : true;
     }
   };
-
+  
   data.length > 0 ? getPaths(data) : "";
   return (
     <div>
