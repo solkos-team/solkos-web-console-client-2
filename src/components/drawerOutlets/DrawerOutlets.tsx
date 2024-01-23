@@ -848,7 +848,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
                           key={index}
                           className="Tabla"
                           onClick={() => {
-                            navigate(`/coolerDetail/${cooler.serial_number}`);
+                            navigate(`/home/coolerDetail/${cooler.serial_number}`);
                           }}
                         >
                           <TableCell

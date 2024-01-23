@@ -28,7 +28,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ModalsProvider>
           <NotificationsProvider>
             <Router>
-              <Routes>
+              {/* <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/recover" element={<RecoverPassword />} />
                 <Route path="/newPassword" element={<NewPassword />}></Route>
@@ -47,6 +47,40 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   <Route path="/outlets" element={<Outlets />} />
                   <Route path="/panel" element={<Panel />} />
                   <Route path="/users" element={<Users />} />
+                </Route>
+              </Routes> */}
+              <Routes>
+                <Route path="" element={<Login />}>
+                  {/* <Route path="" element={} />
+                  <Route path="" element={} />
+                  <Route path="" element={} />
+                <Route path="" element={} /> */}
+                </Route>
+                <Route path="/home" element={<App />} >
+                <Route index path="/home" element={<Insights />} />
+                {/* Insights */}
+                <Route path="/home/insights" element={<Insights />} />
+                {/* Alertas */}
+                <Route path="/home/alerts" element={<Alerts />} />
+                {/* Fallas */}
+                <Route path="/home/fails" element={<Fails />} />
+                {/* Indicadores */}
+                <Route  path="/home/indicator" element={<Indicator />} />
+                {/* Cooler life tracking */}
+                <Route path="/home/clt" element={<Coolers />}/>
+                {/* Cooler detail */}
+                <Route
+                    path="/home/coolerDetail/:serial_number"
+                    element={<CoolerDetail />}
+                  />
+                {/* Puntos de venta */}
+                <Route path="/home/outlets" element={<Outlets />} />
+                {/* Tableros */}
+                <Route path="/home/panel" element={<Panel />} />
+                {/* colaboradores */}
+                <Route path="/home/users" element={<Users />} />
+                {/* Login */}
+                <Route  path="/home/login" element={<Login />}/>
                 </Route>
               </Routes>
             </Router>

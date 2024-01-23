@@ -217,7 +217,7 @@ export default function (props) {
             visibility: props.status == "false" ? "hidden" : "visible",
           }}
           onClick={() => {
-            navigate(`/` + getPath(props));
+            navigate(`/home/` + getPath(props));
           }}
         >
           <IconArrowNarrowLeft />

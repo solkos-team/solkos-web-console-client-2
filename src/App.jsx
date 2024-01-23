@@ -138,43 +138,43 @@ const routes = [
     links: [
       {
         label: "Insights",
-        link: "/insights",
+        link: "/home/insights",
         icon: <img src={"../../sampleData/system_3.png"} alt="cooler"></img>,
       },
       {
         label: "Alertas",
-        link: "/alerts",
+        link: "/home/alerts",
         icon: <img src={alert} />,
       },
       {
         label: "Fallas",
-        link: "/fails",
+        link: "/home/fails",
         icon: <img src={fails} />,
       },
       {
         label: "Indicadores",
-        link: "/indicator",
+        link: "/home/indicator",
         icon: <img src={ind} />,
       },
     ],
   },
   {
-    link: "/clt",
+    link: "/home/clt",
     label: "Cooler Life Tracking",
     icon: <img src={clt} />,
   },
   {
-    link: "/outlets",
+    link: "/home/outlets",
     label: "Puntos de venta",
     icon: <img src={pv} />,
   },
   {
-    link: "/panel",
+    link: "/home/panel",
     label: "Tableros",
     icon: <img src={boards} />,
   },
   {
-    link: "/users",
+    link: "/home/users",
     label: "Colaboradores",
     icon: <img src={collab} />,
   },
@@ -644,7 +644,7 @@ function App() {
                       }}
                       onClick={() => {
                         localStorage.clear()
-                        navigate("/login");
+                        navigate("/");
                       }}
                     >
                       <img

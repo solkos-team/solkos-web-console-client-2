@@ -356,7 +356,7 @@ export default function Coolers() {
                                     className="Tabla"
                                     onClick={() => {
                                       navigate(
-                                        `/coolerDetail/${cooler.serial_number}`
+                                        `/home/coolerDetail/${cooler.serial_number}`
                                       );
                                       console.log(
                                         `Se hizo clic en la fila con serial_number: ${cooler.serial_number}`
