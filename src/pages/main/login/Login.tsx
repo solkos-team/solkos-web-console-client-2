@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { IconEarOff, IconEaseIn } from "@tabler/icons-react";
+import { path } from "d3-path";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,9 +15,11 @@ export const Login = () => {
 
   const pushUserConfig = (data) => {
     const { user } = data;
-    const { Customer, Path } = user;
+    const { Customer, Path, Name } = user;
     localStorage.setItem("PATH", JSON.stringify(Path));
     localStorage.setItem("ORG", Customer);
+    localStorage.setItem("RO0T", JSON.stringify(Path));
+    localStorage.setItem("USER", Name);
     navigate("/insights");
   };
   const body = {

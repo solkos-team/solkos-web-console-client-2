@@ -47,21 +47,19 @@ const useStyles = createStyles((theme, _params, getRef) => {
       overflowY: "hidden",
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
-      borderBottom: `1px solid ${
-        theme.colorScheme === "dark"
+      borderBottom: `1px solid ${theme.colorScheme === "dark"
           ? theme.colors.dark[4]
           : theme.colors.gray[2]
-      }`,
+        }`,
     },
 
     footer: {
       paddingTop: theme.spacing.md,
       marginTop: theme.spacing.md,
-      borderTop: `1px solid ${
-        theme.colorScheme === "dark"
+      borderTop: `1px solid ${theme.colorScheme === "dark"
           ? theme.colors.dark[4]
           : theme.colors.gray[2]
-      }`,
+        }`,
     },
 
     link: {
@@ -110,7 +108,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
         [`& .${icon}`]: {
           color:
             theme.colors[theme.primaryColor][
-              theme.colorScheme === "dark" ? 5 : 7
+            theme.colorScheme === "dark" ? 5 : 7
             ],
         },
       },
@@ -183,6 +181,7 @@ const routes = [
 ];
 
 function App() {
+  const Name = localStorage.getItem("USER") || ''
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
   const [data, setData] = useState([]);
@@ -198,6 +197,7 @@ function App() {
     setData(data);
   };
   useEffect(() => {
+    dispatch(addOrg());
     // fetch get customers
     fetctData();
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
@@ -266,9 +266,6 @@ function App() {
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
-  // console.log(dt,JSON.parse(dto).length || 0)
-  // console.log(dt,JSON.parse(dto))
-
   const saveOrganization = (ORG) => {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
@@ -276,10 +273,11 @@ function App() {
       setOpened(false);
     }
   };
-  const initOrg = () => {
-    dt == [] ? console.log(dt) : saveOrganization("KOF");
-  };
-const validPath = dto.length == 0 ? [] : JSON.parse(dto)
+  const validaUser = localStorage.getItem("RO0T")
+  const array = Name.split(" ")
+  const total = array.length
+  let resultado = ""
+  for (var i = 0; i < total; resultado += array[i][0], i++);
   return (
     <>
       <AppShell
@@ -339,7 +337,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                           // fontFamily: "DM Mono",
                         }}
                       >
-                        BY IMBERA
+                        'BY IMBERA'
                       </span>
                     </div>
                   </div>
@@ -418,7 +416,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                             background: "#E6E6E6",
                           }}
                         >
-                          MB
+                          {resultado.toUpperCase() || 'US'}
                         </div>
                         <div
                           style={{
@@ -438,7 +436,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                               lineHeight: "155%",
                             }}
                           >
-                            Mayra Barrón
+                            {Name || 'User'}
                           </Text>
                           <div
                             style={{
@@ -463,7 +461,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                                 textTransform: "uppercase",
                               }}
                             >
-                              IMBERA
+                              {dt || 'IMBERA'}
                             </Text>
                           </div>
                         </div>
@@ -482,7 +480,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                       alignSelf: "stretch",
                     }}
                   >
-                    
+
                     <div
                       style={{
                         color: "#88888B",
@@ -490,7 +488,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                         fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 600,
-                        lineHeight: "16px",                        
+                        lineHeight: "16px",
                       }}
                     >
                       Cambiar de organización
@@ -499,39 +497,71 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                   <div style={{ maxHeight: "300px", overflowY: "auto" }}>
                     {/* Contenido del menú de cambio de organización */}
                     {data == undefined ? ("Sin registros") :
-                    data.map((nombre, index) => (
-
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "10px 12px",
-                          alignItems: "center",
-                          gap: "10px",
-                          alignSelf: "stretch",
-                          display : validPath.length >= 1 && dt !== nombre ? 'none' :'',
-                        }}
-                        key={index}
-                        onChange={setData}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: "10px",
-                            flex: "100",
-                            fontSize: "14px",
-                            textDecorationColor: dt === nombre ? "#ec547c" : "",
-                            color: dt === nombre ? "#ec547c" : "",                            
-                            cursor: "pointer",
-                          }}
-                          onClick={() => {
-                            saveOrganization(nombre);
-                          }}
-                        >
-                          {nombre}
-                        </div>
-                      </div>
-                    ))}
+                      data.map((nombre, index) => (
+                        JSON.parse(validaUser).length == 0
+                          ?
+                          <div
+                            style={{
+                              // display: "flex",
+                              padding: "10px 12px",
+                              alignItems: "center",
+                              gap: "10px",
+                              alignSelf: "stretch",
+                              display: JSON.parse(validaUser).length == 0 ? "" : "none"
+                            }}
+                            key={index}
+                            onChange={setData}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "10px",
+                                flex: "100",
+                                fontSize: "14px",
+                                textDecorationColor: dt === nombre ? "#ec547c" : "",
+                                color: dt === nombre ? "#ec547c" : "",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                saveOrganization(nombre);
+                              }}
+                            >
+                              {nombre}
+                            </div>
+                          </div>
+                          :
+                          <div
+                            style={{
+                              // display: "flex",
+                              padding: "10px 12px",
+                              alignItems: "center",
+                              gap: "10px",
+                              alignSelf: "stretch",
+                              display: dt == nombre ? "" : "none"
+                            }}
+                            key={index}
+                            onChange={setData}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "10px",
+                                flex: "100",
+                                fontSize: "14px",
+                                textDecorationColor: dt === nombre ? "#ec547c" : "",
+                                color: dt === nombre ? "#ec547c" : "",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => {
+                                saveOrganization(nombre);
+                              }}
+                            >
+                              {nombre}
+                            </div>
+                          </div>
+                      ))}
                   </div>
                   <div
                     style={{
@@ -613,6 +643,7 @@ const validPath = dto.length == 0 ? [] : JSON.parse(dto)
                         flex: "100",
                       }}
                       onClick={() => {
+                        localStorage.clear()
                         navigate("/login");
                       }}
                     >

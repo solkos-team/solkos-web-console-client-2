@@ -174,8 +174,15 @@ export default function (props) {
   const getPath = ({ path }) => {
     return typeof path === "undefined" ? "" : path;
   };
+  const validaUser = JSON.parse(localStorage.getItem("RO0T") || "")
   const bloqPath = (i) => {
-    return i == data.length - 1 ? false : true;
+    // i == data.length - 1 ? false : true;    
+    // return i >= validaUser?.length ? false : true;
+    if (validaUser.length == 0) {
+      return i == data.length - 1 ? false : true;
+    } else {
+      return i >= validaUser?.length && i == data.length - 1 ? false : true;
+    }
   };
 
   data.length > 0 ? getPaths(data) : "";
@@ -273,72 +280,72 @@ export default function (props) {
           {data === null || data === undefined
             ? []
             : data.map((item, i) => (
-                <div style={{ display: "flex", alignItems: "center" }} key={i}>
-                  <button
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      borderRadius: "8px",
-                      border: "1px solid #ADBACC",
-                      padding: "3px 7px",
-                      background: bloqPath(i) == false ? "" : "#D4DAE3",
-                    }}
-                    disabled={bloqPath(i)}
-                    type="button"
-                  >
-                    {bloqPath(i) == false ? (
-                      <IconCircleX
-                        style={{
-                          color: "#313A49",
-                          width: "16px",
-                          height: "16px",
-                          marginRight: "3px",
-                          visibility:
-                            bloqPath(i) == false ? "visible" : "hidden",
-                        }}
-                        onClick={() => {
-                          deleteFilter(i);
-                        }}
-                        onClickCapture={(o) => !o}
-                      />
-                    ) : (
-                      <IconLock
-                        style={{
-                          color: "#ADBACC",
-                          width: "16px",
-                          height: "16px",
-                          marginRight: "3px",
-                        }}
-                      />
-                    )}
-
-                    <Text
+              <div style={{ display: "flex", alignItems: "center" }} key={i}>
+                <button
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    borderRadius: "8px",
+                    border: "1px solid #ADBACC",
+                    padding: "3px 7px",
+                    background: bloqPath(i) == false ? "" : "#D4DAE3",
+                  }}
+                  disabled={bloqPath(i)}
+                  type="button"
+                >
+                  {bloqPath(i) == false ? (
+                    <IconCircleX
                       style={{
-                        // color: "#313A49",
-                        // fontFamily: "Space Mono",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
-                        userSelect: "none",
-                        color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
+                        color: "#313A49",
+                        width: "16px",
+                        height: "16px",
+                        marginRight: "3px",
+                        visibility:
+                          bloqPath(i) == false ? "visible" : "hidden",
                       }}
-                    >
-                      {item}
-                    </Text>
-                  </button>
-                  <IconChevronRight
+                      onClick={() => {
+                        deleteFilter(i);
+                      }}
+                      onClickCapture={(o) => !o}
+                    />
+                  ) : (
+                    <IconLock
+                      style={{
+                        color: "#ADBACC",
+                        width: "16px",
+                        height: "16px",
+                        marginRight: "3px",
+                      }}
+                    />
+                  )}
+
+                  <Text
                     style={{
-                      color: "#ADBACC",
-                      width: "16px",
-                      height: "16px",
-                      marginLeft: "3px",
-                      visibility: i == 3 ? "hidden" : "visible",
+                      // color: "#313A49",
+                      // fontFamily: "Space Mono",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "14px",
+                      textTransform: "uppercase",
+                      userSelect: "none",
+                      color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
                     }}
-                  />
-                </div>
-              ))}
+                  >
+                    {item}
+                  </Text>
+                </button>
+                <IconChevronRight
+                  style={{
+                    color: "#ADBACC",
+                    width: "16px",
+                    height: "16px",
+                    marginLeft: "3px",
+                    visibility: i == 3 ? "hidden" : "visible",
+                  }}
+                />
+              </div>
+            ))}
 
           {/* ---------------------- */}
           {filterVisibility ? (

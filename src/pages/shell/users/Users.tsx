@@ -55,9 +55,7 @@ export default function Users() {
       Nombre: user.name,
       Email: user.email,
       Cliente: user.customer,
-      Path: user.path.toString(),
-      // Fecha_Actualizacion: user.updated_at,
-      // Fecha_Creacion: user.created_at
+      Path: user.path.toString()
     }));
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
