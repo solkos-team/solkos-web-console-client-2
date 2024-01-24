@@ -58,6 +58,7 @@ export default function Insights() {
 
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
+  const [items,numIntems] = useState(0)
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -106,7 +107,7 @@ export default function Insights() {
     class: "STK",
     algorithm: ["INSTALLED"],
     path: pathVerify(),
-    page_size: 1000,
+    page_size: items > 1000 || items == 0 ? 1000 : items,
     page_number: 1,
   };
   const fetchData2 = async () => {
@@ -119,7 +120,17 @@ export default function Insights() {
       console.error("Error fetching coolers:", error);
     }
   };
+  const fetchDataNumerOfItems = async () => {
+    try {
+      const data = await fetchInsights(pathVerify());
+      numIntems(Number(data.insights.INDICATOR.total))
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching coolers:", error);
+    }
+  };
   useEffect(() => {
+    fetchDataNumerOfItems()
     fetchData();
     fetchData2();
     handleMapKeyChange();

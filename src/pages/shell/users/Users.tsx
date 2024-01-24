@@ -24,6 +24,7 @@ export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([]);
+  const [dataUsersEdit, setDataUsersEdit] = useState();
   const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
@@ -399,7 +400,7 @@ export default function Users() {
                                     width: "150px",
                                   }}
                                 >
-                                  {user.path}
+                                  {user.path.toString()}
                                 </TableCell>
                                 <TableCell
                                   style={{
@@ -431,6 +432,7 @@ export default function Users() {
                                         display: "flex",
                                         marginRight: "90px",
                                       }}
+                                      onClick={()=>{setDataUsersEdit(user)}}
                                     >
                                       Ver más{" "}
                                       <IconArrowRight
@@ -440,11 +442,7 @@ export default function Users() {
                                         }}
                                       />
                                     </div>
-                                  </div>
-                                  <DrawerUsers
-                                    isOpen={isDrawerOpen}
-                                    onClose={closeDrawer}
-                                  ></DrawerUsers>
+                                  </div>                                  
                                 </TableCell>
                               </TableRow>
                             ))}
@@ -484,6 +482,13 @@ export default function Users() {
           </div>
         </div>
       </div>
-    </div>
+      {dataUsersEdit && (
+        <DrawerUsers
+        isOpen={isDrawerOpen}
+        onClose={closeDrawer}
+        userData = {dataUsersEdit}                                    
+      ></DrawerUsers>
+      )}
+    </div>    
   );
 }
