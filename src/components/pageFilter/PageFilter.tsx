@@ -216,7 +216,7 @@ export default function (props) {
             borderRadius: "4px",
             cursor: "pointer",
             // boxSizing: "border-box",
-            visibility: props.status == "false" ? "hidden" : "visible",
+            // visibility: props.status == "false" ? "hidden" : "visible",
           }}
           onClick={() => {
             navigate(`/home/` + getPath(props));
@@ -234,6 +234,7 @@ export default function (props) {
             border: "0.5px solid #ADBACC",
             width: "100%",
             borderRadius: "4px",
+            visibility : props.disabledPath == true ? "hidden" : "visible"
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -302,8 +303,8 @@ export default function (props) {
                         width: "16px",
                         height: "16px",
                         marginRight: "3px",
-                        visibility:
-                          bloqPath(i) == false ? "visible" : "hidden",
+                        // visibility:
+                        //   bloqPath(i) == false ? "visible" : "hidden",
                       }}
                       onClick={() => {
                         deleteFilter(i);
@@ -343,7 +344,7 @@ export default function (props) {
                     width: "16px",
                     height: "16px",
                     marginLeft: "3px",
-                    visibility: i == 3 ? "hidden" : "visible",
+                    visibility: i == 3 || props.disabledPath == true ? "hidden" : "visible",
                   }}
                 />
               </div>
@@ -351,7 +352,7 @@ export default function (props) {
 
           {/* ---------------------- */}
           {filterVisibility ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ display: "flex", alignItems: "center" , visibility : props.status == true  || props.disabledPath == true ? "hidden" : "visible" }}>
               <div
                 style={{
                   display: "flex",

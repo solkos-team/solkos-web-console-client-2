@@ -4,7 +4,6 @@ import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 
 const EconomicDetail = ({ coolersData }) => {
-  console.log(coolersData);
   const formatCreatedAt = (createdAt) => {
     const date = new Date(createdAt);
     const formattedDate = date.toLocaleDateString("es-ES", {
@@ -64,11 +63,9 @@ const EconomicDetail = ({ coolersData }) => {
   ];
 
   const valueFormatter = (number) => {
-    console.log("Valor sin formato:", number);
     const formattedValue = `$ ${new Intl.NumberFormat("us")
       .format(number)
       .toString()}`;
-    console.log("Valor formateado:", formattedValue);
     return formattedValue;
   };
 

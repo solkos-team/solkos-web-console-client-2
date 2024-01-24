@@ -98,7 +98,7 @@ export default function Outlets() {
     useState<CoolerInterface | null>(null);
   return (
     <div>
-      <PageFilter loading={isLoading} />
+      <PageFilter status={isLoading} />
 
       <br></br>
       <div

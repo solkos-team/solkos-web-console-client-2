@@ -109,7 +109,7 @@ export default function Users() {
   }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina]);
   return (
     <div>
-      <PageFilter loading={isLoading} />
+      <PageFilter status={isLoading} />
       <br></br>
       <div
         style={{

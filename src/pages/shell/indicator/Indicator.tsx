@@ -26,7 +26,6 @@ export default function Indicator() {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
-      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -61,7 +60,7 @@ export default function Indicator() {
 
   return (
     <div>
-      <PageFilter />
+      <PageFilter status={isLoading} />
       <br></br>
       <div className="principal-titl">
         <div

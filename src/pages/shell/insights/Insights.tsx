@@ -157,7 +157,7 @@ export default function Insights() {
 
   return (
     <div>
-      <PageFilter status="false" />
+      <PageFilter status={isLoading} />
       <br></br>
       <div
         style={{
