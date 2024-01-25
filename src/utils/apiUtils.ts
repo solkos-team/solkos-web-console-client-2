@@ -221,8 +221,7 @@ export const fetchUniversal = async (
 
     if (!response.ok) {
       throw new Error("Error fetching alerts data");
-    }
-
+    }    
     const responseData = await response.json();
     return responseData;
   } catch (error) {
