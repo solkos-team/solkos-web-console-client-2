@@ -5,6 +5,7 @@ import { Button, TextInput } from "@mantine/core";
 import DrawerUsers from "../../../components/drawerUsers/DrawerUsers";
 import DrawerNewUser from "../../../components/drawerNewUser/DrawerNewUser";
 import { IconArrowRight } from "@tabler/icons-react";
+import { Alert } from "@mantine/core";
 import {
   Card,
   Table,
@@ -33,6 +34,8 @@ export default function Users() {
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const [isLoading, setIsLoading] = useState(true);
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -52,12 +55,14 @@ export default function Users() {
     return filteredData;
   };
   const filterUsersDataDownload = (data) => {
-    data === null || data === undefined ? [] : data.map((user) => ({
-      Nombre: user.name,
-      Email: user.email,
-      Cliente: user.customer,
-      Path: user.path.toString()
-    }));
+    data === null || data === undefined
+      ? []
+      : data.map((user) => ({
+          Nombre: user.name,
+          Email: user.email,
+          Cliente: user.customer,
+          Path: user.path.toString(),
+        }));
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const openDrawer = () => {
@@ -77,6 +82,11 @@ export default function Users() {
   const closeDrawer2 = () => {
     setTimeout(() => {
       setIsDrawerOpen2(false);
+      setIsAlertOpen(true);
+
+      const top = window.innerHeight / 2 - 100;
+      const left = window.innerWidth / 2 - 150;
+      setAlertPosition({ top, left });
     }, 5);
   };
   const pathVerify = () => {
@@ -107,6 +117,11 @@ export default function Users() {
       document.body.style.overflow = "auto";
     };
   }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina]);
+
+  const closeAlert = () => {
+    setIsAlertOpen(false);
+  };
+
   return (
     <div>
       <PageFilter loading={isLoading} />
@@ -301,20 +316,20 @@ export default function Users() {
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
-                          width: "145px",
+                          width: "190px",
                         }}
                       >
                         Nombre
                       </TableHeaderCell>
                       <TableHeaderCell
-                        style={{ textAlign: "left", width: "235px" }}
+                        style={{ textAlign: "left", width: "300px" }}
                       >
                         Correo
                       </TableHeaderCell>
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
-                          width: "130px",
+                          width: "100px",
                         }}
                       >
                         Cliente
@@ -322,7 +337,7 @@ export default function Users() {
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
-                          width: "170px",
+                          width: "140px",
                         }}
                       >
                         Path
@@ -367,7 +382,7 @@ export default function Users() {
                                     paddingRight: "30px",
                                     fontSize: "15px",
                                     textAlign: "left",
-                                    width: "8rem",
+                                    width: "280PX",
                                   }}
                                 >
                                   {user.name}
@@ -384,10 +399,10 @@ export default function Users() {
                                 </TableCell>
                                 <TableCell
                                   style={{
-                                    paddingLeft: "2.5rem",
+                                    paddingLeft: "15px",
                                     fontSize: "15px",
                                     textAlign: "left",
-                                    width: "150px",
+                                    width: "170px",
                                   }}
                                 >
                                   {user.customer}
@@ -406,7 +421,7 @@ export default function Users() {
                                   style={{
                                     paddingRight: "50px",
                                     fontSize: "15px",
-                                    width: "180px",
+                                    width: "200px",
                                     textAlign: "left",
                                     cursor: "pointer",
                                   }}
@@ -430,9 +445,11 @@ export default function Users() {
                                         fontWeight: 400,
                                         lineHeight: "20px",
                                         display: "flex",
-                                        marginRight: "90px",
+                                        marginRight: "50px",
                                       }}
-                                      onClick={()=>{setDataUsersEdit(user)}}
+                                      onClick={() => {
+                                        setDataUsersEdit(user);
+                                      }}
                                     >
                                       Ver más{" "}
                                       <IconArrowRight
@@ -442,7 +459,7 @@ export default function Users() {
                                         }}
                                       />
                                     </div>
-                                  </div>                                  
+                                  </div>
                                 </TableCell>
                               </TableRow>
                             ))}
@@ -484,11 +501,53 @@ export default function Users() {
       </div>
       {dataUsersEdit && (
         <DrawerUsers
-        isOpen={isDrawerOpen}
-        onClose={closeDrawer}
-        userData = {dataUsersEdit}                                    
-      ></DrawerUsers>
+          isOpen={isDrawerOpen}
+          onClose={closeDrawer}
+          userData={dataUsersEdit}
+        ></DrawerUsers>
       )}
-    </div>    
+      {isAlertOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: alertPosition.top,
+            left: alertPosition.left,
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <Alert
+            color="teal"
+            title="Usuario creado"
+            onClose={closeAlert}
+            closeButtonLabel="Cerrar"
+          >
+            El usuario ha sido creado exitosamente.
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              <Button
+                onClick={closeAlert}
+                size="xs"
+                style={{
+                  marginLeft: 5,
+                  backgroundColor: "red",
+                  color: "white",
+                }}
+              >
+                X
+              </Button>
+            </div>
+          </Alert>
+        </div>
+      )}
+    </div>
   );
 }

@@ -25,16 +25,16 @@ export const SkeletonTableUsers = () => {
       >
         <TableCell
           style={{
-            paddingRight: "45px",
+            paddingRight: "5px",
             textAlign: "left",
-            width: "100px",
+            width: "190px",
           }}
         >
           <Skeleton height={30} mt={6} width="90%" />
         </TableCell>
         <TableCell
           style={{
-            paddingRight: "30px",
+            paddingLeft: 0,
             textAlign: "left",
             width: "200px",
           }}
@@ -43,7 +43,7 @@ export const SkeletonTableUsers = () => {
         </TableCell>
         <TableCell
           style={{
-            paddingLeft: "0px",
+            paddingLeft: 90,
             textAlign: "center",
             width: "90px",
           }}
@@ -52,7 +52,16 @@ export const SkeletonTableUsers = () => {
         </TableCell>
         <TableCell
           style={{
-            paddingLeft: "40px",
+            paddingLeft: 10,
+            textAlign: "center",
+            width: "80px",
+          }}
+        >
+          <Skeleton height={30} mt={6} width="90%" />
+        </TableCell>
+        <TableCell
+          style={{
+            paddingLeft: 70,
             textAlign: "center",
             width: "80px",
           }}

@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Button } from "@mantine/core";
+import { Button, Alert, Center } from "@mantine/core";
 import { fetchUniversal } from "../../utils/apiUtils";
 import { useState, useEffect } from "react";
+// import { mailer } from "../../utils/apiUtils";
 
 export default function DrawerNewUser({
   isOpen,
@@ -16,31 +16,35 @@ export default function DrawerNewUser({
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
 
   const dt = useSelector((state: any) => state.works);
   const pathVerify = () => {
-    return dt.length === 0 ? "[]" : JSON.parse(dt);
+    return dt.length === 0 ? [] : JSON.parse(dt);
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const body = {
       customer: "KOF",
       email: email,
       name: name,
-      password: "123abc",
-      path: ["REGION"],
-    };
-    const fetchData = async () => {
-      try {
-        const data = await fetchUniversal("users/add", body);
-        console.log(data);
-        onClose();
-      } catch (error) {
-        console.error("Error fetching :", error);
-      }
+      path: pathVerify(),
     };
 
-    fetchData();
+    try {
+      const data = await fetchUniversal("users/add", body);
+      console.log(data);
+      onClose();
+      setShowAlert(true);
+    } catch (error) {
+      console.error("Error fetching :", error);
+    }
+  };
+
+  const closeAlert = () => {
+    console.log("Closing alert");
+    setShowAlert(false);
+    onClose();
   };
 
   return (

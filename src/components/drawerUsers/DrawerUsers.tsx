@@ -3,18 +3,15 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mantine/core";
 
-export default function DrawerUsers({ isOpen, onClose,userData }) {
-  const { name, email, customer,path } = userData
-  const [nameUser,setNameUser] = useState(name)
-  const [emailUser,setEmailUser] = useState(email)
-  const [customerUser,setCustomerUser] = useState(customer)
-  const [pathUser,setPathUser] = useState(path)
+export default function DrawerUsers({ isOpen, onClose, userData }) {
+  const { name, email, customer, path } = userData;
+  const [nameUser, setNameUser] = useState(name);
+  const [emailUser, setEmailUser] = useState(email);
+  const [customerUser, setCustomerUser] = useState(customer);
+  const [pathUser, setPathUser] = useState(path);
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
-  const pathVerify = () => {
-    return dt.length === 0 ? [] : JSON.parse(dt);
-  };
   return (
     <div
       ref={drawerRef}
@@ -92,7 +89,7 @@ export default function DrawerUsers({ isOpen, onClose,userData }) {
             EDITAR USUARIO
           </h1>
         </div>
-      </div>      
+      </div>
       <div
         style={{
           display: "flex",
@@ -188,7 +185,7 @@ export default function DrawerUsers({ isOpen, onClose,userData }) {
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: "15px",            
+            gap: "15px",
           }}
         >
           <label
@@ -199,10 +196,10 @@ export default function DrawerUsers({ isOpen, onClose,userData }) {
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -120,              
+              marginLeft: -120,
             }}
           >
-           Customer
+            Customer
           </label>
           <input
             type="text"

@@ -31,15 +31,6 @@ export default function Insights() {
       total: number;
       algorithms: Algorithm[];
     };
-    DATA: {
-      coolers_total: string;
-      routes_total: string;
-      operativ_u_total: string;
-      region_total: string;
-      zone_total: string;
-      coolers_data: string;
-      coolers_no_data: string;
-    };
   }
 
   interface InsightsData {
@@ -58,7 +49,7 @@ export default function Insights() {
 
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-  const [items,numIntems] = useState(0)
+  const [items, numIntems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -95,6 +86,7 @@ export default function Insights() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversal("insights", body);
+      console.log(data);
       setInsightsData(data);
       setIsLoading(false);
     } catch (error) {
@@ -123,14 +115,14 @@ export default function Insights() {
   const fetchDataNumerOfItems = async () => {
     try {
       const data = await fetchInsights(pathVerify());
-      numIntems(Number(data.insights.INDICATOR.total))
+      numIntems(Number(data.insights.INDICATOR.total));
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
     }
   };
   useEffect(() => {
-    fetchDataNumerOfItems()
+    fetchDataNumerOfItems();
     fetchData();
     fetchData2();
     handleMapKeyChange();
@@ -319,11 +311,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights?.DATA?.coolers_total ===
-                      undefined ||
-                    insightsData?.insights?.DATA?.coolers_total === ""
-                      ? "Sin registro"
-                      : insightsData?.insights?.DATA?.coolers_total}
+                    ----
                   </div>
                 </div>
                 <div
@@ -357,10 +345,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights?.DATA?.routes_total === undefined ||
-                    insightsData?.insights?.DATA?.routes_total === ""
-                      ? "Sin registro"
-                      : insightsData?.insights?.DATA?.routes_total}
+                    ----
                   </div>
                 </div>
                 <div
@@ -394,11 +379,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights?.DATA?.operativ_u_total ===
-                      undefined ||
-                    insightsData?.insights?.DATA?.operativ_u_total === ""
-                      ? "Sin registro"
-                      : insightsData?.insights?.DATA?.operativ_u_total}
+                    -----
                   </div>
                 </div>
                 <div
@@ -432,10 +413,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights?.DATA?.region_total === undefined ||
-                    insightsData?.insights?.DATA?.region_total === ""
-                      ? "Sin registro"
-                      : insightsData?.insights?.DATA?.region_total}
+                    -----
                   </div>
                 </div>
                 <div
@@ -469,10 +447,7 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    {insightsData?.insights?.DATA?.zone_total === undefined ||
-                    insightsData?.insights?.DATA?.zone_total === ""
-                      ? "Sin registro"
-                      : insightsData?.insights?.DATA?.zone_total}
+                    ----
                   </div>
                 </div>
               </div>
@@ -1533,11 +1508,7 @@ export default function Insights() {
                           lineHeight: "normal",
                         }}
                       >
-                        {insightsData?.insights?.DATA?.coolers_data ===
-                          undefined ||
-                        insightsData?.insights?.DATA?.coolers_data === ""
-                          ? "Sin registro"
-                          : insightsData?.insights?.DATA?.coolers_data}
+                        ----
                       </div>
                     </div>
                   </div>
@@ -1633,11 +1604,7 @@ export default function Insights() {
                           lineHeight: "normal",
                         }}
                       >
-                        {insightsData?.insights?.DATA?.coolers_no_data ===
-                          undefined ||
-                        insightsData?.insights?.DATA?.coolers_no_data === ""
-                          ? "Sin registro"
-                          : insightsData?.insights?.DATA?.coolers_no_data}
+                        ----
                       </div>
                     </div>
                   </div>

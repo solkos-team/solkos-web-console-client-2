@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchUniversal } from "../../../utils/apiUtils";
-import { IconEarOff, IconEaseIn } from "@tabler/icons-react";
+import { IconEyeOff, IconEye } from "@tabler/icons-react";
 import { path } from "d3-path";
 
 export const Login = () => {
@@ -45,6 +45,11 @@ export const Login = () => {
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin();
   };
 
   return (
@@ -192,6 +197,7 @@ export const Login = () => {
                 flexDirection: "column",
                 alignItems: "flex-start",
                 gap: "8px",
+                position: "relative",
               }}
             >
               <div
@@ -206,31 +212,47 @@ export const Login = () => {
               >
                 Contraseña
               </div>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+              <div
                 style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: 430,
+                  position: "relative",
+                  width: 400,
                 }}
-              />
-              {/* {showPassword ? (
-                <IconEarOff
-                  style={{ marginLeft: "5px", cursor: "pointer" }}
-                  onClick={handleTogglePasswordVisibility}
+              >
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: "-20px",
+                    transform: "translateY(-50%)",
+                  }}
+                >
+                  {showPassword ? (
+                    <IconEye
+                      style={{ cursor: "pointer" }}
+                      onClick={handleTogglePasswordVisibility}
+                    />
+                  ) : (
+                    <IconEyeOff
+                      style={{ cursor: "pointer" }}
+                      onClick={handleTogglePasswordVisibility}
+                    />
+                  )}
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{
+                    color: "#000",
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "28px",
+                    width: "100%",
+                    paddingRight: "30px",
+                  }}
                 />
-              ) : (
-                <IconEaseIn
-                  style={{ marginLeft: "5px", cursor: "pointer" }}
-                  onClick={handleTogglePasswordVisibility}
-                />
-              )} */}
+              </div>
               {errorMessage && (
                 <div
                   style={{
@@ -262,12 +284,18 @@ export const Login = () => {
                 </Link>
               </div> */}
             </div>
-            <Button
-              style={{ background: "#ED5079", width: "440px", marginLeft: 10 }}
-              onClick={handleLogin}
-            >
-              Iniciar sesión
-            </Button>
+            <form onSubmit={handleSubmit}>
+              <Button
+                style={{
+                  background: "#ED5079",
+                  width: "440px",
+                  marginLeft: 10,
+                }}
+                onClick={handleLogin}
+              >
+                Iniciar sesión
+              </Button>
+            </form>
           </div>
           {/* <div
             style={{
