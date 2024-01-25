@@ -124,7 +124,7 @@ export default function Users() {
 
   return (
     <div>
-      <PageFilter loading={isLoading} />
+      <PageFilter status={isLoading} />
       <br></br>
       <div
         style={{

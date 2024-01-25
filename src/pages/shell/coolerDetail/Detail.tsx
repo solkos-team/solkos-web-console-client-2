@@ -47,7 +47,6 @@ export default function CoolerDetail() {
   };
 
   const fetchCoolersFromAPI = async (serial_number) => {
-    console.log(serial_number);
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
 
     const headers = {
@@ -65,7 +64,6 @@ export default function CoolerDetail() {
       }
 
       const responseData = await response.json();
-      console.log(responseData);
       return responseData;
     } catch (error) {
       throw error;
@@ -77,7 +75,6 @@ export default function CoolerDetail() {
       // const data = await fetchCoolersFromAPI(serial_number);
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
-      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -91,13 +88,9 @@ export default function CoolerDetail() {
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
 
-  console.log(coolersData?.properties);
-
-  console.log(moment.locale()); // Esto debería imprimir "es"
-
   return (
     <div>
-      <PageFilter path="clt" />
+      <PageFilter path="clt" disabledPath={true}/>
       <br />
       <div>
         {/* *********************************************************** */}

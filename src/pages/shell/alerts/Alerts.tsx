@@ -58,7 +58,7 @@ export default function Alerts() {
 
   return (
     <div>
-      <PageFilter />
+      <PageFilter status={isLoading} />
       <br></br>
       <div className="principal-titl">
         {/* title */}

@@ -78,7 +78,6 @@ export default function Coolers() {
     try {
       const data = await fetchUniversal("coolers", body, setIsLoading);
       setCoolersData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -104,11 +103,11 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-  console.log(filteredCoolers);
   return (
     <div>
-      <PageFilter />
-
+      <section>
+        <PageFilter status={isLoading} />
+      </section>
       <br></br>
       <div
         style={{

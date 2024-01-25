@@ -59,7 +59,7 @@ export default function Fails() {
   console.log(coolersData);
   return (
     <div>
-      <PageFilter />
+      <PageFilter status={isLoading} />
       <br></br>
       <div
         // style={{
