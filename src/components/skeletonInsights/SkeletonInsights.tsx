@@ -23,7 +23,7 @@ export const SkeletonInsights = () => {
           style={{
             paddingRight: "45px",
             textAlign: "left",
-            width: "100%",
+            width: "300px",
           }}
         >
           <Skeleton height={30} mt={6} width="90%" />
@@ -32,7 +32,7 @@ export const SkeletonInsights = () => {
           style={{
             paddingRight: "30px",
             textAlign: "left",
-            width: "70%",
+            width: "70px",
           }}
         >
           <Skeleton height={30} mt={6} width="90%" />
@@ -47,7 +47,7 @@ export const SkeletonInsights = () => {
         style={{
           borderCollapse: "collapse",
           width: "100%",
-          maxWidth: "100%",
+          maxWidth: "8000px",
         }}
       >
         <TableBody
@@ -62,7 +62,7 @@ export const SkeletonInsights = () => {
             style={{
               paddingBottom: "30px",
               textAlign: "left",
-              width: "100%",
+              width: "60px",
             }}
           >
             <Skeleton height={40} mt={6} width="80%" />
