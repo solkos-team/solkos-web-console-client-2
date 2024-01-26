@@ -62,8 +62,8 @@ export default function Insights() {
 
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-  const [showData,setShowData] = useState(false)
-  const [items, numIntems] = useState(0)
+  const [showData, setShowData] = useState(false);
+  const [items, numIntems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -141,21 +141,20 @@ export default function Insights() {
 
   const filteredMarkers = coolersData
     ? coolersData
-      .filter(
-        (cooler) =>
-          parseFloat(cooler.latitude) !== 0 &&
-          parseFloat(cooler.longitude) !== 0
-      )
-      .map((cooler) => ({
-        latitude: parseFloat(cooler.latitude),
-        longitude: parseFloat(cooler.longitude),
-      }))
+        .filter(
+          (cooler) =>
+            parseFloat(cooler.latitude) !== 0 &&
+            parseFloat(cooler.longitude) !== 0
+        )
+        .map((cooler) => ({
+          latitude: parseFloat(cooler.latitude),
+          longitude: parseFloat(cooler.longitude),
+        }))
     : [];
 
   const markers = filteredMarkers;
 
-  useEffect(() => {
-  }, [markers]);
+  useEffect(() => {}, [markers]);
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -166,7 +165,7 @@ export default function Insights() {
           flexDirection: "column",
           alignItems: "flex-start",
           flex: 100,
-          alignSelf: "stretch"
+          alignSelf: "stretch",
         }}
       >
         {/* Titl */}
@@ -204,34 +203,67 @@ export default function Insights() {
               display: "flex",
               flexDirection: "row",
               width: "97%",
-              gap : "10px"
+              gap: "10px",
             }}
           >
             {/* Acerca de los equipos y graficas */}
-            <section style={{ width: "100%",height:"50%",gap:"-10px", display: "grid",gridColumnGap:"1px"}}>
-              <div style={{
-                display: "flex",
+            <section
+              style={{
                 width: "100%",
-                height: showData == true ? "50%" : "100%",                
-                flexDirection: "row",
-                alignItems: "flex-start",
-                gap: "1rem",
-                borderRadius: "8px",
-                border: "1px solid #88888B",
-                background: "#FFF",
-              }}>
-                <div style={{ width: "33%", height: "100%",marginLeft:"2rem"}} >
-                  <div style={{ margin: "-1px", width: showData == true ? "35%" : "65%",height: showData == true ? "25%" : "65%", marginTop:showData == true ?"-3rem": "-0.6rem" }}>
+                height: "50%",
+                gap: "-10px",
+                display: "grid",
+                gridColumnGap: "1px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  width: "100%",
+                  height: showData == true ? "50%" : "100%",
+                  flexDirection: "row",
+                  alignItems: "flex-start",
+                  gap: "1rem",
+                  borderRadius: "8px",
+                  border: "1px solid #88888B",
+                  background: "#FFF",
+                }}
+              >
+                <div
+                  style={{ width: "33%", height: "100%", marginLeft: "2rem" }}
+                >
+                  <div
+                    style={{
+                      margin: "-1px",
+                      width: showData == true ? "35%" : "65%",
+                      height: showData == true ? "25%" : "65%",
+                      marginTop: showData == true ? "-3rem" : "-0.6rem",
+                    }}
+                  >
                     <MapInsights />
                   </div>
                 </div>
-                <div style={{ width: "33%", height: "100%", }} >
-                  <div style={{ margin: "-1px", width: showData == true ? "35%" : "65%",height: showData == true ? "25%" : "65%", marginTop:showData == true ?"-3rem": "-0.6rem" }}>
+                <div style={{ width: "33%", height: "100%" }}>
+                  <div
+                    style={{
+                      margin: "-1px",
+                      width: showData == true ? "35%" : "65%",
+                      height: showData == true ? "25%" : "65%",
+                      marginTop: showData == true ? "-3rem" : "-0.6rem",
+                    }}
+                  >
                     <MapInsights />
                   </div>
                 </div>
-                <div style={{ width: "33%", height: "100%", }} >
-                  <div style={{ margin: "-1px", width: showData == true ? "35%" : "65%",height: showData == true ? "25%" : "65%", marginTop:showData == true ?"-3rem": "-0.6rem" }}>
+                <div style={{ width: "33%", height: "100%" }}>
+                  <div
+                    style={{
+                      margin: "-1px",
+                      width: showData == true ? "35%" : "65%",
+                      height: showData == true ? "25%" : "65%",
+                      marginTop: showData == true ? "-3rem" : "-0.6rem",
+                    }}
+                  >
                     <MapInsights />
                   </div>
                 </div>
@@ -240,14 +272,14 @@ export default function Insights() {
                 style={{
                   display: "flex",
                   // width: "92%",
-                  height: showData == true ? "30vw": "21vw",
+                  height: showData == true ? "30vw" : "21vw",
                   padding: "1.2rem",
                   flexDirection: "column",
                   alignItems: "flex-start",
                   borderRadius: "8px",
                   border: "1px solid #88888B",
                   background: "#FFF",
-                  marginTop : showData == true ?  "-3.5rem" : "0%",  
+                  marginTop: showData == true ? "-3.5rem" : "0%",
                 }}
               >
                 <div
@@ -283,10 +315,30 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      Acerca de los equipos 
+                      Acerca de los equipos
                     </div>
-                    <button style={{fontSize:"0.8rem", display: showData == true ? 'none' : "contents" }} onClick={()=>{setShowData(true)}}>Ver mas</button>
-                    <button style={{fontSize:"0.8rem", display: showData == true ? 'contents' : "none" }} onClick={()=>{setShowData(false)}} >Ver menos</button>
+                    <button
+                      style={{
+                        fontSize: "0.8rem",
+                        display: showData == true ? "none" : "contents",
+                      }}
+                      onClick={() => {
+                        setShowData(true);
+                      }}
+                    >
+                      Ver mas
+                    </button>
+                    <button
+                      style={{
+                        fontSize: "0.8rem",
+                        display: showData == true ? "contents" : "none",
+                      }}
+                      onClick={() => {
+                        setShowData(false);
+                      }}
+                    >
+                      Ver menos
+                    </button>
                   </div>
                   <div
                     style={{
@@ -334,7 +386,7 @@ export default function Insights() {
                     >
                       Enfriadores
                     </div>
-                    
+
                     <div
                       style={{
                         color: "#000005",
@@ -346,8 +398,8 @@ export default function Insights() {
                       }}
                     >
                       {insightsData?.summary.coolers === undefined
-                      ? "Sin registro"
-                      : insightsData?.summary.coolers.toLocaleString()}
+                        ? "Sin registro"
+                        : insightsData?.summary.coolers.toLocaleString()}
                     </div>
                   </div>
                   <div
@@ -382,8 +434,8 @@ export default function Insights() {
                       }}
                     >
                       {insightsData?.summary.regions === undefined
-                      ? "Sin registro"
-                      : insightsData?.summary.regions.toLocaleString()}
+                        ? "Sin registro"
+                        : insightsData?.summary.regions.toLocaleString()}
                     </div>
                   </div>
                   <div
@@ -418,8 +470,8 @@ export default function Insights() {
                       }}
                     >
                       {insightsData?.summary.zones === undefined
-                      ? "Sin registro"
-                      : insightsData?.summary.zones.toLocaleString()}
+                        ? "Sin registro"
+                        : insightsData?.summary.zones.toLocaleString()}
                     </div>
                   </div>
                   <div
@@ -454,8 +506,8 @@ export default function Insights() {
                       }}
                     >
                       {insightsData?.summary.operative_units === undefined
-                      ? "Sin registro"
-                      : insightsData?.summary.operative_units.toLocaleString()}
+                        ? "Sin registro"
+                        : insightsData?.summary.operative_units.toLocaleString()}
                     </div>
                   </div>
                   <div
@@ -490,8 +542,8 @@ export default function Insights() {
                       }}
                     >
                       {insightsData?.summary.routes === undefined
-                      ? "Sin registro"
-                      : insightsData?.summary.routes.toLocaleString()}
+                        ? "Sin registro"
+                        : insightsData?.summary.routes.toLocaleString()}
                     </div>
                   </div>
                 </div>
@@ -609,20 +661,29 @@ export default function Insights() {
               </div>
             </section>
             {/* Indicadores */}
-            <section style={{ width: "100%", display: "flex", flexDirection: "row",gap:"10px" }}>
-              {/* Control del activo */}
-              <section style={{
+            <section
+              style={{
+                width: "100%",
                 display: "flex",
-                width: "50%",
-                height: "95%",
-                padding: "0.6rem",
-                flexDirection: "column",
-                alignItems: "flex-start",
+                flexDirection: "row",
                 gap: "10px",
-                borderRadius: "8px",
-                border: "1px solid #88888B",
-                background: "#FFF"
-              }}>
+              }}
+            >
+              {/* Control del activo */}
+              <section
+                style={{
+                  display: "flex",
+                  width: "50%",
+                  height: "95%",
+                  padding: "0.6rem",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  borderRadius: "8px",
+                  border: "1px solid #88888B",
+                  background: "#FFF",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -694,7 +755,7 @@ export default function Insights() {
                               }}
                             >
                               {insightsData?.insights?.INDICATOR?.total ===
-                                undefined
+                              undefined
                                 ? "Sin registro"
                                 : insightsData?.insights?.INDICATOR?.total.toLocaleString()}
                             </div>
@@ -789,26 +850,26 @@ export default function Insights() {
                                       ? "Instalado"
                                       : algorithm.algorithm ===
                                         "Indicador de Riesgo Nivel: 0"
-                                        ? "Sin riesgo"
-                                        : algorithm.algorithm ===
-                                          "Indicador de Riesgo Nivel: 1"
-                                          ? "Visitar punto de venta"
-                                          : algorithm.algorithm ===
-                                            "Indicador de Riesgo Nivel: 2"
-                                            ? "Requiere actualizar información"
-                                            : algorithm.algorithm ===
-                                              "Indicador de Riesgo Nivel: 3"
-                                              ? "Tomar acción urgente"
-                                              : algorithm.algorithm ===
-                                                "Indicador de Riesgo Nivel: 4"
-                                                ? "En riesgo"
-                                                : algorithm.algorithm === "OWNED"
-                                                  ? "En propiedad"
-                                                  : algorithm.algorithm === "LOCATION"
-                                                    ? "Ubicado"
-                                                    : algorithm.algorithm === "TELEMETRY"
-                                                      ? "Telemetría"
-                                                      : algorithm.algorithm}
+                                      ? "Sin riesgo"
+                                      : algorithm.algorithm ===
+                                        "Indicador de Riesgo Nivel: 1"
+                                      ? "Visitar punto de venta"
+                                      : algorithm.algorithm ===
+                                        "Indicador de Riesgo Nivel: 2"
+                                      ? "Requiere actualizar información"
+                                      : algorithm.algorithm ===
+                                        "Indicador de Riesgo Nivel: 3"
+                                      ? "Tomar acción urgente"
+                                      : algorithm.algorithm ===
+                                        "Indicador de Riesgo Nivel: 4"
+                                      ? "En riesgo"
+                                      : algorithm.algorithm === "OWNED"
+                                      ? "En propiedad"
+                                      : algorithm.algorithm === "LOCATION"
+                                      ? "Ubicado"
+                                      : algorithm.algorithm === "TELEMETRY"
+                                      ? "Telemetría"
+                                      : algorithm.algorithm}
                                   </div>
                                 </div>
                                 <div
@@ -895,18 +956,20 @@ export default function Insights() {
                 )}
               </section>
               {/* Mantenimiento */}
-              <section style={{
-                display: "flex",
-                width: "50%",
-                height: "95%",
-                padding: "0.6rem",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "10px",
-                borderRadius: "8px",
-                border: "1px solid #88888B",
-                background: "#FFF"
-              }}>                
+              <section
+                style={{
+                  display: "flex",
+                  width: "50%",
+                  height: "95%",
+                  padding: "0.6rem",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "10px",
+                  borderRadius: "8px",
+                  border: "1px solid #88888B",
+                  background: "#FFF",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -978,7 +1041,8 @@ export default function Insights() {
                                 lineHeight: "normal",
                               }}
                             >
-                              {insightsData?.insights?.ALERT?.total === undefined
+                              {insightsData?.insights?.ALERT?.total ===
+                              undefined
                                 ? "Sin registro"
                                 : insightsData?.insights?.ALERT?.total.toLocaleString()}
                             </div>
@@ -1015,7 +1079,8 @@ export default function Insights() {
                                 lineHeight: "normal",
                               }}
                             >
-                              {insightsData?.insights?.ALERT?.total === undefined
+                              {insightsData?.insights?.ALERT?.total ===
+                              undefined
                                 ? "Sin registro"
                                 : insightsData?.insights?.ALERT?.total.toLocaleString()}
                             </div>
@@ -1107,24 +1172,24 @@ export default function Insights() {
                                     }}
                                   >
                                     {algorithm.algorithm ===
-                                      "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                    "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
                                       ? "Alta demanda del compresor"
                                       : algorithm.algorithm ===
                                         "LOW_VOLTAGE_ALERT"
-                                        ? "Bajo voltaje"
-                                        : algorithm.algorithm ===
-                                          "HIGH_VOLTAGE_ALERT"
-                                          ? "Alto voltaje"
-                                          : algorithm.algorithm ===
-                                            "MOVED_VISIT_ALERT"
-                                            ? "Movimiento"
-                                            : algorithm.algorithm ===
-                                              "HIGH_TEMPERATURE_ALERT"
-                                              ? "Alta temperatura"
-                                              : algorithm.algorithm ===
-                                                "DISCONNECTION_ALERT"
-                                                ? "Desconexión"
-                                                : algorithm.algorithm}
+                                      ? "Bajo voltaje"
+                                      : algorithm.algorithm ===
+                                        "HIGH_VOLTAGE_ALERT"
+                                      ? "Alto voltaje"
+                                      : algorithm.algorithm ===
+                                        "MOVED_VISIT_ALERT"
+                                      ? "Movimiento"
+                                      : algorithm.algorithm ===
+                                        "HIGH_TEMPERATURE_ALERT"
+                                      ? "Alta temperatura"
+                                      : algorithm.algorithm ===
+                                        "DISCONNECTION_ALERT"
+                                      ? "Desconexión"
+                                      : algorithm.algorithm}
                                   </div>
                                 </div>
                                 <div

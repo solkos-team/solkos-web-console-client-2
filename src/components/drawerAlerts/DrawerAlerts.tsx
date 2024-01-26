@@ -329,6 +329,8 @@ export default function DrawerA({
                       ? "Instalado"
                       : selectedAlgorithm === "OWNED"
                       ? "En propiedad"
+                      : selectedAlgorithm === "FROZEN_FAIL"
+                      ? "Evaporador bloqueado"
                       : selectedAlgorithm}
                   </div>
                 )}
