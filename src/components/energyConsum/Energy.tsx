@@ -127,9 +127,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.[7].value == undefined
+              {coolersData?.properties?.energy_cost.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.[7].value}`}
+                : `${coolersData?.properties?.energy_cost.value}`}
             </div>
           </div>
           <div
@@ -163,9 +163,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.[3].value == undefined
+              {coolersData?.properties?.energy_consumption.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.[3].value}`}
+                : `${coolersData?.properties?.energy_consumption.value}`}
             </div>
           </div>
           <div
@@ -199,9 +199,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.[8].value == undefined
+              {coolersData?.properties?.energy_consumption.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.[8].value}`}
+                : `${coolersData?.properties?.energy_consumption.value}`}
             </div>
           </div>
           <div
@@ -235,9 +235,9 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.[9].value == undefined
+              {coolersData?.properties?.average_C02_emissions.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.[9].value}`}
+                : `${coolersData?.properties?.average_C02_emissions.value}`}
             </div>
           </div>
         </div>

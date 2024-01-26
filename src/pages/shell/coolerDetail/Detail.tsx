@@ -87,7 +87,7 @@ export default function CoolerDetail() {
 
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
-
+  console.log(coolersData)
   return (
     <div>
       <PageFilter path="clt" disabledPath={true}/>

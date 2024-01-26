@@ -184,9 +184,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[0].value == undefined
-                    ? "Sin registro"
-                    : `${coolersData?.properties?.[0].value}`}
+                  {'Sin registros'}
                 </div>
                 <div
                   style={{
@@ -258,9 +256,9 @@ const EconomicDetail = ({ coolersData }) => {
                     marginRight: 75,
                   }}
                 >
-                  {coolersData?.properties?.[1].value == undefined
+                  {coolersData?.properties?.sale_price.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[1].value}`}
+                    : `${coolersData?.properties?.sale_price.value}`}
                 </div>
               </div>
               <div
@@ -295,9 +293,9 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[2].value == undefined
+                  {coolersData?.properties?.total_expense_service.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[2].value}`}
+                    : `${coolersData?.properties?.total_expense_service.value}`}
                 </div>
               </div>
             </div>
@@ -380,9 +378,7 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "normal",
                     }}
                   >
-                    {coolersData?.properties?.[4].value == undefined
-                      ? "Sin registro"
-                      : `${coolersData?.properties?.[4].value}`}
+                    {'Sin registro'}
                   </div>
                   <div
                     style={{
@@ -431,9 +427,9 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "14px",
                     }}
                   >
-                    {coolersData?.properties?.[5].value == undefined
+                    {coolersData?.properties?.present_value_of_depreciation.value == undefined
                       ? "Sin registro"
-                      : `${coolersData?.properties?.[5].value}`}
+                      : `${coolersData?.properties?.present_value_of_depreciation.value}`}
                   </div>
                   <div
                     style={{
@@ -507,9 +503,9 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[6].value == undefined
+                  {coolersData?.properties?.year_of_production.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[6].value}`}
+                    : `${coolersData?.properties?.year_of_production.value}`}
                 </div>
               </div>
               <div
@@ -829,9 +825,9 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "normal",
                 }}
               >
-                {coolersData?.properties?.[2].value == undefined
+                {coolersData?.properties?.total_expense_service.value == undefined
                   ? "Sin registro"
-                  : `${coolersData?.properties?.[2].value}`}
+                  : `${coolersData?.properties?.total_expense_service.value}`}
               </div>
               <div
                 style={{
@@ -879,9 +875,9 @@ const EconomicDetail = ({ coolersData }) => {
                 }}
               >
                 (+ $
-                {coolersData?.properties?.[5].value == undefined
+                {coolersData?.properties?.total_expense_service.value == undefined
                   ? "Sin registro"
-                  : `${coolersData?.properties?.[5].value}`}
+                  : `${coolersData?.properties?.total_expense_service.value}`}
                 )
               </div>
               <div

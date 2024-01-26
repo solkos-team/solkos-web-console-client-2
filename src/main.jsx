@@ -20,6 +20,7 @@ import { store } from "./app/store.js";
 import { Login } from "./pages/main/login/Login.tsx";
 import { RecoverPassword } from "./pages/main/recover/RecoverPassword.tsx";
 import { NewPassword } from "./pages/main/newPassword/NewPassword.tsx";
+import { MapInsights } from "./pages/shell/insights/MapInsights.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -81,6 +82,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/home/users" element={<Users />} />
                 {/* Login */}
                 <Route  path="/home/login" element={<Login />}/>
+                <Route  path="/home/grafica" element={<MapInsights />}/>
                 </Route>
               </Routes>
             </Router>

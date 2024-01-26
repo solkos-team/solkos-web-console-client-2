@@ -1120,9 +1120,9 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[0].value == undefined
+                  {coolersData?.properties?.total_ownership_expense.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[0].value}`}
+                    : `${coolersData?.properties?.total_ownership_expense.value}`}
                 </div>
               </div>
               <div
@@ -1156,9 +1156,9 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[1].value == undefined
+                  {coolersData?.properties?.sale_price.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[1].value}`}
+                    : `${coolersData?.properties?.sale_price.value}`}
                 </div>
               </div>
               <div
@@ -1192,9 +1192,9 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[2].value == undefined
+                  {coolersData?.properties?.total_expense_service.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[2].value}`}
+                    : `${coolersData?.properties?.total_expense_service.value}`}
                 </div>
               </div>
             </div>
@@ -1291,9 +1291,9 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.[3].value == undefined
+                  {coolersData?.properties?.energy_consumption.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.[3].value}`}
+                    : `${coolersData?.properties?.energy_consumption.value}`}
                 </div>
               </div>
 

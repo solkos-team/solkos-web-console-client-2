@@ -10,14 +10,14 @@ import {
   fetchUniversal,
 } from "../../../utils/apiUtils";
 import {
-  Card,
-  Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
+
+import { Table } from "@mantine/core";
 import { useSelector, useDispatch } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
@@ -273,7 +273,7 @@ export default function Coolers() {
             <div style={{}}>
               <div>
                 <div>
-                  <Card>
+                  <section>
                     <Table
                       style={{
                         borderCollapse: "collapse",
@@ -580,7 +580,7 @@ export default function Coolers() {
                       datosPorPagina={datosPorPagina}
                       numero={setNumero}
                     />
-                  </Card>
+                  </section>
                 </div>
               </div>
             </div>

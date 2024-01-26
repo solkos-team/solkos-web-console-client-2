@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
 import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
+import { MapInsights } from "./MapInsights";
 
 export default function Insights() {
   interface Algorithm {
@@ -69,7 +70,6 @@ export default function Insights() {
   const [mapKey, setMapKey] = useState(0);
 
   const handleMapKeyChange = () => {
-    console.log("Calling handleMapKeyChange");
     setMapKey((prevKey) => prevKey + 1);
   };
 
@@ -99,7 +99,6 @@ export default function Insights() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversal("insights", body);
-      console.log(data);
       setInsightsData(data);
       setIsLoading(false);
     } catch (error) {
@@ -119,7 +118,6 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("coolers", body2, setIsLoading);
       setCoolersData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -157,9 +155,7 @@ export default function Insights() {
   const markers = filteredMarkers;
 
   useEffect(() => {
-    console.log(markers);
   }, [markers]);
-
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -212,34 +208,46 @@ export default function Insights() {
             }}
           >
             {/* Acerca de los equipos y graficas */}
-            <section style={{ width: "100%", display: "grid",gridColumnGap:"1px"}}>
+            <section style={{ width: "100%",height:"50%",gap:"-10px", display: "grid",gridColumnGap:"1px"}}>
               <div style={{
                 display: "flex",
-                width: "96%",
-                height: showData == true ? "40%" : "9vw",
-                padding: "0.6rem",
+                width: "100%",
+                height: showData == true ? "50%" : "100%",                
                 flexDirection: "row",
                 alignItems: "flex-start",
-                gap: "5rem",
+                gap: "1rem",
                 borderRadius: "8px",
                 border: "1px solid #88888B",
-                background: "#FFF",                
+                background: "#FFF",
               }}>
-                <div style={{width:"33%",height:"100%"}} >donas</div>
-                <div style={{width:"33%",height:"100%"}} >donas</div>
-                <div style={{width:"33%",height:"100%"}} >donas</div>
+                <div style={{ width: "33%", height: "100%",marginLeft:"2rem"}} >
+                  <div style={{ margin: "-1px", width: showData == true ? "35%" : "65%",height: showData == true ? "25%" : "65%", marginTop:showData == true ?"-3rem": "-0.6rem" }}>
+                    <MapInsights />
+                  </div>
+                </div>
+                <div style={{ width: "33%", height: "100%", }} >
+                  <div style={{ margin: "-1px", width: showData == true ? "35%" : "65%",height: showData == true ? "25%" : "65%", marginTop:showData == true ?"-3rem": "-0.6rem" }}>
+                    <MapInsights />
+                  </div>
+                </div>
+                <div style={{ width: "33%", height: "100%", }} >
+                  <div style={{ margin: "-1px", width: showData == true ? "35%" : "65%",height: showData == true ? "25%" : "65%", marginTop:showData == true ?"-3rem": "-0.6rem" }}>
+                    <MapInsights />
+                  </div>
+                </div>
               </div>
               <div
                 style={{
                   display: "flex",
-                  width: "92%",
+                  // width: "92%",
                   height: showData == true ? "30vw": "21vw",
                   padding: "1.2rem",
                   flexDirection: "column",
                   alignItems: "flex-start",
                   borderRadius: "8px",
                   border: "1px solid #88888B",
-                  background: "#FFF"
+                  background: "#FFF",
+                  marginTop : showData == true ?  "-3.5rem" : "0%",  
                 }}
               >
                 <div
@@ -984,7 +992,44 @@ export default function Insights() {
                                 lineHeight: "normal",
                               }}
                             >
-                              total de alertas
+                              Enfriadores analizados
+                            </div>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "flex-end",
+                              alignContent: "flex-end",
+                              gap: "8px",
+                              alignSelf: "stretch",
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            <div
+                              style={{
+                                color: "#000005",
+                                // fontFamily: "DM Sans",
+                                fontSize: "26px",
+                                fontStyle: "normal",
+                                fontWeight: 500,
+                                lineHeight: "normal",
+                              }}
+                            >
+                              {insightsData?.insights?.ALERT?.total === undefined
+                                ? "Sin registro"
+                                : insightsData?.insights?.ALERT?.total.toLocaleString()}
+                            </div>
+                            <div
+                              style={{
+                                color: "#88888B",
+                                // fontFamily: "DM Sans",
+                                fontSize: "14px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "normal",
+                              }}
+                            >
+                              Enfriadores Funcionando
                             </div>
                           </div>
                         </div>
