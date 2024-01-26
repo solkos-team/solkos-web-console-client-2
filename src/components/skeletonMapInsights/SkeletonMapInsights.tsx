@@ -17,10 +17,9 @@ export const SkeletonMapInsights = () => {
   return (
     <>
       <Skeleton
-        height={400}
+        height="100%"
         mt={6}
-        width="785px"
-        style={{ marginLeft: 35, marginTop: 20 }}
+        width="100%"        
       />
     </>
   );

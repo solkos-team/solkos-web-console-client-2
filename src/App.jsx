@@ -225,9 +225,9 @@ function App() {
             {item.icon}
             <span style={{ marginLeft: 10 }}>{item.label}</span>
             {coolerInsightsOpen ? (
-              <img src={arrow_1} style={{ marginLeft: 70 }} />
+              <img src={arrow_1} style={{ marginLeft: 40 }} />
             ) : (
-              <img src={arrow_2} style={{ marginLeft: 70 }} />
+              <img src={arrow_2} style={{ marginLeft: 40 }} />
             )}
           </div>
 
@@ -287,7 +287,7 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: 270 }} p={"md"}>
+          <Navbar width={{ base: 220 }} p={"md"}>
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
@@ -339,7 +339,7 @@ function App() {
                           // fontFamily: "DM Mono",
                         }}
                       >
-                        'BY IMBERA'
+                        BY IMBERA
                       </span>
                     </div>
                   </div>
