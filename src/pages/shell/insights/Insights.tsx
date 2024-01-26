@@ -31,8 +31,27 @@ export default function Insights() {
       total: number;
       algorithms: Algorithm[];
     };
+    summary: {
+      coolers: number;
+      operative_units: number;
+      regions: number;
+      routes: number;
+      zones: number;
+    };
+    coolers;
+    operative_units;
+    regions;
+    routes;
+    zones;
   }
 
+  // interface SummaryData {
+  //   coolers: number;
+  //   operative_units: number;
+  //   regions: number;
+  //   routes: number;
+  //   zones: number;
+  // }
   interface InsightsData {
     [key: string]: InsightLevel;
   }
@@ -46,7 +65,6 @@ export default function Insights() {
     latitude: string;
     longitude: string;
   }
-
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [items, numIntems] = useState(0);
@@ -146,6 +164,9 @@ export default function Insights() {
   useEffect(() => {
     console.log(markers);
   }, [markers]);
+
+  // Change this line
+  console.log(insightsData?.summary.coolers);
 
   return (
     <div>
@@ -311,75 +332,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    ----
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                    alignItems: "flex-start",
-                    gap: "4px",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    Rutas
-                  </div>
-                  <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "26px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    ----
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                    alignItems: "flex-start",
-                    gap: "4px",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    Unidad Op.
-                  </div>
-                  <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "26px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    -----
+                    {insightsData?.summary.coolers === undefined
+                      ? "Sin registro"
+                      : insightsData?.summary.coolers.toLocaleString()}
                   </div>
                 </div>
                 <div
@@ -413,7 +368,9 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    -----
+                    {insightsData?.summary.regions === undefined
+                      ? "Sin registro"
+                      : insightsData?.summary.regions.toLocaleString()}
                   </div>
                 </div>
                 <div
@@ -447,7 +404,81 @@ export default function Insights() {
                       lineHeight: "normal",
                     }}
                   >
-                    ----
+                    {insightsData?.summary.zones === undefined
+                      ? "Sin registro"
+                      : insightsData?.summary.zones.toLocaleString()}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
+                    gap: "4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Unidad OP.
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "26px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {insightsData?.summary.operative_units === undefined
+                      ? "Sin registro"
+                      : insightsData?.summary.operative_units.toLocaleString()}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
+                    gap: "4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "14px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Rutas
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "26px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {insightsData?.summary.routes === undefined
+                      ? "Sin registro"
+                      : insightsData?.summary.routes.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -812,7 +843,7 @@ export default function Insights() {
                           marginLeft: 270,
                           cursor: "pointer",
                         }}
-                        onClick={() => navigate("/indicator")}
+                        onClick={() => navigate("/home/indicator")}
                       >
                         <div
                           style={{
@@ -1095,7 +1126,7 @@ export default function Insights() {
                           marginLeft: 270,
                           cursor: "pointer",
                         }}
-                        onClick={() => navigate("/alerts")}
+                        onClick={() => navigate("/home/alerts")}
                       >
                         <div
                           style={{
@@ -1370,7 +1401,7 @@ export default function Insights() {
                           marginLeft: 270,
                           cursor: "pointer",
                         }}
-                        onClick={() => navigate("/fails")}
+                        onClick={() => navigate("/home/fails")}
                       >
                         <div
                           style={{
@@ -1508,7 +1539,7 @@ export default function Insights() {
                           lineHeight: "normal",
                         }}
                       >
-                        ----
+                        Sin registro
                       </div>
                     </div>
                   </div>
@@ -1604,7 +1635,7 @@ export default function Insights() {
                           lineHeight: "normal",
                         }}
                       >
-                        ----
+                        Sin registro
                       </div>
                     </div>
                   </div>

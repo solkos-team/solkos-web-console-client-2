@@ -47,19 +47,21 @@ const useStyles = createStyles((theme, _params, getRef) => {
       overflowY: "hidden",
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
-      borderBottom: `1px solid ${theme.colorScheme === "dark"
+      borderBottom: `1px solid ${
+        theme.colorScheme === "dark"
           ? theme.colors.dark[4]
           : theme.colors.gray[2]
-        }`,
+      }`,
     },
 
     footer: {
       paddingTop: theme.spacing.md,
       marginTop: theme.spacing.md,
-      borderTop: `1px solid ${theme.colorScheme === "dark"
+      borderTop: `1px solid ${
+        theme.colorScheme === "dark"
           ? theme.colors.dark[4]
           : theme.colors.gray[2]
-        }`,
+      }`,
     },
 
     link: {
@@ -108,7 +110,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
         [`& .${icon}`]: {
           color:
             theme.colors[theme.primaryColor][
-            theme.colorScheme === "dark" ? 5 : 7
+              theme.colorScheme === "dark" ? 5 : 7
             ],
         },
       },
@@ -181,7 +183,7 @@ const routes = [
 ];
 
 function App() {
-  const Name = localStorage.getItem("USER") || ''
+  const Name = localStorage.getItem("USER") || "";
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
   const [data, setData] = useState([]);
@@ -273,10 +275,10 @@ function App() {
       setOpened(false);
     }
   };
-  const validaUser = localStorage.getItem("RO0T")
-  const array = Name.split(" ")
-  const total = array.length
-  let resultado = ""
+  const validaUser = localStorage.getItem("RO0T");
+  const array = Name.split(" ");
+  const total = array.length;
+  let resultado = "";
   for (var i = 0; i < total; resultado += array[i][0], i++);
   return (
     <>
@@ -406,7 +408,7 @@ function App() {
                         <div
                           style={{
                             display: "flex",
-                            width: "38px",
+                            width: "42px",
                             height: "38px",
                             padding: "1px",
                             justifyContent: "center",
@@ -416,27 +418,32 @@ function App() {
                             background: "#E6E6E6",
                           }}
                         >
-                          {resultado.toUpperCase() || 'US'}
+                          <div style={{ fontSize: 14 }}>
+                            {resultado.toUpperCase() || "US"}
+                          </div>
                         </div>
+
                         <div
                           style={{
                             display: "flex",
-                            flexDirection: "column", // Cambiado a dirección de columna
+                            flexDirection: "column",
                             alignItems: "flex-start",
+                            maxWidth: "150px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
                           }}
                         >
                           <Text
                             style={{
-                              // alignSelf: "stretch",
                               color: "#000005",
-                              // fontFamily: "DM Sans",
                               fontSize: "14px",
                               fontStyle: "normal",
                               fontWeight: 600,
                               lineHeight: "155%",
                             }}
                           >
-                            {Name || 'User'}
+                            <div style={{ fontSize: 12 }}>{Name || "User"}</div>
                           </Text>
                           <div
                             style={{
@@ -453,7 +460,6 @@ function App() {
                             <Text
                               style={{
                                 color: "#313A49",
-                                // fontFamily: "Space Mono",
                                 fontSize: "12px",
                                 fontStyle: "normal",
                                 fontWeight: 400,
@@ -461,12 +467,12 @@ function App() {
                                 textTransform: "uppercase",
                               }}
                             >
-                              {dt || 'IMBERA'}
+                              {dt || "IMBERA"}
                             </Text>
                           </div>
                         </div>
                       </div>
-                      <img src={arrows} />
+                      <img src={arrows} style={{ marginLeft: 12 }} />
                     </div>
                   </UnstyledButton>
                 </Menu.Target>
@@ -480,7 +486,6 @@ function App() {
                       alignSelf: "stretch",
                     }}
                   >
-
                     <div
                       style={{
                         color: "#88888B",
@@ -496,72 +501,78 @@ function App() {
                   </div>
                   <div style={{ maxHeight: "300px", overflowY: "auto" }}>
                     {/* Contenido del menú de cambio de organización */}
-                    {data == undefined ? ("Sin registros") :
-                      data.map((nombre, index) => (
-                        JSON.parse(validaUser).length == 0
-                          ?
-                          <div
-                            style={{
-                              // display: "flex",
-                              padding: "10px 12px",
-                              alignItems: "center",
-                              gap: "10px",
-                              alignSelf: "stretch",
-                              display: JSON.parse(validaUser).length == 0 ? "" : "none"
-                            }}
-                            key={index}
-                            onChange={setData}
-                          >
+                    {data == undefined
+                      ? "Sin registros"
+                      : data.map((nombre, index) =>
+                          JSON.parse(validaUser).length == 0 ? (
                             <div
                               style={{
-                                display: "flex",
+                                // display: "flex",
+                                padding: "10px 12px",
                                 alignItems: "center",
                                 gap: "10px",
-                                flex: "100",
-                                fontSize: "14px",
-                                textDecorationColor: dt === nombre ? "#ec547c" : "",
-                                color: dt === nombre ? "#ec547c" : "",
-                                cursor: "pointer",
+                                alignSelf: "stretch",
+                                display:
+                                  JSON.parse(validaUser).length == 0
+                                    ? ""
+                                    : "none",
                               }}
-                              onClick={() => {
-                                saveOrganization(nombre);
-                              }}
+                              key={index}
+                              onChange={setData}
                             >
-                              {nombre}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "10px",
+                                  flex: "100",
+                                  fontSize: "14px",
+                                  textDecorationColor:
+                                    dt === nombre ? "#ec547c" : "",
+                                  color: dt === nombre ? "#ec547c" : "",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => {
+                                  saveOrganization(nombre);
+                                }}
+                              >
+                                {nombre}
+                              </div>
                             </div>
-                          </div>
-                          :
-                          <div
-                            style={{
-                              // display: "flex",
-                              padding: "10px 12px",
-                              alignItems: "center",
-                              gap: "10px",
-                              alignSelf: "stretch",
-                              display: dt == nombre ? "" : "none"
-                            }}
-                            key={index}
-                            onChange={setData}
-                          >
+                          ) : (
                             <div
                               style={{
-                                display: "flex",
+                                // display: "flex",
+                                padding: "10px 12px",
                                 alignItems: "center",
                                 gap: "10px",
-                                flex: "100",
-                                fontSize: "14px",
-                                textDecorationColor: dt === nombre ? "#ec547c" : "",
-                                color: dt === nombre ? "#ec547c" : "",
-                                cursor: "pointer",
+                                alignSelf: "stretch",
+                                display: dt == nombre ? "" : "none",
                               }}
-                              onClick={() => {
-                                saveOrganization(nombre);
-                              }}
+                              key={index}
+                              onChange={setData}
                             >
-                              {nombre}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "10px",
+                                  flex: "100",
+                                  fontSize: "14px",
+                                  textDecorationColor:
+                                    dt === nombre ? "#ec547c" : "",
+                                  color: dt === nombre ? "#ec547c" : "",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => {
+                                  saveOrganization(nombre);
+                                }}
+                              >
+                                {nombre}
+                              </div>
                             </div>
-                          </div>
-                      ))}
+                          )
+                        )}
                   </div>
                   <div
                     style={{
@@ -643,7 +654,7 @@ function App() {
                         flex: "100",
                       }}
                       onClick={() => {
-                        localStorage.clear()
+                        localStorage.clear();
                         navigate("/");
                       }}
                     >
