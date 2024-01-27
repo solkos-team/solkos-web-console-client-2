@@ -174,7 +174,7 @@ export default function Insights() {
             style={{
               color: "#000005",
               // fontFamily: "DM Sans",
-              fontSize: "26px",
+              fontSize: "22px",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "155%",
@@ -186,7 +186,7 @@ export default function Insights() {
             style={{
               color: "#88888B",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "14px",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "155%",

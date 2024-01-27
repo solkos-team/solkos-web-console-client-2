@@ -69,7 +69,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
       display: "flex",
       alignItems: "center",
       textDecoration: "none",
-      fontSize: theme.fontSizes.sm,
+      fontSize: 13,
       color:
         theme.colorScheme === "dark"
           ? theme.colors.dark[1]
@@ -310,7 +310,7 @@ function App() {
                     }}
                   >
                     <img
-                      style={{ width: "24px", height: "24px" }}
+                      style={{ width: "18px", height: "18px", marginLeft: -10 }}
                       src={solkosSymbol}
                     />
 
@@ -318,7 +318,7 @@ function App() {
                       <span
                         style={{
                           color: "#000005",
-                          fontSize: "16px",
+                          fontSize: "14px",
                           fontStyle: "normal",
                           fontWeight: 700,
                           lineHeight: "155%",
@@ -331,7 +331,7 @@ function App() {
                       <span
                         style={{
                           color: "#3A3A3F",
-                          fontSize: "12px",
+                          fontSize: "10px",
                           fontStyle: "normal",
                           fontWeight: 300,
                           lineHeight: "155%",
@@ -351,7 +351,7 @@ function App() {
                       alignItems: "center",
                       borderRadius: "3px",
                       background: "#D4DAE3",
-                      width: "41px",
+                      width: "25px",
                       height: "16px",
                       marginLeft: "10px",
                     }}
@@ -360,7 +360,7 @@ function App() {
                       style={{
                         color: "#313A49",
                         // fontFamily: "Space Mono",
-                        fontSize: "12px",
+                        fontSize: "10px",
                         fontStyle: "normal",
                         fontWeight: 400,
                         lineHeight: "14px",
@@ -388,11 +388,12 @@ function App() {
                     <div
                       style={{
                         display: "flex",
-                        padding: "10px",
+                        padding: "0px",
                         justifyContent: "space-between",
                         alignItems: "center",
                         flexDirection: "row",
                         height: "16px",
+                        marginLeft: -20,
                       }}
                     >
                       {/* CONTENT */}
@@ -408,8 +409,8 @@ function App() {
                         <div
                           style={{
                             display: "flex",
-                            width: "42px",
-                            height: "38px",
+                            width: "38px",
+                            height: "34px",
                             padding: "1px",
                             justifyContent: "center",
                             alignItems: "center",
@@ -418,7 +419,7 @@ function App() {
                             background: "#E6E6E6",
                           }}
                         >
-                          <div style={{ fontSize: 14 }}>
+                          <div style={{ fontSize: 12 }}>
                             {resultado.toUpperCase() || "US"}
                           </div>
                         </div>
@@ -472,7 +473,7 @@ function App() {
                           </div>
                         </div>
                       </div>
-                      <img src={arrows} style={{ marginLeft: 12 }} />
+                      <img src={arrows} style={{ marginLeft: 5 }} />
                     </div>
                   </UnstyledButton>
                 </Menu.Target>
@@ -526,7 +527,7 @@ function App() {
                                   alignItems: "center",
                                   gap: "10px",
                                   flex: "100",
-                                  fontSize: "14px",
+                                  fontSize: "12px",
                                   textDecorationColor:
                                     dt === nombre ? "#ec547c" : "",
                                   color: dt === nombre ? "#ec547c" : "",
