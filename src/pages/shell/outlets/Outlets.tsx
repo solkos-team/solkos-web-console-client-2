@@ -65,7 +65,6 @@ export default function Outlets() {
     try {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
       const data = await fetchUniversal("outlets", body, setIsLoading);
-      console.log(data)
       setOutletsData(data);
       setIsLoading(false);
     } catch (error) {
@@ -477,7 +476,7 @@ export default function Outlets() {
                                         }}
                                       >
                                         <Link
-                                          to="/coolerDetail"
+                                          to="/home/coolerDetail"
                                           onClick={() => {
                                             setSelectedOutletDetails(outlet);
                                             setIsDrawerOpen(true);
