@@ -257,3 +257,29 @@ export const fetchUniversalDetails = async (
     throw error;
   }
 };
+export const fetchDeleteUsers = async (
+  componentURL,
+  detailsID?,
+  CRUD?
+) => {
+  const url = `${baseUrl}/${componentURL}/${Number(detailsID)}`;
+  const headers = {
+    "Content-Type": "application/json",
+  };
+  const cuerpo = {
+    method: "DELETE",
+    headers,
+  };
+  try {
+    const response = await fetch(url, cuerpo);
+
+    if (!response.ok) {
+      throw new Error("Error fetching alerts data");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};

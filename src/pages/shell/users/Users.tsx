@@ -14,11 +14,12 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Card, Table } from "@mantine/core";
-import { fetchUniversal } from "../../../utils/apiUtils";
+import { fetchDeleteUsers, fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { UsersInterfaces } from "./UsersInterfaces";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { SkeletonTableUsers } from "../../../components/skeletonTableUsers/SkeletonTableUsers";
+import { da } from "date-fns/locale";
 
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -35,7 +36,8 @@ export default function Users() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
-  const [alertStatus, setAlertStatus] = useState();
+  const [alertStatus,setAlertStatus] = useState()
+  const [userDelete,setUserDelete] = useState()
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -115,12 +117,19 @@ export default function Users() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina]);
+  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina,userDelete]);
 
   const closeAlert = () => {
     setIsAlertOpen(false);
   };
-  console.log(isDrawerOpen2);
+  const deleteUser = async (id) =>{
+    try {
+      const data = await fetchDeleteUsers("users", id);
+      setUserDelete(data)
+    } catch (error) {
+      console.log("Error", error);
+    }
+  }
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -341,11 +350,13 @@ export default function Users() {
                       >
                         Path
                       </TableHeaderCell>
+                      
                       <TableHeaderCell
                         style={{ textAlign: "left", width: "150px" }}
                       >
                         Acciones
                       </TableHeaderCell>
+                      
                     </TableRow>
                   </TableHead>
                   {isLoading == true ? (
@@ -381,7 +392,7 @@ export default function Users() {
                                     paddingRight: "30px",
                                     fontSize: "15px",
                                     textAlign: "left",
-                                    width: "280PX",
+                                    width: "6rem",
                                   }}
                                 >
                                   {user.name}
@@ -420,11 +431,14 @@ export default function Users() {
                                   style={{
                                     paddingRight: "50px",
                                     fontSize: "15px",
-                                    width: "200px",
+                                    width: "100px",
                                     textAlign: "left",
                                     cursor: "pointer",
-                                    display: "flex",
-                                    flexDirection: "column",
+                                    display :"flex",
+                                    flexDirection:"column",
+                                    alignContent:"center",
+                                    alignItems:"center",
+                                    overflowX:"hidden"
                                   }}
                                   // onClick={openDrawer}
                                 >
@@ -447,6 +461,7 @@ export default function Users() {
                                         fontWeight: 400,
                                         lineHeight: "20px",
                                         display: "flex",
+                                        marginLeft:"50px",
                                         marginRight: "50px",
                                       }}
                                       onClick={() => {
@@ -462,8 +477,11 @@ export default function Users() {
                                       />
                                     </div>
                                   </div>
-                                  {/* <Button variant="filled" color="red" size="xs" style={{width:"4rem"}}>Button</Button> */}
+                                  {localStorage.getItem('USER') == 'Jose Iván Peréz Ugalde' || localStorage.getItem('Mayra Barrón Reséndiz')
+                                  ?  <Button variant="filled" color="red" size="xs" style={{width:"4rem"}} onClick={()=>{deleteUser(user.id)}}>Delete</Button>                                  
+                                  : ''}                          
                                 </TableCell>
+                                
                               </TableRow>
                             ))}
                           <DrawerNewUser
@@ -494,6 +512,7 @@ export default function Users() {
                     </>
                   )}
                 </Table>
+                <br />
                 <PaginationComponent
                   accion={setCurrentPage}
                   totalDatos={dataUsers === null ? 0 : dataUsers.length}
@@ -525,10 +544,11 @@ export default function Users() {
           }}
         >
           <Alert
-            color={alertStatus == true ? "teal" : "red"}
-            title={alertStatus == true ? "Usuario creado" : "Usuario no creado"}
+            // color = { alertStatus == true ? "green" : 'red'}
+            title={alertStatus == true ? "Usuario creado" : 'Usuario no creado'}
             onClose={closeAlert}
             closeButtonLabel="Cerrar"
+            style={{backgroundColor:"#FFFF", borderColor:"#88888B",color: alertStatus == true ? "blue" : '#ED5079'}}
           >
             {alertStatus == true
               ? "El usuario ha sido creado exitosamente."
@@ -546,7 +566,7 @@ export default function Users() {
                 size="xs"
                 style={{
                   marginLeft: 5,
-                  backgroundColor: "red",
+                  backgroundColor: "#ED5079",
                   color: "white",
                 }}
               >

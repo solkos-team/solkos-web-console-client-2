@@ -43,6 +43,7 @@ export default function DrawerNewUser({
       setAlertStatus(true)
     } catch (error) {
       setIsDrawerOpen2(false)
+      onClose()
       setAlertStatus(false)
       console.error("Error fetching :", error);
       setIsAlertOpen(true)

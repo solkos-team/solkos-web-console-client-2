@@ -65,6 +65,7 @@ export default function Outlets() {
     try {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
       const data = await fetchUniversal("outlets", body, setIsLoading);
+      console.log(data)
       setOutletsData(data);
       setIsLoading(false);
     } catch (error) {
