@@ -7,8 +7,6 @@ import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
 import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
 import { MapInsights } from "./MapInsights";
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Insights() {
   interface Algorithm {

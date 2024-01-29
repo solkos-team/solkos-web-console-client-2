@@ -11,6 +11,9 @@ export default function DrawerNewUser({
   onClose,
   reloadUsers,
   children,
+  setIsAlertOpen,
+  setAlertStatus,
+  setIsDrawerOpen2
 }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
@@ -36,8 +39,13 @@ export default function DrawerNewUser({
       console.log(data);
       onClose();
       setShowAlert(true);
+      setIsAlertOpen(true)
+      setAlertStatus(true)
     } catch (error) {
+      setIsDrawerOpen2(false)
+      setAlertStatus(false)
       console.error("Error fetching :", error);
+      setIsAlertOpen(true)
     }
   };
 

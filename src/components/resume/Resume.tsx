@@ -16,9 +16,9 @@ async function validarExistenciaImagen(url) {
     const response = await fetch(url, { method: "HEAD" });
 
     if (response.ok) {
-      console.log("La imagen existe.");
+      // console.log("La imagen existe.");
     } else {
-      console.log("La imagen no existe. Código de respuesta:", response.status);
+      // console.log("La imagen no existe. Código de respuesta:", response.status);
     }
   } catch (error) {
     console.error(
@@ -47,7 +47,7 @@ const Resume = ({ coolersData, setTab }) => {
 
   validarExistenciaImagen(urlImagen);
 
-  console.log(coolersData?.tracking);
+  
 
   const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
     // Convertir las fechas a milisegundos
@@ -655,7 +655,7 @@ const Resume = ({ coolersData, setTab }) => {
                   src={"../../sampleData/cooler_c.png"}
                   width={"100%"}
                   alt="cooler"
-                  onError={() => console.log("Error al cargar la imagen")}
+                  onError={() => console.error("Error al cargar la imagen")}
                 />
               </div>
               <div

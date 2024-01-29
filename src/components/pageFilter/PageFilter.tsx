@@ -180,10 +180,14 @@ export default function (props) {
   const bloqPath = (i) => {
     // i == data.length - 1 ? false : true;    
     // return i >= validaUser?.length ? false : true;
+    if(props.disabledPath == true){
+      return Boolean('false')
+    }
+    props.disabledPath == true ? "false" : ""
     if (validaUser.length == 0) {
-      return i == data.length - 1 ? false : true;
+      return i == data.length - 1 || props.disabledPath == true ? false : true;
     } else {
-      return i >= validaUser?.length && i == data.length - 1 ? false : true;
+      return i >= validaUser?.length && i == data.length - 1 || props.disabledPath == true ? false : true;
     }
   };
   
@@ -234,7 +238,7 @@ export default function (props) {
             border: "0.5px solid #ADBACC",
             width: "100%",
             borderRadius: "4px",
-            visibility : props.disabledPath == true ? "hidden" : "visible"
+            // visibility : props.disabledPath == true ? "hidden" : "visible"            
           }}
         >
           <div style={{ display: "flex", alignItems: "center" }}>
