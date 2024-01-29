@@ -36,8 +36,8 @@ export default function Users() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
-  const [alertStatus,setAlertStatus] = useState()
-  const [userDelete,setUserDelete] = useState()
+  const [alertStatus, setAlertStatus] = useState();
+  const [userDelete, setUserDelete] = useState();
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -117,19 +117,19 @@ export default function Users() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina,userDelete]);
+  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina, userDelete]);
 
   const closeAlert = () => {
     setIsAlertOpen(false);
   };
-  const deleteUser = async (id) =>{
+  const deleteUser = async (id) => {
     try {
       const data = await fetchDeleteUsers("users", id);
-      setUserDelete(data)
+      setUserDelete(data);
     } catch (error) {
       console.log("Error", error);
     }
-  }
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -350,13 +350,12 @@ export default function Users() {
                       >
                         Path
                       </TableHeaderCell>
-                      
+
                       <TableHeaderCell
                         style={{ textAlign: "left", width: "150px" }}
                       >
                         Acciones
                       </TableHeaderCell>
-                      
                     </TableRow>
                   </TableHead>
                   {isLoading == true ? (
@@ -434,11 +433,11 @@ export default function Users() {
                                     width: "100px",
                                     textAlign: "left",
                                     cursor: "pointer",
-                                    display :"flex",
-                                    flexDirection:"column",
-                                    alignContent:"center",
-                                    alignItems:"center",
-                                    overflowX:"hidden"
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignContent: "center",
+                                    alignItems: "center",
+                                    overflowX: "hidden",
                                   }}
                                   // onClick={openDrawer}
                                 >
@@ -461,7 +460,7 @@ export default function Users() {
                                         fontWeight: 400,
                                         lineHeight: "20px",
                                         display: "flex",
-                                        marginLeft:"50px",
+                                        marginLeft: "50px",
                                         marginRight: "50px",
                                       }}
                                       onClick={() => {
@@ -477,11 +476,25 @@ export default function Users() {
                                       />
                                     </div>
                                   </div>
-                                  {localStorage.getItem('USER') == 'Jose Iván Peréz Ugalde' || localStorage.getItem('Mayra Barrón Reséndiz')
-                                  ?  <Button variant="filled" color="red" size="xs" style={{width:"4rem"}} onClick={()=>{deleteUser(user.id)}}>Delete</Button>                                  
-                                  : ''}                          
+                                  {localStorage.getItem("USER") ===
+                                    "Jose Iván Peréz Ugalde" ||
+                                  localStorage.getItem("USER") ===
+                                    "Mayra Barrón Reséndiz" ? (
+                                    <Button
+                                      variant="filled"
+                                      color="red"
+                                      size="xs"
+                                      style={{ width: "4rem" }}
+                                      onClick={() => {
+                                        deleteUser(user.id);
+                                      }}
+                                    >
+                                      Delete
+                                    </Button>
+                                  ) : (
+                                    ""
+                                  )}
                                 </TableCell>
-                                
                               </TableRow>
                             ))}
                           <DrawerNewUser
@@ -501,12 +514,11 @@ export default function Users() {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginLeft: 250,
                             fontWeight: "bold",
                             fontSize: "18px",
                           }}
                         >
-                          <p>No hay datos de coolers disponibles.</p>
+                          <p>No hay datos de usuarios disponibles.</p>
                         </div>
                       )}
                     </>
@@ -545,14 +557,18 @@ export default function Users() {
         >
           <Alert
             // color = { alertStatus == true ? "green" : 'red'}
-            title={alertStatus == true ? "Usuario creado" : 'Usuario no creado'}
+            title={alertStatus == true ? "Usuario creado" : "Usuario no creado"}
             onClose={closeAlert}
             closeButtonLabel="Cerrar"
-            style={{backgroundColor:"#FFFF", borderColor:"#88888B",color: alertStatus == true ? "blue" : '#ED5079'}}
+            style={{
+              backgroundColor: "#FFFF",
+              borderColor: "#88888B",
+              color: alertStatus == true ? "#6ea2ff" : "#ED5079",
+            }}
           >
             {alertStatus == true
               ? "El usuario ha sido creado exitosamente."
-              : "Error al crear usuario correo ya existente"}
+              : "Error al crear usuario, el correo ya existe"}
             <div
               style={{
                 display: "flex",

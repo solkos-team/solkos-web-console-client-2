@@ -76,7 +76,7 @@ export default function Alerts() {
               style={{
                 color: "#000005",
                 // fontFamily: "DM Sans",
-                fontSize: "26px",
+                fontSize: "24px",
                 fontStyle: "normal",
                 fontWeight: 700,
                 lineHeight: "155%",
@@ -117,7 +117,7 @@ export default function Alerts() {
             style={{
               color: "#88888B",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "14px",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "155%",
@@ -130,13 +130,13 @@ export default function Alerts() {
           <div
             style={{
               display: "flex",
-              padding: "16px 5px",
+              padding: "16px 32px",
               alignItems: "flex-start",
               alignContent: "flex-start",
               gap: "16px",
-              flex: 100,
               alignSelf: "stretch",
               flexWrap: "wrap",
+              width: "100%",
             }}
           >
             {/* Indicador */}
@@ -166,15 +166,17 @@ export default function Alerts() {
                   <div
                     key={index}
                     style={{
-                      display: "flex",
-                      width: "280px",
-                      padding: "24px",
+                      marginBottom: "16px",
+                      width: "222px",
+                      padding: "18px",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: "16px",
+                      gap: "10px",
                       borderRadius: "8px",
                       border: "1px solid #88888B",
                       background: "#FFF",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
                     }}
                   >
                     {/* Descrip */}
@@ -212,6 +214,7 @@ export default function Alerts() {
                               <img
                                 src={"../../sampleData/devices_2.png"}
                                 alt="Descripción de la imagen"
+                                style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : cooler.algorithm === "DISCONNECTION_ALERT" ? (
@@ -220,6 +223,7 @@ export default function Alerts() {
                               <img
                                 src={"../../sampleData/disconnection.png"}
                                 alt="Descripción de la imagen"
+                                style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : // cooler.algorithm.includes("VOLTAGE") ? (
@@ -232,11 +236,13 @@ export default function Alerts() {
                             <img
                               src={"../../sampleData/weather.png"}
                               alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
                             />
                           ) : (
                             <img
                               src={"../../sampleData/devices_2.png"}
                               alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
                             />
                           )}
                         </div>
@@ -280,7 +286,7 @@ export default function Alerts() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "26px",
+                            fontSize: "24px",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -438,7 +444,7 @@ export default function Alerts() {
                             fontStyle: "normal",
                             fontWeight: 400,
                             lineHeight: "normal",
-                            marginLeft: 160,
+                            marginLeft: 100,
                           }}
                         >
                           Ver enfriadores

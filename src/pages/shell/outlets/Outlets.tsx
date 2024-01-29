@@ -515,12 +515,13 @@ export default function Outlets() {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                marginLeft: 250,
                                 fontWeight: "bold",
                                 fontSize: "18px",
                               }}
                             >
-                              <p>No hay datos de coolers disponibles.</p>
+                              <p>
+                                No hay datos de puntos de venta disponibles.
+                              </p>
                             </div>
                           )}
                         </>

@@ -90,7 +90,7 @@ export default function Fails() {
               style={{
                 color: "#000005",
                 // fontFamily: "DM Sans",
-                fontSize: "26px",
+                fontSize: "24px",
                 fontStyle: "normal",
                 fontWeight: 700,
                 lineHeight: "155%",
@@ -131,7 +131,7 @@ export default function Fails() {
             style={{
               color: "#88888B",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "14px",
               fontStyle: "normal",
               fontWeight: 400,
               lineHeight: "155%",
@@ -144,13 +144,13 @@ export default function Fails() {
           <div
             style={{
               display: "flex",
-              padding: "16px 5px",
+              padding: "16px 32px",
               alignItems: "flex-start",
               alignContent: "flex-start",
               gap: "16px",
-              flex: 100,
               alignSelf: "stretch",
               flexWrap: "wrap",
+              width: "100%",
             }}
           >
             {/* Indicador */}
@@ -170,15 +170,17 @@ export default function Fails() {
                   <div
                     key={index}
                     style={{
-                      display: "flex",
-                      width: "260px",
-                      padding: "24px",
+                      marginBottom: "16px",
+                      width: "222px",
+                      padding: "18px",
                       flexDirection: "column",
                       alignItems: "flex-start",
-                      gap: "16px",
+                      gap: "10px",
                       borderRadius: "8px",
                       border: "1px solid #88888B",
                       background: "#FFF",
+                      justifyContent: "space-between",
+                      flexWrap: "wrap",
                     }}
                   >
                     {/* Descrip */}
@@ -215,6 +217,7 @@ export default function Fails() {
                               <img
                                 src={"../../sampleData/compressor2.png"}
                                 alt="Descripción de la imagen"
+                                style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : // cooler.algorithm === "DISCONNECTIONS_FAIL" ? (
@@ -230,11 +233,13 @@ export default function Fails() {
                             <img
                               src={"../../sampleData/weather2.png"}
                               alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
                             />
                           ) : (
                             <img
                               src={"../../sampleData/compressor2.png"}
                               alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
                             />
                           )}
                         </div>
@@ -273,7 +278,7 @@ export default function Fails() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "26px",
+                            fontSize: "24px",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -431,7 +436,7 @@ export default function Fails() {
                             fontStyle: "normal",
                             fontWeight: 400,
                             lineHeight: "normal",
-                            marginLeft: 140,
+                            marginLeft: 100,
                           }}
                         >
                           Ver enfriadores
