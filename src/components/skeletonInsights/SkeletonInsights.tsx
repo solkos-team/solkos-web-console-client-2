@@ -11,8 +11,8 @@ import {
 import { Skeleton } from "@mantine/core";
 
 export const SkeletonInsights = () => {
-  const numRows = 4;
-  const rowHeight = 60;
+  const numRows = 3;
+  const rowHeight = 70;
 
   const renderTableRow = (index) => {
     const isEvenRow = index % 2 === 0;

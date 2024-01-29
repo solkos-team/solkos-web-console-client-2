@@ -35,7 +35,7 @@ export default function Users() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
-  const [alertStatus,setAlertStatus] = useState()
+  const [alertStatus, setAlertStatus] = useState();
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -120,7 +120,7 @@ export default function Users() {
   const closeAlert = () => {
     setIsAlertOpen(false);
   };
-console.log(isDrawerOpen2)
+  console.log(isDrawerOpen2);
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -423,8 +423,8 @@ console.log(isDrawerOpen2)
                                     width: "200px",
                                     textAlign: "left",
                                     cursor: "pointer",
-                                    display :"flex",
-                                    flexDirection:"column"
+                                    display: "flex",
+                                    flexDirection: "column",
                                   }}
                                   // onClick={openDrawer}
                                 >
@@ -449,7 +449,7 @@ console.log(isDrawerOpen2)
                                         display: "flex",
                                         marginRight: "50px",
                                       }}
-                                      onClick={() => {                                        
+                                      onClick={() => {
                                         setDataUsersEdit(user);
                                       }}
                                     >
@@ -462,7 +462,7 @@ console.log(isDrawerOpen2)
                                       />
                                     </div>
                                   </div>
-                                  <Button variant="filled" color="red" size="xs" style={{width:"4rem"}}>Button</Button>
+                                  {/* <Button variant="filled" color="red" size="xs" style={{width:"4rem"}}>Button</Button> */}
                                 </TableCell>
                               </TableRow>
                             ))}
@@ -525,12 +525,14 @@ console.log(isDrawerOpen2)
           }}
         >
           <Alert
-            color = { alertStatus == true ? "teal" : 'red'}
-            title={alertStatus == true ? "Usuario creado" : 'Usuario no creado'}
+            color={alertStatus == true ? "teal" : "red"}
+            title={alertStatus == true ? "Usuario creado" : "Usuario no creado"}
             onClose={closeAlert}
             closeButtonLabel="Cerrar"
           >
-            {alertStatus == true ? 'El usuario ha sido creado exitosamente.' : 'Error al crear usuario correo ya existente' }            
+            {alertStatus == true
+              ? "El usuario ha sido creado exitosamente."
+              : "Error al crear usuario correo ya existente"}
             <div
               style={{
                 display: "flex",
