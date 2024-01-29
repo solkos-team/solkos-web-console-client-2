@@ -7,14 +7,13 @@ import DrawerNewUser from "../../../components/drawerNewUser/DrawerNewUser";
 import { IconArrowRight } from "@tabler/icons-react";
 import { Alert } from "@mantine/core";
 import {
-  Card,
-  Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
+import { Card, Table } from "@mantine/core";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { UsersInterfaces } from "./UsersInterfaces";
@@ -301,7 +300,7 @@ export default function Users() {
             }}
           >
             <div style={{}}>
-              <Card>
+              <section>
                 <Table
                   style={{
                     borderCollapse: "collapse",
@@ -494,7 +493,7 @@ export default function Users() {
                   datosPorPagina={datosPorPagina}
                   numero={setNumero}
                 />
-              </Card>
+              </section>
             </div>
           </div>
         </div>

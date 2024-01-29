@@ -11,7 +11,7 @@ import {
 import { Skeleton } from "@mantine/core";
 
 export const SkeletonInsights = () => {
-  const numRows = 5;
+  const numRows = 4;
   const rowHeight = 60;
 
   const renderTableRow = (index) => {
@@ -23,7 +23,7 @@ export const SkeletonInsights = () => {
           style={{
             paddingRight: "45px",
             textAlign: "left",
-            width: "100%",
+            width: 100,
           }}
         >
           <Skeleton height={30} mt={6} width="90%" />

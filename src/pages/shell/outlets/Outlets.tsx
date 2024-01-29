@@ -6,8 +6,6 @@ import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import {
-  Card,
-  Table,
   TableBody,
   TableCell,
   TableFoot,
@@ -16,9 +14,10 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
+import { Card, Table } from "@mantine/core";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
-import { TextInput } from "@mantine/core";
+import { MantineProvider, TextInput } from "@mantine/core";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../components/drawerOutlets/CoolerInterface";
 import { SkeletonTableOutlets } from "../../../components/skeletonTableOutlets/SkeletonTableOutlets";
@@ -266,7 +265,7 @@ export default function Outlets() {
             <div style={{}}>
               <div>
                 <div>
-                  <Card>
+                  <section>
                     <Table
                       style={{
                         marginBottom: "20px",
@@ -533,7 +532,7 @@ export default function Outlets() {
                       datosPorPagina={datosPorPagina}
                       numero={setNumero}
                     />
-                  </Card>
+                  </section>
                 </div>
               </div>
             </div>

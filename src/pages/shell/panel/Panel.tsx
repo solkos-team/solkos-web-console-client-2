@@ -20,7 +20,7 @@ export default function Panel() {
         height="1200"
         style={{ marginLeft: -30 }}
       >
-        <p>Your browser does not support iframes.</p>
+        <p></p>
       </iframe>
     </>
   );

@@ -16,7 +16,6 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-
 import { Table } from "@mantine/core";
 import { useSelector, useDispatch } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";

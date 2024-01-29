@@ -7,6 +7,8 @@ import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
 import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
 import { MapInsights } from "./MapInsights";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Insights() {
   interface Algorithm {
@@ -155,6 +157,25 @@ export default function Insights() {
   const markers = filteredMarkers;
 
   useEffect(() => {}, [markers]);
+
+  const [showAll1, setShowAll1] = useState(false);
+
+  const toggleShowAll1 = () => {
+    setShowAll1(!showAll1);
+  };
+
+  const [showAll2, setShowAll2] = useState(false);
+
+  const toggleShowAll2 = () => {
+    setShowAll2(!showAll2);
+  };
+
+  const [showAll3, setShowAll3] = useState(false);
+
+  const toggleShowAll3 = () => {
+    setShowAll3(!showAll3);
+  };
+
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -692,11 +713,11 @@ export default function Insights() {
                     alignSelf: "stretch",
                   }}
                 >
-                  <img
+                  {/* <img
                     src={"../../sampleData/indc2.png"}
                     alt="Descripción de la imagen"
                     style={{ width: "25px", height: "25px" }}
-                  />
+                  /> */}
                   <div
                     style={{
                       color: "#3A3A3F",
@@ -709,6 +730,7 @@ export default function Insights() {
                   >
                     Control del Activo
                   </div>
+                  <p></p>
                 </div>
                 {isLoading == true ? (
                   <>
@@ -724,6 +746,7 @@ export default function Insights() {
                     {insightsData && insightsData?.insights != undefined ? (
                       <>
                         {/* ******************************** */}
+
                         <div
                           style={{
                             display: "flex",
@@ -734,6 +757,35 @@ export default function Insights() {
                             alignSelf: "stretch",
                           }}
                         >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "16px",
+                              alignSelf: "stretch",
+                            }}
+                          >
+                            <img
+                              src={"../../sampleData/indc2.png"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "25px", height: "25px" }}
+                            />
+                            <div
+                              style={{
+                                color: "#3A3A3F",
+                                // fontFamily: "DM Sans",
+                                fontSize: "16px",
+                                fontStyle: "normal",
+                                fontWeight: 500,
+                                lineHeight: "normal",
+                              }}
+                            >
+                              Avanzados
+                            </div>
+
+                            <p></p>
+                          </div>
+
                           <div
                             style={{
                               display: "flex",
@@ -748,7 +800,7 @@ export default function Insights() {
                               style={{
                                 color: "#000005",
                                 // fontFamily: "DM Sans",
-                                fontSize: "26px",
+                                fontSize: "22px",
                                 fontStyle: "normal",
                                 fontWeight: 500,
                                 lineHeight: "normal",
@@ -772,172 +824,214 @@ export default function Insights() {
                               total de indicadores
                             </div>
                           </div>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "8px 0px",
-                            justifyContent: "space-between",
-                            alignItems: "flex-start",
-                            alignSelf: "stretch",
-                          }}
-                        >
                           <div
                             style={{
-                              color: "#3A3A3F",
-                              // fontFamily: "DM Sans",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 600,
-                              lineHeight: "20px",
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              alignItems: "center",
+                              gap: "4px",
+                              marginLeft: 110,
+                              cursor: "pointer",
                             }}
+                            onClick={toggleShowAll1}
                           >
-                            Tipo
+                            <div
+                              style={{
+                                color: "#3E83FF",
+                                fontSize: "14px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "normal",
+                                marginLeft: 20,
+                              }}
+                            >
+                              {showAll1 ? "Ver menos" : "Ver más"}
+                            </div>
+                            <img
+                              src={"../../sampleData/arrow_b.png"}
+                              alt="Descripción de la imagen"
+                              style={{ marginTop: 5 }}
+                            />
                           </div>
-                          <div
-                            style={{
-                              color: "#3A3A3F",
-                              // fontFamily: "DM Sans",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 600,
-                              lineHeight: "20px",
-                            }}
-                          >
-                            Cantidad
-                          </div>
-                        </div>
-                        {/* Indicador barra */}
-                        {insightsData?.insights?.INDICATOR?.algorithms.map(
-                          (algorithm, index) => {
-                            const max = Math.max(
-                              ...insightsData.insights.INDICATOR.algorithms.map(
-                                (alg) => alg.value
-                              )
-                            );
-
-                            return (
-                              <div
-                                key={index}
-                                style={{
-                                  display: "flex",
-                                  padding: "0px",
-                                  gap: "16px",
-                                  alignSelf: "stretch",
-                                }}
-                              >
+                          {/* **************************************** */}
+                          {showAll1 && (
+                            <>
+                              {" "}
+                              <>
                                 <div
                                   style={{
-                                    width: `${(algorithm.value / max) * 100}%`,
-                                    height: "1.1vw",
-                                    borderRadius: "4px",
-                                    background: "#BCDAFF",
                                     display: "flex",
-                                    alignItems: "center",
-                                    paddingLeft: "16px",
+                                    padding: "8px 0px",
+                                    justifyContent: "space-between",
+                                    alignItems: "flex-start",
+                                    alignSelf: "stretch",
                                   }}
                                 >
                                   <div
                                     style={{
-                                      color: "#142257",
+                                      color: "#3A3A3F",
+                                      // fontFamily: "DM Sans",
                                       fontSize: "14px",
-                                      fontWeight: 400,
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
                                       lineHeight: "20px",
-                                      whiteSpace: "nowrap",
                                     }}
                                   >
-                                    {algorithm.algorithm === "INSTALLED"
-                                      ? "Instalado"
-                                      : algorithm.algorithm ===
-                                        "Indicador de Riesgo Nivel: 0"
-                                      ? "Sin riesgo"
-                                      : algorithm.algorithm ===
-                                        "Indicador de Riesgo Nivel: 1"
-                                      ? "Visitar punto de venta"
-                                      : algorithm.algorithm ===
-                                        "Indicador de Riesgo Nivel: 2"
-                                      ? "Requiere actualizar información"
-                                      : algorithm.algorithm ===
-                                        "Indicador de Riesgo Nivel: 3"
-                                      ? "Tomar acción urgente"
-                                      : algorithm.algorithm ===
-                                        "Indicador de Riesgo Nivel: 4"
-                                      ? "En riesgo"
-                                      : algorithm.algorithm === "OWNED"
-                                      ? "En propiedad"
-                                      : algorithm.algorithm === "LOCATION"
-                                      ? "Ubicado"
-                                      : algorithm.algorithm === "TELEMETRY"
-                                      ? "Telemetría"
-                                      : algorithm.algorithm}
+                                    Tipo
+                                  </div>
+                                  <div
+                                    style={{
+                                      color: "#3A3A3F",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: "14px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "20px",
+                                    }}
+                                  >
+                                    Cantidad
                                   </div>
                                 </div>
+                                {insightsData?.insights?.INDICATOR?.algorithms.map(
+                                  (algorithm, index) => {
+                                    const max = Math.max(
+                                      ...insightsData.insights.INDICATOR.algorithms.map(
+                                        (alg) => alg.value
+                                      )
+                                    );
+
+                                    return (
+                                      <div
+                                        key={index}
+                                        style={{
+                                          display: "flex",
+                                          padding: "0px",
+                                          gap: "16px",
+                                          alignSelf: "stretch",
+                                        }}
+                                      >
+                                        <div
+                                          style={{
+                                            width: `${
+                                              (algorithm.value / max) * 100
+                                            }%`,
+                                            height: "2.0vw",
+                                            borderRadius: "4px",
+                                            background: "#BCDAFF",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            paddingLeft: "16px",
+                                          }}
+                                        >
+                                          <div
+                                            style={{
+                                              color: "#142257",
+                                              fontSize: "14px",
+                                              fontWeight: 400,
+                                              lineHeight: "20px",
+                                              whiteSpace: "nowrap",
+                                            }}
+                                          >
+                                            {algorithm.algorithm === "INSTALLED"
+                                              ? "Instalado"
+                                              : algorithm.algorithm ===
+                                                "Indicador de Riesgo Nivel: 0"
+                                              ? "Sin riesgo"
+                                              : algorithm.algorithm ===
+                                                "Indicador de Riesgo Nivel: 1"
+                                              ? "Visitar punto de venta"
+                                              : algorithm.algorithm ===
+                                                "Indicador de Riesgo Nivel: 2"
+                                              ? "Requiere actualizar información"
+                                              : algorithm.algorithm ===
+                                                "Indicador de Riesgo Nivel: 3"
+                                              ? "Tomar acción urgente"
+                                              : algorithm.algorithm ===
+                                                "Indicador de Riesgo Nivel: 4"
+                                              ? "En riesgo"
+                                              : algorithm.algorithm === "OWNED"
+                                              ? "En propiedad"
+                                              : algorithm.algorithm ===
+                                                "LOCATION"
+                                              ? "Ubicado"
+                                              : algorithm.algorithm ===
+                                                "TELEMETRY"
+                                              ? "Telemetría"
+                                              : algorithm.algorithm}
+                                          </div>
+                                        </div>
+                                        <div
+                                          style={{
+                                            color: "#000005",
+                                            fontSize: "14px",
+                                            fontWeight: 400,
+                                            lineHeight: "normal",
+                                            marginLeft: "auto",
+                                          }}
+                                        >
+                                          {algorithm.value === undefined
+                                            ? "Sin registro"
+                                            : algorithm.value.toLocaleString()}
+                                        </div>
+                                      </div>
+                                    );
+                                  }
+                                )}
                                 <div
                                   style={{
-                                    color: "#000005",
-                                    fontSize: "14px",
-                                    fontWeight: 400,
-                                    lineHeight: "normal",
-                                    marginLeft: "auto",
+                                    display: "flex",
+                                    padding: "4px 0px",
+                                    flexDirection: "column",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    alignSelf: "stretch",
                                   }}
                                 >
-                                  {algorithm.value === undefined
-                                    ? "Sin registro"
-                                    : algorithm.value.toLocaleString()}
+                                  <div
+                                    style={{
+                                      width: "100%",
+                                      height: "1px",
+                                      background: "#CACACA",
+                                    }}
+                                  ></div>
+                                </div>{" "}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "flex-end",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    marginLeft: 110,
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => navigate("/home/indicator")}
+                                >
+                                  <div
+                                    style={{
+                                      color: "#3E83FF",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: "14px",
+                                      fontStyle: "normal",
+                                      fontWeight: 400,
+                                      lineHeight: "normal",
+                                      marginLeft: 20,
+                                    }}
+                                  >
+                                    Ver detalles
+                                  </div>
+                                  <img
+                                    src={"../../sampleData/arrow_b.png"}
+                                    alt="Descripción de la imagen"
+                                    style={{ marginTop: 5 }}
+                                  />
                                 </div>
-                              </div>
-                            );
-                          }
-                        )}
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "4px 0px",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "10px",
-                            alignSelf: "stretch",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: "100%",
-                              height: "1px",
-                              background: "#CACACA",
-                            }}
-                          ></div>
+                              </>
+                            </>
+                          )}
+
+                          {/* **************************************** */}
                         </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            alignItems: "center",
-                            gap: "4px",
-                            marginLeft: 110,
-                            cursor: "pointer",
-                          }}
-                          onClick={() => navigate("/home/indicator")}
-                        >
-                          <div
-                            style={{
-                              color: "#3E83FF",
-                              // fontFamily: "DM Sans",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 400,
-                              lineHeight: "normal",
-                            }}
-                          >
-                            Ver detalles
-                          </div>
-                          <img
-                            src={"../../sampleData/arrow_b.png"}
-                            alt="Descripción de la imagen"
-                            style={{ marginTop: 5 }}
-                          />
-                        </div>
-                        {/* ******************************** */}
                       </>
                     ) : (
                       <div
@@ -978,11 +1072,11 @@ export default function Insights() {
                     alignSelf: "stretch",
                   }}
                 >
-                  <img
+                  {/* <img
                     src={"../../sampleData/alert_y.png"}
                     alt="Descripción de la imagen"
                     style={{ width: "25px", height: "25px" }}
-                  />
+                  /> */}
                   <div
                     style={{
                       color: "#3A3A3F",
@@ -995,6 +1089,7 @@ export default function Insights() {
                   >
                     Mantenimiento
                   </div>
+                  <p></p>
                 </div>
                 {isLoading == true ? (
                   <>
@@ -1035,7 +1130,7 @@ export default function Insights() {
                               style={{
                                 color: "#000005",
                                 // fontFamily: "DM Sans",
-                                fontSize: "26px",
+                                fontSize: "22px",
                                 fontStyle: "normal",
                                 fontWeight: 500,
                                 lineHeight: "normal",
@@ -1073,7 +1168,7 @@ export default function Insights() {
                               style={{
                                 color: "#000005",
                                 // fontFamily: "DM Sans",
-                                fontSize: "26px",
+                                fontSize: "22px",
                                 fontStyle: "normal",
                                 fontWeight: 500,
                                 lineHeight: "normal",
@@ -1098,135 +1193,70 @@ export default function Insights() {
                             </div>
                           </div>
                         </div>
+                        <br></br>
+                        {/* *********************************** */}
                         <div
                           style={{
                             display: "flex",
-                            padding: "8px 0px",
-                            justifyContent: "space-between",
-                            alignItems: "flex-start",
+                            alignItems: "center",
+                            gap: "16px",
                             alignSelf: "stretch",
                           }}
                         >
+                          <img
+                            src={"../../sampleData/alert_y.png"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "25px", height: "25px" }}
+                          />
                           <div
                             style={{
                               color: "#3A3A3F",
                               // fontFamily: "DM Sans",
-                              fontSize: "14px",
+                              fontSize: "16px",
                               fontStyle: "normal",
-                              fontWeight: 600,
-                              lineHeight: "20px",
+                              fontWeight: 500,
+                              lineHeight: "normal",
                             }}
                           >
-                            Tipo
-                          </div>
-                          <div
-                            style={{
-                              color: "#3A3A3F",
-                              // fontFamily: "DM Sans",
-                              fontSize: "14px",
-                              fontStyle: "normal",
-                              fontWeight: 600,
-                              lineHeight: "20px",
-                            }}
-                          >
-                            Cantidad
+                            Alertas
                           </div>
                         </div>
-                        {/* Indicador barra */}
-                        {insightsData?.insights?.ALERT?.algorithms.map(
-                          (algorithm, index) => {
-                            const max = Math.max(
-                              ...insightsData.insights?.ALERT?.algorithms.map(
-                                (alg) => alg.value
-                              )
-                            );
-
-                            return (
-                              <div
-                                key={index}
-                                style={{
-                                  display: "flex",
-                                  padding: "0px",
-                                  gap: "16px",
-                                  alignSelf: "stretch",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    width: `${(algorithm.value / max) * 100}%`,
-                                    height: "1.1vw",
-                                    borderRadius: "4px",
-                                    background: "#FEF5C7",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    paddingLeft: "16px",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      color: "#142257",
-                                      fontSize: "14px",
-                                      fontWeight: 400,
-                                      lineHeight: "20px",
-                                      whiteSpace: "nowrap",
-                                    }}
-                                  >
-                                    {algorithm.algorithm ===
-                                    "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                                      ? "Alta demanda del compresor"
-                                      : algorithm.algorithm ===
-                                        "LOW_VOLTAGE_ALERT"
-                                      ? "Bajo voltaje"
-                                      : algorithm.algorithm ===
-                                        "HIGH_VOLTAGE_ALERT"
-                                      ? "Alto voltaje"
-                                      : algorithm.algorithm ===
-                                        "MOVED_VISIT_ALERT"
-                                      ? "Movimiento"
-                                      : algorithm.algorithm ===
-                                        "HIGH_TEMPERATURE_ALERT"
-                                      ? "Alta temperatura"
-                                      : algorithm.algorithm ===
-                                        "DISCONNECTION_ALERT"
-                                      ? "Desconexión"
-                                      : algorithm.algorithm}
-                                  </div>
-                                </div>
-                                <div
-                                  style={{
-                                    color: "#000005",
-                                    fontSize: "14px",
-                                    fontWeight: 400,
-                                    lineHeight: "normal",
-                                    marginLeft: "auto",
-                                  }}
-                                >
-                                  {algorithm.value === undefined
-                                    ? "Sin registro"
-                                    : algorithm.value.toLocaleString()}
-                                </div>
-                              </div>
-                            );
-                          }
-                        )}
                         <div
                           style={{
                             display: "flex",
-                            padding: "4px 0px",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "10px",
+                            alignItems: "flex-end",
+                            alignContent: "flex-end",
+                            gap: "8px",
                             alignSelf: "stretch",
+                            flexWrap: "wrap",
                           }}
                         >
                           <div
                             style={{
-                              width: "100%",
-                              height: "1px",
-                              background: "#CACACA",
+                              color: "#000005",
+                              // fontFamily: "DM Sans",
+                              fontSize: "22px",
+                              fontStyle: "normal",
+                              fontWeight: 500,
+                              lineHeight: "normal",
                             }}
-                          ></div>
+                          >
+                            {insightsData?.insights?.ALERT?.total === undefined
+                              ? "Sin registro"
+                              : insightsData?.insights?.ALERT?.total.toLocaleString()}
+                          </div>
+                          <div
+                            style={{
+                              color: "#88888B",
+                              // fontFamily: "DM Sans",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            total de alertas
+                          </div>
                         </div>
                         <div
                           style={{
@@ -1237,19 +1267,19 @@ export default function Insights() {
                             marginLeft: 110,
                             cursor: "pointer",
                           }}
-                          onClick={() => navigate("/home/alerts")}
+                          onClick={toggleShowAll2}
                         >
                           <div
                             style={{
                               color: "#3E83FF",
-                              // fontFamily: "DM Sans",
                               fontSize: "14px",
                               fontStyle: "normal",
                               fontWeight: 400,
                               lineHeight: "normal",
+                              marginLeft: 20,
                             }}
                           >
-                            Ver detalles
+                            {showAll2 ? "Ver menos" : "Ver más"}
                           </div>
                           <img
                             src={"../../sampleData/arrow_b.png"}
@@ -1257,6 +1287,430 @@ export default function Insights() {
                             style={{ marginTop: 5 }}
                           />
                         </div>
+                        {/* ********************* */}
+                        {showAll2 && (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "8px 0px",
+                                justifyContent: "space-between",
+                                alignItems: "flex-start",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  color: "#3A3A3F",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 600,
+                                  lineHeight: "20px",
+                                }}
+                              >
+                                Tipo
+                              </div>
+                              <div
+                                style={{
+                                  color: "#3A3A3F",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 600,
+                                  lineHeight: "20px",
+                                }}
+                              >
+                                Cantidad
+                              </div>
+                            </div>
+                            {/* Indicador barra */}
+                            {insightsData?.insights?.ALERT?.algorithms.map(
+                              (algorithm, index) => {
+                                const max = Math.max(
+                                  ...insightsData.insights?.ALERT?.algorithms.map(
+                                    (alg) => alg.value
+                                  )
+                                );
+
+                                return (
+                                  <div
+                                    key={index}
+                                    style={{
+                                      display: "flex",
+                                      padding: "0px",
+                                      gap: "16px",
+                                      alignSelf: "stretch",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        width: `${
+                                          (algorithm.value / max) * 100
+                                        }%`,
+                                        height: "2.0vw",
+                                        borderRadius: "4px",
+                                        background: "#FEF5C7",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        paddingLeft: "16px",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          color: "#142257",
+                                          fontSize: "12px",
+                                          fontWeight: 400,
+                                          lineHeight: "20px",
+                                          whiteSpace: "nowrap",
+                                        }}
+                                      >
+                                        {algorithm.algorithm ===
+                                        "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                          ? "Alta demanda del compresor"
+                                          : algorithm.algorithm ===
+                                            "LOW_VOLTAGE_ALERT"
+                                          ? "Bajo voltaje"
+                                          : algorithm.algorithm ===
+                                            "HIGH_VOLTAGE_ALERT"
+                                          ? "Alto voltaje"
+                                          : algorithm.algorithm ===
+                                            "MOVED_VISIT_ALERT"
+                                          ? "Movimiento"
+                                          : algorithm.algorithm ===
+                                            "HIGH_TEMPERATURE_ALERT"
+                                          ? "Alta temperatura"
+                                          : algorithm.algorithm ===
+                                            "DISCONNECTION_ALERT"
+                                          ? "Desconexión"
+                                          : algorithm.algorithm}
+                                      </div>
+                                    </div>
+                                    <div
+                                      style={{
+                                        color: "#000005",
+                                        fontSize: "14px",
+                                        fontWeight: 400,
+                                        lineHeight: "normal",
+                                        marginLeft: "auto",
+                                      }}
+                                    >
+                                      {algorithm.value === undefined
+                                        ? "Sin registro"
+                                        : algorithm.value.toLocaleString()}
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            )}
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "4px 0px",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "10px",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "100%",
+                                  height: "1px",
+                                  background: "#CACACA",
+                                }}
+                              ></div>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                alignItems: "center",
+                                gap: "4px",
+                                marginLeft: 110,
+                                cursor: "pointer",
+                              }}
+                              onClick={() => navigate("/home/alerts")}
+                            >
+                              <div
+                                style={{
+                                  color: "#3E83FF",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                  marginLeft: 20,
+                                }}
+                              >
+                                Ver detalles
+                              </div>
+                              <img
+                                src={"../../sampleData/arrow_b.png"}
+                                alt="Descripción de la imagen"
+                                style={{ marginTop: 5 }}
+                              />
+                            </div>
+                          </>
+                        )}
+                        {/* ************************** */}
+                        {/* *********************************** */}
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "16px",
+                            alignSelf: "stretch",
+                          }}
+                        >
+                          <img
+                            src={"../../sampleData/fail_r.png"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "25px", height: "25px" }}
+                          />
+                          <div
+                            style={{
+                              color: "#3A3A3F",
+                              // fontFamily: "DM Sans",
+                              fontSize: "16px",
+                              fontStyle: "normal",
+                              fontWeight: 500,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            Fallas
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "flex-end",
+                            alignContent: "flex-end",
+                            gap: "8px",
+                            alignSelf: "stretch",
+                            flexWrap: "wrap",
+                          }}
+                        >
+                          <div
+                            style={{
+                              color: "#000005",
+                              // fontFamily: "DM Sans",
+                              fontSize: "22px",
+                              fontStyle: "normal",
+                              fontWeight: 500,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            {insightsData?.insights?.FAIL?.total === undefined
+                              ? "Sin registro"
+                              : insightsData?.insights?.FAIL?.total.toLocaleString()}
+                          </div>
+                          <div
+                            style={{
+                              color: "#88888B",
+                              // fontFamily: "DM Sans",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "normal",
+                            }}
+                          >
+                            total de fallas
+                          </div>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "flex-end",
+                            alignItems: "center",
+                            gap: "4px",
+                            marginLeft: 110,
+                            cursor: "pointer",
+                          }}
+                          onClick={toggleShowAll3}
+                        >
+                          <div
+                            style={{
+                              color: "#3E83FF",
+                              fontSize: "14px",
+                              fontStyle: "normal",
+                              fontWeight: 400,
+                              lineHeight: "normal",
+                              marginLeft: 20,
+                            }}
+                          >
+                            {showAll3 ? "Ver menos" : "Ver más"}
+                          </div>
+                          <img
+                            src={"../../sampleData/arrow_b.png"}
+                            alt="Descripción de la imagen"
+                            style={{ marginTop: 5 }}
+                          />
+                        </div>
+                        {/* ********************************************** */}
+                        {showAll3 && (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "8px 0px",
+                                justifyContent: "space-between",
+                                alignItems: "flex-start",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  color: "#3A3A3F",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 600,
+                                  lineHeight: "20px",
+                                }}
+                              >
+                                Tipo
+                              </div>
+                              <div
+                                style={{
+                                  color: "#3A3A3F",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 600,
+                                  lineHeight: "20px",
+                                }}
+                              >
+                                Cantidad
+                              </div>
+                            </div>
+                            {/* Indicador barra */}
+                            {insightsData?.insights?.FAIL?.algorithms.map(
+                              (algorithm, index) => {
+                                const max = Math.max(
+                                  ...insightsData.insights?.FAIL?.algorithms.map(
+                                    (alg) => alg.value
+                                  )
+                                );
+
+                                return (
+                                  <div
+                                    key={index}
+                                    style={{
+                                      display: "flex",
+                                      padding: "0px",
+                                      gap: "16px",
+                                      alignSelf: "stretch",
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        width: `${
+                                          (algorithm.value / max) * 100
+                                        }%`,
+                                        height: "2.0vw",
+                                        borderRadius: "4px",
+                                        background: "#ffc4cc",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        paddingLeft: "16px",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          color: "#142257",
+                                          fontSize: "12px",
+                                          fontWeight: 400,
+                                          lineHeight: "20px",
+                                          whiteSpace: "nowrap",
+                                        }}
+                                      >
+                                        {algorithm.algorithm === "FREEZING_FAIL"
+                                          ? "Evaporador bloqueado"
+                                          : algorithm.algorithm ===
+                                            "TEMPERATURE_FAIL"
+                                          ? "Falla de temperatura"
+                                          : algorithm.algorithm ===
+                                            "COMPRESSOR_FAIL"
+                                          ? "Falla de compresor"
+                                          : algorithm.algorithm ===
+                                            "DISCONNECTIONS_FAIL"
+                                          ? "Falla de desconexión"
+                                          : algorithm.algorithm ===
+                                            "VOLTAGE_FAIL"
+                                          ? "Falla de voltaje"
+                                          : algorithm.algorithm}
+                                      </div>
+                                    </div>
+                                    <div
+                                      style={{
+                                        color: "#000005",
+                                        fontSize: "14px",
+                                        fontWeight: 400,
+                                        lineHeight: "normal",
+                                        marginLeft: "auto",
+                                      }}
+                                    >
+                                      {algorithm.value === undefined
+                                        ? "Sin registro"
+                                        : algorithm.value.toLocaleString()}
+                                    </div>
+                                  </div>
+                                );
+                              }
+                            )}
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "4px 0px",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "10px",
+                                alignSelf: "stretch",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "100%",
+                                  height: "1px",
+                                  background: "#CACACA",
+                                }}
+                              ></div>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-end",
+                                alignItems: "center",
+                                gap: "4px",
+                                marginLeft: 110,
+                                cursor: "pointer",
+                              }}
+                              onClick={() => navigate("/home/fails")}
+                            >
+                              <div
+                                style={{
+                                  color: "#3E83FF",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "normal",
+                                  marginLeft: 20,
+                                }}
+                              >
+                                Ver detalles
+                              </div>
+                              <img
+                                src={"../../sampleData/arrow_b.png"}
+                                alt="Descripción de la imagen"
+                                style={{ marginTop: 5 }}
+                              />
+                            </div>
+                          </>
+                        )}
                         {/* ************************** */}
                       </>
                     ) : (
