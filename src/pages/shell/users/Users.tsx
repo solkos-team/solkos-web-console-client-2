@@ -391,7 +391,7 @@ export default function Users() {
                   )}
                   {!isLoading && (
                     <>
-                      {dataUsers.length > 0 ? (
+                      {filteredUsers.length > 0 ? (
                         <TableBody
                           style={{
                             display: "block",
@@ -400,7 +400,7 @@ export default function Users() {
                             overflowY: "auto",
                           }}
                         >
-                          {dataUsers
+                          {filteredUsers
                             // .slice(firstIndex, lastIndex)
                             .map((user, index) => (
                               <TableRow
