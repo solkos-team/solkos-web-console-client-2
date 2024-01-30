@@ -122,27 +122,29 @@ export default function Users() {
   const closeAlert = () => {
     setIsAlertOpen(false);
   };
-  const alertDelete = 
-  <>
-  <Alert variant="light" color="indigo" title="Alert title" >
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis, quae tempore necessitatibus placeat saepe.
-    </Alert>
-  </>
-  const [isDelete,setIsDelete] = useState(false)
-  const [userDelteID,setUserDelteID] = useState()
+  const alertDelete = (
+    <>
+      <Alert variant="light" color="indigo" title="Alert title">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis,
+        quae tempore necessitatibus placeat saepe.
+      </Alert>
+    </>
+  );
+  const [isDelete, setIsDelete] = useState(false);
+  const [userDelteID, setUserDelteID] = useState();
   const deleteUserDrawer = async (id) => {
-    setUserDelteID(id)
-    setIsDelete(true)
+    setUserDelteID(id);
+    setIsDelete(true);
   };
-  const deleteUser =async () => {
+  const deleteUser = async () => {
     try {
-         const data = await fetchDeleteUsers("users", userDelteID);
-         setUserDelete(data);
-         setIsDelete(false)
-      } catch (error) {
-        console.log("Error", error);
-       }
-  }
+      const data = await fetchDeleteUsers("users", userDelteID);
+      setUserDelete(data);
+      setIsDelete(false);
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -603,30 +605,58 @@ export default function Users() {
               </Button>
             </div>
           </Alert>
-          
         </div>
       )}
       {isDelete == true && (
         <div
-        style={{
-          position: "fixed",
-          top: "50%",
-          left: "45%",
-          zIndex: 9999,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end",
-        }}
-      >
-        <Alert variant="light" color="red" title="Delete Usuario" >
-        ¿ Seguro de eliminar dicho usuario ?
-        <br />
-        <div style={{display:"flex",flexDirection:"row",gap:"10%",alignContent:"center",alignItems:"center",marginLeft:"3rem"}}> 
-        <Button onClick={()=>{deleteUser()}}>Si</Button>
-        <Button variant="filled" color="red" onClick={()=>{setIsDelete(false)}}>No</Button>
-        </div>   
-      </Alert> 
-      </div>
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "45%",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <Alert
+            variant="light"
+            color="red"
+            title="ELIMINAR usuario"
+            style={{ borderColor: "#ffc4cc" }}
+          >
+            ¿Esta seguro de eliminar el usuario?
+            <br />
+            <p></p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "10%",
+                alignContent: "center",
+                alignItems: "center",
+                marginLeft: "3rem",
+              }}
+            >
+              <Button
+                onClick={() => {
+                  deleteUser();
+                }}
+              >
+                Si
+              </Button>
+              <Button
+                variant="filled"
+                color="red"
+                onClick={() => {
+                  setIsDelete(false);
+                }}
+              >
+                No
+              </Button>
+            </div>
+          </Alert>
+        </div>
       )}
     </div>
   );
