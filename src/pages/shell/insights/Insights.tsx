@@ -156,7 +156,7 @@ export default function Insights() {
 
   useEffect(() => {}, [markers]);
 
-  const [showAll1, setShowAll1] = useState(false);
+  const [showAll1, setShowAll1] = useState(true);
 
   const toggleShowAll1 = () => {
     setShowAll1(!showAll1);

@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-import PageFilter from "../../../components/pageFilter";
-
 export default function Panel() {
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-
     return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+      document.body.style.overflow = "auto";
     };
   }, []);
   return (
     <>
-      <iframe
+      {/* <iframe
         src="https://tableau.efemsa.com/views/KOF_Nacional/KOF?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
         title="iframe Example 1"
         width="900"
@@ -21,7 +17,7 @@ export default function Panel() {
         style={{ marginLeft: -30 }}
       >
         <p></p>
-      </iframe>
+      </iframe> */}
     </>
   );
 }
