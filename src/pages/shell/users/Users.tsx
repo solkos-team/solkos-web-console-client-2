@@ -122,14 +122,27 @@ export default function Users() {
   const closeAlert = () => {
     setIsAlertOpen(false);
   };
-  const deleteUser = async (id) => {
-    try {
-      const data = await fetchDeleteUsers("users", id);
-      setUserDelete(data);
-    } catch (error) {
-      console.log("Error", error);
-    }
+  const alertDelete = 
+  <>
+  <Alert variant="light" color="indigo" title="Alert title" >
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis, quae tempore necessitatibus placeat saepe.
+    </Alert>
+  </>
+  const [isDelete,setIsDelete] = useState(false)
+  const [userDelteID,setUserDelteID] = useState()
+  const deleteUserDrawer = async (id) => {
+    setUserDelteID(id)
+    setIsDelete(true)
   };
+  const deleteUser =async () => {
+    try {
+         const data = await fetchDeleteUsers("users", userDelteID);
+         setUserDelete(data);
+         setIsDelete(false)
+      } catch (error) {
+        console.log("Error", error);
+       }
+  }
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -486,7 +499,7 @@ export default function Users() {
                                       size="xs"
                                       style={{ width: "4rem" }}
                                       onClick={() => {
-                                        deleteUser(user.id);
+                                        deleteUserDrawer(user.id);
                                       }}
                                     >
                                       Delete
@@ -590,7 +603,30 @@ export default function Users() {
               </Button>
             </div>
           </Alert>
+          
         </div>
+      )}
+      {isDelete == true && (
+        <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "45%",
+          zIndex: 9999,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+        }}
+      >
+        <Alert variant="light" color="red" title="Delete Usuario" >
+        ¿ Seguro de eliminar dicho usuario ?
+        <br />
+        <div style={{display:"flex",flexDirection:"row",gap:"10%",alignContent:"center",alignItems:"center",marginLeft:"3rem"}}> 
+        <Button onClick={()=>{deleteUser()}}>Si</Button>
+        <Button variant="filled" color="red" onClick={()=>{setIsDelete(false)}}>No</Button>
+        </div>   
+      </Alert> 
+      </div>
       )}
     </div>
   );
