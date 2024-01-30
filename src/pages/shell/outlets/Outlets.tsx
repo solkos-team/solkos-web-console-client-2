@@ -41,6 +41,13 @@ export default function Outlets() {
     setNoInfoToShow(false);
   };
 
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setCurrentPage(1)
+      fetchData()
+    }
+  };
   const filterOutlets = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
       const searchString = searchQuery.toLowerCase();
@@ -60,6 +67,7 @@ export default function Outlets() {
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     path: pathVerify(),
+    filter_by : searchValue
   };
   const fetchData = async () => {
     try {
@@ -191,7 +199,8 @@ export default function Outlets() {
               >
                 <TextInput
                   value={searchValue}
-                  onChange={handleSearchChange}
+                  onChange={event => handleSearchChange(event)}
+                  onKeyDown={handleKeyDown}
                   type="text"
                   placeholder="Busca por punto de venta"
                   style={{

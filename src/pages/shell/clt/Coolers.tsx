@@ -71,6 +71,13 @@ export default function Coolers() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      setCurrentPage(1)
+      fetchData()
+    }
+  };
   const body = {
     customer: dto,
     class: "STK",
@@ -78,6 +85,7 @@ export default function Coolers() {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
+    filter_by : searchValue
   };
   const fetchData = async () => {
     try {
@@ -205,7 +213,8 @@ export default function Coolers() {
               >
                 <TextInput
                   value={searchValue}
-                  onChange={handleSearchChange}
+                  onChange={event => handleSearchChange(event)}
+                  onKeyDown={handleKeyDown}
                   type="text"
                   placeholder="Busca por Id Coolector / Mac"
                   style={{
