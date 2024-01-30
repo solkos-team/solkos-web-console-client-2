@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { IconArrowRight, IconCircleCheck } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import MapComponent from "../map";
+import { Table } from "@mantine/core";
 import {
-  Card,
-  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -24,7 +23,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
   const [searchValue, setSearchValue] = useState("");
-console.log(outletDetails)
+  console.log(outletDetails);
   const {
     region,
     route,
@@ -75,8 +74,8 @@ console.log(outletDetails)
     try {
       // const data = await fetchCoolers(pathVerify(), null, outlet_id);
       const data = await fetchUniversal("coolers", body);
-      console.log(data)
-      console.log(body)
+      console.log(data);
+      console.log(body);
       setCoolersData(data);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -90,10 +89,12 @@ console.log(outletDetails)
   }, [dt]);
 
   const inputState = () => {
-    if(coolersData == null){
-      return 0
-    }else{return coolersData.length}
-  }
+    if (coolersData == null) {
+      return 0;
+    } else {
+      return coolersData.length;
+    }
+  };
   return (
     <div
       ref={drawerRef}
@@ -777,7 +778,7 @@ console.log(outletDetails)
               style={{ width: "330%" }}
             />
           </section>
-          <Card>
+          <section>
             <Table
               style={{
                 borderCollapse: "collapse",
@@ -856,7 +857,9 @@ console.log(outletDetails)
                           key={index}
                           className="Tabla"
                           onClick={() => {
-                            navigate(`/home/coolerDetail/${cooler.serial_number}`);
+                            navigate(
+                              `/home/coolerDetail/${cooler.serial_number}`
+                            );
                           }}
                         >
                           <TableCell
@@ -1067,7 +1070,7 @@ console.log(outletDetails)
               datosPorPagina={datosPorPagina}
               numero={setNumero}
             />
-          </Card>
+          </section>
         </div>
       </div>
     </div>

@@ -297,7 +297,7 @@ export default function Outlets() {
                               width: "160px",
                             }}
                           >
-                            Días sin visita
+                            Última visita
                           </TableHeaderCell>
                           <TableHeaderCell
                             style={{

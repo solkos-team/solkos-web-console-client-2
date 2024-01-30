@@ -4,18 +4,15 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
-
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
 import {
-  Card,
-  Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-import { flushSync } from "react-dom";
+import { Table } from "@mantine/core";
 import { fetchCoolersDrawer, fetchUniversal } from "../../utils/apiUtils";
 import { CoolerInterface } from "../drawerOutlets/CoolerInterface";
 import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
@@ -570,7 +567,7 @@ export default function DrawerA({
           padding: "0px 24px",
         }}
       >
-        <Card>
+        <section>
           <Table
             style={{
               borderCollapse: "collapse",
@@ -863,7 +860,7 @@ export default function DrawerA({
             datosPorPagina={datosPorPagina}
             numero={setNumero}
           />
-        </Card>
+        </section>
       </div>
     </div>
   );
