@@ -7,7 +7,7 @@ export const PaginationComponent = ({
   datosPorPagina,
   numero,
 }) => {
-  const [data, setData] = useState(["50", "100", "200"]);
+  const [data, setData] = useState(["25", "50", "100"]);
   const [value, setValue] = useState<string | null>("50");
   // const npage = Math.ceil(totalDatos/datosPorPagina)
   const npage = Math.ceil(totalDatos / datosPorPagina);
@@ -27,7 +27,7 @@ export const PaginationComponent = ({
           radius="md"
           placeholder="Select placeholder"
           data={data}
-          defaultValue={"50"}
+          defaultValue={"25"}
           onChange={numero}
           style={{
             width: "80px", // Establece el ancho deseado

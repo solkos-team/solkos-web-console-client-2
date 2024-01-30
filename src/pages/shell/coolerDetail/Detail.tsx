@@ -74,7 +74,6 @@ export default function CoolerDetail() {
     try {
       // const data = await fetchCoolersFromAPI(serial_number);
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
-      console.log(data)
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);

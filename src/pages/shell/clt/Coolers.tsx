@@ -8,6 +8,7 @@ import {
   fetchCoolers,
   fetchCoolerDetails,
   fetchUniversal,
+  fetchUniversalTables
 } from "../../../utils/apiUtils";
 import {
   TableBody,
@@ -29,6 +30,10 @@ export default function Coolers() {
     outlet_name: string;
     region: string;
     route: string;
+    status : string;
+    last_read : string;
+    days_without_visit : string;
+    priority_status : string;
   }
   interface CoolerDetail {
     serial_number: string;
@@ -36,11 +41,12 @@ export default function Coolers() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [searchValue, setSearchValue] = useState("");
-  const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
+  const [coolersData, setCoolersData] = useState<Cooler[]>();
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [currentPage, setCurrentPage] = useState(1);
-  const [datosPorPagina, setNumero] = useState(50);
+  const [datosPorPagina, setNumero] = useState(25);
+  const [totalData,setTotalData] = useState<String | number >(0)
   const navigate = useNavigate();
   // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
@@ -70,13 +76,16 @@ export default function Coolers() {
     class: "STK",
     algorithm: ["INSTALLED"],
     path: pathVerify(),
-    page_size: 1000,
-    page_number: 1,
+    page_size: Number(datosPorPagina),
+    page_number: currentPage,
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("coolers", body, setIsLoading);
-      setCoolersData(data);
+      const data = await fetchUniversalTables("coolers", body, setIsLoading)
+      const datos = await data.json()
+      const totalData = data.headers.get('content-length')      
+      setTotalData(Number(totalData) || 0) 
+      setCoolersData(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -84,7 +93,7 @@ export default function Coolers() {
   };
   useEffect(() => {
     fetchData();
-  }, [dt, dto]);
+  }, [dt, dto,currentPage,datosPorPagina]);
 
   const filteredCoolers = coolersData
     ? filterCoolers(coolersData, searchValue)
@@ -102,6 +111,8 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
+  coolersData == undefined ? [] : coolersData
+  totalData == undefined ? 0 : totalData
   return (
     <div>
       <section>
@@ -337,7 +348,8 @@ export default function Coolers() {
                       )}
                       {!isLoading && (
                         <>
-                          {filteredCoolers.length > 0 ? (
+                          { coolersData == undefined ? [] :
+                          coolersData ? (
                             <TableBody
                               style={{
                                 display: "block",
@@ -346,8 +358,8 @@ export default function Coolers() {
                                 overflowY: "auto",
                               }}
                             >
-                              {filteredCoolers
-                                .slice(firstIndex, lastIndex)
+                              {coolersData
+                                // .slice(firstIndex, lastIndex)
                                 .map((cooler, index) => (
                                   <TableRow
                                     key={index}
@@ -575,7 +587,7 @@ export default function Coolers() {
                     </Table>
                     <PaginationComponent
                       accion={setCurrentPage}
-                      totalDatos={filteredCoolers.length}
+                      totalDatos={totalData}
                       datosPorPagina={datosPorPagina}
                       numero={setNumero}
                     />
