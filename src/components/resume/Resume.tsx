@@ -16,9 +16,7 @@ async function validarExistenciaImagen(url) {
     const response = await fetch(url, { method: "HEAD" });
 
     if (response.ok) {
-      // console.log("La imagen existe.");
     } else {
-      // console.log("La imagen no existe. Código de respuesta:", response.status);
     }
   } catch (error) {
     console.error(

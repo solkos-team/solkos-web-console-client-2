@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
 import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
-import { fetchUniversal } from "../../../utils/apiUtils";
+import { fetchUniversal, fetchUniversalTables } from "../../../utils/apiUtils";
 import {
   TableBody,
   TableCell,
@@ -24,18 +24,18 @@ import { SkeletonTableOutlets } from "../../../components/skeletonTableOutlets/S
 
 export default function Outlets() {
   const [searchValue, setSearchValue] = useState("");
-  const [outletsData, setOutletsData] = useState<CoolerInterface[] | null>(
-    null
-  );
+  const [outletsData, setOutletsData] = useState<CoolerInterface[]>();
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [datosPorPagina, setNumero] = useState(50);
+  const [datosPorPagina, setNumero] = useState(25);
   const navigate = useNavigate();
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
+  const [totalData, setTotalData] = useState<String | number>(0)
+
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -57,15 +57,18 @@ export default function Outlets() {
   };
   const body = {
     customer: dto,
-    page_size: 100,
-    page_number: 1,
+    page_size: Number(datosPorPagina),
+    page_number: currentPage,
     path: pathVerify(),
   };
   const fetchData = async () => {
     try {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
-      const data = await fetchUniversal("outlets", body, setIsLoading);
-      setOutletsData(data);
+      const data = await fetchUniversalTables("outlets", body, setIsLoading);
+      const datos = await data.json()
+      const totalData = data.headers.get('content-length')
+      setTotalData(Number(totalData) || 0)
+      setOutletsData(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -73,7 +76,7 @@ export default function Outlets() {
   };
   useEffect(() => {
     fetchData();
-  }, [dt, dto]);
+  }, [dt, dto, datosPorPagina,currentPage]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)
@@ -95,6 +98,8 @@ export default function Outlets() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedOutletDetails, setSelectedOutletDetails] =
     useState<CoolerInterface | null>(null);
+  outletsData == undefined ? [] : outletsData
+  totalData == undefined ? 0 : totalData
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -328,7 +333,7 @@ export default function Outlets() {
                       )}
                       {!isLoading && (
                         <>
-                          {filteredOutlets.length > 0 ? (
+                          {outletsData == undefined ? [] : outletsData ? (
                             <TableBody
                               style={{
                                 display: "block",
@@ -337,8 +342,8 @@ export default function Outlets() {
                                 overflowY: "auto",
                               }}
                             >
-                              {filteredOutlets
-                                .slice(firstIndex, lastIndex)
+                              {outletsData
+                                // .slice(firstIndex, lastIndex)
                                 .map((outlet, index) => (
                                   <TableRow
                                     className="Tabla"
@@ -381,7 +386,7 @@ export default function Outlets() {
                                     >
                                       {outlet.days_without_visitC ===
                                         undefined ||
-                                      outlet.days_without_visitC === "" ? (
+                                        outlet.days_without_visitC === "" ? (
                                         "Sin registro"
                                       ) : (
                                         <>
@@ -423,7 +428,7 @@ export default function Outlets() {
                                       }}
                                     >
                                       {outlet.priority === undefined ||
-                                      outlet.priority === "" ? (
+                                        outlet.priority === "" ? (
                                         "Sin registro"
                                       ) : (
                                         <>
@@ -529,7 +534,7 @@ export default function Outlets() {
                     </Table>
                     <PaginationComponent
                       accion={setCurrentPage}
-                      totalDatos={filteredOutlets.length}
+                      totalDatos={totalData}
                       datosPorPagina={datosPorPagina}
                       numero={setNumero}
                     />

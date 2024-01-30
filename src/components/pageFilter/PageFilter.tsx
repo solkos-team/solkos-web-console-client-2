@@ -68,12 +68,11 @@ export default function (props) {
         // const data = await fetchPath(dataLocalStorage);
         const data = await fetchUniversal("paths", body);
         const v1 = data === null ? [""] : data;
-        // console.log(v1)
         //dataZone.push(data)
         dataZone.unshift(v1); // solucion path desde api
         checkVisibilityPath();
       } catch (error) {
-        console.log("Error fetching path", error);
+        console.error("Error fetching path", error);
       }
     }
   };

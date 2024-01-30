@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Table } from "@mantine/core";
-import { fetchCoolersDrawer, fetchUniversal } from "../../utils/apiUtils";
+import { fetchCoolersDrawer, fetchUniversal, fetchUniversalTables } from "../../utils/apiUtils";
 import { CoolerInterface } from "../drawerOutlets/CoolerInterface";
 import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
 
@@ -27,10 +27,11 @@ export default function DrawerA({
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const [datosPorPagina, setNumero] = useState(50);
+  const [datosPorPagina, setNumero] = useState(25);
   const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(
     null
   );
+  const [totalData, setTotalData] = useState<String | number>(0)
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -42,14 +43,16 @@ export default function DrawerA({
     algorithm: [selectedAlgorithm],
     path: pathVerify(),
     page_size: Number(value),
-    page_number: 1,
+    page_number: currentPage,
   };
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const data = await fetchUniversal("coolers", body);
-      console.log(data);
-      setCoolersData(data);
+      const data = await fetchUniversalTables("coolers", body);
+      const datos = await data.json()
+      const totalData = data.headers.get('content-length')
+      setTotalData(Number(totalData) || 0)
+      setCoolersData(datos);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -58,7 +61,7 @@ export default function DrawerA({
   };
   useEffect(() => {
     fetchData();
-  }, [dt]);
+  }, [dt,datosPorPagina]);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -81,7 +84,8 @@ export default function DrawerA({
       Fecha_de_notificación: cooler.notified_at,
     }));
   };
-
+  coolersData == undefined ? [] : coolersData
+  totalData == undefined ? 0 : totalData
   return (
     <div
       ref={drawerRef}
@@ -856,7 +860,7 @@ export default function DrawerA({
           </Table>
           <PaginationComponent
             accion={setCurrentPage}
-            totalDatos={coolersData?.length || 0}
+            totalDatos={coolersData?.length}
             datosPorPagina={datosPorPagina}
             numero={setNumero}
           />

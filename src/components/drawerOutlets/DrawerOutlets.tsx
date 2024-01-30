@@ -23,7 +23,6 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
   const [searchValue, setSearchValue] = useState("");
-  console.log(outletDetails);
   const {
     region,
     route,
@@ -74,8 +73,6 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
     try {
       // const data = await fetchCoolers(pathVerify(), null, outlet_id);
       const data = await fetchUniversal("coolers", body);
-      console.log(data);
-      console.log(body);
       setCoolersData(data);
     } catch (error) {
       console.error("Error fetching coolers:", error);

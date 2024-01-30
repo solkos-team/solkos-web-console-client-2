@@ -14,7 +14,7 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Card, Table } from "@mantine/core";
-import { fetchDeleteUsers, fetchUniversal } from "../../../utils/apiUtils";
+import { fetchDeleteUsers, fetchUniversal, fetchUniversalTables } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { UsersInterfaces } from "./UsersInterfaces";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
@@ -25,10 +25,10 @@ export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([]);
-  const [dataUsersEdit, setDataUsersEdit] = useState();
+  const [dataUsersEdit, setDataUsersEdit] = useState<UsersInterfaces>();
   const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [datosPorPagina, setNumero] = useState(50);
+  const [datosPorPagina, setNumero] = useState(25);
   const dto = useSelector((state: any) => state.organization);
   const dt = useSelector((state: any) => state.works);
   const lastIndex = currentPage * Number(datosPorPagina);
@@ -38,6 +38,7 @@ export default function Users() {
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
   const [alertStatus, setAlertStatus] = useState();
   const [userDelete, setUserDelete] = useState();
+  const [totalData, setTotalData] = useState<String | number>(0)
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -95,17 +96,20 @@ export default function Users() {
   };
   const body = {
     customer: dto,
-    page_number: 1,
-    page_size: 10,
+    page_number: currentPage,
+    page_size: Number(datosPorPagina),
     path: pathVerify(),
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("users", body, setIsLoading);
-      setDataUsers(data);
+      const data = await fetchUniversalTables("users", body, setIsLoading);
+      const datos = await data.json()
+      const totalData = data.headers.get('content-length')
+      setTotalData(Number(totalData) || 0)
+      setDataUsers(datos);
       setIsLoading(false);
     } catch (error) {
-      console.log("Error", error);
+      console.error("Error", error);
     }
   };
   const handleReloadUsers = () => {
@@ -142,9 +146,11 @@ export default function Users() {
       setUserDelete(data);
       setIsDelete(false);
     } catch (error) {
-      console.log("Error", error);
+      console.error("Error", error);
     }
   };
+  dataUsers == undefined ? [] : dataUsers
+  totalData == undefined ? 0 : totalData
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -253,7 +259,7 @@ export default function Users() {
               </div>
               <div style={{ marginLeft: 480 }}>
                 <ExportToExcel
-                  datos={filterUsersDataDownload(dataUsers)}
+                  datos={dataUsers}
                   nombre={"Users"}
                 />
               </div>
@@ -385,7 +391,7 @@ export default function Users() {
                   )}
                   {!isLoading && (
                     <>
-                      {filteredUsers.length > 0 ? (
+                      {dataUsers.length > 0 ? (
                         <TableBody
                           style={{
                             display: "block",
@@ -394,10 +400,11 @@ export default function Users() {
                             overflowY: "auto",
                           }}
                         >
-                          {filteredUsers
-                            .slice(firstIndex, lastIndex)
+                          {dataUsers
+                            // .slice(firstIndex, lastIndex)
                             .map((user, index) => (
                               <TableRow
+                              className="Tabla"
                                 key={index}
                                 style={{ userSelect: "none" }}
                               >

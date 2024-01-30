@@ -36,7 +36,6 @@ export default function DrawerNewUser({
 
     try {
       const data = await fetchUniversal("users/add", body);
-      console.log(data);
       onClose();
       setShowAlert(true);
       setIsAlertOpen(true)
@@ -51,7 +50,6 @@ export default function DrawerNewUser({
   };
 
   const closeAlert = () => {
-    console.log("Closing alert");
     setShowAlert(false);
     onClose();
   };
