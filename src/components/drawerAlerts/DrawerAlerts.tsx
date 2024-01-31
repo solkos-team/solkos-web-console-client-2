@@ -664,7 +664,7 @@ export default function DrawerA({
                       key={cooler.serial_number}
                       className="Tabla"
                       onClick={() => {
-                        navigate(`/coolerDetail/${cooler.serial_number}`);
+                        navigate(`/home/coolerDetail/${cooler.serial_number}`);
                       }}
                     >
                       <TableCell
@@ -831,7 +831,7 @@ export default function DrawerA({
                             height: "40px",
                           }}
                         >
-                          <Link to="/coolerDetail">
+                          <Link to="/home/coolerDetail">
                             <div
                               style={{
                                 color: "#3E83FF",
