@@ -14,7 +14,11 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Card, Table } from "@mantine/core";
-import { fetchDeleteUsers, fetchUniversal, fetchUniversalTables } from "../../../utils/apiUtils";
+import {
+  fetchDeleteUsers,
+  fetchUniversal,
+  fetchUniversalTables,
+} from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { UsersInterfaces } from "./UsersInterfaces";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
@@ -38,7 +42,7 @@ export default function Users() {
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
   const [alertStatus, setAlertStatus] = useState();
   const [userDelete, setUserDelete] = useState();
-  const [totalData, setTotalData] = useState<String | number>(0)
+  const [totalData, setTotalData] = useState<String | number>(0);
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -103,9 +107,9 @@ export default function Users() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("users", body, setIsLoading);
-      const datos = await data.json()
-      const totalData = data.headers.get('content-length')
-      setTotalData(Number(totalData) || 0)
+      const datos = await data.json();
+      const totalData = data.headers.get("content-length");
+      setTotalData(Number(totalData) || 0);
       setDataUsers(datos);
       setIsLoading(false);
     } catch (error) {
@@ -149,8 +153,8 @@ export default function Users() {
       console.error("Error", error);
     }
   };
-  dataUsers == undefined ? [] : dataUsers
-  totalData == undefined ? 0 : totalData
+  dataUsers == undefined ? [] : dataUsers;
+  totalData == undefined ? 0 : totalData;
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -258,10 +262,7 @@ export default function Users() {
                 Colaboradores
               </div>
               <div style={{ marginLeft: 480 }}>
-                <ExportToExcel
-                  datos={dataUsers}
-                  nombre={"Users"}
-                />
+                <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
               <Button style={{ background: "#ED5079" }} onClick={openDrawer2}>
                 Nuevo colaborador
@@ -404,7 +405,7 @@ export default function Users() {
                             // .slice(firstIndex, lastIndex)
                             .map((user, index) => (
                               <TableRow
-                              className="Tabla"
+                                className="Tabla"
                                 key={index}
                                 style={{ userSelect: "none" }}
                               >
@@ -558,6 +559,16 @@ export default function Users() {
           </div>
         </div>
       </div>
+      <DrawerNewUser
+        isOpen={isDrawerOpen2}
+        onClose={closeDrawer2}
+        reloadUsers={handleReloadUsers}
+        setIsAlertOpen={setIsAlertOpen}
+        setAlertStatus={setAlertStatus}
+        setIsDrawerOpen2={setIsDrawerOpen2}
+      >
+        {""}
+      </DrawerNewUser>
       {dataUsersEdit && (
         <DrawerUsers
           isOpen={isDrawerOpen}

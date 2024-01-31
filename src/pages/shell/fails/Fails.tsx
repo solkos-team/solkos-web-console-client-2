@@ -56,7 +56,7 @@ export default function Fails() {
   } | null>(null);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  console.log(coolersData);
+  // console.log(coolersData);
   return (
     <div>
       <PageFilter status={isLoading} />

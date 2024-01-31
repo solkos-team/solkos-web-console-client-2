@@ -13,14 +13,14 @@ export default function DrawerNewUser({
   children,
   setIsAlertOpen,
   setAlertStatus,
-  setIsDrawerOpen2
+  setIsDrawerOpen2,
 }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
-
+  const dto = useSelector((state: any) => state.organization);
   const dt = useSelector((state: any) => state.works);
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
@@ -28,7 +28,7 @@ export default function DrawerNewUser({
 
   const handleLogin = async () => {
     const body = {
-      customer: "KOF",
+      customer: dto,
       email: email,
       name: name,
       path: pathVerify(),
@@ -38,14 +38,14 @@ export default function DrawerNewUser({
       const data = await fetchUniversal("users/add", body);
       onClose();
       setShowAlert(true);
-      setIsAlertOpen(true)
-      setAlertStatus(true)
+      setIsAlertOpen(true);
+      setAlertStatus(true);
     } catch (error) {
-      setIsDrawerOpen2(false)
-      onClose()
-      setAlertStatus(false)
+      setIsDrawerOpen2(false);
+      onClose();
+      setAlertStatus(false);
       console.error("Error fetching :", error);
-      setIsAlertOpen(true)
+      setIsAlertOpen(true);
     }
   };
 
