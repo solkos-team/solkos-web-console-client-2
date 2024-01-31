@@ -9,6 +9,22 @@ import { fetchUniversal, fetchUniversalDetails } from "../../../utils/apiUtils";
 import { format } from "date-fns";
 import moment from "moment";
 import "moment/locale/es";
+moment.locale("es", {
+  months: [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ],
+});
 
 export default function CoolerDetail() {
   interface CoolerData {
@@ -285,6 +301,7 @@ export default function CoolerDetail() {
                   {coolersData?.cooler?.days_without_visit === null
                     ? "Sin registro"
                     : coolersData?.cooler?.days_without_visit +
+                      " " +
                       "días sin visita"}
                 </div>
               </div>
