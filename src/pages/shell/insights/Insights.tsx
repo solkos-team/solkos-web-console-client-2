@@ -173,7 +173,7 @@ export default function Insights() {
   const toggleShowAll3 = () => {
     setShowAll3(!showAll3);
   };
-
+sessionStorage.setItem('TtlCoolers',insightsData?.summary.coolers.toLocaleString())
   return (
     <div>
       <PageFilter status={isLoading} />

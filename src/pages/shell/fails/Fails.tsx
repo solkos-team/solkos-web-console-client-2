@@ -14,7 +14,7 @@ export default function Fails() {
   }
 
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-
+  const totalCoolers = sessionStorage.getItem('TtlCoolers')
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -56,7 +56,6 @@ export default function Fails() {
   } | null>(null);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  // console.log(coolersData);
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -296,7 +295,7 @@ export default function Fails() {
                             lineHeight: "normal",
                           }}
                         >
-                          de ----- enfriadores
+                          {`de ${totalCoolers?.toLocaleLowerCase()} enfriadores`}
                         </div>
                       </div>
                       {/* ***** */}
