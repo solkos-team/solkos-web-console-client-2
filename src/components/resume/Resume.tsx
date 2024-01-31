@@ -45,8 +45,6 @@ const Resume = ({ coolersData, setTab }) => {
 
   validarExistenciaImagen(urlImagen);
 
-  
-
   const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
     // Convertir las fechas a milisegundos
     const dateA = new Date(a.notified_at).getTime();
@@ -541,10 +539,11 @@ const Resume = ({ coolersData, setTab }) => {
                   >
                     {"("}{" "}
                     {coolersData?.cooler?.last_latitude === undefined ||
-                    coolersData?.cooler?.last_longitude === undefined
+                    coolersData?.cooler?.last_longitude === null
                       ? "Sin registro"
-                      : coolersData?.cooler?.last_latitude}{" "}
-                    {")"}
+                      : coolersData?.cooler?.last_latitude}
+                    {","}
+                    {coolersData?.cooler?.last_longitude} {")"}
                   </div>
                 </div>
                 <div
@@ -828,7 +827,8 @@ const Resume = ({ coolersData, setTab }) => {
             >
               {/* ORDEN */}
               <div>
-                {coolersData?.service_orders === null ? (
+                {coolersData?.service_orders === null ||
+                coolersData?.service_orders.length === 0 ? (
                   <>
                     <p style={{ marginLeft: 90, fontWeight: "bold" }}>
                       Sin ordenes de servicio
@@ -1071,7 +1071,10 @@ const Resume = ({ coolersData, setTab }) => {
                       lineHeight: "14px",
                     }}
                   >
-                    $-------
+                    {coolersData?.properties?.annual_decrement.value === null ||
+                    coolersData?.properties?.annual_decrement.value == undefined
+                      ? "Sin registro"
+                      : coolersData?.properties?.annual_decrement.value.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -1118,9 +1121,10 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_ownership_expense.value == undefined
+                  {coolersData?.properties?.total_ownership_expense.value ==
+                  undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_ownership_expense.value}`}
+                    : `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                 </div>
               </div>
               <div
@@ -1156,7 +1160,7 @@ const Resume = ({ coolersData, setTab }) => {
                 >
                   {coolersData?.properties?.sale_price.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.sale_price.value}`}
+                    : `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
                 </div>
               </div>
               <div
@@ -1190,9 +1194,10 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_expense_service.value == undefined
+                  {coolersData?.properties?.total_expense_service.value ==
+                  undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_expense_service.value}`}
+                    : `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
                 </div>
               </div>
             </div>
@@ -1289,7 +1294,8 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.energy_consumption.value == undefined
+                  {coolersData?.properties?.energy_consumption.value ==
+                  undefined
                     ? "Sin registro"
                     : `${coolersData?.properties?.energy_consumption.value}`}
                 </div>

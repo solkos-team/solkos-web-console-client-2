@@ -184,7 +184,10 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {'Sin registros'}
+                  {coolersData?.properties?.total_ownership_expense.value ==
+                  undefined
+                    ? "Sin registro"
+                    : `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                 </div>
                 <div
                   style={{
@@ -240,6 +243,7 @@ const EconomicDetail = ({ coolersData }) => {
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "normal",
+                    marginRight: 30,
                   }}
                 >
                   Precio de venta
@@ -293,9 +297,10 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_expense_service.value == undefined
+                  {coolersData?.properties?.total_expense_service.value ==
+                  undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_expense_service.value}`}
+                    : `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
                 </div>
               </div>
             </div>
@@ -378,7 +383,10 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "normal",
                     }}
                   >
-                    {'Sin registro'}
+                    {coolersData?.properties?.present_value_of_depreciation
+                      .value == undefined
+                      ? "Sin registro"
+                      : `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString()}`}
                   </div>
                   <div
                     style={{
@@ -427,9 +435,10 @@ const EconomicDetail = ({ coolersData }) => {
                       lineHeight: "14px",
                     }}
                   >
-                    {coolersData?.properties?.present_value_of_depreciation.value == undefined
+                    {coolersData?.properties?.annual_decrement.value ==
+                    undefined
                       ? "Sin registro"
-                      : `${coolersData?.properties?.present_value_of_depreciation.value}`}
+                      : `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}
                   </div>
                   <div
                     style={{
@@ -503,7 +512,8 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.year_of_production.value == undefined
+                  {coolersData?.properties?.year_of_production.value ==
+                  undefined
                     ? "Sin registro"
                     : `${coolersData?.properties?.year_of_production.value}`}
                 </div>
@@ -538,9 +548,9 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.cooler?.customer === "HEINEKEN"
-                    ? "5 años"
-                    : "10 años"}
+                  {coolersData?.cooler?.customer === "KOF"
+                    ? "10 años"
+                    : "5 años"}
                 </div>
               </div>
             </div>
@@ -825,7 +835,8 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "normal",
                 }}
               >
-                {coolersData?.properties?.total_expense_service.value == undefined
+                {coolersData?.properties?.total_expense_service.value ==
+                undefined
                   ? "Sin registro"
                   : `${coolersData?.properties?.total_expense_service.value}`}
               </div>
@@ -875,9 +886,9 @@ const EconomicDetail = ({ coolersData }) => {
                 }}
               >
                 (+ $
-                {coolersData?.properties?.total_expense_service.value == undefined
+                {coolersData?.properties?.annual_decrement.value == undefined
                   ? "Sin registro"
-                  : `${coolersData?.properties?.total_expense_service.value}`}
+                  : `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}
                 )
               </div>
               <div
@@ -998,7 +1009,8 @@ const EconomicDetail = ({ coolersData }) => {
             >
               {/* ORDEN */}
               <div>
-                {coolersData?.service_orders === null ? (
+                {coolersData?.service_orders === null ||
+                coolersData?.service_orders.length === 0 ? (
                   <>
                     <p style={{ marginLeft: 90, fontWeight: "bold" }}>
                       Sin ordenes de movimiento
@@ -1206,7 +1218,8 @@ const EconomicDetail = ({ coolersData }) => {
             >
               {/* ORDEN */}
               <div>
-                {coolersData?.service_orders === null ? (
+                {coolersData?.service_orders === null ||
+                coolersData?.service_orders.length === 0 ? (
                   <>
                     <p style={{ marginLeft: 90, fontWeight: "bold" }}>
                       Sin ordenes de servicio

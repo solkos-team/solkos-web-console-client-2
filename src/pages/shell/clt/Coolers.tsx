@@ -8,7 +8,7 @@ import {
   fetchCoolers,
   fetchCoolerDetails,
   fetchUniversal,
-  fetchUniversalTables
+  fetchUniversalTables,
 } from "../../../utils/apiUtils";
 import {
   TableBody,
@@ -46,7 +46,7 @@ export default function Coolers() {
   const [isLoading, setIsLoading] = useState(true); // Added loading state
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
-  const [totalData, setTotalData] = useState<String | number>(0)
+  const [totalData, setTotalData] = useState<String | number>(0);
   const navigate = useNavigate();
   // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
@@ -71,11 +71,11 @@ export default function Coolers() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const handleKeyDown = event => {
-    if (event.key === 'Enter') {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
       event.preventDefault();
-      setCurrentPage(1)
-      fetchData()
+      setCurrentPage(1);
+      fetchData();
     }
   };
   const body = {
@@ -85,14 +85,15 @@ export default function Coolers() {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
-    filter_by : searchValue
+    filter_by: searchValue,
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversalTables("coolers", body, setIsLoading)
-      const datos = await data.json()
-      const totalData = data.headers.get('content-length')
-      setTotalData(Number(totalData) || 0)
+      const data = await fetchUniversalTables("coolers", body, setIsLoading);
+      const datos = await data.json();
+      console.log(datos);
+      const totalData = data.headers.get("content-length");
+      setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
       setIsLoading(false);
     } catch (error) {
@@ -119,8 +120,8 @@ export default function Coolers() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-  coolersData == undefined ? [] : coolersData
-  totalData == undefined ? 0 : totalData
+  coolersData == undefined ? [] : coolersData;
+  totalData == undefined ? 0 : totalData;
   return (
     <div>
       <section>
@@ -213,7 +214,7 @@ export default function Coolers() {
               >
                 <TextInput
                   value={searchValue}
-                  onChange={event => handleSearchChange(event)}
+                  onChange={(event) => handleSearchChange(event)}
                   onKeyDown={handleKeyDown}
                   type="text"
                   placeholder="Busca por Id Coolector / Mac"
@@ -357,237 +358,238 @@ export default function Coolers() {
                       )}
                       {!isLoading && (
                         <>
-                          {coolersData == undefined ? [] :
-                            coolersData ? (
-                              <TableBody
-                                style={{
-                                  display: "block",
-                                  height: "450px",
-                                  minWidth: "900px",
-                                  overflowY: "auto",
-                                }}
-                              >
-                                {coolersData
-                                  // .slice(firstIndex, lastIndex)
-                                  .map((cooler, index) => (
-                                    <TableRow
-                                      key={index}
-                                      className="Tabla"
-                                      onClick={() => {
-                                        navigate(
-                                          `/home/coolerDetail/${cooler.serial_number}`
-                                        );                                        
+                          {coolersData == undefined ? (
+                            []
+                          ) : coolersData ? (
+                            <TableBody
+                              style={{
+                                display: "block",
+                                height: "450px",
+                                minWidth: "900px",
+                                overflowY: "auto",
+                              }}
+                            >
+                              {coolersData
+                                // .slice(firstIndex, lastIndex)
+                                .map((cooler, index) => (
+                                  <TableRow
+                                    key={index}
+                                    className="Tabla"
+                                    onClick={() => {
+                                      navigate(
+                                        `/home/coolerDetail/${cooler.serial_number}`
+                                      );
+                                    }}
+                                  >
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "30px",
+                                        textAlign: "left",
+                                        width: "150px",
                                       }}
                                     >
-                                      <TableCell
-                                        style={{
-                                          paddingRight: "30px",
-                                          textAlign: "left",
-                                          width: "150px",
-                                        }}
-                                      >
-                                        {cooler.status == undefined ||
-                                          cooler.status == "" ? (
-                                          "Sin registro"
-                                        ) : (
-                                          <>
+                                      {cooler.status == undefined ||
+                                      cooler.status == "" ? (
+                                        "Sin registro"
+                                      ) : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              // justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              background: "#B6FEDB",
+                                            }}
+                                          >
                                             <div
                                               style={{
-                                                display: "flex",
-                                                padding: "4px",
-                                                // justifyContent: "center",
-                                                alignItems: "center",
-                                                gap: "4px",
-                                                borderRadius: "2px",
-                                                background: "#B6FEDB",
+                                                width: "4px",
+                                                height: "4px",
+                                                borderRadius: "5px",
+                                                background: "#31B648",
                                               }}
-                                            >
-                                              <div
-                                                style={{
-                                                  width: "4px",
-                                                  height: "4px",
-                                                  borderRadius: "5px",
-                                                  background: "#31B648",
-                                                }}
-                                              ></div>
-                                              <div
-                                                style={{
-                                                  color: "#028053",
-                                                  // fontFamily: "Space Mono",
-                                                  fontSize: "12px",
-                                                  fontStyle: "normal",
-                                                  fontWeight: 400,
-                                                  lineHeight: "14px",
-                                                }}
-                                              >
-                                                {cooler.status}
-                                              </div>
-                                            </div>
-                                          </>
-                                        )}
-                                      </TableCell>
-                                      <TableCell
-                                        style={{
-                                          paddingRight: "30px",
-                                          fontSize: "15px",
-                                          textAlign: "left",
-                                          width: "150px",
-                                        }}
-                                      >
-                                        {cooler.serial_number === ""
-                                          ? "Sin registro"
-                                          : cooler.serial_number}
-                                      </TableCell>
-                                      <TableCell
-                                        style={{
-                                          paddingRight: "50px",
-                                          fontSize: "15px",
-                                          width: "180px",
-                                          textAlign: "left",
-                                        }}
-                                      >
-                                        {cooler.model_id === ""
-                                          ? "Sin registro"
-                                          : cooler.model_id}
-                                      </TableCell>
-                                      <TableCell
-                                        style={{
-                                          paddingRight: "80px",
-                                          fontSize: "15px",
-                                          width: "150px",
-                                          textAlign: "left",
-                                        }}
-                                      >
-                                        {cooler.last_read == undefined ||
-                                          cooler.last_read == "" ? (
-                                          "Sin registro"
-                                        ) : (
-                                          <>
+                                            ></div>
                                             <div
                                               style={{
-                                                display: "flex",
-                                                padding: "4px",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                gap: "4px",
-                                                borderRadius: "2px",
-                                                background: "#D4DAE3",
-                                              }}
-                                            >
-                                              <div
-                                                style={{
-                                                  color: "#313A49",
-                                                  // fontFamily: "Space Mono",
-                                                  fontSize: "12px",
-                                                  fontStyle: "normal",
-                                                  fontWeight: 400,
-                                                  lineHeight: "14px",
-                                                }}
-                                              >
-                                                {cooler.days_without_visit} DÍAS
-                                              </div>
-                                            </div>
-                                          </>
-                                        )}
-                                      </TableCell>
-                                      <TableCell
-                                        style={{
-                                          paddingRight: "60px",
-                                          textAlign: "left",
-                                          width: "150px",
-                                        }}
-                                      >
-                                        {cooler.priority_status == undefined ||
-                                          cooler.priority_status == "" ? (
-                                          "Sin registro"
-                                        ) : (
-                                          <>
-                                            <div
-                                              style={{
-                                                display: "flex",
-                                                padding: "4px",
-                                                justifyContent: "center",
-                                                alignItems: "center",
-                                                gap: "4px",
-                                                borderRadius: "2px",
-                                                border: "1.5px solid #0F9F67",
-                                                background: "#FFF",
-                                              }}
-                                            >
-                                              <div
-                                                style={{
-                                                  color: "#0F9F67",
-                                                  // fontFamily: "DM Sans",
-                                                  fontSize: "12px",
-                                                  fontStyle: "normal",
-                                                  fontWeight: 600,
-                                                  lineHeight: "14px",
-                                                }}
-                                              >
-                                                {cooler.priority_status}
-                                              </div>
-                                            </div>
-                                          </>
-                                        )}
-                                      </TableCell>
-                                      <TableCell
-                                        style={{
-                                          paddingRight: "70px",
-                                          textAlign: "left",
-                                          width: "150px",
-                                        }}
-                                      >
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            justifyContent: "flex-end",
-                                            alignItems: "center",
-                                            gap: "4px",
-                                            flex: 100,
-                                            height: "40px",
-                                          }}
-                                        >
-                                          <Link to="/coolerDetail">
-                                            <div
-                                              style={{
-                                                color: "#3E83FF",
-                                                fontSize: "14px",
+                                                color: "#028053",
+                                                // fontFamily: "Space Mono",
+                                                fontSize: "12px",
                                                 fontStyle: "normal",
                                                 fontWeight: 400,
-                                                lineHeight: "20px",
-                                                display: "flex",
-                                                marginRight: "6px",
+                                                lineHeight: "14px",
                                               }}
                                             >
-                                              Ver más{" "}
-                                              <IconArrowRight
-                                                style={{
-                                                  color: "#3E83FF",
-                                                  width: "16px",
-                                                  height: "16px",
-                                                  marginTop: "2px",
-                                                }}
-                                              />
+                                              {cooler.status}
                                             </div>
-                                          </Link>
-                                        </div>
-                                      </TableCell>
-                                    </TableRow>
-                                  ))}
-                              </TableBody>
-                            ) : (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  fontWeight: "bold",
-                                  fontSize: "18px",
-                                }}
-                              >
-                                <p>No hay datos de coolers disponibles.</p>
-                              </div>
-                            )}
+                                          </div>
+                                        </>
+                                      )}
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "30px",
+                                        fontSize: "15px",
+                                        textAlign: "left",
+                                        width: "150px",
+                                      }}
+                                    >
+                                      {cooler.serial_number === ""
+                                        ? "Sin registro"
+                                        : cooler.serial_number}
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "50px",
+                                        fontSize: "15px",
+                                        width: "180px",
+                                        textAlign: "left",
+                                      }}
+                                    >
+                                      {cooler.model_id === ""
+                                        ? "Sin registro"
+                                        : cooler.model_id}
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "80px",
+                                        fontSize: "15px",
+                                        width: "150px",
+                                        textAlign: "left",
+                                      }}
+                                    >
+                                      {cooler.last_read == undefined ||
+                                      cooler.last_read == "" ? (
+                                        "Sin registro"
+                                      ) : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              background: "#D4DAE3",
+                                            }}
+                                          >
+                                            <div
+                                              style={{
+                                                color: "#313A49",
+                                                // fontFamily: "Space Mono",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 400,
+                                                lineHeight: "14px",
+                                              }}
+                                            >
+                                              {cooler.days_without_visit} DÍAS
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "60px",
+                                        textAlign: "left",
+                                        width: "150px",
+                                      }}
+                                    >
+                                      {cooler.priority_status == undefined ||
+                                      cooler.priority_status == "" ? (
+                                        "Sin registro"
+                                      ) : (
+                                        <>
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              padding: "4px",
+                                              justifyContent: "center",
+                                              alignItems: "center",
+                                              gap: "4px",
+                                              borderRadius: "2px",
+                                              border: "1.5px solid #0F9F67",
+                                              background: "#FFF",
+                                            }}
+                                          >
+                                            <div
+                                              style={{
+                                                color: "#0F9F67",
+                                                // fontFamily: "DM Sans",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 600,
+                                                lineHeight: "14px",
+                                              }}
+                                            >
+                                              {cooler.priority_status}
+                                            </div>
+                                          </div>
+                                        </>
+                                      )}
+                                    </TableCell>
+                                    <TableCell
+                                      style={{
+                                        paddingRight: "70px",
+                                        textAlign: "left",
+                                        width: "150px",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "flex-end",
+                                          alignItems: "center",
+                                          gap: "4px",
+                                          flex: 100,
+                                          height: "40px",
+                                        }}
+                                      >
+                                        <Link to="/coolerDetail">
+                                          <div
+                                            style={{
+                                              color: "#3E83FF",
+                                              fontSize: "14px",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                              lineHeight: "20px",
+                                              display: "flex",
+                                              marginRight: "6px",
+                                            }}
+                                          >
+                                            Ver más{" "}
+                                            <IconArrowRight
+                                              style={{
+                                                color: "#3E83FF",
+                                                width: "16px",
+                                                height: "16px",
+                                                marginTop: "2px",
+                                              }}
+                                            />
+                                          </div>
+                                        </Link>
+                                      </div>
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                            </TableBody>
+                          ) : (
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                fontWeight: "bold",
+                                fontSize: "18px",
+                              }}
+                            >
+                              <p>No hay datos de coolers disponibles.</p>
+                            </div>
+                          )}
                         </>
                       )}
                     </Table>

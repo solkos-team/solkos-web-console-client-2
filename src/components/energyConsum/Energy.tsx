@@ -129,7 +129,9 @@ const Energy = ({ coolersData }) => {
             >
               {coolersData?.properties?.energy_cost.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.energy_cost.value}`}
+                : "$" +
+                  " " +
+                  `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
             </div>
           </div>
           <div
@@ -165,7 +167,11 @@ const Energy = ({ coolersData }) => {
             >
               {coolersData?.properties?.energy_consumption.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.energy_consumption.value}`}
+                : `${
+                    coolersData?.properties?.energy_consumption.value +
+                    " " +
+                    "KW/h"
+                  }`}
             </div>
           </div>
           <div
@@ -199,9 +205,12 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.energy_consumption.value == undefined
+              {coolersData?.properties?.power_consumption_reference.value ===
+              undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.energy_consumption.value}`}
+                : coolersData?.properties?.power_consumption_reference.value +
+                  " " +
+                  "KW/h"}
             </div>
           </div>
           <div
@@ -237,7 +246,11 @@ const Energy = ({ coolersData }) => {
             >
               {coolersData?.properties?.average_C02_emissions.value == undefined
                 ? "Sin registro"
-                : `${coolersData?.properties?.average_C02_emissions.value}`}
+                : `${
+                    coolersData?.properties?.average_C02_emissions.value +
+                    " " +
+                    "Kg/día"
+                  }`}
             </div>
           </div>
         </div>
