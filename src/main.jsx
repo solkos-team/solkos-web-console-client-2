@@ -29,56 +29,36 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ModalsProvider>
           <NotificationsProvider>
             <Router>
-              {localStorage.getItem("USER") === "Call Center" ? (
-                <>
-                  <Routes>
-                    <Route path="" element={<Login />}></Route>
-                    <Route path="/home" element={<App />}>
-                      <Route index path="/home" element={<Coolers />} />
-                      <Route
-                        path="/home/coolerDetail/:serial_number"
-                        element={<CoolerDetail />}
-                      />
-                      {/* Login */}
-                      <Route path="/home/login" element={<Login />} />
-                      <Route path="/home/grafica" element={<MapInsights />} />
-                    </Route>
-                  </Routes>
-                </>
-              ) : (
-                <>
-                  <Routes>
-                    <Route path="" element={<Login />}></Route>
-                    <Route path="/home" element={<App />}>
-                      <Route index path="/home" element={<Insights />} />
-                      {/* Insights */}
-                      <Route path="/home/insights" element={<Insights />} />
-                      {/* Alertas */}
-                      <Route path="/home/alerts" element={<Alerts />} />
-                      {/* Fallas */}
-                      <Route path="/home/fails" element={<Fails />} />
-                      {/* Indicadores */}
-                      <Route path="/home/indicator" element={<Indicator />} />
-                      {/* Cooler life tracking */}
-                      <Route path="/home/clt" element={<Coolers />} />
-                      {/* Cooler detail */}
-                      <Route
-                        path="/home/coolerDetail/:serial_number"
-                        element={<CoolerDetail />}
-                      />
-                      {/* Puntos de venta */}
-                      <Route path="/home/outlets" element={<Outlets />} />
-                      {/* Tableros */}
-                      <Route path="/home/panel" element={<Panel />} />
-                      {/* colaboradores */}
-                      <Route path="/home/users" element={<Users />} />
-                      {/* Login */}
-                      <Route path="/home/login" element={<Login />} />
-                      <Route path="/home/grafica" element={<MapInsights />} />
-                    </Route>
-                  </Routes>
-                </>
-              )}
+              <Routes>
+                <Route path="" element={<Login />}></Route>
+                <Route path="/home" element={<App />}>
+                  <Route index path="/home" element={<Insights />} />
+                  {/* Insights */}
+                  <Route path="/home/insights" element={<Insights />} />
+                  {/* Alertas */}
+                  <Route path="/home/alerts" element={<Alerts />} />
+                  {/* Fallas */}
+                  <Route path="/home/fails" element={<Fails />} />
+                  {/* Indicadores */}
+                  <Route path="/home/indicator" element={<Indicator />} />
+                  {/* Cooler life tracking */}
+                  <Route path="/home/clt" element={<Coolers />} />
+                  {/* Cooler detail */}
+                  <Route
+                    path="/home/coolerDetail/:serial_number"
+                    element={<CoolerDetail />}
+                  />
+                  {/* Puntos de venta */}
+                  <Route path="/home/outlets" element={<Outlets />} />
+                  {/* Tableros */}
+                  <Route path="/home/panel" element={<Panel />} />
+                  {/* colaboradores */}
+                  <Route path="/home/users" element={<Users />} />
+                  {/* Login */}
+                  <Route path="/home/login" element={<Login />} />
+                  <Route path="/home/grafica" element={<MapInsights />} />
+                </Route>
+              </Routes>
             </Router>
           </NotificationsProvider>
         </ModalsProvider>
