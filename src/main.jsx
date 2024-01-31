@@ -29,62 +29,56 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ModalsProvider>
           <NotificationsProvider>
             <Router>
-              {/* <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/recover" element={<RecoverPassword />} />
-                <Route path="/newPassword" element={<NewPassword />}></Route>
-                <Route path="" element={<App />}>
-                  <Route index element={<Insights />} />
-                  <Route path="/alerts" element={<Alerts />} />
-                  <Route path="/clt" element={<Coolers />} />
-                  <Route path="/coolerDetail" element={<CoolerDetail />} />
-                  <Route
-                    path="/coolerDetail/:serial_number"
-                    element={<CoolerDetail />}
-                  />
-                  <Route path="/insights" element={<Insights />} />
-                  <Route path="/fails" element={<Fails />} />
-                  <Route path="/indicator" element={<Indicator />} />
-                  <Route path="/outlets" element={<Outlets />} />
-                  <Route path="/panel" element={<Panel />} />
-                  <Route path="/users" element={<Users />} />
-                </Route>
-              </Routes> */}
-              <Routes>
-                <Route path="" element={<Login />}>
-                  {/* <Route path="" element={} />
-                  <Route path="" element={} />
-                  <Route path="" element={} />
-                <Route path="" element={} /> */}
-                </Route>
-                <Route path="/home" element={<App />} >
-                <Route index path="/home" element={<Insights />} />
-                {/* Insights */}
-                <Route path="/home/insights" element={<Insights />} />
-                {/* Alertas */}
-                <Route path="/home/alerts" element={<Alerts />} />
-                {/* Fallas */}
-                <Route path="/home/fails" element={<Fails />} />
-                {/* Indicadores */}
-                <Route  path="/home/indicator" element={<Indicator />} />
-                {/* Cooler life tracking */}
-                <Route path="/home/clt" element={<Coolers />}/>
-                {/* Cooler detail */}
-                <Route
-                    path="/home/coolerDetail/:serial_number"
-                    element={<CoolerDetail />}
-                  />
-                {/* Puntos de venta */}
-                <Route path="/home/outlets" element={<Outlets />} />
-                {/* Tableros */}
-                <Route path="/home/panel" element={<Panel />} />
-                {/* colaboradores */}
-                <Route path="/home/users" element={<Users />} />
-                {/* Login */}
-                <Route  path="/home/login" element={<Login />}/>
-                <Route  path="/home/grafica" element={<MapInsights />}/>
-                </Route>
-              </Routes>
+              {localStorage.getItem("USER") === "Call Center" ? (
+                <>
+                  <Routes>
+                    <Route path="" element={<Login />}></Route>
+                    <Route path="/home" element={<App />}>
+                      <Route index path="/home" element={<Coolers />} />
+                      <Route
+                        path="/home/coolerDetail/:serial_number"
+                        element={<CoolerDetail />}
+                      />
+                      {/* Login */}
+                      <Route path="/home/login" element={<Login />} />
+                      <Route path="/home/grafica" element={<MapInsights />} />
+                    </Route>
+                  </Routes>
+                </>
+              ) : (
+                <>
+                  <Routes>
+                    <Route path="" element={<Login />}></Route>
+                    <Route path="/home" element={<App />}>
+                      <Route index path="/home" element={<Insights />} />
+                      {/* Insights */}
+                      <Route path="/home/insights" element={<Insights />} />
+                      {/* Alertas */}
+                      <Route path="/home/alerts" element={<Alerts />} />
+                      {/* Fallas */}
+                      <Route path="/home/fails" element={<Fails />} />
+                      {/* Indicadores */}
+                      <Route path="/home/indicator" element={<Indicator />} />
+                      {/* Cooler life tracking */}
+                      <Route path="/home/clt" element={<Coolers />} />
+                      {/* Cooler detail */}
+                      <Route
+                        path="/home/coolerDetail/:serial_number"
+                        element={<CoolerDetail />}
+                      />
+                      {/* Puntos de venta */}
+                      <Route path="/home/outlets" element={<Outlets />} />
+                      {/* Tableros */}
+                      <Route path="/home/panel" element={<Panel />} />
+                      {/* colaboradores */}
+                      <Route path="/home/users" element={<Users />} />
+                      {/* Login */}
+                      <Route path="/home/login" element={<Login />} />
+                      <Route path="/home/grafica" element={<MapInsights />} />
+                    </Route>
+                  </Routes>
+                </>
+              )}
             </Router>
           </NotificationsProvider>
         </ModalsProvider>
