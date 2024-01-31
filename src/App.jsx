@@ -42,6 +42,7 @@ dayjs.extend(utc);
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef("icon");
+
   return {
     header: {
       overflowY: "hidden",
@@ -182,6 +183,14 @@ const routes = [
   },
 ];
 
+const routes2 = [
+  {
+    link: "/home/clt",
+    label: "Cooler Life Tracking",
+    icon: <img src={clt} />,
+  },
+];
+
 function App() {
   const Name = localStorage.getItem("USER") || "";
   const { classes, cx } = useStyles();
@@ -210,61 +219,125 @@ function App() {
       dispatch(addOrg());
     }
   }, [location.pathname]);
-  const links = routes.map((item) => (
-    <div key={item.label}>
-      {item.links ? (
-        <div style={{ whiteSpace: "nowrap" }}>
-          <div
-            onClick={() => {
-              setCoolerInsightsOpen(!coolerInsightsOpen);
-            }}
-            className={cx(classes.link, {
-              [classes.linkActive]: coolerInsightsOpen,
-            })}
-          >
-            {item.icon}
-            <span style={{ marginLeft: 10 }}>{item.label}</span>
-            {coolerInsightsOpen ? (
-              <img src={arrow_1} style={{ marginLeft: 40 }} />
+  const links =
+    localStorage.getItem("USER") === "Call Center" ? (
+      <>
+        {routes2.map((item) => (
+          <div key={item.label}>
+            {item.links ? (
+              <div style={{ whiteSpace: "nowrap" }}>
+                <div
+                  onClick={() => {
+                    setCoolerInsightsOpen(!coolerInsightsOpen);
+                  }}
+                  className={cx(classes.link, {
+                    [classes.linkActive]: coolerInsightsOpen,
+                  })}
+                >
+                  {item.icon}
+                  <span style={{ marginLeft: 10 }}>{item.label}</span>
+                  {coolerInsightsOpen ? (
+                    <img src={arrow_1} style={{ marginLeft: 40 }} />
+                  ) : (
+                    <img src={arrow_2} style={{ marginLeft: 40 }} />
+                  )}
+                </div>
+
+                {coolerInsightsOpen && (
+                  <div style={{ marginLeft: 20 }}>
+                    {item.links.map((option) => (
+                      <NavLink
+                        to={option.link}
+                        className={classes.link}
+                        key={option.label}
+                        activate={true.toString()} // Convert boolean to string
+                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                      >
+                        {option.icon && option.icon}{" "}
+                        <span style={{ marginLeft: 10 }}>{option.label}</span>
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
             ) : (
-              <img src={arrow_2} style={{ marginLeft: 40 }} />
+              <NavLink
+                className={({ isActive }) =>
+                  cx(classes.link, { [classes.linkActive]: isActive })
+                }
+                to={item.link || "/"}
+                onClick={() => {
+                  setActive(item.label);
+                  closeCoolerInsights();
+                }}
+              >
+                {item.icon}
+                <span style={{ marginLeft: 10 }}>{item.label}</span>
+              </NavLink>
             )}
           </div>
-
-          {coolerInsightsOpen && (
-            <div style={{ marginLeft: 20 }}>
-              {item.links.map((option) => (
-                <NavLink
-                  to={option.link}
-                  className={classes.link}
-                  key={option.label}
-                  activate={true.toString()} // Convert boolean to string
-                  onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+        ))}
+      </>
+    ) : (
+      <>
+        {routes.map((item) => (
+          <div key={item.label}>
+            {item.links ? (
+              <div style={{ whiteSpace: "nowrap" }}>
+                <div
+                  onClick={() => {
+                    setCoolerInsightsOpen(!coolerInsightsOpen);
+                  }}
+                  className={cx(classes.link, {
+                    [classes.linkActive]: coolerInsightsOpen,
+                  })}
                 >
-                  {option.icon && option.icon}{" "}
-                  <span style={{ marginLeft: 10 }}>{option.label}</span>
-                </NavLink>
-              ))}
-            </div>
-          )}
-        </div>
-      ) : (
-        <NavLink
-          className={({ isActive }) =>
-            cx(classes.link, { [classes.linkActive]: isActive })
-          }
-          to={item.link || "/"}
-          onClick={() => {
-            setActive(item.label);
-            closeCoolerInsights();
-          }}
-        >
-          {item.icon}
-          <span style={{ marginLeft: 10 }}>{item.label}</span>
-        </NavLink>
-      )}
-    </div>
-  ));
+                  {item.icon}
+                  <span style={{ marginLeft: 10 }}>{item.label}</span>
+                  {coolerInsightsOpen ? (
+                    <img src={arrow_1} style={{ marginLeft: 40 }} />
+                  ) : (
+                    <img src={arrow_2} style={{ marginLeft: 40 }} />
+                  )}
+                </div>
+
+                {coolerInsightsOpen && (
+                  <div style={{ marginLeft: 20 }}>
+                    {item.links.map((option) => (
+                      <NavLink
+                        to={option.link}
+                        className={classes.link}
+                        key={option.label}
+                        activate={true.toString()} // Convert boolean to string
+                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                      >
+                        {option.icon && option.icon}{" "}
+                        <span style={{ marginLeft: 10 }}>{option.label}</span>
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink
+                className={({ isActive }) =>
+                  cx(classes.link, { [classes.linkActive]: isActive })
+                }
+                to={item.link || "/"}
+                onClick={() => {
+                  setActive(item.label);
+                  closeCoolerInsights();
+                }}
+              >
+                {item.icon}
+                <span style={{ marginLeft: 10 }}>{item.label}</span>
+              </NavLink>
+            )}
+          </div>
+        ))}
+      </>
+    );
+
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);

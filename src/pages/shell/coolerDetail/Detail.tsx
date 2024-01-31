@@ -75,6 +75,7 @@ export default function CoolerDetail() {
       // const data = await fetchCoolersFromAPI(serial_number);
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -87,10 +88,10 @@ export default function CoolerDetail() {
 
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
-  
+
   return (
     <div>
-      <PageFilter path="clt" disabledPath={true}/>
+      <PageFilter path="clt" disabledPath={true} />
       <br />
       <div>
         {/* *********************************************************** */}

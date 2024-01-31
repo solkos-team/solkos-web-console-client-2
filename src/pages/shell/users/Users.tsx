@@ -130,14 +130,7 @@ export default function Users() {
   const closeAlert = () => {
     setIsAlertOpen(false);
   };
-  const alertDelete = (
-    <>
-      <Alert variant="light" color="indigo" title="Alert title">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. At officiis,
-        quae tempore necessitatibus placeat saepe.
-      </Alert>
-    </>
-  );
+
   const [isDelete, setIsDelete] = useState(false);
   const [userDelteID, setUserDelteID] = useState();
   const deleteUserDrawer = async (id) => {
