@@ -51,7 +51,12 @@ export const Login = () => {
     e.preventDefault();
     handleLogin();
   };
-
+  const handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleLogin()
+    }
+  };
   return (
     // General
     <>
@@ -242,6 +247,7 @@ export const Login = () => {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={handleKeyDown}
                   style={{
                     color: "#000",
                     fontSize: "14px",
