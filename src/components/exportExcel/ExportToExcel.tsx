@@ -4,6 +4,7 @@ import { IconDownload } from "@tabler/icons-react";
 import * as XLSX from "xlsx/xlsx";
 
 export const ExportToExcel = (props) => {
+  console.log(props.datos)
   const exportToExcel = () => {
     let wb = XLSX.utils.book_new();
     let ws = XLSX.utils.json_to_sheet(props.datos);
@@ -54,13 +55,14 @@ export const ExportToExcel = (props) => {
   return (
     <Group>
       <Button
+      disabled={props.datos == null || props.datos.length == 0 || props.datos == undefined ? true : false}      
         style={{
           color: "#3E83FF",
           fontSize: "18px",
           fontStyle: "normal",
           fontWeight: 300,
           lineHeight: "100%",
-          backgroundColor: "transparent",
+          backgroundColor: "transparent",          
         }}
         onClick={exportToExcel}
       >
@@ -70,3 +72,4 @@ export const ExportToExcel = (props) => {
     </Group>
   );
 };
+
