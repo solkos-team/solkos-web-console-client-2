@@ -20,7 +20,7 @@ export const Login = () => {
     localStorage.setItem("ORG", Customer);
     localStorage.setItem("RO0T", JSON.stringify(Path));
     localStorage.setItem("USER", Name);
-    navigate("/home");
+    String(Name) == 'Call Center' ? navigate("/homeCallCenter") : navigate("/home")
   };
   const body = {
     email: email,

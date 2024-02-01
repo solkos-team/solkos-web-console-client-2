@@ -97,7 +97,7 @@ export default function (props) {
     }
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "x") {
-        setMostrarVentanaEmergente(true);
+        // setMostrarVentanaEmergente(true);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -222,7 +222,11 @@ export default function (props) {
             // visibility: props.status == "false" ? "hidden" : "visible",
           }}
           onClick={() => {
-            navigate(`/home/` + getPath(props));
+            localStorage.getItem("USER") == 'Call Center'
+            ?
+            navigate(`/homeCallCenter/` + getPath(props))
+            :
+            navigate(`/home/` + getPath(props))
           }}
         >
           <IconArrowNarrowLeft />

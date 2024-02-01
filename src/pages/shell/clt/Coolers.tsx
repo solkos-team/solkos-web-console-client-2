@@ -86,7 +86,6 @@ export default function Coolers() {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
       const datos = await data.json();
-      console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
@@ -115,10 +114,11 @@ export default function Coolers() {
   }, []);
   coolersData == undefined ? [] : coolersData;
   totalData == undefined ? 0 : totalData;
+  
   return (
     <div>
       <section>
-        <PageFilter status={isLoading} />
+        <PageFilter status={isLoading} />        
       </section>
       <br></br>
       <div
@@ -368,10 +368,16 @@ export default function Coolers() {
                                   <TableRow
                                     key={index}
                                     className="Tabla"
-                                    onClick={() => {
+                                    onClick={() => {     
+                                      localStorage.getItem("USER") == 'Call Center' 
+                                      ?                                 
+                                      navigate(
+                                        `/homeCallCenter/coolerDetail/${cooler.serial_number}`
+                                      )
+                                      :
                                       navigate(
                                         `/home/coolerDetail/${cooler.serial_number}`
-                                      );
+                                      )
                                     }}
                                   >
                                     <TableCell

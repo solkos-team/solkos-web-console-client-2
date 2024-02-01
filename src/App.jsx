@@ -185,7 +185,7 @@ const routes = [
 
 const routes2 = [
   {
-    link: "/home/clt",
+    link: "/homeCallCenter",
     label: "Cooler Life Tracking",
     icon: <img src={clt} />,
   },

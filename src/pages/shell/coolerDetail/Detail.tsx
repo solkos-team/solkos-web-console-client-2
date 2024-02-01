@@ -129,7 +129,12 @@ export default function CoolerDetail() {
 
   return (
     <div>
-      <PageFilter path="clt" disabledPath={true} />
+      {
+        localStorage.getItem("USER") == 'Call Center' 
+        ? <PageFilter path="" disabledPath={true} />
+        : <PageFilter path="clt" disabledPath={true} />
+      }
+      
       <br />
       <div>
         {/* *********************************************************** */}
