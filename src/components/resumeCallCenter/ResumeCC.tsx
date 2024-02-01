@@ -46,11 +46,8 @@ const ResumeCC = ({ coolersData, setTab }) => {
   validarExistenciaImagen(urlImagen);
 
   const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
-    // Convertir las fechas a milisegundos
     const dateA = new Date(a.notified_at).getTime();
     const dateB = new Date(b.notified_at).getTime();
-
-    // Comparar las fechas (de la más reciente a la más antigua)
     return dateB - dateA;
   });
 

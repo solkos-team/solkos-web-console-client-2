@@ -45,6 +45,7 @@ export default function CoolerDetail() {
       energy_consumption: string;
       status: string;
       asset_number: string;
+      channel: string;
     };
     properties: {
       description: string;
@@ -52,7 +53,7 @@ export default function CoolerDetail() {
       value: number;
     };
     service_orders?: Array<{ description: string }>;
-    tracking?: Array<{ class: string; algorithm: string }>;
+    tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
   }
 
   const b = "../../sampleData/devices.png";
@@ -86,6 +87,25 @@ export default function CoolerDetail() {
     } catch (error) {
       throw error;
     }
+  };
+  console.log(coolersData);
+
+  const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
+    const dateA = new Date(a.notified_at).getTime();
+    const dateB = new Date(b.notified_at).getTime();
+    return dateB - dateA;
+  });
+
+  const formatCreatedAt = (createdAt) => {
+    const date = new Date(createdAt);
+    const formattedDate = date.toLocaleDateString("es-ES", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+    return formattedDate;
   };
 
   const fetchData = async () => {
@@ -335,6 +355,89 @@ export default function CoolerDetail() {
                     </div>
                   </div>
                 </div>
+                <br></br>
+                {localStorage.getItem("USER") === "Call Center" ? (
+                  <>
+                    <div style={{ display: "flex", gap: "16px" }}>
+                      {sortedTracking?.map((cooler, index) => (
+                        <>
+                          <div
+                            style={{
+                              display: "flex",
+                              padding: "8px",
+                              // justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              borderRadius: "4px",
+                              background: "#EEF6FF",
+                            }}
+                          >
+                            <div
+                              style={{
+                                color: "#3E83FF",
+                                // fontFamily: "DM Sans",
+                                fontSize: "16px",
+                                fontStyle: "normal",
+                                fontWeight: 700,
+                                lineHeight: "normal",
+                              }}
+                            >
+                              {cooler.algorithm ===
+                              "Indicador de Riesgo Nivel: 0"
+                                ? "Indicador: Sin riesgo"
+                                : cooler.algorithm ===
+                                  "Indicador de Riesgo Nivel: 1"
+                                ? "Indicador: Visitar punto de venta"
+                                : cooler.algorithm ===
+                                  "Indicador de Riesgo Nivel: 2"
+                                ? "Indicador: Requiere actualizar información"
+                                : cooler.algorithm ===
+                                  "Indicador de Riesgo Nivel: 3"
+                                ? "Indicador: Tomar acción urgente"
+                                : cooler.algorithm ===
+                                  "Indicador de Riesgo Nivel: 4"
+                                ? "Indicador: En riesgo"
+                                : cooler.algorithm === "OWNED"
+                                ? "Indicador: En propiedad"
+                                : cooler.algorithm === "INSTALLED"
+                                ? "Indicador: Instalado"
+                                : cooler.algorithm === "LOCATION"
+                                ? "Indicador: Ubicado"
+                                : cooler.algorithm === "TELEMETRY"
+                                ? "Indicador: Telemetría"
+                                : cooler.algorithm ===
+                                  "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                ? "Alerta: Alta demanda del compresor"
+                                : cooler.algorithm === "LOW_VOLTAGE_ALERT"
+                                ? "Alerta: Bajo voltaje"
+                                : cooler.algorithm === "HIGH_VOLTAGE_ALERT"
+                                ? "Alerta: Alto voltaje"
+                                : cooler.algorithm === "MOVED_VISIT_ALERT"
+                                ? "Alerta: Movimiento"
+                                : cooler.algorithm === "HIGH_TEMPERATURE_ALERT"
+                                ? "Alerta: Alta temperatura"
+                                : cooler.algorithm === "DISCONNECTION_ALERT"
+                                ? "Alerta: Desconexión"
+                                : cooler.algorithm === "TEMPERATURE_FAIL"
+                                ? "Falla de temperatura"
+                                : cooler.algorithm === "COMPRESSOR_FAIL"
+                                ? "Falla asociada al compresor"
+                                : cooler.algorithm === "DISCONNECTIONS_FAIL"
+                                ? "Falla de desconexión"
+                                : cooler.algorithm === "VOLTAGE_FAIL"
+                                ? "Falla de voltaje"
+                                : cooler.algorithm === "FREEZING_FAIL"
+                                ? "Falla de congelación"
+                                : cooler.algorithm}
+                            </div>
+                          </div>
+                        </>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  ""
+                )}
               </div>
               <div
                 style={{
@@ -345,60 +448,58 @@ export default function CoolerDetail() {
                   alignSelf: "stretch",
                 }}
               >
-                {coolersData?.cooler?.customer != "KOF" ? (
-                  <>
+                <div
+                  style={{
+                    display: "flex",
+                    // flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: "6px",
+                    alignSelf: "stretch",
+                    padding: "0px 0px 4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Mono",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "14px",
+                    }}
+                  >
+                    CANAL:
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "4px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      borderRadius: "2px",
+                      background: "#D4DAE3",
+                      marginTop: -5,
+                    }}
+                  >
                     <div
                       style={{
-                        display: "flex",
-                        // flexDirection: "column",
-                        alignItems: "flex-start",
-                        gap: "6px",
-                        alignSelf: "stretch",
-                        padding: "0px 0px 4px",
+                        color: "#313A49",
+                        // fontFamily: "DM Mono",
+                        fontSize: "10px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "14px",
                       }}
                     >
-                      <div
-                        style={{
-                          color: "#88888B",
-                          // fontFamily: "DM Mono",
-                          fontSize: "12px",
-                          fontStyle: "normal",
-                          fontWeight: 500,
-                          lineHeight: "14px",
-                        }}
-                      >
-                        CANAL:
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "4px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "4px",
-                          borderRadius: "2px",
-                          background: "#D4DAE3",
-                          marginTop: -5,
-                        }}
-                      >
-                        <div
-                          style={{
-                            color: "#313A49",
-                            // fontFamily: "DM Mono",
-                            fontSize: "10px",
-                            fontStyle: "normal",
-                            fontWeight: 500,
-                            lineHeight: "14px",
-                          }}
-                        >
-                          Sin registro
-                        </div>
-                      </div>
+                      {coolersData?.cooler?.channel === "" ||
+                      coolersData?.cooler?.channel === undefined
+                        ? "Sin registro"
+                        : coolersData?.cooler?.channel}
                     </div>
-                  </>
-                ) : (
-                  ""
-                )}
+                  </div>
+                </div>
+
                 <div
                   style={{
                     display: "flex",
