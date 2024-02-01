@@ -59,8 +59,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   <Route path="/home/grafica" element={<MapInsights />} />
                 </Route>
               </Routes>
-              <Routes>                
-                <Route path="" element={<Login />}></Route>
+              <Routes>                                
                 <Route path="/homeCallCenter" element={<App />}>
                   <Route index path="/homeCallCenter" element={<Coolers />} />
                   {/* Cooler detail */}
