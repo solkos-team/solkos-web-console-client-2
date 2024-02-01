@@ -391,7 +391,7 @@ export default function CoolerDetail() {
                             lineHeight: "14px",
                           }}
                         >
-                          SIN REGISTRO
+                          Sin registro
                         </div>
                       </div>
                     </div>

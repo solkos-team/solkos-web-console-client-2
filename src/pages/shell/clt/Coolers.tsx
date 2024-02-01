@@ -4,12 +4,7 @@ import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
 import { SkeletonTable } from "../../../components/skeletonTable/SkeletonTable";
-import {
-  fetchCoolers,
-  fetchCoolerDetails,
-  fetchUniversal,
-  fetchUniversalTables,
-} from "../../../utils/apiUtils";
+import { fetchUniversalTables } from "../../../utils/apiUtils";
 import {
   TableBody,
   TableCell,
@@ -22,6 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
+
 export default function Coolers() {
   interface Cooler {
     serial_number: string;
@@ -43,12 +39,11 @@ export default function Coolers() {
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[]>();
   const [noInfoToShow, setNoInfoToShow] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); // Added loading state
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
   const [totalData, setTotalData] = useState<String | number>(0);
   const navigate = useNavigate();
-  // const datosPorPagina = 10;
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const handleSearchChange = (event) => {
@@ -114,8 +109,6 @@ export default function Coolers() {
 
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
@@ -414,9 +407,9 @@ export default function Coolers() {
                                             ></div>
                                             <div
                                               style={{
-                                                color: "#028053",
+                                                color: "#0F9F67",
                                                 // fontFamily: "Space Mono",
-                                                fontSize: "12px",
+                                                fontSize: "14px",
                                                 fontStyle: "normal",
                                                 fontWeight: 400,
                                                 lineHeight: "14px",
@@ -431,7 +424,7 @@ export default function Coolers() {
                                     <TableCell
                                       style={{
                                         paddingRight: "30px",
-                                        fontSize: "15px",
+                                        fontSize: "14px",
                                         textAlign: "left",
                                         width: "150px",
                                       }}
@@ -443,7 +436,7 @@ export default function Coolers() {
                                     <TableCell
                                       style={{
                                         paddingRight: "50px",
-                                        fontSize: "15px",
+                                        fontSize: "13px",
                                         width: "180px",
                                         textAlign: "left",
                                       }}
@@ -455,42 +448,17 @@ export default function Coolers() {
                                     <TableCell
                                       style={{
                                         paddingRight: "80px",
-                                        fontSize: "15px",
+                                        fontSize: "14px",
                                         width: "150px",
                                         textAlign: "left",
                                       }}
                                     >
                                       {cooler.last_read == undefined ||
-                                      cooler.last_read == "" ? (
-                                        "Sin registro"
-                                      ) : (
-                                        <>
-                                          <div
-                                            style={{
-                                              display: "flex",
-                                              padding: "4px",
-                                              justifyContent: "center",
-                                              alignItems: "center",
-                                              gap: "4px",
-                                              borderRadius: "2px",
-                                              background: "#D4DAE3",
-                                            }}
-                                          >
-                                            <div
-                                              style={{
-                                                color: "#313A49",
-                                                // fontFamily: "Space Mono",
-                                                fontSize: "12px",
-                                                fontStyle: "normal",
-                                                fontWeight: 400,
-                                                lineHeight: "14px",
-                                              }}
-                                            >
-                                              {cooler.days_without_visit} DÍAS
-                                            </div>
-                                          </div>
-                                        </>
-                                      )}
+                                      cooler.last_read == null
+                                        ? "Sin registro"
+                                        : new Date(
+                                            cooler.last_read
+                                          ).toLocaleDateString()}
                                     </TableCell>
                                     <TableCell
                                       style={{
@@ -520,7 +488,7 @@ export default function Coolers() {
                                               style={{
                                                 color: "#0F9F67",
                                                 // fontFamily: "DM Sans",
-                                                fontSize: "12px",
+                                                fontSize: "14px",
                                                 fontStyle: "normal",
                                                 fontWeight: 600,
                                                 lineHeight: "14px",

@@ -266,6 +266,11 @@ const ResumeCC = ({ coolersData, setTab }) => {
               coolersData?.cooler?.outlet_name == undefined
                 ? "Sin registro"
                 : coolersData?.cooler?.outlet_name}
+              {"/"}
+              {coolersData?.cooler?.outlet_id === "" ||
+              coolersData?.cooler?.outlet_id == undefined
+                ? "Sin registro"
+                : coolersData?.cooler?.outlet_id}
             </div>
           </div>
           <div
