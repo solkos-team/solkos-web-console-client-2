@@ -173,7 +173,10 @@ export default function Insights() {
   const toggleShowAll3 = () => {
     setShowAll3(!showAll3);
   };
-sessionStorage.setItem('TtlCoolers',insightsData?.summary.coolers.toLocaleString())
+  sessionStorage.setItem(
+    "TtlCoolers",
+    insightsData?.summary.coolers.toLocaleString()
+  );
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -1317,16 +1320,16 @@ sessionStorage.setItem('TtlCoolers',insightsData?.summary.coolers.toLocaleString
                                             ? "Evaporador bloqueado"
                                             : algorithm.algorithm ===
                                               "TEMPERATURE_FAIL"
-                                            ? "Falla de temperatura"
+                                            ? "Alta temperatura"
                                             : algorithm.algorithm ===
                                               "COMPRESSOR_FAIL"
-                                            ? "Falla de compresor"
+                                            ? "Falla asociada al compresor"
                                             : algorithm.algorithm ===
                                               "DISCONNECTIONS_FAIL"
                                             ? "Falla de desconexión"
                                             : algorithm.algorithm ===
                                               "VOLTAGE_FAIL"
-                                            ? "Falla de voltaje"
+                                            ? "Posible daño eléctrico"
                                             : algorithm.algorithm}
                                         </div>
                                       </div>

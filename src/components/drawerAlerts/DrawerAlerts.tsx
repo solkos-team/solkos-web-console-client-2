@@ -13,7 +13,11 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Table } from "@mantine/core";
-import { fetchCoolersDrawer, fetchUniversal, fetchUniversalTables } from "../../utils/apiUtils";
+import {
+  fetchCoolersDrawer,
+  fetchUniversal,
+  fetchUniversalTables,
+} from "../../utils/apiUtils";
 import { CoolerInterface } from "../drawerOutlets/CoolerInterface";
 import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
 
@@ -31,7 +35,7 @@ export default function DrawerA({
   const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(
     null
   );
-  const [totalData, setTotalData] = useState<String | number>(0)
+  const [totalData, setTotalData] = useState<String | number>(0);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -49,9 +53,9 @@ export default function DrawerA({
     try {
       setIsLoading(true);
       const data = await fetchUniversalTables("coolers", body);
-      const datos = await data.json()
-      const totalData = data.headers.get('content-length')
-      setTotalData(Number(totalData) || 0)
+      const datos = await data.json();
+      const totalData = data.headers.get("content-length");
+      setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
     } catch (error) {
       console.error("Error:", error);
@@ -61,7 +65,7 @@ export default function DrawerA({
   };
   useEffect(() => {
     fetchData();
-  }, [dt,datosPorPagina]);
+  }, [dt, datosPorPagina]);
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -84,8 +88,8 @@ export default function DrawerA({
       Fecha_de_notificación: cooler.notified_at,
     }));
   };
-  coolersData == undefined ? [] : coolersData
-  totalData == undefined ? 0 : totalData
+  coolersData == undefined ? [] : coolersData;
+  totalData == undefined ? 0 : totalData;
   return (
     <div
       ref={drawerRef}
@@ -305,9 +309,9 @@ export default function DrawerA({
                       : selectedAlgorithm === "DISCONNECTIONS_FAIL"
                       ? "Desconexión"
                       : selectedAlgorithm === "TEMPERATURE_FAIL"
-                      ? "Falla de temperatura"
+                      ? "Alta temperatura"
                       : selectedAlgorithm === "VOLTAGE_FAIL"
-                      ? "Falla de voltaje"
+                      ? "Posible daño eléctrico"
                       : selectedAlgorithm === "COMPRESSOR_FAIL"
                       ? "Falla asociada al compresor"
                       : selectedAlgorithm === "MOVED_VISIT_ALERT"
@@ -330,7 +334,7 @@ export default function DrawerA({
                       ? "Instalado"
                       : selectedAlgorithm === "OWNED"
                       ? "En propiedad"
-                      : selectedAlgorithm === "FROZEN_FAIL"
+                      : selectedAlgorithm === "FREEZING_FAIL"
                       ? "Evaporador bloqueado"
                       : selectedAlgorithm}
                   </div>

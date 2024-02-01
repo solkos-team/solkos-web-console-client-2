@@ -19,6 +19,7 @@ export default function Alerts() {
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
+  const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -286,7 +287,7 @@ export default function Alerts() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "24px",
+                            fontSize: "20px",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -298,13 +299,17 @@ export default function Alerts() {
                           style={{
                             color: "#88888B",
                             // fontFamily: "DM Sans",
-                            fontSize: "14px",
+                            fontSize: "12px",
                             fontStyle: "normal",
                             fontWeight: 400,
                             lineHeight: "normal",
                           }}
                         >
-                          de ----- enfriadores
+                          {totalCoolers === undefined || totalCoolers === null
+                            ? "de sin registro de enfriadores "
+                            : "de " +
+                              totalCoolers?.toLocaleLowerCase() +
+                              " enfriadores"}
                         </div>
                       </div>
                       {/* ***** */}

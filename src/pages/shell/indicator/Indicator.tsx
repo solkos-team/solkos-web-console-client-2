@@ -15,7 +15,7 @@ export default function Indicator() {
   }
 
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-
+  const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -276,7 +276,7 @@ export default function Indicator() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "24px",
+                            fontSize: "20px",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -288,13 +288,17 @@ export default function Indicator() {
                           style={{
                             color: "#88888B",
                             // fontFamily: "DM Sans",
-                            fontSize: "14px",
+                            fontSize: "12px",
                             fontStyle: "normal",
                             fontWeight: 400,
                             lineHeight: "normal",
                           }}
                         >
-                          de ----- enfriadores
+                          {totalCoolers === undefined || totalCoolers === null
+                            ? "de sin registro de enfriadores "
+                            : "de " +
+                              totalCoolers?.toLocaleLowerCase() +
+                              " enfriadores"}
                         </div>
                       </div>
                       {/* ***** */}

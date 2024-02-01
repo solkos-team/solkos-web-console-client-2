@@ -14,7 +14,7 @@ export default function Fails() {
   }
 
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
-  const totalCoolers = sessionStorage.getItem('TtlCoolers')
+  const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -256,9 +256,11 @@ export default function Fails() {
                             : cooler.algorithm === "DISCONNECTIONS_FAIL"
                             ? "Desconexión"
                             : cooler.algorithm === "TEMPERATURE_FAIL"
-                            ? "Falla de temperatura"
+                            ? "Alta temperatura"
                             : cooler.algorithm === "VOLTAGE_FAIL"
-                            ? "Falla de voltaje"
+                            ? "Posible daño eléctrico"
+                            : cooler.algorithm === "FREEZING_FAIL"
+                            ? "Evaporador bloqueado"
                             : cooler.algorithm}
                         </div>
                       </div>
@@ -277,7 +279,7 @@ export default function Fails() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "24px",
+                            fontSize: "20px",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -289,13 +291,17 @@ export default function Fails() {
                           style={{
                             color: "#88888B",
                             // fontFamily: "DM Sans",
-                            fontSize: "14px",
+                            fontSize: "12px",
                             fontStyle: "normal",
                             fontWeight: 400,
                             lineHeight: "normal",
                           }}
                         >
-                          {`de ${totalCoolers?.toLocaleLowerCase()} enfriadores`}
+                          {totalCoolers === undefined || totalCoolers === null
+                            ? "de sin registro de enfriadores "
+                            : "de " +
+                              totalCoolers?.toLocaleLowerCase() +
+                              " enfriadores"}
                         </div>
                       </div>
                       {/* ***** */}
