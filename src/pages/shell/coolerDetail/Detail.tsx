@@ -65,29 +65,7 @@ export default function CoolerDetail() {
     setNoInfoToShow(false);
   };
 
-  const fetchCoolersFromAPI = async (serial_number) => {
-    const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/coolers/${serial_number}`;
 
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers,
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al obtener los datos del enfriador");
-      }
-
-      const responseData = await response.json();
-      return responseData;
-    } catch (error) {
-      throw error;
-    }
-  };
   console.log(coolersData);
 
   const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
