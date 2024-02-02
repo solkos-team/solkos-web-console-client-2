@@ -12,6 +12,7 @@ import {
 } from "@tremor/react";
 
 const Energy = ({ coolersData }) => {
+  console.log(coolersData?.properties)
   const mes1 = new Date(
     coolersData?.properties?.energy_consumption_month_1.timestamp
   );
@@ -28,17 +29,17 @@ const Energy = ({ coolersData }) => {
     {
       name: mes33,
       "Consumo de energía":
-        (coolersData?.properties?.energy_consumption_month_3.value).toFixed(2),
+        (coolersData?.properties?.energy_consumption_month_3.value == undefined ? 0 : coolersData?.properties?.energy_consumption_month_3.value).toFixed(2),
     },
     {
       name: mes22,
       "Consumo de energía":
-        (coolersData?.properties?.energy_consumption_month_2.value).toFixed(2),
+        (coolersData?.properties?.energy_consumption_month_2.value == undefined ? 0 : coolersData?.properties?.energy_consumption_month_2.value).toFixed(2),
     },
     {
       name: mes11,
       "Consumo de energía":
-        (coolersData?.properties?.energy_consumption_month_1.value).toFixed(2),
+        (coolersData?.properties?.energy_consumption_month_1.value == undefined ? 0 : coolersData?.properties?.energy_consumption_month_1.value).toFixed(2),
     },
   ];
 
