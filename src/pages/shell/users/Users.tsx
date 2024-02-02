@@ -43,7 +43,7 @@ export default function Users() {
   const [alertStatus, setAlertStatus] = useState();
   const [userDelete, setUserDelete] = useState();
   const [totalData, setTotalData] = useState<String | number>(0);
-
+  console.log(dataUsersEdit)
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -577,6 +577,7 @@ export default function Users() {
           isOpen={isDrawerOpen}
           onClose={closeDrawer}
           userData={dataUsersEdit}
+          userDataClear={setDataUsersEdit}
         ></DrawerUsers>
       )}
       {isAlertOpen && (

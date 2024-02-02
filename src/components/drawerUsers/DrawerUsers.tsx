@@ -3,7 +3,8 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mantine/core";
 
-export default function DrawerUsers({ isOpen, onClose, userData }) {
+export default function DrawerUsers({ isOpen, onClose, userData,userDataClear }) {
+  console.log(userData)  
   const { name, email, customer, path } = userData;
   const [nameUser, setNameUser] = useState(name);
   const [emailUser, setEmailUser] = useState(email);
@@ -12,6 +13,10 @@ export default function DrawerUsers({ isOpen, onClose, userData }) {
   const drawerRef = useRef(null);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
+  const closeAndClearInfo = () =>{
+    onClose
+    userDataClear('')
+  }
   return (
     <div
       ref={drawerRef}
@@ -50,7 +55,7 @@ export default function DrawerUsers({ isOpen, onClose, userData }) {
           }}
         >
           <img
-            onClick={onClose}
+            onClick={()=>closeAndClearInfo()}
             src="../../sampleData/arrowsDes.png"
             alt="Descripción de la imagen"
             style={{ width: "25px", height: "25px", cursor: "pointer" }}
