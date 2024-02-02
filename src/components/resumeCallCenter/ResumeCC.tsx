@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
@@ -7,6 +7,7 @@ import {
   IconCirclePlus,
   IconArrowDownRight,
   IconArrowRight,
+  IconNote,
 } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
@@ -51,132 +52,238 @@ const ResumeCC = ({ coolersData, setTab }) => {
     return dateB - dateA;
   });
 
+  // *******************************************************
+  const [nuevoComentario, setNuevoComentario] = useState<string>("");
+  const [comentarios, setComentarios] = useState<string[]>([]);
+
+  const handleComentarioChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setNuevoComentario(event.target.value);
+  };
+
+  const handleEnterPress = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && nuevoComentario.trim() !== "") {
+      const comentarioConFechaHora = `${nuevoComentario} - ${new Date().toLocaleString(
+        "es-ES"
+      )}`;
+      setComentarios((prevComentarios) => [
+        ...prevComentarios,
+        comentarioConFechaHora,
+      ]);
+      setNuevoComentario("");
+    }
+  };
+
+  const comentariosInvertidos = [...comentarios].reverse();
+
+  // *******************************************************
   return (
     <>
       <br></br>
-
-      <div
-        style={{
-          display: "flex",
-          padding: "24px",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "16px",
-          alignSelf: "stretch",
-          borderRadius: "8px",
-          border: "1px solid #88888B",
-        }}
-      >
+      <div style={{ display: "flex", gap: "16px" }}>
         <div
           style={{
             display: "flex",
-            alignItems: "center",
+            padding: "24px",
+            flexDirection: "column",
+            alignItems: "flex-start",
             gap: "16px",
             alignSelf: "stretch",
+            borderRadius: "8px",
+            border: "1px solid #88888B",
+            width: "55%",
           }}
         >
-          <img src={"../../sampleData/actividad.png"} alt="cooler"></img>
           <div
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "16px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "normal",
-            }}
-          >
-            Actividad del enfriador
-          </div>
-        </div>
-        {sortedTracking?.map((cooler, index) => (
-          <div
-            key={index}
             style={{
               display: "flex",
-              padding: "16px",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "6px",
+              alignItems: "center",
+              gap: "16px",
               alignSelf: "stretch",
-              borderRadius: "8px",
-              borderLeft: "4px solid #3E83FF",
-              background: "#EEF6FF",
             }}
           >
+            <img src={"../../sampleData/actividad.png"} alt="cooler"></img>
             <div
               style={{
-                color: "#3E83FF",
+                color: "#3A3A3F",
                 // fontFamily: "DM Sans",
-                fontSize: "14px",
+                fontSize: "16px",
                 fontStyle: "normal",
-                fontWeight: 700,
+                fontWeight: 500,
                 lineHeight: "normal",
               }}
             >
-              {cooler.algorithm === "Indicador de Riesgo Nivel: 0"
-                ? "Indicador: Sin riesgo"
-                : cooler.algorithm === "Indicador de Riesgo Nivel: 1"
-                ? "Indicador: Visitar punto de venta"
-                : cooler.algorithm === "Indicador de Riesgo Nivel: 2"
-                ? "Indicador: Requiere actualizar información"
-                : cooler.algorithm === "Indicador de Riesgo Nivel: 3"
-                ? "Indicador: Tomar acción urgente"
-                : cooler.algorithm === "Indicador de Riesgo Nivel: 4"
-                ? "Indicador: En riesgo"
-                : cooler.algorithm === "OWNED"
-                ? "Indicador: En propiedad"
-                : cooler.algorithm === "INSTALLED"
-                ? "Indicador: Instalado"
-                : cooler.algorithm === "LOCATION"
-                ? "Indicador: Ubicado"
-                : cooler.algorithm === "TELEMETRY"
-                ? "Indicador: Telemetría"
-                : cooler.algorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                ? "Alerta: Alta demanda del compresor"
-                : cooler.algorithm === "LOW_VOLTAGE_ALERT"
-                ? "Alerta: Bajo voltaje"
-                : cooler.algorithm === "HIGH_VOLTAGE_ALERT"
-                ? "Alerta: Alto voltaje"
-                : cooler.algorithm === "MOVED_VISIT_ALERT"
-                ? "Alerta: Movimiento"
-                : cooler.algorithm === "HIGH_TEMPERATURE_ALERT"
-                ? "Alerta: Alta temperatura"
-                : cooler.algorithm === "DISCONNECTION_ALERT"
-                ? "Alerta: Desconexión"
-                : cooler.algorithm === "TEMPERATURE_FAIL"
-                ? "Falla de temperatura"
-                : cooler.algorithm === "COMPRESSOR_FAIL"
-                ? "Falla asociada al compresor"
-                : cooler.algorithm === "DISCONNECTIONS_FAIL"
-                ? "Falla de desconexión"
-                : cooler.algorithm === "VOLTAGE_FAIL"
-                ? "Falla de voltaje"
-                : cooler.algorithm === "FREEZING_FAIL"
-                ? "Falla de congelación"
-                : cooler.algorithm}
-            </div>
-            <div
-              style={{
-                color: "#3E83FF",
-                // fontFamily: "DM Sans",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
-              }}
-            >
-              {formatCreatedAt(cooler.notified_at)}
+              Actividad del enfriador
             </div>
           </div>
-        ))}
-      </div>
+          {sortedTracking?.map((cooler, index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                padding: "16px",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "6px",
+                alignSelf: "stretch",
+                borderRadius: "8px",
+                borderLeft: "4px solid #3E83FF",
+                background: "#EEF6FF",
+              }}
+            >
+              <div
+                style={{
+                  color: "#3E83FF",
+                  // fontFamily: "DM Sans",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "normal",
+                }}
+              >
+                {cooler.algorithm === "Indicador de Riesgo Nivel: 0"
+                  ? "Indicador: Sin riesgo"
+                  : cooler.algorithm === "Indicador de Riesgo Nivel: 1"
+                  ? "Indicador: Visitar punto de venta"
+                  : cooler.algorithm === "Indicador de Riesgo Nivel: 2"
+                  ? "Indicador: Requiere actualizar información"
+                  : cooler.algorithm === "Indicador de Riesgo Nivel: 3"
+                  ? "Indicador: Tomar acción urgente"
+                  : cooler.algorithm === "Indicador de Riesgo Nivel: 4"
+                  ? "Indicador: En riesgo"
+                  : cooler.algorithm === "OWNED"
+                  ? "Indicador: En propiedad"
+                  : cooler.algorithm === "INSTALLED"
+                  ? "Indicador: Instalado"
+                  : cooler.algorithm === "LOCATION"
+                  ? "Indicador: Ubicado"
+                  : cooler.algorithm === "TELEMETRY"
+                  ? "Indicador: Telemetría"
+                  : cooler.algorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                  ? "Alerta: Alta demanda del compresor"
+                  : cooler.algorithm === "LOW_VOLTAGE_ALERT"
+                  ? "Alerta: Bajo voltaje"
+                  : cooler.algorithm === "HIGH_VOLTAGE_ALERT"
+                  ? "Alerta: Alto voltaje"
+                  : cooler.algorithm === "MOVED_VISIT_ALERT"
+                  ? "Alerta: Movimiento"
+                  : cooler.algorithm === "HIGH_TEMPERATURE_ALERT"
+                  ? "Alerta: Alta temperatura"
+                  : cooler.algorithm === "DISCONNECTION_ALERT"
+                  ? "Alerta: Desconexión"
+                  : cooler.algorithm === "TEMPERATURE_FAIL"
+                  ? "Falla de temperatura"
+                  : cooler.algorithm === "COMPRESSOR_FAIL"
+                  ? "Falla asociada al compresor"
+                  : cooler.algorithm === "DISCONNECTIONS_FAIL"
+                  ? "Falla de desconexión"
+                  : cooler.algorithm === "VOLTAGE_FAIL"
+                  ? "Falla de voltaje"
+                  : cooler.algorithm === "FREEZING_FAIL"
+                  ? "Falla de congelación"
+                  : cooler.algorithm}
+              </div>
+              <div
+                style={{
+                  color: "#3E83FF",
+                  // fontFamily: "DM Sans",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
+                }}
+              >
+                {formatCreatedAt(cooler.notified_at)}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            padding: "24px",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: "16px",
+            alignSelf: "stretch",
+            borderRadius: "8px",
+            border: "1px solid #88888B",
+            width: 440,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "16px",
+              alignSelf: "stretch",
+            }}
+          >
+            <IconNote
+              style={{
+                width: "22px",
+                height: "22px",
+              }}
+            />
+            <div
+              style={{
+                color: "#3A3A3F",
+                // fontFamily: "DM Sans",
+                fontSize: "16px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "normal",
+              }}
+            >
+              Notas
+            </div>
+          </div>
 
+          <textarea
+            value={nuevoComentario}
+            onChange={handleComentarioChange}
+            onKeyDown={handleEnterPress}
+            style={{
+              width: "100%",
+              height: 100,
+              marginTop: "16px",
+              borderRadius: "4px",
+              border: "1px solid #88888B",
+              resize: "vertical",
+            }}
+            placeholder="Escribe tu comentario aquí..."
+          />
+
+          {/* Lista de comentarios */}
+          <ul
+            style={{
+              listStyleType: "none",
+              padding: 0,
+              margin: 0,
+              marginTop: "16px",
+            }}
+          >
+            {comentariosInvertidos.map((comentario, index) => (
+              <li
+                key={index}
+                style={{
+                  border: "1px solid #88888B",
+                  padding: "5px",
+                  borderRadius: "4px",
+                  marginTop: "8px",
+                  fontSize: "14px",
+                }}
+              >
+                {comentario}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <br></br>
       <div
         style={{
           display: "flex",
-          flexDirection: "row", // Ajusta la dirección a "row" para colocar los divs uno al lado del otro
+          flexDirection: "row",
           gap: "16px",
         }}
       >
@@ -923,7 +1030,7 @@ const ResumeCC = ({ coolersData, setTab }) => {
                                     lineHeight: "normal",
                                   }}
                                 >
-                                  $-----
+                                  $ (Sin registro)
                                 </div>
                                 <div
                                   style={{
