@@ -331,7 +331,7 @@ export default function Users() {
                     width: "100%",
                     maxWidth: "1000px",
                     // width: "910px",
-                    height: "400px",
+                    // height: "400px",
                   }}
                 >
                   <TableHead style={{ display: "block" }}>
@@ -339,20 +339,20 @@ export default function Users() {
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
-                          width: "190px",
+                          width: "180px",
                         }}
                       >
                         Nombre
                       </TableHeaderCell>
                       <TableHeaderCell
-                        style={{ textAlign: "left", width: "300px" }}
+                        style={{ textAlign: "left", width: "250px" }}
                       >
                         Correo
                       </TableHeaderCell>
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
-                          width: "100px",
+                          width: "80px",
                         }}
                       >
                         Cliente
@@ -360,17 +360,20 @@ export default function Users() {
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
-                          width: "140px",
+                          width: "150px",
                         }}
                       >
                         Path
                       </TableHeaderCell>
 
                       <TableHeaderCell
-                        style={{ textAlign: "left", width: "150px" }}
+                        style={{ textAlign: "left", width: "50px" }}
                       >
                         Acciones
                       </TableHeaderCell>
+                      <TableHeaderCell
+                        style={{ textAlign: "left", width: "100px" }}
+                      ></TableHeaderCell>
                     </TableRow>
                   </TableHead>
                   {isLoading == true ? (
@@ -391,7 +394,6 @@ export default function Users() {
                             display: "block",
                             height: "100%",
                             minWidth: "900px",
-                            overflowY: "auto",
                           }}
                         >
                           {filteredUsers
@@ -400,12 +402,12 @@ export default function Users() {
                               <TableRow
                                 className="Tabla"
                                 key={index}
-                                style={{ userSelect: "none" }}
+                                style={{ userSelect: "none", height: "auto" }}
                               >
                                 <TableCell
                                   style={{
                                     paddingRight: "30px",
-                                    fontSize: "15px",
+                                    fontSize: "14px",
                                     textAlign: "left",
                                     width: "6rem",
                                   }}
@@ -415,7 +417,7 @@ export default function Users() {
                                 <TableCell
                                   style={{
                                     paddingRight: "30px",
-                                    fontSize: "15px",
+                                    fontSize: "14px",
                                     textAlign: "left",
                                     width: "8rem",
                                   }}
@@ -425,7 +427,7 @@ export default function Users() {
                                 <TableCell
                                   style={{
                                     paddingLeft: "15px",
-                                    fontSize: "15px",
+                                    fontSize: "14px",
                                     textAlign: "left",
                                     width: "170px",
                                   }}
@@ -434,8 +436,8 @@ export default function Users() {
                                 </TableCell>
                                 <TableCell
                                   style={{
-                                    paddingRight: "30px",
-                                    fontSize: "15px",
+                                    paddingRight: "50px",
+                                    fontSize: "14px",
                                     textAlign: "left",
                                     width: "150px",
                                   }}
@@ -444,9 +446,8 @@ export default function Users() {
                                 </TableCell>
                                 <TableCell
                                   style={{
-                                    paddingRight: "50px",
-                                    fontSize: "15px",
-                                    width: "100px",
+                                    fontSize: "14px",
+                                    width: "50px",
                                     textAlign: "left",
                                     cursor: "pointer",
                                     display: "flex",
@@ -454,6 +455,8 @@ export default function Users() {
                                     alignContent: "center",
                                     alignItems: "center",
                                     overflowX: "hidden",
+                                    marginTop: 10,
+                                    height: 25,
                                   }}
                                   // onClick={openDrawer}
                                 >
@@ -464,7 +467,7 @@ export default function Users() {
                                       alignItems: "center",
                                       gap: "4px",
                                       flex: 100,
-                                      height: "40px",
+                                      // height: "40px",
                                     }}
                                     onClick={openDrawer}
                                   >
@@ -483,7 +486,7 @@ export default function Users() {
                                         setDataUsersEdit(user);
                                       }}
                                     >
-                                      Ver más{" "}
+                                      Ver más
                                       <IconArrowRight
                                         style={{
                                           color: "#3E83FF",
@@ -492,6 +495,13 @@ export default function Users() {
                                       />
                                     </div>
                                   </div>
+                                </TableCell>
+                                <TableCell
+                                  style={{
+                                    textAlign: "left",
+                                    width: "100px",
+                                  }}
+                                >
                                   {localStorage.getItem("USER") ===
                                     "Jose Iván Peréz Ugalde" ||
                                   localStorage.getItem("USER") ===
@@ -500,12 +510,12 @@ export default function Users() {
                                       variant="filled"
                                       color="red"
                                       size="xs"
-                                      style={{ width: "4rem" }}
+                                      style={{ width: "73px" }}
                                       onClick={() => {
                                         deleteUserDrawer(user.id);
                                       }}
                                     >
-                                      Delete
+                                      Eliminar
                                     </Button>
                                   ) : (
                                     ""

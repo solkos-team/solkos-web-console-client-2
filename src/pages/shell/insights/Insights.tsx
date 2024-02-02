@@ -1080,7 +1080,7 @@ export default function Insights() {
                                   lineHeight: "normal",
                                 }}
                               >
-                                ---
+                                0
                               </div>
                             </div>
                           </div>
@@ -1140,7 +1140,7 @@ export default function Insights() {
                                   lineHeight: "normal",
                                 }}
                               >
-                                ---
+                                0
                               </div>
                             </div>
                           </div>

@@ -43,9 +43,9 @@ export const SkeletonTableUsers = () => {
         </TableCell>
         <TableCell
           style={{
-            paddingLeft: 90,
+            paddingLeft: 50,
             textAlign: "center",
-            width: "90px",
+            width: "70px",
           }}
         >
           <Skeleton height={30} mt={6} width="90%" />
