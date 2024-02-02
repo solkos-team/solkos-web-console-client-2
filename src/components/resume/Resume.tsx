@@ -1074,7 +1074,8 @@ const Resume = ({ coolersData, setTab }) => {
                     {coolersData?.properties?.annual_decrement.value === null ||
                     coolersData?.properties?.annual_decrement.value == undefined
                       ? "Sin registro"
-                      : coolersData?.properties?.annual_decrement.value.toLocaleString()}
+                      : "$" +
+                        coolersData?.properties?.annual_decrement.value.toLocaleString()}
                   </div>
                 </div>
               </div>
@@ -1124,7 +1125,8 @@ const Resume = ({ coolersData, setTab }) => {
                   {coolersData?.properties?.total_ownership_expense.value ==
                   undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
+                    : "$" +
+                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                 </div>
               </div>
               <div
@@ -1160,7 +1162,8 @@ const Resume = ({ coolersData, setTab }) => {
                 >
                   {coolersData?.properties?.sale_price.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
+                    : "$" +
+                      `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
                 </div>
               </div>
               <div
@@ -1197,7 +1200,8 @@ const Resume = ({ coolersData, setTab }) => {
                   {coolersData?.properties?.total_expense_service.value ==
                   undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
+                    : "$" +
+                      `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
                 </div>
               </div>
             </div>
@@ -1294,10 +1298,14 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.energy_consumption.value ==
+                  {coolersData?.properties?.energy_consumption.value ===
                   undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.energy_consumption.value}`}
+                    : `${
+                        coolersData?.properties?.energy_consumption.value.toFixed(
+                          2
+                        ) + " KW/h"
+                      }`}
                 </div>
               </div>
 

@@ -187,7 +187,8 @@ const EconomicDetail = ({ coolersData }) => {
                   {coolersData?.properties?.total_ownership_expense.value ==
                   undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
+                    : "$" +
+                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                 </div>
                 <div
                   style={{
@@ -243,7 +244,7 @@ const EconomicDetail = ({ coolersData }) => {
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "normal",
-                    marginRight: 30,
+                    marginRight: 40,
                   }}
                 >
                   Precio de venta
@@ -262,7 +263,7 @@ const EconomicDetail = ({ coolersData }) => {
                 >
                   {coolersData?.properties?.sale_price.value == undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.sale_price.value}`}
+                    : "$" + `${coolersData?.properties?.sale_price.value}`}
                 </div>
               </div>
               <div
@@ -300,7 +301,8 @@ const EconomicDetail = ({ coolersData }) => {
                   {coolersData?.properties?.total_expense_service.value ==
                   undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
+                    : "$" +
+                      `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
                 </div>
               </div>
             </div>
@@ -386,7 +388,8 @@ const EconomicDetail = ({ coolersData }) => {
                     {coolersData?.properties?.present_value_of_depreciation
                       .value == undefined
                       ? "Sin registro"
-                      : `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString()}`}
+                      : "$" +
+                        `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString()}`}
                   </div>
                   <div
                     style={{
@@ -438,7 +441,8 @@ const EconomicDetail = ({ coolersData }) => {
                     {coolersData?.properties?.annual_decrement.value ==
                     undefined
                       ? "Sin registro"
-                      : `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}
+                      : "$" +
+                        `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}
                   </div>
                   <div
                     style={{
@@ -901,7 +905,7 @@ const EconomicDetail = ({ coolersData }) => {
                   lineHeight: "14px",
                 }}
               >
-                0
+                $0
               </div>
               <div
                 style={{

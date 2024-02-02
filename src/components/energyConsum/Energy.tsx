@@ -1,26 +1,50 @@
 import React, { useState, useEffect } from "react";
+import { IconArrowRight } from "@tabler/icons-react";
+import { Tabs } from "@mantine/core";
 import {
-  IconSearch,
-  IconArrowNarrowLeft,
-  IconLock,
-  IconChevronRight,
-  IconCircleX,
-  IconCirclePlus,
-  IconArrowRight,
-} from "@tabler/icons-react";
-import {
-  Table,
-  Pagination,
-  Select,
-  Loader,
-  TextInput,
-  Paper,
-  Tooltip,
-  Tabs,
-} from "@mantine/core";
-import { Text } from "@mantine/core";
+  AreaChart,
+  BarChart,
+  Card,
+  Flex,
+  Switch,
+  Title,
+  Subtitle,
+} from "@tremor/react";
 
 const Energy = ({ coolersData }) => {
+  const mes1 = new Date(
+    coolersData?.properties?.energy_consumption_month_1.timestamp
+  );
+  const mes11 = mes1.toLocaleString("es-ES", { month: "long" });
+  const mes2 = new Date(
+    coolersData?.properties?.energy_consumption_month_2.timestamp
+  );
+  const mes22 = mes2.toLocaleString("es-ES", { month: "long" });
+  const mes3 = new Date(
+    coolersData?.properties?.energy_consumption_month_3.timestamp
+  );
+  const mes33 = mes3.toLocaleString("es-ES", { month: "long" });
+  const chartdata = [
+    {
+      name: mes33,
+      "Consumo de energía":
+        (coolersData?.properties?.energy_consumption_month_3.value).toFixed(2),
+    },
+    {
+      name: mes22,
+      "Consumo de energía":
+        (coolersData?.properties?.energy_consumption_month_2.value).toFixed(2),
+    },
+    {
+      name: mes11,
+      "Consumo de energía":
+        (coolersData?.properties?.energy_consumption_month_1.value).toFixed(2),
+    },
+  ];
+
+  const valueFormatter = (number) =>
+    `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
+
   return (
     <div
       style={{
@@ -130,7 +154,6 @@ const Energy = ({ coolersData }) => {
               {coolersData?.properties?.energy_cost.value == undefined
                 ? "Sin registro"
                 : "$" +
-                  " " +
                   `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
             </div>
           </div>
@@ -168,7 +191,9 @@ const Energy = ({ coolersData }) => {
               {coolersData?.properties?.energy_consumption.value == undefined
                 ? "Sin registro"
                 : `${
-                    coolersData?.properties?.energy_consumption.value +
+                    (coolersData?.properties?.energy_consumption.value).toFixed(
+                      2
+                    ) +
                     " " +
                     "KW/h"
                   }`}
@@ -208,7 +233,9 @@ const Energy = ({ coolersData }) => {
               {coolersData?.properties?.power_consumption_reference.value ===
               undefined
                 ? "Sin registro"
-                : coolersData?.properties?.power_consumption_reference.value +
+                : (coolersData?.properties?.power_consumption_reference.value).toFixed(
+                    2
+                  ) +
                   " " +
                   "KW/h"}
             </div>
@@ -247,7 +274,9 @@ const Energy = ({ coolersData }) => {
               {coolersData?.properties?.average_C02_emissions.value == undefined
                 ? "Sin registro"
                 : `${
-                    coolersData?.properties?.average_C02_emissions.value +
+                    (coolersData?.properties?.average_C02_emissions.value).toFixed(
+                      2
+                    ) +
                     " " +
                     "Kg/día"
                   }`}
@@ -356,9 +385,28 @@ const Energy = ({ coolersData }) => {
               }}
             >
               <Tabs.Panel value="first" pt="xs">
-                <div style={{ width: "100%", height: "100px" }}>
-                  <div style={{ marginLeft: 400 }}>Sin registros</div>
-                </div>
+                {coolersData?.properties?.energy_consumption_month_1.value ===
+                0 ? (
+                  <div style={{ marginLeft: 270, marginTop: 50 }}>
+                    Sin información para mostrar
+                  </div>
+                ) : (
+                  <>
+                    <div style={{ width: "700px", height: "500px" }}>
+                      <Card>
+                        <BarChart
+                          className="mt-6"
+                          data={chartdata}
+                          index="name"
+                          categories={["Consumo de energía"]}
+                          colors={["blue"]}
+                          valueFormatter={valueFormatter}
+                          yAxisWidth={48}
+                        />
+                      </Card>
+                    </div>
+                  </>
+                )}
               </Tabs.Panel>
             </div>
           </Tabs>
