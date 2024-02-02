@@ -12,7 +12,6 @@ import {
 } from "@tremor/react";
 
 const Energy = ({ coolersData }) => {
-  console.log(coolersData?.properties)
   const mes1 = new Date(
     coolersData?.properties?.energy_consumption_month_1.timestamp
   );

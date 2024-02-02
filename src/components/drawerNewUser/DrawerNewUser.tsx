@@ -183,6 +183,7 @@ export default function DrawerNewUser({
               lineHeight: "28px",
               width: 430,
               marginLeft: 250,
+              backgroundColor:"#FFFF"
             }}
           />
         </div>
@@ -222,6 +223,7 @@ export default function DrawerNewUser({
               lineHeight: "28px",
               width: 430,
               marginLeft: 250,
+              backgroundColor:"#FFFF"
             }}
           />
         </div>

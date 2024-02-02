@@ -136,6 +136,7 @@ export default function DrawerUsers({ isOpen, onClose, userData }) {
               lineHeight: "28px",
               width: 430,
               marginLeft: 250,
+              backgroundColor:"#FFFF"
             }}
           />
         </section>
@@ -175,6 +176,7 @@ export default function DrawerUsers({ isOpen, onClose, userData }) {
               lineHeight: "28px",
               width: 430,
               marginLeft: 250,
+              backgroundColor:"#FFFF"
             }}
           />
         </section>
@@ -214,6 +216,7 @@ export default function DrawerUsers({ isOpen, onClose, userData }) {
               lineHeight: "28px",
               width: 430,
               marginLeft: 250,
+              backgroundColor:"#FFFF"
             }}
           />
         </section>
@@ -253,6 +256,7 @@ export default function DrawerUsers({ isOpen, onClose, userData }) {
               lineHeight: "28px",
               width: 430,
               marginLeft: 250,
+              backgroundColor:"#FFFF"
             }}
           />
         </section>

@@ -603,7 +603,7 @@ function App() {
                                   fontSize: "12px",
                                   textDecorationColor:
                                     dt === nombre ? "#ec547c" : "",
-                                  color: dt === nombre ? "#ec547c" : "",
+                                  color: dt === nombre ? "#ec547c" : "black",
                                   cursor: "pointer",
                                 }}
                                 onClick={() => {

@@ -360,6 +360,8 @@ export default function Coolers() {
                                 height: "450px",
                                 minWidth: "900px",
                                 overflowY: "auto",
+                                backgroundColor:"#FFFF",
+                                scrollbarColor : "black #FFFF"
                               }}
                             >
                               {coolersData

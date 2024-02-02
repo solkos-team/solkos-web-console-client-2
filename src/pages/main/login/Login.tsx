@@ -1,4 +1,4 @@
-import { Button } from "@mantine/core";
+import { Button,PasswordInput,Input  } from "@mantine/core";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -180,7 +180,7 @@ export const Login = () => {
               >
                 Correo
               </div>
-              <input
+              <Input 
                 type="text"
                 value={email}
                 onChange={handleEmailChange}
@@ -192,6 +192,7 @@ export const Login = () => {
                   fontWeight: 500,
                   lineHeight: "28px",
                   width: 430,
+                  backgroundColor:"#FFFF"
                 }}
               />
             </div>
@@ -243,18 +244,18 @@ export const Login = () => {
                     />
                   )}
                 </div>
-                <input
-                  type={showPassword ? "text" : "password"}
+                <PasswordInput
+                  // type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={handleKeyDown}
                   style={{
-                    color: "#000",
+                    color: "black",
                     fontSize: "14px",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "28px",
-                    width: "100%",
+                    width: 430,
                     paddingRight: "30px",
                   }}
                 />

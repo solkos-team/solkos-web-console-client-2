@@ -229,7 +229,7 @@ export default function (props) {
             navigate(`/home/` + getPath(props))
           }}
         >
-          <IconArrowNarrowLeft />
+          <IconArrowNarrowLeft color="black" />
         </section>
         <div
           style={{
@@ -299,6 +299,7 @@ export default function (props) {
                     border: "1px solid #ADBACC",
                     padding: "3px 7px",
                     background: bloqPath(i) == false ? "" : "#D4DAE3",
+                    backgroundColor:"#FFFF"
                   }}
                   disabled={bloqPath(i)}
                   type="button"

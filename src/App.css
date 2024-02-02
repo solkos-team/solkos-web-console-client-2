@@ -5,6 +5,7 @@
   padding: 2rem;
   text-align: center;
   overflow-x: hidden;
+  background-color: #FFFF;
 }
 
 .logo {
@@ -70,4 +71,18 @@
 }
 .Tabla:hover{
   background-color: #CCCCCC;
+}
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #FFFF;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 20px;
+  
 }
