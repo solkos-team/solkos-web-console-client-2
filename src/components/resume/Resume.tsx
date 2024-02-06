@@ -332,6 +332,8 @@ const Resume = ({ coolersData, setTab }) => {
                       <MapComponent2
                         latitude={coolersData?.cooler?.latitude}
                         longitude={coolersData?.cooler?.longitude}
+                        last_latitude={coolersData?.cooler?.last_latitude}
+                        last_longitude={coolersData?.cooler?.last_longitude}
                       />
                     </>
                   )}

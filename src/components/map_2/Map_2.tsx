@@ -2,9 +2,19 @@ import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { IconMap, IconMap2 } from "@tabler/icons-react";
 
-const MapComponent2 = ({ latitude, longitude }) => {
+interface Marker {
+  setMap(map: any): void;
+}
+
+const MapComponent2 = ({
+  latitude,
+  longitude,
+  last_latitude,
+  last_longitude,
+}) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const [map, setMap] = useState(null);
+  const [markers, setMarkers] = useState<Marker[]>([]);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -31,8 +41,9 @@ const MapComponent2 = ({ latitude, longitude }) => {
     setMap(map);
 
     const iconUrl = "../../sampleData/filled.png";
+    const iconUrl2 = "../../sampleData/pin_filled.png";
 
-    new maps.Marker({
+    const currentMarker = new maps.Marker({
       position: { lat: latitude, lng: longitude },
       map,
       title: "Mi Marcador Fijo",
@@ -41,16 +52,46 @@ const MapComponent2 = ({ latitude, longitude }) => {
         scaledSize: new maps.Size(32, 32),
       },
     });
+
+    const anotherMarker = new maps.Marker({
+      position: { lat: last_latitude, lng: last_longitude },
+      map,
+      title: "Otro Marcador",
+      icon: {
+        url: iconUrl2,
+        scaledSize: new maps.Size(32, 32),
+      },
+    });
+
+    setMarkers([currentMarker, anotherMarker]);
+
+    // Cálculo del zoom dinámico
+    const zoomLevel = Math.log2(
+      24200000 /
+        (Dist(latitude, longitude, last_latitude, last_longitude) * 1000)
+    );
+    map.setZoom(zoomLevel);
   };
 
-  if (!googleMapsLoaded) {
-    return <div>Error al cargar Google Maps</div>;
-  }
+  const Dist = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = ((lat2 - lat1) * Math.PI) / 180; // Convertir diferencia de latitud a radianes
+    const dLon = ((lon2 - lon1) * Math.PI) / 180; // Convertir diferencia de longitud a radianes
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+        Math.cos((lat2 * Math.PI) / 180) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distancia = R * c; // Distancia en km
+    return distancia;
+  };
 
   const openGoogleMaps = () => {
     //@ts-ignore
     if (window.google && window.google.maps) {
-      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      const url = `https://www.google.com/maps/dir/${latitude},${longitude}/${last_latitude},${last_longitude}`;
       window.open(url, "_blank");
     } else {
       console.error("La API de Google Maps no se ha cargado completamente.");
@@ -73,20 +114,20 @@ const MapComponent2 = ({ latitude, longitude }) => {
         overflow: "hidden",
       }}
     >
-      {/* <GoogleMapReact
+      <GoogleMapReact
         bootstrapURLKeys={{
           key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
         }}
         center={{ lat: latitude, lng: longitude }}
-        defaultZoom={20}
+        defaultZoom={10} // Default zoom set to a reasonable value
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         options={{
           gestureHandling: "greedy",
           fullscreenControl: false,
         }}
-      /> */}
-      {/* <div
+      />
+      <div
         style={{
           position: "absolute",
           top: "25px",
@@ -98,7 +139,7 @@ const MapComponent2 = ({ latitude, longitude }) => {
           style={{ color: "#666666", cursor: "pointer" }}
           onClick={openGoogleMaps}
         />
-      </div> */}
+      </div>
       Prueba
     </div>
   );
