@@ -535,9 +535,9 @@ const Resume = ({ coolersData, setTab }) => {
                     {coolersData?.cooler?.last_latitude === undefined ||
                     coolersData?.cooler?.last_longitude === null
                       ? "Sin registro"
-                      : coolersData?.cooler?.last_latitude.toFixed(8)}
+                      : coolersData?.cooler?.last_latitude?.toFixed(8)}
                     {","}
-                    {coolersData?.cooler?.last_longitude.toFixed(8)} {")"}
+                    {coolersData?.cooler?.last_longitude?.toFixed(8)} {")"}
                   </div>
                 </div>
                 <div
