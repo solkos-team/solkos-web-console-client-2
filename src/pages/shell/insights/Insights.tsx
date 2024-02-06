@@ -496,7 +496,7 @@ export default function Insights() {
                       alignSelf: "stretch",
                     }}
                   >
-                    <div
+                    {/* <div
                       style={{
                         color: "#3A3A3F",
                         // fontFamily: "DM Sans",
@@ -508,8 +508,8 @@ export default function Insights() {
                       }}
                     >
                       Visualización de enfriadores:
-                    </div>
-                    <div
+                    </div> */}
+                    {/* <div
                       style={{
                         display: "flex",
                         justifyContent: "center",
@@ -519,7 +519,6 @@ export default function Insights() {
                         marginBottom: -12,
                       }}
                     >
-                      {/* Todo */}
                       <div
                         style={{
                           display: "flex",
@@ -549,7 +548,6 @@ export default function Insights() {
                           <div
                             style={{
                               color: "#3E83FF",
-                              // fontFamily: "DM Sans",
                               fontSize: "0.7rem",
                               fontStyle: "normal",
                               fontWeight: 500,
@@ -560,7 +558,7 @@ export default function Insights() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <br></br>
                   <div

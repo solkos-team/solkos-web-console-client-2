@@ -528,13 +528,13 @@ function App() {
                               gap: "4px",
                               borderRadius: "3px",
                               background: "#D4DAE3",
-                              width: 50,
+                              width: "100%",
                             }}
                           >
                             <Text
                               style={{
                                 color: "#313A49",
-                                fontSize: "12px",
+                                fontSize: "10px",
                                 fontStyle: "normal",
                                 fontWeight: 400,
                                 lineHeight: "14px",

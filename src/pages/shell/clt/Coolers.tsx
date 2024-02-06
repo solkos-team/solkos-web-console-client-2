@@ -114,11 +114,11 @@ export default function Coolers() {
   }, []);
   coolersData == undefined ? [] : coolersData;
   totalData == undefined ? 0 : totalData;
-  
+
   return (
     <div>
       <section>
-        <PageFilter status={isLoading} />        
+        <PageFilter status={isLoading} />
       </section>
       <br></br>
       <div
@@ -210,7 +210,7 @@ export default function Coolers() {
                   onChange={(event) => handleSearchChange(event)}
                   onKeyDown={handleKeyDown}
                   type="text"
-                  placeholder="Busca por Id Coolector / Mac"
+                  placeholder="Busca por Serie/ Id Coolector / Mac"
                   style={{
                     fontSize: "14px",
                     fontStyle: "normal",
@@ -360,8 +360,8 @@ export default function Coolers() {
                                 height: "450px",
                                 minWidth: "900px",
                                 overflowY: "auto",
-                                backgroundColor:"#FFFF",
-                                scrollbarColor : "gray #FFFF"
+                                backgroundColor: "#FFFF",
+                                scrollbarColor: "gray #FFFF",
                               }}
                             >
                               {coolersData
@@ -370,16 +370,15 @@ export default function Coolers() {
                                   <TableRow
                                     key={index}
                                     className="Tabla"
-                                    onClick={() => {     
-                                      localStorage.getItem("USER") == 'Call Center' 
-                                      ?                                 
-                                      navigate(
-                                        `/homeCallCenter/coolerDetail/${cooler.serial_number}`
-                                      )
-                                      :
-                                      navigate(
-                                        `/home/coolerDetail/${cooler.serial_number}`
-                                      )
+                                    onClick={() => {
+                                      localStorage.getItem("USER") ==
+                                      "Call Center"
+                                        ? navigate(
+                                            `/homeCallCenter/coolerDetail/${cooler.serial_number}`
+                                          )
+                                        : navigate(
+                                            `/home/coolerDetail/${cooler.serial_number}`
+                                          );
                                     }}
                                   >
                                     <TableCell
