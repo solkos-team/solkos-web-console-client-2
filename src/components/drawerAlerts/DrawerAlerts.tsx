@@ -161,7 +161,7 @@ export default function DrawerA({
                   borderRadius: "4px",
                   background: selectedAlgorithm.endsWith("ALERT")
                     ? "#FEF5C7"
-                    : selectedAlgorithm.endsWith("ALERT")
+                    : selectedAlgorithm.endsWith("FAIL")
                     ? "#FFC7CD"
                     : "#BCDAFF",
                 }}
@@ -189,7 +189,7 @@ export default function DrawerA({
                     alt="Descripción de la imagen"
                     style={{ width: "44px", height: "44px" }}
                   />
-                ) : selectedAlgorithm === "COMPRESSOR_FAIL" ? (
+                ) : selectedAlgorithm === "COMPRESSOR_FAIL" || selectedAlgorithm === "FREEZING_FAIL" || selectedAlgorithm === "VOLTAGE_FAIL" ? (
                   <img
                     src={"../../sampleData/compressor2.png"}
                     alt="Descripción de la imagen"
