@@ -1122,8 +1122,7 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_ownership_expense.value ==
-                  undefined
+                  {coolersData?.properties?.total_ownership_expense?.value == undefined || coolersData?.properties?.total_ownership_expense?.value == 'undefined'                  
                     ? "Sin registro"
                     : "$" +
                       `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
@@ -1160,7 +1159,7 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.sale_price.value == undefined
+                  {coolersData?.properties?.sale_price?.value == undefined
                     ? "Sin registro"
                     : "$" +
                       `${coolersData?.properties?.sale_price.value.toLocaleString()}`}

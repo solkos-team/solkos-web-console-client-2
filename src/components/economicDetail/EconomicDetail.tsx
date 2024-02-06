@@ -184,7 +184,7 @@ const EconomicDetail = ({ coolersData }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_ownership_expense.value ==
+                  {coolersData?.properties?.total_ownership_expense?.value ==
                   undefined
                     ? "Sin registro"
                     : "$" +
@@ -261,7 +261,7 @@ const EconomicDetail = ({ coolersData }) => {
                     marginRight: 75,
                   }}
                 >
-                  {coolersData?.properties?.sale_price.value == undefined
+                  {coolersData?.properties?.sale_price?.value == undefined
                     ? "Sin registro"
                     : "$" + `${coolersData?.properties?.sale_price.value}`}
                 </div>
