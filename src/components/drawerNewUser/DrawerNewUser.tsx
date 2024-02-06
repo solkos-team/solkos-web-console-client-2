@@ -40,15 +40,20 @@ export default function DrawerNewUser({
       setShowAlert(true);
       setIsAlertOpen(true);
       setAlertStatus(true);
+      clearInputs()
     } catch (error) {
       setIsDrawerOpen2(false);
       onClose();
       setAlertStatus(false);
       console.error("Error fetching :", error);
       setIsAlertOpen(true);
+      clearInputs()
     }
   };
-
+  const clearInputs = () =>{
+    setName('')
+    setEmail('')
+  }
   const closeAlert = () => {
     setShowAlert(false);
     onClose();
