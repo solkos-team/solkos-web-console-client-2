@@ -10,21 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
-
-async function validarExistenciaImagen(url) {
-  try {
-    const response = await fetch(url, { method: "HEAD" });
-
-    if (response.ok) {
-    } else {
-    }
-  } catch (error) {
-    console.error(
-      "Error al intentar validar la existencia de la imagen:",
-      error
-    );
-  }
-}
+import MapComponent2 from "../map_2";
 
 const formatCreatedAt = (createdAt) => {
   const date = new Date(createdAt);
@@ -41,9 +27,6 @@ const formatCreatedAt = (createdAt) => {
 const Resume = ({ coolersData, setTab }) => {
   const a = "../../sampleData/cooler_c.png";
   const b = "../../sampleData/buildings.png";
-  const urlImagen = coolersData?.cooler?.asset_url;
-
-  validarExistenciaImagen(urlImagen);
 
   const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
     // Convertir las fechas a milisegundos
@@ -335,12 +318,23 @@ const Resume = ({ coolersData, setTab }) => {
                     border: "1px solid #CACACA",
                   }}
                 >
-                  <div>
-                    <MapComponent
-                      latitude={coolersData?.cooler?.latitude}
-                      longitude={coolersData?.cooler?.longitude}
-                    />
-                  </div>
+                  {coolersData?.cooler?.last_latitude === null ? (
+                    <>
+                      <div>
+                        <MapComponent
+                          latitude={coolersData?.cooler?.latitude}
+                          longitude={coolersData?.cooler?.longitude}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <MapComponent2
+                        latitude={coolersData?.cooler?.latitude}
+                        longitude={coolersData?.cooler?.longitude}
+                      />
+                    </>
+                  )}
                 </div>
                 <div
                   style={{
@@ -541,9 +535,9 @@ const Resume = ({ coolersData, setTab }) => {
                     {coolersData?.cooler?.last_latitude === undefined ||
                     coolersData?.cooler?.last_longitude === null
                       ? "Sin registro"
-                      : coolersData?.cooler?.last_latitude}
+                      : coolersData?.cooler?.last_latitude.toFixed(8)}
                     {","}
-                    {coolersData?.cooler?.last_longitude} {")"}
+                    {coolersData?.cooler?.last_longitude.toFixed(8)} {")"}
                   </div>
                 </div>
                 <div
@@ -1122,7 +1116,10 @@ const Resume = ({ coolersData, setTab }) => {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_ownership_expense?.value == undefined || coolersData?.properties?.total_ownership_expense?.value == 'undefined'                  
+                  {coolersData?.properties?.total_ownership_expense?.value ==
+                    undefined ||
+                  coolersData?.properties?.total_ownership_expense?.value ==
+                    "undefined"
                     ? "Sin registro"
                     : "$" +
                       `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
