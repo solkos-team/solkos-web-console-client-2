@@ -97,7 +97,12 @@ export default function Outlets() {
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-
+    document.addEventListener('click', function(event) {
+      const element = event.target as HTMLElement  
+     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'principalOutlets'){
+        setIsDrawerOpen(false)
+      }     
+    })
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
@@ -114,6 +119,7 @@ export default function Outlets() {
 
       <br></br>
       <div
+      className="principalOutlets"
         style={{
           display: "flex",
           padding: "16px 0px",
@@ -124,7 +130,7 @@ export default function Outlets() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0,
+          marginLeft: 0,          
         }}
       >
         <div
@@ -165,6 +171,7 @@ export default function Outlets() {
           </div>
         </div>
         <div
+        className="principalOutlets"
           style={{
             display: "flex",
             padding: "32px 0px",
@@ -219,6 +226,7 @@ export default function Outlets() {
         </div>
         {/* Tabla */}
         <div
+        className="principalOutlets"
           style={{
             display: "flex",
             padding: "0px 32px",

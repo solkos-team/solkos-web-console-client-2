@@ -15,6 +15,7 @@ export default function Indicator() {
   }
 
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
@@ -42,12 +43,16 @@ export default function Indicator() {
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-
+    document.addEventListener('click', function(event) {
+      const element = event.target as HTMLElement  
+     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'IndicatorCardsContent'){
+        setIsDrawerOpen(false)
+      }     
+    })
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
     null
   );
@@ -56,14 +61,15 @@ export default function Indicator() {
     delta: number;
   } | null>(null);
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  
+  
   return (
     <div>
       <PageFilter status={isLoading} />
       <br></br>
       <div className="principal-titl">
         <div
+        className="IndicatorCardsContent"
           style={{
             display: "flex",
             padding: "0px 0px",
@@ -151,6 +157,7 @@ export default function Indicator() {
                 .filter((cooler) => cooler.level === "INDICATOR")
                 .map((cooler, index) => (
                   <div
+                  className="IndicatorCardsContent"
                     key={index}
                     style={{
                       marginBottom: "16px",

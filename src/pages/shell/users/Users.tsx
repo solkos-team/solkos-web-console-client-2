@@ -43,7 +43,6 @@ export default function Users() {
   const [alertStatus, setAlertStatus] = useState();
   const [userDelete, setUserDelete] = useState();
   const [totalData, setTotalData] = useState<String | number>(0);
-  console.log(dataUsersEdit)
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -122,6 +121,13 @@ export default function Users() {
 
   useEffect(() => {
     fetchData();
+    document.addEventListener('click', function(event) {
+      const element = event.target as HTMLElement  
+     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'principalUsers' || element.className == 'Tabla'){
+        closeDrawer()
+        closeDrawer2()
+      }     
+    })
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -153,6 +159,7 @@ export default function Users() {
       <PageFilter status={isLoading} />
       <br></br>
       <div
+      className="principalUsers"
         style={{
           display: "flex",
           padding: "16px 0px",
@@ -163,10 +170,11 @@ export default function Users() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0,
+          marginLeft: 0,          
         }}
       >
         <div
+        className="principalUsers"
           style={{
             display: "flex",
             padding: "0px 32px",
@@ -205,6 +213,7 @@ export default function Users() {
 
         {/* Tabla */}
         <div
+        className="principalUsers"
           style={{
             display: "flex",
             padding: "0px 32px",
@@ -263,6 +272,7 @@ export default function Users() {
             </div>
           </div>
           <div
+          className="principalUsers"
             style={{
               display: "flex",
               padding: "32px 0px",
@@ -324,8 +334,9 @@ export default function Users() {
             }}
           >
             <div style={{}}>
-              <section>
+              <section className="principalUsers">
                 <Table
+                className="principalUsers"
                   style={{
                     borderCollapse: "collapse",
                     width: "100%",
@@ -335,7 +346,7 @@ export default function Users() {
                   }}
                 >
                   <TableHead style={{ display: "block" }}>
-                    <TableRow>
+                    <TableRow className="principalUsers">
                       <TableHeaderCell
                         style={{
                           textAlign: "left",
@@ -399,7 +410,7 @@ export default function Users() {
                           {filteredUsers
                             // .slice(firstIndex, lastIndex)
                             .map((user, index) => (
-                              <TableRow
+                              <TableRow                            
                                 className="Tabla"
                                 key={index}
                                 style={{ userSelect: "none", height: "auto" }}

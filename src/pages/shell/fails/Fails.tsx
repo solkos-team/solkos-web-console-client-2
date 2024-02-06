@@ -41,7 +41,12 @@ export default function Fails() {
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-
+    document.addEventListener('click', function(event) {
+      const element = event.target as HTMLElement  
+     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'IndicatorCardsContent'){
+        setIsDrawerOpen(false)
+      }     
+    })
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
@@ -76,6 +81,7 @@ export default function Fails() {
       >
         {/* title */}
         <div
+        className="IndicatorCardsContent"
           style={{
             display: "flex",
             padding: "0px 0px",
@@ -167,6 +173,7 @@ export default function Fails() {
                 )
                 .map((cooler, index) => (
                   <div
+                  className="IndicatorCardsContent"
                     key={index}
                     style={{
                       marginBottom: "16px",

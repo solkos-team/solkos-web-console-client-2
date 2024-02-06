@@ -4,7 +4,6 @@ import { IconDownload } from "@tabler/icons-react";
 import * as XLSX from "xlsx/xlsx";
 
 export const ExportToExcel = (props) => {
-  console.log(props.datos)
   const exportToExcel = () => {
     let wb = XLSX.utils.book_new();
     let ws = XLSX.utils.json_to_sheet(props.datos);

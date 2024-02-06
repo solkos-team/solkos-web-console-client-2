@@ -65,9 +65,6 @@ export default function CoolerDetail() {
     setNoInfoToShow(false);
   };
 
-
-  console.log(coolersData);
-
   const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
     const dateA = new Date(a.notified_at).getTime();
     const dateB = new Date(b.notified_at).getTime();
