@@ -2,20 +2,9 @@ import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { IconMap, IconMap2 } from "@tabler/icons-react";
 
-interface Marker {
-  setMap(map: any): void;
-}
-
-const MapComponent2 = ({
-  latitude,
-  longitude,
-  last_latitude,
-  last_longitude,
-}) => {
+const MapComponent1 = ({ latitude, longitude }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const [map, setMap] = useState(null);
-  const [markers, setMarkers] = useState<Marker[]>([]);
-  const [line, setLine] = useState(null); // Mantén una referencia a la línea
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -41,10 +30,9 @@ const MapComponent2 = ({
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/filled.png";
-    const iconUrl2 = "../../sampleData/pin_filled.png";
+    const iconUrl = "../../sampleData/pin_filled.png";
 
-    const currentMarker = new maps.Marker({
+    new maps.Marker({
       position: { lat: latitude, lng: longitude },
       map,
       title: "Mi Marcador Fijo",
@@ -53,73 +41,16 @@ const MapComponent2 = ({
         scaledSize: new maps.Size(32, 32),
       },
     });
-
-    const anotherMarker = new maps.Marker({
-      position: { lat: last_latitude, lng: last_longitude },
-      map,
-      title: "Otro Marcador",
-      icon: {
-        url: iconUrl2,
-        scaledSize: new maps.Size(32, 32),
-      },
-    });
-
-    setMarkers([currentMarker, anotherMarker]);
-
-    // Crea la línea entre los marcadores
-    const lineCoordinates = [
-      { lat: latitude, lng: longitude },
-      { lat: last_latitude, lng: last_longitude },
-    ];
-    const linePath = new maps.Polyline({
-      path: lineCoordinates,
-      geodesic: true,
-      strokeColor: "transparent",
-      strokeOpacity: 0,
-      strokeWeight: 0,
-      icons: [
-        {
-          icon: {
-            path: "M 0,-1 0,1",
-            strokeColor: "#f0547c",
-            strokeOpacity: 1,
-            scale: 4,
-          },
-          offset: "0",
-          repeat: "20px",
-        },
-      ],
-    });
-
-    linePath.setMap(map);
-    setLine(linePath);
-
-    const zoomLevel = Math.log2(
-      24200000 /
-        (Dist(latitude, longitude, last_latitude, last_longitude) * 1000)
-    );
-    map.setZoom(zoomLevel);
   };
 
-  const Dist = (lat1, lon1, lat2, lon2) => {
-    const R = 6371;
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distancia = R * c;
-    return distancia;
-  };
+  if (!googleMapsLoaded) {
+    return <div>Error al cargar Google Maps</div>;
+  }
 
   const openGoogleMaps = () => {
     //@ts-ignore
     if (window.google && window.google.maps) {
-      const url = `https://www.google.com/maps/dir/${latitude},${longitude}/${last_latitude},${last_longitude}`;
+      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
       window.open(url, "_blank");
     } else {
       console.error("La API de Google Maps no se ha cargado completamente.");
@@ -147,7 +78,7 @@ const MapComponent2 = ({
           key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
         }}
         center={{ lat: latitude, lng: longitude }}
-        defaultZoom={10}
+        defaultZoom={20}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         options={{
@@ -168,9 +99,8 @@ const MapComponent2 = ({
           onClick={openGoogleMaps}
         />
       </div>
-      Prueba
     </div>
   );
 };
 
-export default MapComponent2;
+export default MapComponent1;

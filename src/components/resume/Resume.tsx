@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
+import MapComponent1 from "../map_1";
 import MapComponent2 from "../map_2";
 
 const formatCreatedAt = (createdAt) => {
@@ -318,7 +319,36 @@ const Resume = ({ coolersData, setTab }) => {
                     border: "1px solid #CACACA",
                   }}
                 >
-                  {coolersData?.cooler?.last_latitude === null ? (
+                  {/* {coolersData?.cooler?.last_latitude === null ? (
+                    <>
+                      <div>
+                        <MapComponent
+                          latitude={coolersData?.cooler?.latitude}
+                          longitude={coolersData?.cooler?.longitude}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <MapComponent2
+                        latitude={coolersData?.cooler?.latitude}
+                        longitude={coolersData?.cooler?.longitude}
+                        last_latitude={coolersData?.cooler?.last_latitude}
+                        last_longitude={coolersData?.cooler?.last_longitude}
+                      />
+                    </>
+                  )} */}
+                  {coolersData?.cooler?.last_latitude != null &&
+                  coolersData?.cooler?.latitude === 0 ? (
+                    <>
+                      <div>
+                        <MapComponent1
+                          latitude={coolersData?.cooler?.last_latitude}
+                          longitude={coolersData?.cooler?.last_longitude}
+                        />
+                      </div>
+                    </>
+                  ) : coolersData?.cooler?.last_latitude === null ? (
                     <>
                       <div>
                         <MapComponent
