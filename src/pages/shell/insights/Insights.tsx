@@ -7,7 +7,7 @@ import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
 import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
 import { MapInsights } from "./MapInsights";
-
+import { InsightsData,Algorithm,InsightLevel,CoolerInterface as Cooler } from "../../../components/drawerOutlets/CoolerInterface";
 export default function Insights() {
   interface Algorithm {
     level: string;
@@ -48,16 +48,6 @@ export default function Insights() {
 
   interface InsightsData {
     [key: string]: InsightLevel;
-  }
-  interface Cooler {
-    serial_number: string;
-    device_id: string;
-    model_id: string;
-    outlet_name: string;
-    region: string;
-    route: string;
-    latitude: string;
-    longitude: string;
   }
 
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
@@ -578,11 +568,7 @@ export default function Insights() {
                     ]}
                   /> */}
 
-                    {markers && markers.length > 0 ? (
-                      <MapInsightsComponent key={mapKey} markers={markers} />
-                    ) : (
-                      <SkeletonMapInsights />
-                    )}
+                    {<MapInsightsComponent items={items} data={coolersData}/>}
                   </div>
                 </div>
               </div>

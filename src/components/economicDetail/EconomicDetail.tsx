@@ -16,49 +16,96 @@ const EconomicDetail = ({ coolersData }) => {
     return formattedDate;
   };
 
-  // *************
-  const chartData = [
-    { name: "Category A", value: 10 },
-    { name: "Category B", value: 20 },
-    // ... otros datos
+  // datos grafica lineal
+  const chartdata = [
+    {
+      year: 1970,
+      "Export Growth Rate": 2.04,
+      "Import Growth Rate": 1.53,
+    },
+    {
+      year: 1971,
+      "Export Growth Rate": 1.96,
+      "Import Growth Rate": 1.58,
+    },
+    {
+      year: 1972,
+      "Export Growth Rate": 1.96,
+      "Import Growth Rate": 1.61,
+    },
+    {
+      year: 1973,
+      "Export Growth Rate": 1.93,
+      "Import Growth Rate": 1.61,
+    },
+    {
+      year: 1974,
+      "Export Growth Rate": 1.88,
+      "Import Growth Rate": 1.67,
+    },
+    //...
   ];
-  // data de ejemplo para grafica
-  const chartdata4 = [
+  // datos grafica de barras
+  const chartdata3 = [
     {
       date: "Jan 23",
-      Running: 167,
+      "2022": 45,
+      "2023": 78,
     },
     {
       date: "Feb 23",
-      Running: 125,
+      "2022": 52,
+      "2023": 71,
     },
     {
       date: "Mar 23",
-      Running: 156,
+      "2022": 48,
+      "2023": 80,
     },
     {
       date: "Apr 23",
-      Running: 165,
+      "2022": 61,
+      "2023": 65,
     },
     {
       date: "May 23",
-      Running: 153,
+      "2022": 55,
+      "2023": 58,
     },
     {
       date: "Jun 23",
-      Running: 124,
+      "2022": 67,
+      "2023": 62,
     },
     {
       date: "Jul 23",
-      Running: 164,
+      "2022": 60,
+      "2023": 54,
     },
     {
       date: "Aug 23",
-      Running: 123,
+      "2022": 72,
+      "2023": 49,
     },
     {
       date: "Sep 23",
-      Running: 132,
+      "2022": 65,
+      "2023": 52,
+    },
+    {
+      date: "Oct 23",
+      "2022": 68,
+      "2023": null,
+    },
+    {
+      date: "Nov 23",
+      "2022": 74,
+      "2023": null,
+    },
+    {
+      date: "Dec 23",
+      "2022": 71,
+      "2023": null,
     },
   ];
 
@@ -78,7 +125,7 @@ const EconomicDetail = ({ coolersData }) => {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-
+  console.log(coolersData)
   return (
     <div>
       <div
@@ -769,6 +816,7 @@ const EconomicDetail = ({ coolersData }) => {
             borderRadius: "8px",
             border: "1px solid #88888B",
             width: "95%",
+            height:"40rem"
           }}
         >
           <div
@@ -925,7 +973,7 @@ const EconomicDetail = ({ coolersData }) => {
             <Tabs
               color="teal"
               defaultValue="first"
-              style={{ width: "100%", marginTop: "16px" }}
+              style={{ width: "100%"}}
             >
               <Tabs.List>
                 <Tabs.Tab value="first">Gráfica del acumulado</Tabs.Tab>
@@ -936,18 +984,38 @@ const EconomicDetail = ({ coolersData }) => {
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  padding: "16px",
                 }}
               >
                 <Tabs.Panel value="first" pt="xs">
                   <div style={{ width: "100%", height: "100px" }}>
-                    <div style={{ marginLeft: 400 }}>Sin registros</div>
+                    {/* <div style={{ marginLeft: 400 }}>Sin registros</div> */}
+                    <Card style={{width:"95%",height:"90%"}}>
+                      <LineChart
+                        className="mt-6"
+                        data={chartdata}
+                        index="year"
+                        categories={["Export Growth Rate", "Import Growth Rate"]}
+                        colors={["emerald", "gray"]}
+                        valueFormatter={valueFormatter}
+                        yAxisWidth={40}
+                      />
+                    </Card>
                   </div>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="second" pt="xs">
                   <div style={{ width: "100%", height: "100px" }}>
-                    <div style={{ marginLeft: 400 }}>Sin registros</div>
+                    {/* <div style={{ marginLeft: 400 }}>Sin registros</div> */}
+                    <Card style={{width:"95%",height:"90%"}}>
+                      <BarChart
+                        className="mt-6"
+                        data={chartdata3}
+                        index="date"
+                        categories={["2022", "2023"]}
+                        colors={["neutral", "indigo"]}
+                        yAxisWidth={30}                        
+                      />
+                    </Card>
                   </div>
                 </Tabs.Panel>
               </div>

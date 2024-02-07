@@ -12,8 +12,8 @@ export interface CoolerInterface {
   outlet_id: string;
   outlet_name: string;
   outlet_address: string;
-  latitude: number;
-  longitude: number;
+  latitude: string;
+  longitude: string;
   class: Class;
   algorithm: Algorithm;
   priority?: string;
@@ -24,10 +24,14 @@ export interface CoolerInterface {
   days_without_visitC: string;
   status: string;
   num_coolers : string;
+  priority_status: string;
+  last_read: string;
+  
 }
 
 export enum Algorithm {
   Installed = "INSTALLED",
+  
 }
 
 export enum Class {
@@ -48,4 +52,37 @@ export enum Region {
 
 export enum Route {
   Si0038 = "SI0038",
+}
+export interface InsightLevel {
+  ALERT: {
+    level: string;
+    total: number;
+    algorithms: Algorithm[];
+  };
+  FAIL: {
+    level: string;
+    total: number;
+    algorithms: Algorithm[];
+  };
+  INDICATOR: {
+    level: string;
+    total: number;
+    algorithms: Algorithm[];
+  };
+  summary: {
+    coolers: number;
+    operative_units: number;
+    regions: number;
+    routes: number;
+    zones: number;
+  };
+  coolers;
+  operative_units;
+  regions;
+  routes;
+  zones;
+}
+
+export interface InsightsData {
+  [key: string]: InsightLevel;
 }

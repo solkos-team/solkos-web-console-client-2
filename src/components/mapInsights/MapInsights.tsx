@@ -1,36 +1,57 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
-
-const MapInsightsComponent = ({ markers }) => {
+import { useSelector } from "react-redux";
+import { fetchUniversal } from "../../utils/apiUtils";
+import { CoolerInterface as Cooler } from "../drawerOutlets/CoolerInterface";
+import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
+const MapInsightsComponent = ({items,data }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
-  const [map, setMap] = useState(null);
+  const [coolersData, setCoolersData] = useState<Cooler[]>();
+  const [isLoading, setIsLoading] = useState(true);
+  const [markers,setMarkers] = useState(data)
+  const [map, setMap] = useState<String>();
+  const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state: any) => state.organization);
+  const pathVerify = () => {
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+  const body2 = {
+    customer: dto,
+    class: "STK",
+    algorithm: ["INSTALLED"],
+    path: pathVerify(),
+    page_size: items > 1000 || items == 0 ? 1000 : items,
+    page_number: 1,
+  };
+  const fetchData2 = async () => {
+    try {
+      const data = await fetchUniversal("coolers", body2, setIsLoading);
+      setMarkers(data
+        ? data
+        .filter(
+          (cooler) =>
+          parseFloat(cooler.latitude) !== 0 &&
+          parseFloat(cooler.longitude) !== 0
+          )
+          .map((cooler) => ({
+            latitude: parseFloat(cooler.latitude),
+            longitude: parseFloat(cooler.longitude),
+          }))
+          : [])
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching coolers:", error);
+    }
+  };
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w&libraries=places`;
-    script.async = true;
-
-    script.onload = () => {
-      setGoogleMapsLoaded(true);
-    };
-
-    script.onerror = () => {
-      console.error("Error al cargar el script de Google Maps");
-      setGoogleMapsLoaded(false);
-    };
-
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  useEffect(() => {    
+    fetchData2()    
+  }, [dt,dto]);
 
   const handleApiLoaded = (map, maps) => {
     setMap(map);
-
     const bounds = new maps.LatLngBounds();
-
+    markers == undefined ? [] :
     markers.forEach(({ latitude, longitude }, index) => {
       const marker = new maps.Marker({
         position: { lat: latitude, lng: longitude },
@@ -50,22 +71,7 @@ const MapInsightsComponent = ({ markers }) => {
     });
 
     map.fitBounds(bounds);
-  };
-
-  const openGoogleMaps = () => {
-    //@ts-ignore
-    if (window.google && window.google.maps) {
-      const url = `https://www.google.com/maps/search/?api=1&query=${markers[0].latitude},${markers[0].longitude}`;
-      window.open(url, "_blank");
-    } else {
-      console.error("La API de Google Maps no se ha cargado completamente.");
-    }
-  };
-
-  if (!googleMapsLoaded) {
-    return <div></div>;
-  }
-
+  };  
   return (
     <div
       style={{
@@ -78,7 +84,8 @@ const MapInsightsComponent = ({ markers }) => {
         overflow: "hidden",
       }}
     >
-      <GoogleMapReact
+      {isLoading == true ? (<SkeletonMapInsights />) : (
+        <GoogleMapReact
         bootstrapURLKeys={{
           key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
         }}
@@ -93,8 +100,9 @@ const MapInsightsComponent = ({ markers }) => {
         options={{
           gestureHandling: "greedy",
           fullscreenControl: false,
-        }}
-      />
+        }}/>
+      )}
+      
       <div
         style={{
           position: "absolute",

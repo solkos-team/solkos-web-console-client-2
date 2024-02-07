@@ -17,23 +17,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
+import {CoolerInterface as Cooler} from '../../../components/drawerOutlets/CoolerInterface'
 
-export default function Coolers() {
-  interface Cooler {
-    serial_number: string;
-    device_id: string;
-    model_id: string;
-    outlet_name: string;
-    region: string;
-    route: string;
-    status: string;
-    last_read: string;
-    days_without_visit: string;
-    priority_status: string;
-  }
-  interface CoolerDetail {
-    serial_number: string;
-  }
+export default function Coolers() {    
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [searchValue, setSearchValue] = useState("");
@@ -524,7 +510,7 @@ export default function Coolers() {
                                           height: "40px",
                                         }}
                                       >
-                                        <Link to="/coolerDetail">
+                                        <Link to="/home/coolerDetail">
                                           <div
                                             style={{
                                               color: "#3E83FF",
