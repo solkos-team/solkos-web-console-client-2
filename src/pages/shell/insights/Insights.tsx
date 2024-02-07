@@ -102,7 +102,7 @@ export default function Insights() {
     class: "STK",
     algorithm: ["INSTALLED"],
     path: pathVerify(),
-    page_size: items > 1000 || items == 0 ? 1000 : items,
+    page_size: 10000,
     page_number: 1,
   };
   const fetchData2 = async () => {

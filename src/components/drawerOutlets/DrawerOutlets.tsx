@@ -63,7 +63,7 @@ export default function Drawer({ isOpen, onClose, outletDetails }) {
   const body = {
     customer: dto,
     class: "STK",
-    algorithm: ["INSTALLED"],
+    algorithm: ["INSTALLED","OWNED"],
     path: pathVerify(),
     page_size: 1000,
     page_number: 1,
