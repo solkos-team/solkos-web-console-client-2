@@ -8,6 +8,7 @@ import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonI
 import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
 import { MapInsights } from "./MapInsights";
 import { InsightsData,Algorithm,InsightLevel,CoolerInterface as Cooler } from "../../../components/drawerOutlets/CoolerInterface";
+import { Skeleton } from "@mantine/core";
 export default function Insights() {
   interface Algorithm {
     level: string;
@@ -316,9 +317,11 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {insightsData?.summary.coolers === undefined
+                      {                        
+                        isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
+                      insightsData?.summary.coolers === undefined
                         ? "Sin registro"
-                        : insightsData?.summary.coolers.toLocaleString()}
+                        : insightsData?.summary.coolers.toLocaleString()}                        
                     </div>
                   </div>
                   <div
@@ -352,7 +355,8 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {insightsData?.summary.regions === undefined
+                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
+                      insightsData?.summary.regions === undefined
                         ? "Sin registro"
                         : insightsData?.summary.regions.toLocaleString()}
                     </div>
@@ -388,7 +392,8 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {insightsData?.summary.zones === undefined
+                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
+                      insightsData?.summary.zones === undefined
                         ? "Sin registro"
                         : insightsData?.summary.zones.toLocaleString()}
                     </div>
@@ -424,7 +429,8 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {insightsData?.summary.operative_units === undefined
+                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
+                      insightsData?.summary.operative_units === undefined
                         ? "Sin registro"
                         : insightsData?.summary.operative_units.toLocaleString()}
                     </div>
@@ -460,7 +466,8 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {insightsData?.summary.routes === undefined
+                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
+                      insightsData?.summary.routes === undefined
                         ? "Sin registro"
                         : insightsData?.summary.routes.toLocaleString()}
                     </div>
