@@ -15,7 +15,7 @@ const MapComponent2 = ({
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const [map, setMap] = useState(null);
   const [markers, setMarkers] = useState<Marker[]>([]);
-  const [line, setLine] = useState(null); // Mantén una referencia a la línea
+  const [line, setLine] = useState(null);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -66,7 +66,6 @@ const MapComponent2 = ({
 
     setMarkers([currentMarker, anotherMarker]);
 
-    // Crea la línea entre los marcadores
     const lineCoordinates = [
       { lat: latitude, lng: longitude },
       { lat: last_latitude, lng: last_longitude },
@@ -168,7 +167,6 @@ const MapComponent2 = ({
           onClick={openGoogleMaps}
         />
       </div>
-      Prueba
     </div>
   );
 };

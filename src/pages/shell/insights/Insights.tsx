@@ -7,7 +7,12 @@ import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
 import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
 import { MapInsights } from "./MapInsights";
-import { InsightsData,Algorithm,InsightLevel,CoolerInterface as Cooler } from "../../../components/drawerOutlets/CoolerInterface";
+import {
+  InsightsData,
+  Algorithm,
+  InsightLevel,
+  CoolerInterface as Cooler,
+} from "../../../components/drawerOutlets/CoolerInterface";
 import { Skeleton } from "@mantine/core";
 export default function Insights() {
   interface Algorithm {
@@ -91,6 +96,7 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body);
       setInsightsData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -317,11 +323,22 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {                        
-                        isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
-                      insightsData?.summary.coolers === undefined
-                        ? "Sin registro"
-                        : insightsData?.summary.coolers.toLocaleString()}                        
+                      {isLoading == true ? (
+                        <>
+                          <div style={{ width: "100%", height: "100%" }}>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="70px"
+                              radius="xl"
+                            />
+                          </div>
+                        </>
+                      ) : insightsData?.summary.coolers === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.summary.coolers.toLocaleString()
+                      )}
                     </div>
                   </div>
                   <div
@@ -355,10 +372,22 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
-                      insightsData?.summary.regions === undefined
-                        ? "Sin registro"
-                        : insightsData?.summary.regions.toLocaleString()}
+                      {isLoading == true ? (
+                        <>
+                          <div style={{ width: "100%", height: "100%" }}>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="70px"
+                              radius="xl"
+                            />
+                          </div>
+                        </>
+                      ) : insightsData?.summary.regions === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.summary.regions.toLocaleString()
+                      )}
                     </div>
                   </div>
                   <div
@@ -392,10 +421,22 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
-                      insightsData?.summary.zones === undefined
-                        ? "Sin registro"
-                        : insightsData?.summary.zones.toLocaleString()}
+                      {isLoading == true ? (
+                        <>
+                          <div style={{ width: "100%", height: "100%" }}>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="70px"
+                              radius="xl"
+                            />
+                          </div>
+                        </>
+                      ) : insightsData?.summary.zones === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.summary.zones.toLocaleString()
+                      )}
                     </div>
                   </div>
                   <div
@@ -429,10 +470,23 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
-                      insightsData?.summary.operative_units === undefined
-                        ? "Sin registro"
-                        : insightsData?.summary.operative_units.toLocaleString()}
+                      {isLoading == true ? (
+                        <>
+                          <div style={{ width: "100%", height: "100%" }}>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="70px"
+                              radius="xl"
+                            />
+                          </div>
+                        </>
+                      ) : insightsData?.summary.operative_units ===
+                        undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.summary.operative_units.toLocaleString()
+                      )}
                     </div>
                   </div>
                   <div
@@ -466,10 +520,22 @@ export default function Insights() {
                         lineHeight: "normal",
                       }}
                     >
-                      {isLoading == true ? <><div style={{width:"100%",height:"100%"}}><Skeleton height={15} mt={6} width="70px" radius="xl" /></div></> :
-                      insightsData?.summary.routes === undefined
-                        ? "Sin registro"
-                        : insightsData?.summary.routes.toLocaleString()}
+                      {isLoading == true ? (
+                        <>
+                          <div style={{ width: "100%", height: "100%" }}>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="70px"
+                              radius="xl"
+                            />
+                          </div>
+                        </>
+                      ) : insightsData?.summary.routes === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.summary.routes.toLocaleString()
+                      )}
                     </div>
                   </div>
                 </div>
@@ -575,7 +641,7 @@ export default function Insights() {
                     ]}
                   /> */}
 
-                    {<MapInsightsComponent items={items} data={coolersData}/>}
+                    {<MapInsightsComponent items={items} data={coolersData} />}
                   </div>
                 </div>
               </div>
@@ -705,10 +771,11 @@ export default function Insights() {
                                 lineHeight: "normal",
                               }}
                             >
-                              {insightsData?.insights?.INDICATOR?.total ===
+                              {/* {insightsData?.insights?.INDICATOR?.total ===
                               undefined
                                 ? "Sin registro"
-                                : insightsData?.insights?.INDICATOR?.total.toLocaleString()}
+                                : insightsData?.insights?.INDICATOR?.total.toLocaleString()} */}{" "}
+                              0
                             </div>
                             <div
                               style={{
@@ -723,7 +790,8 @@ export default function Insights() {
                               total de indicadores
                             </div>
                           </div>
-                          <div
+                          {/* *************************INDICADORES****************************** */}
+                          {/* <div
                             style={{
                               display: "flex",
                               justifyContent: "flex-end",
@@ -751,12 +819,12 @@ export default function Insights() {
                               alt="Descripción de la imagen"
                               style={{ marginTop: 5 }}
                             />
-                          </div>
-                          {/* **************************************** */}
-                          {showAll1 && (
+                          </div> */}
+
+                          {/* {showAll1 && (
                             <>
-                              {" "}
                               <>
+                               
                                 <div
                                   style={{
                                     display: "flex",
@@ -925,11 +993,11 @@ export default function Insights() {
                                     style={{ marginTop: 5 }}
                                   />
                                 </div>
+                                
                               </>
                             </>
-                          )}
-
-                          {/* **************************************** */}
+                          )} */}
+                          {/* ***********************INDICADORES******************************** */}
                         </div>
                       </>
                     ) : (

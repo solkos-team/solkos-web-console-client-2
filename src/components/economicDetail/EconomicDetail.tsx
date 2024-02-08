@@ -125,7 +125,7 @@ const EconomicDetail = ({ coolersData }) => {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-  console.log(coolersData)
+  console.log(coolersData);
   return (
     <div>
       <div
@@ -816,7 +816,7 @@ const EconomicDetail = ({ coolersData }) => {
             borderRadius: "8px",
             border: "1px solid #88888B",
             width: "95%",
-            height:"40rem"
+            height: "40rem",
           }}
         >
           <div
@@ -970,11 +970,7 @@ const EconomicDetail = ({ coolersData }) => {
             </div>
           </div>
           <div>
-            <Tabs
-              color="teal"
-              defaultValue="first"
-              style={{ width: "100%"}}
-            >
+            <Tabs color="teal" defaultValue="first" style={{ width: "100%" }}>
               <Tabs.List>
                 <Tabs.Tab value="first">Gráfica del acumulado</Tabs.Tab>
                 <Tabs.Tab value="second">Gráfica por año</Tabs.Tab>
@@ -988,8 +984,8 @@ const EconomicDetail = ({ coolersData }) => {
               >
                 <Tabs.Panel value="first" pt="xs">
                   <div style={{ width: "100%", height: "100px" }}>
-                    {/* <div style={{ marginLeft: 400 }}>Sin registros</div> */}
-                    <Card style={{width:"95%",height:"90%"}}>
+                    <div style={{ marginLeft: 400 }}>Sin registros</div>
+                    {/* <Card style={{width:"95%",height:"90%"}}>
                       <LineChart
                         className="mt-6"
                         data={chartdata}
@@ -999,14 +995,14 @@ const EconomicDetail = ({ coolersData }) => {
                         valueFormatter={valueFormatter}
                         yAxisWidth={40}
                       />
-                    </Card>
+                    </Card> */}
                   </div>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="second" pt="xs">
                   <div style={{ width: "100%", height: "100px" }}>
-                    {/* <div style={{ marginLeft: 400 }}>Sin registros</div> */}
-                    <Card style={{width:"95%",height:"90%"}}>
+                    <div style={{ marginLeft: 400 }}>Sin registros</div>
+                    {/* <Card style={{width:"95%",height:"90%"}}>
                       <BarChart
                         className="mt-6"
                         data={chartdata3}
@@ -1015,7 +1011,7 @@ const EconomicDetail = ({ coolersData }) => {
                         colors={["neutral", "indigo"]}
                         yAxisWidth={30}                        
                       />
-                    </Card>
+                    </Card> */}
                   </div>
                 </Tabs.Panel>
               </div>

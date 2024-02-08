@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import GoogleMapReact from "google-map-react";
 import {
   IconCircleX,
   IconCirclePlus,
@@ -319,25 +320,6 @@ const Resume = ({ coolersData, setTab }) => {
                     border: "1px solid #CACACA",
                   }}
                 >
-                  {/* {coolersData?.cooler?.last_latitude === null ? (
-                    <>
-                      <div>
-                        <MapComponent
-                          latitude={coolersData?.cooler?.latitude}
-                          longitude={coolersData?.cooler?.longitude}
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <MapComponent2
-                        latitude={coolersData?.cooler?.latitude}
-                        longitude={coolersData?.cooler?.longitude}
-                        last_latitude={coolersData?.cooler?.last_latitude}
-                        last_longitude={coolersData?.cooler?.last_longitude}
-                      />
-                    </>
-                  )} */}
                   {coolersData?.cooler?.last_latitude != null &&
                   coolersData?.cooler?.latitude === 0 ? (
                     <>
@@ -367,6 +349,55 @@ const Resume = ({ coolersData, setTab }) => {
                       />
                     </>
                   )}
+                  {/* {(coolersData?.cooler?.latitude === 0 &&
+                    coolersData?.cooler?.last_latitude === 0) ||
+                  (coolersData?.cooler?.latitude === undefined &&
+                    coolersData?.cooler?.last_latitude === undefined) ||
+                  (coolersData?.cooler?.latitude === null &&
+                    coolersData?.cooler?.last_latitude === null) ? (
+                    <>
+                      <GoogleMapReact
+                        bootstrapURLKeys={{
+                          key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
+                        }}
+                        center={{ lat: 0, lng: 0 }}
+                        defaultZoom={20}
+                        yesIWantToUseGoogleMapApiInternals
+                        options={{
+                          gestureHandling: "greedy",
+                          fullscreenControl: false,
+                        }}
+                      />
+                    </>
+                  ) : coolersData?.cooler?.last_latitude != null &&
+                    coolersData?.cooler?.latitude === 0 ? (
+                    <>
+                      <div>
+                        <MapComponent1
+                          latitude={coolersData?.cooler?.last_latitude}
+                          longitude={coolersData?.cooler?.last_longitude}
+                        />
+                      </div>
+                    </>
+                  ) : coolersData?.cooler?.last_latitude === null ? (
+                    <>
+                      <div>
+                        <MapComponent
+                          latitude={coolersData?.cooler?.latitude}
+                          longitude={coolersData?.cooler?.longitude}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <MapComponent2
+                        latitude={coolersData?.cooler?.latitude}
+                        longitude={coolersData?.cooler?.longitude}
+                        last_latitude={coolersData?.cooler?.last_latitude}
+                        last_longitude={coolersData?.cooler?.last_longitude}
+                      />
+                    </>
+                  )} */}
                 </div>
                 <div
                   style={{
@@ -520,14 +551,17 @@ const Resume = ({ coolersData, setTab }) => {
                       marginLeft: "auto",
                     }}
                   >
-                    {"("}{" "}
-                    {coolersData?.cooler?.latitude === ""
+                    {"("}
+                    {coolersData?.cooler?.latitude === "" ||
+                    coolersData?.cooler?.latitude === 0 ||
+                    coolersData?.cooler?.latitude === null
                       ? "Sin registro"
-                      : coolersData?.cooler?.latitude}{" "}
-                    {","}
-                    {coolersData?.cooler?.longitude === ""
-                      ? "Sin registro"
-                      : coolersData?.cooler?.longitude}
+                      : coolersData?.cooler?.latitude.toFixed(6) + ","}
+                    {coolersData?.cooler?.longitude === "" ||
+                    coolersData?.cooler?.longitude === 0 ||
+                    coolersData?.cooler?.longitude === null
+                      ? ""
+                      : coolersData?.cooler?.longitude.toFixed(6)}
                     {")"}
                   </div>
                 </div>
@@ -563,13 +597,18 @@ const Resume = ({ coolersData, setTab }) => {
                       marginLeft: "auto",
                     }}
                   >
-                    {"("}{" "}
-                    {coolersData?.cooler?.last_latitude === undefined ||
-                    coolersData?.cooler?.last_longitude === null
+                    {"("}
+                    {coolersData?.cooler?.last_latitude === "" ||
+                    coolersData?.cooler?.last_latitude === 0 ||
+                    coolersData?.cooler?.last_latitude === null
                       ? "Sin registro"
-                      : coolersData?.cooler?.last_latitude?.toFixed(8)}
-                    {","}
-                    {coolersData?.cooler?.last_longitude?.toFixed(8)} {")"}
+                      : coolersData?.cooler?.last_latitude.toFixed(6) + ","}
+                    {coolersData?.cooler?.last_longitude === "" ||
+                    coolersData?.cooler?.last_longitude === 0 ||
+                    coolersData?.cooler?.last_longitude === null
+                      ? ""
+                      : coolersData?.cooler?.last_longitude.toFixed(6)}
+                    {")"}
                   </div>
                 </div>
                 <div

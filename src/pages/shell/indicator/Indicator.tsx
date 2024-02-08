@@ -43,12 +43,16 @@ export default function Indicator() {
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-    document.addEventListener('click', function(event) {
-      const element = event.target as HTMLElement  
-     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'IndicatorCardsContent'){
-        setIsDrawerOpen(false)
-      }     
-    })
+    document.addEventListener("click", function (event) {
+      const element = event.target as HTMLElement;
+      if (
+        (isDrawerOpen == true &&
+          element.className == "mantine-134h5mf mantine-AppShell-main") ||
+        element.className == "IndicatorCardsContent"
+      ) {
+        setIsDrawerOpen(false);
+      }
+    });
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
@@ -61,15 +65,13 @@ export default function Indicator() {
     delta: number;
   } | null>(null);
 
-  
-  
   return (
     <div>
       <PageFilter status={isLoading} />
       <br></br>
       <div className="principal-titl">
         <div
-        className="IndicatorCardsContent"
+          className="IndicatorCardsContent"
           style={{
             display: "flex",
             padding: "0px 0px",
@@ -147,7 +149,7 @@ export default function Indicator() {
             }}
           >
             {/* Indicador */}
-            {isLoading ? (
+            {/* {isLoading ? (
               <>
                 <SkeletonCards></SkeletonCards>
               </>
@@ -173,7 +175,6 @@ export default function Indicator() {
                       flexWrap: "wrap",
                     }}
                   >
-                    {/* Descrip */}
                     <div
                       style={{
                         display: "flex",
@@ -183,7 +184,6 @@ export default function Indicator() {
                         alignSelf: "stretch",
                       }}
                     >
-                      {/* icono */}
                       <div
                         style={{
                           display: "flex",
@@ -210,15 +210,7 @@ export default function Indicator() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : // cooler.algorithm === "DISCONNECTIONS_FAIL" ? (
-                          //   <>
-                          //     {" "}
-                          //     <img
-                          //       src={"../../sampleData/disconnection.png"}
-                          //       alt="Descripción de la imagen"
-                          //     />
-                          //   </>
-                          // ) :
+                          ) : 
                           cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
                               src={"../../sampleData/weather2.png"}
@@ -268,7 +260,6 @@ export default function Indicator() {
                             : cooler.algorithm}
                         </div>
                       </div>
-                      {/* Siguiente */}
                       <div
                         style={{
                           display: "flex",
@@ -282,7 +273,6 @@ export default function Indicator() {
                         <div
                           style={{
                             color: "#000005",
-                            // fontFamily: "DM Sans",
                             fontSize: "20px",
                             fontStyle: "normal",
                             fontWeight: 500,
@@ -294,7 +284,6 @@ export default function Indicator() {
                         <div
                           style={{
                             color: "#88888B",
-                            // fontFamily: "DM Sans",
                             fontSize: "12px",
                             fontStyle: "normal",
                             fontWeight: 400,
@@ -308,7 +297,6 @@ export default function Indicator() {
                               " enfriadores"}
                         </div>
                       </div>
-                      {/* ***** */}
                       <div
                         style={{
                           display: "flex",
@@ -376,7 +364,6 @@ export default function Indicator() {
                                 : cooler.delta > 0
                                 ? "#F93448"
                                 : "",
-                            // fontFamily: "DM Sans",
                             fontSize: "16px",
                             fontStyle: "normal",
                             fontWeight: 400,
@@ -388,7 +375,6 @@ export default function Indicator() {
                         <div
                           style={{
                             color: "#88888B",
-                            // fontFamily: "DM Sans",
                             fontSize: "14px",
                             fontStyle: "normal",
                             fontWeight: 400,
@@ -398,7 +384,6 @@ export default function Indicator() {
                           desde ayer
                         </div>
                       </div>
-                      {/* ********** */}
                       <div
                         style={{
                           display: "flex",
@@ -418,7 +403,6 @@ export default function Indicator() {
                           }}
                         ></div>
                       </div>
-                      {/* ******* */}
                       <div
                         style={{
                           display: "flex",
@@ -440,7 +424,6 @@ export default function Indicator() {
                         <div
                           style={{
                             color: "#3E83FF",
-                            // fontFamily: "DM Sans",
                             fontSize: "14px",
                             fontStyle: "normal",
                             fontWeight: 400,
@@ -459,7 +442,7 @@ export default function Indicator() {
                     </div>
                   </div>
                 ))
-            )}
+            )} */}
           </div>
         </div>
       </div>
