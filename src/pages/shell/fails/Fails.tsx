@@ -59,17 +59,6 @@ export default function Fails() {
       <PageFilter status={isLoading} />
       <br></br>
       <div
-        // style={{
-        //   display: "flex",
-        //   padding: "10px 0px",
-        //   flexDirection: "column",
-        //   alignItems: "flex-start",
-        //   gap: "16px",
-        //   flex: 100,
-        //   alignSelf: "stretch",
-        //   background: "#FFF",
-        //   marginLeft: -50,
-        // }}
         className="principal-titl"
       >
         {/* title */}
@@ -219,15 +208,7 @@ export default function Fails() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : // cooler.algorithm === "DISCONNECTIONS_FAIL" ? (
-                          //   <>
-                          //     {" "}
-                          //     <img
-                          //       src={"../../sampleData/disconnection.png"}
-                          //       alt="Descripción de la imagen"
-                          //     />
-                          //   </>
-                          // ) :
+                          ) : 
                           cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
                               src={"../../sampleData/weather2.png"}

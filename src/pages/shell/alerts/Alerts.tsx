@@ -7,7 +7,6 @@ import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 export default function Alerts() {
 
-
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
   const dt = useSelector((state: any) => state.works);

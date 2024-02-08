@@ -9,6 +9,7 @@ import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
 import "moment/locale/es";
 import ResumeCC from "../../../components/resumeCallCenter";
+import { CoolerData } from "../../../interfaces/CoolerInterface";
 moment.locale("es", {
   months: [
     "Enero",
@@ -27,34 +28,6 @@ moment.locale("es", {
 });
 
 export default function CoolerDetail() {
-  interface CoolerData {
-    cooler: {
-      serial_number: string;
-      model_id: string;
-      outlet_name: string;
-      customer: string;
-      region: string;
-      route: string;
-      zone: string;
-      days_without_visit: string;
-      last_read: string;
-      total_ownership_expense: number;
-      sale_price: number;
-      total_expense_service: string;
-      energy_consumption: string;
-      status: string;
-      asset_number: string;
-      channel: string;
-    };
-    properties: {
-      description: string;
-      name: string;
-      value: number;
-    };
-    service_orders?: Array<{ description: string }>;
-    tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
-  }
-
   const b = "../../sampleData/devices.png";
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);

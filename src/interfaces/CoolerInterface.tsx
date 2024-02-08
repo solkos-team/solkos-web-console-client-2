@@ -15,7 +15,7 @@ export interface CoolerInterface {
   latitude: string;
   longitude: string;
   class: string | Class;
-  algorithm: string | Algorithm;
+  algorithm: string;
   priority?: string;
   created_at: string;
   updated_at: string;
@@ -90,4 +90,32 @@ export interface InsightLevel {
 
 export interface InsightsData {
   [key: string]: InsightLevel;
+}
+
+export interface CoolerData {
+  cooler: {
+    serial_number: string;
+    model_id: string;
+    outlet_name: string;
+    customer: string;
+    region: string;
+    route: string;
+    zone: string;
+    days_without_visit: string;
+    last_read: string;
+    total_ownership_expense: number;
+    sale_price: number;
+    total_expense_service: string;
+    energy_consumption: string;
+    status: string;
+    asset_number: string;
+    channel: string;
+  };
+  properties: {
+    description: string;
+    name: string;
+    value: number;
+  };
+  service_orders?: Array<{ description: string }>;
+  tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
 }

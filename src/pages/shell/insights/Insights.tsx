@@ -15,32 +15,24 @@ export default function Insights() {
   const [items, numIntems] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
   const [mapKey, setMapKey] = useState(0);
-
+  const [drawerAbierto, setDrawerAbierto] = useState(false);
+  const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state: any) => state.organization);
   const handleMapKeyChange = () => {
     setMapKey((prevKey) => prevKey + 1);
   };
-
-  // Page (Body)
   useEffect(() => {
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-
-  const [drawerAbierto, setDrawerAbierto] = useState(false);
-
   const abrirDrawer = () => {
     setDrawerAbierto(true);
   };
-
   const cerrarDrawer = () => {
     setDrawerAbierto(false);
   };
-
-  const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -54,7 +46,6 @@ export default function Insights() {
       console.error("Error fetching outlets:", error);
     }
   };
-
   const body2 = {
     customer: dto,
     class: "STK",
