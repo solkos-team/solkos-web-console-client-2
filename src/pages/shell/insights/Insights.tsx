@@ -5,56 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
-import { SkeletonMapInsights } from "../../../components/skeletonMapInsights/SkeletonMapInsights";
-import { MapInsights } from "./MapInsights";
-import {
-  InsightsData,
-  Algorithm,
-  InsightLevel,
-  CoolerInterface as Cooler,
-} from "../../../components/drawerOutlets/CoolerInterface";
+import { InsightsData,CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import { Skeleton } from "@mantine/core";
 export default function Insights() {
-  interface Algorithm {
-    level: string;
-    class: string;
-    algorithm: string;
-    value: number;
-  }
-
-  interface InsightLevel {
-    ALERT: {
-      level: string;
-      total: number;
-      algorithms: Algorithm[];
-    };
-    FAIL: {
-      level: string;
-      total: number;
-      algorithms: Algorithm[];
-    };
-    INDICATOR: {
-      level: string;
-      total: number;
-      algorithms: Algorithm[];
-    };
-    summary: {
-      coolers: number;
-      operative_units: number;
-      regions: number;
-      routes: number;
-      zones: number;
-    };
-    coolers;
-    operative_units;
-    regions;
-    routes;
-    zones;
-  }
-
-  interface InsightsData {
-    [key: string]: InsightLevel;
-  }
 
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
@@ -96,7 +49,6 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body);
       setInsightsData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);

@@ -11,8 +11,6 @@ import {
 import { Text, Popover, Select } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 import { addPath } from "../../app/works";
-import { fetchPath } from "./getPath";
-import { useStorage } from "reactfire";
 import { fetchUniversal } from "../../utils/apiUtils";
 
 export default function (props) {

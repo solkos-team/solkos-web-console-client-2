@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
-import {CoolerInterface as Cooler} from '../../../components/drawerOutlets/CoolerInterface'
+import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 
 export default function Coolers() {    
   const dt = useSelector((state: any) => state.works);

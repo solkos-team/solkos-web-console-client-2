@@ -5,8 +5,7 @@ import EconomicDetail from "../../../components/economicDetail/EconomicDetail";
 import Energy from "../../../components/energyConsum";
 import { Tabs } from "@mantine/core";
 import { useParams } from "react-router-dom";
-import { fetchUniversal, fetchUniversalDetails } from "../../../utils/apiUtils";
-import { format } from "date-fns";
+import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
 import "moment/locale/es";
 import ResumeCC from "../../../components/resumeCallCenter";
@@ -88,7 +87,6 @@ export default function CoolerDetail() {
       // const data = await fetchCoolersFromAPI(serial_number);
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
-      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }

@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
-import { IconSearch, IconDownload } from "@tabler/icons-react";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
-
+import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 export default function Alerts() {
-  interface Cooler {
-    class: string;
-    algorithm: string;
-    value: number;
-    delta: number;
-    level: string;
-  }
+
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);

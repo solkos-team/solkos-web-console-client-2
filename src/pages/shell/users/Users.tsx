@@ -16,14 +16,12 @@ import {
 import { Card, Table } from "@mantine/core";
 import {
   fetchDeleteUsers,
-  fetchUniversal,
   fetchUniversalTables,
 } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
-import { UsersInterfaces } from "./UsersInterfaces";
+import { UsersInterfaces } from "../../../interfaces/UsersInterfaces";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { SkeletonTableUsers } from "../../../components/skeletonTableUsers/SkeletonTableUsers";
-import { da } from "date-fns/locale";
 
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -64,11 +62,11 @@ export default function Users() {
     data === null || data === undefined
       ? []
       : data.map((user) => ({
-          Nombre: user.name,
-          Email: user.email,
-          Cliente: user.customer,
-          Path: user.path.toString(),
-        }));
+        Nombre: user.name,
+        Email: user.email,
+        Cliente: user.customer,
+        Path: user.path.toString(),
+      }));
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const openDrawer = () => {
@@ -121,12 +119,12 @@ export default function Users() {
 
   useEffect(() => {
     fetchData();
-    document.addEventListener('click', function(event) {
-      const element = event.target as HTMLElement  
-     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'principalUsers' || element.className == 'Tabla'){
+    document.addEventListener('click', function (event) {
+      const element = event.target as HTMLElement
+      if (isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'principalUsers' || element.className == 'Tabla') {
         closeDrawer()
         closeDrawer2()
-      }     
+      }
     })
     return () => {
       document.body.style.overflow = "auto";
@@ -159,7 +157,7 @@ export default function Users() {
       <PageFilter status={isLoading} />
       <br></br>
       <div
-      className="principalUsers"
+        className="principalUsers"
         style={{
           display: "flex",
           padding: "16px 0px",
@@ -170,11 +168,11 @@ export default function Users() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0,          
+          marginLeft: 0,
         }}
       >
         <div
-        className="principalUsers"
+          className="principalUsers"
           style={{
             display: "flex",
             padding: "0px 32px",
@@ -213,7 +211,7 @@ export default function Users() {
 
         {/* Tabla */}
         <div
-        className="principalUsers"
+          className="principalUsers"
           style={{
             display: "flex",
             padding: "0px 32px",
@@ -272,7 +270,7 @@ export default function Users() {
             </div>
           </div>
           <div
-          className="principalUsers"
+            className="principalUsers"
             style={{
               display: "flex",
               padding: "32px 0px",
@@ -336,7 +334,7 @@ export default function Users() {
             <div style={{}}>
               <section className="principalUsers">
                 <Table
-                className="principalUsers"
+                  className="principalUsers"
                   style={{
                     borderCollapse: "collapse",
                     width: "100%",
@@ -410,7 +408,7 @@ export default function Users() {
                           {filteredUsers
                             // .slice(firstIndex, lastIndex)
                             .map((user, index) => (
-                              <TableRow                            
+                              <TableRow
                                 className="Tabla"
                                 key={index}
                                 style={{ userSelect: "none", height: "auto" }}
@@ -469,7 +467,7 @@ export default function Users() {
                                     marginTop: 10,
                                     height: 25,
                                   }}
-                                  // onClick={openDrawer}
+                                // onClick={openDrawer}
                                 >
                                   <div
                                     style={{
@@ -515,7 +513,7 @@ export default function Users() {
                                 >
                                   {localStorage.getItem("USER") ===
                                     "Jose Iván Peréz Ugalde" ||
-                                  localStorage.getItem("USER") ===
+                                    localStorage.getItem("USER") ===
                                     "Mayra Barrón Reséndiz" ? (
                                     <Button
                                       variant="filled"

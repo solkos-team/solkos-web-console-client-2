@@ -2,8 +2,6 @@ import React from "react";
 import { Skeleton } from "@mantine/core";
 
 export const SkeletonCards = () => {
-  const numRows = 1;
-  const rowHeight = 60;
 
   return (
     <>

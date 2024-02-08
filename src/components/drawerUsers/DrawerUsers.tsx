@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mantine/core";
 
 export default function DrawerUsers({ isOpen, onClose, userData,userDataClear }) {
-  console.log(userData)  
   const { name, email, customer, path } = userData;
   const [nameUser, setNameUser] = useState(name);
   const [emailUser, setEmailUser] = useState(email);

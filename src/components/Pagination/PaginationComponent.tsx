@@ -8,8 +8,6 @@ export const PaginationComponent = ({
   numero,
 }) => {
   const [data, setData] = useState(["25", "50", "100"]);
-  const [value, setValue] = useState<string | null>("50");
-  // const npage = Math.ceil(totalDatos/datosPorPagina)
   const npage = Math.ceil(totalDatos / datosPorPagina);
   const handlePageChange = (pageNum) => {
     accion(pageNum);

@@ -125,7 +125,6 @@ const EconomicDetail = ({ coolersData }) => {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-  console.log(coolersData);
   return (
     <div>
       <div

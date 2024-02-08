@@ -14,8 +14,8 @@ export interface CoolerInterface {
   outlet_address: string;
   latitude: string;
   longitude: string;
-  class: Class;
-  algorithm: Algorithm;
+  class: string | Class;
+  algorithm: string | Algorithm;
   priority?: string;
   created_at: string;
   updated_at: string;
@@ -23,17 +23,22 @@ export interface CoolerInterface {
   days_without_visit: string;
   days_without_visitC: string;
   status: string;
-  num_coolers : string;
+  num_coolers: string;
   priority_status: string;
   last_read: string;
-  
+  value: number;
+  delta: number;
+  level: string;
 }
 
-export enum Algorithm {
-  Installed = "INSTALLED",
-  
-}
 
+export interface Algorithm {
+  level: string;
+  class: string;
+  algorithm: string;
+  value: number;
+  Installed :string ;
+}
 export enum Class {
   Stk = "STK",
 }

@@ -1,14 +1,5 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import {
-  IconCircleX,
-  IconCirclePlus,
-  IconArrowDownRight,
-  IconArrowRight,
-  IconNote,
-} from "@tabler/icons-react";
+import {IconNote,} from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
 

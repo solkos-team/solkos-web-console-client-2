@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@tremor/react";
 import { fetchCoolers, fetchUniversal } from "../../utils/apiUtils";
-import { CoolerInterface } from "./CoolerInterface";
+import { CoolerInterface } from "../../interfaces/CoolerInterface";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";

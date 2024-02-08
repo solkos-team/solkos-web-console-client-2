@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { IconEyeOff, IconEye } from "@tabler/icons-react";
-import { path } from "d3-path";
 
 export const Login = () => {
   const [email, setEmail] = useState("");

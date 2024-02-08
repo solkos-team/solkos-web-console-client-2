@@ -2,17 +2,10 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { useSelector } from "react-redux";
-import { fetchAlerts, fetchUniversal } from "../../../utils/apiUtils";
+import { fetchUniversal } from "../../../utils/apiUtils";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
-
+import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 export default function Indicator() {
-  interface Cooler {
-    class: string;
-    algorithm: string;
-    value: number;
-    delta: number;
-    level: string;
-  }
 
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { useSelector } from "react-redux";
 import { fetchUniversal } from "../../utils/apiUtils";
-import { CoolerInterface as Cooler } from "../drawerOutlets/CoolerInterface";
+import { CoolerInterface as Cooler } from "../../interfaces/CoolerInterface";
 import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
 const MapInsightsComponent = ({items,data }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);

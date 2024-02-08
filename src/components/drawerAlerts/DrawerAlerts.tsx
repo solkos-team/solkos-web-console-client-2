@@ -13,12 +13,8 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Table } from "@mantine/core";
-import {
-  fetchCoolersDrawer,
-  fetchUniversal,
-  fetchUniversalTables,
-} from "../../utils/apiUtils";
-import { CoolerInterface } from "../drawerOutlets/CoolerInterface";
+import {fetchUniversalTables} from "../../utils/apiUtils";
+import { CoolerInterface } from "../../interfaces/CoolerInterface";
 import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
 
 export default function DrawerA({

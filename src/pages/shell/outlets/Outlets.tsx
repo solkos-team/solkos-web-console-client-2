@@ -19,7 +19,7 @@ import { PaginationComponent } from "../../../components/Pagination/PaginationCo
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { MantineProvider, TextInput } from "@mantine/core";
 import { useSelector } from "react-redux";
-import { CoolerInterface } from "../../../components/drawerOutlets/CoolerInterface";
+import { CoolerInterface} from "../../../interfaces/CoolerInterface";
 import { SkeletonTableOutlets } from "../../../components/skeletonTableOutlets/SkeletonTableOutlets";
 
 export default function Outlets() {

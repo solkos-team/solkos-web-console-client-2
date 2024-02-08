@@ -3,12 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import GoogleMapReact from "google-map-react";
-import {
-  IconCircleX,
-  IconCirclePlus,
-  IconArrowDownRight,
-  IconArrowRight,
-} from "@tabler/icons-react";
+import {IconArrowDownRight,IconArrowRight,} from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
 import MapComponent1 from "../map_1";
