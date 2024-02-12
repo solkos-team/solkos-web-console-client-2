@@ -35,6 +35,7 @@ import fails from "./sampleData/fails.png";
 import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
 import { fetchUniversalDetails } from "./utils/apiUtils";
+import { Burger,Tooltip } from '@mantine/core';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -190,7 +191,6 @@ const routes2 = [
     icon: <img src={clt} />,
   },
 ];
-
 function App() {
   const Name = localStorage.getItem("USER") || "";
   const { classes, cx } = useStyles();
@@ -199,6 +199,12 @@ function App() {
   const [opened, setOpened] = useState(false); // state of menu
   const location = useLocation();
   const [value, setValue] = useState();
+  const dispatch = useDispatch();
+  const dt = useSelector((state) => state.organization);
+  const dto = useSelector((state) => state.works);
+  const stateM = sessionStorage.getItem('MenuState')
+  stateM == undefined ? sessionStorage.setItem('MenuState',false) : sessionStorage.getItem('MenuState')  
+  const [opened2,setOpened2] = useState(JSON.parse(stateM))  
   const navigate = useNavigate();
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
@@ -207,8 +213,11 @@ function App() {
     const data = await fetchUniversalDetails("customers");
     setData(data);
   };
-  useEffect(() => {
-    dispatch(addOrg());
+  useEffect(()=>{
+    const status = sessionStorage.getItem('MenuState')
+    status != opened2 ? sessionStorage.setItem('MenuState',opened2) : ''
+  },[opened2])
+  useEffect(() => {    
     // fetch get customers
     fetctData();
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
@@ -217,8 +226,8 @@ function App() {
     if (storage == null) {
       localStorage.setItem("ORG", "KOF");
       dispatch(addOrg());
-    }
-  }, [location.pathname]);
+    }           
+  }, [location.pathname]); 
   const links =
     localStorage.getItem("USER") === "Call Center" ? (
       <>
@@ -235,11 +244,11 @@ function App() {
                   })}
                 >
                   {item.icon}
-                  <span style={{ marginLeft: 10 }}>{item.label}</span>
+                  <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{item.label}</span>
                   {coolerInsightsOpen ? (
-                    <img src={arrow_1} style={{ marginLeft: 40 }} />
+                    <img src={arrow_1} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
                   ) : (
-                    <img src={arrow_2} style={{ marginLeft: 40 }} />
+                    <img src={arrow_2} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
                   )}
                 </div>
 
@@ -254,7 +263,7 @@ function App() {
                         onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
                       >
                         {option.icon && option.icon}{" "}
-                        <span style={{ marginLeft: 10 }}>{option.label}</span>
+                        <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{option.label}</span>
                       </NavLink>
                     ))}
                   </div>
@@ -272,7 +281,7 @@ function App() {
                 }}
               >
                 {item.icon}
-                <span style={{ marginLeft: 10 }}>{item.label}</span>
+                <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{item.label}</span>
               </NavLink>
             )}
           </div>
@@ -284,6 +293,7 @@ function App() {
           <div key={item.label}>
             {item.links ? (
               <div style={{ whiteSpace: "nowrap" }}>
+                <Tooltip label={item.label}>
                 <div
                   onClick={() => {
                     setCoolerInsightsOpen(!coolerInsightsOpen);
@@ -292,17 +302,17 @@ function App() {
                     [classes.linkActive]: coolerInsightsOpen,
                   })}
                 >
-                  {item.icon}
-                  <span style={{ marginLeft: 10 }}>{item.label}</span>
+                  {item.icon}                  
+                  <span style={{ marginLeft: 10, display:opened2 == true ? "none" : "" }}>{item.label}</span>                  
                   {coolerInsightsOpen ? (
-                    <img src={arrow_1} style={{ marginLeft: 40 }} />
+                    <img src={arrow_1} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
                   ) : (
-                    <img src={arrow_2} style={{ marginLeft: 40 }} />
+                    <img src={arrow_2} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
                   )}
                 </div>
-
+                </Tooltip>
                 {coolerInsightsOpen && (
-                  <div style={{ marginLeft: 20 }}>
+                  <div style={{ marginLeft: opened2 == true ? 5 : 20 }}>
                     {item.links.map((option) => (
                       <NavLink
                         to={option.link}
@@ -311,8 +321,12 @@ function App() {
                         activate={true.toString()} // Convert boolean to string
                         onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
                       >
+                        <Tooltip label={option.label}>
+                        <div>
                         {option.icon && option.icon}{" "}
-                        <span style={{ marginLeft: 10 }}>{option.label}</span>
+                        <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{option.label}</span>
+                        </div>
+                        </Tooltip>
                       </NavLink>
                     ))}
                   </div>
@@ -329,18 +343,19 @@ function App() {
                   closeCoolerInsights();
                 }}
               >
+                <Tooltip label={item.label}>
+                <div>
                 {item.icon}
-                <span style={{ marginLeft: 10 }}>{item.label}</span>
+                <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{item.label}</span>
+                </div>
+                </Tooltip>
               </NavLink>
             )}
           </div>
         ))}
       </>
     );
-
-  const dispatch = useDispatch();
-  const dt = useSelector((state) => state.organization);
-  const dto = useSelector((state) => state.works);
+  
   const saveOrganization = (ORG) => {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
@@ -360,38 +375,41 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: 220 }} p={"md"}>
+          <Navbar width={{ base: opened2 == false ? 240 : 80 }} p={"md"}>          
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
                   style={{
                     display: "flex",
-                    padding: "10px",
+                    padding: opened2 == true ? "1rem":".5px",
                     justifyContent: "space-between",
                     alignItems: "center",
                     alignSelf: "stretch",
+                    flexDirection:"row",
+                    overflowX : opened2 == true ? "hidden" : ""
                   }}
                 >
+                  <section style={{display:"flex",flexDirection:opened2 == false ? "row" : "column",gap:"0.7rem",justifyContent:"space-between",alignItems:"center",whiteSpace:"pre"}}>
                   <div
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "16px",
+                      gap: "9px",
                       flex: 100,
                       // width: "180px",
-                      height: "44px",
+                      height: "44px"                      
                     }}
                   >
                     <img
-                      style={{ width: "18px", height: "18px", marginLeft: -10 }}
+                      style={{ width: "1.5rem", height: "18px", marginLeft: -10 }}
                       src={solkosSymbol}
                     />
 
-                    <div style={{ textAlign: "left" }}>
+                    <div style={{ textAlign: "left",display:opened2 == true ? "none" : "" }}>
                       <span
                         style={{
                           color: "#000005",
-                          fontSize: "14px",
+                          fontSize: "0.8rem",
                           fontStyle: "normal",
                           fontWeight: 700,
                           lineHeight: "155%",
@@ -415,10 +433,9 @@ function App() {
                         BY IMBERA
                       </span>
                     </div>
-                  </div>
+                  </div>                  
                   <div
                     style={{
-                      display: "flex",
                       padding: "4px",
                       justifyContent: "center",
                       alignItems: "center",
@@ -427,8 +444,9 @@ function App() {
                       width: "25px",
                       height: "16px",
                       marginLeft: "10px",
+                      display:opened2 == true ? "none" : "flex"
                     }}
-                  >
+                  >                    
                     <div
                       style={{
                         color: "#313A49",
@@ -440,9 +458,11 @@ function App() {
                         textTransform: "uppercase",
                       }}
                     >
-                      V2.0.0
-                    </div>
-                  </div>
+                       V2.0.0                      
+                    </div>                    
+                  </div>                  
+                  <Burger size="sm" opened={opened2} onClick={()=> setOpened2((o) => !o)} aria-label="Toggle navigation" style={{marginLeft: -10}} />
+                  </section>                  
                 </div>
               </Group>
               {links}
@@ -489,7 +509,7 @@ function App() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "32px",
-                            background: "#E6E6E6",
+                            background: "#E6E6E6"
                           }}
                         >
                           <div style={{ fontSize: 12 }}>
@@ -505,7 +525,8 @@ function App() {
                             maxWidth: "150px",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            whiteSpace: "nowrap",
+                            whiteSpace: "nowrap" ,
+                            display : opened2 == true ? "none" : ""                                                    
                           }}
                         >
                           <Text
@@ -729,6 +750,7 @@ function App() {
                       }}
                       onClick={() => {
                         localStorage.clear();
+                        sessionStorage.clear();
                         navigate("/");
                       }}
                     >
