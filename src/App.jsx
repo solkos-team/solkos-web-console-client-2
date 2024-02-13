@@ -305,9 +305,9 @@ function App() {
                   {item.icon}                  
                   <span style={{ marginLeft: 10, display:opened2 == true ? "none" : "" }}>{item.label}</span>                  
                   {coolerInsightsOpen ? (
-                    <img src={arrow_1} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
+                    <img src={arrow_1} style={{ marginLeft: opened2 == true ? 1 : 40 }} />
                   ) : (
-                    <img src={arrow_2} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
+                    <img src={arrow_2} style={{ marginLeft: opened2 == true ? 1 : 40 }} />
                   )}
                 </div>
                 </Tooltip>
@@ -354,7 +354,7 @@ function App() {
           </div>
         ))}
       </>
-    );
+    );padding: opened2
   
   const saveOrganization = (ORG) => {
     if (ORG) {
@@ -375,13 +375,13 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: opened2 == false ? 240 : 80 }} p={"md"}>          
+          <Navbar width={{ base: opened2 == false ? 240 : 60 }} p={"md"}>          
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
                   style={{
                     display: "flex",
-                    padding: opened2 == true ? "1rem":".5px",
+                    padding: opened2 == true ? ".5rem":".5px",
                     justifyContent: "space-between",
                     alignItems: "center",
                     alignSelf: "stretch",
@@ -464,8 +464,10 @@ function App() {
                   <Burger size="sm" opened={opened2} onClick={()=> setOpened2((o) => !o)} aria-label="Toggle navigation" style={{marginLeft: -10}} />
                   </section>                  
                 </div>
-              </Group>
-              {links}
+              </Group>     
+              <div style={{padding: opened2 == true ? "0.1rem 0px" : "",marginLeft : opened2 == true ? "-0.7rem" : ""}}> 
+                {links}
+              </div>       
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
@@ -486,7 +488,7 @@ function App() {
                         alignItems: "center",
                         flexDirection: "row",
                         height: "16px",
-                        marginLeft: -20,
+                        marginLeft: -20
                       }}
                     >
                       {/* CONTENT */}
@@ -519,14 +521,14 @@ function App() {
 
                         <div
                           style={{
-                            display: "flex",
+                            // display: "flex",
                             flexDirection: "column",
                             alignItems: "flex-start",
                             maxWidth: "150px",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap" ,
-                            display : opened2 == true ? "none" : ""                                                    
+                            display : opened2 == true ? "none" : "flex"                                                    
                           }}
                         >
                           <Text
@@ -567,7 +569,7 @@ function App() {
                           </div>
                         </div>
                       </div>
-                      <img src={arrows} style={{ marginLeft: 5 }} />
+                      <img src={arrows} style={{ marginLeft: 5 ,display : opened2 == true ? "none" : "" }} />
                     </div>
                   </UnstyledButton>
                 </Menu.Target>

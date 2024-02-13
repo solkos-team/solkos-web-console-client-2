@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Drawer, Button } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 export default function Panel() {
+  const [opened, { open, close }] = useDisclosure(false);
   // Page (Body)
   useEffect(() => {
     return () => {
@@ -18,6 +21,11 @@ export default function Panel() {
       >
         <p></p>
       </iframe> */}
+      <Drawer opened={opened} onClose={close} title="Authentication" position="right">
+        {/* Drawer content */}
+      </Drawer>
+
+      <Button onClick={open}>Open Drawer</Button>
     </>
   );
 }
