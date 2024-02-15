@@ -5,10 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
 import { SkeletonInsights } from "../../../components/skeletonInsights/SkeletonInsights";
-import { InsightsData,CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
+import {
+  InsightsData,
+  CoolerInterface as Cooler,
+} from "../../../interfaces/CoolerInterface";
 import { Skeleton } from "@mantine/core";
 export default function Insights() {
-
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [showData, setShowData] = useState(false);
@@ -67,6 +69,7 @@ export default function Insights() {
     try {
       const data = await fetchInsights(pathVerify());
       numIntems(Number(data.insights.INDICATOR.total));
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);

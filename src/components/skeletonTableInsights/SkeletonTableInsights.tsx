@@ -29,7 +29,7 @@ export const SkeletonTableInsights = () => {
             style={{
               paddingRight: "30px",
               textAlign: "left",
-              width: "75px",
+              width: "55px",
             }}
           >
             <Skeleton height={30} mt={6} width="90%" />

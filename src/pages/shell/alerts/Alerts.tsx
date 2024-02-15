@@ -3,11 +3,13 @@ import PageFilter from "../../../components/pageFilter";
 import DrawerA from "../../../components/drawerAlerts/DrawerAlerts";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
+import { useDisclosure } from "@mantine/hooks";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
-export default function Alerts() {
 
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
+export default function Alerts() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [opened, { open, close }] = useDisclosure(false);
   const [alertsData, setAlertsData] = useState<Cooler[] | null>(null);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
@@ -15,6 +17,7 @@ export default function Alerts() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
+  console.log(opened);
   const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
@@ -33,26 +36,15 @@ export default function Alerts() {
 
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-    document.addEventListener('click', function(event) {
-      const element = event.target as HTMLElement  
-     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'IndicatorCardsContent'){
-        setIsDrawerOpen(false)
-      }     
-    })
-    return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
-    };
+    document.body.style.overflow = "auto";
   }, []);
 
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
-    null
-  );
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("");
+
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
     delta: number;
-  } | null>(null);
+  }>();
 
   return (
     <div>
@@ -61,7 +53,7 @@ export default function Alerts() {
       <div className="principal-titl">
         {/* title */}
         <div
-        className="IndicatorCardsContent"
+          className="IndicatorCardsContent"
           style={{
             display: "flex",
             padding: "0px 0px",
@@ -72,7 +64,7 @@ export default function Alerts() {
         >
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <div
-            className="IndicatorCardsContent"
+              className="IndicatorCardsContent"
               style={{
                 color: "#000005",
                 // fontFamily: "DM Sans",
@@ -142,29 +134,16 @@ export default function Alerts() {
             {/* Indicador */}
             {isLoading ? (
               <>
-                {/* <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginLeft: 400,
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  Cargando...
-                </div> */}
                 <SkeletonCards></SkeletonCards>
               </>
-            ) : // Mostrar las tarjetas una vez que la carga ha terminado
-            alertsData == null ? (
+            ) : alertsData == null ? (
               "Sin registros"
             ) : (
               alertsData
                 .filter((cooler) => cooler.level === "ALERT")
                 .map((cooler, index) => (
                   <div
-                  className="IndicatorCardsContent"
+                    className="IndicatorCardsContent"
                     key={index}
                     style={{
                       marginBottom: "16px",
@@ -438,7 +417,7 @@ export default function Alerts() {
                             value: cooler.value,
                             delta: cooler.delta,
                           });
-                          setIsDrawerOpen(true);
+                          open();
                         }}
                       >
                         <div
@@ -467,14 +446,14 @@ export default function Alerts() {
           </div>
         </div>
       </div>
-      {isDrawerOpen && selectedAlgorithmValues && (
+      {selectedAlgorithm && selectedAlgorithmValues && (
         <DrawerA
-          isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
+          opened={opened}
+          onClose={close}
           selectedAlgorithm={selectedAlgorithm}
           value={selectedAlgorithmValues.value}
           delta={selectedAlgorithmValues.delta}
-        ></DrawerA>
+        />
       )}
     </div>
   );

@@ -5,7 +5,10 @@ import { useSelector } from "react-redux";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
+import { useDisclosure } from "@mantine/hooks";
+
 export default function Fails() {
+  const [opened, { open, close }] = useDisclosure(false);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const dt = useSelector((state: any) => state.works);
@@ -34,36 +37,37 @@ export default function Fails() {
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-    document.addEventListener('click', function(event) {
-      const element = event.target as HTMLElement  
-     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'IndicatorCardsContent'){
-        setIsDrawerOpen(false)
-      }     
-    })
+    document.addEventListener("click", function (event) {
+      const element = event.target as HTMLElement;
+      if (
+        (isDrawerOpen == true &&
+          element.className == "mantine-134h5mf mantine-AppShell-main") ||
+        element.className == "IndicatorCardsContent"
+      ) {
+        setIsDrawerOpen(false);
+      }
+    });
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
 
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
-    null
-  );
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("");
+
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
     delta: number;
-  } | null>(null);
+  }>({ value: 0, delta: 0 });
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   return (
     <div>
       <PageFilter status={isLoading} />
       <br></br>
-      <div
-        className="principal-titl"
-      >
+      <div className="principal-titl">
         {/* title */}
         <div
-        className="IndicatorCardsContent"
+          className="IndicatorCardsContent"
           style={{
             display: "flex",
             padding: "0px 0px",
@@ -155,7 +159,7 @@ export default function Fails() {
                 )
                 .map((cooler, index) => (
                   <div
-                  className="IndicatorCardsContent"
+                    className="IndicatorCardsContent"
                     key={index}
                     style={{
                       marginBottom: "16px",
@@ -208,10 +212,15 @@ export default function Fails() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : 
-                          cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
                               src={"../../sampleData/weather2.png"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm.includes("VOLTAGE_FAIL") ? (
+                            <img
+                              src={"../../sampleData/elect.png"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -411,7 +420,7 @@ export default function Fails() {
                             value: cooler.value,
                             delta: cooler.delta,
                           });
-                          setIsDrawerOpen(true);
+                          open();
                         }}
                       >
                         <div
@@ -440,14 +449,14 @@ export default function Fails() {
           </div>
         </div>
       </div>
-      {isDrawerOpen && selectedAlgorithmValues && (
+      {selectedAlgorithm && selectedAlgorithmValues && (
         <DrawerA
-          isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
+          opened={opened}
+          onClose={close}
           selectedAlgorithm={selectedAlgorithm}
           value={selectedAlgorithmValues.value}
           delta={selectedAlgorithmValues.delta}
-        ></DrawerA>
+        />
       )}
     </div>
   );

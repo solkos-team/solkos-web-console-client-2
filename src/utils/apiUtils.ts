@@ -257,11 +257,7 @@ export const fetchUniversalDetails = async (
     throw error;
   }
 };
-export const fetchDeleteUsers = async (
-  componentURL,
-  detailsID?,
-  CRUD?
-) => {
+export const fetchDeleteUsers = async (componentURL, detailsID?, CRUD?) => {
   const url = `${baseUrl}/${componentURL}/${Number(detailsID)}`;
   const headers = {
     "Content-Type": "application/json",

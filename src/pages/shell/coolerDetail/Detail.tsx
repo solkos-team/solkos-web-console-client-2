@@ -60,6 +60,7 @@ export default function CoolerDetail() {
       // const data = await fetchCoolersFromAPI(serial_number);
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -75,12 +76,12 @@ export default function CoolerDetail() {
 
   return (
     <div>
-      {
-        localStorage.getItem("USER") == 'Call Center' 
-        ? <PageFilter path="" disabledPath={true} />
-        : <PageFilter path="clt" disabledPath={true} />
-      }
-      
+      {localStorage.getItem("USER") == "Call Center" ? (
+        <PageFilter path="" disabledPath={true} />
+      ) : (
+        <PageFilter path="clt" disabledPath={true} />
+      )}
+
       <br />
       <div>
         {/* *********************************************************** */}

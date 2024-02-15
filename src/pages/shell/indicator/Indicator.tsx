@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
-export default function Indicator() {
+import { useDisclosure } from "@mantine/hooks";
 
+export default function Indicator() {
+  const [opened, { open, close }] = useDisclosure(false);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
@@ -50,13 +52,13 @@ export default function Indicator() {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
   }, []);
-  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string | null>(
-    null
-  );
+
+  const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("");
+
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
     delta: number;
-  } | null>(null);
+  }>({ value: 0, delta: 0 });
 
   return (
     <div>
@@ -152,7 +154,7 @@ export default function Indicator() {
                 .filter((cooler) => cooler.level === "INDICATOR")
                 .map((cooler, index) => (
                   <div
-                  className="IndicatorCardsContent"
+                    className="IndicatorCardsContent"
                     key={index}
                     style={{
                       marginBottom: "16px",
@@ -203,8 +205,7 @@ export default function Indicator() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : 
-                          cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
                               src={"../../sampleData/weather2.png"}
                               alt="Descripción de la imagen"
@@ -411,7 +412,7 @@ export default function Indicator() {
                             value: cooler.value,
                             delta: cooler.delta,
                           });
-                          setIsDrawerOpen(true);
+                          open();
                         }}
                       >
                         <div
@@ -439,14 +440,14 @@ export default function Indicator() {
           </div>
         </div>
       </div>
-      {isDrawerOpen && selectedAlgorithmValues && (
+      {selectedAlgorithm && selectedAlgorithmValues && (
         <DrawerA
-          isOpen={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
+          opened={opened}
+          onClose={close}
           selectedAlgorithm={selectedAlgorithm}
           value={selectedAlgorithmValues.value}
           delta={selectedAlgorithmValues.delta}
-        ></DrawerA>
+        />
       )}
     </div>
   );

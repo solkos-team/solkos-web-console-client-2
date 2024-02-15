@@ -13,12 +13,14 @@ import {
   TableRow,
 } from "@tremor/react";
 import { Table } from "@mantine/core";
-import {fetchUniversalTables} from "../../utils/apiUtils";
+import { fetchUniversalTables } from "../../utils/apiUtils";
 import { CoolerInterface } from "../../interfaces/CoolerInterface";
 import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
+import { useDisclosure } from "@mantine/hooks";
+import { Drawer, Button } from "@mantine/core";
 
 export default function DrawerA({
-  isOpen,
+  opened,
   onClose,
   selectedAlgorithm,
   value,
@@ -31,6 +33,7 @@ export default function DrawerA({
   const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(true);
   const [totalData, setTotalData] = useState<String | number>(0);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
@@ -62,8 +65,7 @@ export default function DrawerA({
   useEffect(() => {
     fetchData();
   }, [dt, datosPorPagina]);
-
-  const [isLoading, setIsLoading] = useState(true);
+  console.log(selectedAlgorithm);
 
   const filterCoolersDataDownload = (coolersData) => {
     if (!coolersData) return [];
@@ -86,786 +88,741 @@ export default function DrawerA({
   };
   coolersData == undefined ? [] : coolersData;
   totalData == undefined ? 0 : totalData;
+
   return (
-    <div
-      ref={drawerRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        width: "700px",
-        backgroundColor: "#FFF",
-        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-        transform: `translateX(${isOpen ? "0" : "100%"})`,
-        transition: "transform 0.3s ease-in-out",
-        padding: "10px",
-        overflowY: "auto",
-        maxHeight: "100vh",
-      }}
+    <Drawer
+      opened={opened}
+      onClose={onClose}
+      title=""
+      position="right"
+      size="40rem"
     >
-      <div
-        style={{
-          display: "flex",
-          padding: "27px 0px",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "20px",
-        }}
-      >
+      <>
         <div
           style={{
             display: "flex",
-            padding: "0px 32px",
+            flexDirection: "column",
             alignItems: "flex-start",
-            gap: "10px",
-            alignSelf: "stretch",
+            gap: "20px",
           }}
         >
-          <img
-            onClick={onClose}
-            src={"../../sampleData/arrowsDes.png"}
-            alt="Descripción de la imagen"
-            style={{ width: "25px", height: "25px", cursor: "pointer" }}
-          />
-        </div>
-        {/* 2 */}
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 30px",
-            alignItems: "center",
-            gap: "30px",
-            alignSelf: "stretch",
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-                alignSelf: "stretch",
-              }}
-            >
+          {/* 2 */}
+          <div
+            style={{
+              display: "flex",
+              padding: "0px 30px",
+              alignItems: "center",
+              gap: "30px",
+              alignSelf: "stretch",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <div
                 style={{
                   display: "flex",
-                  padding: "2px",
                   alignItems: "center",
-                  gap: "10px",
-                  borderRadius: "4px",
-                  background: selectedAlgorithm.endsWith("ALERT")
-                    ? "#FEF5C7"
-                    : selectedAlgorithm.endsWith("FAIL")
-                    ? "#FFC7CD"
-                    : "#BCDAFF",
+                  gap: "16px",
+                  alignSelf: "stretch",
                 }}
               >
-                {selectedAlgorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
-                  <>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "2px",
+                    alignItems: "center",
+                    gap: "10px",
+                    borderRadius: "4px",
+                    background: selectedAlgorithm.endsWith("ALERT")
+                      ? "#FEF5C7"
+                      : selectedAlgorithm.endsWith("FAIL")
+                      ? "#FFC7CD"
+                      : "#BCDAFF",
+                  }}
+                >
+                  {selectedAlgorithm ===
+                  "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
+                    <>
+                      <img
+                        src={"../../sampleData/devices_2.png"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "44px", height: "44px" }}
+                      />
+                    </>
+                  ) : selectedAlgorithm === "DISCONNECTION_ALERT" ? (
+                    <>
+                      {" "}
+                      <img
+                        src={"../../sampleData/disconnection.png"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "44px", height: "44px" }}
+                      />
+                    </>
+                  ) : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT" ? (
+                    <img
+                      src={"../../sampleData/weather.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "44px", height: "44px" }}
+                    />
+                  ) : selectedAlgorithm === "COMPRESSOR_FAIL" ||
+                    selectedAlgorithm === "FREEZING_FAIL" ? (
+                    <img
+                      src={"../../sampleData/compressor2.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "44px", height: "44px" }}
+                    />
+                  ) : selectedAlgorithm === "TEMPERATURE_FAIL" ? (
+                    <img
+                      src={"../../sampleData/weather2.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "44px", height: "44px" }}
+                    />
+                  ) : selectedAlgorithm === "MOVED_VISIT_ALERT" ? (
                     <img
                       src={"../../sampleData/devices_2.png"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
-                  </>
-                ) : selectedAlgorithm === "DISCONNECTION_ALERT" ? (
-                  <>
-                    {" "}
+                  ) : selectedAlgorithm === "HIGH_VOLTAGE_ALERT" ||
+                    selectedAlgorithm === "LOW_VOLTAGE_ALERT" ? (
                     <img
-                      src={"../../sampleData/disconnection.png"}
+                      src={"../../sampleData/devices_2.png"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
-                  </>
-                ) : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT" ? (
-                  <img
-                    src={"../../sampleData/weather.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                ) : selectedAlgorithm === "COMPRESSOR_FAIL" || selectedAlgorithm === "FREEZING_FAIL" || selectedAlgorithm === "VOLTAGE_FAIL" ? (
-                  <img
-                    src={"../../sampleData/compressor2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                ) : selectedAlgorithm === "TEMPERATURE_FAIL" ? (
-                  <img
-                    src={"../../sampleData/weather2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                ) : selectedAlgorithm === "MOVED_VISIT_ALERT" ? (
-                  <img
-                    src={"../../sampleData/devices_2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                ) : selectedAlgorithm === "HIGH_VOLTAGE_ALERT" ||
-                  selectedAlgorithm === "LOW_VOLTAGE_ALERT" ? (
-                  <img
-                    src={"../../sampleData/devices_2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                ) : (
-                  <img
-                    src={"../../sampleData/indc2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "44px", height: "44px" }}
-                  />
-                )}
+                  ) : selectedAlgorithm === "VOLTAGE_FAIL" ? (
+                    <img
+                      src={"../../sampleData/elect.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "44px", height: "44px" }}
+                    />
+                  ) : (
+                    <img
+                      src={"../../sampleData/indc2.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "44px", height: "44px" }}
+                    />
+                  )}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "4px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "4px",
+                    borderRadius: "2px",
+                    background: selectedAlgorithm.endsWith("ALERT")
+                      ? "#FEF5C7"
+                      : selectedAlgorithm.endsWith("FAIL")
+                      ? "#FFC7CD"
+                      : "#BCDAFF",
+                    height: 8,
+                  }}
+                >
+                  {selectedAlgorithm.endsWith("ALERT") ? (
+                    <img
+                      src={"../../sampleData/alert_y.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "16px", height: "16px" }}
+                    />
+                  ) : selectedAlgorithm.endsWith("FAIL") ? (
+                    <img
+                      src={"../../sampleData/fails2.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "16px", height: "16px" }}
+                    />
+                  ) : (
+                    <img
+                      src={"../../sampleData/indc2.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "16px", height: "16px" }}
+                    />
+                  )}
+
+                  <div
+                    style={{
+                      color: "#451C03",
+                      // fontFamily: "Space Mono",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "14px",
+                    }}
+                  >
+                    {selectedAlgorithm.endsWith("ALERT")
+                      ? "ALERTA"
+                      : selectedAlgorithm.endsWith("FAIL")
+                      ? "FALLA"
+                      : "INDICADOR"}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    color: "#000",
+                    // fontFamily: "DM Sans",
+                    fontSize: "16px",
+                    fontStyle: "normal",
+                    fontWeight: 600,
+                    lineHeight: "normal",
+                  }}
+                >
+                  {selectedAlgorithm && (
+                    <div>
+                      {selectedAlgorithm ===
+                      "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                        ? "Alta demanda del compresor"
+                        : selectedAlgorithm === "DISCONNECTION_ALERT"
+                        ? "Desconexión"
+                        : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT"
+                        ? "Alta temperatura"
+                        : selectedAlgorithm === "HIGH_VOLTAGE_ALERT"
+                        ? "Alto voltaje"
+                        : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
+                        ? "Bajo voltaje"
+                        : selectedAlgorithm === "DISCONNECTIONS_FAIL"
+                        ? "Desconexión"
+                        : selectedAlgorithm === "TEMPERATURE_FAIL"
+                        ? "Alta temperatura"
+                        : selectedAlgorithm === "VOLTAGE_FAIL"
+                        ? "Posible daño eléctrico"
+                        : selectedAlgorithm === "COMPRESSOR_FAIL"
+                        ? "Falla asociada al compresor"
+                        : selectedAlgorithm === "MOVED_VISIT_ALERT"
+                        ? "Movimiento"
+                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 0"
+                        ? "Sin riesgo"
+                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 1"
+                        ? "Visitar punto de venta"
+                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 2"
+                        ? "Requiere actualizar información"
+                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 3"
+                        ? "Tomar acción urgente"
+                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 4"
+                        ? "En riesgo"
+                        : selectedAlgorithm === "LOCATION"
+                        ? "Ubicado"
+                        : selectedAlgorithm === "TELEMETRY"
+                        ? "Telemetría"
+                        : selectedAlgorithm === "INSTALLED"
+                        ? "Instalado"
+                        : selectedAlgorithm === "OWNED"
+                        ? "En propiedad"
+                        : selectedAlgorithm === "FREEZING_FAIL"
+                        ? "Evaporador bloqueado"
+                        : selectedAlgorithm}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             <div
               style={{
                 display: "flex",
+                width: "265px",
+                padding: "8px",
                 flexDirection: "column",
+                justifyContent: "center",
                 alignItems: "flex-start",
-                gap: "4px",
+                gap: "8px",
+                borderRadius: "8px",
+                border: "1px solid #88888B",
+                background: "#FFF",
+                marginLeft: "auto",
               }}
             >
               <div
                 style={{
                   display: "flex",
-                  padding: "8px",
-                  justifyContent: "center",
+                  justifyContent: "space-between",
                   alignItems: "center",
-                  gap: "4px",
-                  borderRadius: "2px",
-                  background: selectedAlgorithm.endsWith("ALERT")
-                    ? "#FEF5C7"
-                    : selectedAlgorithm.endsWith("FAIL")
-                    ? "#FFC7CD"
-                    : "#BCDAFF",
-                  height: 8,
+                  alignSelf: "stretch",
                 }}
               >
-                {selectedAlgorithm.endsWith("ALERT") ? (
-                  <img
-                    src={"../../sampleData/alert_y.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "16px", height: "16px" }}
-                  />
-                ) : selectedAlgorithm.endsWith("FAIL") ? (
-                  <img
-                    src={"../../sampleData/fails2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "16px", height: "16px" }}
-                  />
-                ) : (
-                  <img
-                    src={"../../sampleData/indc2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "16px", height: "16px" }}
-                  />
-                )}
-
                 <div
                   style={{
-                    color: "#451C03",
-                    // fontFamily: "Space Mono",
-                    fontSize: "12px",
+                    color: "#000005",
+                    // fontFamily: " DM Sans",
+                    fontSize: "26px",
                     fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "14px",
+                    fontWeight: 500,
+                    lineHeight: "normal",
                   }}
                 >
-                  {selectedAlgorithm.endsWith("ALERT")
-                    ? "ALERTA"
-                    : selectedAlgorithm.endsWith("FAIL")
-                    ? "FALLA"
-                    : "INDICADOR"}
+                  {value.toLocaleString()}
                 </div>
-              </div>
-              <div
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "16px",
-                  fontStyle: "normal",
-                  fontWeight: 600,
-                  lineHeight: "normal",
-                }}
-              >
-                {selectedAlgorithm && (
-                  <div>
-                    {selectedAlgorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                      ? "Alta demanda del compresor"
-                      : selectedAlgorithm === "DISCONNECTION_ALERT"
-                      ? "Desconexión"
-                      : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT"
-                      ? "Alta temperatura"
-                      : selectedAlgorithm === "HIGH_VOLTAGE_ALERT"
-                      ? "Alto voltaje"
-                      : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
-                      ? "Bajo voltaje"
-                      : selectedAlgorithm === "DISCONNECTIONS_FAIL"
-                      ? "Desconexión"
-                      : selectedAlgorithm === "TEMPERATURE_FAIL"
-                      ? "Alta temperatura"
-                      : selectedAlgorithm === "VOLTAGE_FAIL"
-                      ? "Posible daño eléctrico"
-                      : selectedAlgorithm === "COMPRESSOR_FAIL"
-                      ? "Falla asociada al compresor"
-                      : selectedAlgorithm === "MOVED_VISIT_ALERT"
-                      ? "Movimiento"
-                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 0"
-                      ? "Sin riesgo"
-                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 1"
-                      ? "Visitar punto de venta"
-                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 2"
-                      ? "Requiere actualizar información"
-                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 3"
-                      ? "Tomar acción urgente"
-                      : selectedAlgorithm === "Indicador de Riesgo Nivel: 4"
-                      ? "En riesgo"
-                      : selectedAlgorithm === "LOCATION"
-                      ? "Ubicado"
-                      : selectedAlgorithm === "TELEMETRY"
-                      ? "Telemetría"
-                      : selectedAlgorithm === "INSTALLED"
-                      ? "Instalado"
-                      : selectedAlgorithm === "OWNED"
-                      ? "En propiedad"
-                      : selectedAlgorithm === "FREEZING_FAIL"
-                      ? "Evaporador bloqueado"
-                      : selectedAlgorithm}
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "flex-start" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "8px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "4px",
+                          borderRadius: "8px",
+                          background:
+                            delta < 0
+                              ? "#C0F2C8"
+                              : delta === 0
+                              ? "#ADBACC"
+                              : delta > 0
+                              ? "#FFC7CD"
+                              : "",
+                        }}
+                      >
+                        {delta < 0 ? (
+                          <>
+                            {" "}
+                            <img
+                              src={"../../sampleData/arrow_gr.png"}
+                              alt="Descripción de la imagen"
+                            />
+                          </>
+                        ) : delta === 0 ? (
+                          <>
+                            <img
+                              src={"../../sampleData/arrow_3.png"}
+                              alt="Descripción de la imagen"
+                            />
+                          </>
+                        ) : delta > 0 ? (
+                          <>
+                            {" "}
+                            <img
+                              src={"../../sampleData/arrow_4.png"}
+                              alt="Descripción de la imagen"
+                            />
+                          </>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color:
+                          delta < 0
+                            ? "#31B648"
+                            : delta === 0
+                            ? "#313A49"
+                            : delta > 0
+                            ? "#F93448"
+                            : "",
+                        // fontFamily: "DM Sans",
+                        fontSize: "16px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      {delta > 0 ? "+" + delta : delta}
+                    </div>
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "14px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      desde ayer
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           </div>
           <div
             style={{
               display: "flex",
-              width: "265px",
-              padding: "8px",
+              padding: "4px 0px",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: "flex-start",
-              gap: "8px",
-              borderRadius: "8px",
-              border: "1px solid #88888B",
-              background: "#FFF",
-              marginLeft: "auto",
+              alignItems: "center",
+              gap: "10px",
+              alignSelf: "stretch",
             }}
           >
             <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                alignSelf: "stretch",
-              }}
-            >
-              <div
-                style={{
-                  color: "#000005",
-                  // fontFamily: " DM Sans",
-                  fontSize: "26px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
-                }}
-              >
-                {value.toLocaleString()}
-              </div>
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "flex-start" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        padding: "8px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "4px",
-                        borderRadius: "8px",
-                        background:
-                          delta < 0
-                            ? "#C0F2C8"
-                            : delta === 0
-                            ? "#ADBACC"
-                            : delta > 0
-                            ? "#FFC7CD"
-                            : "",
-                      }}
-                    >
-                      {delta < 0 ? (
-                        <>
-                          {" "}
-                          <img
-                            src={"../../sampleData/arrow_gr.png"}
-                            alt="Descripción de la imagen"
-                          />
-                        </>
-                      ) : delta === 0 ? (
-                        <>
-                          <img
-                            src={"../../sampleData/arrow_3.png"}
-                            alt="Descripción de la imagen"
-                          />
-                        </>
-                      ) : delta > 0 ? (
-                        <>
-                          {" "}
-                          <img
-                            src={"../../sampleData/arrow_4.png"}
-                            alt="Descripción de la imagen"
-                          />
-                        </>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      color:
-                        delta < 0
-                          ? "#31B648"
-                          : delta === 0
-                          ? "#313A49"
-                          : delta > 0
-                          ? "#F93448"
-                          : "",
-                      // fontFamily: "DM Sans",
-                      fontSize: "16px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {delta > 0 ? "+" + delta : delta}
-                  </div>
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    desde ayer
-                  </div>
-                </div>
-              </div>
-            </div>
+              style={{ width: "100%", height: "1px", background: "#CACACA" }}
+            ></div>
           </div>
         </div>
         <div
           style={{
             display: "flex",
-            padding: "4px 0px",
-            flexDirection: "column",
-            justifyContent: "center",
+            padding: "0px 64px",
+            justifyContent: "space-between",
             alignItems: "center",
-            gap: "10px",
-            alignSelf: "stretch",
           }}
         >
           <div
-            style={{ width: "100%", height: "1px", background: "#CACACA" }}
-          ></div>
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <div
+              style={{
+                color: "#88888B",
+                // fontFamily: "DM Sans",
+                fontSize: "12px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "155%",
+              }}
+            >
+              TABLA
+            </div>
+            <div
+              style={{
+                color: "#000005",
+                // fontFamily: "DM Sans",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 300,
+                lineHeight: "155%",
+              }}
+            >
+              ENFRIADORES
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "4px",
+              marginLeft: 350,
+            }}
+          >
+            <div style={{ marginLeft: "auto" }}>
+              <ExportToExcel
+                datos={filterCoolersDataDownload(coolersData)}
+                nombre={
+                  "Enfriadores_" +
+                  (selectedAlgorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                    ? "Alta demanda del compresor"
+                    : selectedAlgorithm === "DISCONNECTION_ALERT"
+                    ? "Desconexión"
+                    : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT"
+                    ? "Alta temperatura"
+                    : selectedAlgorithm === "HIGH_VOLTAGE_ALERT"
+                    ? "Alto voltaje"
+                    : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
+                    ? "Bajo voltaje"
+                    : selectedAlgorithm === "DISCONNECTIONS_FAIL"
+                    ? "Desconexión"
+                    : selectedAlgorithm === "TEMPERATURE_FAIL"
+                    ? "Falla de temperatura"
+                    : selectedAlgorithm === "VOLTAGE_FAIL"
+                    ? "Falla de voltaje"
+                    : selectedAlgorithm === "COMPRESSOR_FAIL"
+                    ? "Falla asociada al compresor"
+                    : selectedAlgorithm)
+                }
+              />
+            </div>
+          </div>
         </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          padding: "0px 64px",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+        <br></br>
+        <br></br>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
+            gap: "32px",
+            padding: "0px 24px",
           }}
         >
-          <div
-            style={{
-              color: "#88888B",
-              // fontFamily: "DM Sans",
-              fontSize: "12px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "155%",
-            }}
-          >
-            TABLA
-          </div>
-          <div
-            style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 300,
-              lineHeight: "155%",
-            }}
-          >
-            ENFRIADORES
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "4px",
-            marginLeft: 350,
-          }}
-        >
-          <div style={{ marginLeft: "auto" }}>
-            <ExportToExcel
-              datos={filterCoolersDataDownload(coolersData)}
-              nombre={
-                "Enfriadores_" +
-                (selectedAlgorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                  ? "Alta demanda del compresor"
-                  : selectedAlgorithm === "DISCONNECTION_ALERT"
-                  ? "Desconexión"
-                  : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT"
-                  ? "Alta temperatura"
-                  : selectedAlgorithm === "HIGH_VOLTAGE_ALERT"
-                  ? "Alto voltaje"
-                  : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
-                  ? "Bajo voltaje"
-                  : selectedAlgorithm === "DISCONNECTIONS_FAIL"
-                  ? "Desconexión"
-                  : selectedAlgorithm === "TEMPERATURE_FAIL"
-                  ? "Falla de temperatura"
-                  : selectedAlgorithm === "VOLTAGE_FAIL"
-                  ? "Falla de voltaje"
-                  : selectedAlgorithm === "COMPRESSOR_FAIL"
-                  ? "Falla asociada al compresor"
-                  : selectedAlgorithm)
-              }
-            />
-          </div>
-        </div>
-      </div>
-      <br></br>
-      <br></br>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "32px",
-          padding: "0px 24px",
-        }}
-      >
-        <section>
-          <Table
-            style={{
-              borderCollapse: "collapse",
-              width: "100%",
-              maxWidth: "1000px",
-              height: "20rem",
-            }}
-          >
-            <TableHead style={{ display: "block" }}>
-              <TableRow>
-                <TableHeaderCell
-                  style={{
-                    fontSize: ".84rem",
-                    textAlign: "left",
-                    width: "6.2rem",
-                  }}
-                >
-                  Estatus
-                </TableHeaderCell>
-                <TableHeaderCell
-                  style={{
-                    fontSize: ".84rem",
-                    textAlign: "left",
-                    paddingLeft: 30,
-                    width: "7rem",
-                  }}
-                >
-                  Serie
-                </TableHeaderCell>
-                <TableHeaderCell
-                  style={{
-                    fontSize: ".84rem",
-                    textAlign: "left",
-                    width: "9rem",
-                  }}
-                >
-                  Modelo
-                </TableHeaderCell>
-                <TableHeaderCell
-                  style={{
-                    fontSize: ".84rem",
-                    textAlign: "left",
-                    width: "9rem",
-                  }}
-                >
-                  Dias sin visita
-                </TableHeaderCell>
-                <TableHeaderCell
-                  style={{
-                    fontSize: ".84rem",
-                    textAlign: "left",
-                    width: "6rem",
-                  }}
-                >
-                  Prioridad
-                </TableHeaderCell>
-                <TableHeaderCell
-                  style={{
-                    fontSize: ".84rem",
-                    textAlign: "left",
-                    width: "8rem",
-                  }}
-                >
-                  Acciones
-                </TableHeaderCell>
-              </TableRow>
-            </TableHead>
-            {isLoading == true ? (
-              <>
-                <br></br>
-                <br></br>
-                <div style={{ marginBottom: -10 }}></div>
-                <SkeletonTableInsights></SkeletonTableInsights>
-              </>
-            ) : (
-              ""
-            )}
-
-            <TableBody
-              style={{ display: "block", height: "90%", overflowY: "auto" }}
+          <section>
+            <Table
+              style={{
+                borderCollapse: "collapse",
+                width: "100%",
+                maxWidth: "1000px",
+                height: "20rem",
+              }}
             >
-              {coolersData &&
-                coolersData
-                  .slice(
-                    (currentPage - 1) * datosPorPagina,
-                    currentPage * datosPorPagina
-                  )
-                  .map((cooler) => (
-                    <TableRow
-                      key={cooler.serial_number}
-                      className="Tabla"
-                      onClick={() => {
-                        navigate(`/home/coolerDetail/${cooler.serial_number}`);
-                      }}
-                    >
-                      <TableCell
-                        style={{
-                          paddingRight: "30px",
-                          textAlign: "left",
-                          width: "100px",
+              <TableHead style={{ display: "block" }}>
+                <TableRow>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "6.2rem",
+                    }}
+                  >
+                    Estatus
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      paddingLeft: 30,
+                      width: "7rem",
+                    }}
+                  >
+                    Serie
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "9rem",
+                    }}
+                  >
+                    Modelo
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "9rem",
+                    }}
+                  >
+                    Dias sin visita
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "6rem",
+                    }}
+                  >
+                    Prioridad
+                  </TableHeaderCell>
+                  <TableHeaderCell
+                    style={{
+                      fontSize: ".84rem",
+                      textAlign: "left",
+                      width: "8rem",
+                    }}
+                  >
+                    Acciones
+                  </TableHeaderCell>
+                </TableRow>
+              </TableHead>
+              {isLoading == true ? (
+                <>
+                  <br></br>
+                  <br></br>
+                  <div style={{ marginBottom: -10 }}></div>
+                  <SkeletonTableInsights></SkeletonTableInsights>
+                </>
+              ) : (
+                ""
+              )}
+
+              <TableBody
+                style={{ display: "block", height: "90%", overflowY: "auto" }}
+              >
+                {coolersData &&
+                  coolersData
+                    .slice(
+                      (currentPage - 1) * datosPorPagina,
+                      currentPage * datosPorPagina
+                    )
+                    .map((cooler) => (
+                      <TableRow
+                        key={cooler.serial_number}
+                        className="Tabla"
+                        onClick={() => {
+                          navigate(
+                            `/home/coolerDetail/${cooler.serial_number}`
+                          );
                         }}
                       >
-                        {cooler.status == undefined || cooler.status == null ? (
-                          <div style={{ fontSize: 13 }}>Sin registro</div>
-                        ) : (
-                          <>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "4px",
-                                // justifyContent: "center",
-                                alignItems: "center",
-                                gap: "4px",
-                                borderRadius: "2px",
-                                background: "#B6FEDB",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  width: "4px",
-                                  height: "4px",
-                                  borderRadius: "5px",
-                                  background: "#31B648",
-                                }}
-                              ></div>
-                              <div
-                                style={{
-                                  color: "#028053",
-                                  // fontFamily: "Space Mono",
-                                  fontSize: "8px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "14px",
-                                }}
-                              >
-                                {cooler.status}
-                              </div>
-                            </div>
-                          </>
-                        )}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".74rem",
-                          textAlign: "left",
-                          width: "6.5rem",
-                        }}
-                      >
-                        {cooler.serial_number}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".74rem",
-                          textAlign: "left",
-                          width: "9rem",
-                        }}
-                      >
-                        {cooler.model_id}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".74rem",
-                          textAlign: "left",
-                          width: "9rem",
-                        }}
-                      >
-                        {cooler.days_without_visit == undefined ||
-                        cooler.days_without_visit == "" ? (
-                          "Sin registro"
-                        ) : (
-                          <>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "4px",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "4px",
-                                borderRadius: "2px",
-                                background: "#D4DAE3",
-                                width: "80px",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  color: "#313A49",
-                                  // fontFamily: "Space Mono",
-                                  fontSize: "10px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "14px",
-                                }}
-                              >
-                                {" "}
-                                {`${cooler.days_without_visit} DÍAS`}
-                              </div>
-                            </div>
-                          </>
-                        )}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".84rem",
-                          textAlign: "left",
-                          width: "5rem",
-                        }}
-                      >
-                        <div style={{ fontSize: 12 }}>Sin registro</div>
-                        {/* {cooler.priority === undefined ||
-                        cooler.priority === null ? (
-                          "Sin registros"
-                        ) : (
-                          <>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "4px",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "4px",
-                                borderRadius: "2px",
-                                border: "1.5px solid #0F9F67",
-                                background: "#FFF",
-                                width: "3rem",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  color: "#0F9F67",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "12px",
-                                  fontStyle: "normal",
-                                  fontWeight: 600,
-                                  lineHeight: "14px",
-                                }}
-                              >
-                                {cooler.priority}
-                              </div>
-                            </div>
-                          </>
-                        )} */}
-                      </TableCell>
-                      <TableCell
-                        style={{
-                          fontSize: ".74rem",
-                          textAlign: "left",
-                          width: "9rem",
-                        }}
-                      >
-                        <div
+                        <TableCell
                           style={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            alignItems: "center",
-                            gap: "4px",
-                            flex: 100,
-                            height: "40px",
+                            paddingRight: "30px",
+                            textAlign: "left",
+                            width: "100px",
                           }}
                         >
-                          <Link to="/home/coolerDetail">
-                            <div
-                              style={{
-                                color: "#3E83FF",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "20px",
-                                display: "flex",
-                                marginRight: "30px",
-                              }}
-                            >
-                              Ver más{" "}
-                              <IconArrowRight
+                          {cooler.status == undefined ||
+                          cooler.status == null ? (
+                            <div style={{ fontSize: 13 }}>Sin registro</div>
+                          ) : (
+                            <>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "4px",
+                                  // justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  borderRadius: "2px",
+                                  background: "#B6FEDB",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    width: "4px",
+                                    height: "4px",
+                                    borderRadius: "5px",
+                                    background: "#31B648",
+                                  }}
+                                ></div>
+                                <div
+                                  style={{
+                                    color: "#028053",
+                                    // fontFamily: "Space Mono",
+                                    fontSize: "8px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "14px",
+                                  }}
+                                >
+                                  {cooler.status}
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            fontSize: ".74rem",
+                            textAlign: "left",
+                            width: "6.5rem",
+                          }}
+                        >
+                          {cooler.serial_number}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            fontSize: ".74rem",
+                            textAlign: "left",
+                            width: "9rem",
+                          }}
+                        >
+                          {cooler.model_id}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            fontSize: ".74rem",
+                            textAlign: "left",
+                            width: "9rem",
+                          }}
+                        >
+                          {cooler.days_without_visit == undefined ||
+                          cooler.days_without_visit == "" ? (
+                            "Sin registro"
+                          ) : (
+                            <>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "4px",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  borderRadius: "2px",
+                                  background: "#D4DAE3",
+                                  width: "80px",
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    color: "#313A49",
+                                    // fontFamily: "Space Mono",
+                                    fontSize: "10px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "14px",
+                                  }}
+                                >
+                                  {" "}
+                                  {`${cooler.days_without_visit} DÍAS`}
+                                </div>
+                              </div>
+                            </>
+                          )}
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            fontSize: ".84rem",
+                            textAlign: "left",
+                            width: "5rem",
+                          }}
+                        >
+                          <div style={{ fontSize: 12 }}>Sin registro</div>
+                        </TableCell>
+                        <TableCell
+                          style={{
+                            fontSize: ".74rem",
+                            textAlign: "left",
+                            width: "9rem",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              alignItems: "center",
+                              gap: "4px",
+                              flex: 100,
+                              height: "40px",
+                            }}
+                          >
+                            <Link to="/home/coolerDetail">
+                              <div
                                 style={{
                                   color: "#3E83FF",
-                                  width: "1.0rem",
+                                  fontSize: "12px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  lineHeight: "20px",
+                                  display: "flex",
+                                  marginRight: "30px",
                                 }}
-                              />
-                            </div>
-                          </Link>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-            </TableBody>
-          </Table>
-          <PaginationComponent
-            accion={setCurrentPage}
-            totalDatos={coolersData?.length}
-            datosPorPagina={datosPorPagina}
-            numero={setNumero}
-          />
-        </section>
-      </div>
-    </div>
+                              >
+                                Ver más{" "}
+                                <IconArrowRight
+                                  style={{
+                                    color: "#3E83FF",
+                                    width: "1.0rem",
+                                  }}
+                                />
+                              </div>
+                            </Link>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+              </TableBody>
+            </Table>
+            <PaginationComponent
+              accion={setCurrentPage}
+              totalDatos={coolersData?.length}
+              datosPorPagina={datosPorPagina}
+              numero={setNumero}
+            />
+          </section>
+        </div>
+      </>
+    </Drawer>
   );
 }

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import GoogleMapReact from "google-map-react";
-import {IconArrowDownRight,IconArrowRight,} from "@tabler/icons-react";
+import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
 import { Tabs } from "@mantine/core";
 import MapComponent from "../map";
 import MapComponent1 from "../map_1";
@@ -315,8 +315,10 @@ const Resume = ({ coolersData, setTab }) => {
                     border: "1px solid #CACACA",
                   }}
                 >
-                  {coolersData?.cooler?.last_latitude != null &&
-                  coolersData?.cooler?.latitude === 0 ? (
+                  {(coolersData?.cooler?.last_latitude != null &&
+                    coolersData?.cooler?.latitude === 0) ||
+                  (coolersData?.cooler?.last_latitude != 0 &&
+                    coolersData?.cooler?.latitude === 0) ? (
                     <>
                       <div>
                         <MapComponent1
@@ -325,7 +327,8 @@ const Resume = ({ coolersData, setTab }) => {
                         />
                       </div>
                     </>
-                  ) : coolersData?.cooler?.last_latitude === null ? (
+                  ) : coolersData?.cooler?.last_latitude === null ||
+                    coolersData?.cooler?.last_latitude === 0 ? (
                     <>
                       <div>
                         <MapComponent
