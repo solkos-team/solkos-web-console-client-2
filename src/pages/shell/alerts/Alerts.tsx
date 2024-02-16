@@ -206,15 +206,29 @@ export default function Alerts() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : // cooler.algorithm.includes("VOLTAGE") ? (
-                          //   <img
-                          //     src={"../../sampleData/arrows.png"}
-                          //     alt="Descripción de la imagen"
-                          //   />
-                          // ) :
-                          cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
                               src={"../../sampleData/weather.png"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm.includes("MOVED_VISIT_ALERT") ? (
+                            <img
+                              src={"../../sampleData/mov.png"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm.includes(
+                              "HIGH_VOLTAGE_ALERT"
+                            ) ? (
+                            <img
+                              src={"../../sampleData/bajov.png"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm.includes("LOW_VOLTAGE_ALERT") ? (
+                            <img
+                              src={"../../sampleData/bajov2.png"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />

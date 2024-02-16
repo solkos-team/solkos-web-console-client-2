@@ -3,7 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconDownload, IconArrowRight } from "@tabler/icons-react";
-import Drawer from "../../../components/drawerOutlets/DrawerOutlets";
+import DrawerO from "../../../components/drawerOutlets/DrawerOutlets";
 import { fetchUniversal, fetchUniversalTables } from "../../../utils/apiUtils";
 import {
   TableBody,
@@ -18,12 +18,14 @@ import { Card, Table } from "@mantine/core";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { MantineProvider, TextInput } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { useSelector } from "react-redux";
-import { CoolerInterface} from "../../../interfaces/CoolerInterface";
+import { CoolerInterface } from "../../../interfaces/CoolerInterface";
 import { SkeletonTableOutlets } from "../../../components/skeletonTableOutlets/SkeletonTableOutlets";
 
 export default function Outlets() {
   const [searchValue, setSearchValue] = useState("");
+  const [opened, { open, close }] = useDisclosure(false);
   const [outletsData, setOutletsData] = useState<CoolerInterface[]>();
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,18 +36,18 @@ export default function Outlets() {
   const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
-  const [totalData, setTotalData] = useState<String | number>(0)
+  const [totalData, setTotalData] = useState<String | number>(0);
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
   };
 
-  const handleKeyDown = event => {
-    if (event.key === 'Enter') {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
       event.preventDefault();
-      setCurrentPage(1)
-      fetchData()
+      setCurrentPage(1);
+      fetchData();
     }
   };
   const filterOutlets = (data, searchQuery) => {
@@ -67,15 +69,15 @@ export default function Outlets() {
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     path: pathVerify(),
-    filter_by : searchValue
+    filter_by: searchValue,
   };
   const fetchData = async () => {
     try {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
       const data = await fetchUniversalTables("outlets", body, setIsLoading);
-      const datos = await data.json()
-      const totalData = data.headers.get('content-length')
-      setTotalData(Number(totalData) || 0)
+      const datos = await data.json();
+      const totalData = data.headers.get("content-length");
+      setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
       setIsLoading(false);
     } catch (error) {
@@ -84,7 +86,7 @@ export default function Outlets() {
   };
   useEffect(() => {
     fetchData();
-  }, [dt, dto, datosPorPagina,currentPage]);
+  }, [dt, dto, datosPorPagina, currentPage]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)
@@ -97,12 +99,16 @@ export default function Outlets() {
   // Page (Body)
   useEffect(() => {
     // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
-    document.addEventListener('click', function(event) {
-      const element = event.target as HTMLElement  
-     if(isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'principalOutlets'){
-        setIsDrawerOpen(false)
-      }     
-    })
+    document.addEventListener("click", function (event) {
+      const element = event.target as HTMLElement;
+      if (
+        (isDrawerOpen == true &&
+          element.className == "mantine-134h5mf mantine-AppShell-main") ||
+        element.className == "principalOutlets"
+      ) {
+        setIsDrawerOpen(false);
+      }
+    });
     return () => {
       document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
     };
@@ -111,15 +117,15 @@ export default function Outlets() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedOutletDetails, setSelectedOutletDetails] =
     useState<CoolerInterface | null>(null);
-  outletsData == undefined ? [] : outletsData
-  totalData == undefined ? 0 : totalData
+  outletsData == undefined ? [] : outletsData;
+  totalData == undefined ? 0 : totalData;
   return (
     <div>
       <PageFilter status={isLoading} />
 
       <br></br>
       <div
-      className="principalOutlets"
+        className="principalOutlets"
         style={{
           display: "flex",
           padding: "16px 0px",
@@ -130,7 +136,7 @@ export default function Outlets() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0,          
+          marginLeft: 0,
         }}
       >
         <div
@@ -171,7 +177,7 @@ export default function Outlets() {
           </div>
         </div>
         <div
-        className="principalOutlets"
+          className="principalOutlets"
           style={{
             display: "flex",
             padding: "32px 0px",
@@ -206,7 +212,7 @@ export default function Outlets() {
               >
                 <TextInput
                   value={searchValue}
-                  onChange={event => handleSearchChange(event)}
+                  onChange={(event) => handleSearchChange(event)}
                   onKeyDown={handleKeyDown}
                   type="text"
                   placeholder="Busca por punto de venta"
@@ -226,7 +232,7 @@ export default function Outlets() {
         </div>
         {/* Tabla */}
         <div
-        className="principalOutlets"
+          className="principalOutlets"
           style={{
             display: "flex",
             padding: "0px 32px",
@@ -350,7 +356,9 @@ export default function Outlets() {
                       )}
                       {!isLoading && (
                         <>
-                          {outletsData == undefined ? [] : outletsData ? (
+                          {outletsData == undefined ? (
+                            []
+                          ) : outletsData ? (
                             <TableBody
                               style={{
                                 display: "block",
@@ -403,7 +411,7 @@ export default function Outlets() {
                                     >
                                       {outlet.days_without_visitC ===
                                         undefined ||
-                                        outlet.days_without_visitC === "" ? (
+                                      outlet.days_without_visitC === "" ? (
                                         "Sin registro"
                                       ) : (
                                         <>
@@ -445,7 +453,7 @@ export default function Outlets() {
                                       }}
                                     >
                                       {outlet.priority === undefined ||
-                                        outlet.priority === "" ? (
+                                      outlet.priority === "" ? (
                                         "Sin registro"
                                       ) : (
                                         <>
@@ -499,9 +507,13 @@ export default function Outlets() {
                                       >
                                         <Link
                                           to="/home/coolerDetail"
+                                          // onClick={() => {
+                                          //   setSelectedOutletDetails(outlet);
+                                          //   setIsDrawerOpen(true);
+                                          // }}
                                           onClick={() => {
                                             setSelectedOutletDetails(outlet);
-                                            setIsDrawerOpen(true);
+                                            open();
                                           }}
                                         >
                                           <div
@@ -563,12 +575,13 @@ export default function Outlets() {
         </div>
       </div>
       {selectedOutletDetails && (
-        <Drawer
-          isOpen={isDrawerOpen}
-          onClose={() => {
-            setIsDrawerOpen(false);
-            setSelectedOutletDetails(null);
-          }}
+        <DrawerO
+          opened={opened}
+          // onClose={() => {
+          //   setIsDrawerOpen(false);
+          //   setSelectedOutletDetails(null);
+          // }}
+          onClose={close}
           outletDetails={selectedOutletDetails}
         />
       )}

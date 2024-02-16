@@ -128,7 +128,7 @@ export default function Indicator() {
               lineHeight: "155%",
             }}
           >
-            Identifica los enfriadores
+            Monitorea y toma acción sobre tus enfriadores.
           </div>
           <br></br>
           <div

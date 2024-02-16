@@ -178,20 +178,25 @@ export default function DrawerA({
                     />
                   ) : selectedAlgorithm === "MOVED_VISIT_ALERT" ? (
                     <img
-                      src={"../../sampleData/devices_2.png"}
+                      src={"../../sampleData/mov.png"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
-                  ) : selectedAlgorithm === "HIGH_VOLTAGE_ALERT" ||
-                    selectedAlgorithm === "LOW_VOLTAGE_ALERT" ? (
+                  ) : selectedAlgorithm === "LOW_VOLTAGE_ALERT" ? (
                     <img
-                      src={"../../sampleData/devices_2.png"}
+                      src={"../../sampleData/bajov2.png"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "VOLTAGE_FAIL" ? (
                     <img
                       src={"../../sampleData/elect.png"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "44px", height: "44px" }}
+                    />
+                  ) : selectedAlgorithm === "HIGH_VOLTAGE_ALERT" ? (
+                    <img
+                      src={"../../sampleData/bajov.png"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />

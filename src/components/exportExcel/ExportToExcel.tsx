@@ -54,14 +54,20 @@ export const ExportToExcel = (props) => {
   return (
     <Group>
       <Button
-      disabled={props.datos == null || props.datos.length == 0 || props.datos == undefined ? true : false}      
+        disabled={
+          props.datos == null ||
+          props.datos.length == 0 ||
+          props.datos == undefined
+            ? true
+            : false
+        }
         style={{
           color: "#3E83FF",
-          fontSize: "18px",
+          fontSize: "15px",
           fontStyle: "normal",
           fontWeight: 300,
           lineHeight: "100%",
-          backgroundColor: "transparent",          
+          backgroundColor: "transparent",
         }}
         onClick={exportToExcel}
       >
@@ -71,4 +77,3 @@ export const ExportToExcel = (props) => {
     </Group>
   );
 };
-
