@@ -31,13 +31,12 @@ export interface CoolerInterface {
   level: string;
 }
 
-
 export interface Algorithm {
   level: string;
   class: string;
   algorithm: string;
   value: number;
-  Installed :string ;
+  Installed: string;
 }
 export enum Class {
   Stk = "STK",
@@ -110,12 +109,26 @@ export interface CoolerData {
     status: string;
     asset_number: string;
     channel: string;
+    outlet_address: string;
+    last_latitude: number;
+    latitude: number;
+    last_longitude: number;
+    longitude: number;
+    distance: string;
+    device_id: string;
+    outlet_id: string;
   };
   properties: {
     description: string;
     name: string;
     value: number;
   };
-  service_orders?: Array<{ description: string }>;
+  service_orders?: Array<{
+    service_id: string;
+    status: string;
+    id: string;
+    created_at: string;
+    description: string;
+  }>;
   tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
 }

@@ -134,7 +134,7 @@ const MapComponent2 = ({
       style={{
         position: "relative",
         width: "100%",
-        height: "450px",
+        height: "10vw",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",

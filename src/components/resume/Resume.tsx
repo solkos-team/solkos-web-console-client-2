@@ -159,7 +159,7 @@ const Resume = ({ coolersData, setTab }) => {
       <div
         style={{
           display: "flex",
-          flexDirection: "row", // Ajusta la dirección a "row" para colocar los divs uno al lado del otro
+          flexDirection: "row",
           gap: "16px",
         }}
       >

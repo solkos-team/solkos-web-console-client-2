@@ -1,11 +1,10 @@
-
 #root {
   /* max-width: 1280px; */
   /* margin: 0 auto; */
   padding: 2rem;
   text-align: center;
   overflow-x: hidden;
-  background-color: #FFFF;
+  background-color: #ffff;
 }
 
 .logo {
@@ -61,16 +60,16 @@
   align-self: stretch;
   flex-wrap: wrap;
   margin-left: -40px;
-  width: 110% 
+  width: 110%;
 }
-.Tabla{
-  border-bottom: 1px solid #CACACA;
+.Tabla {
+  border-bottom: 1px solid #cacaca;
 }
 .Tabla:nth-child(even) {
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
 }
-.Tabla:hover{
-  background-color: #CCCCCC;
+.Tabla:hover {
+  background-color: #cccccc;
 }
 
 *::-webkit-scrollbar {
@@ -78,11 +77,124 @@
 }
 
 *::-webkit-scrollbar-track {
-  background: #FFFF;
+  background: #ffff;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: grey;
   border-radius: 20px;
-  
+}
+.clt_actividad_acerca_principal {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+  gap: 0.5rem;
+  /* flex-wrap: wrap; */
+}
+.clt_actividad_principal {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #cacaca;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.clt_acerca_principal {
+  width: 50%;
+  height: 100%;
+  border: 1px solid #cacaca;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+.clt_acerca_principal_cards {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #cacaca;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  background-color: #cacaca;
+}
+.clt_acerca_principal_cards_info {
+  width: 100%;
+  height: 50%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+.clt_actividad_principal_title_h1 {
+  font-weight: 500;
+  font-size: 1cap;
+  color: #3a3a3f;
+}
+.clt_actividad_principal_title {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+.clt_acerca_principal_cards_info_fecha {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.clt_acerca_principal_cards_info_fecha_h1 {
+  /* font-size: 0.7rem; */
+  font-size: 0.8vw;
+  font-weight: 500;
+  color: #88888b;
+}
+.clt_acerca_principal_cards_info_fecha_estatus {
+  width: 1rem;
+  height: 0.5rem;
+  background-color: pink;
+}
+.clt_acerca_principal_cards_info_fecha_estatus_h1 {
+  /* font-size: 0.6rem; */
+  font-size: 0.5vw;
+  color: #ed5079;
+  font-weight: 400;
+  line-height: 0.8rem;
+  background-color: #fccfd9;
+}
+.clt_acerca_principal_cards_info_orden {
+  display: flex;
+  flex-direction: row;
+  margin-top: -1rem;
+  gap: 0.5rem;
+}
+.clt_acerca_principal_cards_info_orden_h1 {
+  /* font-size: 0.8rem; */
+  font-size: 0.8vw;
+  font-weight: 500;
+  color: #000005;
+  line-height: 18px;
+}
+/* .clt_acerca_principal_cards_info_orden_tipo{
+} */
+.clt_actividad_principal_title_nombre {
+  width: 100%;
+  height: 7%;
+  border-bottom: #cacaca 1px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 1rem;
+  box-sizing: border-box;
+}
+.clt_actividad_principal_title_nombre_h1 {
+  font-size: 0.8vw;
+  font-weight: 400;
+  color: #88888b;
+  margin-top: 0.3rem;
+}
+.clt_actividad_principal_mapa {
+  width: 100%;
+  height: 40%;
 }
