@@ -70,6 +70,7 @@ export default function CoolerDetail() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
+      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -887,7 +888,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   <img
-                    src={"../../sampleData/filled.png"}
+                    src={"../../sampleData/icon1.svg"}
                     width={"20vw"}
                     alt="cooler"
                   ></img>
@@ -913,7 +914,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   <img
-                    src={"../../sampleData/pin_filled.png"}
+                    src={"../../sampleData/icon2.svg"}
                     width={"20vw"}
                     alt="cooler"
                   ></img>

@@ -101,7 +101,7 @@ export default function Fails() {
               }}
             >
               <img
-                src={"../../sampleData/fails2.png"}
+                src={"../../sampleData/fail1.svg"}
                 alt="Descripción de la imagen"
               />
               <div
@@ -207,26 +207,26 @@ export default function Fails() {
                           {cooler.algorithm === "COMPRESSOR_FAIL" ? (
                             <>
                               <img
-                                src={"../../sampleData/compressor2.png"}
+                                src={"../../sampleData/failc.svg"}
                                 alt="Descripción de la imagen"
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
-                              src={"../../sampleData/weather2.png"}
+                              src={"../../sampleData/failt.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm.includes("VOLTAGE_FAIL") ? (
                             <img
-                              src={"../../sampleData/elect.png"}
+                              src={"../../sampleData/faile.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : (
                             <img
-                              src={"../../sampleData/compressor2.png"}
+                              src={"../../sampleData/failc.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -328,14 +328,14 @@ export default function Fails() {
                               <>
                                 {" "}
                                 <img
-                                  src={"../../sampleData/arrow_gr.png"}
+                                  src={"../../sampleData/arrow2.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
                             ) : cooler.delta === 0 ? (
                               <>
                                 <img
-                                  src={"../../sampleData/arrow_3.png"}
+                                  src={"../../sampleData/arrow1.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
@@ -343,7 +343,7 @@ export default function Fails() {
                               <>
                                 {" "}
                                 <img
-                                  src={"../../sampleData/arrow_4.png"}
+                                  src={"../../sampleData/arrow3.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
@@ -437,7 +437,7 @@ export default function Fails() {
                           Ver enfriadores
                         </div>
                         <img
-                          src={"../../sampleData/dess.png"}
+                          src={"../../sampleData/view.svg"}
                           alt="Descripción de la imagen"
                           style={{ marginLeft: "4px" }}
                         />

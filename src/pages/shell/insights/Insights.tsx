@@ -83,20 +83,20 @@ export default function Insights() {
 
   const filteredMarkers = coolersData
     ? coolersData
-      .filter(
-        (cooler) =>
-          parseFloat(cooler.latitude) !== 0 &&
-          parseFloat(cooler.longitude) !== 0
-      )
-      .map((cooler) => ({
-        latitude: parseFloat(cooler.latitude),
-        longitude: parseFloat(cooler.longitude),
-      }))
+        .filter(
+          (cooler) =>
+            parseFloat(cooler.latitude) !== 0 &&
+            parseFloat(cooler.longitude) !== 0
+        )
+        .map((cooler) => ({
+          latitude: parseFloat(cooler.latitude),
+          longitude: parseFloat(cooler.longitude),
+        }))
     : [];
 
   const markers = filteredMarkers;
 
-  useEffect(() => { }, [markers]);
+  useEffect(() => {}, [markers]);
 
   const [showAll1, setShowAll1] = useState(true);
 
@@ -125,35 +125,43 @@ export default function Insights() {
       <br></br>
       <section className="insights_title">
         <h1 className="insights_title_h1">Cooler Insights</h1>
-        <p className="insights_title_p">Ve el panorama general de los enfriadores y toma acciones</p>
+        <p className="insights_title_p">
+          Ve el panorama general de los enfriadores y toma acciones
+        </p>
       </section>
       <section className="insights_principal">
         <section className="insights_mapa">
           <div className="insights_mapa_info_title">
-            <img className="insights_mapa_info_title_mapa" src={"../../sampleData/map.png"} alt="Descripción de la imagen" />
-            <h1 className="insights_mapa_info_title_h1">A cerca de los equipos</h1>
+            <img
+              className="insights_mapa_info_title_mapa"
+              src={"../../sampleData/map.svg"}
+              alt="Descripción de la imagen"
+              style={{ width: "22px", height: "22px" }}
+            />
+            <h1 className="insights_mapa_info_title_h1">
+              Acerca de los equipos
+            </h1>
           </div>
           {/* description from mapa */}
           <div className="insights_mapa_info_descripcion">
-            <p className="insights_mapa_info_descripcion_p">Visualiza la ubicación donde los enfriadores han sido instalados.</p>
+            <p className="insights_mapa_info_descripcion_p">
+              Visualiza la ubicación donde los enfriadores han sido instalados.
+            </p>
           </div>
           {/* datas from mapa */}
           <div className="insights_mapa_info_datas">
             <div className="insights_mapa_info_datas_data">
               <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">Enfriadores</h1>
+                <h1 className="insights_mapa_info_datas_data_name_h1">
+                  Enfriadores
+                </h1>
               </div>
               <div className="insights_mapa_info_datas_data_value">
                 <h1 className="insights_mapa_info_datas_data_name_h1_value">
                   {isLoading == true ? (
                     <>
                       <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton
-                          height={15}
-                          mt={6}
-                          width="70px"
-                          radius="xl"
-                        />
+                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
                       </div>
                     </>
                   ) : insightsData?.summary.coolers === undefined ? (
@@ -166,19 +174,16 @@ export default function Insights() {
             </div>
             <div className="insights_mapa_info_datas_data">
               <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">Regiones</h1>
+                <h1 className="insights_mapa_info_datas_data_name_h1">
+                  Regiones
+                </h1>
               </div>
               <div className="insights_mapa_info_datas_data_value">
                 <h1 className="insights_mapa_info_datas_data_name_h1_value">
                   {isLoading == true ? (
                     <>
                       <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton
-                          height={15}
-                          mt={6}
-                          width="70px"
-                          radius="xl"
-                        />
+                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
                       </div>
                     </>
                   ) : insightsData?.summary.regions === undefined ? (
@@ -198,12 +203,7 @@ export default function Insights() {
                   {isLoading == true ? (
                     <>
                       <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton
-                          height={15}
-                          mt={6}
-                          width="70px"
-                          radius="xl"
-                        />
+                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
                       </div>
                     </>
                   ) : insightsData?.summary.zones === undefined ? (
@@ -216,23 +216,19 @@ export default function Insights() {
             </div>
             <div className="insights_mapa_info_datas_data">
               <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">Unidad OP.</h1>
+                <h1 className="insights_mapa_info_datas_data_name_h1">
+                  Unidad OP.
+                </h1>
               </div>
               <div className="insights_mapa_info_datas_data_value">
                 <h1 className="insights_mapa_info_datas_data_name_h1_value">
                   {isLoading == true ? (
                     <>
                       <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton
-                          height={15}
-                          mt={6}
-                          width="70px"
-                          radius="xl"
-                        />
+                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
                       </div>
                     </>
-                  ) : insightsData?.summary.operative_units ===
-                    undefined ? (
+                  ) : insightsData?.summary.operative_units === undefined ? (
                     "Sin registro"
                   ) : (
                     insightsData?.summary.operative_units.toLocaleString()
@@ -249,12 +245,7 @@ export default function Insights() {
                   {isLoading == true ? (
                     <>
                       <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton
-                          height={15}
-                          mt={6}
-                          width="100%"
-                          radius="xl"
-                        />
+                        <Skeleton height={15} mt={6} width="100%" radius="xl" />
                       </div>
                     </>
                   ) : insightsData?.summary.routes === undefined ? (
@@ -268,7 +259,9 @@ export default function Insights() {
           </div>
           {/* Mapa inf and filters */}
           <div className="insights_mapa_info_mapa_info">
-            <h1 className="insights_mapa_info_mapa_info">Visualización de enfriadores:</h1>
+            <h1 className="insights_mapa_info_mapa_info">
+              Visualización de enfriadores:
+            </h1>
             <div className="insights_mapa_info_mapa_filters"></div>
           </div>
           {/* Mapa */}
@@ -281,9 +274,9 @@ export default function Insights() {
             <div className="insights_datas_kpi">
               <div className="insights_datas_kpi_title">
                 <img
-                  src={"../../sampleData/indc2.png"}
+                  src={"../../sampleData/kpi.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "25px", height: "25px" }}
+                  style={{ width: "22px", height: "22px" }}
                 />
                 <h1 className="insights_datas_kpi_title_h1">KPI’s</h1>
               </div>
@@ -303,24 +296,36 @@ export default function Insights() {
                   <li>n</li>
                   <li>d</li>
                 </ol>
-
               </div>
             </div>
-            <div className="insights_datas_grafica"></div>
+            <div className="insights_datas_grafica">
+              <div className="insights_datas_kpi_title">
+                <img
+                  src={"../../sampleData/kpi.svg"}
+                  alt="Descripción de la imagen"
+                  style={{ width: "22px", height: "22px" }}
+                />
+                <h1 className="insights_datas_kpi_title_h1">Titulo</h1>
+              </div>
+            </div>
           </section>
           <section className="insights_datas_info2">
             <div className="insigths_datas_info2_control">
               <div className="insigths_datas_info2_control_title">
                 <img
-                  src={"../../sampleData/cooler1.png"}
+                  src={"../../sampleData/actividad.svg"}
                   alt="Descripción de la imagen"
                   style={{ width: "22px", height: "22px" }}
                 />
-                <h1 className="insights_datas_kpi_title_h1">Control de activos</h1>
+                <h1 className="insights_datas_kpi_title_h1">
+                  Control de activos
+                </h1>
               </div>
               <div className="insigths_datas_info2_control_title">
                 <h1 className="insights_datas_kpi_title_h1">0</h1>
-                <h1 className="insights_datas_kpi_title_h1">Total de enfriadores</h1>
+                <h1 className="insights_datas_kpi_title_h1">
+                  Total de enfriadores
+                </h1>
               </div>
               <div className="insigths_datas_info2_control_title_grapics">
                 <div className="insigths_datas_info2_control_title_grapics_container">
@@ -365,15 +370,17 @@ export default function Insights() {
               <div className="insigths_datas_info2_control_mantenimiento">
                 <div className="insigths_datas_info2_control_title">
                   <img
-                    src={"../../sampleData/alert_y.png"}
+                    src={"../../sampleData/aler.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "25px", height: "25px" }}
+                    style={{ width: "22px", height: "22px" }}
                   />
                   <h1 className="insights_datas_kpi_title_h1">Mantenimiento</h1>
                 </div>
                 <div className="insigths_datas_info2_control_title">
                   <h1 className="insights_datas_kpi_title_h1">0</h1>
-                  <h1 className="insights_datas_kpi_title_h1">Total de alertas</h1>
+                  <h1 className="insights_datas_kpi_title_h1">
+                    Total de alertas
+                  </h1>
                 </div>
                 <div className="insigths_datas_info2_control_title_grapics_container">
                   <div

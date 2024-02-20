@@ -30,7 +30,7 @@ const MapComponent = ({ latitude, longitude }) => {
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/filled.png";
+    const iconUrl = "../../sampleData/icon1.svg";
 
     new maps.Marker({
       position: { lat: latitude, lng: longitude },
@@ -38,7 +38,7 @@ const MapComponent = ({ latitude, longitude }) => {
       title: "Mi Marcador Fijo",
       icon: {
         url: iconUrl,
-        scaledSize: new maps.Size(32, 32),
+        scaledSize: new maps.Size(25, 25),
       },
     });
   };

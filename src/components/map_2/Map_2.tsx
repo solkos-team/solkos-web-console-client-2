@@ -41,8 +41,8 @@ const MapComponent2 = ({
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/filled.png";
-    const iconUrl2 = "../../sampleData/pin_filled.png";
+    const iconUrl = "../../sampleData/icon1.svg";
+    const iconUrl2 = "../../sampleData/icon2.svg";
 
     const currentMarker = new maps.Marker({
       position: { lat: latitude, lng: longitude },
@@ -60,7 +60,7 @@ const MapComponent2 = ({
       title: "Otro Marcador",
       icon: {
         url: iconUrl2,
-        scaledSize: new maps.Size(32, 32),
+        scaledSize: new maps.Size(25, 25),
       },
     });
 
@@ -94,7 +94,7 @@ const MapComponent2 = ({
     setLine(linePath);
 
     const zoomLevel = Math.log2(
-      24200000 /
+      12200000 /
         (Dist(latitude, longitude, last_latitude, last_longitude) * 1000)
     );
     map.setZoom(zoomLevel);
@@ -134,7 +134,7 @@ const MapComponent2 = ({
       style={{
         position: "relative",
         width: "100%",
-        height: "10vw",
+        height: "15vw",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",

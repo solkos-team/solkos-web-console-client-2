@@ -143,7 +143,7 @@ export default function DrawerA({
                   "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
                     <>
                       <img
-                        src={"../../sampleData/devices_2.png"}
+                        src={"../../sampleData/comp.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "44px", height: "44px" }}
                       />
@@ -152,57 +152,57 @@ export default function DrawerA({
                     <>
                       {" "}
                       <img
-                        src={"../../sampleData/disconnection.png"}
+                        src={"../../sampleData/desc.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "44px", height: "44px" }}
                       />
                     </>
                   ) : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT" ? (
                     <img
-                      src={"../../sampleData/weather.png"}
+                      src={"../../sampleData/alt.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "COMPRESSOR_FAIL" ||
                     selectedAlgorithm === "FREEZING_FAIL" ? (
                     <img
-                      src={"../../sampleData/compressor2.png"}
+                      src={"../../sampleData/failc.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "TEMPERATURE_FAIL" ? (
                     <img
-                      src={"../../sampleData/weather2.png"}
+                      src={"../../sampleData/failt.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "MOVED_VISIT_ALERT" ? (
                     <img
-                      src={"../../sampleData/mov.png"}
+                      src={"../../sampleData/mov.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "LOW_VOLTAGE_ALERT" ? (
                     <img
-                      src={"../../sampleData/bajov2.png"}
+                      src={"../../sampleData/bajv.svg   "}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "VOLTAGE_FAIL" ? (
                     <img
-                      src={"../../sampleData/elect.png"}
+                      src={"../../sampleData/faile.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : selectedAlgorithm === "HIGH_VOLTAGE_ALERT" ? (
                     <img
-                      src={"../../sampleData/bajov.png"}
+                      src={"../../sampleData/altv.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
                   ) : (
                     <img
-                      src={"../../sampleData/indc2.png"}
+                      src={"../../sampleData/ind.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
@@ -235,19 +235,19 @@ export default function DrawerA({
                 >
                   {selectedAlgorithm.endsWith("ALERT") ? (
                     <img
-                      src={"../../sampleData/alert_y.png"}
+                      src={"../../sampleData/alert.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "16px", height: "16px" }}
                     />
                   ) : selectedAlgorithm.endsWith("FAIL") ? (
                     <img
-                      src={"../../sampleData/fails2.png"}
+                      src={"../../sampleData/fail1.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "16px", height: "16px" }}
                     />
                   ) : (
                     <img
-                      src={"../../sampleData/indc2.png"}
+                      src={"../../sampleData/ind.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "16px", height: "16px" }}
                     />
@@ -303,24 +303,6 @@ export default function DrawerA({
                         ? "Falla asociada al compresor"
                         : selectedAlgorithm === "MOVED_VISIT_ALERT"
                         ? "Movimiento"
-                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 0"
-                        ? "Sin riesgo"
-                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 1"
-                        ? "Visitar punto de venta"
-                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 2"
-                        ? "Requiere actualizar información"
-                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 3"
-                        ? "Tomar acción urgente"
-                        : selectedAlgorithm === "Indicador de Riesgo Nivel: 4"
-                        ? "En riesgo"
-                        : selectedAlgorithm === "LOCATION"
-                        ? "Ubicado"
-                        : selectedAlgorithm === "TELEMETRY"
-                        ? "Telemetría"
-                        : selectedAlgorithm === "INSTALLED"
-                        ? "Instalado"
-                        : selectedAlgorithm === "OWNED"
-                        ? "En propiedad"
                         : selectedAlgorithm === "FREEZING_FAIL"
                         ? "Evaporador bloqueado"
                         : selectedAlgorithm}
@@ -398,14 +380,14 @@ export default function DrawerA({
                           <>
                             {" "}
                             <img
-                              src={"../../sampleData/arrow_gr.png"}
+                              src={"../../sampleData/arrow2.svg"}
                               alt="Descripción de la imagen"
                             />
                           </>
                         ) : delta === 0 ? (
                           <>
                             <img
-                              src={"../../sampleData/arrow_3.png"}
+                              src={"../../sampleData/arrow1.svg"}
                               alt="Descripción de la imagen"
                             />
                           </>
@@ -413,7 +395,7 @@ export default function DrawerA({
                           <>
                             {" "}
                             <img
-                              src={"../../sampleData/arrow_4.png"}
+                              src={"../../sampleData/arrow3.svg"}
                               alt="Descripción de la imagen"
                             />
                           </>

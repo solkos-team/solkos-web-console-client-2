@@ -5,14 +5,14 @@ import { Button, Drawer } from "@mantine/core";
 import { fetchUniversal } from "../../utils/apiUtils";
 import { useState, useEffect } from "react";
 
-export default function DrawerNewUser({    
+export default function DrawerNewUser({
   children,
   setIsAlertOpen,
   setAlertStatus,
   setIsDrawerOpen2,
   openedDrawer,
   oncloseDrawer,
-  setOpenedDrawer
+  setOpenedDrawer,
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,49 +22,52 @@ export default function DrawerNewUser({
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
-  const clearInputs = () =>{
-    setName('')
-    setEmail('')
-  }
-  const handleLogin = async () => {    
+  const clearInputs = () => {
+    setName("");
+    setEmail("");
+  };
+  const handleLogin = async () => {
     const body = {
       customer: dto,
       email: email,
       name: name,
       path: pathVerify(),
-    }; 
-      try {
-        const data = await fetchUniversal("users/add", body);
-        setOpenedDrawer((flag) => !flag);
-        clearInputs()
-        setShowAlert(true);
-        setIsAlertOpen(true);
-        setAlertStatus(true);        
-      } catch (error) {
-        setIsDrawerOpen2(false);
-        setAlertStatus(false);
-        console.error("Error fetching :", error);
-        setIsAlertOpen(true);
-        clearInputs()
-      }    
-    
+    };
+    try {
+      const data = await fetchUniversal("users/add", body);
+      setOpenedDrawer((flag) => !flag);
+      clearInputs();
+      setShowAlert(true);
+      setIsAlertOpen(true);
+      setAlertStatus(true);
+    } catch (error) {
+      setIsDrawerOpen2(false);
+      setAlertStatus(false);
+      console.error("Error fetching :", error);
+      setIsAlertOpen(true);
+      clearInputs();
+    }
   };
 
   return (
-    <Drawer opened={openedDrawer} onClose={oncloseDrawer} position="right" size="40rem">     
+    <Drawer
+      opened={openedDrawer}
+      onClose={oncloseDrawer}
+      position="right"
+      size="40rem"
+    >
       <div
         style={{
           display: "flex",
           padding: "0px 32px",
           alignItems: "flex-start",
           gap: "8px",
-          alignSelf: "stretch"          
+          alignSelf: "stretch",
         }}
       >
         <img
-          src={"../../sampleData/user_c.png"}
+          src={"../../sampleData/user2.svg"}
           alt="Descripción de la imagen"
-          style={{ width: "60px", height: "55px" }}
         />
         <div
           style={{
@@ -134,8 +137,8 @@ export default function DrawerNewUser({
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: "50%",              
-              backgroundColor:"#FFFF"
+              width: "50%",
+              backgroundColor: "#FFFF",
             }}
           />
         </div>
@@ -173,8 +176,8 @@ export default function DrawerNewUser({
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: "50%",              
-              backgroundColor:"#FFFF"
+              width: "50%",
+              backgroundColor: "#FFFF",
             }}
           />
         </div>

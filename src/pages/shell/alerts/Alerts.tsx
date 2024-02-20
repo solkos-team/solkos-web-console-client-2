@@ -87,7 +87,7 @@ export default function Alerts() {
               }}
             >
               <img
-                src={"../../sampleData/alert.png"}
+                src={"../../sampleData/alert.svg"}
                 alt="Descripción de la imagen"
               />
               <div
@@ -191,7 +191,7 @@ export default function Alerts() {
                           "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
                             <>
                               <img
-                                src={"../../sampleData/devices_2.png"}
+                                src={"../../sampleData/comp.svg"}
                                 alt="Descripción de la imagen"
                                 style={{ width: "18px", height: "18px" }}
                               />
@@ -200,20 +200,20 @@ export default function Alerts() {
                             <>
                               {" "}
                               <img
-                                src={"../../sampleData/disconnection.png"}
+                                src={"../../sampleData/desc.svg"}
                                 alt="Descripción de la imagen"
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : cooler.algorithm.includes("TEMPERATURE") ? (
                             <img
-                              src={"../../sampleData/weather.png"}
+                              src={"../../sampleData/alt.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm.includes("MOVED_VISIT_ALERT") ? (
                             <img
-                              src={"../../sampleData/mov.png"}
+                              src={"../../sampleData/mov.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -221,13 +221,13 @@ export default function Alerts() {
                               "HIGH_VOLTAGE_ALERT"
                             ) ? (
                             <img
-                              src={"../../sampleData/bajov.png"}
+                              src={"../../sampleData/altv.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm.includes("LOW_VOLTAGE_ALERT") ? (
                             <img
-                              src={"../../sampleData/bajov2.png"}
+                              src={"../../sampleData/bajv.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -338,14 +338,14 @@ export default function Alerts() {
                               <>
                                 {" "}
                                 <img
-                                  src={"../../sampleData/arrow_gr.png"}
+                                  src={"../../sampleData/arrow2.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
                             ) : cooler.delta === 0 ? (
                               <>
                                 <img
-                                  src={"../../sampleData/arrow_3.png"}
+                                  src={"../../sampleData/arrow1.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
@@ -353,7 +353,7 @@ export default function Alerts() {
                               <>
                                 {" "}
                                 <img
-                                  src={"../../sampleData/arrow_4.png"}
+                                  src={"../../sampleData/arrow3.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
@@ -447,7 +447,7 @@ export default function Alerts() {
                           Ver enfriadores
                         </div>
                         <img
-                          src={"../../sampleData/dess.png"}
+                          src={"../../sampleData/view.svg"}
                           alt="Descripción de la imagen"
                           style={{ marginLeft: "4px" }}
                         />

@@ -1,0 +1,8 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Nature">
+<rect x="0.25" y="0.25" width="23.5" height="23.5" rx="1.75" fill="#FEF5C7"/>
+<rect x="0.25" y="0.25" width="23.5" height="23.5" rx="1.75" stroke="#451C03" stroke-width="0.5"/>
+<path id="Vector" d="M14 10H11V3L3 14H9V21L13 15.5L15 12.75" stroke="#451C03" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M17.5358 2.99962L17.5358 10.0707M17.5358 10.0707L20.3642 7.24226M17.5358 10.0707L14.7073 7.24226" stroke="#451C03" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

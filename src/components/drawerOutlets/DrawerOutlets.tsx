@@ -123,7 +123,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
           >
             <img
               onClick={onClose}
-              src={"../../sampleData/buildings2.png"}
+              src={"../../sampleData/pv2.svg"}
               alt="Descripción de la imagen"
               style={{ width: "40px", height: "40px", cursor: "pointer" }}
             />
@@ -591,7 +591,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       }}
                     >
                       <img
-                        src={"../../sampleData/filled.png"}
+                        src={"../../sampleData/icon1.svg"}
                         width={"15px"}
                         alt="cooler"
                       ></img>
@@ -617,7 +617,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       }}
                     >
                       <img
-                        src={"../../sampleData/pin_filled.png"}
+                        src={"../../sampleData/icon2.svg"}
                         width={"15px"}
                         alt="cooler"
                       ></img>

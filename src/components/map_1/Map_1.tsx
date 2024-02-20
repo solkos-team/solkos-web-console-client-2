@@ -30,7 +30,7 @@ const MapComponent1 = ({ latitude, longitude }) => {
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/pin_filled.png";
+    const iconUrl = "../../sampleData/icon2.svg";
 
     new maps.Marker({
       position: { lat: latitude, lng: longitude },

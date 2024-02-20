@@ -22,6 +22,7 @@ export default function Indicator() {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
+      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -100,13 +101,13 @@ export default function Indicator() {
               }}
             >
               <img
-                src={"../../sampleData/indc2.png"}
+                src={"../../sampleData/act.svg"}
                 alt="Descripción de la imagen"
                 style={{ width: "18px", height: "18px" }}
               />
               <div
                 style={{
-                  color: "#000",
+                  color: "#3E83FF",
                   // fontFamily: "Space Mono",
                   fontSize: "12px",
                   fontStyle: "normal",
@@ -114,7 +115,7 @@ export default function Indicator() {
                   lineHeight: "14px",
                 }}
               >
-                INDICADORES
+                CONTROL DE ACTIVOS
               </div>
             </div>
           </div>
@@ -194,26 +195,21 @@ export default function Indicator() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
-                            background: "#BCDAFF",
+                            background:
+                              cooler.algorithm === "Sin Riesgo"
+                                ? "#C0F2C8"
+                                : "#BCDAFF",
                           }}
                         >
-                          {cooler.algorithm === "COMPRESSOR_FAIL" ? (
-                            <>
-                              <img
-                                src={"../../sampleData/compressor2.png"}
-                                alt="Descripción de la imagen"
-                                style={{ width: "18px", height: "18px" }}
-                              />
-                            </>
-                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
+                          {cooler.algorithm === "Sin Riesgo" ? (
                             <img
-                              src={"../../sampleData/weather2.png"}
+                              src={"../../sampleData/sinr.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : (
                             <img
-                              src={"../../sampleData/indc2.png"}
+                              src={"../../sampleData/ind.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -324,14 +320,14 @@ export default function Indicator() {
                               <>
                                 {" "}
                                 <img
-                                  src={"../../sampleData/arrow_gr.png"}
+                                  src={"../../sampleData/arrow2.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
                             ) : cooler.delta === 0 ? (
                               <>
                                 <img
-                                  src={"../../sampleData/arrow_3.png"}
+                                  src={"../../sampleData/arrow1.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
@@ -339,7 +335,7 @@ export default function Indicator() {
                               <>
                                 {" "}
                                 <img
-                                  src={"../../sampleData/arrow_4.png"}
+                                  src={"../../sampleData/arrow3.svg"}
                                   alt="Descripción de la imagen"
                                 />
                               </>
@@ -428,7 +424,7 @@ export default function Indicator() {
                           Ver enfriadores
                         </div>
                         <img
-                          src={"../../sampleData/dess.png"}
+                          src={"../../sampleData/view.svg"}
                           alt="Descripción de la imagen"
                           style={{ marginLeft: "4px" }}
                         />
