@@ -1,22 +1,19 @@
 import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Alert, Center } from "@mantine/core";
+import { Button, Drawer } from "@mantine/core";
 import { fetchUniversal } from "../../utils/apiUtils";
 import { useState, useEffect } from "react";
-// import { mailer } from "../../utils/apiUtils";
 
-export default function DrawerNewUser({
-  isOpen,
-  onClose,
-  reloadUsers,
+export default function DrawerNewUser({    
   children,
   setIsAlertOpen,
   setAlertStatus,
   setIsDrawerOpen2,
+  openedDrawer,
+  oncloseDrawer,
+  setOpenedDrawer
 }) {
-  const drawerRef = useRef(null);
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [showAlert, setShowAlert] = useState(false);
@@ -25,92 +22,43 @@ export default function DrawerNewUser({
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
-
-  const handleLogin = async () => {
+  const clearInputs = () =>{
+    setName('')
+    setEmail('')
+  }
+  const handleLogin = async () => {    
     const body = {
       customer: dto,
       email: email,
       name: name,
       path: pathVerify(),
-    };
-
-    try {
-      const data = await fetchUniversal("users/add", body);
-      onClose();
-      setShowAlert(true);
-      setIsAlertOpen(true);
-      setAlertStatus(true);
-      clearInputs()
-    } catch (error) {
-      setIsDrawerOpen2(false);
-      onClose();
-      setAlertStatus(false);
-      console.error("Error fetching :", error);
-      setIsAlertOpen(true);
-      clearInputs()
-    }
-  };
-  const clearInputs = () =>{
-    setName('')
-    setEmail('')
-  }
-  const closeAlert = () => {
-    setShowAlert(false);
-    onClose();
+    }; 
+      try {
+        const data = await fetchUniversal("users/add", body);
+        setOpenedDrawer((flag) => !flag);
+        clearInputs()
+        setShowAlert(true);
+        setIsAlertOpen(true);
+        setAlertStatus(true);        
+      } catch (error) {
+        setIsDrawerOpen2(false);
+        setAlertStatus(false);
+        console.error("Error fetching :", error);
+        setIsAlertOpen(true);
+        clearInputs()
+      }    
+    
   };
 
   return (
-    <div
-      ref={drawerRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        width: "700px",
-        backgroundColor: "#FFF",
-        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-        transform: `translateX(${isOpen ? "0" : "100%"})`,
-        transition: "transform 0.3s ease-in-out",
-        padding: "10px",
-        overflowY: "auto",
-        maxHeight: "100vh",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          padding: "27px 0px",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "20px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 32px",
-            alignItems: "flex-start",
-            gap: "10px",
-            alignSelf: "stretch",
-            cursor: "pointer",
-          }}
-        >
-          <img
-            onClick={onClose}
-            src="../../sampleData/arrowsDes.png"
-            alt="Descripción de la imagen"
-            style={{ width: "25px", height: "25px", cursor: "pointer" }}
-          />
-        </div>
-      </div>
+    <Drawer opened={openedDrawer} onClose={oncloseDrawer} position="right" size="40rem">     
       <div
         style={{
           display: "flex",
           padding: "0px 32px",
           alignItems: "flex-start",
           gap: "8px",
-          alignSelf: "stretch",
+          alignSelf: "stretch"          
         }}
       >
         <img
@@ -166,11 +114,11 @@ export default function DrawerNewUser({
             style={{
               color: "#3A3A3F",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "1rem",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -120,
+              marginLeft: -220,
             }}
           >
             Nombre
@@ -182,12 +130,11 @@ export default function DrawerNewUser({
             style={{
               color: "#000",
               // fontFamily: "DM Sans",
-              fontSize: "14px",
+              fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: 430,
-              marginLeft: 250,
+              width: "50%",              
               backgroundColor:"#FFFF"
             }}
           />
@@ -206,11 +153,11 @@ export default function DrawerNewUser({
             style={{
               color: "#3A3A3F",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "1rem",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -130,
+              marginLeft: -220,
             }}
           >
             Correo
@@ -222,24 +169,23 @@ export default function DrawerNewUser({
             style={{
               color: "#000",
               // fontFamily: "DM Sans",
-              fontSize: "14px",
+              fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: 430,
-              marginLeft: 250,
+              width: "50%",              
               backgroundColor:"#FFFF"
             }}
           />
         </div>
         <br></br>
         <Button
-          style={{ background: "#ED5079", width: "440px", marginLeft: 260 }}
+          style={{ background: "#ED5079", width: "50%", marginLeft: 0 }}
           onClick={handleLogin}
         >
           Crear usuario
         </Button>
       </div>
-    </div>
+    </Drawer>
   );
 }

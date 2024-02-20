@@ -1,19 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
-import { Button, TextInput } from "@mantine/core";
+import { Button, Drawer, TextInput } from "@mantine/core";
+import { useDisclosure } from '@mantine/hooks';
 import DrawerUsers from "../../../components/drawerUsers/DrawerUsers";
 import DrawerNewUser from "../../../components/drawerNewUser/DrawerNewUser";
 import { IconArrowRight } from "@tabler/icons-react";
 import { Alert } from "@mantine/core";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
-import { Card, Table } from "@mantine/core";
 import {
   fetchDeleteUsers,
   fetchUniversalTables,
@@ -25,9 +18,13 @@ import { SkeletonTableUsers } from "../../../components/skeletonTableUsers/Skele
 
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const toggleDrawer = () => setOpened((flag) => !flag);
+  const [openedEdit, setOpenedEdit] = useState(false);
+  const toggleDrawerEdit = () => setOpenedEdit((flag) => !flag);
   const [searchValue, setSearchValue] = useState("");
   const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([]);
-  const [dataUsersEdit, setDataUsersEdit] = useState<UsersInterfaces>();
+  const [dataUsersEdit, setDataUsersEdit] = useState<UsersInterfaces | string>();
   const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
@@ -38,7 +35,7 @@ export default function Users() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
-  const [alertStatus, setAlertStatus] = useState();
+  const [alertStatus, setAlertStatus] = useState<Boolean>(false);
   const [userDelete, setUserDelete] = useState();
   const [totalData, setTotalData] = useState<String | number>(0);
   const handleSearchChange = (event) => {
@@ -69,29 +66,6 @@ export default function Users() {
       }));
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
-  const openDrawer = () => {
-    setIsDrawerOpen(true);
-  };
-
-  const closeDrawer = () => {
-    setTimeout(() => {
-      setIsDrawerOpen(false);
-    }, 5);
-  };
-
-  const openDrawer2 = () => {
-    setIsDrawerOpen2(true);
-  };
-
-  const closeDrawer2 = () => {
-    setTimeout(() => {
-      setIsDrawerOpen2(false);
-      // setIsAlertOpen(true);
-      const top = window.innerHeight / 2 - 100;
-      const left = window.innerWidth / 2 - 150;
-      setAlertPosition({ top, left });
-    }, 5);
-  };
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -121,17 +95,15 @@ export default function Users() {
     fetchData();
     document.addEventListener('click', function (event) {
       const element = event.target as HTMLElement
-      if (isDrawerOpen == true && element.className == 'mantine-134h5mf mantine-AppShell-main' || element.className == 'principalUsers' || element.className == 'Tabla') {
-        closeDrawer()
-        closeDrawer2()
-      }
+
     })
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina, userDelete]);
+  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina, userDelete, opened]);
 
   const closeAlert = () => {
+    setAlertStatus(false);
     setIsAlertOpen(false);
   };
 
@@ -152,12 +124,20 @@ export default function Users() {
   };
   dataUsers == undefined ? [] : dataUsers;
   totalData == undefined ? 0 : totalData;
+  const formatingPath = (path) => {
+    let fp
+    if(path == undefined || path == null){
+      return ''
+    }
+    else{      
+      return path[3]
+    }    
+  }
   return (
     <div>
       <PageFilter status={isLoading} />
       <br></br>
       <div
-        className="principalUsers"
         style={{
           display: "flex",
           padding: "16px 0px",
@@ -168,17 +148,17 @@ export default function Users() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0,
+          marginLeft: 0
         }}
       >
         <div
-          className="principalUsers"
           style={{
             display: "flex",
             padding: "0px 32px",
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
+            width: "90%"
           }}
         >
           <div
@@ -208,10 +188,54 @@ export default function Users() {
             Catálogo de los colaboradores
           </div>
         </div>
-
+        <div
+          style={{
+            display: "flex",
+            padding: "0px 2rem",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            alignSelf: "stretch",
+            width: "90%"
+          }}
+        >
+          <h1
+            style={{
+              color: "#000005",
+              // fontFamily: "DM Sans",
+              fontSize: "0.8rem",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "155%",
+              marginLeft: -55,
+            }}
+          >
+            Tabla
+          </h1>
+          <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+            <h1
+              style={{
+                color: "#88888B",
+                // fontFamily: "DM Sans",
+                fontSize: "1.1rem",
+                fontStyle: "normal",
+                fontWeight: 300,
+                marginLeft: -55,
+              }}
+            >
+              Colaboradores
+            </h1>
+            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+              <div>
+                <ExportToExcel datos={dataUsers} nombre={"Users"} />
+              </div>
+              <Button style={{ background: "#ED5079" }} onClick={toggleDrawer}>
+                Nuevo colaborador
+              </Button>
+            </div>
+          </div>
+        </div>
         {/* Tabla */}
         <div
-          className="principalUsers"
           style={{
             display: "flex",
             padding: "0px 32px",
@@ -225,380 +249,213 @@ export default function Users() {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
+              alignItems: "flex-start"
             }}
           >
-            <div
-              style={{
-                color: "#88888B",
-                // fontFamily: "DM Sans",
-                fontSize: "12px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "155%",
-                marginLeft: -55,
-              }}
-            >
-              TABLA
-            </div>
-            <div
-              style={{
-                display: "flex",
-                width: "800%",
-                marginLeft: -55,
-                gap: "10px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#000005",
-                  // fontFamily: "DM Sans",
-                  fontSize: "18px",
-                  fontStyle: "normal",
-                  fontWeight: 300,
-                  lineHeight: "155%",
-                }}
-              >
-                Colaboradores
-              </div>
-              <div style={{ marginLeft: 480 }}>
-                <ExportToExcel datos={dataUsers} nombre={"Users"} />
-              </div>
-              <Button style={{ background: "#ED5079" }} onClick={openDrawer2}>
-                Nuevo colaborador
-              </Button>
-            </div>
+
           </div>
           <div
-            className="principalUsers"
+
             style={{
               display: "flex",
               padding: "32px 0px",
               justifyContent: "center",
               alignItems: "center",
               alignSelf: "stretch",
+              width: "100%",
             }}
           >
-            <div
+            <TextInput
+              value={searchValue}
+              onChange={handleSearchChange}
+              type="text"
+              placeholder="Busca por cualquier campo "
               style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                alignSelf: "stretch",
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "28px",
+                width: "100%",
+                paddingRight: "40px",
+                margin: 0,
+                borderRadius: "4px",
+                color: "#88888B",
               }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  flex: 100,
-                }}
-              >
-                <div
-                  style={{
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    alignSelf: "stretch",
-                  }}
-                >
-                  <TextInput
-                    value={searchValue}
-                    onChange={handleSearchChange}
-                    type="text"
-                    placeholder="Busca por cualquier campo "
-                    style={{
-                      fontSize: "14px",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "28px",
-                      width: "850px",
-                      paddingRight: "40px",
-                      margin: 0,
-                      borderRadius: "4px",
-                      color: "#88888B",
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "flex-start",
-              alignSelf: "stretch",
-            }}
-          >
-            <div style={{}}>
-              <section className="principalUsers">
-                <Table
-                  className="principalUsers"
-                  style={{
-                    borderCollapse: "collapse",
-                    width: "100%",
-                    maxWidth: "1000px",
-                    // width: "910px",
-                    // height: "400px",
-                  }}
-                >
-                  <TableHead style={{ display: "block" }}>
-                    <TableRow className="principalUsers">
-                      <TableHeaderCell
-                        style={{
-                          textAlign: "left",
-                          width: "180px",
-                        }}
-                      >
-                        Nombre
-                      </TableHeaderCell>
-                      <TableHeaderCell
-                        style={{ textAlign: "left", width: "250px" }}
-                      >
-                        Correo
-                      </TableHeaderCell>
-                      <TableHeaderCell
-                        style={{
-                          textAlign: "left",
-                          width: "80px",
-                        }}
-                      >
-                        Cliente
-                      </TableHeaderCell>
-                      <TableHeaderCell
-                        style={{
-                          textAlign: "left",
-                          width: "150px",
-                        }}
-                      >
-                        Path
-                      </TableHeaderCell>
-
-                      <TableHeaderCell
-                        style={{ textAlign: "left", width: "50px" }}
-                      >
-                        Acciones
-                      </TableHeaderCell>
-                      <TableHeaderCell
-                        style={{ textAlign: "left", width: "100px" }}
-                      ></TableHeaderCell>
-                    </TableRow>
-                  </TableHead>
-                  {isLoading == true ? (
-                    <>
-                      <br></br>
-                      <br></br>
-                      <div style={{ marginBottom: -40 }}></div>
-                      <SkeletonTableUsers></SkeletonTableUsers>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  {!isLoading && (
-                    <>
-                      {filteredUsers.length > 0 ? (
-                        <TableBody
-                          style={{
-                            display: "block",
-                            height: "100%",
-                            minWidth: "900px",
-                          }}
-                        >
-                          {filteredUsers
-                            // .slice(firstIndex, lastIndex)
-                            .map((user, index) => (
-                              <TableRow
-                                className="Tabla"
-                                key={index}
-                                style={{ userSelect: "none", height: "auto" }}
-                              >
-                                <TableCell
-                                  style={{
-                                    paddingRight: "30px",
-                                    fontSize: "14px",
-                                    textAlign: "left",
-                                    width: "6rem",
-                                  }}
-                                >
-                                  {user.name}
-                                </TableCell>
-                                <TableCell
-                                  style={{
-                                    paddingRight: "30px",
-                                    fontSize: "14px",
-                                    textAlign: "left",
-                                    width: "8rem",
-                                  }}
-                                >
-                                  {user.email}
-                                </TableCell>
-                                <TableCell
-                                  style={{
-                                    paddingLeft: "15px",
-                                    fontSize: "14px",
-                                    textAlign: "left",
-                                    width: "170px",
-                                  }}
-                                >
-                                  {user.customer}
-                                </TableCell>
-                                <TableCell
-                                  style={{
-                                    paddingRight: "50px",
-                                    fontSize: "14px",
-                                    textAlign: "left",
-                                    width: "150px",
-                                  }}
-                                >
-                                  {user.path.toString()}
-                                </TableCell>
-                                <TableCell
-                                  style={{
-                                    fontSize: "14px",
-                                    width: "50px",
-                                    textAlign: "left",
-                                    cursor: "pointer",
-                                    display: "flex",
-                                    flexDirection: "column",
-                                    alignContent: "center",
-                                    alignItems: "center",
-                                    overflowX: "hidden",
-                                    marginTop: 10,
-                                    height: 25,
-                                  }}
-                                // onClick={openDrawer}
-                                >
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "flex-end",
-                                      alignItems: "center",
-                                      gap: "4px",
-                                      flex: 100,
-                                      // height: "40px",
-                                    }}
-                                    onClick={openDrawer}
-                                  >
-                                    <div
-                                      style={{
-                                        color: "#3E83FF",
-                                        fontSize: "14px",
-                                        fontStyle: "normal",
-                                        fontWeight: 400,
-                                        lineHeight: "20px",
-                                        display: "flex",
-                                        marginLeft: "50px",
-                                        marginRight: "50px",
-                                      }}
-                                      onClick={() => {
-                                        setDataUsersEdit(user);
-                                      }}
-                                    >
-                                      Ver más
-                                      <IconArrowRight
-                                        style={{
-                                          color: "#3E83FF",
-                                          width: "1.0rem",
-                                        }}
-                                      />
-                                    </div>
-                                  </div>
-                                </TableCell>
-                                <TableCell
-                                  style={{
-                                    textAlign: "left",
-                                    width: "100px",
-                                  }}
-                                >
-                                  {localStorage.getItem("USER") ===
-                                    "Jose Iván Peréz Ugalde" ||
-                                    localStorage.getItem("USER") ===
-                                    "Mayra Barrón Reséndiz" ? (
-                                    <Button
-                                      variant="filled"
-                                      color="red"
-                                      size="xs"
-                                      style={{ width: "73px" }}
-                                      onClick={() => {
-                                        deleteUserDrawer(user.id);
-                                      }}
-                                    >
-                                      Eliminar
-                                    </Button>
-                                  ) : (
-                                    ""
-                                  )}
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          <DrawerNewUser
-                            isOpen={isDrawerOpen2}
-                            onClose={closeDrawer2}
-                            reloadUsers={handleReloadUsers}
-                            setIsAlertOpen={setIsAlertOpen}
-                            setAlertStatus={setAlertStatus}
-                            setIsDrawerOpen2={setIsDrawerOpen2}
-                          >
-                            {""}
-                          </DrawerNewUser>
-                        </TableBody>
-                      ) : (
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            fontWeight: "bold",
-                            fontSize: "18px",
-                          }}
-                        >
-                          <p>No hay datos de usuarios disponibles.</p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </Table>
-                <br />
-                <PaginationComponent
-                  accion={setCurrentPage}
-                  totalDatos={dataUsers === null ? 0 : dataUsers.length}
-                  datosPorPagina={datosPorPagina}
-                  numero={setNumero}
-                />
-              </section>
-            </div>
+            />
           </div>
         </div>
+        <section style={{
+          padding: "0px 0rem",
+          marginLeft: -55,
+          width: "100%"
+        }} >
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Path</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            {isLoading == true ? (
+              <>
+                <br></br>
+                <br></br>
+                <div style={{ marginBottom: -40 }}></div>
+                <SkeletonTableUsers></SkeletonTableUsers>
+              </>
+            ) : (
+              ""
+            )}
+            {!isLoading && (
+              <>
+                {filteredUsers.length > 0 ? (
+                  <tbody>
+                    {filteredUsers
+                      // .slice(firstIndex, lastIndex)
+                      .map((user, index) => (
+                        <tr key={index}>
+                          <td data-label="Nombre" title={user.name}>
+                            {user.name}
+                          </td>
+                          <td data-label="Email" title={user.email}>
+                            {user.email}
+                          </td>
+                          <td data-label="Customer" title={user.customer}>
+                            {user.customer}
+                          </td>
+                          <td data-label="Path" title={user.path}>
+                            {
+                              formatingPath(user.path)
+                            }
+                          </td>
+                          <td data-label="Acciones">
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                // gap: "4px",
+                                // flex: 100,
+                                // height: "40px",
+                              }}
+                              // onClick={openDrawer}
+                              onClick={toggleDrawerEdit}
+                            >
+                              <div
+                                style={{
+                                  color: "#3E83FF",
+                                  fontSize: "14px",
+                                  fontStyle: "normal",
+                                  fontWeight: 400,
+                                  // lineHeight: "20px",
+                                  display: "flex",
+                                  // marginLeft: "50px",
+                                  // marginRight: "50px",
+                                  cursor:"pointer"
+                                }}
+                                onClick={() => {
+                                  setDataUsersEdit(user);
+                                }}
+                              >
+                                Ver más
+                                <IconArrowRight
+                                  style={{
+                                    color: "#3E83FF",
+                                    width: "1.0rem",
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            {localStorage.getItem("USER") ===
+                              "Jose Iván Peréz Ugalde" ||
+                              localStorage.getItem("USER") ===
+                              "Mayra Barrón Reséndiz" ? (
+                              <Button
+                                variant="filled"
+                                color="red"
+                                size="xs"
+                                style={{ width: "73px" }}
+                                onClick={() => {
+                                  deleteUserDrawer(user.id);
+                                }}
+                              >
+                                Eliminar
+                              </Button>
+                            ) : (
+                              ""
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    <DrawerNewUser
+                      setIsAlertOpen={setIsAlertOpen}
+                      setAlertStatus={setAlertStatus}
+                      setIsDrawerOpen2={setIsDrawerOpen2}
+                      openedDrawer={opened}
+                      oncloseDrawer={toggleDrawer}
+                      setOpenedDrawer={setOpened}
+                    >
+                      {""}
+                    </DrawerNewUser>
+                  </tbody>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontWeight: "bold",
+                      fontSize: "18px",
+                    }}
+                  >
+                    <p>No hay datos de usuarios disponibles.</p>
+                  </div>
+                )}
+              </>
+            )}
+          </table>
+          <br />
+          <PaginationComponent
+            accion={setCurrentPage}
+            totalDatos={dataUsers === null ? 0 : dataUsers.length}
+            datosPorPagina={datosPorPagina}
+            numero={setNumero}
+          />
+        </section>
       </div>
       <DrawerNewUser
-        isOpen={isDrawerOpen2}
-        onClose={closeDrawer2}
-        reloadUsers={handleReloadUsers}
         setIsAlertOpen={setIsAlertOpen}
         setAlertStatus={setAlertStatus}
         setIsDrawerOpen2={setIsDrawerOpen2}
+        openedDrawer={opened}
+        oncloseDrawer={close}
+        setOpenedDrawer={setOpened}
       >
         {""}
       </DrawerNewUser>
       {dataUsersEdit && (
         <DrawerUsers
-          isOpen={isDrawerOpen}
-          onClose={closeDrawer}
           userData={dataUsersEdit}
           userDataClear={setDataUsersEdit}
+          openedDrawerEdit={openedEdit}
+          oncloseDrawerEdit={toggleDrawerEdit}
+          setOpenedDrawerEdit={setOpenedEdit}
         ></DrawerUsers>
       )}
       {isAlertOpen && (
         <div
           style={{
-            position: "fixed",
-            top: alertPosition.top,
-            left: alertPosition.left,
+            position: "absolute",
+            top: "50%",
+            left: "50%",
             zIndex: 9999,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-end",
+            marginLeft: "-width",
+            marginTop: "-height"
           }}
         >
           <Alert

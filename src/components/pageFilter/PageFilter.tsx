@@ -60,7 +60,7 @@ export default function (props) {
   };
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
-    const body = { customer: dto, path: dataLocalStorage };
+    const body = { customer: dto, path: dataLocalStorage };    
     if (data.length < 4) {
       try {
         // const data = await fetchPath(dataLocalStorage);
@@ -197,10 +197,10 @@ export default function (props) {
           // padding: "0px 32px",
           marginLeft: -35,
           alignItems: "center",
-          gap: "32px",
+          gap: "1rem",
           alignSelf: "stretch",
           marginTop: -30,
-          maxWidth: "97%",
+          maxWidth: "100%",
           // overflowX: "auto",
           whiteSpace: "nowrap",
         }}
@@ -210,8 +210,8 @@ export default function (props) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "32px",
-            height: "32px",
+            width: "2rem",
+            height: "2rem",
             strokeWidth: "0.5",
             border: "0.5px solid #ADBACC",
             borderRadius: "4px",
@@ -238,10 +238,11 @@ export default function (props) {
             // flex: "100",
             border: "0.5px solid #ADBACC",
             width: "100%",
-            borderRadius: "4px",
+            borderRadius: "4px",                                      
             // visibility : props.disabledPath == true ? "hidden" : "visible"            
           }}
         >
+          <section style={{display:"flex",maxWidth:"100%",width:"100%",overflowX:"auto",scrollbarWidth:'thin'}}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <div
               style={{
@@ -256,8 +257,8 @@ export default function (props) {
               <IconLock
                 style={{
                   color: "#ADBACC",
-                  width: "16px",
-                  height: "16px",
+                  width: "1rem",
+                  height: "1rem",
                   marginRight: "3px",
                 }}
               />
@@ -288,7 +289,7 @@ export default function (props) {
           {data === null || data === undefined
             ? []
             : data.map((item, i) => (
-              <div style={{ display: "flex", alignItems: "center" }} key={i}>
+              <div style={{ display: "flex", alignItems: "center"}} key={i}>
                 <button
                   style={{
                     display: "flex",
@@ -306,8 +307,8 @@ export default function (props) {
                     <IconCircleX
                       style={{
                         color: "#313A49",
-                        width: "16px",
-                        height: "16px",
+                        width: "1rem",
+                        height: "1rem",
                         marginRight: "3px",
                         // visibility:
                         //   bloqPath(i) == false ? "visible" : "hidden",
@@ -332,10 +333,10 @@ export default function (props) {
                     style={{
                       // color: "#313A49",
                       // fontFamily: "Space Mono",
-                      fontSize: "12px",
+                      fontSize: "0.6rem",
                       fontStyle: "normal",
                       fontWeight: 400,
-                      lineHeight: "14px",
+                      lineHeight: "0.6rem",
                       textTransform: "uppercase",
                       userSelect: "none",
                       color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
@@ -347,30 +348,31 @@ export default function (props) {
                 <IconChevronRight
                   style={{
                     color: "#ADBACC",
-                    width: "16px",
-                    height: "16px",
+                    width: "0.9rem",
+                    height: "0.9rem",
                     marginLeft: "3px",
                     visibility: i == 3 || props.disabledPath == true ? "hidden" : "visible",
                   }}
                 />
               </div>
             ))}
-
+          </section>
           {/* ---------------------- */}
           {filterVisibility ? (
-            <div style={{ display: "flex", alignItems: "center" , visibility : props.status == true  || props.disabledPath == true ? "hidden" : "visible" }}>
+            <div style={{ display: "flex", alignItems: "center" , visibility : props.status == true  || props.disabledPath == true ? "hidden" : "visible",alignContent:"end",backgroundColor:"",width:"100%" ,justifyContent:"flex-end"}}>
               <div
                 style={{
                   display: "flex",
                   alignItems: "center",
                   padding: "3px 7px",
+                  marginRight:"2rem"
                 }}
               >
                 <IconCirclePlus
                   style={{
                     color: "#313A49",
-                    width: "16px",
-                    height: "16px",
+                    width: "0.9rem",
+                    height: "0.9rem",
                     marginRight: "3px",
                   }}
                   onClick={() => setOpened((o) => !o)}
@@ -390,10 +392,10 @@ export default function (props) {
                       style={{
                         color: "#313A49",
                         // fontFamily: "Space Mono",
-                        fontSize: "12px",
+                        fontSize: "0.6rem",
                         fontStyle: "normal",
                         fontWeight: 400,
-                        lineHeight: "14px",
+                        lineHeight: "0.7rem",
                         textTransform: "uppercase",
                         userSelect: "none",
                         cursor: "pointer",
@@ -413,6 +415,7 @@ export default function (props) {
                       // value={value}
                       onChange={setValue}
                       nothingFound="Dato no encontrado"
+                      dropdownPosition="flip"                      
                     />
                   </Popover.Dropdown>
                 </Popover>
@@ -425,7 +428,8 @@ export default function (props) {
         <div>
           <div
             style={{
-              display: "flex",
+              // display: "flex",
+              display: "none",
               alignItems: "center",
               justifyContent: "center",
               width: "200px",
@@ -433,7 +437,7 @@ export default function (props) {
               strokeWidth: "0.5",
               border: "0.5px solid #ADBACC",
               borderRadius: "4px",
-              visibility: "hidden",
+              // visibility: "hidden",             
             }}
           >
             <div

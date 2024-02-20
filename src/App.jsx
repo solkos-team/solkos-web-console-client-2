@@ -35,7 +35,7 @@ import fails from "./sampleData/fails.png";
 import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
 import { fetchUniversalDetails } from "./utils/apiUtils";
-import { Burger,Tooltip } from '@mantine/core';
+import { Burger, Tooltip } from '@mantine/core';
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -49,21 +49,19 @@ const useStyles = createStyles((theme, _params, getRef) => {
       overflowY: "hidden",
       paddingBottom: theme.spacing.md,
       marginBottom: theme.spacing.md * 1.5,
-      borderBottom: `1px solid ${
-        theme.colorScheme === "dark"
+      borderBottom: `1px solid ${theme.colorScheme === "dark"
           ? theme.colors.dark[4]
           : theme.colors.gray[2]
-      }`,
+        }`,
     },
 
     footer: {
       paddingTop: theme.spacing.md,
       marginTop: theme.spacing.md,
-      borderTop: `1px solid ${
-        theme.colorScheme === "dark"
+      borderTop: `1px solid ${theme.colorScheme === "dark"
           ? theme.colors.dark[4]
           : theme.colors.gray[2]
-      }`,
+        }`,
     },
 
     link: {
@@ -112,7 +110,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
         [`& .${icon}`]: {
           color:
             theme.colors[theme.primaryColor][
-              theme.colorScheme === "dark" ? 5 : 7
+            theme.colorScheme === "dark" ? 5 : 7
             ],
         },
       },
@@ -203,8 +201,8 @@ function App() {
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
   const stateM = sessionStorage.getItem('MenuState')
-  stateM == undefined ? sessionStorage.setItem('MenuState',false) : sessionStorage.getItem('MenuState')  
-  const [opened2,setOpened2] = useState(JSON.parse(stateM))  
+  stateM == undefined ? sessionStorage.setItem('MenuState', false) : sessionStorage.getItem('MenuState')
+  const [opened2, setOpened2] = useState(JSON.parse(stateM))
   const navigate = useNavigate();
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
@@ -213,11 +211,11 @@ function App() {
     const data = await fetchUniversalDetails("customers");
     setData(data);
   };
-  useEffect(()=>{
+  useEffect(() => {
     const status = sessionStorage.getItem('MenuState')
-    status != opened2 ? sessionStorage.setItem('MenuState',opened2) : ''
-  },[opened2])
-  useEffect(() => {    
+    status != opened2 ? sessionStorage.setItem('MenuState', opened2) : ''
+  }, [opened2])
+  useEffect(() => {
     // fetch get customers
     fetctData();
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
@@ -226,8 +224,8 @@ function App() {
     if (storage == null) {
       localStorage.setItem("ORG", "KOF");
       dispatch(addOrg());
-    }           
-  }, [location.pathname]); 
+    }
+  }, [location.pathname]);
   const links =
     localStorage.getItem("USER") === "Call Center" ? (
       <>
@@ -244,7 +242,7 @@ function App() {
                   })}
                 >
                   {item.icon}
-                  <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{item.label}</span>
+                  <span style={{ marginLeft: 10, display: opened2 == true ? "none" : "" }}>{item.label}</span>
                   {coolerInsightsOpen ? (
                     <img src={arrow_1} style={{ marginLeft: opened2 == true ? 10 : 40 }} />
                   ) : (
@@ -263,7 +261,7 @@ function App() {
                         onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
                       >
                         {option.icon && option.icon}{" "}
-                        <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{option.label}</span>
+                        <span style={{ marginLeft: 10, display: opened2 == true ? "none" : "" }}>{option.label}</span>
                       </NavLink>
                     ))}
                   </div>
@@ -281,7 +279,7 @@ function App() {
                 }}
               >
                 {item.icon}
-                <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{item.label}</span>
+                <span style={{ marginLeft: 10, display: opened2 == true ? "none" : "" }}>{item.label}</span>
               </NavLink>
             )}
           </div>
@@ -294,22 +292,22 @@ function App() {
             {item.links ? (
               <div style={{ whiteSpace: "nowrap" }}>
                 <Tooltip label={item.label}>
-                <div
-                  onClick={() => {
-                    setCoolerInsightsOpen(!coolerInsightsOpen);
-                  }}
-                  className={cx(classes.link, {
-                    [classes.linkActive]: coolerInsightsOpen,
-                  })}
-                >
-                  {item.icon}                  
-                  <span style={{ marginLeft: 10, display:opened2 == true ? "none" : "" }}>{item.label}</span>                  
-                  {coolerInsightsOpen ? (
-                    <img src={arrow_1} style={{ marginLeft: opened2 == true ? 1 : 40 }} />
-                  ) : (
-                    <img src={arrow_2} style={{ marginLeft: opened2 == true ? 1 : 40 }} />
-                  )}
-                </div>
+                  <div
+                    onClick={() => {
+                      setCoolerInsightsOpen(!coolerInsightsOpen);
+                    }}
+                    className={cx(classes.link, {
+                      [classes.linkActive]: coolerInsightsOpen,
+                    })}
+                  >
+                    {item.icon}
+                    <span style={{ marginLeft: 10, display: opened2 == true ? "none" : "" }}>{item.label}</span>
+                    {coolerInsightsOpen ? (
+                      <img src={arrow_1} style={{ marginLeft: opened2 == true ? 1 : 40 }} />
+                    ) : (
+                      <img src={arrow_2} style={{ marginLeft: opened2 == true ? 1 : 40 }} />
+                    )}
+                  </div>
                 </Tooltip>
                 {coolerInsightsOpen && (
                   <div style={{ marginLeft: opened2 == true ? 5 : 20 }}>
@@ -322,10 +320,10 @@ function App() {
                         onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
                       >
                         <Tooltip label={option.label}>
-                        <div>
-                        {option.icon && option.icon}{" "}
-                        <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{option.label}</span>
-                        </div>
+                          <div>
+                            {option.icon && option.icon}{" "}
+                            <span style={{ marginLeft: 10, display: opened2 == true ? "none" : "" }}>{option.label}</span>
+                          </div>
                         </Tooltip>
                       </NavLink>
                     ))}
@@ -344,18 +342,18 @@ function App() {
                 }}
               >
                 <Tooltip label={item.label}>
-                <div>
-                {item.icon}
-                <span style={{ marginLeft: 10,display:opened2 == true ? "none" : "" }}>{item.label}</span>
-                </div>
+                  <div>
+                    {item.icon}
+                    <span style={{ marginLeft: 10, display: opened2 == true ? "none" : "" }}>{item.label}</span>
+                  </div>
                 </Tooltip>
               </NavLink>
             )}
           </div>
         ))}
       </>
-    );padding: opened2
-  
+    ); padding: opened2
+
   const saveOrganization = (ORG) => {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
@@ -375,99 +373,99 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: opened2 == false ? 240 : 60 }} p={"md"}>          
+          <Navbar width={{ base: opened2 == false ? 240 : 60 }} p={"md"}>
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
                   style={{
                     display: "flex",
-                    padding: opened2 == true ? ".5rem":".5px",
+                    padding: opened2 == true ? ".5rem" : ".5px",
                     justifyContent: "space-between",
                     alignItems: "center",
                     alignSelf: "stretch",
-                    flexDirection:"row",
-                    overflowX : opened2 == true ? "hidden" : ""
+                    flexDirection: "row",
+                    overflowX: opened2 == true ? "hidden" : ""
                   }}
                 >
-                  <section style={{display:"flex",flexDirection:opened2 == false ? "row" : "column",gap:"0.7rem",justifyContent:"space-between",alignItems:"center",whiteSpace:"pre"}}>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "9px",
-                      flex: 100,
-                      // width: "180px",
-                      height: "44px"                      
-                    }}
-                  >
-                    <img
-                      style={{ width: "1.5rem", height: "18px", marginLeft: -10 }}
-                      src={solkosSymbol}
-                    />
-
-                    <div style={{ textAlign: "left",display:opened2 == true ? "none" : "" }}>
-                      <span
-                        style={{
-                          color: "#000005",
-                          fontSize: "0.8rem",
-                          fontStyle: "normal",
-                          fontWeight: 700,
-                          lineHeight: "155%",
-                          // fontFamily: "DM Sans",
-                        }}
-                      >
-                        Consola Solkos
-                      </span>
-                      <br></br>
-                      <span
-                        style={{
-                          color: "#3A3A3F",
-                          fontSize: "10px",
-                          fontStyle: "normal",
-                          fontWeight: 300,
-                          lineHeight: "155%",
-                          textTransform: "uppercase",
-                          // fontFamily: "DM Mono",
-                        }}
-                      >
-                        BY IMBERA
-                      </span>
-                    </div>
-                  </div>                  
-                  <div
-                    style={{
-                      padding: "4px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: "3px",
-                      background: "#D4DAE3",
-                      width: "25px",
-                      height: "16px",
-                      marginLeft: "10px",
-                      display:opened2 == true ? "none" : "flex"
-                    }}
-                  >                    
+                  <section style={{ display: "flex", flexDirection: opened2 == false ? "row" : "column", gap: "0.8rem", justifyContent: "space-between", alignItems: "center", whiteSpace: "pre" }}>
+                    <Burger size="sm" opened={opened2} onClick={() => setOpened2((o) => !o)} aria-label="Toggle navigation" style={{ marginLeft: -10 }} />
                     <div
                       style={{
-                        color: "#313A49",
-                        // fontFamily: "Space Mono",
-                        fontSize: "10px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "14px",
-                        textTransform: "uppercase",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "9px",
+                        flex: 100,
+                        // width: "180px",
+                        height: "44px"
                       }}
                     >
-                       V2.0.0                      
-                    </div>                    
-                  </div>                  
-                  <Burger size="sm" opened={opened2} onClick={()=> setOpened2((o) => !o)} aria-label="Toggle navigation" style={{marginLeft: -10}} />
-                  </section>                  
+                      <img
+                        style={{ width: "1.5rem", height: "18px", marginLeft: -10 }}
+                        src={solkosSymbol}
+                      />
+
+                      <div style={{ textAlign: "left", display: opened2 == true ? "none" : "" }}>
+                        <span
+                          style={{
+                            color: "#000005",
+                            fontSize: "0.8rem",
+                            fontStyle: "normal",
+                            fontWeight: 700,
+                            lineHeight: "155%",
+                            // fontFamily: "DM Sans",
+                          }}
+                        >
+                          Consola Solkos
+                        </span>
+                        <br></br>
+                        <span
+                          style={{
+                            color: "#3A3A3F",
+                            fontSize: "10px",
+                            fontStyle: "normal",
+                            fontWeight: 300,
+                            lineHeight: "155%",
+                            textTransform: "uppercase",
+                            // fontFamily: "DM Mono",
+                          }}
+                        >
+                          BY IMBERA
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        padding: "4px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        borderRadius: "3px",
+                        background: "#D4DAE3",
+                        width: "25px",
+                        height: "16px",
+                        marginLeft: "10px",
+                        display: opened2 == true ? "none" : "flex"
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#313A49",
+                          // fontFamily: "Space Mono",
+                          fontSize: "10px",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "14px",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        V2.0.0
+                      </div>
+                    </div>
+                  </section>
                 </div>
-              </Group>     
-              <div style={{padding: opened2 == true ? "0.1rem 0px" : "",marginLeft : opened2 == true ? "-0.7rem" : ""}}> 
+              </Group>
+              <div style={{ padding: opened2 == true ? "0.1rem 0px" : "", marginLeft: opened2 == true ? "-0.7rem" : "" }}>
                 {links}
-              </div>       
+              </div>
             </Navbar.Section>
 
             <Navbar.Section className={classes.footer}>
@@ -527,8 +525,8 @@ function App() {
                             maxWidth: "150px",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            whiteSpace: "nowrap" ,
-                            display : opened2 == true ? "none" : "flex"                                                    
+                            whiteSpace: "nowrap",
+                            display: opened2 == true ? "none" : "flex"
                           }}
                         >
                           <Text
@@ -569,7 +567,7 @@ function App() {
                           </div>
                         </div>
                       </div>
-                      <img src={arrows} style={{ marginLeft: 5 ,display : opened2 == true ? "none" : "" }} />
+                      <img src={arrows} style={{ marginLeft: 5, display: opened2 == true ? "none" : "" }} />
                     </div>
                   </UnstyledButton>
                 </Menu.Target>
@@ -601,75 +599,75 @@ function App() {
                     {data == undefined
                       ? "Sin registros"
                       : data.map((nombre, index) =>
-                          JSON.parse(validaUser).length == 0 ? (
+                        JSON.parse(validaUser).length == 0 ? (
+                          <div
+                            style={{
+                              // display: "flex",
+                              padding: "10px 12px",
+                              alignItems: "center",
+                              gap: "10px",
+                              alignSelf: "stretch",
+                              display:
+                                JSON.parse(validaUser).length == 0
+                                  ? ""
+                                  : "none",
+                            }}
+                            key={index}
+                            onChange={setData}
+                          >
                             <div
                               style={{
-                                // display: "flex",
-                                padding: "10px 12px",
+                                display: "flex",
                                 alignItems: "center",
                                 gap: "10px",
-                                alignSelf: "stretch",
-                                display:
-                                  JSON.parse(validaUser).length == 0
-                                    ? ""
-                                    : "none",
+                                flex: "100",
+                                fontSize: "12px",
+                                textDecorationColor:
+                                  dt === nombre ? "#ec547c" : "",
+                                color: dt === nombre ? "#ec547c" : "black",
+                                cursor: "pointer",
                               }}
-                              key={index}
-                              onChange={setData}
+                              onClick={() => {
+                                saveOrganization(nombre);
+                              }}
                             >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "10px",
-                                  flex: "100",
-                                  fontSize: "12px",
-                                  textDecorationColor:
-                                    dt === nombre ? "#ec547c" : "",
-                                  color: dt === nombre ? "#ec547c" : "black",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  saveOrganization(nombre);
-                                }}
-                              >
-                                {nombre}
-                              </div>
+                              {nombre}
                             </div>
-                          ) : (
+                          </div>
+                        ) : (
+                          <div
+                            style={{
+                              // display: "flex",
+                              padding: "10px 12px",
+                              alignItems: "center",
+                              gap: "10px",
+                              alignSelf: "stretch",
+                              display: dt == nombre ? "" : "none",
+                            }}
+                            key={index}
+                            onChange={setData}
+                          >
                             <div
                               style={{
-                                // display: "flex",
-                                padding: "10px 12px",
+                                display: "flex",
                                 alignItems: "center",
                                 gap: "10px",
-                                alignSelf: "stretch",
-                                display: dt == nombre ? "" : "none",
+                                flex: "100",
+                                fontSize: "14px",
+                                textDecorationColor:
+                                  dt === nombre ? "#ec547c" : "",
+                                color: dt === nombre ? "#ec547c" : "",
+                                cursor: "pointer",
                               }}
-                              key={index}
-                              onChange={setData}
+                              onClick={() => {
+                                saveOrganization(nombre);
+                              }}
                             >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "10px",
-                                  flex: "100",
-                                  fontSize: "14px",
-                                  textDecorationColor:
-                                    dt === nombre ? "#ec547c" : "",
-                                  color: dt === nombre ? "#ec547c" : "",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  saveOrganization(nombre);
-                                }}
-                              >
-                                {nombre}
-                              </div>
+                              {nombre}
                             </div>
-                          )
-                        )}
+                          </div>
+                        )
+                      )}
                   </div>
                   <div
                     style={{

@@ -1,70 +1,21 @@
-import { useSelector } from "react-redux";
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@mantine/core";
+import { Button,Drawer } from "@mantine/core";
 
-export default function DrawerUsers({ isOpen, onClose, userData,userDataClear }) {
+export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,setOpenedDrawerEdit,oncloseDrawerEdit }) {
   const { name, email, customer, path } = userData;
   const [nameUser, setNameUser] = useState(name);
   const [emailUser, setEmailUser] = useState(email);
-  const [customerUser, setCustomerUser] = useState(customer);
-  const [pathUser, setPathUser] = useState(path);
-  const drawerRef = useRef(null);
-  const navigate = useNavigate();
-  const dt = useSelector((state: any) => state.works);
-  const closeAndClearInfo = () =>{
-    onClose
+  const [customerUser, setCustomerUser] = useState(customer);   
+  const closeAndClearInfo = () =>{    
     userDataClear('')
   }
+  openedDrawerEdit == false ? closeAndClearInfo() : ""
   return (
-    <div
-      ref={drawerRef}
-      style={{
-        position: "fixed",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        width: "700px",
-        backgroundColor: "#FFF",
-        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
-        transform: `translateX(${isOpen ? "0" : "100%"})`,
-        transition: "transform 0.3s ease-in-out",
-        padding: "10px",
-        overflowY: "auto", // Agregado para permitir el scroll vertical
-        maxHeight: "100vh",
-      }}
-    >
+    <Drawer opened={openedDrawerEdit} onClose={oncloseDrawerEdit} position="right" size="30rem">      
       <div
         style={{
           display: "flex",
-          padding: "27px 0px",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          gap: "20px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 32px",
-            alignItems: "flex-start",
-            gap: "10px",
-            alignSelf: "stretch",
-            cursor: "pointer",
-          }}
-        >
-          <img
-            onClick={()=>closeAndClearInfo()}
-            src="../../sampleData/arrowsDes.png"
-            alt="Descripción de la imagen"
-            style={{ width: "25px", height: "25px", cursor: "pointer" }}
-          />
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          padding: "0px 32px",
+          padding: "0px 2rem",
           alignItems: "flex-start",
           gap: "8px",
           alignSelf: "stretch",
@@ -97,32 +48,32 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
       <div
         style={{
           display: "flex",
-          width: "450px",
+          width: "28rem",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: "12px",
+          gap: "1rem"          
         }}
       >
         <section
           style={{
             display: "flex",
-            width: "450px",
+            width: "100%",
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: "15px",
+            gap: "1rem"
           }}
         >
           <label
             style={{
               color: "#3A3A3F",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "1rem",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -120,
+              marginLeft: -220,
             }}
           >
             Nombre
@@ -134,12 +85,11 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             style={{
               color: "#000",
               // fontFamily: "DM Sans",
-              fontSize: "14px",
+              fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: 430,
-              marginLeft: 250,
+              width: "17rem",              
               backgroundColor:"#FFFF"
             }}
           />
@@ -151,18 +101,18 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: "15px",
+            gap: "1rem",
           }}
         >
           <label
             style={{
               color: "#3A3A3F",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "1rem",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -135,
+              marginLeft: -220,
             }}
           >
             Correo
@@ -174,12 +124,11 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             style={{
               color: "#000",
               // fontFamily: "DM Sans",
-              fontSize: "14px",
+              fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: 430,
-              marginLeft: 250,
+              width: "17rem",              
               backgroundColor:"#FFFF"
             }}
           />
@@ -198,11 +147,11 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             style={{
               color: "#3A3A3F",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "1rem",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -120,
+              marginLeft: -200,
             }}
           >
             Customer
@@ -214,12 +163,11 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             style={{
               color: "#000",
               // fontFamily: "DM Sans",
-              fontSize: "14px",
+              fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: 430,
-              marginLeft: 250,
+              width: "17rem",              
               backgroundColor:"#FFFF"
             }}
           />
@@ -231,18 +179,18 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: "15px",
+            gap: "1rem",
           }}
         >
           <label
             style={{
               color: "#3A3A3F",
               // fontFamily: "DM Sans",
-              fontSize: "16px",
+              fontSize: "1rem",
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -150,
+              marginLeft: -230,
             }}
           >
             Path
@@ -254,25 +202,24 @@ export default function DrawerUsers({ isOpen, onClose, userData,userDataClear })
             style={{
               color: "#000",
               // fontFamily: "DM Sans",
-              fontSize: "14px",
+              fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: 430,
-              marginLeft: 250,
+              width: "17rem",              
               backgroundColor:"#FFFF"
             }}
           />
         </section>
         <br></br>
         <Button
-          style={{ background: "#ED5079", width: "440px", marginLeft: 260 }}
+          style={{ background: "#ED5079", width: "17rem", marginLeft: 0 }}
           // onClick={handleLogin}
           disabled
         >
           Editar usuario
         </Button>
       </div>
-    </div>
+    </Drawer>
   );
 }
