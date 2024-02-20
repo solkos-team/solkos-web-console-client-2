@@ -70,7 +70,6 @@ export default function CoolerDetail() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
-      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -92,7 +91,6 @@ export default function CoolerDetail() {
 
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
-
   return (
     <div>
       {localStorage.getItem("USER") == "Call Center" ? (
@@ -806,7 +804,9 @@ export default function CoolerDetail() {
                   Nombre pdv
                 </h1>
                 <h1 className="clt_actividad_principal_title_nombre_h1">
-                  {coolersData?.cooler?.outlet_name}
+                  {
+                    coolersData?.cooler?.outlet_name == '' ? 'Sin registro' :
+                  coolersData?.cooler?.outlet_name}
                 </h1>
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   /<b>{coolersData?.cooler?.outlet_id}</b>

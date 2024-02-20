@@ -100,7 +100,7 @@ export default function Users() {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina, userDelete, opened]);
+  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina, userDelete,alertStatus]);
 
   const closeAlert = () => {
     setAlertStatus(false);

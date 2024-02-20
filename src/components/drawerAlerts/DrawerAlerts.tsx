@@ -65,7 +65,6 @@ export default function DrawerA({
   useEffect(() => {
     fetchData();
   }, [dt, datosPorPagina]);
-  console.log(selectedAlgorithm);
 
   const filterCoolersDataDownload = (coolersData) => {
     if (!coolersData) return [];

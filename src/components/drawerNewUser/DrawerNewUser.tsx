@@ -54,7 +54,7 @@ export default function DrawerNewUser({
       opened={openedDrawer}
       onClose={oncloseDrawer}
       position="right"
-      size="40rem"
+      size="30rem"
     >
       <div
         style={{
