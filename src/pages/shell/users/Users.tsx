@@ -6,7 +6,7 @@ import { useDisclosure } from '@mantine/hooks';
 import DrawerUsers from "../../../components/drawerUsers/DrawerUsers";
 import DrawerNewUser from "../../../components/drawerNewUser/DrawerNewUser";
 import { IconArrowRight } from "@tabler/icons-react";
-import { Alert } from "@mantine/core";
+import { Alert,Skeleton } from "@mantine/core";
 import {
   fetchDeleteUsers,
   fetchUniversalTables,
@@ -32,7 +32,7 @@ export default function Users() {
   const dt = useSelector((state: any) => state.works);
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
   const [alertStatus, setAlertStatus] = useState<Boolean>(false);
@@ -132,6 +132,31 @@ export default function Users() {
     else{      
       return path[3]
     }    
+  }
+  const isloadingData = () => {
+    let rows:any = []
+    for (let i = 0; i < 25; i++) {
+      rows.push(
+          <tr key={i}>
+            <td data-label="Nombre">
+              {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            </td>
+            <td data-label="# Endriadores" >
+              {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            </td>
+            <td data-label="Última visita" >
+              {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            </td>
+            <td data-label="Prioridad">
+              {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            </td>
+            <td data-label="Acciones">
+              {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            </td>
+          </tr>      
+      )
+    }
+    return rows
   }
   return (
     <div>
@@ -298,17 +323,7 @@ export default function Users() {
                 <th scope="col">Path</th>
                 <th scope="col">Acciones</th>
               </tr>
-            </thead>
-            {isLoading == true ? (
-              <>
-                <br></br>
-                <br></br>
-                <div style={{ marginBottom: -40 }}></div>
-                <SkeletonTableUsers></SkeletonTableUsers>
-              </>
-            ) : (
-              ""
-            )}
+            </thead>            
             {!isLoading && (
               <>
                 {filteredUsers.length > 0 ? (
@@ -318,57 +333,51 @@ export default function Users() {
                       .map((user, index) => (
                         <tr key={index}>
                           <td data-label="Nombre" title={user.name}>
-                            {user.name}
+                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :user.name}
                           </td>
                           <td data-label="Email" title={user.email}>
-                            {user.email}
+                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :user.email}
                           </td>
                           <td data-label="Customer" title={user.customer}>
-                            {user.customer}
+                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :user.customer}
                           </td>
                           <td data-label="Path" title={user.path}>
-                            {
+                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
                               formatingPath(user.path)
                             }
                           </td>
                           <td data-label="Acciones">
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                // gap: "4px",
-                                // flex: 100,
-                                // height: "40px",
-                              }}
-                              // onClick={openDrawer}
-                              onClick={toggleDrawerEdit}
-                            >
-                              <div
-                                style={{
-                                  color: "#3E83FF",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  // lineHeight: "20px",
-                                  display: "flex",
-                                  // marginLeft: "50px",
-                                  // marginRight: "50px",
-                                  cursor:"pointer"
-                                }}
-                                onClick={() => {
-                                  setDataUsersEdit(user);
-                                }}
+                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
+                              <div                              
+                                // onClick={openDrawer}
+                                onClick={toggleDrawerEdit}
                               >
-                                Ver más
-                                <IconArrowRight
+                                <div
                                   style={{
                                     color: "#3E83FF",
-                                    width: "1.0rem",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    // lineHeight: "20px",
+                                    display: "flex",
+                                    // marginLeft: "50px",
+                                    // marginRight: "50px",
+                                    cursor:"pointer"
                                   }}
-                                />
+                                  onClick={() => {
+                                    setDataUsersEdit(user);
+                                  }}
+                                >
+                                  Ver más
+                                  <IconArrowRight
+                                    style={{
+                                      color: "#3E83FF",
+                                      width: "1.0rem",
+                                    }}
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            }
                           </td>
                           <td>
                             {localStorage.getItem("USER") ===
@@ -403,7 +412,14 @@ export default function Users() {
                       {""}
                     </DrawerNewUser>
                   </tbody>
-                ) : (
+                ) : 
+                (
+                  isLoading == true 
+                  ?
+                  <tbody>
+                    {isloadingData()}
+                </tbody>
+                  :
                   <div
                     style={{
                       display: "flex",
@@ -415,7 +431,7 @@ export default function Users() {
                   >
                     <p>No hay datos de usuarios disponibles.</p>
                   </div>
-                )}
+                )}  
               </>
             )}
           </table>

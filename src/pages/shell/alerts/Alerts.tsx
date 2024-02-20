@@ -17,7 +17,6 @@ export default function Alerts() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  console.log(opened);
   const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {

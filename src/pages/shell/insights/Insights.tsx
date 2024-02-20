@@ -69,7 +69,6 @@ export default function Insights() {
     try {
       const data = await fetchInsights(pathVerify());
       numIntems(Number(data.insights.INDICATOR.total));
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);

@@ -71,7 +71,6 @@ export default function CoolerDetail() {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
-      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -563,7 +562,7 @@ export default function CoolerDetail() {
                 style={{
                   color: "#3E83FF",
                   // fontFamily: "DM Sans",
-                  fontSize: "12px",
+                  fontSize: "0.95vw",
                   fontStyle: "normal",
                   fontWeight: 700,
                   lineHeight: "normal",
@@ -615,7 +614,7 @@ export default function CoolerDetail() {
                 style={{
                   color: "#3E83FF",
                   // fontFamily: "DM Sans",
-                  fontSize: "10px",
+                  fontSize: "0.79vw",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "normal",
@@ -636,7 +635,7 @@ export default function CoolerDetail() {
                 <img
                   src={"../../sampleData/actividad.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "18px", height: "18px" }}
+                  style={{ width: "2vw", height: "2vw" }}
                 />
                 <h1 className="clt_actividad_principal_title_h1">
                   Actividad del enfriador
@@ -795,7 +794,7 @@ export default function CoolerDetail() {
                 <img
                   src={"../../sampleData/buildings.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "22px", height: "22px" }}
+                  style={{ width: "2vw", height: "2vw" }}
                 />
                 <h1 className="clt_actividad_principal_title_h1">
                   Acerca del punto de venta

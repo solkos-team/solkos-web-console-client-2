@@ -14,8 +14,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-import { Skeleton } from '@mantine/core';
-import { Card, Table } from "@mantine/core";
+import { Card, Table,Skeleton } from "@mantine/core";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { MantineProvider, TextInput } from "@mantine/core";
@@ -121,10 +120,10 @@ export default function Outlets() {
   outletsData == undefined ? [] : outletsData;
   totalData == undefined ? 0 : totalData;
   const isloadingData = () => {
-    for (let index = 0; index < 24; index++) {
-      return (
-        <>
-          <tr>
+    let rows:any = []
+    for (let i = 0; i < 25; i++) {
+      rows.push(
+          <tr key={i}>
             <td data-label="Nombre">
               {<><Skeleton height={8} radius="xl" width="100%" /></>}
             </td>
@@ -138,111 +137,13 @@ export default function Outlets() {
               {<><Skeleton height={8} radius="xl" width="100%" /></>}
             </td>
             <td data-label="Acciones">
-              {
-                <><Skeleton height={8} radius="xl" width="100%" /></>
-              }
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Nombre">
               {<><Skeleton height={8} radius="xl" width="100%" /></>}
             </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {
-                <><Skeleton height={8} radius="xl" width="100%" /></>
-              }
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Nombre">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {
-                <><Skeleton height={8} radius="xl" width="100%" /></>
-              }
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Nombre">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {
-                <><Skeleton height={8} radius="xl" width="100%" /></>
-              }
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Nombre">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {
-                <><Skeleton height={8} radius="xl" width="100%" /></>
-              }
-            </td>
-          </tr>
-          <tr>
-            <td data-label="Nombre">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {
-                <><Skeleton height={8} radius="xl" width="100%" /></>
-              }
-            </td>
-          </tr>
-        </>
+          </tr>      
       )
     }
+    return rows
   }
-  console.log(isloadingData)
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -508,15 +409,7 @@ export default function Outlets() {
                           <td data-label="Acciones">
                             {
                               isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                // gap: "4px",
-                                // flex: 100,
-                                // height: "40px",
-                              }}
+                            <div                              
                               // onClick={openDrawer}
                               // onClick={toggleDrawerEdit}
                               onClick={() => {
