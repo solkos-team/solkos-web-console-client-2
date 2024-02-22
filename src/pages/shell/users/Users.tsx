@@ -129,8 +129,8 @@ export default function Users() {
     if(path == undefined || path == null){
       return ''
     }
-    else{      
-      return path[3]
+    else{     
+      return path[path.length-1]
     }    
   }
   const isloadingData = () => {

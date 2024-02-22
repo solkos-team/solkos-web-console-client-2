@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { fetchInsights, fetchUniversal } from "../../../utils/apiUtils";
+import { Card, DonutChart, Title, Legend } from "@tremor/react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
@@ -10,6 +11,7 @@ import {
   CoolerInterface as Cooler,
 } from "../../../interfaces/CoolerInterface";
 import { Skeleton } from "@mantine/core";
+import { MapInsights } from "./MapInsights";
 export default function Insights() {
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
@@ -83,20 +85,20 @@ export default function Insights() {
 
   const filteredMarkers = coolersData
     ? coolersData
-        .filter(
-          (cooler) =>
-            parseFloat(cooler.latitude) !== 0 &&
-            parseFloat(cooler.longitude) !== 0
-        )
-        .map((cooler) => ({
-          latitude: parseFloat(cooler.latitude),
-          longitude: parseFloat(cooler.longitude),
-        }))
+      .filter(
+        (cooler) =>
+          parseFloat(cooler.latitude) !== 0 &&
+          parseFloat(cooler.longitude) !== 0
+      )
+      .map((cooler) => ({
+        latitude: parseFloat(cooler.latitude),
+        longitude: parseFloat(cooler.longitude),
+      }))
     : [];
 
   const markers = filteredMarkers;
 
-  useEffect(() => {}, [markers]);
+  useEffect(() => { }, [markers]);
 
   const [showAll1, setShowAll1] = useState(true);
 
@@ -150,119 +152,83 @@ export default function Insights() {
           </div>
           {/* datas from mapa */}
           <div className="insights_mapa_info_datas">
-            <div className="insights_mapa_info_datas_data">
-              <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">
-                  Enfriadores
-                </h1>
-              </div>
-              <div className="insights_mapa_info_datas_data_value">
-                <h1 className="insights_mapa_info_datas_data_name_h1_value">
-                  {isLoading == true ? (
-                    <>
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
-                      </div>
-                    </>
-                  ) : insightsData?.summary.coolers === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    insightsData?.summary.coolers.toLocaleString()
-                  )}
-                </h1>
-              </div>
-            </div>
-            <div className="insights_mapa_info_datas_data">
-              <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">
-                  Regiones
-                </h1>
-              </div>
-              <div className="insights_mapa_info_datas_data_value">
-                <h1 className="insights_mapa_info_datas_data_name_h1_value">
-                  {isLoading == true ? (
-                    <>
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
-                      </div>
-                    </>
-                  ) : insightsData?.summary.regions === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    insightsData?.summary.regions.toLocaleString()
-                  )}
-                </h1>
-              </div>
-            </div>
-            <div className="insights_mapa_info_datas_data">
-              <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">Zonas</h1>
-              </div>
-              <div className="insights_mapa_info_datas_data_value">
-                <h1 className="insights_mapa_info_datas_data_name_h1_value">
-                  {isLoading == true ? (
-                    <>
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
-                      </div>
-                    </>
-                  ) : insightsData?.summary.zones === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    insightsData?.summary.zones.toLocaleString()
-                  )}
-                </h1>
-              </div>
-            </div>
-            <div className="insights_mapa_info_datas_data">
-              <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">
-                  Unidad OP.
-                </h1>
-              </div>
-              <div className="insights_mapa_info_datas_data_value">
-                <h1 className="insights_mapa_info_datas_data_name_h1_value">
-                  {isLoading == true ? (
-                    <>
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={15} mt={6} width="70px" radius="xl" />
-                      </div>
-                    </>
-                  ) : insightsData?.summary.operative_units === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    insightsData?.summary.operative_units.toLocaleString()
-                  )}
-                </h1>
-              </div>
-            </div>
-            <div className="insights_mapa_info_datas_data">
-              <div className="insights_mapa_info_datas_data_name">
-                <h1 className="insights_mapa_info_datas_data_name_h1">Rutas</h1>
-              </div>
-              <div className="insights_mapa_info_datas_data_value">
-                <h1 className="insights_mapa_info_datas_data_name_h1_value">
-                  {isLoading == true ? (
-                    <>
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                      </div>
-                    </>
-                  ) : insightsData?.summary.routes === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    insightsData?.summary.routes.toLocaleString()
-                  )}
-                </h1>
-              </div>
-            </div>
+            <ol className="insights_mapa_info_datas_data">
+              <li className="insights_mapa_info_datas_data_li">Enfriadores</li>
+              <li className="insights_mapa_info_datas_data_li_value">
+                {isLoading == true ? (
+                  <>
+                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                  </>
+                ) : insightsData?.summary.coolers === undefined ? (
+                  "Sin registro"
+                ) : (
+                  insightsData?.summary.coolers.toLocaleString()
+                )}
+              </li>
+            </ol>
+            <ol className="insights_mapa_info_datas_data">
+              <li className="insights_mapa_info_datas_data_li">Rutas</li>
+              <li className="insights_mapa_info_datas_data_li_value">
+                {isLoading == true ? (
+                  <>
+                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                  </>
+                ) : insightsData?.summary.routes === undefined ? (
+                  "Sin registro"
+                ) : (
+                  insightsData?.summary.routes.toLocaleString()
+                )}
+              </li>
+            </ol>
+            <ol className="insights_mapa_info_datas_data">
+              <li className="insights_mapa_info_datas_data_li">Unidad Op.</li>
+              <li className="insights_mapa_info_datas_data_li_value">
+                {isLoading == true ? (
+                  <>
+                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                  </>
+                ) : insightsData?.summary.operative_units === undefined ? (
+                  "Sin registro"
+                ) : (
+                  insightsData?.summary.operative_units.toLocaleString()
+                )}
+              </li>
+            </ol>
+            <ol className="insights_mapa_info_datas_data">
+              <li className="insights_mapa_info_datas_data_li">Regiones</li>
+              <li className="insights_mapa_info_datas_data_li_value">
+                {isLoading == true ? (
+                  <>
+                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                  </>
+                ) : insightsData?.summary.regions === undefined ? (
+                  "Sin registro"
+                ) : (
+                  insightsData?.summary.regions.toLocaleString()
+                )}
+              </li>
+            </ol>
+            <ol className="insights_mapa_info_datas_data">
+              <li className="insights_mapa_info_datas_data_li">Zonas</li>
+              <li className="insights_mapa_info_datas_data_li_value">
+                {isLoading == true ? (
+                  <>
+                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                  </>
+                ) : insightsData?.summary.zones === undefined ? (
+                  "Sin registro"
+                ) : (
+                  insightsData?.summary.zones.toLocaleString()
+                )}
+              </li>
+            </ol>
           </div>
           {/* Mapa inf and filters */}
           <div className="insights_mapa_info_mapa_info">
             <h1 className="insights_mapa_info_mapa_info">
               Visualización de enfriadores:
             </h1>
-            <div className="insights_mapa_info_mapa_filters"></div>
+            {/* <div className="insights_mapa_info_mapa_filters"></div> */}
           </div>
           {/* Mapa */}
           <div className="insights_mapa_info_mapa">
@@ -280,22 +246,56 @@ export default function Insights() {
                 />
                 <h1 className="insights_datas_kpi_title_h1">KPI’s</h1>
               </div>
+              {/* Informacion KPI´s */}
               <div className="insights_datas_kpi_data">
-                <ol className="insights_datas_kpi_data_data">
-                  <li>Cobertura</li>
-                  <li>n</li>
-                  <li>d</li>
+                {/* <ol className="insights_datas_kpi_data_data">
+                  <li className="insights_datas_kpi_data_data_1">Cobertura</li>
+                  <li className="insights_datas_kpi_data_data_1">0%</li>
+                  <li className="insights_datas_kpi_data_data_1">0 Enfriadores</li>
                 </ol>
                 <ol className="insights_datas_kpi_data_data">
                   <li>Coincidencia</li>
-                  <li>n</li>
-                  <li>d</li>
+                  <li>0%</li>
+                  <li>0 Enfriadores</li>
                 </ol>
                 <ol className="insights_datas_kpi_data_data">
                   <li>Frecuencia</li>
-                  <li>n</li>
-                  <li>d</li>
-                </ol>
+                  <li>0%</li>
+                  <li>0 Enfriadores</li>
+                </ol> */}
+                <div className="insights_datas_kpi_data_data">
+                  <div className="insights_datas_kpi_data_data_1">
+                    Cobertura
+                  </div>
+                  <div className="insights_datas_kpi_data_data_2">
+                    0%
+                  </div>
+                  <div className="insights_datas_kpi_data_data_3">
+                    0 Enfriadores
+                  </div>
+                </div>
+                <div className="insights_datas_kpi_data_data">
+                  <div className="insights_datas_kpi_data_data_1">
+                    Coincidencia
+                  </div>
+                  <div className="insights_datas_kpi_data_data_2">
+                    0%
+                  </div>
+                  <div className="insights_datas_kpi_data_data_3">
+                    0 Enfriadores
+                  </div>
+                </div>
+                <div className="insights_datas_kpi_data_data">
+                  <div className="insights_datas_kpi_data_data_1">
+                    Frecuencia
+                  </div>
+                  <div className="insights_datas_kpi_data_data_2">
+                    0%
+                  </div>
+                  <div className="insights_datas_kpi_data_data_3">
+                    0 Enfriadores
+                  </div>
+                </div>
               </div>
             </div>
             <div className="insights_datas_grafica">
@@ -305,7 +305,50 @@ export default function Insights() {
                   alt="Descripción de la imagen"
                   style={{ width: "22px", height: "22px" }}
                 />
-                <h1 className="insights_datas_kpi_title_h1">Titulo</h1>
+                <h1 className="insights_datas_kpi_title_h1">Estatus del parque</h1>
+              </div>
+              <div className="insights_datas_container">
+                <div className="insights_datas_container_Grafica">
+                  <MapInsights />
+                </div>
+                <div className="insights_datas_container_Grafica_Datas">
+                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                    <li className="insights_datas_container_Grafica_Datas_li_title">🔵 Analizados</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_total">
+                      0
+                    </li>
+                  </ol>
+                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                    <li className="insights_datas_container_Grafica_Datas_li_title">🟢 Funcionando</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_total">
+                      0
+                    </li>
+                  </ol>
+                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                    <li className="insights_datas_container_Grafica_Datas_li_title">🔴 Falla</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_total">
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                        </>
+                      ) : insightsData?.insights?.FAIL?.total === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.insights?.FAIL?.total.toLocaleString()
+                      )}
+                    </li>
+                  </ol>
+                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                    <li className="insights_datas_container_Grafica_Datas_li_title">🟡 Atendidos</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
+                    <li className="insights_datas_container_Grafica_Datas_li_total">
+                      0
+                    </li>
+                  </ol>
+                </div>
               </div>
             </div>
           </section>
@@ -322,8 +365,8 @@ export default function Insights() {
                 </h1>
               </div>
               <div className="insigths_datas_info2_control_title">
-                <h1 className="insights_datas_kpi_title_h1">0</h1>
-                <h1 className="insights_datas_kpi_title_h1">
+                <h1 className="insights_datas_kpi_title_h1_data">0</h1>
+                <h1 className="insights_datas_kpi_title_data_h1">
                   Total de enfriadores
                 </h1>
               </div>
@@ -342,7 +385,7 @@ export default function Insights() {
                       style={{
                         color: "#3A3A3F",
                         // fontFamily: "DM Sans",
-                        fontSize: "14px",
+                        fontSize: "0.8vw",
                         fontStyle: "normal",
                         fontWeight: 600,
                         lineHeight: "20px",
@@ -354,7 +397,7 @@ export default function Insights() {
                       style={{
                         color: "#3A3A3F",
                         // fontFamily: "DM Sans",
-                        fontSize: "14px",
+                        fontSize: "0.8vw",
                         fontStyle: "normal",
                         fontWeight: 600,
                         lineHeight: "20px",
@@ -377,8 +420,20 @@ export default function Insights() {
                   <h1 className="insights_datas_kpi_title_h1">Mantenimiento</h1>
                 </div>
                 <div className="insigths_datas_info2_control_title">
-                  <h1 className="insights_datas_kpi_title_h1">0</h1>
-                  <h1 className="insights_datas_kpi_title_h1">
+                  <h1 className="insights_datas_kpi_title_h1_data">                    
+                    {isLoading == true ? (
+                      <>
+                      <div style={{width:"2rem",height:"1rem"}}>
+                        <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                      </div>
+                      </>
+                    ) : insightsData?.insights?.ALERT.total == undefined && insightsData?.insights?.FAIL.total == undefined ? (
+                      "Sin registro"
+                    ) : (
+                      insightsData?.insights?.ALERT.total + insightsData?.insights?.FAIL.total
+                    )}
+                  </h1>
+                  <h1 className="insights_datas_kpi_title_data_h1">
                     Total de alertas
                   </h1>
                 </div>
@@ -396,7 +451,7 @@ export default function Insights() {
                       style={{
                         color: "#3A3A3F",
                         // fontFamily: "DM Sans",
-                        fontSize: "14px",
+                        fontSize: "0.8vw",
                         fontStyle: "normal",
                         fontWeight: 600,
                         lineHeight: "20px",
@@ -408,13 +463,130 @@ export default function Insights() {
                       style={{
                         color: "#3A3A3F",
                         // fontFamily: "DM Sans",
-                        fontSize: "14px",
+                        fontSize: "0.8vw",
                         fontStyle: "normal",
                         fontWeight: 600,
                         lineHeight: "20px",
                       }}
                     >
                       Cantidad
+                    </div>
+                  </div>
+                  {/* Indicador barra */}
+                  <div
+                    key={1}
+                    style={{
+                      display: "flex",
+                      padding: "0px",
+                      gap: "16px",
+                      alignSelf: "stretch",
+                      marginBottom: "1px"
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "13vw",
+                        height: "2.0vw",
+                        borderRadius: "4px",
+                        background: "#ffc4cc",
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: "16px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#142257",
+                          fontSize: "0.8vw",
+                          fontWeight: 400,
+                          lineHeight: "20px",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {insightsData?.insights?.FAIL.level ===
+                          "FAIL"
+                          ? "Fallas"
+                          : ''}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color: "#000005",
+                        fontSize: "0.8vw",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                        marginLeft: "auto",
+                      }}
+                    >
+                      {isLoading == true ? (
+                        <>
+                        <div style={{width:"2rem",height:"1rem"}}>
+                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                        </div>                        
+                        </>
+                      ) : insightsData?.insights?.FAIL.total === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.insights?.FAIL.total
+                      )}
+                    </div>
+                  </div>
+                  <div
+                    key={2}
+                    style={{
+                      display: "flex",
+                      padding: "0px",
+                      gap: "16px",
+                      alignSelf: "stretch",
+                      marginBottom: "1px"
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "13vw",
+                        height: "2.0vw",
+                        borderRadius: "4px",
+                        background: "#FEF5C7",
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: "16px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#142257",
+                          fontSize: "0.8vw",
+                          fontWeight: 400,
+                          lineHeight: "20px",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {insightsData?.insights?.ALERT.level ===
+                          "ALERT"
+                          ? "Alertas"
+                          : ''}
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color: "#000005",
+                        fontSize: "0.8vw",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                        marginLeft: "auto",
+                      }}
+                    >                      
+                      {isLoading == true ? (
+                        <>
+                        <div style={{width:"2rem",height:"1rem"}}>
+                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                        </div>                        
+                        </>
+                      ) : insightsData?.insights?.ALERT.total === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        insightsData?.insights?.ALERT.total
+                      )}
                     </div>
                   </div>
                 </div>

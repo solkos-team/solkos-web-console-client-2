@@ -1,36 +1,47 @@
 import React from "react";
-import { Card, DonutChart, Title } from "@tremor/react";
+import { Card, DonutChart, Title,Legend } from "@tremor/react";
 import "./Insights.css";
 export const MapInsights = () => {
-  const cities = [
+  const park_Status = [
     {
-      name: "New York",
-      sales: 9800,
-    },
-
-    {
-      name: "Singapore",
-      sales: 1908,
+      name: 'Analizados',
+      total: 980,      
     },
     {
-      name: "Zurich",
-      sales: 1398,
+      name: 'Funcionando',
+      total: 456,      
     },
+    {
+      name: 'Falla',
+      total: 390,      
+    },
+    {
+      name: 'Atendidos',
+      total: 390,      
+    }
   ];
-
-  const valueFormatter = (number) =>
-    `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
-  // @tailwind base;
-  // @tailwind components;
-  // @tailwind utilities;
+  
+  const valueFormatter = (number: number) =>
+    `$ ${Intl.NumberFormat('us').format(number).toString()}`;
 
   return (
-    <DonutChart
-      data={cities}
-      category="sales"
-      index="name"
-      valueFormatter={valueFormatter}
-      colors={["slate", "violet", "indigo", "rose", "cyan", "amber"]}
-    />
+    <div>
+      <DonutChart
+        data={park_Status}
+        category="total"
+        index="name"        
+        colors={['blue', 'green', 'red','yellow']}
+        className="w-20"
+        showLabel
+        // variant="pie"
+      />
+      {/* <Legend
+        categories={['New York', 'London', 'Hong Kong', 'San Francisco', 'Singapore']}
+        colors={['blue', 'cyan', 'indigo', 'violet', 'fuchsia']}
+        className="max-w-xs"
+      /> */}
+
+    </div>
+
   );
 };
