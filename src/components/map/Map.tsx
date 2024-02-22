@@ -58,7 +58,7 @@ const MapComponent = ({ latitude, longitude }) => {
   };
 
   if (!googleMapsLoaded) {
-    return <div>Error al cargar Google Maps</div>;
+    return <div>Cargando...</div>;
   }
 
   return (

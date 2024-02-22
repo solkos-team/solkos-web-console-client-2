@@ -71,7 +71,7 @@ export default function Coolers() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
-      const datos = await data.json();      
+      const datos = await data.json();
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
@@ -101,32 +101,50 @@ export default function Coolers() {
   coolersData == undefined ? [] : coolersData;
   totalData == undefined ? 0 : totalData;
   const isloadingData = () => {
-    let rows: any = []
+    let rows: any = [];
     for (let i = 0; i < 25; i++) {
       rows.push(
         <tr key={i}>
           <td data-label="Nombre">
-            {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            {
+              <>
+                <Skeleton height={8} radius="xl" width="100%" />
+              </>
+            }
           </td>
-          <td data-label="# Endriadores" >
-            {<><Skeleton height={8} radius="xl" width="100%" /></>}
+          <td data-label="# Endriadores">
+            {
+              <>
+                <Skeleton height={8} radius="xl" width="100%" />
+              </>
+            }
           </td>
-          <td data-label="Última visita" >
-            {<><Skeleton height={8} radius="xl" width="100%" /></>}
+          <td data-label="Última visita">
+            {
+              <>
+                <Skeleton height={8} radius="xl" width="100%" />
+              </>
+            }
           </td>
           <td data-label="Prioridad">
-            {<><Skeleton height={8} radius="xl" width="100%" /></>}
+            {
+              <>
+                <Skeleton height={8} radius="xl" width="100%" />
+              </>
+            }
           </td>
           <td data-label="Acciones">
             {
-              <><Skeleton height={8} radius="xl" width="100%" /></>
+              <>
+                <Skeleton height={8} radius="xl" width="100%" />
+              </>
             }
           </td>
         </tr>
-      )
+      );
     }
-    return rows
-  }
+    return rows;
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -142,7 +160,7 @@ export default function Coolers() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0
+          marginLeft: 0,
         }}
       >
         <div
@@ -152,7 +170,7 @@ export default function Coolers() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%"
+            width: "90%",
           }}
         >
           <div
@@ -179,7 +197,8 @@ export default function Coolers() {
               marginLeft: -55,
             }}
           >
-            Haz seguimiento de todos los parámetros de cada uno de tus enfriadores
+            Haz seguimiento de todos los parámetros de cada uno de tus
+            enfriadores
           </div>
         </div>
         <div
@@ -189,7 +208,7 @@ export default function Coolers() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%"
+            width: "90%",
           }}
         >
           <h1
@@ -205,7 +224,13 @@ export default function Coolers() {
           >
             Tabla
           </h1>
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             <h1
               style={{
                 color: "#88888B",
@@ -218,7 +243,13 @@ export default function Coolers() {
             >
               Enfriadores
             </h1>
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+              }}
+            >
               <div>
                 <ExportToExcel datos={filteredCoolers} nombre={"Enfriadores"} />
               </div>
@@ -240,13 +271,10 @@ export default function Coolers() {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
-          >
-
-          </div>
+          ></div>
           <div
-
             style={{
               display: "flex",
               padding: "32px 0px",
@@ -276,13 +304,15 @@ export default function Coolers() {
             />
           </div>
         </div>
-        <section style={{
-          padding: "0px 0rem",
-          marginLeft: -55,
-          width: "100%",
-          height: "30rem",
-          overflowY: "auto"
-        }} >
+        <section
+          style={{
+            padding: "0px 0rem",
+            marginLeft: -55,
+            width: "100%",
+            height: "30rem",
+            overflowY: "auto",
+          }}
+        >
           <table>
             <thead>
               <tr>
@@ -299,20 +329,24 @@ export default function Coolers() {
                 {coolersData
                   // .slice(firstIndex, lastIndex)
                   .map((cooler, index) => (
-                    <tr key={index}
+                    <tr
+                      key={index}
                       onClick={() => {
-                        localStorage.getItem("USER") ==
-                          "Call Center"
+                        localStorage.getItem("USER") == "Call Center"
                           ? navigate(
-                            `/homeCallCenter/coolerDetail/${cooler.serial_number}`
-                          )
+                              `/homeCallCenter/coolerDetail/${cooler.serial_number}`
+                            )
                           : navigate(
-                            `/home/coolerDetail/${cooler.serial_number}`
-                          );
-                      }}>
+                              `/home/coolerDetail/${cooler.serial_number}`
+                            );
+                      }}
+                    >
                       <td data-label="Nombre" title={cooler.status}>
-                        {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                        cooler.status == undefined ||
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={8} radius="xl" width="100%" />
+                          </>
+                        ) : cooler.status == undefined ||
                           cooler.status == "" ? (
                           "Sin registro"
                         ) : (
@@ -353,29 +387,45 @@ export default function Coolers() {
                         )}
                       </td>
                       <td data-label="Serie" title={cooler.serial_number}>
-                        {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                        cooler.serial_number === ""
-                          ? "Sin registro"
-                          : cooler.serial_number}
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={8} radius="xl" width="100%" />
+                          </>
+                        ) : cooler.serial_number === "" ? (
+                          "Sin registro"
+                        ) : (
+                          cooler.serial_number
+                        )}
                       </td>
                       <td data-label="Modelo" title={cooler.model_id}>
-                        {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                        cooler.model_id === ""
-                          ? "Sin registro"
-                          : cooler.model_id}
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={8} radius="xl" width="100%" />
+                          </>
+                        ) : cooler.model_id === "" ? (
+                          "Sin registro"
+                        ) : (
+                          cooler.model_id
+                        )}
                       </td>
                       <td data-label="Última visita" title={cooler.last_read}>
-                        {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                        cooler.last_read == undefined ||
-                          cooler.last_read == null
-                          ? "Sin registro"
-                          : new Date(
-                            cooler.last_read
-                          ).toLocaleDateString()}
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={8} radius="xl" width="100%" />
+                          </>
+                        ) : cooler.last_read == undefined ||
+                          cooler.last_read == null ? (
+                          "Sin registro"
+                        ) : (
+                          new Date(cooler.last_read).toLocaleDateString()
+                        )}
                       </td>
                       <td data-label="Prioridad" title={cooler.priority_status}>
-                        {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                        cooler.priority_status == undefined ||
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={8} radius="xl" width="100%" />
+                          </>
+                        ) : cooler.priority_status == undefined ||
                           cooler.priority_status == "" ? (
                           "Sin registro"
                         ) : (
@@ -409,7 +459,11 @@ export default function Coolers() {
                         )}
                       </td>
                       <td data-label="Acciones" title="Acciones">
-                        {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={8} radius="xl" width="100%" />
+                          </>
+                        ) : (
                           <div>
                             <Link to="/home/coolerDetail">
                               <div
@@ -435,34 +489,32 @@ export default function Coolers() {
                               </div>
                             </Link>
                           </div>
-                        }
+                        )}
                       </td>
                     </tr>
                   ))}
               </tbody>
+            ) : isLoading == true ? (
+              <tbody>{isloadingData()}</tbody>
             ) : (
-              isLoading == true
-                ?
-                <tbody>
-                  {isloadingData()}
-                </tbody>
-                :
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                    fontSize: "18px",
-                  }}
-                >
-                  <p>No hay datos de usuarios disponibles.</p>
-                </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontWeight: "bold",
+                  fontSize: "1.5vw",
+                }}
+              >
+                <p>No hay información para mostrar.</p>
+              </div>
             )}
           </table>
           <br />
         </section>
-        <section style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+        <section
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
           <PaginationComponent
             accion={setCurrentPage}
             totalDatos={totalData}

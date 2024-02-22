@@ -1,17 +1,28 @@
 import React, { useRef, useState } from "react";
-import { Button,Drawer } from "@mantine/core";
+import { Button, Drawer } from "@mantine/core";
 
-export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,setOpenedDrawerEdit,oncloseDrawerEdit }) {
+export default function DrawerUsers({
+  userData,
+  userDataClear,
+  openedDrawerEdit,
+  setOpenedDrawerEdit,
+  oncloseDrawerEdit,
+}) {
   const { name, email, customer, path } = userData;
   const [nameUser, setNameUser] = useState(name);
   const [emailUser, setEmailUser] = useState(email);
-  const [customerUser, setCustomerUser] = useState(customer);   
-  const closeAndClearInfo = () =>{    
-    userDataClear('')
-  }
-  openedDrawerEdit == false ? closeAndClearInfo() : ""
+  const [customerUser, setCustomerUser] = useState(customer);
+  const closeAndClearInfo = () => {
+    userDataClear("");
+  };
+  openedDrawerEdit == false ? closeAndClearInfo() : "";
   return (
-    <Drawer opened={openedDrawerEdit} onClose={oncloseDrawerEdit} position="right" size="30rem">      
+    <Drawer
+      opened={openedDrawerEdit}
+      onClose={oncloseDrawerEdit}
+      position="right"
+      size="40rem"
+    >
       <div
         style={{
           display: "flex",
@@ -52,7 +63,7 @@ export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,se
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
-          gap: "1rem"          
+          gap: "1rem",
         }}
       >
         <section
@@ -62,7 +73,7 @@ export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,se
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
-            gap: "1rem"
+            gap: "1rem",
           }}
         >
           <label
@@ -89,8 +100,8 @@ export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,se
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: "17rem",              
-              backgroundColor:"#FFFF"
+              width: "17rem",
+              backgroundColor: "#FFFF",
             }}
           />
         </section>
@@ -128,8 +139,8 @@ export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,se
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: "17rem",              
-              backgroundColor:"#FFFF"
+              width: "17rem",
+              backgroundColor: "#FFFF",
             }}
           />
         </section>
@@ -167,8 +178,8 @@ export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,se
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: "17rem",              
-              backgroundColor:"#FFFF"
+              width: "17rem",
+              backgroundColor: "#FFFF",
             }}
           />
         </section>
@@ -206,8 +217,8 @@ export default function DrawerUsers({ userData,userDataClear,openedDrawerEdit,se
               fontStyle: "normal",
               fontWeight: 500,
               lineHeight: "28px",
-              width: "17rem",              
-              backgroundColor:"#FFFF"
+              width: "17rem",
+              backgroundColor: "#FFFF",
             }}
           />
         </section>

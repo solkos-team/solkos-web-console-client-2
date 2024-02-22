@@ -29,6 +29,20 @@ export interface CoolerInterface {
   value: number;
   delta: number;
   level: string;
+  properties?: {
+    energy_consumption_month_1?: {
+      timestamp: string;
+      value: number;
+    };
+    energy_consumption_month_2?: {
+      timestamp: string;
+      value: number;
+    };
+    energy_consumption_month_3?: {
+      timestamp: string;
+      value: number;
+    };
+  };
 }
 
 export interface Algorithm {
@@ -119,9 +133,36 @@ export interface CoolerData {
     outlet_id: string;
   };
   properties: {
-    description: string;
-    name: string;
-    value: number;
+    annual_decrement: {
+      description: string;
+      value: number;
+    };
+    total_ownership_expense: {
+      description: string;
+      value: number;
+    };
+
+    energy_consumption: {
+      description: string;
+      value: number;
+    };
+    power_consumption_reference: {
+      description: string;
+      value: number;
+    };
+
+    energy_cost: {
+      description: string;
+      value: number;
+    };
+    sale_price: {
+      description: string;
+      value: number;
+    };
+    total_expense_service: {
+      description: string;
+      value: number;
+    };
   };
   service_orders?: Array<{
     service_id: string;
@@ -131,4 +172,12 @@ export interface CoolerData {
     description: string;
   }>;
   tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
+  activity?: ActivityItem[];
+}
+export interface ActivityItem {
+  type: string;
+  data: any;
+  level: string;
+  close_at: string;
+  service_id: string;
 }

@@ -126,7 +126,7 @@ const MapComponent2 = ({
   };
 
   if (!googleMapsLoaded) {
-    return <div>Error al cargar Google Maps</div>;
+    return <div>Cargando...</div>;
   }
 
   return (

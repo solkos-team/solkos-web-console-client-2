@@ -54,7 +54,7 @@ export default function DrawerNewUser({
       opened={openedDrawer}
       onClose={oncloseDrawer}
       position="right"
-      size="30rem"
+      size="40rem"
     >
       <div
         style={{
@@ -121,7 +121,7 @@ export default function DrawerNewUser({
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -220,
+              marginLeft: -150,
             }}
           >
             Nombre
@@ -160,7 +160,7 @@ export default function DrawerNewUser({
               fontStyle: "normal",
               fontWeight: 700,
               lineHeight: "normal",
-              marginLeft: -220,
+              marginLeft: -150,
             }}
           >
             Correo

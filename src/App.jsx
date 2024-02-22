@@ -146,9 +146,9 @@ const routes = [
         icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
       },
       {
-        label: "Alertas",
-        link: "/home/alerts",
-        icon: <img src={"../../sampleData/alert.svg"} alt="cooler"></img>,
+        label: "Indicadores",
+        link: "/home/indicator",
+        icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
       },
       {
         label: "Fallas",
@@ -156,9 +156,9 @@ const routes = [
         icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
       },
       {
-        label: "Indicadores",
-        link: "/home/indicator",
-        icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+        label: "Alertas",
+        link: "/home/alerts",
+        icon: <img src={"../../sampleData/alert.svg"} alt="cooler"></img>,
       },
     ],
   },
@@ -426,8 +426,8 @@ function App() {
   let resultado = "";
   for (var i = 0; i < total; resultado += array[i][0], i++);
   const [width, setWidth] = useState(window.innerWidth);
-const [height, setHeight] = useState(window.innerHeight);
-const handleResize = () => {
+  const [height, setHeight] = useState(window.innerHeight);
+  const handleResize = () => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
   };
@@ -436,12 +436,12 @@ const handleResize = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);    
-  if(width < 1000){     
-    if(opened2 == true){      
-    }else{
-      setOpened2(true)
-      sessionStorage.setItem('MenuState', opened2)
+  }, []);
+  if (width < 1000) {
+    if (opened2 == true) {
+    } else {
+      setOpened2(true);
+      sessionStorage.setItem("MenuState", opened2);
     }
   }
   return (
@@ -675,7 +675,7 @@ const handleResize = () => {
                         </div>
                       </div>
                       <img
-                        src={arrows}
+                        src={"../../sampleData/arrows3.svg"}
                         style={{
                           marginLeft: 5,
                           display: opened2 == true ? "none" : "",

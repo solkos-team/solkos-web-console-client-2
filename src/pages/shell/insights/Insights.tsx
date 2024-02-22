@@ -70,6 +70,7 @@ export default function Insights() {
   const fetchDataNumerOfItems = async () => {
     try {
       const data = await fetchInsights(pathVerify());
+      console.log(data);
       numIntems(Number(data.insights.INDICATOR.total));
       setIsLoading(false);
     } catch (error) {

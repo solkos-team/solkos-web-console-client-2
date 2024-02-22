@@ -3,7 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import Resume from "../../../components/resume";
 import EconomicDetail from "../../../components/economicDetail/EconomicDetail";
 import Energy from "../../../components/energyConsum";
-import { Tabs } from "@mantine/core";
+import { Center, Tabs } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
@@ -91,6 +91,13 @@ export default function CoolerDetail() {
 
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
+
+  if (coolersData && coolersData.activity && coolersData.activity.length > 0) {
+    console.log(coolersData.activity[0].data.service_id);
+  } else {
+    console.log("No hay actividad disponible.");
+  }
+
   return (
     <div>
       {localStorage.getItem("USER") == "Call Center" ? (
@@ -285,7 +292,7 @@ export default function CoolerDetail() {
                     coolersData?.cooler?.last_read == null
                       ? "Sin registro"
                       : moment(new Date(coolersData?.cooler?.last_read)).format(
-                          "D [de] MMMM [de] YYYY [a las] h:mm A"
+                          "DD/MM/YYYY HH:mm"
                         )}
                   </div>
                   <div
@@ -629,7 +636,7 @@ export default function CoolerDetail() {
             className="clt_actividad_acerca_principal"
             style={{ overflowY: "auto" }}
           >
-            <section className="clt_actividad_principal">
+            <section className="clt_actividad_principal_actividad">
               <div className="clt_actividad_principal_title">
                 <img
                   src={"../../sampleData/actividad.svg"}
@@ -644,144 +651,280 @@ export default function CoolerDetail() {
                 {coolersData?.service_orders === null ||
                 coolersData?.service_orders?.length === 0 ? (
                   <>
-                    <p style={{ fontWeight: "bold", fontSize: "1vw" }}>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "1vw",
+                        marginTop: 150,
+                      }}
+                    >
                       Sin actividad
                     </p>
                   </>
                 ) : (
-                  coolersData?.service_orders && (
+                  coolersData &&
+                  coolersData.activity &&
+                  coolersData.activity.length > 0 && (
                     <div>
-                      {coolersData.service_orders
-                        .filter(
-                          (order) =>
-                            order.service_id === "1001" ||
-                            order.service_id === "1002" ||
-                            (order.service_id === "1005" &&
-                              order.status === "D,D")
-                        )
-                        .map((order) => (
-                          <>
-                            <div key={order.id}>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "8px",
-                                  flexDirection: "column",
-                                  alignItems: "flex-start",
-                                  gap: "2px",
-                                  alignSelf: "stretch",
-                                  borderRadius: "5px",
-                                  background: "#FFF",
-                                  boxShadow:
-                                    "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                  width: "96%",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    alignSelf: "stretch",
-                                  }}
-                                >
+                      {coolersData.activity.map((order, index) => (
+                        <>
+                          <div key={index}>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "8px",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+
+                                alignSelf: "stretch",
+                                borderRadius: "5px",
+                                background: "#FFF",
+                                boxShadow:
+                                  "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                width: "96%",
+                                height: "100%",
+                              }}
+                            >
+                              {order.type === "SERVICE_ORDER" && (
+                                <>
                                   <div
                                     style={{
-                                      flex: 100,
-                                      color: "#000005",
-                                      // fontFamily: "DM Sans",
+                                      color: "#88888B",
                                       fontSize: "10px",
-                                      fontStyle: "normal",
-                                      fontWeight: 600,
-                                      lineHeight: "normal",
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    Orden{" "}
-                                    {order.id === ""
-                                      ? "Sin registro"
-                                      : order.id}
-                                  </div>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      padding: "3px",
-                                      justifyContent: "center",
-                                      alignItems: "center",
-                                      gap: "2px",
-                                      borderRadius: "2px",
-                                      background: "#D4DAE3",
-                                    }}
-                                  >
-                                    <div
-                                      style={{
-                                        color: "#313A49",
-                                        // fontFamily: "Space Mono",
-                                        fontSize: "8px",
-                                        fontStyle: "normal",
-                                        fontWeight: 400,
-                                        lineHeight: "10px",
-                                      }}
-                                    >
-                                      CERRADA
-                                    </div>
-                                  </div>
-                                </div>
-                                <div
-                                  style={{
-                                    flex: 100,
-                                    color: "#000005",
-                                    // fontFamily: "DM Sans",
-                                    fontSize: "12px",
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    lineHeight: "normal",
-                                  }}
-                                >
-                                  $
-                                </div>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "4px",
-                                    alignSelf: "stretch",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      color: "#3E83FF",
-                                      // fontFamily: "Inter",
-                                      fontSize: "12px",
                                       fontStyle: "normal",
                                       fontWeight: 500,
                                       lineHeight: "normal",
                                     }}
                                   >
-                                    {order.created_at === ""
+                                    {order.data.close_at === undefined ||
+                                    order.data.close_at === null
                                       ? "Sin registro"
-                                      : formatCreatedAt(order.created_at)}
+                                      : moment(
+                                          new Date(order.data.close_at)
+                                        ).format("DD/MM/YYYY HH:mm")}
                                   </div>
-                                </div>
-                                <div
-                                  style={{
-                                    color: "#88888B",
-                                    // fontFamily: "Inter",
-                                    fontSize: "10px",
-                                    fontStyle: "normal",
-                                    fontWeight: 500,
-                                    lineHeight: "normal",
-                                    textAlign: "left",
-                                  }}
-                                >
-                                  {order.description === ""
-                                    ? "Sin registro"
-                                    : order.description}
-                                </div>
-                              </div>
+
+                                  <div
+                                    style={{
+                                      color: "#000005",
+                                      // fontFamily: "DM Sans",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      fontSize: "10px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "normal",
+                                      textAlign: "left",
+                                      marginTop: "-5px",
+                                    }}
+                                  >
+                                    <div>
+                                      <p>Orden: {order.data.id}</p>
+                                    </div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        padding: "2px",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        gap: "4px",
+                                        borderRadius: "2px",
+                                        background: "#BCDAFF",
+                                        marginLeft: 10,
+                                      }}
+                                    >
+                                      {order.data.service_id === "1003" ? (
+                                        <>
+                                          <img
+                                            src={"../../sampleData/mov2.svg"}
+                                            alt="Descripción de la imagen"
+                                            style={{
+                                              width: ".9vw",
+                                              height: ".9vw",
+                                              lineHeight: "14px",
+                                            }}
+                                          />
+                                        </>
+                                      ) : (
+                                        <>
+                                          <img
+                                            src={"../../sampleData/so.svg"}
+                                            alt="Descripción de la imagen"
+                                            style={{
+                                              width: ".9vw",
+                                              height: ".9vw",
+                                              lineHeight: "14px",
+                                            }}
+                                          />
+                                        </>
+                                      )}
+
+                                      <div
+                                        style={{
+                                          color: "#3E83FF",
+                                          fontSize: "8px",
+                                          fontStyle: "normal",
+                                          fontWeight: 400,
+                                        }}
+                                      >
+                                        {order.data.service_id === "1004"
+                                          ? "ORDEN DE INSTALACIÓN"
+                                          : order.data.service_id === "1003"
+                                          ? "ORDEN DE MOVIMIENTO"
+                                          : "ORDEN DE SERVICIO"}
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div
+                                    style={{
+                                      color: "#000005",
+                                      fontSize: "12px",
+                                      fontStyle: "normal",
+                                      fontWeight: 400,
+                                      lineHeight: "normal",
+                                      marginTop: "-5px",
+                                    }}
+                                  >
+                                    $ {order.data.total.toLocaleString()}
+                                  </div>
+                                  <div
+                                    style={{
+                                      color: "#88888B",
+                                      fontSize: "10px",
+                                      fontStyle: "normal",
+                                      fontWeight: 500,
+                                      lineHeight: "normal",
+                                      textAlign: "left",
+                                    }}
+                                  >
+                                    {order.data.description}
+                                  </div>
+                                </>
+                              )}
+                              {order.type === "TRACKING" && (
+                                <>
+                                  <div
+                                    style={{
+                                      color: "#88888B",
+                                      fontSize: "10px",
+                                      fontStyle: "normal",
+                                      fontWeight: 500,
+                                      lineHeight: "normal",
+                                    }}
+                                  >
+                                    {order.data.notified_at === undefined ||
+                                    order.data.notified_at === null
+                                      ? "Sin registro"
+                                      : moment(
+                                          new Date(order.data.notified_at)
+                                        ).format("DD/MM/YYYY HH:mm")}
+                                  </div>
+
+                                  <div
+                                    style={{
+                                      color: "#000005",
+                                      // fontFamily: "DM Sans",
+                                      display: "flex",
+                                      alignItems: "center",
+                                      fontSize: "10px",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "normal",
+                                      textAlign: "left",
+                                      marginTop: "-5px",
+                                    }}
+                                  >
+                                    <div>
+                                      <p>{order.data.algorithm}</p>
+                                    </div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        padding: "2px",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        gap: "4px",
+                                        borderRadius: "2px",
+                                        background:
+                                          order.data.level === "ALERT"
+                                            ? "#FEF5C7"
+                                            : order.data.level === "FAIL"
+                                            ? "#FFC7CD"
+                                            : "#BCDAFF",
+                                        marginLeft: 10,
+                                      }}
+                                    >
+                                      {order.data.level === "ALERT" ? (
+                                        <>
+                                          {" "}
+                                          <img
+                                            src={"../../sampleData/alert3.svg"}
+                                            alt="Descripción de la imagen"
+                                            style={{
+                                              width: ".9vw",
+                                              height: ".9vw",
+                                              lineHeight: "14px",
+                                            }}
+                                          />
+                                        </>
+                                      ) : order.data.level === "FAIL" ? (
+                                        <>
+                                          {" "}
+                                          <img
+                                            src={"../../sampleData/fail3.svg"}
+                                            alt="Descripción de la imagen"
+                                            style={{
+                                              width: ".9vw",
+                                              height: ".9vw",
+                                              lineHeight: "14px",
+                                            }}
+                                          />
+                                        </>
+                                      ) : order.data.level === "INDICATOR" ? (
+                                        <>
+                                          {" "}
+                                          <img
+                                            src={"../../sampleData/ind3.svg"}
+                                            alt="Descripción de la imagen"
+                                            style={{
+                                              width: ".9vw",
+                                              height: ".9vw",
+                                              lineHeight: "14px",
+                                            }}
+                                          />
+                                        </>
+                                      ) : (
+                                        ""
+                                      )}
+
+                                      <div
+                                        style={{
+                                          color:
+                                            order.data.level === "ALERT"
+                                              ? "#451C03"
+                                              : order.data.level === "FAIL"
+                                              ? "#F93448"
+                                              : "#3E83FF",
+                                          fontSize: "8px",
+                                          fontStyle: "normal",
+                                          fontWeight: 400,
+                                        }}
+                                      >
+                                        {order.data.level === "ALERT"
+                                          ? "ALERTA"
+                                          : order.data.level === "FAIL"
+                                          ? "FALLA"
+                                          : order.data.level}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </>
+                              )}
                             </div>
-                            <br></br>
-                          </>
-                        ))}
+                            <p />
+                          </div>
+                        </>
+                      ))}
                     </div>
                   )
                 )}
@@ -801,12 +944,12 @@ export default function CoolerDetail() {
               </div>
               <div className="clt_actividad_principal_title_nombre">
                 <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Nombre pdv
+                  Nombre PdV
                 </h1>
                 <h1 className="clt_actividad_principal_title_nombre_h1">
-                  {
-                    coolersData?.cooler?.outlet_name == '' ? 'Sin registro' :
-                  coolersData?.cooler?.outlet_name}
+                  {coolersData?.cooler?.outlet_name == ""
+                    ? "Sin registro"
+                    : coolersData?.cooler?.outlet_name}
                 </h1>
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   /<b>{coolersData?.cooler?.outlet_id}</b>
@@ -1007,7 +1150,7 @@ export default function CoolerDetail() {
                 display: "flex",
                 alignItems: "center",
                 alignContent: "center",
-                gap: "10px",
+                gap: "60px",
                 alignSelf: "stretch",
                 flexWrap: "wrap",
               }}
@@ -1043,14 +1186,11 @@ export default function CoolerDetail() {
                     lineHeight: "normal",
                   }}
                 >
-                  {/* {coolersData?.properties?.total_ownership_expense?.value ==
-                    undefined ||
-                  coolersData?.properties?.total_ownership_expense?.value ==
-                    "undefined"
+                  {coolersData?.properties?.total_ownership_expense?.value ===
+                  undefined
                     ? "Sin registro"
                     : "$" +
-                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`} */}
-                  $ 0
+                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                 </div>
               </div>
               <div
@@ -1084,11 +1224,10 @@ export default function CoolerDetail() {
                     lineHeight: "normal",
                   }}
                 >
-                  {/* {coolersData?.properties?.sale_price?.value == undefined
+                  {coolersData?.properties?.sale_price?.value === undefined
                     ? "Sin registro"
                     : "$" +
-                      `${coolersData?.properties?.sale_price.value.toLocaleString()}`} */}
-                  $ 0
+                      `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
                 </div>
               </div>
               <div
@@ -1122,12 +1261,11 @@ export default function CoolerDetail() {
                     lineHeight: "normal",
                   }}
                 >
-                  {/* {coolersData?.properties?.total_expense_service.values ==
+                  {coolersData?.properties?.total_expense_service.value ===
                   undefined
                     ? "Sin registro"
                     : "$" +
-                      `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`} */}
-                  $ 0
+                      `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
                 </div>
               </div>
             </div>
@@ -1159,7 +1297,6 @@ export default function CoolerDetail() {
               />
             </div>
           </section>
-
           <section className="clt_actividad_principal">
             <div className="clt_actividad_principal_title">
               <img
@@ -1176,7 +1313,7 @@ export default function CoolerDetail() {
                 display: "flex",
                 alignItems: "center",
                 alignContent: "center",
-                gap: "10px",
+                gap: "40px",
                 alignSelf: "stretch",
                 flexWrap: "wrap",
               }}
@@ -1212,14 +1349,16 @@ export default function CoolerDetail() {
                     lineHeight: "normal",
                   }}
                 >
-                  {/* {coolersData?.properties?.total_ownership_expense?.value ==
-                    undefined ||
-                  coolersData?.properties?.total_ownership_expense?.value ==
-                    "undefined"
+                  {coolersData?.properties?.energy_consumption?.value ===
+                  undefined
                     ? "Sin registro"
-                    : "$" +
-                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`} */}
-                  0 KW/h
+                    : `${
+                        coolersData?.properties?.energy_consumption.value.toFixed(
+                          2
+                        ) +
+                        " " +
+                        "KW/h"
+                      }`}
                 </div>
               </div>
               <div
@@ -1253,11 +1392,16 @@ export default function CoolerDetail() {
                     lineHeight: "normal",
                   }}
                 >
-                  {/* {coolersData?.properties?.sale_price?.value == undefined
+                  {coolersData?.properties?.power_consumption_reference
+                    ?.value == undefined
                     ? "Sin registro"
-                    : "$" +
-                      `${coolersData?.properties?.sale_price.value.toLocaleString()}`} */}
-                  0 KW/h
+                    : `${
+                        coolersData?.properties?.power_consumption_reference.value.toFixed(
+                          2
+                        ) +
+                        " " +
+                        "KW/h"
+                      }`}
                 </div>
               </div>
               <div
@@ -1291,12 +1435,10 @@ export default function CoolerDetail() {
                     lineHeight: "normal",
                   }}
                 >
-                  {/* {coolersData?.properties?.total_expense_service.values ==
-                  undefined
+                  {coolersData?.properties?.energy_cost.value == undefined
                     ? "Sin registro"
                     : "$" +
-                      `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`} */}
-                  $ 0
+                      `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
                 </div>
               </div>
             </div>
@@ -1330,8 +1472,16 @@ export default function CoolerDetail() {
           </section>
         </div>
       </section>
-      <DrawerInversion opened={inversionOpened} onClose={closeInversion} />
-      <DrawerEnergy opened={energyOpened} onClose={closeEnergy} />
+      <DrawerInversion
+        opened={inversionOpened}
+        onClose={closeInversion}
+        coolersData={coolersData}
+      />
+      <DrawerEnergy
+        opened={energyOpened}
+        onClose={closeEnergy}
+        coolersData={coolersData}
+      />
     </div>
   );
 }
