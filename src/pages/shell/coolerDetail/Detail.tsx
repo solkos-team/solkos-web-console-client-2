@@ -116,10 +116,10 @@ export default function CoolerDetail() {
                 display: "flex",
                 padding: "0px 32px",
                 alignItems: "flex-start",
-                marginLeft: -85,
+                marginLeft: -95,
                 gap: "2px",
                 alignSelf: "stretch",
-                width: "96%",
+                width: "106%",
               }}
             >
               <img
@@ -632,430 +632,572 @@ export default function CoolerDetail() {
           ))} */}
         </section>
         <section>
-          <div
-            className="clt_actividad_acerca_principal"
-            style={{ overflowY: "auto" }}
-          >
-            <section className="clt_actividad_principal_actividad">
+          <div style={{ marginLeft: -35 }}>
+            <div
+              className="clt_actividad_acerca_principal"
+              style={{ overflowY: "auto" }}
+            >
+              <section className="clt_actividad_principal_actividad">
+                <div className="clt_actividad_principal_title">
+                  <img
+                    src={"../../sampleData/actividad.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "2vw", height: "2vw" }}
+                  />
+                  <h1 className="clt_actividad_principal_title_h1">
+                    Actividad del enfriador
+                  </h1>
+                </div>
+                <div className="clt_acerca_principal_cards">
+                  {coolersData?.service_orders === null ||
+                  coolersData?.service_orders?.length === 0 ? (
+                    <>
+                      <p
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: "1vw",
+                          marginTop: 150,
+                        }}
+                      >
+                        Sin actividad
+                      </p>
+                    </>
+                  ) : (
+                    coolersData &&
+                    coolersData.activity &&
+                    coolersData.activity.length > 0 && (
+                      <div>
+                        {coolersData.activity
+                          .slice()
+                          .reverse()
+                          .map((order, index) => (
+                            <>
+                              <div key={index}>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    padding: "8px",
+                                    flexDirection: "column",
+                                    alignItems: "flex-start",
+
+                                    alignSelf: "stretch",
+                                    borderRadius: "5px",
+                                    background: "#FFF",
+                                    boxShadow:
+                                      "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                    width: "96%",
+                                    height: "100%",
+                                  }}
+                                >
+                                  {order.type === "SERVICE_ORDER" && (
+                                    <>
+                                      <div
+                                        style={{
+                                          color: "#88888B",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: 500,
+                                          lineHeight: "normal",
+                                        }}
+                                      >
+                                        {order.data.close_at === undefined ||
+                                        order.data.close_at === null
+                                          ? "Sin registro"
+                                          : moment(
+                                              new Date(order.data.close_at)
+                                            ).format("DD/MM/YYYY HH:mm")}
+                                      </div>
+
+                                      <div
+                                        style={{
+                                          color: "#000005",
+                                          // fontFamily: "DM Sans",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: 600,
+                                          lineHeight: "normal",
+                                          textAlign: "left",
+                                          marginTop: "-5px",
+                                        }}
+                                      >
+                                        <div>
+                                          <p>Orden: {order.data.id}</p>
+                                        </div>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            padding: "2px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "4px",
+                                            borderRadius: "2px",
+                                            background: "#BCDAFF",
+                                            marginLeft: 10,
+                                          }}
+                                        >
+                                          {order.data.service_id === "1003" ? (
+                                            <>
+                                              <img
+                                                src={
+                                                  "../../sampleData/mov2.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : (
+                                            <>
+                                              <img
+                                                src={"../../sampleData/so.svg"}
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          )}
+
+                                          <div
+                                            style={{
+                                              color: "#3E83FF",
+                                              fontSize: "8px",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                            }}
+                                          >
+                                            {order.data.service_id === "1004"
+                                              ? "ORDEN DE INSTALACIÓN"
+                                              : order.data.service_id === "1003"
+                                              ? "ORDEN DE MOVIMIENTO"
+                                              : "ORDEN DE SERVICIO"}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div
+                                        style={{
+                                          color: "#000005",
+                                          fontSize: "12px",
+                                          fontStyle: "normal",
+                                          fontWeight: 400,
+                                          lineHeight: "normal",
+                                          marginTop: "-5px",
+                                        }}
+                                      >
+                                        $ {order.data.total.toLocaleString()}
+                                      </div>
+                                      <div
+                                        style={{
+                                          color: "#88888B",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: 500,
+                                          lineHeight: "normal",
+                                          textAlign: "left",
+                                        }}
+                                      >
+                                        {order.data.description}
+                                      </div>
+                                    </>
+                                  )}
+                                  {order.type === "TRACKING" && (
+                                    <>
+                                      <div
+                                        style={{
+                                          color: "#88888B",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: 500,
+                                          lineHeight: "normal",
+                                        }}
+                                      >
+                                        {order.data.notified_at === undefined ||
+                                        order.data.notified_at === null
+                                          ? "Sin registro"
+                                          : moment(
+                                              new Date(order.data.notified_at)
+                                            ).format("DD/MM/YYYY HH:mm")}
+                                      </div>
+
+                                      <div
+                                        style={{
+                                          color: "#000005",
+                                          // fontFamily: "DM Sans",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          fontSize: "10px",
+                                          fontStyle: "normal",
+                                          fontWeight: 600,
+                                          lineHeight: "normal",
+                                          textAlign: "left",
+                                        }}
+                                      >
+                                        <div>
+                                          {order.data.algorithm ===
+                                          "COMPRESSOR_FAIL"
+                                            ? "Falla asociada al compresor"
+                                            : order.data.algorithm ===
+                                              "DISCONNECTIONS_FAIL"
+                                            ? "Desconexión"
+                                            : order.data.algorithm ===
+                                              "TEMPERATURE_FAIL"
+                                            ? "Alta temperatura"
+                                            : order.data.algorithm ===
+                                              "VOLTAGE_FAIL"
+                                            ? "Posible daño eléctrico"
+                                            : order.data.algorithm ===
+                                              "FREEZING_FAIL"
+                                            ? "Evaporador bloqueado"
+                                            : order.data.algorithm ===
+                                              "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                            ? "Alta demanda del compresor"
+                                            : order.data.algorithm ===
+                                              "DISCONNECTION_ALERT"
+                                            ? "Desconexión"
+                                            : order.data.algorithm ===
+                                              "HIGH_TEMPERATURE_ALERT"
+                                            ? "Alta temperatura"
+                                            : order.data.algorithm ===
+                                              "HIGH_VOLTAGE_ALERT"
+                                            ? "Alto voltaje"
+                                            : order.data.algorithm ===
+                                              "LOW_VOLTAGE_ALERT"
+                                            ? "Bajo voltaje"
+                                            : order.data.algorithm ===
+                                              "MOVED_VISIT_ALERT"
+                                            ? "Movimiento"
+                                            : order.data.algorithm}
+                                        </div>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            padding: "2px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "4px",
+                                            borderRadius: "2px",
+                                            background:
+                                              order.data.level === "ALERT"
+                                                ? "#FEF5C7"
+                                                : order.data.level === "FAIL"
+                                                ? "#FFC7CD"
+                                                : "#BCDAFF",
+                                            marginLeft: 10,
+                                          }}
+                                        >
+                                          {order.data.level === "ALERT" ? (
+                                            <>
+                                              {" "}
+                                              <img
+                                                src={
+                                                  "../../sampleData/alert3.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : order.data.level === "FAIL" ? (
+                                            <>
+                                              {" "}
+                                              <img
+                                                src={
+                                                  "../../sampleData/fail3.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : order.data.level ===
+                                            "INDICATOR" ? (
+                                            <>
+                                              {" "}
+                                              <img
+                                                src={
+                                                  "../../sampleData/ind3.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : (
+                                            ""
+                                          )}
+
+                                          <div
+                                            style={{
+                                              color:
+                                                order.data.level === "ALERT"
+                                                  ? "#451C03"
+                                                  : order.data.level === "FAIL"
+                                                  ? "#F93448"
+                                                  : "#3E83FF",
+                                              fontSize: "8px",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                            }}
+                                          >
+                                            {order.data.level === "ALERT"
+                                              ? "ALERTA"
+                                              : order.data.level === "FAIL"
+                                              ? "FALLA"
+                                              : order.data.level}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                                <p />
+                              </div>
+                            </>
+                          ))}
+                      </div>
+                    )
+                  )}
+                </div>
+              </section>
+
+              <section className="clt_acerca_principal">
+                <div className="clt_actividad_principal_title">
+                  <img
+                    src={"../../sampleData/buildings.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "2vw", height: "2vw" }}
+                  />
+                  <h1 className="clt_actividad_principal_title_h1">
+                    Acerca del punto de venta
+                  </h1>
+                </div>
+                <div className="clt_actividad_principal_title_nombre">
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    Nombre PdV
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    {coolersData?.cooler?.outlet_name == ""
+                      ? "Sin registro"
+                      : coolersData?.cooler?.outlet_name}
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    /<b>{coolersData?.cooler?.outlet_id}</b>
+                  </h1>
+                </div>
+
+                <div className="clt_actividad_principal_title_nombre">
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    Dirección
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    {coolersData?.cooler?.outlet_address === "" ||
+                    coolersData?.cooler?.outlet_address == undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.outlet_address}
+                  </h1>
+                </div>
+
+                <div className="clt_actividad_principal_title_nombre">
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    Distancia el punto de instalación
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    {coolersData?.cooler?.distance === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.last_latitude + "metros"}
+                  </h1>
+                </div>
+                <div className="clt_actividad_principal_mapa">
+                  {(coolersData?.cooler?.last_latitude != null &&
+                    coolersData?.cooler?.latitude === 0) ||
+                  (coolersData?.cooler?.last_latitude != 0 &&
+                    coolersData?.cooler?.latitude === 0) ? (
+                    <>
+                      <div>
+                        <MapComponent1
+                          latitude={coolersData?.cooler?.last_latitude}
+                          longitude={coolersData?.cooler?.last_longitude}
+                        />
+                      </div>
+                    </>
+                  ) : coolersData?.cooler?.last_latitude === null ||
+                    coolersData?.cooler?.last_latitude === 0 ? (
+                    <>
+                      <div>
+                        <MapComponent
+                          latitude={coolersData?.cooler?.latitude}
+                          longitude={coolersData?.cooler?.longitude}
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <MapComponent2
+                        latitude={coolersData?.cooler?.latitude}
+                        longitude={coolersData?.cooler?.longitude}
+                        last_latitude={coolersData?.cooler?.last_latitude}
+                        last_longitude={coolersData?.cooler?.last_longitude}
+                      />
+                    </>
+                  )}
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px",
+                    alignItems: "center",
+                    alignContent: "center",
+                    gap: "8px",
+                    alignSelf: "stretch",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/icon1.svg"}
+                      width={"20vw"}
+                      alt="cooler"
+                    ></img>
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Instalación
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <img
+                      src={"../../sampleData/icon2.svg"}
+                      width={"20vw"}
+                      alt="cooler"
+                    ></img>
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Última ubicación
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    {/* <IconCircleX /> */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px", // Espacio entre los bloques
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "1vw", // Ancho de cada bloque
+                          height: "0.3vw",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                      &nbsp;
+                      <div
+                        style={{
+                          width: "1vw", // Ancho de cada bloque
+                          height: "0.3vw",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                      &nbsp;
+                      <div
+                        style={{
+                          width: "1vw", // Ancho de cada bloque
+                          height: "0.3vw",
+                          background: "#ED5079",
+                        }}
+                      ></div>
+                    </div>
+
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "DM Sans",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Distancia entre puntos
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section>
+        <div style={{ marginLeft: -35 }}>
+          <div className="clt_actividad_acerca_principal">
+            <section className="clt_actividad_principal">
               <div className="clt_actividad_principal_title">
                 <img
                   src={"../../sampleData/actividad.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "2vw", height: "2vw" }}
+                  style={{ width: "18px", height: "18px" }}
                 />
                 <h1 className="clt_actividad_principal_title_h1">
-                  Actividad del enfriador
+                  Inversión total en el enfriador
                 </h1>
-              </div>
-              <div className="clt_acerca_principal_cards">
-                {coolersData?.service_orders === null ||
-                coolersData?.service_orders?.length === 0 ? (
-                  <>
-                    <p
-                      style={{
-                        fontWeight: "bold",
-                        fontSize: "1vw",
-                        marginTop: 150,
-                      }}
-                    >
-                      Sin actividad
-                    </p>
-                  </>
-                ) : (
-                  coolersData &&
-                  coolersData.activity &&
-                  coolersData.activity.length > 0 && (
-                    <div>
-                      {coolersData.activity
-                        .slice()
-                        .reverse()
-                        .map((order, index) => (
-                          <>
-                            <div key={index}>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "8px",
-                                  flexDirection: "column",
-                                  alignItems: "flex-start",
-
-                                  alignSelf: "stretch",
-                                  borderRadius: "5px",
-                                  background: "#FFF",
-                                  boxShadow:
-                                    "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                  width: "96%",
-                                  height: "100%",
-                                }}
-                              >
-                                {order.type === "SERVICE_ORDER" && (
-                                  <>
-                                    <div
-                                      style={{
-                                        color: "#88888B",
-                                        fontSize: "10px",
-                                        fontStyle: "normal",
-                                        fontWeight: 500,
-                                        lineHeight: "normal",
-                                      }}
-                                    >
-                                      {order.data.close_at === undefined ||
-                                      order.data.close_at === null
-                                        ? "Sin registro"
-                                        : moment(
-                                            new Date(order.data.close_at)
-                                          ).format("DD/MM/YYYY HH:mm")}
-                                    </div>
-
-                                    <div
-                                      style={{
-                                        color: "#000005",
-                                        // fontFamily: "DM Sans",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        fontSize: "10px",
-                                        fontStyle: "normal",
-                                        fontWeight: 600,
-                                        lineHeight: "normal",
-                                        textAlign: "left",
-                                        marginTop: "-5px",
-                                      }}
-                                    >
-                                      <div>
-                                        <p>Orden: {order.data.id}</p>
-                                      </div>
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "2px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background: "#BCDAFF",
-                                          marginLeft: 10,
-                                        }}
-                                      >
-                                        {order.data.service_id === "1003" ? (
-                                          <>
-                                            <img
-                                              src={"../../sampleData/mov2.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : (
-                                          <>
-                                            <img
-                                              src={"../../sampleData/so.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        )}
-
-                                        <div
-                                          style={{
-                                            color: "#3E83FF",
-                                            fontSize: "8px",
-                                            fontStyle: "normal",
-                                            fontWeight: 400,
-                                          }}
-                                        >
-                                          {order.data.service_id === "1004"
-                                            ? "ORDEN DE INSTALACIÓN"
-                                            : order.data.service_id === "1003"
-                                            ? "ORDEN DE MOVIMIENTO"
-                                            : "ORDEN DE SERVICIO"}
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div
-                                      style={{
-                                        color: "#000005",
-                                        fontSize: "12px",
-                                        fontStyle: "normal",
-                                        fontWeight: 400,
-                                        lineHeight: "normal",
-                                        marginTop: "-5px",
-                                      }}
-                                    >
-                                      $ {order.data.total.toLocaleString()}
-                                    </div>
-                                    <div
-                                      style={{
-                                        color: "#88888B",
-                                        fontSize: "10px",
-                                        fontStyle: "normal",
-                                        fontWeight: 500,
-                                        lineHeight: "normal",
-                                        textAlign: "left",
-                                      }}
-                                    >
-                                      {order.data.description}
-                                    </div>
-                                  </>
-                                )}
-                                {order.type === "TRACKING" && (
-                                  <>
-                                    <div
-                                      style={{
-                                        color: "#88888B",
-                                        fontSize: "10px",
-                                        fontStyle: "normal",
-                                        fontWeight: 500,
-                                        lineHeight: "normal",
-                                      }}
-                                    >
-                                      {order.data.notified_at === undefined ||
-                                      order.data.notified_at === null
-                                        ? "Sin registro"
-                                        : moment(
-                                            new Date(order.data.notified_at)
-                                          ).format("DD/MM/YYYY HH:mm")}
-                                    </div>
-
-                                    <div
-                                      style={{
-                                        color: "#000005",
-                                        // fontFamily: "DM Sans",
-                                        display: "flex",
-                                        alignItems: "center",
-                                        fontSize: "10px",
-                                        fontStyle: "normal",
-                                        fontWeight: 600,
-                                        lineHeight: "normal",
-                                        textAlign: "left",
-                                      }}
-                                    >
-                                      <div>
-                                        {order.data.algorithm ===
-                                        "COMPRESSOR_FAIL"
-                                          ? "Falla asociada al compresor"
-                                          : order.data.algorithm ===
-                                            "DISCONNECTIONS_FAIL"
-                                          ? "Desconexión"
-                                          : order.data.algorithm ===
-                                            "TEMPERATURE_FAIL"
-                                          ? "Alta temperatura"
-                                          : order.data.algorithm ===
-                                            "VOLTAGE_FAIL"
-                                          ? "Posible daño eléctrico"
-                                          : order.data.algorithm ===
-                                            "FREEZING_FAIL"
-                                          ? "Evaporador bloqueado"
-                                          : order.data.algorithm ===
-                                            "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                                          ? "Alta demanda del compresor"
-                                          : order.data.algorithm ===
-                                            "DISCONNECTION_ALERT"
-                                          ? "Desconexión"
-                                          : order.data.algorithm ===
-                                            "HIGH_TEMPERATURE_ALERT"
-                                          ? "Alta temperatura"
-                                          : order.data.algorithm ===
-                                            "HIGH_VOLTAGE_ALERT"
-                                          ? "Alto voltaje"
-                                          : order.data.algorithm ===
-                                            "LOW_VOLTAGE_ALERT"
-                                          ? "Bajo voltaje"
-                                          : order.data.algorithm ===
-                                            "MOVED_VISIT_ALERT"
-                                          ? "Movimiento"
-                                          : order.data.algorithm}
-                                      </div>
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "2px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background:
-                                            order.data.level === "ALERT"
-                                              ? "#FEF5C7"
-                                              : order.data.level === "FAIL"
-                                              ? "#FFC7CD"
-                                              : "#BCDAFF",
-                                          marginLeft: 10,
-                                        }}
-                                      >
-                                        {order.data.level === "ALERT" ? (
-                                          <>
-                                            {" "}
-                                            <img
-                                              src={
-                                                "../../sampleData/alert3.svg"
-                                              }
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : order.data.level === "FAIL" ? (
-                                          <>
-                                            {" "}
-                                            <img
-                                              src={"../../sampleData/fail3.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : order.data.level === "INDICATOR" ? (
-                                          <>
-                                            {" "}
-                                            <img
-                                              src={"../../sampleData/ind3.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : (
-                                          ""
-                                        )}
-
-                                        <div
-                                          style={{
-                                            color:
-                                              order.data.level === "ALERT"
-                                                ? "#451C03"
-                                                : order.data.level === "FAIL"
-                                                ? "#F93448"
-                                                : "#3E83FF",
-                                            fontSize: "8px",
-                                            fontStyle: "normal",
-                                            fontWeight: 400,
-                                          }}
-                                        >
-                                          {order.data.level === "ALERT"
-                                            ? "ALERTA"
-                                            : order.data.level === "FAIL"
-                                            ? "FALLA"
-                                            : order.data.level}
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </>
-                                )}
-                              </div>
-                              <p />
-                            </div>
-                          </>
-                        ))}
-                    </div>
-                  )
-                )}
-              </div>
-            </section>
-
-            <section className="clt_acerca_principal">
-              <div className="clt_actividad_principal_title">
-                <img
-                  src={"../../sampleData/buildings.svg"}
-                  alt="Descripción de la imagen"
-                  style={{ width: "2vw", height: "2vw" }}
-                />
-                <h1 className="clt_actividad_principal_title_h1">
-                  Acerca del punto de venta
-                </h1>
-              </div>
-              <div className="clt_actividad_principal_title_nombre">
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Nombre PdV
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  {coolersData?.cooler?.outlet_name == ""
-                    ? "Sin registro"
-                    : coolersData?.cooler?.outlet_name}
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  /<b>{coolersData?.cooler?.outlet_id}</b>
-                </h1>
-              </div>
-
-              <div className="clt_actividad_principal_title_nombre">
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Dirección
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  {coolersData?.cooler?.outlet_address === "" ||
-                  coolersData?.cooler?.outlet_address == undefined
-                    ? "Sin registro"
-                    : coolersData?.cooler?.outlet_address}
-                </h1>
-              </div>
-
-              <div className="clt_actividad_principal_title_nombre">
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Distancia el punto de instalación
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  {coolersData?.cooler?.distance === undefined
-                    ? "Sin registro"
-                    : coolersData?.cooler?.last_latitude + "metros"}
-                </h1>
-              </div>
-              <div className="clt_actividad_principal_mapa">
-                {(coolersData?.cooler?.last_latitude != null &&
-                  coolersData?.cooler?.latitude === 0) ||
-                (coolersData?.cooler?.last_latitude != 0 &&
-                  coolersData?.cooler?.latitude === 0) ? (
-                  <>
-                    <div>
-                      <MapComponent1
-                        latitude={coolersData?.cooler?.last_latitude}
-                        longitude={coolersData?.cooler?.last_longitude}
-                      />
-                    </div>
-                  </>
-                ) : coolersData?.cooler?.last_latitude === null ||
-                  coolersData?.cooler?.last_latitude === 0 ? (
-                  <>
-                    <div>
-                      <MapComponent
-                        latitude={coolersData?.cooler?.latitude}
-                        longitude={coolersData?.cooler?.longitude}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <MapComponent2
-                      latitude={coolersData?.cooler?.latitude}
-                      longitude={coolersData?.cooler?.longitude}
-                      last_latitude={coolersData?.cooler?.last_latitude}
-                      last_longitude={coolersData?.cooler?.last_longitude}
-                    />
-                  </>
-                )}
               </div>
               <div
                 style={{
                   display: "flex",
-                  padding: "8px",
                   alignItems: "center",
                   alignContent: "center",
-                  gap: "8px",
+                  gap: "60px",
                   alignSelf: "stretch",
                   flexWrap: "wrap",
                 }}
@@ -1063,450 +1205,319 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
                   }}
                 >
-                  <img
-                    src={"../../sampleData/icon1.svg"}
-                    width={"20vw"}
-                    alt="cooler"
-                  ></img>
                   <div
                     style={{
                       color: "#88888B",
                       // fontFamily: "DM Sans",
-                      fontSize: "12px",
+                      fontSize: ".8vw",
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "normal",
                     }}
                   >
-                    Instalación
+                    {" "}
+                    Gasto total de propiedad
                   </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                  }}
-                >
-                  <img
-                    src={"../../sampleData/icon2.svg"}
-                    width={"20vw"}
-                    alt="cooler"
-                  ></img>
                   <div
                     style={{
-                      color: "#88888B",
+                      color: "#000005",
                       // fontFamily: "DM Sans",
-                      fontSize: "12px",
+                      fontSize: "1.3vw",
                       fontStyle: "normal",
-                      fontWeight: 400,
+                      fontWeight: 500,
                       lineHeight: "normal",
                     }}
                   >
-                    Última ubicación
+                    {coolersData?.properties?.total_ownership_expense?.value ===
+                    undefined
+                      ? "Sin registro"
+                      : "$" +
+                        `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                   </div>
                 </div>
                 <div
                   style={{
                     display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
                   }}
                 >
-                  {/* <IconCircleX /> */}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px", // Espacio entre los bloques
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "1vw", // Ancho de cada bloque
-                        height: "0.3vw",
-                        background: "#ED5079",
-                      }}
-                    ></div>
-                    &nbsp;
-                    <div
-                      style={{
-                        width: "1vw", // Ancho de cada bloque
-                        height: "0.3vw",
-                        background: "#ED5079",
-                      }}
-                    ></div>
-                    &nbsp;
-                    <div
-                      style={{
-                        width: "1vw", // Ancho de cada bloque
-                        height: "0.3vw",
-                        background: "#ED5079",
-                      }}
-                    ></div>
-                  </div>
-
                   <div
                     style={{
                       color: "#88888B",
                       // fontFamily: "DM Sans",
-                      fontSize: "12px",
+                      fontSize: ".8vw",
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "normal",
                     }}
                   >
-                    Distancia entre puntos
+                    {" "}
+                    Precio de venta
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1.3vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {coolersData?.properties?.sale_price?.value === undefined
+                      ? "Sin registro"
+                      : "$" +
+                        `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
                   </div>
                 </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: "0.8vw",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {" "}
+                    Gasto total por servicio
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1.3vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {coolersData?.properties?.total_expense_service.value ===
+                    undefined
+                      ? "Sin registro"
+                      : "$" +
+                        `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  gap: "4px",
+                  flex: 100,
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  style={{
+                    color: "#3E83FF",
+                    // fontFamily: "DM Sans",
+                    fontSize: "1vw",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                  }}
+                  onClick={openInversion}
+                >
+                  Ver detalles
+                </div>
+                <IconArrowRight
+                  style={{ color: "#3E83FF", width: "15px", height: "15px" }}
+                />
+              </div>
+            </section>
+            <section className="clt_actividad_principal">
+              <div className="clt_actividad_principal_title">
+                <img
+                  src={"../../sampleData/energy.svg"}
+                  alt="Descripción de la imagen"
+                  style={{ width: "18px", height: "18px" }}
+                />
+                <h1 className="clt_actividad_principal_title_h1">
+                  Gastos de energía
+                </h1>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  alignContent: "center",
+                  gap: "40px",
+                  alignSelf: "stretch",
+                  flexWrap: "wrap",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: ".8vw",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {" "}
+                    Consumo de energía
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1.3vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {coolersData?.properties?.energy_consumption?.value ===
+                    undefined
+                      ? "Sin registro"
+                      : `${
+                          coolersData?.properties?.energy_consumption.value.toFixed(
+                            2
+                          ) +
+                          " " +
+                          "KW/h"
+                        }`}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: ".8vw",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {" "}
+                    Referencia de consumo de energía
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1.3vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {coolersData?.properties?.power_consumption_reference
+                      ?.value == undefined
+                      ? "Sin registro"
+                      : `${
+                          coolersData?.properties?.power_consumption_reference.value.toFixed(
+                            2
+                          ) +
+                          " " +
+                          "KW/h"
+                        }`}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      // fontFamily: "DM Sans",
+                      fontSize: ".8vw",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {" "}
+                    Gasto en energía
+                  </div>
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1.3vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {coolersData?.properties?.energy_cost.value == undefined
+                      ? "Sin registro"
+                      : "$" +
+                        `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  alignItems: "center",
+                  gap: "4px",
+                  flex: 100,
+                  cursor: "pointer",
+                }}
+              >
+                <div
+                  style={{
+                    color: "#3E83FF",
+                    // fontFamily: "DM Sans",
+                    fontSize: "1vw",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                  }}
+                  onClick={openEnergy}
+                >
+                  Ver detalles
+                </div>
+                <IconArrowRight
+                  style={{ color: "#3E83FF", width: "15px", height: "15px" }}
+                />
               </div>
             </section>
           </div>
-        </section>
-      </section>
-      <section>
-        <div className="clt_actividad_acerca_principal">
-          <section className="clt_actividad_principal">
-            <div className="clt_actividad_principal_title">
-              <img
-                src={"../../sampleData/actividad.svg"}
-                alt="Descripción de la imagen"
-                style={{ width: "18px", height: "18px" }}
-              />
-              <h1 className="clt_actividad_principal_title_h1">
-                Inversión total en el enfriador
-              </h1>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                alignContent: "center",
-                gap: "60px",
-                alignSelf: "stretch",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".8vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {" "}
-                  Gasto total de propiedad
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.3vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.properties?.total_ownership_expense?.value ===
-                  undefined
-                    ? "Sin registro"
-                    : "$" +
-                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".8vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {" "}
-                  Precio de venta
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.3vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.properties?.sale_price?.value === undefined
-                    ? "Sin registro"
-                    : "$" +
-                      `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.8vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {" "}
-                  Gasto total por servicio
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.3vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.properties?.total_expense_service.value ===
-                  undefined
-                    ? "Sin registro"
-                    : "$" +
-                      `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                gap: "4px",
-                flex: 100,
-                cursor: "pointer",
-              }}
-            >
-              <div
-                style={{
-                  color: "#3E83FF",
-                  // fontFamily: "DM Sans",
-                  fontSize: "1vw",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-                onClick={openInversion}
-              >
-                Ver detalles
-              </div>
-              <IconArrowRight
-                style={{ color: "#3E83FF", width: "15px", height: "15px" }}
-              />
-            </div>
-          </section>
-          <section className="clt_actividad_principal">
-            <div className="clt_actividad_principal_title">
-              <img
-                src={"../../sampleData/energy.svg"}
-                alt="Descripción de la imagen"
-                style={{ width: "18px", height: "18px" }}
-              />
-              <h1 className="clt_actividad_principal_title_h1">
-                Gastos de energía
-              </h1>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                alignContent: "center",
-                gap: "40px",
-                alignSelf: "stretch",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".8vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {" "}
-                  Consumo de energía
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.3vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.properties?.energy_consumption?.value ===
-                  undefined
-                    ? "Sin registro"
-                    : `${
-                        coolersData?.properties?.energy_consumption.value.toFixed(
-                          2
-                        ) +
-                        " " +
-                        "KW/h"
-                      }`}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".8vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {" "}
-                  Referencia de consumo de energía
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.3vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.properties?.power_consumption_reference
-                    ?.value == undefined
-                    ? "Sin registro"
-                    : `${
-                        coolersData?.properties?.power_consumption_reference.value.toFixed(
-                          2
-                        ) +
-                        " " +
-                        "KW/h"
-                      }`}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".8vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {" "}
-                  Gasto en energía
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.3vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.properties?.energy_cost.value == undefined
-                    ? "Sin registro"
-                    : "$" +
-                      `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                gap: "4px",
-                flex: 100,
-                cursor: "pointer",
-              }}
-            >
-              <div
-                style={{
-                  color: "#3E83FF",
-                  // fontFamily: "DM Sans",
-                  fontSize: "1vw",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-                onClick={openEnergy}
-              >
-                Ver detalles
-              </div>
-              <IconArrowRight
-                style={{ color: "#3E83FF", width: "15px", height: "15px" }}
-              />
-            </div>
-          </section>
         </div>
       </section>
       <DrawerInversion
