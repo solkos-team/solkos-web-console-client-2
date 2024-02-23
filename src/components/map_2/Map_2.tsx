@@ -41,7 +41,7 @@ const MapComponent2 = ({
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/icon1.svg";
+    const iconUrl = "../../sampleData/mappv.svg";
     const iconUrl2 = "../../sampleData/icon2.svg";
 
     const currentMarker = new maps.Marker({
@@ -50,7 +50,7 @@ const MapComponent2 = ({
       title: "Mi Marcador Fijo",
       icon: {
         url: iconUrl,
-        scaledSize: new maps.Size(32, 32),
+        scaledSize: new maps.Size(25, 25),
       },
     });
 

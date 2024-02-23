@@ -119,14 +119,28 @@ export default function CoolerDetail() {
                 marginLeft: -95,
                 gap: "2px",
                 alignSelf: "stretch",
-                width: "106%",
+                width: "108.7%",
               }}
             >
-              <img
-                src={"../../sampleData/cooler_c.png"}
-                alt="cooler"
-                width={"10%"}
-              ></img>
+              <div
+                style={{
+                  width: "90px",
+                  height: "80px",
+                  backgroundColor: "#D4DAE3",
+                  marginLeft: 30,
+                  borderRadius: "4px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <img
+                  src={"../../sampleData/cooler_c.png"}
+                  alt="cooler"
+                  width={"100%"}
+                  height={"85%"}
+                />
+              </div>
 
               <div
                 style={{
@@ -135,6 +149,7 @@ export default function CoolerDetail() {
                   alignItems: "flex-start",
                   gap: "4px",
                   flex: 100,
+                  marginLeft: 10,
                 }}
               >
                 <div
@@ -327,312 +342,151 @@ export default function CoolerDetail() {
                   </div>
                 </div>
               </div>
+
               <div
                 style={{
                   display: "flex",
                   flexDirection: "column",
-                  alignItems: "flex-start",
                   gap: "6px",
-                  alignSelf: "stretch",
                 }}
               >
-                {/* {coolersData?.cooler?.customer != "KOF" ? ( */}
-                <>
-                  <div
-                    style={{
-                      display: "flex",
-                      // flexDirection: "column",
-                      alignItems: "flex-start",
-                      gap: "6px",
-                      alignSelf: "stretch",
-                      padding: "0px 0px 4px",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Mono",
-                        fontSize: ".7vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "14px",
-                      }}
-                    >
-                      CANAL:
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        padding: "4px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "4px",
-                        borderRadius: "2px",
-                        background: "#D4DAE3",
-                        marginTop: -5,
-                      }}
-                    >
-                      <div
-                        style={{
-                          color: "#313A49",
-                          // fontFamily: "DM Mono",
-                          fontSize: ".7vw",
-                          fontStyle: "normal",
-                          fontWeight: 500,
-                          lineHeight: "14px",
-                        }}
-                      >
-                        Sin registro
-                      </div>
-                    </div>
-                  </div>
-                </>
-                {/* ) : (
-                ""
-              )} */}
                 <div
                   style={{
                     display: "flex",
-                    // flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: "6px",
-                    alignSelf: "stretch",
-                    padding: "0px 0px 4px",
+                    justifyContent: "space-between",
                   }}
                 >
                   <div
                     style={{
                       color: "#88888B",
-                      // fontFamily: "DM Mono",
                       fontSize: ".7vw",
-                      fontStyle: "normal",
                       fontWeight: 500,
-                      lineHeight: "14px",
+                    }}
+                  >
+                    CANAL:
+                  </div>
+                  <div
+                    style={{
+                      color: "#313A49",
+                      fontSize: ".7vw",
+                      fontWeight: 500,
+                      background: "#D4DAE3",
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
+                    }}
+                  >
+                    {coolersData?.cooler?.channel === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.channel}
+                  </div>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      fontSize: ".7vw",
+                      fontWeight: 500,
                     }}
                   >
                     REGIÓN:
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      padding: "4px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
+                      color: "#313A49",
+                      fontSize: ".7vw",
+                      fontWeight: 500,
                       background: "#D4DAE3",
-                      marginTop: -5,
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
                     }}
                   >
-                    <div
-                      style={{
-                        color: "#313A49",
-                        // fontFamily: "DM Mono",
-                        fontSize: ".7vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "14px",
-                      }}
-                    >
-                      {coolersData?.cooler?.region === "" ||
-                      coolersData?.cooler?.region === undefined
-                        ? "Sin registro"
-                        : coolersData?.cooler?.region}
-                    </div>
+                    {coolersData?.cooler?.region === "" ||
+                    coolersData?.cooler?.region === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.region}
                   </div>
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    // flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: "6px",
-                    alignSelf: "stretch",
-                    padding: "0px 0px 4px",
-                  }}
+                  style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <div
                     style={{
                       color: "#88888B",
-                      // fontFamily: "DM Mono",
                       fontSize: ".7vw",
-                      fontStyle: "normal",
                       fontWeight: 500,
-                      lineHeight: "14px",
                     }}
                   >
                     RUTA:
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      padding: "4px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
+                      color: "#313A49",
+                      fontSize: ".7vw",
+                      fontWeight: 500,
                       background: "#D4DAE3",
-                      marginTop: -5,
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
                     }}
                   >
-                    <div
-                      style={{
-                        color: "#313A49",
-                        // fontFamily: "DM Mono",
-                        fontSize: ".7vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "14px",
-                      }}
-                    >
-                      {coolersData?.cooler?.route === "" ||
-                      coolersData?.cooler?.route === undefined
-                        ? "Sin registro"
-                        : coolersData?.cooler?.route}
-                    </div>
+                    {coolersData?.cooler?.route === "" ||
+                    coolersData?.cooler?.route === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.route}
                   </div>
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    // flexDirection: "column",
-                    alignItems: "flex-start",
-                    gap: "6px",
-                    alignSelf: "stretch",
-                  }}
+                  style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <div
                     style={{
                       color: "#88888B",
-                      // fontFamily: "DM Mono",
                       fontSize: ".7vw",
-                      fontStyle: "normal",
                       fontWeight: 500,
-                      lineHeight: "14px",
                     }}
                   >
                     GERENCIA DE ZONA:
                   </div>
                   <div
                     style={{
-                      display: "flex",
-                      padding: "4px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
+                      color: "#313A49",
+                      fontSize: ".7vw",
+                      fontWeight: 500,
                       background: "#D4DAE3",
-                      marginTop: -5,
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
                     }}
                   >
-                    <div
-                      style={{
-                        color: "#313A49",
-                        // fontFamily: "DM Mono",
-                        fontSize: ".7vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "14px",
-                      }}
-                    >
-                      {coolersData?.cooler?.zone === "" ||
-                      coolersData?.cooler?.zone === undefined
-                        ? "Sin registro"
-                        : coolersData?.cooler?.zone}
-                    </div>
+                    {coolersData?.cooler?.zone === "" ||
+                    coolersData?.cooler?.zone === undefined
+                      ? "Sin registro"
+                      : coolersData?.cooler?.zone}
                   </div>
                 </div>
               </div>
             </div>
           </>
         </section>
+        <div
+          style={{
+            width: "120%",
+            height: ".7px",
+            background: "#CACACA",
+            marginLeft: -100,
+          }}
+        ></div>
 
         <section>
-          {/* {sortedTracking?.map((cooler, index) => (
-            <div
-              key={index}
-              style={{
-                display: "flex",
-                padding: "0.5rem",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "6px",
-                alignSelf: "stretch",
-                borderRadius: "8px",
-                borderLeft: "4px solid #3E83FF",
-                background: "#EEF6FF",
-                marginBottom: "0.4rem",
-              }}
-            >
-              <div
-                style={{
-                  color: "#3E83FF",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.95vw",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "normal",
-                }}
-              >
-                {cooler.algorithm === "Indicador de Riesgo Nivel: 0"
-                  ? "Indicador: Sin riesgo"
-                  : cooler.algorithm === "Indicador de Riesgo Nivel: 1"
-                  ? "Indicador: Visitar punto de venta"
-                  : cooler.algorithm === "Indicador de Riesgo Nivel: 2"
-                  ? "Indicador: Requiere actualizar información"
-                  : cooler.algorithm === "Indicador de Riesgo Nivel: 3"
-                  ? "Indicador: Tomar acción urgente"
-                  : cooler.algorithm === "Indicador de Riesgo Nivel: 4"
-                  ? "Indicador: En riesgo"
-                  : cooler.algorithm === "OWNED"
-                  ? "Indicador: En propiedad"
-                  : cooler.algorithm === "INSTALLED"
-                  ? "Indicador: Instalado"
-                  : cooler.algorithm === "LOCATION"
-                  ? "Indicador: Ubicado"
-                  : cooler.algorithm === "TELEMETRY"
-                  ? "Indicador: Telemetría"
-                  : cooler.algorithm === "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                  ? "Alerta: Alta demanda del compresor"
-                  : cooler.algorithm === "LOW_VOLTAGE_ALERT"
-                  ? "Alerta: Bajo voltaje"
-                  : cooler.algorithm === "HIGH_VOLTAGE_ALERT"
-                  ? "Alerta: Alto voltaje"
-                  : cooler.algorithm === "MOVED_VISIT_ALERT"
-                  ? "Alerta: Movimiento"
-                  : cooler.algorithm === "HIGH_TEMPERATURE_ALERT"
-                  ? "Alerta: Alta temperatura"
-                  : cooler.algorithm === "DISCONNECTION_ALERT"
-                  ? "Alerta: Desconexión"
-                  : cooler.algorithm === "TEMPERATURE_FAIL"
-                  ? "Falla de temperatura"
-                  : cooler.algorithm === "COMPRESSOR_FAIL"
-                  ? "Falla asociada al compresor"
-                  : cooler.algorithm === "DISCONNECTIONS_FAIL"
-                  ? "Falla de desconexión"
-                  : cooler.algorithm === "VOLTAGE_FAIL"
-                  ? "Falla de voltaje"
-                  : cooler.algorithm === "FREEZING_FAIL"
-                  ? "Falla de congelación"
-                  : cooler.algorithm}
-              </div>
-              <div
-                style={{
-                  color: "#3E83FF",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.79vw",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-              >
-                {formatCreatedAt(cooler.notified_at)}
-              </div>
-            </div>
-          ))} */}
-        </section>
-        <section>
-          <div style={{ marginLeft: -35 }}>
+          <div style={{ marginLeft: -40 }}>
             <div
               className="clt_actividad_acerca_principal"
               style={{ overflowY: "auto" }}
@@ -642,7 +496,7 @@ export default function CoolerDetail() {
                   <img
                     src={"../../sampleData/actividad.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "2vw", height: "2vw" }}
+                    style={{ width: "1.5vw", height: "1.5vw" }}
                   />
                   <h1 className="clt_actividad_principal_title_h1">
                     Actividad del enfriador
@@ -656,7 +510,7 @@ export default function CoolerDetail() {
                         style={{
                           fontWeight: "bold",
                           fontSize: "1vw",
-                          marginTop: 150,
+                          marginTop: 130,
                         }}
                       >
                         Sin actividad
@@ -666,10 +520,17 @@ export default function CoolerDetail() {
                     coolersData &&
                     coolersData.activity &&
                     coolersData.activity.length > 0 && (
-                      <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "8px",
+                        }}
+                      >
                         {coolersData.activity
                           .slice()
                           .reverse()
+                          .filter((order) => order.data.level !== "INDICATOR")
                           .map((order, index) => (
                             <>
                               <div key={index}>
@@ -693,21 +554,53 @@ export default function CoolerDetail() {
                                     <>
                                       <div
                                         style={{
-                                          color: "#88888B",
-                                          fontSize: "10px",
-                                          fontStyle: "normal",
-                                          fontWeight: 500,
-                                          lineHeight: "normal",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          gap: "4px",
+                                          alignSelf: "stretch",
                                         }}
                                       >
-                                        {order.data.close_at === undefined ||
-                                        order.data.close_at === null
-                                          ? "Sin registro"
-                                          : moment(
-                                              new Date(order.data.close_at)
-                                            ).format("DD/MM/YYYY HH:mm")}
+                                        <div
+                                          style={{
+                                            color: "#88888B",
+                                            fontSize: "10px",
+                                            fontStyle: "normal",
+                                            fontWeight: 500,
+                                            lineHeight: "normal",
+                                          }}
+                                        >
+                                          {order.data.close_at === undefined ||
+                                          order.data.close_at === null
+                                            ? "Sin registro"
+                                            : moment(
+                                                new Date(order.data.close_at)
+                                              ).format("DD/MM/YYYY HH:mm")}
+                                        </div>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            padding: "4px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "4px",
+                                            borderRadius: "2px",
+                                            background: "#D4DAE3",
+                                            marginLeft: "75%",
+                                          }}
+                                        >
+                                          <div
+                                            style={{
+                                              color: "#313A49",
+                                              fontSize: "7px",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                              lineHeight: "14px",
+                                            }}
+                                          >
+                                            CERRADA
+                                          </div>
+                                        </div>
                                       </div>
-
                                       <div
                                         style={{
                                           color: "#000005",
@@ -844,9 +737,6 @@ export default function CoolerDetail() {
                                           "COMPRESSOR_FAIL"
                                             ? "Falla asociada al compresor"
                                             : order.data.algorithm ===
-                                              "DISCONNECTIONS_FAIL"
-                                            ? "Desconexión"
-                                            : order.data.algorithm ===
                                               "TEMPERATURE_FAIL"
                                             ? "Alta temperatura"
                                             : order.data.algorithm ===
@@ -966,7 +856,6 @@ export default function CoolerDetail() {
                                     </>
                                   )}
                                 </div>
-                                <p />
                               </div>
                             </>
                           ))}
@@ -976,12 +865,15 @@ export default function CoolerDetail() {
                 </div>
               </section>
 
-              <section className="clt_acerca_principal">
+              <section
+                className="clt_actividad_principal_actividad"
+                style={{ marginLeft: "6px" }}
+              >
                 <div className="clt_actividad_principal_title">
                   <img
                     src={"../../sampleData/buildings.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "2vw", height: "2vw" }}
+                    style={{ width: "1.5vw", height: "1.5vw" }}
                   />
                   <h1 className="clt_actividad_principal_title_h1">
                     Acerca del punto de venta
@@ -992,15 +884,19 @@ export default function CoolerDetail() {
                     Nombre PdV
                   </h1>
                   <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {coolersData?.cooler?.outlet_name == ""
+                    {coolersData?.cooler?.outlet_name === undefined
                       ? "Sin registro"
                       : coolersData?.cooler?.outlet_name}
-                  </h1>
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    /<b>{coolersData?.cooler?.outlet_id}</b>
+                    {coolersData?.cooler?.outlet_id === undefined ? (
+                      "/Sin registro"
+                    ) : (
+                      <span>
+                        {" "}
+                        / <strong>{coolersData?.cooler?.outlet_id}</strong>
+                      </span>
+                    )}
                   </h1>
                 </div>
-
                 <div className="clt_actividad_principal_title_nombre">
                   <h1 className="clt_actividad_principal_title_nombre_h1">
                     Dirección
@@ -1023,7 +919,10 @@ export default function CoolerDetail() {
                       : coolersData?.cooler?.last_latitude + "metros"}
                   </h1>
                 </div>
-                <div className="clt_actividad_principal_mapa">
+                <div
+                  className="clt_actividad_principal_mapa"
+                  style={{ marginTop: 5 }}
+                >
                   {(coolersData?.cooler?.last_latitude != null &&
                     coolersData?.cooler?.latitude === 0) ||
                   (coolersData?.cooler?.last_latitude != 0 &&
@@ -1063,9 +962,10 @@ export default function CoolerDetail() {
                     padding: "8px",
                     alignItems: "center",
                     alignContent: "center",
-                    gap: "8px",
+                    gap: "4px",
                     alignSelf: "stretch",
                     flexWrap: "wrap",
+                    marginTop: 62,
                   }}
                 >
                   <div
@@ -1076,7 +976,7 @@ export default function CoolerDetail() {
                     }}
                   >
                     <img
-                      src={"../../sampleData/icon1.svg"}
+                      src={"../../sampleData/mappv.svg"}
                       width={"20vw"}
                       alt="cooler"
                     ></img>
@@ -1179,14 +1079,14 @@ export default function CoolerDetail() {
         </section>
       </section>
       <section>
-        <div style={{ marginLeft: -35 }}>
+        <div style={{ marginLeft: -40 }}>
           <div className="clt_actividad_acerca_principal">
             <section className="clt_actividad_principal">
               <div className="clt_actividad_principal_title">
                 <img
                   src={"../../sampleData/actividad.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "18px", height: "18px" }}
+                  style={{ width: "1.5vw", height: "1.5vw" }}
                 />
                 <h1 className="clt_actividad_principal_title_h1">
                   Inversión total en el enfriador
@@ -1344,12 +1244,15 @@ export default function CoolerDetail() {
                 />
               </div>
             </section>
-            <section className="clt_actividad_principal">
+            <section
+              className="clt_actividad_principal"
+              style={{ marginLeft: "6px" }}
+            >
               <div className="clt_actividad_principal_title">
                 <img
                   src={"../../sampleData/energy.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "18px", height: "18px" }}
+                  style={{ width: "1.5vw", height: "1.5vw" }}
                 />
                 <h1 className="clt_actividad_principal_title_h1">
                   Gastos de energía

@@ -66,7 +66,7 @@ const MapComponent1 = ({ latitude, longitude }) => {
       style={{
         position: "relative",
         width: "100%",
-        height: "10vw",
+        height: "15vw",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",

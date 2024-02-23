@@ -30,7 +30,7 @@ const MapComponent = ({ latitude, longitude }) => {
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/icon1.svg";
+    const iconUrl = "../../sampleData/mappv.svg";
 
     new maps.Marker({
       position: { lat: latitude, lng: longitude },
@@ -44,7 +44,7 @@ const MapComponent = ({ latitude, longitude }) => {
   };
 
   if (!googleMapsLoaded) {
-    return <div>Error al cargar Google Maps</div>;
+    return <div>Cargando...</div>;
   }
 
   const openGoogleMaps = () => {
@@ -66,7 +66,7 @@ const MapComponent = ({ latitude, longitude }) => {
       style={{
         position: "relative",
         width: "100%",
-        height: "10vw",
+        height: "15vw",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",

@@ -591,7 +591,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       }}
                     >
                       <img
-                        src={"../../sampleData/icon1.svg"}
+                        src={"../../sampleData/mappv.svg"}
                         width={"15px"}
                         alt="cooler"
                       ></img>

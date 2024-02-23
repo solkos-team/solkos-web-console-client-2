@@ -170,23 +170,31 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
           <div
             style={{
               display: "flex",
-              padding: "0px 0px",
+              padding: "2px 32px",
               flexDirection: "column",
-              // alignItems: "flex-start",
               gap: "16px",
-              // alignSelf: "stretch",
-              // width : "138vh",
               maxHeight: "100vh", // establecer una altura máxima para el Drawer
-              overflowY: "auto", // agregar scroll vertical
+              marginTop: -35,
             }}
           >
             <div
               style={{
+                color: "#000005",
+                fontSize: "15px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "155%",
+              }}
+            >
+              Desglose económico
+            </div>
+            <div
+              style={{
                 display: "flex",
                 alignItems: "flex-start",
-                gap: "10px",
+                gap: "16px",
                 alignSelf: "stretch",
-                width: "100%",
+                width: "94.8vw",
               }}
             >
               {/* Inversion total */}
@@ -868,7 +876,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 // alignSelf: "stretch",
                 borderRadius: "8px",
                 border: "1px solid #88888B",
-                width: "97%",
+                width: "92.5vw",
                 height: "22vw",
               }}
             >

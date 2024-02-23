@@ -172,11 +172,11 @@ const routes = [
     label: "Puntos de venta",
     icon: <img src={"../../sampleData/pv.svg"} />,
   },
-  {
-    link: "/home/panel",
-    label: "Tableros",
-    icon: <img src={"../../sampleData/tableros.svg"} />,
-  },
+  // {
+  //   link: "/home/panel",
+  //   label: "Tableros",
+  //   icon: <img src={"../../sampleData/tableros.svg"} />,
+  // },
   {
     link: "/home/users",
     label: "Colaboradores",

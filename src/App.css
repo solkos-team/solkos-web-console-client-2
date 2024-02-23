@@ -475,7 +475,7 @@ body {
   line-height: 1.25;
 }
 .clt_actividad_acerca_principal {
-  width: 100%;
+  width: 102.3%;
   height: 40%;
   display: flex;
   flex-direction: row;
@@ -518,10 +518,10 @@ body {
   border-radius: 0.5rem;
   padding: 0.5rem;
   box-sizing: border-box;
-  background-color: #cacaca;
+  background-color: #f4f4f4;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #cacaca #f0f0f0;
+  scrollbar-color: #cacaca transparent;
 }
 .clt_acerca_principal_cards_info {
   width: 100%;
@@ -662,7 +662,7 @@ body {
 }
 .clt_actividad_principal_actividad {
   width: 50%;
-  height: 30vw;
+  height: 27vw;
   border: 1px solid #cacaca;
   border-radius: 0.5rem;
   padding: 0.5rem;

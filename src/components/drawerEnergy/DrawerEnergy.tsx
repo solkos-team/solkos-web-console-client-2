@@ -100,13 +100,25 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
         <div
           style={{
             display: "flex",
-            padding: "0px 10px",
+            padding: "2px 32px",
             flexDirection: "column",
             alignItems: "flex-start",
             gap: "16px",
             alignSelf: "stretch",
+            marginTop: -34,
           }}
         >
+          <div
+            style={{
+              color: "#000005",
+              fontSize: "15px",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "155%",
+            }}
+          >
+            Gastos de energía
+          </div>
           {/* PRIMERO */}
           <div
             style={{
@@ -120,7 +132,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               borderRadius: "8px",
               border: "1px solid #88888B",
               background: "#FFF",
-              width: "97%",
+              width: "93vw",
             }}
           >
             <div
@@ -373,7 +385,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
           <div
             style={{
               display: "flex",
-              width: "93.5vw",
+              width: "90.8vw",
               height: "22vw",
               padding: "24px",
               flexDirection: "column",

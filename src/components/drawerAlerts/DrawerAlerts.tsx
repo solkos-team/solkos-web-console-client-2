@@ -292,18 +292,16 @@ export default function DrawerA({
                         ? "Alto voltaje"
                         : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
                         ? "Bajo voltaje"
-                        : selectedAlgorithm === "DISCONNECTIONS_FAIL"
-                        ? "Desconexión"
                         : selectedAlgorithm === "TEMPERATURE_FAIL"
                         ? "Alta temperatura"
                         : selectedAlgorithm === "VOLTAGE_FAIL"
                         ? "Posible daño eléctrico"
                         : selectedAlgorithm === "COMPRESSOR_FAIL"
                         ? "Falla asociada al compresor"
-                        : selectedAlgorithm === "MOVED_VISIT_ALERT"
-                        ? "Movimiento"
                         : selectedAlgorithm === "FREEZING_FAIL"
                         ? "Evaporador bloqueado"
+                        : selectedAlgorithm === "MOVED_VISIT_ALERT"
+                        ? "Movimiento"
                         : selectedAlgorithm}
                     </div>
                   )}

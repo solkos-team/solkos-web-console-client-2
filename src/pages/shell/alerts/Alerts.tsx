@@ -139,7 +139,11 @@ export default function Alerts() {
               "Sin registros"
             ) : (
               alertsData
-                .filter((cooler) => cooler.level === "ALERT")
+                .filter(
+                  (cooler) =>
+                    cooler.level === "ALERT" &&
+                    cooler.algorithm != "MOVED_VISIT_ALERT"
+                )
                 .map((cooler, index) => (
                   <div
                     className="IndicatorCardsContent"
