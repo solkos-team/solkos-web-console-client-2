@@ -92,12 +92,12 @@ export default function CoolerDetail() {
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
 
-  if (coolersData && coolersData.activity && coolersData.activity.length > 0) {
-    console.log(coolersData.activity[0].data.service_id);
-  } else {
-    console.log("No hay actividad disponible.");
-  }
-
+  // if (coolersData && coolersData.activity && coolersData.activity.length > 0) {
+  //   console.log(coolersData.activity[0].data.service_id);
+  // } else {
+  //   console.log("No hay actividad disponible.");
+  // }
+  
   return (
     <div>
       {localStorage.getItem("USER") == "Call Center" ? (

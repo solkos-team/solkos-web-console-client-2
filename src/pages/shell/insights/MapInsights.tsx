@@ -1,23 +1,19 @@
 import React from "react";
 import { Card, DonutChart, Title,Legend } from "@tremor/react";
 import "./Insights.css";
-export const MapInsights = () => {
-  const park_Status = [
-    {
-      name: 'Analizados',
-      total: 980,      
-    },
+export const MapInsights = ({falla}) => {
+  const park_Status = [    
     {
       name: 'Funcionando',
-      total: 456,      
+      total: 0,      
     },
     {
       name: 'Falla',
-      total: 390,      
+      total: Number(falla),      
     },
     {
       name: 'Atendidos',
-      total: 390,      
+      total: 0,      
     }
   ];
   
@@ -30,7 +26,7 @@ export const MapInsights = () => {
         data={park_Status}
         category="total"
         index="name"        
-        colors={['blue', 'green', 'red','yellow']}
+        colors={['green', 'red','yellow']}
         className="w-20"
         showLabel
         // variant="pie"

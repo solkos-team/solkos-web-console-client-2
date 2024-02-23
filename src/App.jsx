@@ -35,6 +35,8 @@ import fails from "./sampleData/fails.png";
 import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
 import { fetchUniversalDetails } from "./utils/apiUtils";
+
+
 import { Burger, Tooltip } from "@mantine/core";
 
 dayjs.extend(duration);
@@ -475,13 +477,19 @@ function App() {
                       whiteSpace: "pre",
                     }}
                   >
-                    <Burger
+                    {/* <Burger
                       size="sm"
                       opened={opened2}
                       onClick={() => setOpened2((o) => !o)}
                       aria-label="Toggle navigation"
-                      style={{ marginLeft: -10 }}
-                    />
+                      style={{ marginLeft: -10}}                    
+                    /> */}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round" onClick={() => setOpened2((o) => !o)}>
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 6l16 0" />
+                      <path d="M4 12l16 0" />                      
+                      <path d="M4 18l16 0" />
+                    </svg>
                     <div
                       style={{
                         display: "flex",

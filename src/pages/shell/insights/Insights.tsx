@@ -10,7 +10,7 @@ import {
   InsightsData,
   CoolerInterface as Cooler,
 } from "../../../interfaces/CoolerInterface";
-import { Skeleton } from "@mantine/core";
+import { Container, Skeleton } from "@mantine/core";
 import { MapInsights } from "./MapInsights";
 export default function Insights() {
   const [insightsData, setInsightsData] = useState<InsightsData | null>(null);
@@ -69,8 +69,7 @@ export default function Insights() {
   };
   const fetchDataNumerOfItems = async () => {
     try {
-      const data = await fetchInsights(pathVerify());
-      console.log(data);
+      const data = await fetchInsights(pathVerify());      
       numIntems(Number(data.insights.INDICATOR.total));
       setIsLoading(false);
     } catch (error) {
@@ -127,7 +126,7 @@ export default function Insights() {
       <PageFilter status={isLoading} />
       <br></br>
       <section className="insights_title">
-        <h1 className="insights_title_h1">Cooler Insights</h1>
+        <div className="insights_title_h1">Cooler Insights</div>
         <p className="insights_title_p">
           Ve el panorama general de los enfriadores y toma acciones
         </p>
@@ -153,7 +152,7 @@ export default function Insights() {
           </div>
           {/* datas from mapa */}
           <div className="insights_mapa_info_datas">
-            <ol className="insights_mapa_info_datas_data">
+            <div className="insights_mapa_info_datas_data">
               <li className="insights_mapa_info_datas_data_li">Enfriadores</li>
               <li className="insights_mapa_info_datas_data_li_value">
                 {isLoading == true ? (
@@ -166,8 +165,8 @@ export default function Insights() {
                   insightsData?.summary.coolers.toLocaleString()
                 )}
               </li>
-            </ol>
-            <ol className="insights_mapa_info_datas_data">
+            </div>
+            <div className="insights_mapa_info_datas_data">
               <li className="insights_mapa_info_datas_data_li">Rutas</li>
               <li className="insights_mapa_info_datas_data_li_value">
                 {isLoading == true ? (
@@ -180,8 +179,8 @@ export default function Insights() {
                   insightsData?.summary.routes.toLocaleString()
                 )}
               </li>
-            </ol>
-            <ol className="insights_mapa_info_datas_data">
+            </div>
+            <div className="insights_mapa_info_datas_data">
               <li className="insights_mapa_info_datas_data_li">Unidad Op.</li>
               <li className="insights_mapa_info_datas_data_li_value">
                 {isLoading == true ? (
@@ -194,8 +193,8 @@ export default function Insights() {
                   insightsData?.summary.operative_units.toLocaleString()
                 )}
               </li>
-            </ol>
-            <ol className="insights_mapa_info_datas_data">
+            </div>
+            <div className="insights_mapa_info_datas_data">
               <li className="insights_mapa_info_datas_data_li">Regiones</li>
               <li className="insights_mapa_info_datas_data_li_value">
                 {isLoading == true ? (
@@ -208,8 +207,8 @@ export default function Insights() {
                   insightsData?.summary.regions.toLocaleString()
                 )}
               </li>
-            </ol>
-            <ol className="insights_mapa_info_datas_data">
+            </div>
+            <div className="insights_mapa_info_datas_data">
               <li className="insights_mapa_info_datas_data_li">Zonas</li>
               <li className="insights_mapa_info_datas_data_li_value">
                 {isLoading == true ? (
@@ -222,11 +221,11 @@ export default function Insights() {
                   insightsData?.summary.zones.toLocaleString()
                 )}
               </li>
-            </ol>
+            </div>
           </div>
           {/* Mapa inf and filters */}
           <div className="insights_mapa_info_mapa_info">
-            <h1 className="insights_mapa_info_mapa_info">
+            <h1 className="insights_mapa_info_mapa_info_h1">
               Visualización de enfriadores:
             </h1>
             {/* <div className="insights_mapa_info_mapa_filters"></div> */}
@@ -249,21 +248,6 @@ export default function Insights() {
               </div>
               {/* Informacion KPI´s */}
               <div className="insights_datas_kpi_data">
-                {/* <ol className="insights_datas_kpi_data_data">
-                  <li className="insights_datas_kpi_data_data_1">Cobertura</li>
-                  <li className="insights_datas_kpi_data_data_1">0%</li>
-                  <li className="insights_datas_kpi_data_data_1">0 Enfriadores</li>
-                </ol>
-                <ol className="insights_datas_kpi_data_data">
-                  <li>Coincidencia</li>
-                  <li>0%</li>
-                  <li>0 Enfriadores</li>
-                </ol>
-                <ol className="insights_datas_kpi_data_data">
-                  <li>Frecuencia</li>
-                  <li>0%</li>
-                  <li>0 Enfriadores</li>
-                </ol> */}
                 <div className="insights_datas_kpi_data_data">
                   <div className="insights_datas_kpi_data_data_1">
                     Cobertura
@@ -310,24 +294,24 @@ export default function Insights() {
               </div>
               <div className="insights_datas_container">
                 <div className="insights_datas_container_Grafica">
-                  <MapInsights />
+                  <MapInsights falla={insightsData?.insights?.FAIL?.total.toLocaleString()} />
                 </div>
                 <div className="insights_datas_container_Grafica_Datas">
-                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                  <div className="insights_datas_container_Grafica_Datas_ol">
                     <li className="insights_datas_container_Grafica_Datas_li_title">🔵 Analizados</li>
                     <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
                     <li className="insights_datas_container_Grafica_Datas_li_total">
                       0
                     </li>
-                  </ol>
-                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                  </div>
+                  <div className="insights_datas_container_Grafica_Datas_ol">
                     <li className="insights_datas_container_Grafica_Datas_li_title">🟢 Funcionando</li>
                     <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
                     <li className="insights_datas_container_Grafica_Datas_li_total">
                       0
                     </li>
-                  </ol>
-                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                  </div>
+                  <div className="insights_datas_container_Grafica_Datas_ol">
                     <li className="insights_datas_container_Grafica_Datas_li_title">🔴 Falla</li>
                     <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
                     <li className="insights_datas_container_Grafica_Datas_li_total">
@@ -341,14 +325,14 @@ export default function Insights() {
                         insightsData?.insights?.FAIL?.total.toLocaleString()
                       )}
                     </li>
-                  </ol>
-                  <ol className="insights_datas_container_Grafica_Datas_ol">
+                  </div>
+                  <div className="insights_datas_container_Grafica_Datas_ol">
                     <li className="insights_datas_container_Grafica_Datas_li_title">🟡 Atendidos</li>
                     <li className="insights_datas_container_Grafica_Datas_li_Enf">Enfriadores</li>
                     <li className="insights_datas_container_Grafica_Datas_li_total">
                       0
                     </li>
-                  </ol>
+                  </div>
                 </div>
               </div>
             </div>
@@ -407,6 +391,18 @@ export default function Insights() {
                       Cantidad
                     </div>
                   </div>
+                  <hr />
+                  <section className="insights_datas_mantenimiento_VerDetalles_principal"
+                    onClick={() => navigate("/home/indicator")} >
+                    <div className="insights_datas_mantenimiento_VerDetalles_h1">
+                      Ver detalles
+                    </div>
+                    <img
+                      src={"../../sampleData/arrow_b.png"}
+                      alt="Descripción de la imagen"
+                      style={{ marginTop: 4 }}
+                    />
+                  </section>
                 </div>
               </div>
             </div>
@@ -421,17 +417,17 @@ export default function Insights() {
                   <h1 className="insights_datas_kpi_title_h1">Mantenimiento</h1>
                 </div>
                 <div className="insigths_datas_info2_control_title">
-                  <h1 className="insights_datas_kpi_title_h1_data">                    
+                  <h1 className="insights_datas_kpi_title_h1_data">
                     {isLoading == true ? (
                       <>
-                      <div style={{width:"2rem",height:"1rem"}}>
-                        <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                      </div>
+                        <div style={{ width: "2rem", height: "1rem" }}>
+                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                        </div>
                       </>
-                    ) : insightsData?.insights?.ALERT.total == undefined && insightsData?.insights?.FAIL.total == undefined ? (
+                    ) : insightsData?.insights?.ALERT?.total == undefined && insightsData?.insights?.FAIL?.total == undefined ? (
                       "Sin registro"
                     ) : (
-                      insightsData?.insights?.ALERT.total + insightsData?.insights?.FAIL.total
+                      Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total)
                     )}
                   </h1>
                   <h1 className="insights_datas_kpi_title_data_h1">
@@ -439,157 +435,99 @@ export default function Insights() {
                   </h1>
                 </div>
                 <div className="insigths_datas_info2_control_title_grapics_container">
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "8px 0px",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#3A3A3F",
-                        // fontFamily: "DM Sans",
-                        fontSize: "0.8vw",
-                        fontStyle: "normal",
-                        fontWeight: 600,
-                        lineHeight: "20px",
-                      }}
-                    >
+                  <section className="insights_datas_info_mantenimiento_datos">
+                    <div className="insights_datas_info_mantenimiento_datos_h1">
                       Tipo
                     </div>
-                    <div
-                      style={{
-                        color: "#3A3A3F",
-                        // fontFamily: "DM Sans",
-                        fontSize: "0.8vw",
-                        fontStyle: "normal",
-                        fontWeight: 600,
-                        lineHeight: "20px",
-                      }}
-                    >
+                    <div className="insights_datas_info_mantenimiento_datos_h1">
                       Cantidad
                     </div>
-                  </div>
+                  </section>
                   {/* Indicador barra */}
-                  <div
-                    key={1}
-                    style={{
-                      display: "flex",
-                      padding: "0px",
-                      gap: "16px",
-                      alignSelf: "stretch",
-                      marginBottom: "1px"
-                    }}
-                  >
+                  <section className="insights_datas_mantenimiento_barras">
                     <div
-                      style={{
-                        width: "13vw",
-                        height: "2.0vw",
-                        borderRadius: "4px",
-                        background: "#ffc4cc",
-                        display: "flex",
-                        alignItems: "center",
-                        paddingLeft: "16px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          color: "#142257",
-                          fontSize: "0.8vw",
-                          fontWeight: 400,
-                          lineHeight: "20px",
-                          whiteSpace: "nowrap",
-                        }}
+                      key={1}
+                      className="insights_datas_info_mantenimiento_datos_barras">
+                      <div className="insights_datas_info_mantenimiento_datos_barras_color_Fallas"
+                      // style={{
+                      //   width: "13vw",
+                      //   height: "2.0vw",
+                      //   borderRadius: "4px",
+                      //   background: "#ffc4cc",
+                      //   display: "flex",
+                      //   alignItems: "center",
+                      //   paddingLeft: "16px",
+                      // }}
                       >
-                        {insightsData?.insights?.FAIL.level ===
-                          "FAIL"
-                          ? "Fallas"
-                          : ''}
+                        <div className="insights_datas_info_mantenimiento_datos_barras_title">
+                          {insightsData?.insights?.FAIL?.level ===
+                            "FAIL"
+                            ? "Fallas"
+                            : ''}
+                        </div>
+                      </div>
+                      <div className="insights_datas_info_mantenimiento_datos_barras_cantidad">
+                        {isLoading == true ? (
+                          <>
+                            <div style={{ width: "2rem", height: "1rem" }}>
+                              <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                            </div>
+                          </>
+                        ) : insightsData?.insights?.FAIL?.total === undefined ? (
+                          "Sin registro"
+                        ) : (
+                          insightsData?.insights?.FAIL?.total
+                        )}
                       </div>
                     </div>
                     <div
-                      style={{
-                        color: "#000005",
-                        fontSize: "0.8vw",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                        marginLeft: "auto",
-                      }}
-                    >
-                      {isLoading == true ? (
-                        <>
-                        <div style={{width:"2rem",height:"1rem"}}>
-                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                        </div>                        
-                        </>
-                      ) : insightsData?.insights?.FAIL.total === undefined ? (
-                        "Sin registro"
-                      ) : (
-                        insightsData?.insights?.FAIL.total
-                      )}
-                    </div>
-                  </div>
-                  <div
-                    key={2}
-                    style={{
-                      display: "flex",
-                      padding: "0px",
-                      gap: "16px",
-                      alignSelf: "stretch",
-                      marginBottom: "1px"
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "13vw",
-                        height: "2.0vw",
-                        borderRadius: "4px",
-                        background: "#FEF5C7",
-                        display: "flex",
-                        alignItems: "center",
-                        paddingLeft: "16px",
-                      }}
-                    >
-                      <div
-                        style={{
-                          color: "#142257",
-                          fontSize: "0.8vw",
-                          fontWeight: 400,
-                          lineHeight: "20px",
-                          whiteSpace: "nowrap",
-                        }}
+                      key={2}
+                      className="insights_datas_info_mantenimiento_datos_barras">
+                      <div className="insights_datas_info_mantenimiento_datos_barras_color_Alertas"
+                      // style={{
+                      //   width: "13vw",
+                      //   height: "2.0vw",
+                      //   borderRadius: "4px",
+                      //   background: "#FEF5C7",
+                      //   display: "flex",
+                      //   alignItems: "center",
+                      //   paddingLeft: "16px",
+                      // }}
                       >
-                        {insightsData?.insights?.ALERT.level ===
-                          "ALERT"
-                          ? "Alertas"
-                          : ''}
+                        <div className="insights_datas_info_mantenimiento_datos_barras_title">
+                          {insightsData?.insights?.ALERT?.level ===
+                            "ALERT"
+                            ? "Alertas"
+                            : ''}
+                        </div>
+                      </div>
+                      <div className="insights_datas_info_mantenimiento_datos_barras_cantidad">
+                        {isLoading == true ? (
+                          <>
+                            <div style={{ width: "2rem", height: "1rem" }}>
+                              <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                            </div>
+                          </>
+                        ) : insightsData?.insights?.ALERT?.total === undefined ? (
+                          "Sin registro"
+                        ) : (
+                          insightsData?.insights?.ALERT?.total
+                        )}
                       </div>
                     </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        fontSize: "0.8vw",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                        marginLeft: "auto",
-                      }}
-                    >                      
-                      {isLoading == true ? (
-                        <>
-                        <div style={{width:"2rem",height:"1rem"}}>
-                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                        </div>                        
-                        </>
-                      ) : insightsData?.insights?.ALERT.total === undefined ? (
-                        "Sin registro"
-                      ) : (
-                        insightsData?.insights?.ALERT.total
-                      )}
+                  </section>
+                  <hr />
+                  <section className="insights_datas_mantenimiento_VerDetalles_principal"
+                    onClick={() => navigate("/home/fails")} >
+                    <div className="insights_datas_mantenimiento_VerDetalles_h1">
+                      Ver detalles
                     </div>
-                  </div>
+                    <img
+                      src={"../../sampleData/arrow_b.png"}
+                      alt="Descripción de la imagen"
+                      style={{ marginTop: 4 }}
+                    />
+                  </section>
                 </div>
               </div>
             </div>

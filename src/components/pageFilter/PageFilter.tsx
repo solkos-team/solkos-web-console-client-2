@@ -191,34 +191,9 @@ export default function (props) {
   data.length > 0 ? getPaths(data) : "";
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          // padding: "0px 32px",
-          marginLeft: -35,
-          alignItems: "center",
-          gap: "1rem",
-          alignSelf: "stretch",
-          marginTop: -30,
-          maxWidth: "100%",
-          // overflowX: "auto",
-          whiteSpace: "nowrap",
-        }}
-      >
+      <section className="pagefilter_return_principal">
         <section
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "2rem",
-            height: "2rem",
-            strokeWidth: "0.5",
-            border: "0.5px solid #ADBACC",
-            borderRadius: "4px",
-            cursor: "pointer",
-            // boxSizing: "border-box",
-            // visibility: props.status == "false" ? "hidden" : "visible",
-          }}
+          className="return_principal"
           onClick={() => {
             localStorage.getItem("USER") == 'Call Center'
             ?
@@ -229,62 +204,17 @@ export default function (props) {
         >
           <IconArrowNarrowLeft color="black" />
         </section>
-        <div
-          style={{
-            display: "flex",
-            padding: "4px",
-            alignItems: "flex-start",
-            gap: "8px",
-            // flex: "100",
-            border: "0.5px solid #ADBACC",
-            width: "100%",
-            borderRadius: "4px",                                      
-            // visibility : props.disabledPath == true ? "hidden" : "visible"            
-          }}
+        <section className="pagefilter_container_principal"
         >
-          <section style={{display:"flex",maxWidth:"100%",width:"100%",overflowX:"auto",scrollbarWidth:'thin'}}>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                borderRadius: "8px",
-                border: "1px solid #ADBACC",
-                background: "#D4DAE3",
-                padding: "3px 7px",
-              }}
-            >
-              <IconLock
-                style={{
-                  color: "#ADBACC",
-                  width: "1rem",
-                  height: "1rem",
-                  marginRight: "3px",
-                }}
-              />
-              <Text
-                style={{
-                  color: "#ADBACC",
-                  // fontFamily: "Space Mono",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "14px",
-                  textTransform: "uppercase",
-                  userSelect: "none",
-                }}
-              >
+          
+          <div className="pagefilter_container_principal_customer">
+            <div className="pagefilter_container_principal_customer_container">
+              <IconLock className="pagefilter_container_principal_customer_container_icon"/>
+              <Text className="pagefilter_container_principal_customer_container_text">
                 {dto || "CLIENTE"}
               </Text>
             </div>
-            <IconChevronRight
-              style={{
-                color: "#ADBACC",
-                width: "16px",
-                height: "16px",
-                marginLeft: "3px",
-              }}
-            />
+            <IconChevronRight className="pagefilter_container_principal_customer_container_icon_right" />
           </div>
           {data === null || data === undefined
             ? []
@@ -356,25 +286,13 @@ export default function (props) {
                 />
               </div>
             ))}
-          </section>
+          
           {/* ---------------------- */}
           {filterVisibility ? (
-            <div style={{ display: "flex", alignItems: "center" , visibility : props.status == true  || props.disabledPath == true ? "hidden" : "visible",alignContent:"end",backgroundColor:"",width:"100%" ,justifyContent:"flex-end"}}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  padding: "3px 7px",
-                  marginRight:"2rem"
-                }}
-              >
-                <IconCirclePlus
-                  style={{
-                    color: "#313A49",
-                    width: "0.9rem",
-                    height: "0.9rem",
-                    marginRight: "3px",
-                  }}
+            
+              <div style={{ visibility : props.status == true  || props.disabledPath == true ? "hidden" : "visible"}}
+              className="pagefilter_container_principal_addFilter">
+                <IconCirclePlus className="pagefilter_container_principal_addFilter_iconCircle"
                   onClick={() => setOpened((o) => !o)}
                 />
                 <Popover
@@ -420,11 +338,11 @@ export default function (props) {
                   </Popover.Dropdown>
                 </Popover>
               </div>
-            </div>
+            
           ) : (
             ""
           )}
-        </div>
+        </section>
         <div>
           <div
             style={{
@@ -617,7 +535,7 @@ export default function (props) {
             </div>
           )}
         </div>
-      </div>
+      </section>
     </div>
   );
 }

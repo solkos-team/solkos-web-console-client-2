@@ -173,6 +173,10 @@ export interface CoolerData {
   }>;
   tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
   activity?: ActivityItem[];
+  asset?: {
+    url:string;
+    is_default:boolean;
+  }
 }
 export interface ActivityItem {
   type: string;
