@@ -39,8 +39,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
   const firstIndex = lastIndex - Number(datosPorPagina);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization);
-  console.log(coolersData);
+  const dto = useSelector((state: any) => state.organization);  
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };

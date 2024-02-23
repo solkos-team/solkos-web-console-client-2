@@ -135,10 +135,14 @@ export default function CoolerDetail() {
                 }}
               >
                 <img
-                  src={"../../sampleData/cooler_c.png"}
+                  src={coolersData?.asset?.url}
                   alt="cooler"
                   width={"100%"}
                   height={"85%"}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src = 'https://storage.googleapis.com/negocon-renders/default/default_cooler.webp'
+                  }}
                 />
               </div>
 
