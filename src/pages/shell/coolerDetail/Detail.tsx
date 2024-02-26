@@ -485,7 +485,7 @@ export default function CoolerDetail() {
             width: "120%",
             height: ".7px",
             background: "#CACACA",
-            marginLeft: -100,
+            marginLeft: -100,            
           }}
         ></div>
 

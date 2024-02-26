@@ -391,7 +391,7 @@ export default function Insights() {
                       Cantidad
                     </div>
                   </div>
-                  <hr />
+                  <hr className="insights_datas_hr" />
                   <section className="insights_datas_mantenimiento_VerDetalles_principal"
                     onClick={() => navigate("/home/indicator")} >
                     <div className="insights_datas_mantenimiento_VerDetalles_h1">
@@ -516,7 +516,7 @@ export default function Insights() {
                       </div>
                     </div>
                   </section>
-                  <hr />
+                  <hr className="insights_datas_hr" />
                   <section className="insights_datas_mantenimiento_VerDetalles_principal"
                     onClick={() => navigate("/home/fails")} >
                     <div className="insights_datas_mantenimiento_VerDetalles_h1">

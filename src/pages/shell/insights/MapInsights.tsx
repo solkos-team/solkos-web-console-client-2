@@ -21,7 +21,7 @@ export const MapInsights = ({falla}) => {
     `$ ${Intl.NumberFormat('us').format(number).toString()}`;
 
   return (
-    <div>
+    <div style={{width:"80%"}}>
       <DonutChart
         data={park_Status}
         category="total"

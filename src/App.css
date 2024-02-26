@@ -240,7 +240,7 @@ table th {
   width: 48.5%;
   height: 100%;
   border: 1px solid #88888b;
-  padding: 10px;
+  padding: 1rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;  
@@ -341,15 +341,15 @@ table th {
 .insights_datas_info {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
   height: 50%;
 }
 .insights_datas_kpi {
   border: 1px solid #88888b;
-  border-radius: 0.6rem;
+  border-radius: 0.5rem;
   width: 100%;
   height: 45%;
-  padding: 0.5rem;
+  padding: 1rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -423,8 +423,8 @@ table th {
   border: 1px solid #88888b;
   border-radius: 0.5rem;
   width: 100%;
-  height: 7rem;
-  padding: 0.5rem;
+  height: 52%;
+  padding: 1rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -438,6 +438,7 @@ table th {
   gap: 0.5rem;  
 }
 .insigths_datas_info2_control {
+  padding: 1rem;
   width: 48.97%;
   height: 80%;
   border: 1px solid #88888b;
@@ -467,10 +468,16 @@ table th {
   margin-left: 0.5rem;  
 }
 .insigths_datas_info2_mantenimiento {
+  padding: 1rem;
   width: 48.97%;
   height: 80%;
   border: 1px solid #88888b;
   border-radius: 0.5rem;  
+}
+.insights_datas_hr{
+  height: 1px;
+  background-color: #CACACA
+  ;
 }
 .insights_datas_mantenimiento_barras{
   display: flex;
