@@ -144,7 +144,23 @@ table th {
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-
+.drawers_principal{
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: '0px 24px';
+}
+.drawers_table{
+  height: 60%;
+  overflow: auto;
+  scrollbar-width: thin;
+}
+.drawer_pagination{
+  width: 100%;
+  height: 10%;
+}
 @media screen and (max-width: 600px) {
   table {
     border: 0;
@@ -476,16 +492,18 @@ table th {
 }
 .insights_datas_hr {
   height: 1px;
-  background-color: #cacaca;
+  background-color: #CACACA;
+}
+.insights_datas_mantenimiento_VerDetalles_principal{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
 }
 .insights_datas_mantenimiento_barras {
   display: flex;
   flex-direction: column;
 }
-.insights_mapa_info_mapa_info {
-  height: 5%;
-  height: 17%;
-}
+
 .insights_mapa_info_mapa_info_h1 {
   font-size: clamp(0.7rem, 1vw, 1.1rem);
   color: #3a3a3f;
@@ -498,6 +516,7 @@ table th {
   font-weight: 500;
   text-align: left;
   margin-top: -1px;
+  height: 5%;
 }
 .insights_mapa_info_mapa_filters {
   width: 65%;
@@ -522,7 +541,7 @@ table th {
   padding: 0px;
   gap: 1rem;
   align-self: stretch;
-  margin-bottom: 1px;
+  margin-bottom: 5px;
 }
 .insights_datas_info_mantenimiento_datos_barras_color_Fallas {
   width: 13vw;
@@ -548,6 +567,7 @@ table th {
   font-weight: 400;
   line-height: 1rem;
   white-space: nowrap;
+  cursor: pointer;
 }
 .insights_datas_info_mantenimiento_datos_barras_cantidad {
   color: #000005;
@@ -563,7 +583,7 @@ body {
 }
 .clt_actividad_acerca_principal {
   width: 102.3%;
-  height: 40%;
+  /* height: 100%; */
   display: flex;
   flex-direction: row;
   padding: 0.5rem;
@@ -776,11 +796,12 @@ body {
   width: 90%;
   height: 100%;
   display: flex;
-  flex-direction: row-reverse;
-  gap: 1.5rem;
-  overflow: auto;
+  flex-direction: row;  
+  gap: 1.5rem;     
+  overflow: auto;  
   scrollbar-width: thin;
   margin-left: 0.5rem;
+  justify-content: space-around;
 }
 .insights_datas_container_Grafica_Datas_ol {
   list-style: none;
@@ -821,9 +842,21 @@ body {
   margin-left: 110;
   cursor: pointer;
 }
-.insights_datas_mantenimiento_VerDetalles_h1 {
-  color: #3e83ff;
-  font-size: clamp(0.8rem, 0.9vw, 1vw);
+.clt_actividad_mapa_info{
+  background-color: red;
+  width: 96%;
+  height: 7%;
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  align-content: center;
+  gap: 4px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+.insights_datas_mantenimiento_VerDetalles_h1{
+  color: #3E83FF;
+  font-size: clamp(0.8rem,0.9vw,1vw);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -905,4 +938,53 @@ body {
   width: 0.9rem;
   height: 0.9rem;
   margin-right: 3px;
+}
+.detail_principal_body{
+  display: flex;
+  flex-direction: column;  
+  width: 101%;
+  height: 100%;  
+  margin-left: -1%;
+}
+.detail_image_info{  
+  width: 100%;
+  height: 23%;
+  border-bottom: 1px solid #CACACA;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.detail_principal_body_content{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: -1rem;
+}
+.detail_image_info_data{
+  width: 40%;  
+  display: flex;
+  flex-direction: row;
+  margin-left: -3rem;
+}
+.detail_data{
+  width: 15%;  
+  margin-top: 0.5REM;
+}
+.detail_image_show{
+  width: 25%;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+.detail_data_show{
+  width: 75%;
+  margin-top: 0.5rem;
+}
+.detail_principal_actividad_acerca_1{
+  width: 100%;
+  height: fit-content;
+}
+.detail_principal_inv_gast_1{
+  width: 100%;
+  height: max-content;
 }

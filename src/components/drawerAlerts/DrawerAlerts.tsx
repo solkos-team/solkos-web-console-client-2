@@ -12,7 +12,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-import { Table } from "@mantine/core";
+import { Skeleton, Table } from "@mantine/core";
 import { fetchUniversalTables } from "../../utils/apiUtils";
 import { CoolerInterface } from "../../interfaces/CoolerInterface";
 import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
@@ -30,9 +30,7 @@ export default function DrawerA({
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
-  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(
-    null
-  );
+  const [coolersData, setCoolersData] = useState<CoolerInterface[]>();
   const [isLoading, setIsLoading] = useState(true);
   const [totalData, setTotalData] = useState<String | number>(0);
   const dt = useSelector((state: any) => state.works);
@@ -64,7 +62,7 @@ export default function DrawerA({
   };
   useEffect(() => {
     fetchData();
-  }, [dt, datosPorPagina]);
+  }, [dt, datosPorPagina,opened]);
 
   const filterCoolersDataDownload = (coolersData) => {
     if (!coolersData) return [];
@@ -85,9 +83,56 @@ export default function DrawerA({
       Fecha_de_notificación: cooler.notified_at,
     }));
   };
+  const isloadingData = () => {
+    let rows: any = [];
+    for (let i = 0; i < 25; i++) {
+      rows.push(
+        <tr key={i}>
+          <td data-label="Nombre">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="# Endriadores">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Última visita">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Prioridad">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Acciones">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+        </tr>
+      );
+    }
+    return rows;
+  };
   coolersData === undefined ? [] : coolersData;
   totalData === undefined ? 0 : totalData;
 
+  console.log(coolersData)
+  console.log(opened)
   return (
     <Drawer
       opened={opened}
@@ -531,291 +576,211 @@ export default function DrawerA({
           </div>
         </div>
         <br></br>
-        <br></br>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "32px",
-            padding: "0px 24px",
-          }}
-        >
-          <section>
-            <Table
-              style={{
-                borderCollapse: "collapse",
-                width: "100%",
-                maxWidth: "1000px",
-                height: "20rem",
-              }}
-            >
-              <TableHead style={{ display: "block" }}>
-                <TableRow>
-                  <TableHeaderCell
-                    style={{
-                      fontSize: ".84rem",
-                      textAlign: "left",
-                      width: "6.2rem",
-                    }}
-                  >
-                    Estatus
-                  </TableHeaderCell>
-                  <TableHeaderCell
-                    style={{
-                      fontSize: ".84rem",
-                      textAlign: "left",
-                      paddingLeft: 30,
-                      width: "7rem",
-                    }}
-                  >
-                    Serie
-                  </TableHeaderCell>
-                  <TableHeaderCell
-                    style={{
-                      fontSize: ".84rem",
-                      textAlign: "left",
-                      width: "9rem",
-                    }}
-                  >
-                    Modelo
-                  </TableHeaderCell>
-                  <TableHeaderCell
-                    style={{
-                      fontSize: ".84rem",
-                      textAlign: "left",
-                      width: "9rem",
-                    }}
-                  >
-                    Dias sin visita
-                  </TableHeaderCell>
-                  <TableHeaderCell
-                    style={{
-                      fontSize: ".84rem",
-                      textAlign: "left",
-                      width: "6rem",
-                    }}
-                  >
-                    Prioridad
-                  </TableHeaderCell>
-                  <TableHeaderCell
-                    style={{
-                      fontSize: ".84rem",
-                      textAlign: "left",
-                      width: "8rem",
-                    }}
-                  >
-                    Acciones
-                  </TableHeaderCell>
-                </TableRow>
-              </TableHead>
-              {isLoading == true ? (
-                <>
-                  <br></br>
-                  <br></br>
-                  <div style={{ marginBottom: -10 }}></div>
-                  <SkeletonTableInsights></SkeletonTableInsights>
-                </>
-              ) : (
-                ""
-              )}
-
-              <TableBody
-                style={{ display: "block", height: "90%", overflowY: "auto" }}
-              >
-                {coolersData &&
-                  coolersData
-                    .slice(
-                      (currentPage - 1) * datosPorPagina,
-                      currentPage * datosPorPagina
-                    )
-                    .map((cooler) => (
-                      <TableRow
-                        key={cooler.serial_number}
-                        className="Tabla"
-                        onClick={() => {
-                          navigate(
-                            `/home/coolerDetail/${cooler.serial_number}`
-                          );
-                        }}
-                      >
-                        <TableCell
-                          style={{
-                            paddingRight: "30px",
-                            textAlign: "left",
-                            width: "100px",
-                          }}
-                        >
-                          {cooler.status === undefined ||
-                          cooler.status === null ? (
-                            <div style={{ fontSize: 13 }}>Sin registro</div>
-                          ) : (
-                            <>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "4px",
-                                  // justifyContent: "center",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  borderRadius: "2px",
-                                  background:
-                                    cooler?.status === "SIN DATOS"
-                                      ? "#FFC7CD"
-                                      : cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
-                                      ? "#DFF9E3"
-                                      : "#FEF5C7",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    width: "4px",
-                                    height: "4px",
-                                    borderRadius: "5px",
-                                    background:
-                                      cooler?.status === "SIN DATOS"
-                                        ? "#F93448"
-                                        : cooler?.status ===
-                                          "FUNCIONANDO CORRECTAMENTE"
-                                        ? "#31B648"
-                                        : "#F6A60A",
-                                  }}
-                                ></div>
-                                <div
-                                  style={{
-                                    color:
-                                      cooler?.status === "SIN DATOS"
-                                        ? "#F93448"
-                                        : cooler?.status ===
-                                          "FUNCIONANDO CORRECTAMENTE"
-                                        ? "#1D5E29"
-                                        : "#451C03",
-                                    // fontFamily: "Space Mono",
-                                    fontSize: "8px",
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    lineHeight: "14px",
-                                  }}
-                                >
-                                  {cooler.status}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            fontSize: ".74rem",
-                            textAlign: "left",
-                            width: "6.5rem",
-                          }}
-                        >
-                          {cooler.serial_number}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            fontSize: ".74rem",
-                            textAlign: "left",
-                            width: "9rem",
-                          }}
-                        >
-                          {cooler.model_id}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            fontSize: ".74rem",
-                            textAlign: "left",
-                            width: "9rem",
-                          }}
-                        >
-                          {cooler.days_without_visit === undefined ||
-                          cooler.days_without_visit === "" ? (
-                            "Sin registro"
-                          ) : (
-                            <>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  padding: "4px",
-                                  justifyContent: "center",
-                                  alignItems: "center",
-                                  gap: "4px",
-                                  borderRadius: "2px",
-                                  background: "#D4DAE3",
-                                  width: "80px",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    color: "#313A49",
-                                    // fontFamily: "Space Mono",
-                                    fontSize: "10px",
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    lineHeight: "14px",
-                                  }}
-                                >
-                                  {" "}
-                                  {`${cooler.days_without_visit} DÍAS`}
-                                </div>
-                              </div>
-                            </>
-                          )}
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            fontSize: ".84rem",
-                            textAlign: "left",
-                            width: "5rem",
-                          }}
-                        >
-                          <div style={{ fontSize: 12 }}>Sin registro</div>
-                        </TableCell>
-                        <TableCell
-                          style={{
-                            fontSize: ".74rem",
-                            textAlign: "left",
-                            width: "9rem",
-                          }}
-                        >
+        <div className="drawers_principal">
+          <section className="drawers_table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">ESTATUS</th>
+                  <th scope="col">SERIE</th>
+                  <th scope="col">MODELO</th>
+                  <th scope="col">DIAS SIN VISITA</th>
+                  <th scope="col">PRIORIDAD</th>
+                  <th scope="col">ACCIONES</th>
+                </tr>
+              </thead>
+              {coolersData != undefined ? (
+                <tbody>
+                {coolersData
+                  // .slice(firstIndex, lastIndex)
+                  .map((cooler, index) => (
+                    <tr key={index}
+                    onClick={() => {
+                      navigate(
+                        `/home/coolerDetail/${cooler.serial_number}`
+                      );                      
+                    }}>
+                      <td data-label="ESTATUS" title={cooler.status}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.status === "" || cooler.status === null || cooler.status === undefined ? (
+                          "Sin registro"
+                        ) : (
                           <div
                             style={{
                               display: "flex",
-                              justifyContent: "flex-end",
+                              padding: "4px",
+                              // justifyContent: "center",
                               alignItems: "center",
                               gap: "4px",
-                              flex: 100,
-                              height: "40px",
+                              borderRadius: "2px",
+                              background:
+                                cooler?.status === "SIN DATOS"
+                                  ? "#FFC7CD"
+                                  : cooler?.status ===
+                                    "FUNCIONANDO CORRECTAMENTE"
+                                    ? "#DFF9E3"
+                                    : "#FEF5C7",
                             }}
                           >
-                            <Link to="/home/coolerDetail">
-                              <div
+                            <div
+                              style={{
+                                width: "4px",
+                                height: "4px",
+                                borderRadius: "5px",
+                                background:
+                                  cooler?.status === "SIN DATOS"
+                                    ? "#F93448"
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CORRECTAMENTE"
+                                      ? "#31B648"
+                                      : "#F6A60A",
+                              }}
+                            ></div>
+                            <div
+                              style={{
+                                color:
+                                  cooler?.status === "SIN DATOS"
+                                    ? "#F93448"
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CORRECTAMENTE"
+                                      ? "#1D5E29"
+                                      : "#451C03",
+                                // fontFamily: "Space Mono",
+                                fontSize: "8px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "14px",
+                              }}
+                            >
+                              {cooler.status}
+                            </div>
+                          </div>
+                        )}
+                      </td>
+                      <td data-label="SERIE" title={cooler.serial_number}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.serial_number === "" || cooler.serial_number === null || cooler.serial_number === undefined ? (
+                          "Sin registro"
+                        ) : (
+                          cooler.serial_number
+                        )}
+                      </td>
+                      <td data-label="Modelo" title={cooler.model_id}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.model_id === "" || cooler.model_id === null || cooler.model_id === undefined ? (
+                          "Sin registro"
+                        ) : (
+                          cooler.model_id
+                        )}
+                      </td>
+                      <td data-label="DIAS SIN VISITA" title={cooler.days_without_visit}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.serial_number === "" || cooler.serial_number === null || cooler.serial_number === undefined ? (
+                          "Sin registro"
+                        ) : (
+                          <div
+                            style={{
+                              display: "flex",
+                              padding: "4px",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              borderRadius: "2px",
+                              background: "#D4DAE3",
+                              width: "80px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                color: "#313A49",
+                                // fontFamily: "Space Mono",
+                                fontSize: "10px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "14px",
+                              }}
+                            >
+                              {" "}
+                              {`${cooler.days_without_visit} DÍAS`}                              
+                            </div>
+                          </div>
+                        )}
+                      </td>
+                      <td data-label="PRIORIDAD" title="Prioridad">
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.model_id === "" || cooler.model_id === null || cooler.model_id === undefined ? (
+                          "Sin registro"
+                        ) : (
+                          "Sin registro"
+                        )}
+                      </td>
+                      <td data-label="Acciones">
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : (
+                          <Link to="/home/coolerDetail" >
+                            <div
+                              style={{
+                                color: "#3E83FF",
+                                fontSize: "0.8rem",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                // lineHeight: "20px",
+                                display: "flex",
+                                // marginLeft: "50px",
+                                // marginRight: "50px",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Ver más
+                              <IconArrowRight
                                 style={{
                                   color: "#3E83FF",
-                                  fontSize: "12px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "20px",
-                                  display: "flex",
-                                  marginRight: "30px",
+                                  width: "1.0rem",
                                 }}
-                              >
-                                Ver más{" "}
-                                <IconArrowRight
-                                  style={{
-                                    color: "#3E83FF",
-                                    width: "1.0rem",
-                                  }}
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-              </TableBody>
-            </Table>
+                              />
+                            </div>
+                          </Link>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+              ): isLoading == true ? (
+                <tbody>{isloadingData()}</tbody>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                  }}
+                >
+                  <p>No hay datos de usuarios disponibles.</p>
+                </div>
+              )}
+            </table>
+          </section>
+          <section className="drawer_pagination">
             <PaginationComponent
               accion={setCurrentPage}
               totalDatos={coolersData?.length}
