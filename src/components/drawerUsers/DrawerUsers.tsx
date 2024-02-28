@@ -24,7 +24,6 @@ export default function DrawerUsers({
   };
 
   openedDrawerEdit === false ? closeAndClearInfo : "";
-  console.log(userData);
   const handleEditUser = () => {
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
     const data = {

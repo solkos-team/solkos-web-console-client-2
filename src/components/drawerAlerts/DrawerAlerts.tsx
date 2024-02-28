@@ -88,35 +88,35 @@ export default function DrawerA({
     for (let i = 0; i < 25; i++) {
       rows.push(
         <tr key={i}>
-          <td data-label="Nombre">
+          <td data-label="ESTATUS">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
-          <td data-label="# Endriadores">
+          <td data-label="SERIE">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
-          <td data-label="Última visita">
+          <td data-label="MODELO">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
-          <td data-label="Prioridad">
+          <td data-label="DIAS SIN VISITA">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
-          <td data-label="Acciones">
+          <td data-label="PRIORIDAD">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />
@@ -130,9 +130,6 @@ export default function DrawerA({
   };
   coolersData === undefined ? [] : coolersData;
   totalData === undefined ? 0 : totalData;
-
-  console.log(coolersData)
-  console.log(opened)
   return (
     <Drawer
       opened={opened}
@@ -600,7 +597,7 @@ export default function DrawerA({
                         `/home/coolerDetail/${cooler.serial_number}`
                       );                      
                     }}>
-                      <td data-label="ESTATUS" title={cooler.status}>
+                      <td data-label="ESTATUS" title={cooler.status} >
                         {isLoading == true ? (
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
@@ -622,7 +619,8 @@ export default function DrawerA({
                                   : cooler?.status ===
                                     "FUNCIONANDO CORRECTAMENTE"
                                     ? "#DFF9E3"
-                                    : "#FEF5C7",
+                                    : "#FEF5C7",   
+                                                          
                             }}
                           >
                             <div
@@ -637,6 +635,7 @@ export default function DrawerA({
                                       "FUNCIONANDO CORRECTAMENTE"
                                       ? "#31B648"
                                       : "#F6A60A",
+                                
                               }}
                             ></div>
                             <div
