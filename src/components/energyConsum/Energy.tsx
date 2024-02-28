@@ -27,18 +27,27 @@ const Energy = ({ coolersData }) => {
   const chartdata = [
     {
       name: mes33,
-      "Consumo de energía":
-        (coolersData?.properties?.energy_consumption_month_3.value == undefined ? 0 : coolersData?.properties?.energy_consumption_month_3.value).toFixed(2),
+      "Consumo de energía": (coolersData?.properties?.energy_consumption_month_3
+        .value === undefined
+        ? 0
+        : coolersData?.properties?.energy_consumption_month_3.value
+      ).toFixed(2),
     },
     {
       name: mes22,
-      "Consumo de energía":
-        (coolersData?.properties?.energy_consumption_month_2.value == undefined ? 0 : coolersData?.properties?.energy_consumption_month_2.value).toFixed(2),
+      "Consumo de energía": (coolersData?.properties?.energy_consumption_month_2
+        .value === undefined
+        ? 0
+        : coolersData?.properties?.energy_consumption_month_2.value
+      ).toFixed(2),
     },
     {
       name: mes11,
-      "Consumo de energía":
-        (coolersData?.properties?.energy_consumption_month_1.value == undefined ? 0 : coolersData?.properties?.energy_consumption_month_1.value).toFixed(2),
+      "Consumo de energía": (coolersData?.properties?.energy_consumption_month_1
+        .value === undefined
+        ? 0
+        : coolersData?.properties?.energy_consumption_month_1.value
+      ).toFixed(2),
     },
   ];
 
@@ -151,7 +160,7 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.energy_cost.value == undefined
+              {coolersData?.properties?.energy_cost.value === undefined
                 ? "Sin registro"
                 : "$" +
                   `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
@@ -188,7 +197,7 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.energy_consumption.value == undefined
+              {coolersData?.properties?.energy_consumption.value === undefined
                 ? "Sin registro"
                 : `${
                     (coolersData?.properties?.energy_consumption.value).toFixed(
@@ -271,7 +280,8 @@ const Energy = ({ coolersData }) => {
                 lineHeight: "28px",
               }}
             >
-              {coolersData?.properties?.average_C02_emissions.value == undefined
+              {coolersData?.properties?.average_C02_emissions.value ===
+              undefined
                 ? "Sin registro"
                 : `${
                     (coolersData?.properties?.average_C02_emissions.value).toFixed(

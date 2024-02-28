@@ -38,7 +38,7 @@ export default function DrawerA({
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
-    return dt.length == 0 ? [] : JSON.parse(dt);
+    return dt.length === 0 ? [] : JSON.parse(dt);
   };
   const body = {
     customer: dto,
@@ -85,8 +85,8 @@ export default function DrawerA({
       Fecha_de_notificación: cooler.notified_at,
     }));
   };
-  coolersData == undefined ? [] : coolersData;
-  totalData == undefined ? 0 : totalData;
+  coolersData === undefined ? [] : coolersData;
+  totalData === undefined ? 0 : totalData;
 
   return (
     <Drawer
@@ -646,8 +646,8 @@ export default function DrawerA({
                             width: "100px",
                           }}
                         >
-                          {cooler.status == undefined ||
-                          cooler.status == null ? (
+                          {cooler.status === undefined ||
+                          cooler.status === null ? (
                             <div style={{ fontSize: 13 }}>Sin registro</div>
                           ) : (
                             <>
@@ -659,7 +659,13 @@ export default function DrawerA({
                                   alignItems: "center",
                                   gap: "4px",
                                   borderRadius: "2px",
-                                  background: "#B6FEDB",
+                                  background:
+                                    cooler?.status === "SIN DATOS"
+                                      ? "#FFC7CD"
+                                      : cooler?.status ===
+                                        "FUNCIONANDO CORRECTAMENTE"
+                                      ? "#DFF9E3"
+                                      : "#FEF5C7",
                                 }}
                               >
                                 <div
@@ -667,12 +673,24 @@ export default function DrawerA({
                                     width: "4px",
                                     height: "4px",
                                     borderRadius: "5px",
-                                    background: "#31B648",
+                                    background:
+                                      cooler?.status === "SIN DATOS"
+                                        ? "#F93448"
+                                        : cooler?.status ===
+                                          "FUNCIONANDO CORRECTAMENTE"
+                                        ? "#31B648"
+                                        : "#F6A60A",
                                   }}
                                 ></div>
                                 <div
                                   style={{
-                                    color: "#028053",
+                                    color:
+                                      cooler?.status === "SIN DATOS"
+                                        ? "#F93448"
+                                        : cooler?.status ===
+                                          "FUNCIONANDO CORRECTAMENTE"
+                                        ? "#1D5E29"
+                                        : "#451C03",
                                     // fontFamily: "Space Mono",
                                     fontSize: "8px",
                                     fontStyle: "normal",
@@ -711,8 +729,8 @@ export default function DrawerA({
                             width: "9rem",
                           }}
                         >
-                          {cooler.days_without_visit == undefined ||
-                          cooler.days_without_visit == "" ? (
+                          {cooler.days_without_visit === undefined ||
+                          cooler.days_without_visit === "" ? (
                             "Sin registro"
                           ) : (
                             <>

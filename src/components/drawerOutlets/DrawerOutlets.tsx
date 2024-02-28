@@ -45,7 +45,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
-    return dt.length == 0 ? [] : JSON.parse(dt);
+    return dt.length === 0 ? [] : JSON.parse(dt);
   };
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
@@ -87,7 +87,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
   }, [dt]);
 
   const inputState = () => {
-    if (coolersData == null) {
+    if (coolersData === null) {
       return 0;
     } else {
       return coolersData.length;
@@ -758,7 +758,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
           >
             <section
               style={{
-                visibility: inputState() > 10 ? "visible" : "hidden",
+                visibility: inputState() > 1 ? "visible" : "hidden",
               }}
             >
               <TextInput
@@ -793,7 +793,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       style={{
                         fontSize: ".74rem",
                         textAlign: "left",
-                        width: "7rem",
+                        width: "6rem",
                       }}
                     >
                       Serie
@@ -839,7 +839,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 <TableBody
                   style={{ display: "block", height: "90%", overflowY: "auto" }}
                 >
-                  {filteredCoolers == undefined
+                  {filteredCoolers === undefined
                     ? "Sin registros"
                     : filteredCoolers
                         .slice(firstIndex, lastIndex)
@@ -874,7 +874,13 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       alignItems: "center",
                                       gap: "4px",
                                       borderRadius: "2px",
-                                      background: "#B6FEDB",
+                                      background:
+                                        cooler?.status === "SIN DATOS"
+                                          ? "#FFC7CD"
+                                          : cooler?.status ===
+                                            "FUNCIONANDO CORRECTAMENTE"
+                                          ? "#DFF9E3"
+                                          : "#FEF5C7",
                                       width: "fit-content",
                                     }}
                                   >
@@ -883,12 +889,24 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                         width: "4px",
                                         height: "4px",
                                         borderRadius: "5px",
-                                        background: "#31B648",
+                                        background:
+                                          cooler?.status === "SIN DATOS"
+                                            ? "#F93448"
+                                            : cooler?.status ===
+                                              "FUNCIONANDO CORRECTAMENTE"
+                                            ? "#31B648"
+                                            : "#F6A60A",
                                       }}
                                     ></div>
                                     <div
                                       style={{
-                                        color: "#028053",
+                                        color:
+                                          cooler?.status === "SIN DATOS"
+                                            ? "#F93448"
+                                            : cooler?.status ===
+                                              "FUNCIONANDO CORRECTAMENTE"
+                                            ? "#1D5E29"
+                                            : "#451C03",
                                         width: "100%",
                                         fontSize: ".3rem",
                                         fontStyle: "normal",
@@ -904,7 +922,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                             </TableCell>
                             <TableCell
                               style={{
-                                fontSize: ".84rem",
+                                fontSize: ".70rem",
                                 textAlign: "left",
                                 width: "5.5rem",
                               }}

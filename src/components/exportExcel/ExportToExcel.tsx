@@ -55,9 +55,9 @@ export const ExportToExcel = (props) => {
     <Group>
       <Button
         disabled={
-          props.datos == null ||
-          props.datos.length == 0 ||
-          props.datos == undefined
+          props.datos === null ||
+          props.datos.length === 0 ||
+          props.datos === undefined
             ? true
             : false
         }

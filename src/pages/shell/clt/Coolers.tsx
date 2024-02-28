@@ -72,6 +72,7 @@ export default function Coolers() {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
       const datos = await data.json();
+      console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
@@ -108,35 +109,42 @@ export default function Coolers() {
           <td data-label="Nombre">
             {
               <>
-                <Skeleton height={8} radius="xl" width="100%" />
+                <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
           <td data-label="# Endriadores">
             {
               <>
-                <Skeleton height={8} radius="xl" width="100%" />
+                <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
           <td data-label="Última visita">
             {
               <>
-                <Skeleton height={8} radius="xl" width="100%" />
+                <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
           <td data-label="Prioridad">
             {
               <>
-                <Skeleton height={8} radius="xl" width="100%" />
+                <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
           <td data-label="Acciones">
             {
               <>
-                <Skeleton height={8} radius="xl" width="100%" />
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Accion">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
               </>
             }
           </td>
@@ -235,10 +243,11 @@ export default function Coolers() {
               style={{
                 color: "#88888B",
                 // fontFamily: "DM Sans",
-                fontSize: "1.1rem",
+                fontSize: "1.0rem",
                 fontStyle: "normal",
                 fontWeight: 300,
                 marginLeft: -55,
+                marginTop: -10,
               }}
             >
               Enfriadores
@@ -248,6 +257,7 @@ export default function Coolers() {
                 display: "flex",
                 flexDirection: "row",
                 flexWrap: "wrap",
+                marginTop: -15,
               }}
             >
               <div>
@@ -263,7 +273,7 @@ export default function Coolers() {
             padding: "0px 32px",
             flexDirection: "column",
             alignItems: "flex-start",
-            gap: "32px",
+            gap: "0px",
             alignSelf: "stretch",
           }}
         >
@@ -282,6 +292,7 @@ export default function Coolers() {
               alignItems: "center",
               alignSelf: "stretch",
               width: "100%",
+              marginTop: -30,
             }}
           >
             <TextInput
@@ -306,10 +317,10 @@ export default function Coolers() {
         </div>
         <section
           style={{
-            padding: "0px 0rem",
+            padding: "1rem 0rem",
             marginLeft: -55,
             width: "100%",
-            height: "30rem",
+            height: "100%",
             overflowY: "auto",
           }}
         >
@@ -344,7 +355,7 @@ export default function Coolers() {
                       <td data-label="Nombre" title={cooler.status}>
                         {isLoading == true ? (
                           <>
-                            <Skeleton height={8} radius="xl" width="100%" />
+                            <Skeleton height={20} radius="sm" width="90%" />
                           </>
                         ) : cooler.status == undefined ||
                           cooler.status == "" ? (
@@ -359,7 +370,20 @@ export default function Coolers() {
                                 alignItems: "center",
                                 gap: "4px",
                                 borderRadius: "2px",
-                                background: "#B6FEDB",
+                                background:
+                                  cooler?.status === "SIN DATOS"
+                                    ? "#FFC7CD"
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CORRECTAMENTE"
+                                    ? "#DFF9E3"
+                                    : "#FEF5C7",
+                                width:
+                                  cooler?.status === "SIN DATOS"
+                                    ? "60px"
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CORRECTAMENTE"
+                                    ? "160px"
+                                    : "150px",
                               }}
                             >
                               <div
@@ -367,20 +391,38 @@ export default function Coolers() {
                                   width: "4px",
                                   height: "4px",
                                   borderRadius: "5px",
-                                  background: "#31B648",
+                                  background:
+                                    cooler?.status === "SIN DATOS"
+                                      ? "#F93448"
+                                      : cooler?.status ===
+                                        "FUNCIONANDO CORRECTAMENTE"
+                                      ? "#31B648"
+                                      : "#F6A60A",
                                 }}
                               ></div>
                               <div
                                 style={{
-                                  color: "#0F9F67",
+                                  color:
+                                    cooler?.status === "SIN DATOS"
+                                      ? "#F93448"
+                                      : cooler?.status ===
+                                        "FUNCIONANDO CORRECTAMENTE"
+                                      ? "#1D5E29"
+                                      : "#451C03",
                                   // fontFamily: "Space Mono",
-                                  fontSize: "14px",
+                                  fontSize:
+                                    cooler?.status ===
+                                    "FUNCIONANDO CORRECTAMENTE"
+                                      ? ".75vw"
+                                      : ".8vw",
                                   fontStyle: "normal",
                                   fontWeight: 400,
                                   lineHeight: "14px",
                                 }}
                               >
-                                {cooler.status}
+                                {cooler?.status === "EN FALLA"
+                                  ? "FUNCIONANDO CON FALLA"
+                                  : cooler.status}
                               </div>
                             </div>
                           </>
@@ -389,7 +431,7 @@ export default function Coolers() {
                       <td data-label="Serie" title={cooler.serial_number}>
                         {isLoading == true ? (
                           <>
-                            <Skeleton height={8} radius="xl" width="100%" />
+                            <Skeleton height={20} radius="sm" width="90%" />
                           </>
                         ) : cooler.serial_number === "" ? (
                           "Sin registro"
@@ -400,7 +442,7 @@ export default function Coolers() {
                       <td data-label="Modelo" title={cooler.model_id}>
                         {isLoading == true ? (
                           <>
-                            <Skeleton height={8} radius="xl" width="100%" />
+                            <Skeleton height={20} radius="sm" width="90%" />
                           </>
                         ) : cooler.model_id === "" ? (
                           "Sin registro"
@@ -411,7 +453,7 @@ export default function Coolers() {
                       <td data-label="Última visita" title={cooler.last_read}>
                         {isLoading == true ? (
                           <>
-                            <Skeleton height={8} radius="xl" width="100%" />
+                            <Skeleton height={20} radius="sm" width="90%" />
                           </>
                         ) : cooler.last_read == undefined ||
                           cooler.last_read == null ? (
@@ -423,7 +465,7 @@ export default function Coolers() {
                       <td data-label="Prioridad" title={cooler.priority_status}>
                         {isLoading == true ? (
                           <>
-                            <Skeleton height={8} radius="xl" width="100%" />
+                            <Skeleton height={20} radius="sm" width="90%" />
                           </>
                         ) : cooler.priority_status == undefined ||
                           cooler.priority_status == "" ? (
@@ -461,7 +503,7 @@ export default function Coolers() {
                       <td data-label="Acciones" title="Acciones">
                         {isLoading == true ? (
                           <>
-                            <Skeleton height={8} radius="xl" width="100%" />
+                            <Skeleton height={20} radius="sm" width="90%" />
                           </>
                         ) : (
                           <div>
@@ -504,6 +546,7 @@ export default function Coolers() {
                   alignItems: "center",
                   fontWeight: "bold",
                   fontSize: "1.5vw",
+                  width: "100%",
                 }}
               >
                 <p>No hay información para mostrar.</p>

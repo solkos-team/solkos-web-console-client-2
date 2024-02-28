@@ -60,7 +60,7 @@ export default function (props) {
   };
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
-    const body = { customer: dto, path: dataLocalStorage };    
+    const body = { customer: dto, path: dataLocalStorage };
     if (data.length < 4) {
       try {
         // const data = await fetchPath(dataLocalStorage);
@@ -74,7 +74,7 @@ export default function (props) {
       }
     }
   };
-  index == 0 ? getPaths() : "";
+  index === 0 ? getPaths() : "";
   dto === customer ? "" : clearPath();
   useEffect(() => {
     getPaths();
@@ -83,7 +83,7 @@ export default function (props) {
   useEffect(() => {
     dispatch(addPath());
     const storage = localStorage.getItem("PATH");
-    if (storage == null) {
+    if (storage === null) {
       localStorage.setItem("PATH", "");
     }
     setIndex(JSON.parse(storage || "[]").length);
@@ -107,10 +107,10 @@ export default function (props) {
   const ventanaEmergenteRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    verSelectData(value);     
+    verSelectData(value);
     dispatch(addPath());
     const storedTodos = localStorage.getItem("PATH");
-    const todoArr = storedTodos !== null ? JSON.parse(storedTodos || "[]") : [];
+    const todoArr = storedTodos != null ? JSON.parse(storedTodos || "[]") : [];
     setData(todoArr);
     checkVisibilityPath();
     const handleCloseOnOutsideClick = (event) => {
@@ -146,15 +146,14 @@ export default function (props) {
       setData((current) => [...current, value]);
       localStorage.setItem("PATH", JSON.stringify([...data, value]));
       setOpened(false);
-      setValue('')
+      setValue("");
       if (index != 3) {
         setIndex(index + 1);
         setStatusDelete(false);
       }
       setStatusDelete(false);
-      setFilterVisibility(false);      
+      setFilterVisibility(false);
     }
-        
   };
   const deleteFilter = (i) => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
@@ -173,21 +172,26 @@ export default function (props) {
   const getPath = ({ path }) => {
     return typeof path === "undefined" ? "" : path;
   };
-  const validaUser = JSON.parse(localStorage.getItem("RO0T") || "")
+  const validaUser = JSON.parse(localStorage.getItem("RO0T") || "");
   const bloqPath = (i) => {
-    // i == data.length - 1 ? false : true;    
+    // i == data.length - 1 ? false : true;
     // return i >= validaUser?.length ? false : true;
-    if(props.disabledPath == true){
-      return Boolean('false')
+    if (props.disabledPath === true) {
+      return Boolean("false");
     }
-    props.disabledPath == true ? "false" : ""
-    if (validaUser.length == 0) {
-      return i == data.length - 1 || props.disabledPath == true ? false : true;
+    props.disabledPath === true ? "false" : "";
+    if (validaUser.length === 0) {
+      return i === data.length - 1 || props.disabledPath === true
+        ? false
+        : true;
     } else {
-      return i >= validaUser?.length && i == data.length - 1 || props.disabledPath == true ? false : true;
+      return (i >= validaUser?.length && i === data.length - 1) ||
+        props.disabledPath === true
+        ? false
+        : true;
     }
   };
-  
+
   data.length > 0 ? getPaths(data) : "";
   return (
     <div>
@@ -195,21 +199,17 @@ export default function (props) {
         <section
           className="return_principal"
           onClick={() => {
-            localStorage.getItem("USER") == 'Call Center'
-            ?
-            navigate(`/homeCallCenter/` + getPath(props))
-            :
-            navigate(`/home/` + getPath(props))
+            localStorage.getItem("USER") === "Call Center"
+              ? navigate(`/homeCallCenter/` + getPath(props))
+              : navigate(`/home/` + getPath(props));
           }}
         >
           <IconArrowNarrowLeft color="black" />
         </section>
-        <section className="pagefilter_container_principal"
-        >
-          
+        <section className="pagefilter_container_principal">
           <div className="pagefilter_container_principal_customer">
             <div className="pagefilter_container_principal_customer_container">
-              <IconLock className="pagefilter_container_principal_customer_container_icon"/>
+              <IconLock className="pagefilter_container_principal_customer_container_icon" />
               <Text className="pagefilter_container_principal_customer_container_text">
                 {dto || "CLIENTE"}
               </Text>
@@ -219,126 +219,135 @@ export default function (props) {
           {data === null || data === undefined
             ? []
             : data.map((item, i) => (
-              <div style={{ display: "flex", alignItems: "center"}} key={i}>
-                <button
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: "8px",
-                    border: "1px solid #ADBACC",
-                    padding: "3px 7px",
-                    background: bloqPath(i) == false ? "" : "#D4DAE3",
-                    backgroundColor:"#FFFF"
-                  }}
-                  disabled={bloqPath(i)}
-                  type="button"
-                >
-                  {bloqPath(i) == false ? (
-                    <IconCircleX
-                      style={{
-                        color: "#313A49",
-                        width: "1rem",
-                        height: "1rem",
-                        marginRight: "3px",
-                        // visibility:
-                        //   bloqPath(i) == false ? "visible" : "hidden",
-                      }}
-                      onClick={() => {
-                        deleteFilter(i);
-                      }}
-                      onClickCapture={(o) => !o}
-                    />
-                  ) : (
-                    <IconLock
-                      style={{
-                        color: "#ADBACC",
-                        width: "16px",
-                        height: "16px",
-                        marginRight: "3px",
-                      }}
-                    />
-                  )}
-
-                  <Text
+                <div style={{ display: "flex", alignItems: "center" }} key={i}>
+                  <button
                     style={{
-                      // color: "#313A49",
-                      // fontFamily: "Space Mono",
-                      fontSize: "0.6rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "0.6rem",
-                      textTransform: "uppercase",
-                      userSelect: "none",
-                      color: bloqPath(i) == false ? "#313A49" : "#ADBACC",
+                      display: "flex",
+                      alignItems: "center",
+                      borderRadius: "8px",
+                      border: "1px solid #ADBACC",
+                      padding: "3px 7px",
+                      background: bloqPath(i) === false ? "" : "#D4DAE3",
+                      backgroundColor: "#FFFF",
                     }}
+                    disabled={bloqPath(i)}
+                    type="button"
                   >
-                    {item}
-                  </Text>
-                </button>
-                <IconChevronRight
-                  style={{
-                    color: "#ADBACC",
-                    width: "0.9rem",
-                    height: "0.9rem",
-                    marginLeft: "3px",
-                    visibility: i == 3 || props.disabledPath == true ? "hidden" : "visible",
-                  }}
-                />
-              </div>
-            ))}
-          
-          {/* ---------------------- */}
-          {filterVisibility ? (
-            
-              <div style={{ visibility : props.status == true  || props.disabledPath == true ? "hidden" : "visible"}}
-              className="pagefilter_container_principal_addFilter">
-                <IconCirclePlus className="pagefilter_container_principal_addFilter_iconCircle"
-                  onClick={() => setOpened((o) => !o)}
-                />
-                <Popover
-                  position="bottom"
-                  withArrow
-                  shadow="md"
-                  opened={opened}
-                  onClose={() => setOpened(false)}
-                  onChange={(opened) => {
-                    setOpened(opened);
-                  }}
-                >
-                  <Popover.Target>
+                    {bloqPath(i) === false ? (
+                      <IconCircleX
+                        style={{
+                          color: "#313A49",
+                          width: "1rem",
+                          height: "1rem",
+                          marginRight: "3px",
+                          // visibility:
+                          //   bloqPath(i) == false ? "visible" : "hidden",
+                        }}
+                        onClick={() => {
+                          deleteFilter(i);
+                        }}
+                        onClickCapture={(o) => !o}
+                      />
+                    ) : (
+                      <IconLock
+                        style={{
+                          color: "#ADBACC",
+                          width: "16px",
+                          height: "16px",
+                          marginRight: "3px",
+                        }}
+                      />
+                    )}
+
                     <Text
                       style={{
-                        color: "#313A49",
+                        // color: "#313A49",
                         // fontFamily: "Space Mono",
                         fontSize: "0.6rem",
                         fontStyle: "normal",
                         fontWeight: 400,
-                        lineHeight: "0.7rem",
+                        lineHeight: "0.6rem",
                         textTransform: "uppercase",
                         userSelect: "none",
-                        cursor: "pointer",
+                        color: bloqPath(i) === false ? "#313A49" : "#ADBACC",
                       }}
-                      onClick={() => setOpened((o) => !o)}
                     >
-                      AÑADIR FILTRO
+                      {item}
                     </Text>
-                  </Popover.Target>
-                  <Popover.Dropdown>
-                    <Select
-                      label={`Selecciona la ${dataSelect[index]}`}
-                      placeholder="Seleccionar"
-                      searchable
-                      defaultChecked
-                      data={dataZone[index]}
-                      // value={value}
-                      onChange={setValue}
-                      nothingFound="Dato no encontrado"
-                      dropdownPosition="flip"                      
-                    />
-                  </Popover.Dropdown>
-                </Popover>
-              </div>
-            
+                  </button>
+                  <IconChevronRight
+                    style={{
+                      color: "#ADBACC",
+                      width: "0.9rem",
+                      height: "0.9rem",
+                      marginLeft: "3px",
+                      visibility:
+                        i == 3 || props.disabledPath == true
+                          ? "hidden"
+                          : "visible",
+                    }}
+                  />
+                </div>
+              ))}
+
+          {/* ---------------------- */}
+          {filterVisibility ? (
+            <div
+              style={{
+                visibility:
+                  props.status == true || props.disabledPath == true
+                    ? "hidden"
+                    : "visible",
+              }}
+              className="pagefilter_container_principal_addFilter"
+            >
+              <IconCirclePlus
+                className="pagefilter_container_principal_addFilter_iconCircle"
+                onClick={() => setOpened((o) => !o)}
+              />
+              <Popover
+                position="bottom"
+                withArrow
+                shadow="md"
+                opened={opened}
+                onClose={() => setOpened(false)}
+                onChange={(opened) => {
+                  setOpened(opened);
+                }}
+              >
+                <Popover.Target>
+                  <Text
+                    style={{
+                      color: "#313A49",
+                      // fontFamily: "Space Mono",
+                      fontSize: "0.6rem",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "0.7rem",
+                      textTransform: "uppercase",
+                      userSelect: "none",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setOpened((o) => !o)}
+                  >
+                    AÑADIR FILTRO
+                  </Text>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Select
+                    label={`Selecciona la ${dataSelect[index]}`}
+                    placeholder="Seleccionar"
+                    searchable
+                    defaultChecked
+                    data={dataZone[index]}
+                    // value={value}
+                    onChange={setValue}
+                    nothingFound="Dato no encontrado"
+                    dropdownPosition="flip"
+                  />
+                </Popover.Dropdown>
+              </Popover>
+            </div>
           ) : (
             ""
           )}
@@ -355,7 +364,7 @@ export default function (props) {
               strokeWidth: "0.5",
               border: "0.5px solid #ADBACC",
               borderRadius: "4px",
-              // visibility: "hidden",             
+              // visibility: "hidden",
             }}
           >
             <div

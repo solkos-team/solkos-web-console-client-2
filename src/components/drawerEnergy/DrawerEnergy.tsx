@@ -39,9 +39,9 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
   const firstIndex = lastIndex - Number(datosPorPagina);
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization);  
+  const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
-    return dt.length == 0 ? [] : JSON.parse(dt);
+    return dt.length === 0 ? [] : JSON.parse(dt);
   };
 
   const mes1 = new Date(
@@ -60,7 +60,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
     {
       name: mes33,
       "Consumo de energía": (coolersData?.properties?.energy_consumption_month_3
-        .value == undefined
+        .value === undefined
         ? 0
         : coolersData?.properties?.energy_consumption_month_3.value
       ).toFixed(2),
@@ -68,7 +68,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
     {
       name: mes22,
       "Consumo de energía": (coolersData?.properties?.energy_consumption_month_2
-        .value == undefined
+        .value === undefined
         ? 0
         : coolersData?.properties?.energy_consumption_month_2.value
       ).toFixed(2),
@@ -76,7 +76,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
     {
       name: mes11,
       "Consumo de energía": (coolersData?.properties?.energy_consumption_month_1
-        .value == undefined
+        .value === undefined
         ? 0
         : coolersData?.properties?.energy_consumption_month_1.value
       ).toFixed(2),
@@ -215,7 +215,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                     lineHeight: "28px",
                   }}
                 >
-                  {coolersData?.properties?.energy_cost.value == undefined
+                  {coolersData?.properties?.energy_cost.value === undefined
                     ? "Sin registro"
                     : "$" +
                       `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
@@ -252,7 +252,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                     lineHeight: "28px",
                   }}
                 >
-                  {coolersData?.properties?.energy_consumption.value ==
+                  {coolersData?.properties?.energy_consumption.value ===
                   undefined
                     ? "Sin registro"
                     : `${
@@ -336,7 +336,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                     lineHeight: "28px",
                   }}
                 >
-                  {coolersData?.properties?.average_C02_emissions.value ==
+                  {coolersData?.properties?.average_C02_emissions.value ===
                   undefined
                     ? "Sin registro"
                     : `${

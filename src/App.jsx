@@ -36,7 +36,6 @@ import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
 import { fetchUniversalDetails } from "./utils/apiUtils";
 
-
 import { Burger, Tooltip } from "@mantine/core";
 
 dayjs.extend(duration);
@@ -205,10 +204,10 @@ function App() {
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
   const stateM = sessionStorage.getItem("MenuState");
-  stateM == undefined
+  stateM === undefined
     ? sessionStorage.setItem("MenuState", false)
     : sessionStorage.getItem("MenuState");
-  const [opened2, setOpened2] = useState(JSON.parse(stateM));
+  const [opened2, setOpened2] = useState(true);
   const navigate = useNavigate();
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
@@ -227,7 +226,7 @@ function App() {
     // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
     setCoolerInsightsOpen(location.pathname === "/");
     const storage = localStorage.getItem("ORG");
-    if (storage == null) {
+    if (storage === null) {
       localStorage.setItem("ORG", "KOF");
       dispatch(addOrg());
     }
@@ -251,7 +250,7 @@ function App() {
                   <span
                     style={{
                       marginLeft: 10,
-                      display: opened2 == true ? "none" : "",
+                      display: opened2 === true ? "none" : "",
                     }}
                   >
                     {item.label}
@@ -259,12 +258,12 @@ function App() {
                   {coolerInsightsOpen ? (
                     <img
                       src={arrow_1}
-                      style={{ marginLeft: opened2 == true ? 10 : 40 }}
+                      style={{ marginLeft: opened2 === true ? 10 : 40 }}
                     />
                   ) : (
                     <img
                       src={arrow_2}
-                      style={{ marginLeft: opened2 == true ? 10 : 40 }}
+                      style={{ marginLeft: opened2 === true ? 10 : 40 }}
                     />
                   )}
                 </div>
@@ -283,7 +282,7 @@ function App() {
                         <span
                           style={{
                             marginLeft: 10,
-                            display: opened2 == true ? "none" : "",
+                            display: opened2 === true ? "none" : "",
                           }}
                         >
                           {option.label}
@@ -308,7 +307,7 @@ function App() {
                 <span
                   style={{
                     marginLeft: 10,
-                    display: opened2 == true ? "none" : "",
+                    display: opened2 === true ? "none" : "",
                   }}
                 >
                   {item.label}
@@ -337,7 +336,7 @@ function App() {
                     <span
                       style={{
                         marginLeft: 10,
-                        display: opened2 == true ? "none" : "",
+                        display: opened2 === true ? "none" : "",
                       }}
                     >
                       {item.label}
@@ -345,18 +344,18 @@ function App() {
                     {coolerInsightsOpen ? (
                       <img
                         src={arrow_1}
-                        style={{ marginLeft: opened2 == true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
                       />
                     ) : (
                       <img
                         src={arrow_2}
-                        style={{ marginLeft: opened2 == true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
                       />
                     )}
                   </div>
                 </Tooltip>
                 {coolerInsightsOpen && (
-                  <div style={{ marginLeft: opened2 == true ? 5 : 20 }}>
+                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
                     {item.links.map((option) => (
                       <NavLink
                         to={option.link}
@@ -371,7 +370,7 @@ function App() {
                             <span
                               style={{
                                 marginLeft: 10,
-                                display: opened2 == true ? "none" : "",
+                                display: opened2 === true ? "none" : "",
                               }}
                             >
                               {option.label}
@@ -400,7 +399,7 @@ function App() {
                     <span
                       style={{
                         marginLeft: 10,
-                        display: opened2 == true ? "none" : "",
+                        display: opened2 === true ? "none" : "",
                       }}
                     >
                       {item.label}
@@ -440,7 +439,7 @@ function App() {
     };
   }, []);
   if (width < 1000) {
-    if (opened2 == true) {
+    if (opened2 === true) {
     } else {
       setOpened2(true);
       sessionStorage.setItem("MenuState", opened2);
@@ -453,24 +452,24 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: opened2 == false ? 240 : 60 }} p={"md"}>
+          <Navbar width={{ base: opened2 === false ? 240 : 60 }} p={"md"}>
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
                   style={{
                     display: "flex",
-                    padding: opened2 == true ? ".5rem" : ".5px",
+                    padding: opened2 === true ? ".5rem" : ".5px",
                     justifyContent: "space-between",
                     alignItems: "center",
                     alignSelf: "stretch",
                     flexDirection: "row",
-                    overflowX: opened2 == true ? "hidden" : "",
+                    overflowX: opened2 === true ? "hidden" : "",
                   }}
                 >
                   <section
                     style={{
                       display: "flex",
-                      flexDirection: opened2 == false ? "row" : "column",
+                      flexDirection: opened2 === false ? "row" : "column",
                       gap: "0.8rem",
                       justifyContent: "space-between",
                       alignItems: "center",
@@ -484,10 +483,22 @@ function App() {
                       aria-label="Toggle navigation"
                       style={{ marginLeft: -10}}                    
                     /> */}
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round" onClick={() => setOpened2((o) => !o)}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-menu-2"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="#2c3e50"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      onClick={() => setOpened2((o) => !o)}
+                    >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                       <path d="M4 6l16 0" />
-                      <path d="M4 12l16 0" />                      
+                      <path d="M4 12l16 0" />
                       <path d="M4 18l16 0" />
                     </svg>
                     <div
@@ -512,7 +523,7 @@ function App() {
                       <div
                         style={{
                           textAlign: "left",
-                          display: opened2 == true ? "none" : "",
+                          display: opened2 === true ? "none" : "",
                         }}
                       >
                         <span
@@ -553,7 +564,7 @@ function App() {
                         width: "25px",
                         height: "16px",
                         marginLeft: "10px",
-                        display: opened2 == true ? "none" : "flex",
+                        display: opened2 === true ? "none" : "flex",
                       }}
                     >
                       <div
@@ -575,8 +586,8 @@ function App() {
               </Group>
               <div
                 style={{
-                  padding: opened2 == true ? "0.1rem 0px" : "",
-                  marginLeft: opened2 == true ? "-0.7rem" : "",
+                  padding: opened2 === true ? "0.1rem 0px" : "",
+                  marginLeft: opened2 === true ? "-0.7rem" : "",
                 }}
               >
                 {links}
@@ -641,7 +652,7 @@ function App() {
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
-                            display: opened2 == true ? "none" : "flex",
+                            display: opened2 === true ? "none" : "flex",
                           }}
                         >
                           <Text
@@ -686,7 +697,7 @@ function App() {
                         src={"../../sampleData/arrows3.svg"}
                         style={{
                           marginLeft: 5,
-                          display: opened2 == true ? "none" : "",
+                          display: opened2 === true ? "none" : "",
                         }}
                       />
                     </div>
@@ -717,7 +728,7 @@ function App() {
                   </div>
                   <div style={{ maxHeight: "300px", overflowY: "auto" }}>
                     {/* Contenido del menú de cambio de organización */}
-                    {data == undefined
+                    {data === undefined
                       ? "Sin registros"
                       : data.map((nombre, index) =>
                           JSON.parse(validaUser).length == 0 ? (
@@ -729,7 +740,7 @@ function App() {
                                 gap: "10px",
                                 alignSelf: "stretch",
                                 display:
-                                  JSON.parse(validaUser).length == 0
+                                  JSON.parse(validaUser).length === 0
                                     ? ""
                                     : "none",
                               }}
@@ -763,7 +774,7 @@ function App() {
                                 alignItems: "center",
                                 gap: "10px",
                                 alignSelf: "stretch",
-                                display: dt == nombre ? "" : "none",
+                                display: dt === nombre ? "" : "none",
                               }}
                               key={index}
                               onChange={setData}

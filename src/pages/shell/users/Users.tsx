@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { Button, Drawer, TextInput } from "@mantine/core";
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure } from "@mantine/hooks";
 import DrawerUsers from "../../../components/drawerUsers/DrawerUsers";
 import DrawerNewUser from "../../../components/drawerNewUser/DrawerNewUser";
 import { IconArrowRight } from "@tabler/icons-react";
-import { Alert,Skeleton } from "@mantine/core";
+import { Alert, Skeleton } from "@mantine/core";
 import {
   fetchDeleteUsers,
   fetchUniversalTables,
@@ -24,7 +24,9 @@ export default function Users() {
   const toggleDrawerEdit = () => setOpenedEdit((flag) => !flag);
   const [searchValue, setSearchValue] = useState("");
   const [dataUsers, setDataUsers] = useState<UsersInterfaces[]>([]);
-  const [dataUsersEdit, setDataUsersEdit] = useState<UsersInterfaces | string>();
+  const [dataUsersEdit, setDataUsersEdit] = useState<
+    UsersInterfaces | string
+  >();
   const [isDrawerOpen2, setIsDrawerOpen2] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
@@ -34,8 +36,10 @@ export default function Users() {
   const firstIndex = lastIndex - Number(datosPorPagina);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const [isUpdateOpen, setUpdateOpen] = useState(false);
   const [alertPosition, setAlertPosition] = useState({ top: 0, left: 0 });
   const [alertStatus, setAlertStatus] = useState<Boolean>(false);
+  const [updateStatus, setUpdateStatus] = useState<Boolean>(false);
   const [userDelete, setUserDelete] = useState();
   const [totalData, setTotalData] = useState<String | number>(0);
   const handleSearchChange = (event) => {
@@ -59,11 +63,11 @@ export default function Users() {
     data === null || data === undefined
       ? []
       : data.map((user) => ({
-        Nombre: user.name,
-        Email: user.email,
-        Cliente: user.customer,
-        Path: user.path.toString(),
-      }));
+          Nombre: user.name,
+          Email: user.email,
+          Cliente: user.customer,
+          Path: user.path.toString(),
+        }));
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const pathVerify = () => {
@@ -75,10 +79,13 @@ export default function Users() {
     page_size: Number(datosPorPagina),
     path: pathVerify(),
   };
+
+  console.log(searchValue);
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("users", body, setIsLoading);
       const datos = await data.json();
+      console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setDataUsers(datos);
@@ -93,18 +100,28 @@ export default function Users() {
 
   useEffect(() => {
     fetchData();
-    document.addEventListener('click', function (event) {
-      const element = event.target as HTMLElement
-
-    })
+    document.addEventListener("click", function (event) {
+      const element = event.target as HTMLElement;
+    });
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [dt, dto, isDrawerOpen2, currentPage, datosPorPagina, userDelete,alertStatus]);
+  }, [
+    dt,
+    dto,
+    isDrawerOpen2,
+    currentPage,
+    datosPorPagina,
+    userDelete,
+    alertStatus,
+    updateStatus,
+  ]);
 
   const closeAlert = () => {
     setAlertStatus(false);
     setIsAlertOpen(false);
+    setUpdateStatus(false);
+    setUpdateOpen(false);
   };
 
   const [isDelete, setIsDelete] = useState(false);
@@ -125,39 +142,58 @@ export default function Users() {
   dataUsers == undefined ? [] : dataUsers;
   totalData == undefined ? 0 : totalData;
   const formatingPath = (path) => {
-    let fp
-    if(path == undefined || path == null){
-      return ''
+    let fp;
+    if (path == undefined || path == null) {
+      return "";
+    } else {
+      return path[path.length - 1];
     }
-    else{     
-      return path[path.length-1]
-    }    
-  }
+  };
   const isloadingData = () => {
-    let rows:any = []
+    let rows: any = [];
     for (let i = 0; i < 25; i++) {
       rows.push(
-          <tr key={i}>
-            <td data-label="Nombre">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-          </tr>      
-      )
+        <tr key={i}>
+          <td data-label="Nombre">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="# Endriadores">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Última visita">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Prioridad">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Acciones">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+        </tr>
+      );
     }
-    return rows
-  }
+    return rows;
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -173,7 +209,7 @@ export default function Users() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0
+          marginLeft: 0,
         }}
       >
         <div
@@ -183,7 +219,7 @@ export default function Users() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%"
+            width: "90%",
           }}
         >
           <div
@@ -220,7 +256,7 @@ export default function Users() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%"
+            width: "90%",
           }}
         >
           <h1
@@ -236,20 +272,34 @@ export default function Users() {
           >
             Tabla
           </h1>
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             <h1
               style={{
                 color: "#88888B",
                 // fontFamily: "DM Sans",
-                fontSize: "1.1rem",
+                fontSize: "1.0rem",
                 fontStyle: "normal",
                 fontWeight: 300,
                 marginLeft: -55,
+                marginTop: -10,
               }}
             >
               Colaboradores
             </h1>
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                marginTop: -15,
+              }}
+            >
               <div>
                 <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
@@ -274,20 +324,18 @@ export default function Users() {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
-          >
-
-          </div>
+          ></div>
           <div
-
             style={{
               display: "flex",
-              padding: "32px 0px",
+              padding: "0px 0px",
               justifyContent: "center",
               alignItems: "center",
               alignSelf: "stretch",
               width: "100%",
+              marginTop: -30,
             }}
           >
             <TextInput
@@ -309,11 +357,16 @@ export default function Users() {
             />
           </div>
         </div>
-        <section style={{
-          padding: "0px 0rem",
-          marginLeft: -55,
-          width: "100%"
-        }} >
+        <section
+          style={{
+            padding: "1rem 0rem",
+            marginLeft: -55,
+            width: "100%",
+            height: "100%",
+            overflowY: "auto",
+          }}
+        >
+          <br />
           <table>
             <thead>
               <tr>
@@ -323,7 +376,7 @@ export default function Users() {
                 <th scope="col">Path</th>
                 <th scope="col">Acciones</th>
               </tr>
-            </thead>            
+            </thead>
             {!isLoading && (
               <>
                 {filteredUsers.length > 0 ? (
@@ -333,22 +386,48 @@ export default function Users() {
                       .map((user, index) => (
                         <tr key={index}>
                           <td data-label="Nombre" title={user.name}>
-                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :user.name}
+                            {isLoading === true ? (
+                              <>
+                                <Skeleton height={20} radius="sm" width="90%" />
+                              </>
+                            ) : (
+                              user.name
+                            )}
                           </td>
                           <td data-label="Email" title={user.email}>
-                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :user.email}
+                            {isLoading == true ? (
+                              <>
+                                <Skeleton height={20} radius="sm" width="90%" />
+                              </>
+                            ) : (
+                              user.email
+                            )}
                           </td>
                           <td data-label="Customer" title={user.customer}>
-                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :user.customer}
+                            {isLoading == true ? (
+                              <>
+                                <Skeleton height={20} radius="sm" width="90%" />
+                              </>
+                            ) : (
+                              user.customer
+                            )}
                           </td>
-                          <td data-label="Path" title={user.path}>
-                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
+                          <td data-label="Nombre" title={String(user.name)}>
+                            {isLoading == true ? (
+                              <>
+                                <Skeleton height={20} radius="sm" width="90%" />
+                              </>
+                            ) : (
                               formatingPath(user.path)
-                            }
+                            )}
                           </td>
                           <td data-label="Acciones">
-                            {isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                              <div                              
+                            {isLoading == true ? (
+                              <>
+                                <Skeleton height={20} radius="sm" width="90%" />
+                              </>
+                            ) : (
+                              <div
                                 // onClick={openDrawer}
                                 onClick={toggleDrawerEdit}
                               >
@@ -358,11 +437,8 @@ export default function Users() {
                                     fontSize: "14px",
                                     fontStyle: "normal",
                                     fontWeight: 400,
-                                    // lineHeight: "20px",
                                     display: "flex",
-                                    // marginLeft: "50px",
-                                    // marginRight: "50px",
-                                    cursor:"pointer"
+                                    cursor: "pointer",
                                   }}
                                   onClick={() => {
                                     setDataUsersEdit(user);
@@ -377,12 +453,12 @@ export default function Users() {
                                   />
                                 </div>
                               </div>
-                            }
+                            )}
                           </td>
                           <td>
                             {localStorage.getItem("USER") ===
                               "Jose Iván Peréz Ugalde" ||
-                              localStorage.getItem("USER") ===
+                            localStorage.getItem("USER") ===
                               "Mayra Barrón Reséndiz" ? (
                               <Button
                                 variant="filled"
@@ -412,14 +488,9 @@ export default function Users() {
                       {""}
                     </DrawerNewUser>
                   </tbody>
-                ) : 
-                (
-                  isLoading == true 
-                  ?
-                  <tbody>
-                    {isloadingData()}
-                </tbody>
-                  :
+                ) : isLoading == true ? (
+                  <tbody>{isloadingData()}</tbody>
+                ) : (
                   <div
                     style={{
                       display: "flex",
@@ -431,7 +502,7 @@ export default function Users() {
                   >
                     <p>No hay datos de usuarios disponibles.</p>
                   </div>
-                )}  
+                )}
               </>
             )}
           </table>
@@ -456,6 +527,10 @@ export default function Users() {
       </DrawerNewUser>
       {dataUsersEdit && (
         <DrawerUsers
+          setIsAlertOpen={setIsAlertOpen}
+          setAlertStatus={setAlertStatus}
+          setUpdateOpen={setUpdateOpen}
+          setUpdateStatus={setUpdateStatus}
           userData={dataUsersEdit}
           userDataClear={setDataUsersEdit}
           openedDrawerEdit={openedEdit}
@@ -463,7 +538,7 @@ export default function Users() {
           setOpenedDrawerEdit={setOpenedEdit}
         ></DrawerUsers>
       )}
-      {isAlertOpen && (
+      {isUpdateOpen && (
         <div
           style={{
             position: "absolute",
@@ -471,7 +546,58 @@ export default function Users() {
             left: "50%",
             zIndex: 9999,
             marginLeft: "-width",
-            marginTop: "-height"
+            marginTop: "-height",
+          }}
+        >
+          <Alert
+            title={
+              updateStatus == true
+                ? "Usuario actualizado"
+                : "Usuario no actualizado"
+            }
+            onClose={closeAlert}
+            closeButtonLabel="Cerrar"
+            style={{
+              backgroundColor: "#FFFF",
+              borderColor: "#88888B",
+              color: updateStatus == true ? "#6ea2ff" : "#ED5079",
+            }}
+          >
+            {updateStatus == true
+              ? "El usuario ha sido actualizado exitosamente."
+              : "Error al actualizar el usuario"}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              <Button
+                onClick={closeAlert}
+                size="xs"
+                style={{
+                  marginLeft: 5,
+                  backgroundColor: "#ED5079",
+                  color: "white",
+                }}
+              >
+                X
+              </Button>
+            </div>
+          </Alert>
+        </div>
+      )}
+      {isAlertOpen && (
+        <div
+          style={{
+            position: "absolute",
+            top: "45%",
+            left: "50%",
+            zIndex: 9999,
+            marginLeft: "-width",
+            marginTop: "-height",
           }}
         >
           <Alert

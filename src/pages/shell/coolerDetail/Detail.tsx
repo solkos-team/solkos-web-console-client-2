@@ -71,6 +71,7 @@ export default function CoolerDetail() {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -97,7 +98,7 @@ export default function CoolerDetail() {
   // } else {
   //   console.log("No hay actividad disponible.");
   // }
-  
+
   return (
     <div>
       {localStorage.getItem("USER") == "Call Center" ? (
@@ -126,8 +127,8 @@ export default function CoolerDetail() {
                 style={{
                   width: "90px",
                   height: "80px",
-                  backgroundColor: "#D4DAE3",
-                  marginLeft: 30,
+                  // backgroundColor: "#D4DAE3",
+                  marginLeft: 20,
                   borderRadius: "4px",
                   display: "flex",
                   justifyContent: "center",
@@ -141,7 +142,8 @@ export default function CoolerDetail() {
                   height={"85%"}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
-                    currentTarget.src = 'https://storage.googleapis.com/negocon-renders/default/default_cooler.webp'
+                    currentTarget.src =
+                      "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
                   }}
                 />
               </div>
@@ -250,7 +252,13 @@ export default function CoolerDetail() {
                         alignItems: "center",
                         gap: "4px",
                         borderRadius: "2px",
-                        background: "#B6FEDB",
+                        background:
+                          coolersData?.cooler?.status === "SIN DATOS"
+                            ? "#FFC7CD"
+                            : coolersData?.cooler?.status ===
+                              "FUNCIONANDO CORRECTAMENTE"
+                            ? "#DFF9E3"
+                            : "#FEF5C7",
                       }}
                     >
                       <div
@@ -258,20 +266,34 @@ export default function CoolerDetail() {
                           width: "4px",
                           height: "4px",
                           borderRadius: "5px",
-                          background: "#31B648",
+                          background:
+                            coolersData?.cooler?.status === "SIN DATOS"
+                              ? "#F93448"
+                              : coolersData?.cooler?.status ===
+                                "FUNCIONANDO CORRECTAMENTE"
+                              ? "#31B648"
+                              : "#F6A60A",
                         }}
                       ></div>
                       <div
                         style={{
-                          color: "#028053",
+                          color:
+                            coolersData?.cooler?.status === "SIN DATOS"
+                              ? "#F93448"
+                              : coolersData?.cooler?.status ===
+                                "FUNCIONANDO CORRECTAMENTE"
+                              ? "#1D5E29"
+                              : "#451C03",
                           // fontFamily: "Space Mono",
-                          fontSize: ".9vw",
+                          fontSize: ".8vw",
                           fontStyle: "normal",
                           fontWeight: 400,
                           lineHeight: "14px",
                         }}
                       >
-                        {coolersData?.cooler?.status}
+                        {coolersData?.cooler?.status === "EN FALLA"
+                          ? "FUNCIONANDO CON FALLA"
+                          : coolersData?.cooler.status}
                       </div>
                     </div>
                   </>
@@ -381,7 +403,8 @@ export default function CoolerDetail() {
                       marginTop: "-4px",
                     }}
                   >
-                    {coolersData?.cooler?.channel === undefined
+                    {coolersData?.cooler?.channel === undefined ||
+                    coolersData?.cooler?.channel === ""
                       ? "Sin registro"
                       : coolersData?.cooler?.channel}
                   </div>

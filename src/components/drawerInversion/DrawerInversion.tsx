@@ -32,7 +32,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
-    return dt.length == 0 ? [] : JSON.parse(dt);
+    return dt.length === 0 ? [] : JSON.parse(dt);
   };
 
   const formatCreatedAt = (createdAt) => {
@@ -286,7 +286,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       }}
                     >
                       {coolersData?.properties?.total_ownership_expense
-                        ?.value == undefined
+                        ?.value === undefined
                         ? "Sin registro"
                         : "$" +
                           `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
@@ -365,7 +365,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         marginRight: 75,
                       }}
                     >
-                      {coolersData?.properties?.sale_price?.value == undefined
+                      {coolersData?.properties?.sale_price?.value === undefined
                         ? "Sin registro"
                         : "$" + `${coolersData?.properties?.sale_price.value}`}
                     </div>
@@ -402,7 +402,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         lineHeight: "normal",
                       }}
                     >
-                      {coolersData?.properties?.total_expense_service.value ==
+                      {coolersData?.properties?.total_expense_service.value ===
                       undefined
                         ? "Sin registro"
                         : "$" +
@@ -497,7 +497,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         }}
                       >
                         {coolersData?.properties?.present_value_of_depreciation
-                          .value == undefined
+                          .value === undefined
                           ? "Sin registro"
                           : "$" +
                             `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString()}`}
@@ -557,7 +557,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                           lineHeight: "14px",
                         }}
                       >
-                        {coolersData?.properties?.annual_decrement.value ==
+                        {coolersData?.properties?.annual_decrement.value ===
                         undefined
                           ? "Sin registro"
                           : "$" +
@@ -635,7 +635,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         lineHeight: "normal",
                       }}
                     >
-                      {coolersData?.properties?.year_of_production.value ==
+                      {coolersData?.properties?.year_of_production.value ===
                       undefined
                         ? "Sin registro"
                         : `${coolersData?.properties?.year_of_production.value}`}
@@ -951,7 +951,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       lineHeight: "normal",
                     }}
                   >
-                    {coolersData?.properties?.total_expense_service.value ==
+                    {coolersData?.properties?.total_expense_service.value ===
                     undefined
                       ? "Sin registro"
                       : `${coolersData?.properties?.total_expense_service.value}`}
@@ -1006,7 +1006,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     }}
                   >
                     (+ $
-                    {coolersData?.properties?.annual_decrement.value ==
+                    {coolersData?.properties?.annual_decrement.value ===
                     undefined
                       ? "Sin registro"
                       : `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}

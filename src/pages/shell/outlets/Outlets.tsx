@@ -14,7 +14,7 @@ import {
   TableHeaderCell,
   TableRow,
 } from "@tremor/react";
-import { Card, Table,Skeleton } from "@mantine/core";
+import { Card, Table, Skeleton } from "@mantine/core";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { MantineProvider, TextInput } from "@mantine/core";
@@ -120,30 +120,50 @@ export default function Outlets() {
   outletsData == undefined ? [] : outletsData;
   totalData == undefined ? 0 : totalData;
   const isloadingData = () => {
-    let rows:any = []
+    let rows: any = [];
     for (let i = 0; i < 25; i++) {
       rows.push(
-          <tr key={i}>
-            <td data-label="Nombre">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="# Endriadores" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Última visita" >
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Prioridad">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-            <td data-label="Acciones">
-              {<><Skeleton height={8} radius="xl" width="100%" /></>}
-            </td>
-          </tr>      
-      )
+        <tr key={i}>
+          <td data-label="Nombre">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="# Endriadores">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Última visita">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Prioridad">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+          <td data-label="Acciones">
+            {
+              <>
+                <Skeleton height={20} radius="sm" width="90%" />
+              </>
+            }
+          </td>
+        </tr>
+      );
     }
-    return rows
-  }
+    return rows;
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -159,7 +179,7 @@ export default function Outlets() {
           flex: 100,
           alignSelf: "stretch",
           width: "100%",
-          marginLeft: 0
+          marginLeft: 0,
         }}
       >
         <div
@@ -169,7 +189,7 @@ export default function Outlets() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%"
+            width: "90%",
           }}
         >
           <div
@@ -196,8 +216,8 @@ export default function Outlets() {
               marginLeft: -55,
             }}
           >
-            Catálogo de los puntos de venta, realiza el seguimiento adecuado para cada uno de ellos.
-
+            Catálogo de los puntos de venta, realiza el seguimiento adecuado
+            para cada uno de ellos.
           </div>
         </div>
         <div
@@ -207,7 +227,7 @@ export default function Outlets() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%"
+            width: "90%",
           }}
         >
           <h1
@@ -223,22 +243,39 @@ export default function Outlets() {
           >
             Tabla
           </h1>
-          <div style={{ display: "flex", width: "100%", justifyContent: "space-between" }}>
+          <div
+            style={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+            }}
+          >
             <h1
               style={{
                 color: "#88888B",
                 // fontFamily: "DM Sans",
-                fontSize: "1.1rem",
+                fontSize: "1.0rem",
                 fontStyle: "normal",
                 fontWeight: 300,
                 marginLeft: -55,
+                marginTop: -10,
               }}
             >
               Puntos de Venta
             </h1>
-            <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                marginTop: -15,
+              }}
+            >
               <div>
-                <ExportToExcel datos={filteredOutlets} nombre={"Puntos de Venta"} />
+                <ExportToExcel
+                  datos={filteredOutlets}
+                  nombre={"Puntos de Venta"}
+                />
               </div>
             </div>
           </div>
@@ -250,7 +287,7 @@ export default function Outlets() {
             padding: "0px 32px",
             flexDirection: "column",
             alignItems: "flex-start",
-            gap: "32px",
+            gap: "0px",
             alignSelf: "stretch",
           }}
         >
@@ -258,13 +295,10 @@ export default function Outlets() {
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
-          >
-
-          </div>
+          ></div>
           <div
-
             style={{
               display: "flex",
               padding: "32px 0px",
@@ -272,6 +306,7 @@ export default function Outlets() {
               alignItems: "center",
               alignSelf: "stretch",
               width: "100%",
+              marginTop: -30,
             }}
           >
             <TextInput
@@ -294,13 +329,15 @@ export default function Outlets() {
             />
           </div>
         </div>
-        <section style={{          
-          padding: "0px 0rem",
-          marginLeft: -55,
-          width: "100%",
-          height : "30rem",
-          overflowY:"auto"
-        }} >
+        <section
+          style={{
+            padding: "1rem 0rem",
+            marginLeft: -55,
+            width: "100%",
+            height: "100%",
+            overflowY: "auto",
+          }}
+        >
           <table>
             <thead>
               <tr>
@@ -310,170 +347,185 @@ export default function Outlets() {
                 <th scope="col">Prioridad</th>
                 <th scope="col">Acciones</th>
               </tr>
-            </thead>            
-                {outletsData != undefined ? (
-                  <tbody>
-                    {outletsData
-                      // .slice(firstIndex, lastIndex)
-                      .map((outlet, index) => (
-                        <tr key={index}>
-                          <td data-label="Nombre" title={outlet.outlet_name}>
-                            {
-                              isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                            outlet.outlet_name === ""
-                              ? "Sin registro"
-                              : outlet.outlet_name}
-                          </td>
-                          <td data-label="# Endriadores" title={outlet.num_coolers}>
-                            {
-                              isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                            outlet.num_coolers === ""
-                              ? "Sin registro"
-                              : outlet.num_coolers}
-                          </td>
-                          <td data-label="Última visita" title={outlet.days_without_visitC}>
-                            {
-                              isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                            outlet.days_without_visitC ===
-                              undefined ||
-                              outlet.days_without_visitC === "" ? (
-                              "Sin registro"
-                            ) : (
-                              <>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    padding: "4px",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    gap: "4px",
-                                    borderRadius: "2px",
-                                    background: "#D4DAE3",
-                                    width: "60px",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      color: "#313A49",
-                                      // fontFamily: "Space Mono",
-                                      fontSize: "12px",
-                                      fontStyle: "normal",
-                                      fontWeight: 400,
-                                      lineHeight: "14px",
-                                    }}
-                                  >
-                                    {" "}
-                                    {outlet.days_without_visitC}
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </td>
-                          <td data-label="Prioridad" title={outlet.priority}>
-                            {
-                              isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                            outlet.priority === undefined ||
-                              outlet.priority === "" ? (
-                              "Sin registro"
-                            ) : (
-                              <>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    padding: "4px",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    gap: "4px",
-                                    borderRadius: "2px",
-                                    border: "1.5px solid #0F9F67",
-                                    background: "#FFF",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      color: "#0F9F67",
-                                      // fontFamily: "DM Sans",
-                                      fontSize: "12px",
-                                      fontStyle: "normal",
-                                      fontWeight: 600,
-                                      lineHeight: "12px",
-                                    }}
-                                  >
-                                    {" "}
-                                    {outlet.priority}
-                                  </div>
-                                </div>
-                              </>
-                            )}
-                          </td>
-                          <td data-label="Acciones">
-                            {
-                              isLoading == true ? <><Skeleton height={8} radius="xl" width="100%"/></> :
-                            <div                              
-                              // onClick={openDrawer}
-                              // onClick={toggleDrawerEdit}
-                              onClick={() => {
-                                setSelectedOutletDetails(outlet);
-                                open();
+            </thead>
+            {outletsData != undefined ? (
+              <tbody>
+                {outletsData
+                  // .slice(firstIndex, lastIndex)
+                  .map((outlet, index) => (
+                    <tr key={index}>
+                      <td data-label="Nombre" title={outlet.outlet_name}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : outlet.outlet_name === "" ? (
+                          "Sin registro"
+                        ) : (
+                          outlet.outlet_name
+                        )}
+                      </td>
+                      <td data-label="# Endriadores" title={outlet.num_coolers}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : outlet.num_coolers === "" ? (
+                          "Sin registro"
+                        ) : (
+                          outlet.num_coolers
+                        )}
+                      </td>
+                      <td
+                        data-label="Última visita"
+                        title={outlet.days_without_visitC}
+                      >
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : outlet.days_without_visitC === undefined ||
+                          outlet.days_without_visitC === "" ? (
+                          "Sin registro"
+                        ) : (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "4px",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "4px",
+                                borderRadius: "2px",
+                                background: "#D4DAE3",
+                                width: "60px",
                               }}
                             >
                               <div
                                 style={{
-                                  color: "#3E83FF",
-                                  fontSize: "0.8rem",
+                                  color: "#313A49",
+                                  // fontFamily: "Space Mono",
+                                  fontSize: "12px",
                                   fontStyle: "normal",
                                   fontWeight: 400,
-                                  // lineHeight: "20px",
-                                  display: "flex",
-                                  // marginLeft: "50px",
-                                  // marginRight: "50px",
-                                  cursor:"pointer"
-                                }}                               
+                                  lineHeight: "14px",
+                                }}
                               >
-                                Ver más
-                                <IconArrowRight
-                                  style={{
-                                    color: "#3E83FF",
-                                    width: "1.0rem",
-                                  }}
-                                />
+                                {" "}
+                                {outlet.days_without_visitC}
                               </div>
                             </div>
-                            }
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                ) : (
-                  isLoading == true 
-                  ?
-                  <tbody>
-                    {isloadingData()}
-                </tbody>
-                  :
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontWeight: "bold",
-                      fontSize: "18px",
-                    }}
-                  >
-                    <p>No hay datos de usuarios disponibles.</p>
-                  </div>
-                )}              
+                          </>
+                        )}
+                      </td>
+                      <td data-label="Prioridad" title={outlet.priority}>
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : outlet.priority === undefined ||
+                          outlet.priority === "" ? (
+                          "Sin registro"
+                        ) : (
+                          <>
+                            <div
+                              style={{
+                                display: "flex",
+                                padding: "4px",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                gap: "4px",
+                                borderRadius: "2px",
+                                border: "1.5px solid #0F9F67",
+                                background: "#FFF",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  color: "#0F9F67",
+                                  // fontFamily: "DM Sans",
+                                  fontSize: "12px",
+                                  fontStyle: "normal",
+                                  fontWeight: 600,
+                                  lineHeight: "12px",
+                                }}
+                              >
+                                {" "}
+                                {outlet.priority}
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </td>
+                      <td data-label="Acciones">
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : (
+                          <div
+                            // onClick={openDrawer}
+                            // onClick={toggleDrawerEdit}
+                            onClick={() => {
+                              setSelectedOutletDetails(outlet);
+                              open();
+                            }}
+                          >
+                            <div
+                              style={{
+                                color: "#3E83FF",
+                                fontSize: "0.8rem",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                // lineHeight: "20px",
+                                display: "flex",
+                                // marginLeft: "50px",
+                                // marginRight: "50px",
+                                cursor: "pointer",
+                              }}
+                            >
+                              Ver más
+                              <IconArrowRight
+                                style={{
+                                  color: "#3E83FF",
+                                  width: "1.0rem",
+                                }}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            ) : isLoading == true ? (
+              <tbody>{isloadingData()}</tbody>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontWeight: "bold",
+                  fontSize: "18px",
+                }}
+              >
+                <p>No hay datos de usuarios disponibles.</p>
+              </div>
+            )}
           </table>
           <br />
         </section>
-        <section style={{display:"flex",flexDirection:"column" ,width:"100%"}}>
-        <PaginationComponent        
+        <section
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
+          <PaginationComponent
             accion={setCurrentPage}
             totalDatos={totalData}
             datosPorPagina={datosPorPagina}
             numero={setNumero}
           />
-        </section>          
+        </section>
       </div>
       {selectedOutletDetails && (
         <DrawerO

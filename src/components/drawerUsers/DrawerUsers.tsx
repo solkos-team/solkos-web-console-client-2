@@ -1,21 +1,69 @@
 import React, { useRef, useState } from "react";
 import { Button, Drawer } from "@mantine/core";
+import { useEffect } from "react";
 
 export default function DrawerUsers({
+  setIsAlertOpen,
+  setAlertStatus,
+  setUpdateOpen,
+  setUpdateStatus,
   userData,
   userDataClear,
   openedDrawerEdit,
   setOpenedDrawerEdit,
   oncloseDrawerEdit,
 }) {
-  const { name, email, customer, path } = userData;
+  const { id, name, email, customer, path } = userData;
   const [nameUser, setNameUser] = useState(name);
+  const [showAlert, setShowAlert] = useState(false);
   const [emailUser, setEmailUser] = useState(email);
   const [customerUser, setCustomerUser] = useState(customer);
+  const [pathUser, setPathUser] = useState(path.join(","));
   const closeAndClearInfo = () => {
     userDataClear("");
   };
-  openedDrawerEdit == false ? closeAndClearInfo() : "";
+
+  openedDrawerEdit === false ? closeAndClearInfo : "";
+  console.log(userData);
+  const handleEditUser = () => {
+    const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
+    const data = {
+      name: nameUser,
+      email: emailUser,
+      customer: customerUser,
+      path: pathUser.split(","),
+    };
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setOpenedDrawerEdit((flag) => !flag);
+          setShowAlert(true);
+          setUpdateOpen(true);
+          setUpdateStatus(true);
+        } else {
+          console.error("Error al editar usuario:", response.statusText);
+          setUpdateOpen(true);
+        }
+      })
+      .catch((error) => {
+        console.error("Error en la solicitud PUT:", error);
+      });
+  };
+
+  useEffect(() => {
+    const { id, name, email, customer, path } = userData;
+    setNameUser(name);
+    setEmailUser(email);
+    setCustomerUser(customer);
+    setPathUser(path.join(","));
+  }, [userData]);
+
   return (
     <Drawer
       opened={openedDrawerEdit}
@@ -52,7 +100,10 @@ export default function DrawerUsers({
               marginBottom: 50,
             }}
           >
-            EDITAR USUARIO
+            {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+            localStorage.getItem("USER") === "Mayra Barrón Reséndiz"
+              ? "EDITAR USUARIO"
+              : "INFORMACIÓN USUARIO"}
           </h1>
         </div>
       </div>
@@ -89,21 +140,45 @@ export default function DrawerUsers({
           >
             Nombre
           </label>
-          <input
-            type="text"
-            value={nameUser}
-            // onChange={(e) => setName(e.target.value)}
-            style={{
-              color: "#000",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "28px",
-              width: "17rem",
-              backgroundColor: "#FFFF",
-            }}
-          />
+          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+            <>
+              <input
+                type="text"
+                value={nameUser}
+                onChange={(e) => setNameUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                value={nameUser}
+                onChange={(e) => setNameUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+                disabled
+              />
+            </>
+          )}
         </section>
         <section
           style={{
@@ -128,21 +203,45 @@ export default function DrawerUsers({
           >
             Correo
           </label>
-          <input
-            type="text"
-            value={emailUser}
-            // onChange={(e) => setEmail(e.target.value)}
-            style={{
-              color: "#000",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "28px",
-              width: "17rem",
-              backgroundColor: "#FFFF",
-            }}
-          />
+          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+            <>
+              <input
+                type="text"
+                value={emailUser}
+                onChange={(e) => setEmailUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                value={emailUser}
+                onChange={(e) => setEmailUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+                disabled
+              />
+            </>
+          )}
         </section>
         <section
           style={{
@@ -167,21 +266,45 @@ export default function DrawerUsers({
           >
             Customer
           </label>
-          <input
-            type="text"
-            value={customerUser}
-            // onChange={(e) => setEmail(e.target.value)}
-            style={{
-              color: "#000",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "28px",
-              width: "17rem",
-              backgroundColor: "#FFFF",
-            }}
-          />
+          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+            <>
+              <input
+                type="text"
+                value={customerUser}
+                onChange={(e) => setCustomerUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                value={customerUser}
+                onChange={(e) => setCustomerUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+                disabled
+              />
+            </>
+          )}
         </section>
         <section
           style={{
@@ -206,30 +329,66 @@ export default function DrawerUsers({
           >
             Path
           </label>
-          <input
-            type="text"
-            value={path.toString()}
-            // onChange={(e) => setEmail(e.target.value)}
-            style={{
-              color: "#000",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "28px",
-              width: "17rem",
-              backgroundColor: "#FFFF",
-            }}
-          />
+          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+            <>
+              <input
+                type="text"
+                value={path.toString()}
+                // onChange={(e) => setPathUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="text"
+                value={path.toString()}
+                // onChange={(e) => setPathUser(e.target.value)}
+                style={{
+                  color: "#000",
+                  // fontFamily: "DM Sans",
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "28px",
+                  width: "17rem",
+                  backgroundColor: "#FFFF",
+                }}
+                disabled
+              />
+            </>
+          )}
         </section>
-        <br></br>
-        <Button
-          style={{ background: "#ED5079", width: "17rem", marginLeft: 0 }}
-          // onClick={handleLogin}
-          disabled
-        >
-          Editar usuario
-        </Button>
+        {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+        localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+          <>
+            <br></br>
+            <Button
+              style={{
+                background: "#ED5079",
+                width: "17rem",
+                marginLeft: 0,
+                color: "#FEF2F4",
+                cursor: "pointer",
+              }}
+              onClick={handleEditUser}
+            >
+              Editar usuario
+            </Button>
+          </>
+        ) : (
+          ""
+        )}
       </div>
     </Drawer>
   );
