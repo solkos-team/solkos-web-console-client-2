@@ -72,7 +72,6 @@ export default function Coolers() {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
       const datos = await data.json();
-      console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);

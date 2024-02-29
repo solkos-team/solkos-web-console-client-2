@@ -80,12 +80,10 @@ export default function Users() {
     path: pathVerify(),
   };
 
-  console.log(searchValue);
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("users", body, setIsLoading);
       const datos = await data.json();
-      console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setDataUsers(datos);

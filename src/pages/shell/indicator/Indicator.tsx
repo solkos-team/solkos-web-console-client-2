@@ -22,7 +22,6 @@ export default function Indicator() {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
-      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);

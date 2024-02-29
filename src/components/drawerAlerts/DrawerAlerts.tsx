@@ -30,7 +30,7 @@ export default function DrawerA({
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
-  const [coolersData, setCoolersData] = useState<CoolerInterface[]>();
+  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>();
   const [isLoading, setIsLoading] = useState(true);
   const [totalData, setTotalData] = useState<String | number>(0);
   const dt = useSelector((state: any) => state.works);
@@ -38,6 +38,7 @@ export default function DrawerA({
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
+  opened == false ? value = 0 : ''
   const body = {
     customer: dto,
     class: "OPE",
@@ -47,13 +48,13 @@ export default function DrawerA({
     page_number: currentPage,
   };
   const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const data = await fetchUniversalTables("coolers", body);
+    try {      
+      const data = await fetchUniversalTables("coolers", body,setIsLoading);
       const datos = await data.json();
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -61,7 +62,8 @@ export default function DrawerA({
     }
   };
   useEffect(() => {
-    fetchData();
+    value != 0 ?
+    fetchData() :''
   }, [dt, datosPorPagina,opened]);
 
   const filterCoolersDataDownload = (coolersData) => {
@@ -129,7 +131,7 @@ export default function DrawerA({
     return rows;
   };
   coolersData === undefined ? [] : coolersData;
-  totalData === undefined ? 0 : totalData;
+  totalData === undefined ? 0 : totalData;  
   return (
     <Drawer
       opened={opened}

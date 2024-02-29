@@ -146,7 +146,7 @@ table th {
 }
 .drawers_principal{
   width: 100%;
-  height: 100%;
+  height: 94%;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
