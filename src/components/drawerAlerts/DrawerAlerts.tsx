@@ -1,23 +1,14 @@
 import { useSelector } from "react-redux";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
 import { Skeleton, Table } from "@mantine/core";
 import { fetchUniversalTables } from "../../utils/apiUtils";
 import { CoolerInterface } from "../../interfaces/CoolerInterface";
-import { SkeletonTableInsights } from "../skeletonTableInsights/SkeletonTableInsights";
-import { useDisclosure } from "@mantine/hooks";
-import { Drawer, Button } from "@mantine/core";
+import { Drawer } from "@mantine/core";
 
 export default function DrawerA({
   opened,
@@ -26,7 +17,6 @@ export default function DrawerA({
   value,
   delta,
 }) {
-  const drawerRef = useRef(null);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
