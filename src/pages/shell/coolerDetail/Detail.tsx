@@ -1120,12 +1120,12 @@ export default function CoolerDetail() {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "4px", // Espacio entre los bloques
+                        gap: "4px", //
                       }}
                     >
                       <div
                         style={{
-                          width: "1vw", // Ancho de cada bloque
+                          width: "1vw",
                           height: "0.3vw",
                           background: "#ED5079",
                         }}
@@ -1133,7 +1133,7 @@ export default function CoolerDetail() {
                       &nbsp;
                       <div
                         style={{
-                          width: "1vw", // Ancho de cada bloque
+                          width: "1vw",
                           height: "0.3vw",
                           background: "#ED5079",
                         }}
@@ -1141,7 +1141,7 @@ export default function CoolerDetail() {
                       &nbsp;
                       <div
                         style={{
-                          width: "1vw", // Ancho de cada bloque
+                          width: "1vw",
                           height: "0.3vw",
                           background: "#ED5079",
                         }}
@@ -1510,6 +1510,16 @@ export default function CoolerDetail() {
           </section>
         </section>
       </section>
+      <DrawerInversion
+        opened={inversionOpened}
+        onClose={closeInversion}
+        coolersData={coolersData}
+      />
+      <DrawerEnergy
+        opened={energyOpened}
+        onClose={closeEnergy}
+        coolersData={coolersData}
+      />
     </>
   );
 }

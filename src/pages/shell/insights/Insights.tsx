@@ -69,7 +69,7 @@ export default function Insights() {
     try {
       const data = await fetchInsights(pathVerify());
       numIntems(Number(data.insights.INDICATOR.total));
-      console.log(data);
+      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -838,7 +838,7 @@ export default function Insights() {
                                             ? "Sin riesgo"
                                             : algorithm.algorithm ===
                                               "Visita PdV"
-                                            ? "Visita punto de venta"
+                                            ? "Visita PdV"
                                             : algorithm.algorithm}
                                         </div>
                                       </div>
