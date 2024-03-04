@@ -380,15 +380,7 @@ export default function Coolers() {
                                       "FUNCIONANDO CON ALERTA"
                                     ? "#FEF5C7"
                                     : "#D4DAE3",
-                                width:
-                                  cooler?.status === "SIN DATOS"
-                                    ? "60px"
-                                    : cooler?.status ===
-                                      "FUNCIONANDO CORRECTAMENTE"
-                                    ? "160px"
-                                    : cooler?.status === "EN FALLA"
-                                    ? "70px"
-                                    : "150px",
+                                width:"fit-content",
                               }}
                             >
                               <div
@@ -483,16 +475,7 @@ export default function Coolers() {
                           <>
                             <div
                               style={{
-                                width:
-                                  cooler.actionable === "Visita PdV"
-                                    ? "160px"
-                                    : cooler.actionable === "Sin Riesgo"
-                                    ? "100px"
-                                    : cooler.actionable === "Toma de Decisiones"
-                                    ? "150px"
-                                    : cooler.actionable === "Actualizar Info"
-                                    ? "160px"
-                                    : "80px",
+                                width:"fit-content",
                                 display: "flex",
                                 padding: "4px",
                                 justifyContent: "center",
