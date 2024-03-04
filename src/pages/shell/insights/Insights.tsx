@@ -104,16 +104,20 @@ export default function Insights() {
 
   const [showAll3, setShowAll3] = useState(false);
 
-  const toggleShowAll1 = () => {
-    setShowAll3(!showAll1);
-  };
   const toggleShowAll2 = () => {
-    setShowAll3(!showAll2);
+    setShowAll2(!showAll2);
   };
   const toggleShowAll3 = () => {
     setShowAll3(!showAll3);
   };
 
+  insightsData?.summary.coolers.toLocaleString() != null ||
+  insightsData?.summary.coolers.toLocaleString() != undefined
+    ? sessionStorage.setItem(
+        "TtlCoolers",
+        insightsData?.summary.coolers.toLocaleString()
+      )
+    : "";
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -731,211 +735,181 @@ export default function Insights() {
                             </div>
                           </div>
                           {/* *************************INDICADORES****************************** */}
-                          {/* <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "flex-end",
-                              alignItems: "center",
-                              gap: "4px",
-                              marginLeft: 110,
-                              cursor: "pointer",
-                            }}
-                            onClick={toggleShowAll1}
-                          >
-                            <div
-                              style={{
-                                color: "#3E83FF",
-                                fontSize: "14px",
-                                fontStyle: "normal",
-                                fontWeight: 400,
-                                lineHeight: "normal",
-                                marginLeft: 20,
-                              }}
-                            >
-                              {showAll1 ? "Ver menos" : "Ver más"}
-                            </div>
-                            <img
-                              src={"../../sampleData/arrow_b.png"}
-                              alt="Descripción de la imagen"
-                              style={{ marginTop: 5 }}
-                            />
-                          </div> */}
 
-                          {/* {showAll1 && (
+                          <>
                             <>
-                              <>
-                               
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "8px 0px",
+                                  justifyContent: "space-between",
+                                  alignItems: "flex-start",
+                                  alignSelf: "stretch",
+                                }}
+                              >
                                 <div
                                   style={{
-                                    display: "flex",
-                                    padding: "8px 0px",
-                                    justifyContent: "space-between",
-                                    alignItems: "flex-start",
-                                    alignSelf: "stretch",
+                                    color: "#3A3A3F",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "20px",
                                   }}
                                 >
-                                  <div
-                                    style={{
-                                      color: "#3A3A3F",
-                                      // fontFamily: "DM Sans",
-                                      fontSize: "14px",
-                                      fontStyle: "normal",
-                                      fontWeight: 600,
-                                      lineHeight: "20px",
-                                    }}
-                                  >
-                                    Tipo
-                                  </div>
-                                  <div
-                                    style={{
-                                      color: "#3A3A3F",
-                                      // fontFamily: "DM Sans",
-                                      fontSize: "14px",
-                                      fontStyle: "normal",
-                                      fontWeight: 600,
-                                      lineHeight: "20px",
-                                    }}
-                                  >
-                                    Cantidad
-                                  </div>
+                                  Tipo
                                 </div>
-                                {insightsData?.insights?.INDICATOR?.algorithms.map(
-                                  (algorithm, index) => {
-                                    const max = Math.max(
-                                      ...insightsData.insights.INDICATOR.algorithms.map(
-                                        (alg) => alg.value
-                                      )
-                                    );
-                                    return (
+                                <div
+                                  style={{
+                                    color: "#3A3A3F",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "20px",
+                                  }}
+                                >
+                                  Cantidad
+                                </div>
+                              </div>
+                              {insightsData?.insights?.INDICATOR?.algorithms
+                                .filter(
+                                  (algorithm) =>
+                                    algorithm.class ===
+                                    "ASSET_MANAGEMENT_ACTIONABLE"
+                                )
+                                .sort((a, b) => {
+                                  const order = [
+                                    "Sin Riesgo",
+                                    "Visita PdV",
+                                    "Actualizar Info",
+                                    "Toma de Decisiones",
+                                  ];
+                                  const indexA = order.indexOf(a.algorithm);
+                                  const indexB = order.indexOf(b.algorithm);
+                                  return indexA - indexB;
+                                })
+                                .map((algorithm, index) => {
+                                  const max = Math.max(
+                                    ...insightsData.insights.INDICATOR.algorithms.map(
+                                      (alg) => alg.value
+                                    )
+                                  );
+                                  return (
+                                    <div
+                                      key={index}
+                                      style={{
+                                        display: "flex",
+                                        padding: "0px",
+                                        gap: "16px",
+                                        alignSelf: "stretch",
+                                      }}
+                                    >
                                       <div
-                                        key={index}
                                         style={{
+                                          width: `${
+                                            (algorithm.value / max) * 100
+                                          }%`,
+                                          height: "2.0vw",
+                                          borderRadius: "4px",
+                                          background: "#BCDAFF",
                                           display: "flex",
-                                          padding: "0px",
-                                          gap: "16px",
-                                          alignSelf: "stretch",
+                                          alignItems: "center",
+                                          paddingLeft: "16px",
                                         }}
                                       >
                                         <div
                                           style={{
-                                            width: `${
-                                              (algorithm.value / max) * 100
-                                            }%`,
-                                            height: "2.0vw",
-                                            borderRadius: "4px",
-                                            background: "#BCDAFF",
-                                            display: "flex",
-                                            alignItems: "center",
-                                            paddingLeft: "16px",
-                                          }}
-                                        >
-                                          <div
-                                            style={{
-                                              color: "#142257",
-                                              fontSize: "14px",
-                                              fontWeight: 400,
-                                              lineHeight: "20px",
-                                              whiteSpace: "nowrap",
-                                            }}
-                                          >
-                                            {algorithm.algorithm === "INSTALLED"
-                                              ? "Instalado"
-                                              : algorithm.algorithm ===
-                                                "Indicador de Riesgo Nivel: 0"
-                                              ? "Sin riesgo"
-                                              : algorithm.algorithm ===
-                                                "Indicador de Riesgo Nivel: 1"
-                                              ? "Visitar punto de venta"
-                                              : algorithm.algorithm ===
-                                                "Indicador de Riesgo Nivel: 2"
-                                              ? "Requiere actualizar información"
-                                              : algorithm.algorithm ===
-                                                "Indicador de Riesgo Nivel: 3"
-                                              ? "Tomar acción urgente"
-                                              : algorithm.algorithm ===
-                                                "Indicador de Riesgo Nivel: 4"
-                                              ? "En riesgo"
-                                              : algorithm.algorithm === "OWNED"
-                                              ? "En propiedad"
-                                              : algorithm.algorithm ===
-                                                "LOCATION"
-                                              ? "Ubicado"
-                                              : algorithm.algorithm ===
-                                                "TELEMETRY"
-                                              ? "Telemetría"
-                                              : algorithm.algorithm}
-                                          </div>
-                                        </div>
-                                        <div
-                                          style={{
-                                            color: "#000005",
+                                            color: "#142257",
                                             fontSize: "14px",
                                             fontWeight: 400,
-                                            lineHeight: "normal",
-                                            marginLeft: "auto",
+                                            lineHeight: "20px",
+                                            whiteSpace: "nowrap",
                                           }}
                                         >
-                                          {algorithm.value === undefined
-                                            ? "Sin registro"
-                                            : algorithm.value.toLocaleString()}
+                                          {algorithm.algorithm ===
+                                          "Toma de Decisiones"
+                                            ? "Acciones urgentes"
+                                            : algorithm.algorithm ===
+                                              "Actualizar Info"
+                                            ? "Requiere actualizar información"
+                                            : algorithm.algorithm ===
+                                              "Sin Riesgo"
+                                            ? "Sin riesgo"
+                                            : algorithm.algorithm ===
+                                              "Visita PdV"
+                                            ? "Visita punto de venta"
+                                            : algorithm.algorithm}
                                         </div>
                                       </div>
-                                    );
-                                  }
-                                )}
+                                      <div
+                                        style={{
+                                          color: "#000005",
+                                          fontSize: "14px",
+                                          fontWeight: 400,
+                                          lineHeight: "normal",
+                                          marginLeft: "auto",
+                                        }}
+                                      >
+                                        {algorithm.value === undefined
+                                          ? "Sin registro"
+                                          : algorithm.value.toLocaleString()}
+                                      </div>
+                                    </div>
+                                  );
+                                })}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "4px 0px",
+                                  flexDirection: "column",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "10px",
+                                  alignSelf: "stretch",
+                                }}
+                              >
                                 <div
                                   style={{
-                                    display: "flex",
-                                    padding: "4px 0px",
-                                    flexDirection: "column",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    gap: "10px",
-                                    alignSelf: "stretch",
+                                    width: "100%",
+                                    height: "1px",
+                                    background: "#CACACA",
                                   }}
-                                >
-                                  <div
-                                    style={{
-                                      width: "100%",
-                                      height: "1px",
-                                      background: "#CACACA",
-                                    }}
-                                  ></div>
-                                </div>{" "}
+                                ></div>
+                              </div>{" "}
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "flex-end",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  marginLeft: 110,
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => navigate("/home/indicator")}
+                              >
                                 <div
                                   style={{
-                                    display: "flex",
-                                    justifyContent: "flex-end",
-                                    alignItems: "center",
-                                    gap: "4px",
-                                    marginLeft: 110,
-                                    cursor: "pointer",
+                                    color: "#3E83FF",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "14px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "normal",
+                                    marginLeft: 50,
                                   }}
-                                  onClick={() => navigate("/home/indicator")}
                                 >
-                                  <div
-                                    style={{
-                                      color: "#3E83FF",
-                                      // fontFamily: "DM Sans",
-                                      fontSize: "14px",
-                                      fontStyle: "normal",
-                                      fontWeight: 400,
-                                      lineHeight: "normal",
-                                      marginLeft: 20,
-                                    }}
-                                  >
-                                    Ver detalles
-                                  </div>
-                                  <img
-                                    src={"../../sampleData/arrow_b.png"}
-                                    alt="Descripción de la imagen"
-                                    style={{ marginTop: 5 }}
-                                  />
+                                  Ver detalles
                                 </div>
-                                
-                              </>
+                                <img
+                                  src={"../../sampleData/arrow_b.png"}
+                                  alt="Descripción de la imagen"
+                                  style={{ marginTop: 5 }}
+                                />
+                              </div>
                             </>
-                          )} */}
+                          </>
+                          {/* )} */}
                           {/* ***********************INDICADORES******************************** */}
                         </div>
                       </>
@@ -949,7 +923,7 @@ export default function Insights() {
                           fontSize: "18px",
                         }}
                       >
-                        <p>No hay datos de coolers disponibles.</p>
+                        <p>Sin información para mostrar.</p>
                       </div>
                     )}
                   </>
@@ -1224,7 +1198,7 @@ export default function Insights() {
                                 fontStyle: "normal",
                                 fontWeight: 400,
                                 lineHeight: "normal",
-                                marginLeft: 20,
+                                marginLeft: 50,
                               }}
                             >
                               {showAll3 ? "Ver menos" : "Ver más"}
@@ -1482,7 +1456,7 @@ export default function Insights() {
                                 fontStyle: "normal",
                                 fontWeight: 400,
                                 lineHeight: "normal",
-                                marginLeft: 20,
+                                marginLeft: 50,
                               }}
                             >
                               {showAll2 ? "Ver menos" : "Ver más"}
@@ -1672,7 +1646,7 @@ export default function Insights() {
                           fontSize: "18px",
                         }}
                       >
-                        <p>No hay datos de coolers disponibles.</p>
+                        <p>Sin información para mostrar.</p>
                       </div>
                     )}
                   </>

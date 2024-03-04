@@ -76,6 +76,7 @@ export default function Outlets() {
       // const data = await fetchOutlets(pathVerify(), setIsLoading);
       const data = await fetchUniversalTables("outlets", body, setIsLoading);
       const datos = await data.json();
+      // console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
@@ -344,7 +345,7 @@ export default function Outlets() {
                 <th scope="col">Nombre</th>
                 <th scope="col"># Enfriadores</th>
                 <th scope="col">Última visita</th>
-                <th scope="col">Prioridad</th>
+                <th scope="col">CONTROL DE ACTIVOS</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -423,37 +424,107 @@ export default function Outlets() {
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
                           </>
-                        ) : outlet.priority === undefined ||
-                          outlet.priority === "" ? (
+                        ) : outlet.actionable === undefined ||
+                          outlet.actionable === "" ? (
                           "Sin registro"
                         ) : (
                           <>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "4px",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "4px",
-                                borderRadius: "2px",
-                                border: "1.5px solid #0F9F67",
-                                background: "#FFF",
-                              }}
-                            >
+                            <>
                               <div
                                 style={{
-                                  color: "#0F9F67",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "12px",
-                                  fontStyle: "normal",
-                                  fontWeight: 600,
-                                  lineHeight: "12px",
+                                  width:
+                                    outlet.actionable === "Visita PdV"
+                                      ? "160px"
+                                      : outlet.actionable === "Sin Riesgo"
+                                      ? "100px"
+                                      : outlet.actionable ===
+                                        "Toma de Decisiones"
+                                      ? "150px"
+                                      : outlet.actionable === "Actualizar Info"
+                                      ? "160px"
+                                      : "80px",
+                                  display: "flex",
+                                  padding: "4px",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                  gap: "4px",
+                                  borderRadius: "2px",
+                                  border:
+                                    outlet.actionable === "Visita PdV"
+                                      ? "1.5px solid #DA7E05"
+                                      : outlet.actionable === "Sin Riesgo"
+                                      ? "1.5px solid #0F9F67"
+                                      : outlet.actionable ===
+                                        "Toma de Decisiones"
+                                      ? "1.5px solid #F93448"
+                                      : outlet.actionable === "Actualizar Info"
+                                      ? "1.5px solid #DA7E05"
+                                      : "1.5px solid black",
+                                  background: "#FFF",
                                 }}
                               >
-                                {" "}
-                                {outlet.priority}
+                                {outlet.actionable === "Visita PdV" ? (
+                                  <img
+                                    src={"../../sampleData/p.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable === "Sin Riesgo" ? (
+                                  <img
+                                    src={"../../sampleData/sn.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable ===
+                                  "Toma de Decisiones" ? (
+                                  <img
+                                    src={"../../sampleData/a.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable === "Actualizar Info" ? (
+                                  <img
+                                    src={"../../sampleData/p.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+
+                                <div
+                                  style={{
+                                    color:
+                                      outlet.actionable === "Visita PdV"
+                                        ? "#DA7E05"
+                                        : outlet.actionable === "Sin Riesgo"
+                                        ? "#0F9F67"
+                                        : outlet.actionable ===
+                                          "Toma de Decisiones"
+                                        ? "#F93448"
+                                        : outlet.actionable ===
+                                          "Actualizar Info"
+                                        ? "#DA7E05"
+                                        : "black",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "1vw",
+                                    fontStyle: "normal",
+                                    fontWeight: 600,
+                                    lineHeight: "14px",
+                                  }}
+                                >
+                                  {outlet.actionable === "Visita PdV"
+                                    ? "Visita punto de venta"
+                                    : outlet.actionable === "Sin Riesgo"
+                                    ? "Sin riesgo"
+                                    : outlet.actionable === "Toma de Decisiones"
+                                    ? "Acciones urgentes"
+                                    : outlet.actionable === "Actualizar Info"
+                                    ? "Requiere actualizar ..."
+                                    : outlet.actionable}
+                                </div>
                               </div>
-                            </div>
+                            </>
                           </>
                         )}
                       </td>
@@ -510,7 +581,7 @@ export default function Outlets() {
                   fontSize: "18px",
                 }}
               >
-                <p>No hay datos de usuarios disponibles.</p>
+                <p>Sin información para mostrar.</p>
               </div>
             )}
           </table>

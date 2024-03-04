@@ -769,7 +769,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 style={{ width: "330%" }}
               />
             </section>
-            <section>
+            <section style={{ marginTop: -30 }}>
               <Table
                 style={{
                   borderCollapse: "collapse",
@@ -823,7 +823,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                         width: "5rem",
                       }}
                     >
-                      Prioridad
+                      CONTROL DE ACTIVOS
                     </TableHeaderCell>
                     <TableHeaderCell
                       style={{
@@ -875,12 +875,15 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       gap: "4px",
                                       borderRadius: "2px",
                                       background:
-                                        cooler?.status === "SIN DATOS"
+                                        cooler?.status === "EN FALLA"
                                           ? "#FFC7CD"
                                           : cooler?.status ===
                                             "FUNCIONANDO CORRECTAMENTE"
                                           ? "#DFF9E3"
-                                          : "#FEF5C7",
+                                          : cooler?.status ===
+                                            "FUNCIONANDO CON ALERTA"
+                                          ? "#FEF5C7"
+                                          : "#D4DAE3",
                                       width: "fit-content",
                                     }}
                                   >
@@ -890,23 +893,29 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                         height: "4px",
                                         borderRadius: "5px",
                                         background:
-                                          cooler?.status === "SIN DATOS"
+                                          cooler?.status === "EN FALLA"
                                             ? "#F93448"
                                             : cooler?.status ===
                                               "FUNCIONANDO CORRECTAMENTE"
                                             ? "#31B648"
-                                            : "#F6A60A",
+                                            : cooler?.status ===
+                                              "FUNCIONANDO CON ALERTA"
+                                            ? "#F6A60A"
+                                            : "#808080",
                                       }}
                                     ></div>
                                     <div
                                       style={{
                                         color:
-                                          cooler?.status === "SIN DATOS"
+                                          cooler?.status === "EN FALLA"
                                             ? "#F93448"
                                             : cooler?.status ===
                                               "FUNCIONANDO CORRECTAMENTE"
                                             ? "#1D5E29"
-                                            : "#451C03",
+                                            : cooler?.status ===
+                                              "FUNCIONANDO CON ALERTA"
+                                            ? "#451C03"
+                                            : "black",
                                         width: "100%",
                                         fontSize: ".3rem",
                                         fontStyle: "normal",
@@ -995,7 +1004,106 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                 width: "5rem",
                               }}
                             >
-                              Sin registro
+                              <>
+                                <div
+                                  style={{
+                                    width:
+                                      cooler.actionable === "Visita PdV"
+                                        ? "80px"
+                                        : cooler.actionable === "Sin Riesgo"
+                                        ? "80px"
+                                        : cooler.actionable ===
+                                          "Toma de Decisiones"
+                                        ? "80px"
+                                        : cooler.actionable ===
+                                          "Actualizar Info"
+                                        ? "80px"
+                                        : "80px",
+                                    display: "flex",
+                                    padding: "4px",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    borderRadius: "2px",
+                                    border:
+                                      cooler.actionable === "Visita PdV"
+                                        ? "1.5px solid #DA7E05"
+                                        : cooler.actionable === "Sin Riesgo"
+                                        ? "1.5px solid #0F9F67"
+                                        : cooler.actionable ===
+                                          "Toma de Decisiones"
+                                        ? "1.5px solid #F93448"
+                                        : cooler.actionable ===
+                                          "Actualizar Info"
+                                        ? "1.5px solid #DA7E05"
+                                        : "1.5px solid black",
+                                    background: "#FFF",
+                                  }}
+                                >
+                                  {cooler.actionable === "Visita PdV" ? (
+                                    <img
+                                      src={"../../sampleData/p.svg"}
+                                      alt="Descripción de la imagen"
+                                      style={{ width: "12px", height: "12px" }}
+                                    />
+                                  ) : cooler.actionable === "Sin Riesgo" ? (
+                                    <img
+                                      src={"../../sampleData/sn.svg"}
+                                      alt="Descripción de la imagen"
+                                      style={{ width: "12px", height: "12px" }}
+                                    />
+                                  ) : cooler.actionable ===
+                                    "Toma de Decisiones" ? (
+                                    <img
+                                      src={"../../sampleData/a.svg"}
+                                      alt="Descripción de la imagen"
+                                      style={{ width: "12px", height: "12px" }}
+                                    />
+                                  ) : cooler.actionable ===
+                                    "Actualizar Info" ? (
+                                    <img
+                                      src={"../../sampleData/p.svg"}
+                                      alt="Descripción de la imagen"
+                                      style={{ width: "12px", height: "12px" }}
+                                    />
+                                  ) : (
+                                    ""
+                                  )}
+
+                                  <div
+                                    style={{
+                                      color:
+                                        cooler.actionable === "Visita PdV"
+                                          ? "#DA7E05"
+                                          : cooler.actionable === "Sin Riesgo"
+                                          ? "#0F9F67"
+                                          : cooler.actionable ===
+                                            "Toma de Decisiones"
+                                          ? "#F93448"
+                                          : cooler.actionable ===
+                                            "Actualizar Info"
+                                          ? "#DA7E05"
+                                          : "black",
+                                      // fontFamily: "DM Sans",
+                                      fontSize: ".7vw",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      lineHeight: "14px",
+                                    }}
+                                  >
+                                    {cooler.actionable === "Visita PdV"
+                                      ? "Visita punt.."
+                                      : cooler.actionable === "Sin Riesgo"
+                                      ? "Sin riesgo"
+                                      : cooler.actionable ===
+                                        "Toma de Decisiones"
+                                      ? "Acciones urg.."
+                                      : cooler.actionable === "Actualizar Info"
+                                      ? "Requiere act.."
+                                      : cooler.actionable}
+                                  </div>
+                                </div>
+                              </>
                             </TableCell>
                             <TableCell
                               style={{

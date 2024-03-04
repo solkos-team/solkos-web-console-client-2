@@ -43,6 +43,7 @@ export default function Alerts() {
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
     delta: number;
+    level: string;
   }>();
 
   return (
@@ -150,7 +151,7 @@ export default function Alerts() {
                     key={index}
                     style={{
                       marginBottom: "16px",
-                      width: "222px",
+                      width: "250px",
                       padding: "18px",
                       flexDirection: "column",
                       alignItems: "flex-start",
@@ -433,6 +434,7 @@ export default function Alerts() {
                           setSelectedAlgorithmValues({
                             value: cooler.value,
                             delta: cooler.delta,
+                            level: cooler.level,
                           });
                           open();
                         }}
@@ -470,6 +472,7 @@ export default function Alerts() {
           selectedAlgorithm={selectedAlgorithm}
           value={selectedAlgorithmValues.value}
           delta={selectedAlgorithmValues.delta}
+          level={selectedAlgorithmValues.level}
         />
       )}
     </div>

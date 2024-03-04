@@ -32,6 +32,7 @@ export default function Indicator() {
   useEffect(() => {
     fetchData();
   }, [dt, dto]);
+  // console.log(totalCoolers);
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 
@@ -58,7 +59,8 @@ export default function Indicator() {
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
     delta: number;
-  }>({ value: 0, delta: 0 });
+    level: string;
+  }>({ value: 0, delta: 0, level: "" });
 
   return (
     <div>
@@ -144,21 +146,34 @@ export default function Indicator() {
             }}
           >
             {/* Indicador */}
-            {/* {isLoading ? (
+            {isLoading ? (
               <>
                 <SkeletonCards></SkeletonCards>
               </>
             ) : (
               coolersData &&
               coolersData
-                .filter((cooler) => cooler.level === "INDICATOR")
+                .filter(
+                  (cooler) => cooler.class === "ASSET_MANAGEMENT_ACTIONABLE"
+                )
+                .sort((a, b) => {
+                  const order = [
+                    "Sin Riesgo",
+                    "Visita PdV",
+                    "Actualizar Info",
+                    "Toma de Decisiones",
+                  ];
+                  const indexA = order.indexOf(a.algorithm);
+                  const indexB = order.indexOf(b.algorithm);
+                  return indexA - indexB;
+                })
                 .map((cooler, index) => (
                   <div
                     className="IndicatorCardsContent"
                     key={index}
                     style={{
                       marginBottom: "16px",
-                      width: "222px",
+                      width: "250px",
                       padding: "18px",
                       flexDirection: "column",
                       alignItems: "flex-start",
@@ -197,7 +212,13 @@ export default function Indicator() {
                             background:
                               cooler.algorithm === "Sin Riesgo"
                                 ? "#C0F2C8"
-                                : "#BCDAFF",
+                                : cooler.algorithm === "Actualizar Info"
+                                ? "#FEF5C7"
+                                : cooler.algorithm === "Toma de Decisiones"
+                                ? "#FFC7CD"
+                                : cooler.algorithm === "Visita PdV"
+                                ? "#FEF5C7"
+                                : "",
                           }}
                         >
                           {cooler.algorithm === "Sin Riesgo" ? (
@@ -206,12 +227,26 @@ export default function Indicator() {
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : (
+                          ) : cooler.algorithm === "Actualizar Info" ? (
                             <img
-                              src={"../../sampleData/ind.svg"}
+                              src={"../../sampleData/reqa.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
+                          ) : cooler.algorithm === "Toma de Decisiones" ? (
+                            <img
+                              src={"../../sampleData/accio.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "Visita PdV" ? (
+                            <img
+                              src={"../../sampleData/vp.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : (
+                            ""
                           )}
                         </div>
                         <div
@@ -223,29 +258,12 @@ export default function Indicator() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.algorithm === "INSTALLED"
-                            ? "Instalado"
-                            : cooler.algorithm ===
-                              "Indicador de Riesgo Nivel: 0"
-                            ? "Sin riesgo"
-                            : cooler.algorithm ===
-                              "Indicador de Riesgo Nivel: 1"
-                            ? "Visitar punto de venta"
-                            : cooler.algorithm ===
-                              "Indicador de Riesgo Nivel: 2"
+                          {cooler.algorithm === "Visita PdV"
+                            ? "Visita punto de venta"
+                            : cooler.algorithm === "Actualizar Info"
                             ? "Requiere actualizar información"
-                            : cooler.algorithm ===
-                              "Indicador de Riesgo Nivel: 3"
-                            ? "Tomar acción urgente"
-                            : cooler.algorithm ===
-                              "Indicador de Riesgo Nivel: 4"
-                            ? "En riesgo"
-                            : cooler.algorithm === "OWNED"
-                            ? "En propiedad"
-                            : cooler.algorithm === "LOCATION"
-                            ? "Ubicado"
-                            : cooler.algorithm === "TELEMETRY"
-                            ? "Telemetría"
+                            : cooler.algorithm === "Toma de Decisiones"
+                            ? "Acciones urgentes"
                             : cooler.algorithm}
                         </div>
                       </div>
@@ -402,10 +420,12 @@ export default function Indicator() {
                           cursor: "pointer",
                         }}
                         onClick={() => {
+                          // console.log(cooler.level);
                           setSelectedAlgorithm(cooler.algorithm);
                           setSelectedAlgorithmValues({
                             value: cooler.value,
                             delta: cooler.delta,
+                            level: cooler.level,
                           });
                           open();
                         }}
@@ -431,7 +451,7 @@ export default function Indicator() {
                     </div>
                   </div>
                 ))
-            )} */}
+            )}
           </div>
         </div>
       </div>
@@ -442,6 +462,7 @@ export default function Indicator() {
           selectedAlgorithm={selectedAlgorithm}
           value={selectedAlgorithmValues.value}
           delta={selectedAlgorithmValues.delta}
+          level={selectedAlgorithmValues.level}
         />
       )}
     </div>

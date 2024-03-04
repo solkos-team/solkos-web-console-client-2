@@ -72,6 +72,7 @@ export default function Coolers() {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
       const datos = await data.json();
+      // console.log(datos);
       const totalData = data.headers.get("content-length");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
@@ -330,7 +331,7 @@ export default function Coolers() {
                 <th scope="col">Serie</th>
                 <th scope="col">Modelo</th>
                 <th scope="col">Última visita</th>
-                <th scope="col">Prioridad</th>
+                <th scope="col">Control de activos</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -370,18 +371,23 @@ export default function Coolers() {
                                 gap: "4px",
                                 borderRadius: "2px",
                                 background:
-                                  cooler?.status === "SIN DATOS"
+                                  cooler?.status === "EN FALLA"
                                     ? "#FFC7CD"
                                     : cooler?.status ===
                                       "FUNCIONANDO CORRECTAMENTE"
                                     ? "#DFF9E3"
-                                    : "#FEF5C7",
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CON ALERTA"
+                                    ? "#FEF5C7"
+                                    : "#D4DAE3",
                                 width:
                                   cooler?.status === "SIN DATOS"
                                     ? "60px"
                                     : cooler?.status ===
                                       "FUNCIONANDO CORRECTAMENTE"
                                     ? "160px"
+                                    : cooler?.status === "EN FALLA"
+                                    ? "70px"
                                     : "150px",
                               }}
                             >
@@ -391,23 +397,29 @@ export default function Coolers() {
                                   height: "4px",
                                   borderRadius: "5px",
                                   background:
-                                    cooler?.status === "SIN DATOS"
+                                    cooler?.status === "EN FALLA"
                                       ? "#F93448"
                                       : cooler?.status ===
                                         "FUNCIONANDO CORRECTAMENTE"
                                       ? "#31B648"
-                                      : "#F6A60A",
+                                      : cooler?.status ===
+                                        "FUNCIONANDO CON ALERTA"
+                                      ? "#F6A60A"
+                                      : "#808080",
                                 }}
                               ></div>
                               <div
                                 style={{
                                   color:
-                                    cooler?.status === "SIN DATOS"
+                                    cooler?.status === "EN FALLA"
                                       ? "#F93448"
                                       : cooler?.status ===
                                         "FUNCIONANDO CORRECTAMENTE"
                                       ? "#1D5E29"
-                                      : "#451C03",
+                                      : cooler?.status ===
+                                        "FUNCIONANDO CON ALERTA"
+                                      ? "#451C03"
+                                      : "black",
                                   // fontFamily: "Space Mono",
                                   fontSize:
                                     cooler?.status ===
@@ -419,9 +431,7 @@ export default function Coolers() {
                                   lineHeight: "14px",
                                 }}
                               >
-                                {cooler?.status === "EN FALLA"
-                                  ? "FUNCIONANDO CON FALLA"
-                                  : cooler.status}
+                                {cooler?.status}
                               </div>
                             </div>
                           </>
@@ -466,34 +476,99 @@ export default function Coolers() {
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
                           </>
-                        ) : cooler.priority_status == undefined ||
-                          cooler.priority_status == "" ? (
+                        ) : cooler.actionable == undefined ||
+                          cooler.actionable == "" ? (
                           "Sin registro"
                         ) : (
                           <>
                             <div
                               style={{
+                                width:
+                                  cooler.actionable === "Visita PdV"
+                                    ? "160px"
+                                    : cooler.actionable === "Sin Riesgo"
+                                    ? "100px"
+                                    : cooler.actionable === "Toma de Decisiones"
+                                    ? "150px"
+                                    : cooler.actionable === "Actualizar Info"
+                                    ? "160px"
+                                    : "80px",
                                 display: "flex",
                                 padding: "4px",
                                 justifyContent: "center",
                                 alignItems: "center",
                                 gap: "4px",
                                 borderRadius: "2px",
-                                border: "1.5px solid #0F9F67",
+                                border:
+                                  cooler.actionable === "Visita PdV"
+                                    ? "1.5px solid #DA7E05"
+                                    : cooler.actionable === "Sin Riesgo"
+                                    ? "1.5px solid #0F9F67"
+                                    : cooler.actionable === "Toma de Decisiones"
+                                    ? "1.5px solid #F93448"
+                                    : cooler.actionable === "Actualizar Info"
+                                    ? "1.5px solid #DA7E05"
+                                    : "1.5px solid black",
                                 background: "#FFF",
                               }}
                             >
+                              {cooler.actionable === "Visita PdV" ? (
+                                <img
+                                  src={"../../sampleData/p.svg"}
+                                  alt="Descripción de la imagen"
+                                  style={{ width: "15px", height: "15px" }}
+                                />
+                              ) : cooler.actionable === "Sin Riesgo" ? (
+                                <img
+                                  src={"../../sampleData/sn.svg"}
+                                  alt="Descripción de la imagen"
+                                  style={{ width: "15px", height: "15px" }}
+                                />
+                              ) : cooler.actionable === "Toma de Decisiones" ? (
+                                <img
+                                  src={"../../sampleData/a.svg"}
+                                  alt="Descripción de la imagen"
+                                  style={{ width: "15px", height: "15px" }}
+                                />
+                              ) : cooler.actionable === "Actualizar Info" ? (
+                                <img
+                                  src={"../../sampleData/p.svg"}
+                                  alt="Descripción de la imagen"
+                                  style={{ width: "15px", height: "15px" }}
+                                />
+                              ) : (
+                                ""
+                              )}
+
                               <div
                                 style={{
-                                  color: "#0F9F67",
+                                  color:
+                                    cooler.actionable === "Visita PdV"
+                                      ? "#DA7E05"
+                                      : cooler.actionable === "Sin Riesgo"
+                                      ? "#0F9F67"
+                                      : cooler.actionable ===
+                                        "Toma de Decisiones"
+                                      ? "#F93448"
+                                      : cooler.actionable === "Actualizar Info"
+                                      ? "#DA7E05"
+                                      : "black",
                                   // fontFamily: "DM Sans",
-                                  fontSize: "14px",
+                                  fontSize: "1vw",
                                   fontStyle: "normal",
                                   fontWeight: 600,
                                   lineHeight: "14px",
                                 }}
                               >
-                                {cooler.priority_status}
+                                {cooler.actionable === "Visita PdV"
+                                  ? "Visita punto de venta"
+                                  : cooler.actionable === "Sin Riesgo"
+                                  ? "Sin riesgo"
+                                  : cooler.actionable === "Toma de Decisiones"
+                                  ? "Acciones urgentes"
+                                  : cooler.actionable === "Actualizar Info"
+                                  ? "Requiere actualizar ..."
+                                  : cooler.actionable}
                               </div>
                             </div>
                           </>
@@ -548,7 +623,7 @@ export default function Coolers() {
                   width: "100%",
                 }}
               >
-                <p>No hay información para mostrar.</p>
+                <p>Sin información para mostrar.</p>
               </div>
             )}
           </table>

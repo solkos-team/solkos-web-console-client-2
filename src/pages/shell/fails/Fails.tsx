@@ -22,6 +22,7 @@ export default function Fails() {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
       setCoolersData(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -57,7 +58,8 @@ export default function Fails() {
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
     delta: number;
-  }>({ value: 0, delta: 0 });
+    level: string;
+  }>({ value: 0, delta: 0, level: "" });
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   return (
@@ -163,7 +165,7 @@ export default function Fails() {
                     key={index}
                     style={{
                       marginBottom: "16px",
-                      width: "222px",
+                      width: "250px",
                       padding: "18px",
                       flexDirection: "column",
                       alignItems: "flex-start",
@@ -419,6 +421,7 @@ export default function Fails() {
                           setSelectedAlgorithmValues({
                             value: cooler.value,
                             delta: cooler.delta,
+                            level: cooler.level,
                           });
                           open();
                         }}
@@ -456,6 +459,7 @@ export default function Fails() {
           selectedAlgorithm={selectedAlgorithm}
           value={selectedAlgorithmValues.value}
           delta={selectedAlgorithmValues.delta}
+          level={selectedAlgorithmValues.level}
         />
       )}
     </div>

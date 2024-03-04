@@ -29,6 +29,7 @@ export interface CoolerInterface {
   value: number;
   delta: number;
   level: string;
+  actionable: string;
   properties?: {
     energy_consumption_month_1?: {
       timestamp: string;
@@ -107,6 +108,7 @@ export interface InsightsData {
 
 export interface CoolerData {
   cooler: {
+    actionable: string;
     serial_number: string;
     model_id: string;
     outlet_name: string;
@@ -174,9 +176,9 @@ export interface CoolerData {
   tracking?: Array<{ class: string; algorithm: string; notified_at: string }>;
   activity?: ActivityItem[];
   asset?: {
-    url:string;
-    is_default:boolean;
-  }
+    url: string;
+    is_default: boolean;
+  };
 }
 export interface ActivityItem {
   type: string;

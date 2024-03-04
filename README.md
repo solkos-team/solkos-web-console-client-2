@@ -9,4 +9,10 @@ Currently, two official plugins are available:
 
 ## Deploy to firebase hosting:
 
+## PROD
+
+firebase deploy --only hosting:solkos-console2-prd
+
+## QA
+
 firebase deploy --only hosting:solkos-console-2

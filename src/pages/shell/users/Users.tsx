@@ -498,7 +498,7 @@ export default function Users() {
                       fontSize: "18px",
                     }}
                   >
-                    <p>No hay datos de usuarios disponibles.</p>
+                    <p>Sin información para mostrar.</p>
                   </div>
                 )}
               </>

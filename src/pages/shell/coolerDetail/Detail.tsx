@@ -71,6 +71,7 @@ export default function CoolerDetail() {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
+      //console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -79,32 +80,18 @@ export default function CoolerDetail() {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   fetchData();
-  //   document.body.style.overflow = "hidden";
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, []);
-
   const { serial_number } = useParams();
 
   useEffect(() => {}, [serial_number, coolersData]);
   const [tabs, setTabs] = useState<string | undefined>();
 
-  // if (coolersData && coolersData.activity && coolersData.activity.length > 0) {
-  //   console.log(coolersData.activity[0].data.service_id);
-  // } else {
-  //   console.log("No hay actividad disponible.");
-  // }
-
   return (
     <>
-        {localStorage.getItem("USER") == "Call Center" ? (
-            <PageFilter path="" disabledPath={true} />
-          ) : (
-            <PageFilter path="clt" disabledPath={true} />
-          )}
+      {localStorage.getItem("USER") == "Call Center" ? (
+        <PageFilter path="" disabledPath={true} />
+      ) : (
+        <PageFilter path="clt" disabledPath={true} />
+      )}
       <section className="detail_principal_body">
         <section className="detail_image_info">
           <div className="detail_image_info_data">
@@ -116,7 +103,8 @@ export default function CoolerDetail() {
                 height={"85%"}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null;
-                  currentTarget.src = 'https://storage.googleapis.com/negocon-renders/default/default_cooler.webp'
+                  currentTarget.src =
+                    "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
                 }}
               />
             </div>
@@ -161,30 +149,108 @@ export default function CoolerDetail() {
                         ? "Sin registro"
                         : coolersData?.cooler?.serial_number}
                     </div>
-                    {/* <div
-                    style={{
-                      display: "flex",
-                      padding: "4px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
-                      border: "1.5px solid #0F9F67",
-                      background: "#FFF",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#0F9F67",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 600,
-                        lineHeight: "14px",
-                      }}
-                    >
-                      -----
-                    </div>
-                  </div> */}
+                    <>
+                      <div
+                        style={{
+                          width:
+                            coolersData?.cooler.actionable === "Visita PdV"
+                              ? "160px"
+                              : coolersData?.cooler.actionable === "Sin Riesgo"
+                              ? "100px"
+                              : coolersData?.cooler.actionable ===
+                                "Toma de Decisiones"
+                              ? "150px"
+                              : coolersData?.cooler.actionable ===
+                                "Actualizar Info"
+                              ? "220px"
+                              : "80px",
+                          display: "flex",
+                          padding: "4px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "4px",
+                          borderRadius: "2px",
+                          border:
+                            coolersData?.cooler.actionable === "Visita PdV"
+                              ? "1.5px solid #DA7E05"
+                              : coolersData?.cooler.actionable === "Sin Riesgo"
+                              ? "1.5px solid #0F9F67"
+                              : coolersData?.cooler.actionable ===
+                                "Toma de Decisiones"
+                              ? "1.5px solid #F93448"
+                              : coolersData?.cooler.actionable ===
+                                "Actualizar Info"
+                              ? "1.5px solid #DA7E05"
+                              : "1.5px solid black",
+                          background: "#FFF",
+                        }}
+                      >
+                        {coolersData?.cooler.actionable === "Visita PdV" ? (
+                          <img
+                            src={"../../sampleData/p.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable === "Sin Riesgo" ? (
+                          <img
+                            src={"../../sampleData/sn.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable ===
+                          "Toma de Decisiones" ? (
+                          <img
+                            src={"../../sampleData/a.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable ===
+                          "Actualizar Info" ? (
+                          <img
+                            src={"../../sampleData/p.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : (
+                          ""
+                        )}
+
+                        <div
+                          style={{
+                            color:
+                              coolersData?.cooler.actionable === "Visita PdV"
+                                ? "#DA7E05"
+                                : coolersData?.cooler.actionable ===
+                                  "Sin Riesgo"
+                                ? "#0F9F67"
+                                : coolersData?.cooler.actionable ===
+                                  "Toma de Decisiones"
+                                ? "#F93448"
+                                : coolersData?.cooler.actionable ===
+                                  "Actualizar Info"
+                                ? "#DA7E05"
+                                : "black",
+                            // fontFamily: "DM Sans",
+                            fontSize: "1vw",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "14px",
+                          }}
+                        >
+                          {coolersData?.cooler.actionable === "Visita PdV"
+                            ? "Visita punto de venta"
+                            : coolersData?.cooler.actionable === "Sin Riesgo"
+                            ? "Sin riesgo"
+                            : coolersData?.cooler.actionable ===
+                              "Toma de Decisiones"
+                            ? "Acciones urgentes"
+                            : coolersData?.cooler.actionable ===
+                              "Actualizar Info"
+                            ? "Requiere actualizar información"
+                            : coolersData?.cooler.actionable}
+                        </div>
+                      </div>
+                    </>
                   </div>
                 </div>
                 <div
@@ -198,12 +264,12 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.model_id === undefined ||
-                    coolersData?.cooler?.model_id === null
+                  coolersData?.cooler?.model_id === null
                     ? "Sin registro"
                     : coolersData?.cooler?.model_id}
                 </div>
                 {coolersData?.cooler?.status == undefined ||
-                  coolersData?.cooler.status == "" ? (
+                coolersData?.cooler.status == "" ? (
                   <div
                     style={{
                       color: "#88888B",
@@ -226,12 +292,15 @@ export default function CoolerDetail() {
                         gap: "4px",
                         borderRadius: "2px",
                         background:
-                          coolersData?.cooler?.status === "SIN DATOS"
+                          coolersData?.cooler?.status === "EN FALLA"
                             ? "#FFC7CD"
                             : coolersData?.cooler?.status ===
                               "FUNCIONANDO CORRECTAMENTE"
                             ? "#DFF9E3"
-                            : "#FEF5C7",
+                            : coolersData?.cooler?.status ===
+                              "FUNCIONANDO CON ALERTA"
+                            ? "#FEF5C7"
+                            : "#D4DAE3",
                       }}
                     >
                       <div
@@ -240,23 +309,29 @@ export default function CoolerDetail() {
                           height: "4px",
                           borderRadius: "5px",
                           background:
-                            coolersData?.cooler?.status === "SIN DATOS"
+                            coolersData?.cooler?.status === "EN FALLA"
                               ? "#F93448"
                               : coolersData?.cooler?.status ===
                                 "FUNCIONANDO CORRECTAMENTE"
                               ? "#31B648"
-                              : "#F6A60A",
+                              : coolersData?.cooler?.status ===
+                                "FUNCIONANDO CON ALERTA"
+                              ? "#F6A60A"
+                              : "#808080",
                         }}
                       ></div>
                       <div
                         style={{
                           color:
-                            coolersData?.cooler?.status === "SIN DATOS"
+                            coolersData?.cooler?.status === "EN FALLA"
                               ? "#F93448"
                               : coolersData?.cooler?.status ===
                                 "FUNCIONANDO CORRECTAMENTE"
                               ? "#1D5E29"
-                              : "#451C03",
+                              : coolersData?.cooler?.status ===
+                                "FUNCIONANDO CON ALERTA"
+                              ? "#451C03"
+                              : "black",
                           // fontFamily: "Space Mono",
                           fontSize: ".8vw",
                           fontStyle: "normal",
@@ -264,9 +339,7 @@ export default function CoolerDetail() {
                           lineHeight: "14px",
                         }}
                       >
-                        {coolersData?.cooler?.status === "EN FALLA"
-                          ? "FUNCIONANDO CON FALLA"
-                          : coolersData?.cooler.status}
+                        {coolersData?.cooler?.status}
                       </div>
                     </div>
                   </>
@@ -303,11 +376,11 @@ export default function CoolerDetail() {
                     }}
                   >
                     {coolersData?.cooler?.last_read == undefined ||
-                      coolersData?.cooler?.last_read == null
+                    coolersData?.cooler?.last_read == null
                       ? "Sin registro"
                       : moment(new Date(coolersData?.cooler?.last_read)).format(
-                        "DD/MM/YYYY HH:mm"
-                      )}
+                          "DD/MM/YYYY HH:mm"
+                        )}
                   </div>
                   <div
                     style={{
@@ -332,11 +405,11 @@ export default function CoolerDetail() {
                     >
                       {" "}
                       {coolersData?.cooler?.days_without_visit === null ||
-                        coolersData?.cooler?.days_without_visit === undefined
+                      coolersData?.cooler?.days_without_visit === undefined
                         ? "Sin registro"
                         : coolersData?.cooler?.days_without_visit +
-                        " " +
-                        "días sin visita"}
+                          " " +
+                          "días sin visita"}
                     </div>
                   </div>
                 </div>
@@ -383,9 +456,7 @@ export default function CoolerDetail() {
                     : coolersData?.cooler?.channel}
                 </div>
               </div>
-              <div
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div
                   style={{
                     color: "#88888B",
@@ -408,14 +479,12 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.region === "" ||
-                    coolersData?.cooler?.region === undefined
+                  coolersData?.cooler?.region === undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.region}
                 </div>
               </div>
-              <div
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div
                   style={{
                     color: "#88888B",
@@ -438,14 +507,12 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.route === "" ||
-                    coolersData?.cooler?.route === undefined
+                  coolersData?.cooler?.route === undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.route}
                 </div>
               </div>
-              <div
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div
                   style={{
                     color: "#88888B",
@@ -468,7 +535,7 @@ export default function CoolerDetail() {
                   }}
                 >
                   {coolersData?.cooler?.zone === "" ||
-                    coolersData?.cooler?.zone === undefined
+                  coolersData?.cooler?.zone === undefined
                     ? "Sin registro"
                     : coolersData?.cooler?.zone}
                 </div>
@@ -476,12 +543,12 @@ export default function CoolerDetail() {
             </div>
           </div>
         </section>
-        <hr className="detail_hr"/>
+        <hr className="detail_hr" style={{ marginTop: 2 }} />
         <section className="detail_principal_body_content">
           <section className="detail_principal_actividad_acerca_1">
             <div
               className="clt_actividad_acerca_principal"
-            // style={{ overflowY: "auto" }}
+              // style={{ overflowY: "auto" }}
             >
               <section className="clt_actividad_principal_actividad">
                 <div className="clt_actividad_principal_title">
@@ -495,8 +562,9 @@ export default function CoolerDetail() {
                   </h1>
                 </div>
                 <div className="clt_acerca_principal_cards">
-                  {coolersData?.service_orders === null ||
-                    coolersData?.service_orders?.length === 0 ? (
+                  {coolersData &&
+                  coolersData.activity &&
+                  coolersData.activity.length <= 0 ? (
                     <>
                       <p
                         style={{
@@ -520,9 +588,33 @@ export default function CoolerDetail() {
                         }}
                       >
                         {coolersData.activity
-                          .slice()
+
+                          .filter(
+                            (order) =>
+                              (order.type === "SERVICE_ORDER" &&
+                                order.data.status === "D,D") ||
+                              (order.type === "TRACKING" &&
+                                (order.data.algorithm === "COMPRESSOR_FAIL" ||
+                                  order.data.algorithm === "FREEZING_FAIL" ||
+                                  order.data.algorithm === "TEMPERATURE_FAIL" ||
+                                  order.data.algorithm === "VOLTAGE_FAIL" ||
+                                  order.data.algorithm ===
+                                    "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
+                                  order.data.algorithm ===
+                                    "DISCONNECTION_ALERT" ||
+                                  order.data.algorithm ===
+                                    "HIGH_TEMPERATURE_ALERT" ||
+                                  order.data.algorithm ===
+                                    "HIGH_VOLTAGE_ALERT" ||
+                                  order.data.algorithm ===
+                                    "LOW_VOLTAGE_ALERT" ||
+                                  order.data.algorithm === "Actualizar Info" ||
+                                  order.data.algorithm === "Sin Riesgo" ||
+                                  order.data.algorithm ===
+                                    "Toma de Decisiones" ||
+                                  order.data.algorithm === "Visita PdV"))
+                          )
                           .reverse()
-                          .filter((order) => order.data.level !== "INDICATOR")
                           .map((order, index) => (
                             <>
                               <div key={index}>
@@ -562,11 +654,11 @@ export default function CoolerDetail() {
                                           }}
                                         >
                                           {order.data.close_at === undefined ||
-                                            order.data.close_at === null
+                                          order.data.close_at === null
                                             ? "Sin registro"
                                             : moment(
-                                              new Date(order.data.close_at)
-                                            ).format("DD/MM/YYYY HH:mm")}
+                                                new Date(order.data.close_at)
+                                              ).format("DD/MM/YYYY HH:mm")}
                                         </div>
                                         <div
                                           style={{
@@ -661,8 +753,8 @@ export default function CoolerDetail() {
                                             {order.data.service_id === "1004"
                                               ? "ORDEN DE INSTALACIÓN"
                                               : order.data.service_id === "1003"
-                                                ? "ORDEN DE MOVIMIENTO"
-                                                : "ORDEN DE SERVICIO"}
+                                              ? "ORDEN DE MOVIMIENTO"
+                                              : "ORDEN DE SERVICIO"}
                                           </div>
                                         </div>
                                       </div>
@@ -704,11 +796,11 @@ export default function CoolerDetail() {
                                         }}
                                       >
                                         {order.data.notified_at === undefined ||
-                                          order.data.notified_at === null
+                                        order.data.notified_at === null
                                           ? "Sin registro"
                                           : moment(
-                                            new Date(order.data.notified_at)
-                                          ).format("DD/MM/YYYY HH:mm")}
+                                              new Date(order.data.notified_at)
+                                            ).format("DD/MM/YYYY HH:mm")}
                                       </div>
 
                                       <div
@@ -726,36 +818,45 @@ export default function CoolerDetail() {
                                       >
                                         <div>
                                           {order.data.algorithm ===
-                                            "COMPRESSOR_FAIL"
+                                          "COMPRESSOR_FAIL"
                                             ? "Falla asociada al compresor"
                                             : order.data.algorithm ===
                                               "TEMPERATURE_FAIL"
-                                              ? "Alta temperatura"
-                                              : order.data.algorithm ===
-                                                "VOLTAGE_FAIL"
-                                                ? "Posible daño eléctrico"
-                                                : order.data.algorithm ===
-                                                  "FREEZING_FAIL"
-                                                  ? "Evaporador bloqueado"
-                                                  : order.data.algorithm ===
-                                                    "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                                                    ? "Alta demanda del compresor"
-                                                    : order.data.algorithm ===
-                                                      "DISCONNECTION_ALERT"
-                                                      ? "Desconexión"
-                                                      : order.data.algorithm ===
-                                                        "HIGH_TEMPERATURE_ALERT"
-                                                        ? "Alta temperatura"
-                                                        : order.data.algorithm ===
-                                                          "HIGH_VOLTAGE_ALERT"
-                                                          ? "Alto voltaje"
-                                                          : order.data.algorithm ===
-                                                            "LOW_VOLTAGE_ALERT"
-                                                            ? "Bajo voltaje"
-                                                            : order.data.algorithm ===
-                                                              "MOVED_VISIT_ALERT"
-                                                              ? "Movimiento"
-                                                              : order.data.algorithm}
+                                            ? "Alta temperatura"
+                                            : order.data.algorithm ===
+                                              "VOLTAGE_FAIL"
+                                            ? "Posible daño eléctrico"
+                                            : order.data.algorithm ===
+                                              "FREEZING_FAIL"
+                                            ? "Evaporador bloqueado"
+                                            : order.data.algorithm ===
+                                              "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                            ? "Alta demanda del compresor"
+                                            : order.data.algorithm ===
+                                              "DISCONNECTION_ALERT"
+                                            ? "Desconexión"
+                                            : order.data.algorithm ===
+                                              "HIGH_TEMPERATURE_ALERT"
+                                            ? "Alta temperatura"
+                                            : order.data.algorithm ===
+                                              "HIGH_VOLTAGE_ALERT"
+                                            ? "Alto voltaje"
+                                            : order.data.algorithm ===
+                                              "LOW_VOLTAGE_ALERT"
+                                            ? "Bajo voltaje"
+                                            : order.data.algorithm ===
+                                              "Actualizar Info"
+                                            ? "Requiere actualizar información"
+                                            : order.data.algorithm ===
+                                              "Sin Riesgo"
+                                            ? "Sin riesgo"
+                                            : order.data.algorithm ===
+                                              "Toma de Decisiones"
+                                            ? "Acciones urgentes"
+                                            : order.data.algorithm ===
+                                              "Visita PdV"
+                                            ? "Visita punto de venta"
+                                            : order.data.algorithm}
                                         </div>
                                         <div
                                           style={{
@@ -769,8 +870,8 @@ export default function CoolerDetail() {
                                               order.data.level === "ALERT"
                                                 ? "#FEF5C7"
                                                 : order.data.level === "FAIL"
-                                                  ? "#FFC7CD"
-                                                  : "#BCDAFF",
+                                                ? "#FFC7CD"
+                                                : "#BCDAFF",
                                             marginLeft: 10,
                                           }}
                                         >
@@ -830,8 +931,8 @@ export default function CoolerDetail() {
                                                 order.data.level === "ALERT"
                                                   ? "#451C03"
                                                   : order.data.level === "FAIL"
-                                                    ? "#F93448"
-                                                    : "#3E83FF",
+                                                  ? "#F93448"
+                                                  : "#3E83FF",
                                               fontSize: "8px",
                                               fontStyle: "normal",
                                               fontWeight: 400,
@@ -840,8 +941,10 @@ export default function CoolerDetail() {
                                             {order.data.level === "ALERT"
                                               ? "ALERTA"
                                               : order.data.level === "FAIL"
-                                                ? "FALLA"
-                                                : order.data.level}
+                                              ? "FALLA"
+                                              : order.data.level === "INDICATOR"
+                                              ? "INDICADOR"
+                                              : order.data.level}
                                           </div>
                                         </div>
                                       </div>
@@ -857,8 +960,7 @@ export default function CoolerDetail() {
                 </div>
               </section>
 
-              <section
-                className="clt_actividad_principal_actividad">
+              <section className="clt_actividad_principal_actividad">
                 <div className="clt_actividad_principal_title">
                   <img
                     src={"../../sampleData/buildings.svg"}
@@ -893,7 +995,7 @@ export default function CoolerDetail() {
                   </h1>
                   <h1 className="clt_actividad_principal_title_nombre_h1">
                     {coolersData?.cooler?.outlet_address === "" ||
-                      coolersData?.cooler?.outlet_address == undefined
+                    coolersData?.cooler?.outlet_address == undefined
                       ? "Sin registro"
                       : coolersData?.cooler?.outlet_address}
                   </h1>
@@ -911,8 +1013,8 @@ export default function CoolerDetail() {
                 <div className="clt_actividad_principal_mapa">
                   {(coolersData?.cooler?.last_latitude != null &&
                     coolersData?.cooler?.latitude === 0) ||
-                    (coolersData?.cooler?.last_latitude != 0 &&
-                      coolersData?.cooler?.latitude === 0) ? (
+                  (coolersData?.cooler?.last_latitude != 0 &&
+                    coolersData?.cooler?.latitude === 0) ? (
                     <>
                       <div>
                         <MapComponent1
@@ -942,7 +1044,8 @@ export default function CoolerDetail() {
                     </>
                   )}
                 </div>
-                <div className="clt_actividad_mapa_info"
+                <div
+                  className="clt_actividad_mapa_info"
                   // style={{
                   //   display: "flex",
                   //   padding: "8px",
@@ -1116,11 +1219,11 @@ export default function CoolerDetail() {
                         lineHeight: "normal",
                       }}
                     >
-                      {coolersData?.properties?.total_ownership_expense?.value ===
-                        undefined
+                      {coolersData?.properties?.total_ownership_expense
+                        ?.value === undefined
                         ? "Sin registro"
                         : "$" +
-                        `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
+                          `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
                     </div>
                   </div>
                   <div
@@ -1157,7 +1260,7 @@ export default function CoolerDetail() {
                       {coolersData?.properties?.sale_price?.value === undefined
                         ? "Sin registro"
                         : "$" +
-                        `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
+                          `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
                     </div>
                   </div>
                   <div
@@ -1192,10 +1295,10 @@ export default function CoolerDetail() {
                       }}
                     >
                       {coolersData?.properties?.total_expense_service.value ===
-                        undefined
+                      undefined
                         ? "Sin registro"
                         : "$" +
-                        `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
+                          `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
                     </div>
                   </div>
                 </div>
@@ -1283,14 +1386,15 @@ export default function CoolerDetail() {
                       }}
                     >
                       {coolersData?.properties?.energy_consumption?.value ===
-                        undefined
+                      undefined
                         ? "Sin registro"
-                        : `${coolersData?.properties?.energy_consumption.value.toFixed(
-                          2
-                        ) +
-                        " " +
-                        "KW/h"
-                        }`}
+                        : `${
+                            coolersData?.properties?.energy_consumption.value.toFixed(
+                              2
+                            ) +
+                            " " +
+                            "KW/h"
+                          }`}
                     </div>
                   </div>
                   <div
@@ -1327,12 +1431,13 @@ export default function CoolerDetail() {
                       {coolersData?.properties?.power_consumption_reference
                         ?.value == undefined
                         ? "Sin registro"
-                        : `${coolersData?.properties?.power_consumption_reference.value.toFixed(
-                          2
-                        ) +
-                        " " +
-                        "KW/h"
-                        }`}
+                        : `${
+                            coolersData?.properties?.power_consumption_reference.value.toFixed(
+                              2
+                            ) +
+                            " " +
+                            "KW/h"
+                          }`}
                     </div>
                   </div>
                   <div
@@ -1369,7 +1474,7 @@ export default function CoolerDetail() {
                       {coolersData?.properties?.energy_cost.value == undefined
                         ? "Sin registro"
                         : "$" +
-                        `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
+                          `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
                     </div>
                   </div>
                 </div>

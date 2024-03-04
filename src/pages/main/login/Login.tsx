@@ -1,4 +1,4 @@
-import { Button,PasswordInput,Input  } from "@mantine/core";
+import { Button, PasswordInput, Input } from "@mantine/core";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -19,7 +19,9 @@ export const Login = () => {
     localStorage.setItem("ORG", Customer);
     localStorage.setItem("RO0T", JSON.stringify(Path));
     localStorage.setItem("USER", Name);
-    String(Name) == 'Call Center' ? navigate("/homeCallCenter") : navigate("/home")
+    String(Name) == "Call Center"
+      ? navigate("/homeCallCenter")
+      : navigate("/home");
   };
   const body = {
     email: email,
@@ -50,10 +52,10 @@ export const Login = () => {
     e.preventDefault();
     handleLogin();
   };
-  const handleKeyDown = event => {
-    if (event.key === 'Enter') {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
       event.preventDefault();
-      handleLogin()
+      handleLogin();
     }
   };
   return (
@@ -179,7 +181,7 @@ export const Login = () => {
               >
                 Correo
               </div>
-              <Input 
+              <Input
                 type="text"
                 value={email}
                 onChange={handleEmailChange}
@@ -191,7 +193,7 @@ export const Login = () => {
                   fontWeight: 500,
                   lineHeight: "28px",
                   width: 430,
-                  backgroundColor:"#FFFF"
+                  backgroundColor: "#FFFF",
                 }}
               />
             </div>
@@ -355,7 +357,28 @@ export const Login = () => {
             © Imbera 2024
           </div>
         </div>
-        <div style={{ background: "#FCCFD9", width: "1500px" }}></div>
+        <div
+          style={{
+            background:
+              "conic-gradient(from 180deg at 50% 50%, #FCCFD9 0deg, #ED5079 360deg)",
+            width: "1500px",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <div style={{ marginLeft: -130, marginTop: -50 }}>
+            <img
+              src={"../../sampleData/login1.png"}
+              alt="Descripción de la imagen"
+              style={{
+                width: "790px",
+                height: "auto",
+                display: "block",
+                margin: "0 auto",
+              }}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

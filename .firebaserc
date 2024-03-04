@@ -1,5 +1,11 @@
 {
   "projects": {
     "default": "imberalink-238816"
-  }
+  },
+  "targets": {
+    "imberalink-238816": {
+      "hosting": {}
+    }
+  },
+  "etags": {}
 }
