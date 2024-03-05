@@ -13,14 +13,15 @@ export const PaginationComponent = ({
     accion(pageNum);
   };
   return (
-    <section
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-end",
-        gap: "10px",
-        marginTop: "16px",
-      }}
+    <section className="principal_paginator"
+      // style={{
+      //   display: "flex",
+      //   flexDirection: "row",
+      //   justifyContent: "flex-end",
+      //   gap: "10px",
+      //   marginTop: "16px",
+      //   backgroundColor:"red"
+      // }}
     >
       <br />
       <Pagination total={npage} onChange={handlePageChange} />
@@ -31,7 +32,7 @@ export const PaginationComponent = ({
           checked={true}
           // size="xs"
           radius="md"
-          placeholder="Select placeholder"
+          placeholder="Selecciona el numero de items"
           data={data}
           defaultValue={"25"}
           onChange={numero}

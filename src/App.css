@@ -10,6 +10,7 @@
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
     U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
 #root {
   /* max-width: 1280px; */
   /* margin: 0 auto; */
@@ -17,6 +18,7 @@
   text-align: center;
   overflow-x: hidden;
   background-color: #ffff;
+  scrollbar-width: thin;    
 }
 
 .logo {
@@ -135,12 +137,23 @@ table td {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 20px;
+  color: #3A3A3F;
 }
-
+.user_customer{
+  background-color:#FCCFD9 ;
+  padding: 2px 4px 2px 4px;
+  width: max-content;
+  border-radius: 2px;
+  gap: 4px;
+}
 table th {
   font-size: 0.85em;
-  font-weight: bold;
-  color: #3a3a3f;
+  font-weight:500;
+  line-height: 20px;
+  color: #3A3A3F;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -215,6 +228,7 @@ table th {
   flex-direction: column;
   width: 100%;
   height: 100%;
+
 }
 .insights_title {
   width: 100%;
@@ -228,17 +242,20 @@ table th {
   height: 40%;
   text-align: left;
   /* font-size: 1.3vw; */
-  font-size: clamp(1rem, 1.3vw, 1.3rem);
-  color: #000005;
   font-weight: 700;
+  font-size: clamp(1rem, 1.375rem, 1.5rem);
+  line-height: 34.1px;
+  color: #000005;
 }
 .insights_title_p {
   width: 100%;
   height: 50%;
   text-align: left;
-  color: #88888b;
   /* font-size: 0.8vw;   */
-  font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  line-height: 21.7px;
+  color: #88888b;
 }
 .insights_principal {
   width: 100%;
@@ -249,6 +266,11 @@ table th {
   gap: 0.5rem;
   /* flex-wrap: wrap; */
   margin-left: -30px;
+}
+.insights_contenido_principal{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 .GrapInsights {
   width: 1.2rem;
@@ -266,10 +288,10 @@ table th {
 .insights_mapa_info_mapa {
   margin-top: 1rem;
   height: 100%;
-  border-radius: 0.5rem;
+  border-radius: 0.5rem;  
 }
 .insights_mapa_info_title {
-  height: 10%;
+  height: 5%;
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
@@ -282,26 +304,30 @@ table th {
   text-align: left;
   color: #88888b;
   font-weight: 500;
-  line-height: 1rem;
-  /* font-size: 1vw; */
-  font-size: clamp(0.7rem, 1vw, 1.1vw);
+  line-height: 18.23px;
+  /* font-size: 0.875; */
+  font-size: clamp(0.7rem, 0.875, 1.1vw) !important;
 }
 .insights_mapa_info_datas {
   display: flex;
   flex-direction: row;
-  height: 10%;
+  height: 3%;
   margin-top: -1rem;
   /* margin-left: -5%; */
   gap: 1rem;
 }
 .insights_mapa_info_datas_data_li {
   /* font-size: 1vw; */
-  font-size: clamp(0.7rem, 0.8vw, 1rem);
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  line-height: 18.23px;
   color: #88888b;
 }
 .insights_mapa_info_datas_data_li_value {
   /* font-size: 1.2vw; */
-  font-size: clamp(0.7rem, 1vw, 1.2vw);
+  font-weight: 500;
+  font-size: clamp(0.7rem, 1.375rem, 1.4rem);
+  line-height: 28.64px;
   color: #000005;
   align-content: center;
 }
@@ -347,6 +373,7 @@ table th {
   color: #3a3a3f;
   font-weight: 500;
   margin-top: 2px;
+  line-height: 20.83px;
 }
 .insights_datas {
   width: 48.5%;
@@ -388,16 +415,19 @@ table th {
 }
 .insights_datas_kpi_title_data_h1 {
   /* font-size: 0.8vw; */
-  font-size: clamp(0.7rem, 0.8vw, 0.9rem);
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  line-height: 18.23px;
   color: #88888b;
   font-weight: 500;
   margin-left: 1rem;
 }
 .insights_datas_kpi_title_h1_data {
   /* font-size: 1.3vw; */
-  font-size: clamp(1rem, 1.3vw, 1.4rem);
-  color: #000005;
   font-weight: 500;
+  font-size: clamp(1rem, 1.375rem, 1.5rem);
+  line-height: 28.64px;
+  color: #000005;
   margin-left: 1rem;
   width: max-content;
 }
@@ -419,19 +449,25 @@ table th {
   text-align: left;
 }
 .insights_datas_kpi_data_data_1 {
-  font-size: 0.8vw;
+  font-weight: 500;
+  font-size: clamp(0.8rem,1rem,1.3rem);
+  line-height: 20.83px;
   width: 100%;
   height: 33%;
   color: #3a3a3f;
 }
 .insights_datas_kpi_data_data_2 {
-  font-size: 1vw;
+  font-weight: 500;
+  font-size: clamp(1rem,1.375rem,1.5rem);
+  line-height: 28.64px;
   width: 100%;
   height: 33%;
   color: #000005;
 }
 .insights_datas_kpi_data_data_3 {
-  font-size: 0.7vw;
+  font-weight: 400;
+  font-size: clamp(0.5rem,0.875rem,1.2rem);
+  line-height: 18.23px;
   width: 100%;
   height: 33%;
   color: #88888b;
@@ -457,7 +493,7 @@ table th {
 .insigths_datas_info2_control {
   padding: 1rem;
   width: 48.97%;
-  height: 80%;
+  height: 77%;
   border: 1px solid #88888b;
   border-radius: 0.5rem;
 }
@@ -487,7 +523,7 @@ table th {
 .insigths_datas_info2_mantenimiento {
   padding: 1rem;
   width: 48.97%;
-  height: 80%;
+  height: 77%;
   border: 1px solid #88888b;
   border-radius: 0.5rem;
 }
@@ -503,12 +539,14 @@ table th {
 .insights_datas_mantenimiento_barras {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 .insights_mapa_info_mapa_info_h1 {
-  font-size: clamp(0.7rem, 1vw, 1.1rem);
-  color: #3a3a3f;
   font-weight: 500;
+  font-size: clamp(0.7rem, 1rem, 1.1rem);
+  line-height: 20.83px;
+  color: #3a3a3f;
 }
 .insights_mapa_info_mapa_info {
   /* font-zise: 0.8vw; */
@@ -516,7 +554,7 @@ table th {
   color: #3a3a3f;
   font-weight: 500;
   text-align: left;
-  margin-top: -1px;
+  margin-top: 9px;
   height: 5%;
 }
 .insights_mapa_info_mapa_filters {
@@ -532,10 +570,10 @@ table th {
 }
 .insights_datas_info_mantenimiento_datos_h1 {
   color: #3a3a3f;
-  font-size: clamp(0.7rem, 0.8vw, 0.9rem);
-  font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: clamp(0.5rem, 0.75rem, 0.9rem);
   line-height: 20px;
+  font-style: normal;
 }
 .insights_datas_info_mantenimiento_datos_barras {
   display: flex;
@@ -545,37 +583,53 @@ table th {
   margin-bottom: 5px;
 }
 .insights_datas_info_mantenimiento_datos_barras_color_Fallas {
-  width: 13vw;
+  /* width: 13vw; */
   height: 2vw;
   border-radius: 4px;
-  background-color: #ffc4cc;
+  /* background-color: #ffc4cc; */
   display: flex;
   align-items: center;
   padding-left: 1rem;
 }
-.insights_datas_info_mantenimiento_datos_barras_color_Alertas {
-  width: 13vw;
+.insights_datas_info_controlDeActivos_barras{
   height: 2vw;
   border-radius: 4px;
-  background-color: #fef5c7;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+}
+/* .insights_datas_info_mantenimiento_datos_barras_color_Fallas:hover{
+  box-shadow: 0 0 10px red;
+}
+.insights_datas_info_mantenimiento_datos_barras_color_Alertas:hover{
+  box-shadow: 0 0 10px yellow;
+} */
+.insights_datas_info_mantenimiento_datos_barras_color_Alertas {
+  /* width: 13vw; */
+  height: 2vw;
+  border-radius: 4px;
+  /* background-color: #fef5c7; */
   display: flex;
   align-items: center;
   padding-left: 1rem;
 }
 .insights_datas_info_mantenimiento_datos_barras_title {
-  color: #142257;
-  font-size: clamp(0.7rem, 0.8vw, 0.9rem);
+  color: #49060D;
+  font-size: clamp(0.7rem, 0.75rem, 0.9rem);
   font-weight: 400;
-  line-height: 1rem;
+  line-height: 20px;
   white-space: nowrap;
   cursor: pointer;
 }
 .insights_datas_info_mantenimiento_datos_barras_cantidad {
   color: #000005;
-  font-size: clamp(0.7rem, 0.8vw, 0.9rem);
+  font-size: clamp(0.7rem, 0.75rem, 0.9rem);
   font-weight: 400;
-  line-height: normal;
+  line-height: 15.62px;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  align-content: center;
 }
 /* general styling */
 body {
@@ -726,23 +780,35 @@ body {
     display: flex;
     flex-direction: column;
     width: 90%;
-    height: 100%;
+    height: 64%;
     gap: 1vw;
   }
   .insights_mapa_info_datas {
     flex-wrap: nowrap;
     overflow: auto;
+    overflow-y: hidden;
     scrollbar-width: thin;
-    height: 15%;
+    height: 9%;
   }
   .insights_datas {
     width: 100%;
+  }
+  .insights_contenido_principal{
+    gap: 2rem;
+  }
+  .insights_datas_container_Grafica_Datas{
+    margin-left: 2.5rem;
+  }
+  .insights_datas_container_Grafica {
+    width: 30%;
   }
   /* .insights_datas_kpi_data_data{
     
   } */
   .insights_datas_kpi_data_data_1 {
-    font-size: clamp(0.8rem, 0.8vw, 0.8rem);
+    font-weight: 500;
+    font-size: clamp(0.8rem, 1rem, 1.1rem);
+    line-height: 20.83px;  
   }
   .insights_datas_kpi_data_data_2 {
     font-size: clamp(1rem, 1vw, 1rem);
@@ -760,6 +826,7 @@ body {
   .insigths_datas_info2_control {
     width: 100%;
     height: fit-content;
+    margin-top: 1rem;
   }
   .insigths_datas_info2_mantenimiento {
     width: 100%;
@@ -769,12 +836,23 @@ body {
     height: 2rem;
   }
   .insights_datas_info_mantenimiento_datos_barras_color_Alertas {
-    width: 9rem;
+    /* width: 9rem; */
     height: 2rem;
   }
   .insights_datas_info_mantenimiento_datos_barras_color_Fallas {
-    width: 9rem;
+    /* width: 9rem; */
     height: 2rem;
+  }
+  .insights_datas_info_controlDeActivos_barras{
+    height: 2rem;
+  }
+  .insights_mapa_info_mapa{
+    height: 70%;
+  }
+  .principal_paginator{
+    /* width: 100%;     */
+    height: fit-content;
+    margin-left: -3rem;
   }
 }
 /* Termina media */
@@ -792,17 +870,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: -1rem;
 }
 .insights_datas_container_Grafica_Datas {
-  width: 90%;
+  width: 91%;
   height: 100%;
   display: flex;
   flex-direction: row;  
   gap: 1.5rem;     
   overflow: auto;  
   scrollbar-width: thin;
-  margin-left: 0.5rem;
+  /* margin-left: 0.5rem; */
   justify-content: space-around;
+  margin-top: 1rem;
 }
 .insights_datas_container_Grafica_Datas_ol {
   list-style: none;
@@ -815,18 +895,24 @@ body {
 }
 .insights_datas_container_Grafica_Datas_li_title {
   /* font-size: 0.8vw; */
-  font-size: clamp(0.7rem, 0.8vw, 1rem);
+  font-weight: 500;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  line-height: 20.83px;
   color: #3a3a3f;
   width: max-content;
 }
 .insights_datas_container_Grafica_Datas_li_Enf {
-  /* font-size: 0.6vw; */
-  font-size: clamp(0.4rem, 0.6vw, 0.7rem);
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  line-height: 18.23px;
   color: #88888b;
 }
 .insights_datas_container_Grafica_Datas_li_total {
   /* font-size: 0.9vw; */
-  font-size: clamp(0.7rem, 0.9vw, 1rem);
+  font-weight: 500;
+  font-size: clamp(1rem, 1.2vw, 1.375rem);
+  line-height: 28.64px;
   color: #000005;
 }
 .clt_actividad_principal_actividad {
@@ -994,4 +1080,12 @@ body {
 .detail_principal_inv_gast_1{
   width: 100%;
   height: max-content;
+}
+
+.principal_paginator{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 1rem;
 }
