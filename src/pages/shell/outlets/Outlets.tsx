@@ -1,27 +1,16 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { IconDownload, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import DrawerO from "../../../components/drawerOutlets/DrawerOutlets";
-import { fetchUniversal, fetchUniversalTables } from "../../../utils/apiUtils";
-import {
-  TableBody,
-  TableCell,
-  TableFoot,
-  TableFooterCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
-import { Card, Table, Skeleton } from "@mantine/core";
+import { fetchUniversalTables } from "../../../utils/apiUtils";
+import {  Skeleton } from "@mantine/core";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
-import { MantineProvider, TextInput } from "@mantine/core";
+import { TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../interfaces/CoolerInterface";
-import { SkeletonTableOutlets } from "../../../components/skeletonTableOutlets/SkeletonTableOutlets";
 
 export default function Outlets() {
   const [searchValue, setSearchValue] = useState("");
@@ -419,7 +408,7 @@ export default function Outlets() {
                           </>
                         )}
                       </td>
-                      <td data-label="Prioridad" title={outlet.priority}>
+                      <td data-label="CONTROL DE ACTIVOS" title={outlet.priority}>
                         {isLoading == true ? (
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
@@ -432,17 +421,7 @@ export default function Outlets() {
                             <>
                               <div
                                 style={{
-                                  width:
-                                    outlet.actionable === "Visita PdV"
-                                      ? "160px"
-                                      : outlet.actionable === "Sin Riesgo"
-                                      ? "100px"
-                                      : outlet.actionable ===
-                                        "Toma de Decisiones"
-                                      ? "150px"
-                                      : outlet.actionable === "Actualizar Info"
-                                      ? "160px"
-                                      : "80px",
+                                  width:"fit-content",
                                   display: "flex",
                                   padding: "4px",
                                   justifyContent: "center",
