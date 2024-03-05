@@ -24,6 +24,8 @@ export default function DrawerA({
   const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>();
   const [isLoading, setIsLoading] = useState(true);
   const [totalData, setTotalData] = useState<String | number>(0);
+  const lastIndex = currentPage * Number(datosPorPagina);
+  const firstIndex = lastIndex - Number(datosPorPagina);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -617,7 +619,7 @@ export default function DrawerA({
               {coolersData != undefined ? (
                 <tbody>
                   {coolersData
-                    // .slice(firstIndex, lastIndex)
+                    .slice(firstIndex, lastIndex)
                     .map((cooler, index) => (
                       <tr
                         key={index}
@@ -655,6 +657,7 @@ export default function DrawerA({
                                       "FUNCIONANDO CON ALERTA"
                                     ? "#FEF5C7"
                                     : "#D4DAE3",
+                                width:"fit-content"
                               }}
                             >
                               <div
@@ -785,20 +788,10 @@ export default function DrawerA({
                             <>
                               <div
                                 style={{
-                                  width:
-                                    cooler.actionable === "Visita PdV"
-                                      ? "80px"
-                                      : cooler.actionable === "Sin Riesgo"
-                                      ? "80px"
-                                      : cooler.actionable ===
-                                        "Toma de Decisiones"
-                                      ? "80px"
-                                      : cooler.actionable === "Actualizar Info"
-                                      ? "80px"
-                                      : "80px",
+                                  width:"fit-content",
                                   display: "flex",
                                   padding: "4px",
-                                  justifyContent: "center",
+                                  // justifyContent: "center",
                                   alignItems: "center",
                                   gap: "4px",
                                   borderRadius: "2px",
@@ -814,6 +807,7 @@ export default function DrawerA({
                                       ? "1.5px solid #DA7E05"
                                       : "1.5px solid black",
                                   background: "#FFF",
+                                  textOverflow:"ellipsis"
                                 }}
                               >
                                 {cooler.actionable === "Visita PdV" ? (
@@ -846,6 +840,15 @@ export default function DrawerA({
                                 )}
 
                                 <div
+                                title={cooler.actionable === "Visita PdV"
+                                ? "Visita punto de venta"
+                                : cooler.actionable === "Sin Riesgo"
+                                ? "Sin riesgo"
+                                : cooler.actionable === "Toma de Decisiones"
+                                ? "Acciones urgentes"
+                                : cooler.actionable === "Actualizar Info"
+                                ? "Requiere actualización"
+                                : cooler.actionable}
                                   style={{
                                     color:
                                       cooler.actionable === "Visita PdV"
@@ -873,7 +876,7 @@ export default function DrawerA({
                                     : cooler.actionable === "Toma de Decisiones"
                                     ? "Acciones urg.."
                                     : cooler.actionable === "Actualizar Info"
-                                    ? "Requiere act.."
+                                    ? "Requiere ac..."
                                     : cooler.actionable}
                                 </div>
                               </div>
