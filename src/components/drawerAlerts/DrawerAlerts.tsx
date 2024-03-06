@@ -52,10 +52,12 @@ export default function DrawerA({
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
+      setCoolersData(undefined)
     } finally {
       setIsLoading(false);
     }
   };
+  
   useEffect(() => {
     value != 0 ? fetchData() : "";
   }, [dt, datosPorPagina, opened]);
