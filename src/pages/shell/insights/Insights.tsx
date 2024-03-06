@@ -43,6 +43,7 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body);
       setInsightsData(data);
+      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -715,11 +716,17 @@ export default function Insights() {
                                 lineHeight: "normal",
                               }}
                             >
-                              {/* {insightsData?.insights?.INDICATOR?.total ===
-                              undefined
-                                ? "Sin registro"
-                                : insightsData?.insights?.INDICATOR?.total.toLocaleString()} */}{" "}
-                              0
+                              {insightsData?.insights?.INDICATOR?.algorithms
+                                .filter(
+                                  (algorithm) =>
+                                    algorithm.class ===
+                                    "ASSET_MANAGEMENT_ACTIONABLE"
+                                )
+                                .reduce(
+                                  (total, algorithm) => total + algorithm.value,
+                                  0
+                                )
+                                .toLocaleString()}
                             </div>
                             <div
                               style={{
@@ -1505,8 +1512,12 @@ export default function Insights() {
                                 </div>
                               </div>
                               {/* Indicador barra */}
-                              {insightsData?.insights?.ALERT?.algorithms.map(
-                                (algorithm, index) => {
+                              {insightsData?.insights?.ALERT?.algorithms
+                                .filter(
+                                  (algorithm) =>
+                                    algorithm.algorithm !== "MOVED_VISIT_ALERT"
+                                )
+                                .map((algorithm, index) => {
                                   const max = Math.max(
                                     ...insightsData.insights?.ALERT?.algorithms.map(
                                       (alg) => alg.value
@@ -1563,6 +1574,9 @@ export default function Insights() {
                                             : algorithm.algorithm ===
                                               "DISCONNECTION_ALERT"
                                             ? "Desconexión"
+                                            : algorithm.algorithm ===
+                                              "VOLTAGE_ALERT"
+                                            ? "Bajo/Alto voltaje"
                                             : algorithm.algorithm}
                                         </div>
                                       </div>
@@ -1581,8 +1595,7 @@ export default function Insights() {
                                       </div>
                                     </div>
                                   );
-                                }
-                              )}
+                                })}
                               <div
                                 style={{
                                   display: "flex",

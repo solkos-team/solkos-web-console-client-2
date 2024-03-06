@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import Resume from "../../../components/resume";
-import EconomicDetail from "../../../components/economicDetail/EconomicDetail";
-import Energy from "../../../components/energyConsum";
-import { Center, Tabs } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
 import "moment/locale/es";
-import ResumeCC from "../../../components/resumeCallCenter";
 import { CoolerData } from "../../../interfaces/CoolerInterface";
 import MapComponent from "../../../components/map";
 import MapComponent1 from "../../../components/map_1";
 import MapComponent2 from "../../../components/map_2";
-import { IconArrowDownRight, IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight } from "@tabler/icons-react";
 import DrawerInversion from "../../../components/drawerInversion/DrawerInversion";
 import DrawerEnergy from "../../../components/drawerEnergy/DrawerEnergy";
 import { useDisclosure } from "@mantine/hooks";
@@ -71,7 +66,7 @@ export default function CoolerDetail() {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
-      //console.log(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -181,7 +176,7 @@ export default function CoolerDetail() {
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
                               ? "1.5px solid #DA7E05"
-                              : "1.5px solid black",
+                              : "",
                           background: "#FFF",
                         }}
                       >
@@ -591,8 +586,9 @@ export default function CoolerDetail() {
 
                           .filter(
                             (order) =>
-                              (order.type === "SERVICE_ORDER" &&
-                                order.data.status === "D,D") ||
+                              order.type === "SERVICE_ORDER" ||
+                              // &&
+                              //   order.data.status === "D,D"
                               (order.type === "TRACKING" &&
                                 (order.data.algorithm === "COMPRESSOR_FAIL" ||
                                   order.data.algorithm === "FREEZING_FAIL" ||
@@ -614,7 +610,84 @@ export default function CoolerDetail() {
                                     "Toma de Decisiones" ||
                                   order.data.algorithm === "Visita PdV"))
                           )
-                          .reverse()
+                          // .sort((a, b) => {
+                          //   let aDate, bDate;
+
+                          //   if (a.type === "SERVICE_ORDER" && a.data.close_at) {
+                          //     aDate = new Date(a.data.close_at).getTime();
+                          //   } else if (
+                          //     a.type === "TRACKING" &&
+                          //     a.data.notified_at
+                          //   ) {
+                          //     aDate = new Date(a.data.notified_at).getTime();
+                          //   }
+
+                          //   if (b.type === "SERVICE_ORDER" && b.data.close_at) {
+                          //     bDate = new Date(b.data.close_at).getTime();
+                          //   } else if (
+                          //     b.type === "TRACKING" &&
+                          //     b.data.notified_at
+                          //   ) {
+                          //     bDate = new Date(b.data.notified_at).getTime();
+                          //   }
+
+                          //   if (!aDate && !bDate) {
+                          //     if (a.type === "SERVICE_ORDER") return -1;
+                          //     if (b.type === "SERVICE_ORDER") return 1;
+                          //     if (a.type === "TRACKING") return -1;
+                          //     if (b.type === "TRACKING") return 1;
+                          //     return 0;
+                          //   }
+
+                          //   if (!aDate) return -1;
+
+                          //   if (!bDate) return 1;
+
+                          //   return bDate - aDate;
+                          // })
+                          .sort((a, b) => {
+                            let aDate, bDate;
+
+                            if (a.type === "SERVICE_ORDER") {
+                              if (a.data.status === "D,D") {
+                                aDate = new Date(a.data.close_at).getTime();
+                              } else if (a.data.status === "O,O") {
+                                aDate = new Date(a.data.created_at).getTime();
+                              }
+                            } else if (
+                              a.type === "TRACKING" &&
+                              a.data.notified_at
+                            ) {
+                              aDate = new Date(a.data.notified_at).getTime();
+                            }
+
+                            if (b.type === "SERVICE_ORDER") {
+                              if (b.data.status === "D,D") {
+                                bDate = new Date(b.data.close_at).getTime();
+                              } else if (b.data.status === "O,O") {
+                                bDate = new Date(b.data.created_at).getTime();
+                              }
+                            } else if (
+                              b.type === "TRACKING" &&
+                              b.data.notified_at
+                            ) {
+                              bDate = new Date(b.data.notified_at).getTime();
+                            }
+
+                            if (!aDate && !bDate) {
+                              if (a.type === "SERVICE_ORDER") return -1;
+                              if (b.type === "SERVICE_ORDER") return 1;
+                              if (a.type === "TRACKING") return -1;
+                              if (b.type === "TRACKING") return 1;
+                              return 0;
+                            }
+
+                            if (!aDate) return -1;
+                            if (!bDate) return 1;
+
+                            return bDate - aDate;
+                          })
+
                           .map((order, index) => (
                             <>
                               <div key={index}>
@@ -653,23 +726,33 @@ export default function CoolerDetail() {
                                             lineHeight: "normal",
                                           }}
                                         >
-                                          {order.data.close_at === undefined ||
-                                          order.data.close_at === null
-                                            ? "Sin registro"
-                                            : moment(
-                                                new Date(order.data.close_at)
-                                              ).format("DD/MM/YYYY HH:mm")}
+                                          {order.data.status === "D,D"
+                                            ? order.data.close_at ===
+                                                undefined ||
+                                              order.data.close_at === null
+                                              ? "Sin registro"
+                                              : moment
+                                                  .utc(order.data.close_at)
+                                                  .format("DD/MM/YYYY HH:mm")
+                                            : order.data.status === "O,O"
+                                            ? order.data.created_at ===
+                                                undefined ||
+                                              order.data.created_at === null
+                                              ? "Sin registro"
+                                              : moment
+                                                  .utc(order.data.created_at)
+                                                  .format("DD/MM/YYYY HH:mm")
+                                            : "Sin registro"}
                                         </div>
                                         <div
                                           style={{
                                             display: "flex",
                                             padding: "4px",
-                                            justifyContent: "center",
                                             alignItems: "center",
                                             gap: "4px",
                                             borderRadius: "2px",
                                             background: "#D4DAE3",
-                                            marginLeft: "75%",
+                                            marginLeft: "auto",
                                           }}
                                         >
                                           <div
@@ -681,7 +764,9 @@ export default function CoolerDetail() {
                                               lineHeight: "14px",
                                             }}
                                           >
-                                            CERRADA
+                                            {order.data.status === "D,D"
+                                              ? "CERRADA"
+                                              : "ABIERTA"}
                                           </div>
                                         </div>
                                       </div>
@@ -798,9 +883,9 @@ export default function CoolerDetail() {
                                         {order.data.notified_at === undefined ||
                                         order.data.notified_at === null
                                           ? "Sin registro"
-                                          : moment(
-                                              new Date(order.data.notified_at)
-                                            ).format("DD/MM/YYYY HH:mm")}
+                                          : moment
+                                              .utc(order.data.notified_at)
+                                              .format("DD/MM/YYYY HH:mm")}
                                       </div>
 
                                       <div
@@ -1002,7 +1087,7 @@ export default function CoolerDetail() {
                 </div>
                 <div className="clt_actividad_principal_title_nombre">
                   <h1 className="clt_actividad_principal_title_nombre_h1">
-                    Distancia el punto de instalación
+                    Distancia al punto de instalación
                   </h1>
                   <h1 className="clt_actividad_principal_title_nombre_h1">
                     {coolersData?.cooler?.distance === undefined

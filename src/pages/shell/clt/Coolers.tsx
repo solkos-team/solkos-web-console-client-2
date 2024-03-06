@@ -380,7 +380,7 @@ export default function Coolers() {
                                       "FUNCIONANDO CON ALERTA"
                                     ? "#FEF5C7"
                                     : "#D4DAE3",
-                                width:"fit-content",
+                                width: "fit-content",
                               }}
                             >
                               <div
@@ -475,7 +475,7 @@ export default function Coolers() {
                           <>
                             <div
                               style={{
-                                width:"fit-content",
+                                width: "fit-content",
                                 display: "flex",
                                 padding: "4px",
                                 justifyContent: "center",

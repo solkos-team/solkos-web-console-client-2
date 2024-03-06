@@ -6,6 +6,15 @@ import { IconArrowDownRight } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import MapComponentPv from "../mapPv/MapPv";
 import { Table } from "@mantine/core";
+import {
+  AreaChart,
+  BarChart,
+  Card,
+  Flex,
+  Switch,
+  Title,
+  Subtitle,
+} from "@tremor/react";
 import { Tabs } from "@mantine/core";
 import { Drawer, Button } from "@mantine/core";
 import {
@@ -367,7 +376,8 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     >
                       {coolersData?.properties?.sale_price?.value === undefined
                         ? "Sin registro"
-                        : "$" + `${coolersData?.properties?.sale_price.value}`}
+                        : "$" +
+                          `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
                     </div>
                   </div>
                   <div
@@ -671,9 +681,10 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         lineHeight: "normal",
                       }}
                     >
-                      {coolersData?.cooler?.customer === "KOF"
-                        ? "10 años"
-                        : "5 años"}
+                      {/* {coolersData?.cooler?.customer === "KOF"
+                        ?  */}
+                      10 años
+                      {/*  : "5 años"} */}
                     </div>
                   </div>
                 </div>
@@ -730,8 +741,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
-                          width: "500px", // Ajusta el ancho deseado aquí
+                          width: "400px", // Ajusta el ancho deseado aquí
                           marginLeft: -340,
+                          marginTop: 90,
                           // margin: "0 auto", // Centra horizontalmente
                         }}
                       >
@@ -746,7 +758,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                             border: "1px solid #88888B",
                             // zIndex: 999, // Ajusta este valor según sea necesario para superponer correctamente
                             background: "#FFF",
-                            width: "500px",
+                            width: "300px",
                           }}
                         >
                           <div
@@ -760,7 +772,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                             <div
                               style={{
                                 color: "#3A3A3F",
-                                fontSize: "16px",
+                                fontSize: "12px",
                                 fontStyle: "normal",
                                 fontWeight: 500,
                                 lineHeight: "normal",
@@ -800,7 +812,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                                 style={{
                                   color: "#3A3A3F",
                                   // fontFamily: "DM Sans",
-                                  fontSize: "14px",
+                                  fontSize: "12px",
                                   fontStyle: "normal",
                                   fontWeight: 600,
                                   lineHeight: "20px",
@@ -812,7 +824,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                                 style={{
                                   color: "#3A3A3F",
                                   // fontFamily: "DM Sans",
-                                  fontSize: "14px",
+                                  fontSize: "12px",
                                   fontStyle: "normal",
                                   fontWeight: 600,
                                   lineHeight: "20px",
@@ -821,42 +833,100 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                                 Precio
                               </div>
                             </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                padding: "8px 0px",
-                                justifyContent: "space-between",
-                                alignItems: "flex-start",
-                                alignSelf: "stretch",
-                                borderBottom: "1px solid #CACACA",
-                              }}
-                            >
+                            {coolersData?.properties?.total_ownership_expense
+                              ?.value !== undefined &&
+                            coolersData?.properties?.year_of_production
+                              ?.value !== undefined ? (
+                              Array.from({ length: 10 }, (_, i) => i).map(
+                                (_, index) => {
+                                  const year =
+                                    coolersData.properties.year_of_production
+                                      .value + index;
+                                  const adjustedPrice =
+                                    coolersData.properties
+                                      .total_ownership_expense.value -
+                                    index *
+                                      coolersData.properties.annual_decrement
+                                        .value;
+                                  return (
+                                    <div
+                                      key={index}
+                                      style={{
+                                        display: "flex",
+                                        padding: "8px 0px",
+                                        justifyContent: "space-between",
+                                        alignItems: "flex-start",
+                                        alignSelf: "stretch",
+                                        borderBottom: "1px solid #CACACA",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          color: "#88888B",
+                                          // fontFamily: "DM Sans",
+                                          fontSize: "12px",
+                                          fontStyle: "normal",
+                                          fontWeight: 400,
+                                          lineHeight: "20px",
+                                        }}
+                                      >
+                                        {year}
+                                      </div>
+                                      <div
+                                        style={{
+                                          color: "#3A3A3F",
+                                          textAlign: "right",
+                                          // fontFamily: "DM Sans",
+                                          fontSize: "12px",
+                                          fontStyle: "normal",
+                                          fontWeight: 400,
+                                          lineHeight: "20px",
+                                        }}
+                                      >
+                                        ${adjustedPrice.toLocaleString()}
+                                      </div>
+                                    </div>
+                                  );
+                                }
+                              )
+                            ) : (
                               <div
                                 style={{
-                                  color: "#88888B",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "20px",
+                                  display: "flex",
+                                  padding: "8px 0px",
+                                  justifyContent: "space-between",
+                                  alignItems: "flex-start",
+                                  alignSelf: "stretch",
+                                  borderBottom: "1px solid #CACACA",
                                 }}
                               >
-                                Sin registro
+                                <div
+                                  style={{
+                                    color: "#88888B",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                  }}
+                                >
+                                  Sin registro
+                                </div>
+                                <div
+                                  style={{
+                                    color: "#3A3A3F",
+                                    textAlign: "right",
+                                    // fontFamily: "DM Sans",
+                                    fontSize: "12px",
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    lineHeight: "20px",
+                                  }}
+                                >
+                                  Sin registro
+                                </div>
                               </div>
-                              <div
-                                style={{
-                                  color: "#3A3A3F",
-                                  textAlign: "right",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "20px",
-                                }}
-                              >
-                                Sin registro
-                              </div>
-                            </div>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -873,7 +943,6 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 flexDirection: "column",
                 alignItems: "flex-start",
                 gap: "10px",
-                // alignSelf: "stretch",
                 borderRadius: "8px",
                 border: "1px solid #88888B",
                 width: "92.5vw",
@@ -1042,7 +1111,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 <Tabs
                   color="teal"
                   defaultValue="first"
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", marginLeft: 60 }}
                 >
                   <Tabs.List>
                     <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
@@ -1060,47 +1129,23 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     }}
                   >
                     <Tabs.Panel value="first">
-                      <>
-                        <div style={{ width: "100%", height: "10px" }}>
-                          <div
-                            style={{
-                              marginLeft: 500,
-                              marginTop: 50,
-                              fontSize: "1vw",
-                            }}
-                          >
-                            Sin información para mostrar
-                          </div>
-                        </div>
-                      </>
+                      <div
+                        style={{
+                          width: "900px",
+                          height: "130px",
+                          // background: "red",
+                        }}
+                      ></div>
                     </Tabs.Panel>
 
                     <Tabs.Panel value="second">
-                      <>
-                        <div style={{ width: "100%", height: "10px" }}>
-                          <div
-                            style={{
-                              marginLeft: 500,
-                              marginTop: 50,
-                              fontSize: "1vw",
-                            }}
-                          >
-                            Sin información para mostrar
-                          </div>
-                        </div>
-                      </>
-                      {/* <Card style={{width:"95%",height:"90%"}}>
-                      <BarChart
-                        className="mt-6"
-                        data={chartdata3}
-                        index="date"
-                        categories={["2022", "2023"]}
-                        colors={["neutral", "indigo"]}
-                        yAxisWidth={30}                        
-                      />
-                    </Card> */}
-                      {/* </div> */}
-                      <></>
+                      <div
+                        style={{
+                          width: "900px",
+                          height: "130px",
+                          // background: "red",
+                        }}
+                      ></div>
                     </Tabs.Panel>
                   </div>
                 </Tabs>

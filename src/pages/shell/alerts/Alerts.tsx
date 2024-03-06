@@ -266,6 +266,8 @@ export default function Alerts() {
                             ? "Bajo voltaje"
                             : cooler.algorithm === "MOVED_VISIT_ALERT"
                             ? "Movimiento"
+                            : cooler.algorithm === "VOLTAGE_ALERT"
+                            ? "Bajo/Alto voltaje"
                             : cooler.algorithm}
                         </div>
                       </div>

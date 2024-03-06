@@ -259,7 +259,7 @@ export default function Indicator() {
                           }}
                         >
                           {cooler.algorithm === "Visita PdV"
-                            ? "Visita punto de venta"
+                            ? "Visita PdV"
                             : cooler.algorithm === "Actualizar Info"
                             ? "Requiere actualizar información"
                             : cooler.algorithm === "Toma de Decisiones"

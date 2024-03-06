@@ -375,7 +375,9 @@ export default function DrawerA({
                         : selectedAlgorithm === "Toma de Decisiones"
                         ? "Acciones urgentes"
                         : selectedAlgorithm === "Visita PdV"
-                        ? "Visita punto de venta"
+                        ? "Visita PdV"
+                        : selectedAlgorithm === "VOLTAGE_ALERT"
+                        ? "Bajo/Alto voltaje"
                         : selectedAlgorithm}
                     </div>
                   )}
@@ -659,7 +661,7 @@ export default function DrawerA({
                                       "FUNCIONANDO CON ALERTA"
                                     ? "#FEF5C7"
                                     : "#D4DAE3",
-                                width:"fit-content"
+                                width: "fit-content",
                               }}
                             >
                               <div
@@ -790,7 +792,7 @@ export default function DrawerA({
                             <>
                               <div
                                 style={{
-                                  width:"fit-content",
+                                  width: "fit-content",
                                   display: "flex",
                                   padding: "4px",
                                   // justifyContent: "center",
@@ -809,7 +811,7 @@ export default function DrawerA({
                                       ? "1.5px solid #DA7E05"
                                       : "1.5px solid black",
                                   background: "#FFF",
-                                  textOverflow:"ellipsis"
+                                  textOverflow: "ellipsis",
                                 }}
                               >
                                 {cooler.actionable === "Visita PdV" ? (
@@ -842,15 +844,18 @@ export default function DrawerA({
                                 )}
 
                                 <div
-                                title={cooler.actionable === "Visita PdV"
-                                ? "Visita punto de venta"
-                                : cooler.actionable === "Sin Riesgo"
-                                ? "Sin riesgo"
-                                : cooler.actionable === "Toma de Decisiones"
-                                ? "Acciones urgentes"
-                                : cooler.actionable === "Actualizar Info"
-                                ? "Requiere actualización"
-                                : cooler.actionable}
+                                  title={
+                                    cooler.actionable === "Visita PdV"
+                                      ? "Visita punto de venta"
+                                      : cooler.actionable === "Sin Riesgo"
+                                      ? "Sin riesgo"
+                                      : cooler.actionable ===
+                                        "Toma de Decisiones"
+                                      ? "Acciones urgentes"
+                                      : cooler.actionable === "Actualizar Info"
+                                      ? "Requiere actualización"
+                                      : cooler.actionable
+                                  }
                                   style={{
                                     color:
                                       cooler.actionable === "Visita PdV"

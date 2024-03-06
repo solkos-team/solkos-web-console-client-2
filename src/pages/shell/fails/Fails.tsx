@@ -157,8 +157,11 @@ export default function Fails() {
               coolersData
                 .filter(
                   (cooler) =>
-                    cooler.class === "OPE" && cooler.algorithm.endsWith("FAIL")
+                    cooler.class === "OPE" &&
+                    cooler.algorithm.endsWith("FAIL") &&
+                    cooler.algorithm !== "NO_FAIL"
                 )
+
                 .map((cooler, index) => (
                   <div
                     className="IndicatorCardsContent"

@@ -364,7 +364,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  textDecoration: "none", // Elimina el subrayado del enlace
+                  textDecoration: "none",
                   color: "#3E83FF",
                   fontSize: "1vw",
                   fontStyle: "normal",
@@ -372,6 +372,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   lineHeight: "normal",
                   marginTop: "-80px",
                 }}
+                target="_blank"
               >
                 Ver referencias de la CFE
                 <IconArrowRight
