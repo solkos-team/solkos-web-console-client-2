@@ -58,7 +58,7 @@ export default function DrawerA({
   
   useEffect(() => {
     value != 0 ? fetchData() : "";
-  }, [dt, datosPorPagina, opened]);
+  }, [dt, datosPorPagina, opened,currentPage]);
 
   const filterCoolersDataDownload = (coolersData) => {
     if (!coolersData) return [];
