@@ -23,9 +23,7 @@ export default function DrawerA({
   const [datosPorPagina, setNumero] = useState(25);
   const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>();
   const [isLoading, setIsLoading] = useState(true);
-  const [totalData, setTotalData] = useState<String | number>(0);
-  const lastIndex = currentPage * Number(datosPorPagina);
-  const firstIndex = lastIndex - Number(datosPorPagina);
+  const [totalData, setTotalData] = useState<String | number>(0);  
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -37,7 +35,7 @@ export default function DrawerA({
     class: level === "INDICATOR" ? "ASSET_MANAGEMENT_ACTIONABLE" : "OPE",
     algorithm: [selectedAlgorithm],
     path: pathVerify(),
-    page_size: Number(value),
+    page_size: Number(datosPorPagina),
     page_number: currentPage,
   };
   // console.log(level);
@@ -46,7 +44,7 @@ export default function DrawerA({
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
       const datos = await data.json();
-      const totalData = data.headers.get("content-length");
+      const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
       setIsLoading(false);
@@ -623,7 +621,7 @@ export default function DrawerA({
               {coolersData != undefined ? (
                 <tbody>
                   {coolersData
-                    .slice(firstIndex, lastIndex)
+                    // .slice(firstIndex, lastIndex)
                     .map((cooler, index) => (
                       <tr
                         key={index}
@@ -944,7 +942,7 @@ export default function DrawerA({
           <section className="drawer_pagination">
             <PaginationComponent
               accion={setCurrentPage}
-              totalDatos={coolersData?.length}
+              totalDatos={totalData}
               datosPorPagina={datosPorPagina}
               numero={setNumero}
             />
