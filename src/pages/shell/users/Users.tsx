@@ -84,7 +84,7 @@ export default function Users() {
     try {
       const data = await fetchUniversalTables("users", body, setIsLoading);
       const datos = await data.json();
-      const totalData = data.headers.get("content-length");
+      const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setDataUsers(datos);
       setIsLoading(false);

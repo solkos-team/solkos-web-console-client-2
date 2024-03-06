@@ -66,7 +66,7 @@ export default function Outlets() {
       const data = await fetchUniversalTables("outlets", body, setIsLoading);
       const datos = await data.json();
       // console.log(datos);
-      const totalData = data.headers.get("content-length");
+      const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
       setIsLoading(false);
