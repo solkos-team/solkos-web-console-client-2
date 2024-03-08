@@ -36,8 +36,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     outlet_address,
     days_without_visitC,
     last_read_coolerC,
-  } = outletDetails;
-
+    num_coolers
+  } = outletDetails;  
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const drawerRef = useRef(null);
@@ -66,7 +66,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     class: "STK",
     algorithm: ["INSTALLED", "OWNED"],
     path: pathVerify(),
-    page_size: 1000,
+    page_size: num_coolers,
     page_number: 1,
     outlet_id: outlet_id,
   };
@@ -84,7 +84,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     : [];
   useEffect(() => {
     fetchData();
-  }, [dt]);
+  }, [dt,opened]);
 
   const inputState = () => {
     if (coolersData === null) {
