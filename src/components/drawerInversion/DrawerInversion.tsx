@@ -1,59 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { IconArrowRight, IconCircleCheck } from "@tabler/icons-react";
+import React, { useEffect, useState } from "react";
+import { IconArrowRight } from "@tabler/icons-react";
 import { IconArrowDownRight } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
-import MapComponentPv from "../mapPv/MapPv";
-import { Table } from "@mantine/core";
-import {
-  AreaChart,
-  BarChart,
-  Card,
-  Flex,
-  Switch,
-  Title,
-  Subtitle,
-} from "@tremor/react";
 import { Tabs } from "@mantine/core";
-import { Drawer, Button } from "@mantine/core";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
-import { fetchCoolers, fetchUniversal } from "../../utils/apiUtils";
-import { CoolerInterface } from "../../interfaces/CoolerInterface";
-import { PaginationComponent } from "../Pagination/PaginationComponent";
-import { ExportToExcel } from "../exportExcel/ExportToExcel";
-import { TextInput } from "@mantine/core";
+import { Drawer } from "@mantine/core";
 
 export default function DrawerInversion({ opened, onClose, coolersData }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [datosPorPagina, setNumero] = useState(50);
-  const [searchValue, setSearchValue] = useState("");
-
-  const lastIndex = currentPage * Number(datosPorPagina);
-  const firstIndex = lastIndex - Number(datosPorPagina);
-  const navigate = useNavigate();
-  const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization);
-  const pathVerify = () => {
-    return dt.length === 0 ? [] : JSON.parse(dt);
+  const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
+  const handleClick = () => {
+    setMostrarVentanaEmergente(true);
   };
-
-  const formatCreatedAt = (createdAt) => {
-    const date = new Date(createdAt);
-    const formattedDate = date.toLocaleDateString("es-ES", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
-    return formattedDate;
+  const handleCloseVentanaEmergente = () => {
+    setMostrarVentanaEmergente(false);
   };
 
   // datos grafica lineal
@@ -149,23 +107,6 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
     },
   ];
 
-  const valueFormatter = (number) => {
-    const formattedValue = `$ ${new Intl.NumberFormat("us")
-      .format(number)
-      .toString()}`;
-    return formattedValue;
-  };
-
-  const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
-
-  const handleClick = () => {
-    setMostrarVentanaEmergente(true);
-  };
-
-  const handleCloseVentanaEmergente = () => {
-    setMostrarVentanaEmergente(false);
-  };
-
   return (
     <Drawer
       opened={opened}
@@ -182,7 +123,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               padding: "2px 32px",
               flexDirection: "column",
               gap: "16px",
-              maxHeight: "100vh", // establecer una altura máxima para el Drawer
+              maxHeight: "100vh",
               marginTop: -35,
             }}
           >
@@ -741,10 +682,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
-                          width: "400px", // Ajusta el ancho deseado aquí
+                          width: "400px",
                           marginLeft: -340,
                           marginTop: 90,
-                          // margin: "0 auto", // Centra horizontalmente
                         }}
                       >
                         <div
@@ -756,7 +696,6 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                             gap: "16px",
                             borderRadius: "8px",
                             border: "1px solid #88888B",
-                            // zIndex: 999, // Ajusta este valor según sea necesario para superponer correctamente
                             background: "#FFF",
                             width: "300px",
                           }}

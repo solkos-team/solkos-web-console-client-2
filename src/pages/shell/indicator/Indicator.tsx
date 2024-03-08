@@ -32,13 +32,11 @@ export default function Indicator() {
   useEffect(() => {
     fetchData();
   }, [dt, dto]);
-  // console.log(totalCoolers);
 
-  const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
+  const [isLoading, setIsLoading] = useState(true);
 
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
     document.addEventListener("click", function (event) {
       const element = event.target as HTMLElement;
       if (
@@ -50,7 +48,7 @@ export default function Indicator() {
       }
     });
     return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+      document.body.style.overflow = "auto";
     };
   }, []);
 

@@ -23,7 +23,7 @@ export default function DrawerA({
   const [datosPorPagina, setNumero] = useState(25);
   const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>();
   const [isLoading, setIsLoading] = useState(true);
-  const [totalData, setTotalData] = useState<String | number>(0);  
+  const [totalData, setTotalData] = useState<String | number>(0);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -38,8 +38,6 @@ export default function DrawerA({
     page_size: Number(datosPorPagina),
     page_number: currentPage,
   };
-  // console.log(level);
-  // console.log(selectedAlgorithm);
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
@@ -50,15 +48,15 @@ export default function DrawerA({
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
-      setCoolersData(undefined)
+      setCoolersData(undefined);
     } finally {
       setIsLoading(false);
     }
   };
-  
+
   useEffect(() => {
     value != 0 ? fetchData() : "";
-  }, [dt, datosPorPagina, opened,currentPage]);
+  }, [dt, datosPorPagina, opened, currentPage]);
 
   const filterCoolersDataDownload = (coolersData) => {
     if (!coolersData) return [];
@@ -901,10 +899,7 @@ export default function DrawerA({
                                   fontSize: "0.8rem",
                                   fontStyle: "normal",
                                   fontWeight: 400,
-                                  // lineHeight: "20px",
                                   display: "flex",
-                                  // marginLeft: "50px",
-                                  // marginRight: "50px",
                                   cursor: "pointer",
                                 }}
                               >

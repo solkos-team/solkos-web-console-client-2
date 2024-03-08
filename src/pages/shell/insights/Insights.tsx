@@ -18,7 +18,14 @@ export default function Insights() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const [mapKey, setMapKey] = useState(0);
-  const [drawerAbierto, setDrawerAbierto] = useState(false);
+  const [showAll2, setShowAll2] = useState(false);
+  const [showAll3, setShowAll3] = useState(false);
+  const toggleShowAll2 = () => {
+    setShowAll2(!showAll2);
+  };
+  const toggleShowAll3 = () => {
+    setShowAll3(!showAll3);
+  };
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const handleMapKeyChange = () => {
@@ -26,15 +33,9 @@ export default function Insights() {
   };
   useEffect(() => {
     return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+      document.body.style.overflow = "auto";
     };
   }, []);
-  const abrirDrawer = () => {
-    setDrawerAbierto(true);
-  };
-  const cerrarDrawer = () => {
-    setDrawerAbierto(false);
-  };
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -43,7 +44,7 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body);
       setInsightsData(data);
-      // console.log(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -97,20 +98,7 @@ export default function Insights() {
     : [];
 
   const markers = filteredMarkers;
-
   useEffect(() => {}, [markers]);
-
-  const [showAll1, setShowAll1] = useState(false);
-  const [showAll2, setShowAll2] = useState(false);
-
-  const [showAll3, setShowAll3] = useState(false);
-
-  const toggleShowAll2 = () => {
-    setShowAll2(!showAll2);
-  };
-  const toggleShowAll3 = () => {
-    setShowAll3(!showAll3);
-  };
 
   insightsData?.summary.coolers.toLocaleString() != null ||
   insightsData?.summary.coolers.toLocaleString() != undefined
@@ -119,6 +107,7 @@ export default function Insights() {
         insightsData?.summary.coolers.toLocaleString()
       )
     : "";
+
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -503,71 +492,7 @@ export default function Insights() {
                       gap: "8px",
                       alignSelf: "stretch",
                     }}
-                  >
-                    {/* <div
-                      style={{
-                        color: "#3A3A3F",
-                        // fontFamily: "DM Sans",
-                        fontSize: "0.8rem",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                        marginTop: 15,
-                      }}
-                    >
-                      Visualización de enfriadores:
-                    </div> */}
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        marginLeft: 10,
-                        borderRadius: "2px",
-                        marginBottom: -12,
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "2px",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          background: "#E6E6E6",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            padding: "5px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "7px",
-                            alignSelf: "stretch",
-                            borderRadius: "2px",
-                            background: "#FFF",
-                          }}
-                        >
-                          <img
-                            src={"../../sampleData/cooler1.png"}
-                            alt="Descripción de la imagen"
-                          />
-                          <div
-                            style={{
-                              color: "#3E83FF",
-                              fontSize: "0.7rem",
-                              fontStyle: "normal",
-                              fontWeight: 500,
-                              lineHeight: "14px",
-                            }}
-                          >
-                            Todo
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
-                  </div>
+                  ></div>
                   <br></br>
                   <div
                     style={{
@@ -578,14 +503,6 @@ export default function Insights() {
                     }}
                   >
                     {/* MAPA */}
-                    {/* <MapInsightsComponent
-                    markers={[
-                      { latitude: 20.6904037, longitude: -99.8208632 },
-                      { latitude: 20.70686, longitude: -99.83713 },
-                      { latitude: 20.3915, longitude: -99.9814 },
-                    ]}
-                  /> */}
-
                     {<MapInsightsComponent items={items} data={coolersData} />}
                   </div>
                 </div>
@@ -623,11 +540,6 @@ export default function Insights() {
                     alignSelf: "stretch",
                   }}
                 >
-                  {/* <img
-                    src={"../../sampleData/indc2.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "25px", height: "25px" }}
-                  /> */}
                   <div
                     style={{
                       color: "#3A3A3F",
@@ -959,11 +871,6 @@ export default function Insights() {
                     alignSelf: "stretch",
                   }}
                 >
-                  {/* <img
-                    src={"../../sampleData/alert_y.png"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "25px", height: "25px" }}
-                  /> */}
                   <div
                     style={{
                       color: "#3A3A3F",

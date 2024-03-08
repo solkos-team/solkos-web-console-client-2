@@ -12,7 +12,7 @@ export const fetchCoolers = async (path, setIsLoading?, id?) => {
   const data = {
     customer: "KOF",
     class: "STK",
-    algorithm: ["INSTALLED", "OWNED"],
+    algorithm: ["INSTALLED"],
     path: path,
     page_size: 1000,
     page_number: 1,

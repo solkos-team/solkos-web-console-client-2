@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
 import DrawerO from "../../../components/drawerOutlets/DrawerOutlets";
 import { fetchUniversalTables } from "../../../utils/apiUtils";
-import {  Skeleton } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput } from "@mantine/core";
@@ -26,12 +26,10 @@ export default function Outlets() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [totalData, setTotalData] = useState<String | number>(0);
-
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
   };
-
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
@@ -62,7 +60,6 @@ export default function Outlets() {
   };
   const fetchData = async () => {
     try {
-      // const data = await fetchOutlets(pathVerify(), setIsLoading);
       const data = await fetchUniversalTables("outlets", body, setIsLoading);
       const datos = await data.json();
       // console.log(datos);
@@ -88,7 +85,6 @@ export default function Outlets() {
 
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
     document.addEventListener("click", function (event) {
       const element = event.target as HTMLElement;
       if (
@@ -100,7 +96,7 @@ export default function Outlets() {
       }
     });
     return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+      document.body.style.overflow = "auto";
     };
   }, []);
 
@@ -408,7 +404,10 @@ export default function Outlets() {
                           </>
                         )}
                       </td>
-                      <td data-label="CONTROL DE ACTIVOS" title={outlet.priority}>
+                      <td
+                        data-label="CONTROL DE ACTIVOS"
+                        title={outlet.priority}
+                      >
                         {isLoading == true ? (
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
@@ -421,7 +420,7 @@ export default function Outlets() {
                             <>
                               <div
                                 style={{
-                                  width:"fit-content",
+                                  width: "fit-content",
                                   display: "flex",
                                   padding: "4px",
                                   justifyContent: "center",
@@ -514,8 +513,6 @@ export default function Outlets() {
                           </>
                         ) : (
                           <div
-                            // onClick={openDrawer}
-                            // onClick={toggleDrawerEdit}
                             onClick={() => {
                               setSelectedOutletDetails(outlet);
                               open();
@@ -527,10 +524,7 @@ export default function Outlets() {
                                 fontSize: "0.8rem",
                                 fontStyle: "normal",
                                 fontWeight: 400,
-                                // lineHeight: "20px",
                                 display: "flex",
-                                // marginLeft: "50px",
-                                // marginRight: "50px",
                                 cursor: "pointer",
                               }}
                             >
@@ -580,10 +574,6 @@ export default function Outlets() {
       {selectedOutletDetails && (
         <DrawerO
           opened={opened}
-          // onClose={() => {
-          //   setIsDrawerOpen(false);
-          //   setSelectedOutletDetails(null);
-          // }}
           onClose={close}
           outletDetails={selectedOutletDetails}
         />

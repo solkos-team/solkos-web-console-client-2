@@ -37,7 +37,6 @@ export default function Fails() {
 
   // Page (Body)
   useEffect(() => {
-    // document.body.style.overflow = "hidden"; // Evitar el desplazamiento en el cuerpo
     document.addEventListener("click", function (event) {
       const element = event.target as HTMLElement;
       if (
@@ -49,7 +48,7 @@ export default function Fails() {
       }
     });
     return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+      document.body.style.overflow = "auto";
     };
   }, []);
 

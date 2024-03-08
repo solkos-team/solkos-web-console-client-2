@@ -1,43 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { IconArrowRight, IconCircleCheck } from "@tabler/icons-react";
+import React, { useEffect, useState } from "react";
+import { IconArrowRight } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
-import MapComponentPv from "../mapPv/MapPv";
-import { Table } from "@mantine/core";
-import { Tabs } from "@mantine/core";
-import { Drawer, Button } from "@mantine/core";
-import {
-  AreaChart,
-  BarChart,
-  Card,
-  Flex,
-  Switch,
-  Title,
-  Subtitle,
-} from "@tremor/react";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
-import { fetchCoolers, fetchUniversal } from "../../utils/apiUtils";
-import { CoolerInterface } from "../../interfaces/CoolerInterface";
-import { PaginationComponent } from "../Pagination/PaginationComponent";
-import { ExportToExcel } from "../exportExcel/ExportToExcel";
-import { TextInput } from "@mantine/core";
+import { Drawer } from "@mantine/core";
+import { BarChart, Card } from "@tremor/react";
 
 export default function DrawerEnergy({ opened, onClose, coolersData }) {
-  // const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(50);
-  const [searchValue, setSearchValue] = useState("");
-
-  const lastIndex = currentPage * Number(datosPorPagina);
-  const firstIndex = lastIndex - Number(datosPorPagina);
-  const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const pathVerify = () => {
@@ -84,7 +53,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
   ];
 
   const valueFormatter = (number) =>
-    `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
+    ` ${new Intl.NumberFormat("us").format(number).toString()} KW/h`;
 
   return (
     <Drawer
@@ -94,7 +63,6 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
       position="bottom"
       size="35rem"
     >
-      {/* <div style={{ height: "100vh", overflowY: "auto" }}> */}
       <div style={{ height: "100vh" }}>
         <div
           style={{
@@ -364,7 +332,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  textDecoration: "none",
+                  textDecoration: "none", // Elimina el subrayado del enlace
                   color: "#3E83FF",
                   fontSize: "1vw",
                   fontStyle: "normal",
@@ -434,7 +402,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   lineHeight: "normal",
                 }}
               >
-                Consumo de energía consumida durante cada mes.
+                Consumo de energía consumida por cada mes.
               </div>
             </div>
             <div>

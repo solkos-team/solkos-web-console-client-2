@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
-import { SkeletonTable } from "../../../components/skeletonTable/SkeletonTable";
 import { fetchUniversalTables } from "../../../utils/apiUtils";
-import {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
-import { Table } from "@mantine/core";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput, Skeleton } from "@mantine/core";
@@ -30,8 +21,6 @@ export default function Coolers() {
   const [datosPorPagina, setNumero] = useState(25);
   const [totalData, setTotalData] = useState<String | number>(0);
   const navigate = useNavigate();
-  const lastIndex = currentPage * Number(datosPorPagina);
-  const firstIndex = lastIndex - Number(datosPorPagina);
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
     setNoInfoToShow(false);
@@ -62,7 +51,7 @@ export default function Coolers() {
   const body = {
     customer: dto,
     class: "STK",
-    algorithm: ["INSTALLED"],
+    algorithm: ["INSTALLED", "OWNED"],
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
@@ -96,7 +85,7 @@ export default function Coolers() {
   // Page (Body)
   useEffect(() => {
     return () => {
-      document.body.style.overflow = "auto"; // Restaurar el desplazamiento al salir del componente
+      document.body.style.overflow = "auto";
     };
   }, []);
   coolersData == undefined ? [] : coolersData;
@@ -337,261 +326,255 @@ export default function Coolers() {
             </thead>
             {coolersData != undefined ? (
               <tbody>
-                {coolersData
-                  // .slice(firstIndex, lastIndex)
-                  .map((cooler, index) => (
-                    <tr
-                      key={index}
-                      onClick={() => {
-                        localStorage.getItem("USER") == "Call Center"
-                          ? navigate(
-                              `/homeCallCenter/coolerDetail/${cooler.serial_number}`
-                            )
-                          : navigate(
-                              `/home/coolerDetail/${cooler.serial_number}`
-                            );
-                      }}
-                    >
-                      <td data-label="Nombre" title={cooler.status}>
-                        {isLoading == true ? (
-                          <>
-                            <Skeleton height={20} radius="sm" width="90%" />
-                          </>
-                        ) : cooler.status == undefined ||
-                          cooler.status == "" ? (
-                          "Sin registro"
-                        ) : (
-                          <>
+                {coolersData.map((cooler, index) => (
+                  <tr
+                    key={index}
+                    onClick={() => {
+                      localStorage.getItem("USER") == "Call Center"
+                        ? navigate(
+                            `/homeCallCenter/coolerDetail/${cooler.serial_number}`
+                          )
+                        : navigate(
+                            `/home/coolerDetail/${cooler.serial_number}`
+                          );
+                    }}
+                  >
+                    <td data-label="Nombre" title={cooler.status}>
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={20} radius="sm" width="90%" />
+                        </>
+                      ) : cooler.status == undefined || cooler.status == "" ? (
+                        "Sin registro"
+                      ) : (
+                        <>
+                          <div
+                            style={{
+                              display: "flex",
+                              padding: "4px",
+                              // justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              borderRadius: "2px",
+                              background:
+                                cooler?.status === "EN FALLA"
+                                  ? "#FFC7CD"
+                                  : cooler?.status ===
+                                    "FUNCIONANDO CORRECTAMENTE"
+                                  ? "#DFF9E3"
+                                  : cooler?.status === "FUNCIONANDO CON ALERTA"
+                                  ? "#FEF5C7"
+                                  : "#D4DAE3",
+                              width: "fit-content",
+                            }}
+                          >
                             <div
                               style={{
-                                display: "flex",
-                                padding: "4px",
-                                // justifyContent: "center",
-                                alignItems: "center",
-                                gap: "4px",
-                                borderRadius: "2px",
+                                width: "4px",
+                                height: "4px",
+                                borderRadius: "5px",
                                 background:
                                   cooler?.status === "EN FALLA"
-                                    ? "#FFC7CD"
+                                    ? "#F93448"
                                     : cooler?.status ===
                                       "FUNCIONANDO CORRECTAMENTE"
-                                    ? "#DFF9E3"
+                                    ? "#31B648"
                                     : cooler?.status ===
                                       "FUNCIONANDO CON ALERTA"
-                                    ? "#FEF5C7"
-                                    : "#D4DAE3",
-                                width: "fit-content",
+                                    ? "#F6A60A"
+                                    : "#808080",
                               }}
-                            >
-                              <div
-                                style={{
-                                  width: "4px",
-                                  height: "4px",
-                                  borderRadius: "5px",
-                                  background:
-                                    cooler?.status === "EN FALLA"
-                                      ? "#F93448"
-                                      : cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
-                                      ? "#31B648"
-                                      : cooler?.status ===
-                                        "FUNCIONANDO CON ALERTA"
-                                      ? "#F6A60A"
-                                      : "#808080",
-                                }}
-                              ></div>
-                              <div
-                                style={{
-                                  color:
-                                    cooler?.status === "EN FALLA"
-                                      ? "#F93448"
-                                      : cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
-                                      ? "#1D5E29"
-                                      : cooler?.status ===
-                                        "FUNCIONANDO CON ALERTA"
-                                      ? "#451C03"
-                                      : "black",
-                                  // fontFamily: "Space Mono",
-                                  fontSize:
-                                    cooler?.status ===
-                                    "FUNCIONANDO CORRECTAMENTE"
-                                      ? ".75vw"
-                                      : ".8vw",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "14px",
-                                }}
-                              >
-                                {cooler?.status}
-                              </div>
-                            </div>
-                          </>
-                        )}
-                      </td>
-                      <td data-label="Serie" title={cooler.serial_number}>
-                        {isLoading == true ? (
-                          <>
-                            <Skeleton height={20} radius="sm" width="90%" />
-                          </>
-                        ) : cooler.serial_number === "" ? (
-                          "Sin registro"
-                        ) : (
-                          cooler.serial_number
-                        )}
-                      </td>
-                      <td data-label="Modelo" title={cooler.model_id}>
-                        {isLoading == true ? (
-                          <>
-                            <Skeleton height={20} radius="sm" width="90%" />
-                          </>
-                        ) : cooler.model_id === "" ? (
-                          "Sin registro"
-                        ) : (
-                          cooler.model_id
-                        )}
-                      </td>
-                      <td data-label="Última visita" title={cooler.last_read}>
-                        {isLoading == true ? (
-                          <>
-                            <Skeleton height={20} radius="sm" width="90%" />
-                          </>
-                        ) : cooler.last_read == undefined ||
-                          cooler.last_read == null ? (
-                          "Sin registro"
-                        ) : (
-                          new Date(cooler.last_read).toLocaleDateString()
-                        )}
-                      </td>
-                      <td data-label="Prioridad" title={cooler.priority_status}>
-                        {isLoading == true ? (
-                          <>
-                            <Skeleton height={20} radius="sm" width="90%" />
-                          </>
-                        ) : cooler.actionable == undefined ||
-                          cooler.actionable == "" ? (
-                          "Sin registro"
-                        ) : (
-                          <>
+                            ></div>
                             <div
                               style={{
-                                width: "fit-content",
-                                display: "flex",
-                                padding: "4px",
-                                justifyContent: "center",
-                                alignItems: "center",
-                                gap: "4px",
-                                borderRadius: "2px",
-                                border:
-                                  cooler.actionable === "Visita PdV"
-                                    ? "1.5px solid #DA7E05"
-                                    : cooler.actionable === "Sin Riesgo"
-                                    ? "1.5px solid #0F9F67"
-                                    : cooler.actionable === "Toma de Decisiones"
-                                    ? "1.5px solid #F93448"
-                                    : cooler.actionable === "Actualizar Info"
-                                    ? "1.5px solid #DA7E05"
-                                    : "1.5px solid black",
-                                background: "#FFF",
+                                color:
+                                  cooler?.status === "EN FALLA"
+                                    ? "#F93448"
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CORRECTAMENTE"
+                                    ? "#1D5E29"
+                                    : cooler?.status ===
+                                      "FUNCIONANDO CON ALERTA"
+                                    ? "#451C03"
+                                    : "black",
+                                // fontFamily: "Space Mono",
+                                fontSize:
+                                  cooler?.status === "FUNCIONANDO CORRECTAMENTE"
+                                    ? ".75vw"
+                                    : ".8vw",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "14px",
                               }}
                             >
-                              {cooler.actionable === "Visita PdV" ? (
-                                <img
-                                  src={"../../sampleData/p.svg"}
-                                  alt="Descripción de la imagen"
-                                  style={{ width: "15px", height: "15px" }}
-                                />
-                              ) : cooler.actionable === "Sin Riesgo" ? (
-                                <img
-                                  src={"../../sampleData/sn.svg"}
-                                  alt="Descripción de la imagen"
-                                  style={{ width: "15px", height: "15px" }}
-                                />
-                              ) : cooler.actionable === "Toma de Decisiones" ? (
-                                <img
-                                  src={"../../sampleData/a.svg"}
-                                  alt="Descripción de la imagen"
-                                  style={{ width: "15px", height: "15px" }}
-                                />
-                              ) : cooler.actionable === "Actualizar Info" ? (
-                                <img
-                                  src={"../../sampleData/p.svg"}
-                                  alt="Descripción de la imagen"
-                                  style={{ width: "15px", height: "15px" }}
-                                />
-                              ) : (
-                                ""
-                              )}
-
-                              <div
-                                style={{
-                                  color:
-                                    cooler.actionable === "Visita PdV"
-                                      ? "#DA7E05"
-                                      : cooler.actionable === "Sin Riesgo"
-                                      ? "#0F9F67"
-                                      : cooler.actionable ===
-                                        "Toma de Decisiones"
-                                      ? "#F93448"
-                                      : cooler.actionable === "Actualizar Info"
-                                      ? "#DA7E05"
-                                      : "black",
-                                  // fontFamily: "DM Sans",
-                                  fontSize: "1vw",
-                                  fontStyle: "normal",
-                                  fontWeight: 600,
-                                  lineHeight: "14px",
-                                }}
-                              >
-                                {cooler.actionable === "Visita PdV"
-                                  ? "Visita punto de venta"
-                                  : cooler.actionable === "Sin Riesgo"
-                                  ? "Sin riesgo"
-                                  : cooler.actionable === "Toma de Decisiones"
-                                  ? "Acciones urgentes"
-                                  : cooler.actionable === "Actualizar Info"
-                                  ? "Requiere actualizar ..."
-                                  : cooler.actionable}
-                              </div>
+                              {cooler?.status}
                             </div>
-                          </>
-                        )}
-                      </td>
-                      <td data-label="Acciones" title="Acciones">
-                        {isLoading == true ? (
-                          <>
-                            <Skeleton height={20} radius="sm" width="90%" />
-                          </>
-                        ) : (
-                          <div>
-                            <Link to="/home/coolerDetail">
-                              <div
+                          </div>
+                        </>
+                      )}
+                    </td>
+                    <td data-label="Serie" title={cooler.serial_number}>
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={20} radius="sm" width="90%" />
+                        </>
+                      ) : cooler.serial_number === "" ? (
+                        "Sin registro"
+                      ) : (
+                        cooler.serial_number
+                      )}
+                    </td>
+                    <td data-label="Modelo" title={cooler.model_id}>
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={20} radius="sm" width="90%" />
+                        </>
+                      ) : cooler.model_id === "" ? (
+                        "Sin registro"
+                      ) : (
+                        cooler.model_id
+                      )}
+                    </td>
+                    <td data-label="Última visita" title={cooler.last_read}>
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={20} radius="sm" width="90%" />
+                        </>
+                      ) : cooler.last_read == undefined ||
+                        cooler.last_read == null ? (
+                        "Sin registro"
+                      ) : (
+                        new Date(cooler.last_read).toLocaleDateString()
+                      )}
+                    </td>
+                    <td data-label="Prioridad" title={cooler.priority_status}>
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={20} radius="sm" width="90%" />
+                        </>
+                      ) : cooler.actionable == undefined ||
+                        cooler.actionable == "" ? (
+                        "Sin registro"
+                      ) : (
+                        <>
+                          <div
+                            style={{
+                              width: "fit-content",
+                              display: "flex",
+                              padding: "4px",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              gap: "4px",
+                              borderRadius: "2px",
+                              border:
+                                cooler.actionable === "Visita PdV"
+                                  ? "1.5px solid #DA7E05"
+                                  : cooler.actionable === "Sin Riesgo"
+                                  ? "1.5px solid #0F9F67"
+                                  : cooler.actionable === "Toma de Decisiones"
+                                  ? "1.5px solid #F93448"
+                                  : cooler.actionable === "Actualizar Info"
+                                  ? "1.5px solid #DA7E05"
+                                  : "1.5px solid black",
+                              background: "#FFF",
+                            }}
+                          >
+                            {cooler.actionable === "Visita PdV" ? (
+                              <img
+                                src={"../../sampleData/p.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Sin Riesgo" ? (
+                              <img
+                                src={"../../sampleData/sn.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Toma de Decisiones" ? (
+                              <img
+                                src={"../../sampleData/a.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Actualizar Info" ? (
+                              <img
+                                src={"../../sampleData/p.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : (
+                              ""
+                            )}
+
+                            <div
+                              style={{
+                                color:
+                                  cooler.actionable === "Visita PdV"
+                                    ? "#DA7E05"
+                                    : cooler.actionable === "Sin Riesgo"
+                                    ? "#0F9F67"
+                                    : cooler.actionable === "Toma de Decisiones"
+                                    ? "#F93448"
+                                    : cooler.actionable === "Actualizar Info"
+                                    ? "#DA7E05"
+                                    : "black",
+                                // fontFamily: "DM Sans",
+                                fontSize: "1vw",
+                                fontStyle: "normal",
+                                fontWeight: 600,
+                                lineHeight: "14px",
+                              }}
+                            >
+                              {cooler.actionable === "Visita PdV"
+                                ? "Visita punto de venta"
+                                : cooler.actionable === "Sin Riesgo"
+                                ? "Sin riesgo"
+                                : cooler.actionable === "Toma de Decisiones"
+                                ? "Acciones urgentes"
+                                : cooler.actionable === "Actualizar Info"
+                                ? "Requiere actualizar ..."
+                                : cooler.actionable}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </td>
+                    <td data-label="Acciones" title="Acciones">
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton height={20} radius="sm" width="90%" />
+                        </>
+                      ) : (
+                        <div>
+                          <Link to="/home/coolerDetail">
+                            <div
+                              style={{
+                                color: "#3E83FF",
+                                fontSize: "14px",
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                lineHeight: "20px",
+                                display: "flex",
+                                marginRight: "6px",
+                              }}
+                            >
+                              Ver más{" "}
+                              <IconArrowRight
                                 style={{
                                   color: "#3E83FF",
-                                  fontSize: "14px",
-                                  fontStyle: "normal",
-                                  fontWeight: 400,
-                                  lineHeight: "20px",
-                                  display: "flex",
-                                  marginRight: "6px",
+                                  width: "16px",
+                                  height: "16px",
+                                  marginTop: "2px",
                                 }}
-                              >
-                                Ver más{" "}
-                                <IconArrowRight
-                                  style={{
-                                    color: "#3E83FF",
-                                    width: "16px",
-                                    height: "16px",
-                                    marginTop: "2px",
-                                  }}
-                                />
-                              </div>
-                            </Link>
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
+                              />
+                            </div>
+                          </Link>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             ) : isLoading == true ? (
               <tbody>{isloadingData()}</tbody>

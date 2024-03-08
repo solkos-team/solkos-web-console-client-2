@@ -31,42 +31,17 @@ moment.locale("es", {
 });
 
 export default function CoolerDetail() {
-  const b = "../../sampleData/devices.png";
-  const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
   const [inversionOpened, { open: openInversion, close: closeInversion }] =
     useDisclosure(false);
   const [energyOpened, { open: openEnergy, close: closeEnergy }] =
     useDisclosure(false);
-  const [noInfoToShow, setNoInfoToShow] = useState(false);
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-    setNoInfoToShow(false);
-  };
-
-  const sortedTracking = coolersData?.tracking?.slice().sort((a, b) => {
-    const dateA = new Date(a.notified_at).getTime();
-    const dateB = new Date(b.notified_at).getTime();
-    return dateB - dateA;
-  });
-
-  const formatCreatedAt = (createdAt) => {
-    const date = new Date(createdAt);
-    const formattedDate = date.toLocaleDateString("es-ES", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
-    return formattedDate;
-  };
-
+  const { serial_number } = useParams();
   const fetchData = async () => {
     try {
       const data = await fetchUniversalDetails("coolers", serial_number, "GET");
       setCoolersData(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -74,11 +49,7 @@ export default function CoolerDetail() {
   useEffect(() => {
     fetchData();
   }, []);
-
-  const { serial_number } = useParams();
-
   useEffect(() => {}, [serial_number, coolersData]);
-  const [tabs, setTabs] = useState<string | undefined>();
 
   return (
     <>
@@ -583,12 +554,9 @@ export default function CoolerDetail() {
                         }}
                       >
                         {coolersData.activity
-
                           .filter(
                             (order) =>
                               order.type === "SERVICE_ORDER" ||
-                              // &&
-                              //   order.data.status === "D,D"
                               (order.type === "TRACKING" &&
                                 (order.data.algorithm === "COMPRESSOR_FAIL" ||
                                   order.data.algorithm === "FREEZING_FAIL" ||
@@ -610,41 +578,6 @@ export default function CoolerDetail() {
                                     "Toma de Decisiones" ||
                                   order.data.algorithm === "Visita PdV"))
                           )
-                          // .sort((a, b) => {
-                          //   let aDate, bDate;
-
-                          //   if (a.type === "SERVICE_ORDER" && a.data.close_at) {
-                          //     aDate = new Date(a.data.close_at).getTime();
-                          //   } else if (
-                          //     a.type === "TRACKING" &&
-                          //     a.data.notified_at
-                          //   ) {
-                          //     aDate = new Date(a.data.notified_at).getTime();
-                          //   }
-
-                          //   if (b.type === "SERVICE_ORDER" && b.data.close_at) {
-                          //     bDate = new Date(b.data.close_at).getTime();
-                          //   } else if (
-                          //     b.type === "TRACKING" &&
-                          //     b.data.notified_at
-                          //   ) {
-                          //     bDate = new Date(b.data.notified_at).getTime();
-                          //   }
-
-                          //   if (!aDate && !bDate) {
-                          //     if (a.type === "SERVICE_ORDER") return -1;
-                          //     if (b.type === "SERVICE_ORDER") return 1;
-                          //     if (a.type === "TRACKING") return -1;
-                          //     if (b.type === "TRACKING") return 1;
-                          //     return 0;
-                          //   }
-
-                          //   if (!aDate) return -1;
-
-                          //   if (!bDate) return 1;
-
-                          //   return bDate - aDate;
-                          // })
                           .sort((a, b) => {
                             let aDate, bDate;
 
@@ -1129,19 +1062,7 @@ export default function CoolerDetail() {
                     </>
                   )}
                 </div>
-                <div
-                  className="clt_actividad_mapa_info"
-                  // style={{
-                  //   display: "flex",
-                  //   padding: "8px",
-                  //   alignItems: "center",
-                  //   alignContent: "center",
-                  //   gap: "4px",
-                  //   alignSelf: "stretch",
-                  //   flexWrap: "wrap",
-                  //   marginTop: 62,
-                  // }}
-                >
+                <div className="clt_actividad_mapa_info">
                   <div
                     style={{
                       display: "flex",

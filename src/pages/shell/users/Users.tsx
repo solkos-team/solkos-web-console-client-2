@@ -191,14 +191,14 @@ export default function Users() {
     }
     return rows;
   };
-  const userVerify = () : Boolean => {
-    const user = localStorage.getItem("USER")
-    if(user == 'Jose Ivan Perez Ugalde' || user == 'Mayra Barrón Reséndiz'){
-      return true
-    } else{
-      return false
-    }   
-  }
+  const userVerify = (): Boolean => {
+    const user = localStorage.getItem("USER");
+    if (user == "Jose Ivan Perez Ugalde" || user == "Mayra Barrón Reséndiz") {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -408,13 +408,13 @@ export default function Users() {
                               user.email
                             )}
                           </td>
-                          <td data-label="Customer" title={user.customer} >
+                          <td data-label="Customer" title={user.customer}>
                             {isLoading == true ? (
                               <>
                                 <Skeleton height={20} radius="sm" width="90%" />
                               </>
-                            ) : (                            
-                                  user.customer
+                            ) : (
+                              user.customer
                             )}
                           </td>
                           <td data-label="Nombre" title={String(user.name)}>
@@ -460,20 +460,22 @@ export default function Users() {
                               </div>
                             )}
                           </td>
-                          <td style={{display:userVerify() == true ? '':'none'}}>
-                            
-                              <Button
-                                variant="filled"
-                                color="red"
-                                size="xs"
-                                style={{ width: "73px" }}
-                                onClick={() => {
-                                  deleteUserDrawer(user.id);
-                                }}
-                              >
-                                Eliminar
-                              </Button>
-                            
+                          <td
+                            style={{
+                              display: userVerify() == true ? "" : "none",
+                            }}
+                          >
+                            <Button
+                              variant="filled"
+                              color="red"
+                              size="xs"
+                              style={{ width: "73px" }}
+                              onClick={() => {
+                                deleteUserDrawer(user.id);
+                              }}
+                            >
+                              Eliminar
+                            </Button>
                           </td>
                         </tr>
                       ))}
