@@ -18,34 +18,21 @@ export default function DrawerUsers({
   const [showAlert, setShowAlert] = useState(false);
   const [emailUser, setEmailUser] = useState(email);
   const [customerUser, setCustomerUser] = useState(customer);
-  const [pathUser, setPathUser] = useState(path.join(","));
-  const [originalPathUser, setOriginalPathUser] = useState("");
-
+  // const [pathUser, setPathUser] = useState(path.join(","));
+  const [pathUser, setPathUser] = useState(path);
   const closeAndClearInfo = () => {
     userDataClear("");
   };
 
-  useEffect(() => {
-    const { id, name, email, customer, path } = userData;
-    setNameUser(name);
-    setEmailUser(email);
-    setCustomerUser(customer);
-    setPathUser(path.join(","));
-  }, [userData]);
-
-  useEffect(() => {
-    if (openedDrawerEdit) {
-      setOriginalPathUser(pathUser);
-    }
-  }, [openedDrawerEdit]);
-
+  openedDrawerEdit === false ? closeAndClearInfo : "";
   const handleEditUser = () => {
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
     const data = {
       name: nameUser,
       email: emailUser,
       customer: customerUser,
-      path: pathUser.split(","),
+      // path: pathUser.split(","),
+      path: pathUser,
     };
     fetch(url, {
       method: "PUT",
@@ -70,7 +57,13 @@ export default function DrawerUsers({
       });
   };
 
-  const isPathEdited = pathUser !== originalPathUser;
+  useEffect(() => {
+    const { id, name, email, customer, path } = userData;
+    setNameUser(name);
+    setEmailUser(email);
+    setCustomerUser(customer);
+    setPathUser(path);
+  }, [userData]);
 
   return (
     <Drawer
