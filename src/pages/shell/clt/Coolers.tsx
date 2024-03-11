@@ -102,7 +102,7 @@ export default function Coolers() {
               </>
             }
           </td>
-          <td data-label="# Endriadores">
+          <td data-label="# Enfriadores">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />

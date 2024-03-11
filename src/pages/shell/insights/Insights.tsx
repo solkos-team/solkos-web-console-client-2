@@ -1422,7 +1422,13 @@ export default function Insights() {
                               {insightsData?.insights?.ALERT?.algorithms
                                 .filter(
                                   (algorithm) =>
-                                    algorithm.algorithm !== "MOVED_VISIT_ALERT"
+                                    algorithm.algorithm ===
+                                      "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
+                                    algorithm.algorithm === "VOLTAGE_ALERT" ||
+                                    algorithm.algorithm ===
+                                      "HIGH_TEMPERATURE_ALERT" ||
+                                    algorithm.algorithm ===
+                                      "DISCONNECTION_ALERT"
                                 )
                                 .map((algorithm, index) => {
                                   const max = Math.max(

@@ -141,9 +141,12 @@ export default function Alerts() {
             ) : (
               alertsData
                 .filter(
-                  (cooler) =>
-                    cooler.level === "ALERT" &&
-                    cooler.algorithm != "MOVED_VISIT_ALERT"
+                  (algorithm) =>
+                    algorithm.algorithm ===
+                      "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
+                    algorithm.algorithm === "VOLTAGE_ALERT" ||
+                    algorithm.algorithm === "HIGH_TEMPERATURE_ALERT" ||
+                    algorithm.algorithm === "DISCONNECTION_ALERT"
                 )
                 .map((cooler, index) => (
                   <div
@@ -266,6 +269,8 @@ export default function Alerts() {
                             ? "Bajo voltaje"
                             : cooler.algorithm === "MOVED_VISIT_ALERT"
                             ? "Movimiento"
+                            : cooler.algorithm === "VOLTAGE_ALERT"
+                            ? "Bajo/Alto voltaje"
                             : cooler.algorithm}
                         </div>
                       </div>

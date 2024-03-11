@@ -19,11 +19,26 @@ export default function DrawerUsers({
   const [emailUser, setEmailUser] = useState(email);
   const [customerUser, setCustomerUser] = useState(customer);
   const [pathUser, setPathUser] = useState(path.join(","));
+  const [originalPathUser, setOriginalPathUser] = useState("");
+
   const closeAndClearInfo = () => {
     userDataClear("");
   };
 
-  openedDrawerEdit === false ? closeAndClearInfo : "";
+  useEffect(() => {
+    const { id, name, email, customer, path } = userData;
+    setNameUser(name);
+    setEmailUser(email);
+    setCustomerUser(customer);
+    setPathUser(path.join(","));
+  }, [userData]);
+
+  useEffect(() => {
+    if (openedDrawerEdit) {
+      setOriginalPathUser(pathUser);
+    }
+  }, [openedDrawerEdit]);
+
   const handleEditUser = () => {
     const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
     const data = {
@@ -55,13 +70,7 @@ export default function DrawerUsers({
       });
   };
 
-  useEffect(() => {
-    const { id, name, email, customer, path } = userData;
-    setNameUser(name);
-    setEmailUser(email);
-    setCustomerUser(customer);
-    setPathUser(path.join(","));
-  }, [userData]);
+  const isPathEdited = pathUser !== originalPathUser;
 
   return (
     <Drawer

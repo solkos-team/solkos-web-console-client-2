@@ -117,7 +117,7 @@ export default function Outlets() {
               </>
             }
           </td>
-          <td data-label="# Endriadores">
+          <td data-label="# Enfriadores">
             {
               <>
                 <Skeleton height={20} radius="sm" width="90%" />
@@ -351,7 +351,7 @@ export default function Outlets() {
                           outlet.outlet_name
                         )}
                       </td>
-                      <td data-label="# Endriadores" title={outlet.num_coolers}>
+                      <td data-label="# Enfriadores" title={outlet.num_coolers}>
                         {isLoading == true ? (
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
