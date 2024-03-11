@@ -65,6 +65,14 @@ export default function DrawerUsers({
     setPathUser(path);
   }, [userData]);
 
+  const userVerify = (): Boolean => {
+    const user = localStorage.getItem("USER");
+    if (user == "Jose Ivan Perez Ugalde" || user == "Mayra Barrón Reséndiz") {
+      return true;
+    } else {
+      return false;
+    }
+  };
   return (
     <Drawer
       opened={openedDrawerEdit}
@@ -141,8 +149,7 @@ export default function DrawerUsers({
           >
             Nombre
           </label>
-          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+          {userVerify() == true ? (
             <>
               <input
                 type="text"
@@ -204,8 +211,7 @@ export default function DrawerUsers({
           >
             Correo
           </label>
-          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+          {userVerify() == true ? (
             <>
               <input
                 type="text"
@@ -267,8 +273,7 @@ export default function DrawerUsers({
           >
             Customer
           </label>
-          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+          {userVerify() == true ? (
             <>
               <input
                 type="text"
@@ -330,8 +335,7 @@ export default function DrawerUsers({
           >
             Path
           </label>
-          {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-          localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+          {userVerify() == true ? (
             <>
               <input
                 type="text"
@@ -370,8 +374,7 @@ export default function DrawerUsers({
             </>
           )}
         </section>
-        {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-        localStorage.getItem("USER") === "Mayra Barrón Reséndiz" ? (
+        {userVerify() == true ? (
           <>
             <br></br>
             <Button
