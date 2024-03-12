@@ -261,6 +261,8 @@ export default function Outlets() {
                 <ExportToExcel
                   datos={filteredOutlets}
                   nombre={"Puntos de Venta"}
+                  // body={body}
+                  // component="outlets"
                 />
               </div>
             </div>
@@ -485,7 +487,7 @@ export default function Outlets() {
                                         ? "#DA7E05"
                                         : "black",
                                     // fontFamily: "DM Sans",
-                                    fontSize: "1vw",
+                                    // fontSize: "1vw",
                                     fontStyle: "normal",
                                     fontWeight: 600,
                                     lineHeight: "14px",
