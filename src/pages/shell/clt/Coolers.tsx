@@ -250,7 +250,9 @@ export default function Coolers() {
               }}
             >
               <div>
-                <ExportToExcel datos={filteredCoolers} nombre={"Enfriadores"} />
+                <ExportToExcel datos={filteredCoolers} nombre={"Enfriadores"} 
+                // body={body} component="coolers" 
+                />
               </div>
             </div>
           </div>
@@ -339,7 +341,7 @@ export default function Coolers() {
                           );
                     }}
                   >
-                    <td data-label="Nombre" title={cooler.status}>
+                    <td data-label="ESTATUS" title={cooler.status}>
                       {isLoading == true ? (
                         <>
                           <Skeleton height={20} radius="sm" width="90%" />
@@ -398,10 +400,10 @@ export default function Coolers() {
                                     ? "#451C03"
                                     : "black",
                                 // fontFamily: "Space Mono",
-                                fontSize:
-                                  cooler?.status === "FUNCIONANDO CORRECTAMENTE"
-                                    ? ".75vw"
-                                    : ".8vw",
+                                // fontSize:
+                                //   cooler?.status === "FUNCIONANDO CORRECTAMENTE"
+                                //     ? ".75vw"
+                                //     : ".8vw",
                                 fontStyle: "normal",
                                 fontWeight: 400,
                                 lineHeight: "14px",
@@ -447,7 +449,7 @@ export default function Coolers() {
                         new Date(cooler.last_read).toLocaleDateString()
                       )}
                     </td>
-                    <td data-label="Prioridad" title={cooler.priority_status}>
+                    <td data-label="CONTROL DE ACTIVOS" title={cooler.priority_status}>
                       {isLoading == true ? (
                         <>
                           <Skeleton height={20} radius="sm" width="90%" />
@@ -520,7 +522,7 @@ export default function Coolers() {
                                     ? "#DA7E05"
                                     : "black",
                                 // fontFamily: "DM Sans",
-                                fontSize: "1vw",
+                                // fontSize: "1vw",
                                 fontStyle: "normal",
                                 fontWeight: 600,
                                 lineHeight: "14px",
