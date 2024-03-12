@@ -1057,7 +1057,7 @@ export default function CoolerDetail() {
                     {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={10} radius="xl" /></div> :
                     coolersData?.cooler?.distance === undefined
                       ? "Sin registro"
-                      : coolersData?.cooler?.last_latitude + "metros"}
+                      : `${coolersData?.cooler?.last_latitude} metros`}
                   </h1>
                 </div>
                 <div className="clt_actividad_principal_mapa">
