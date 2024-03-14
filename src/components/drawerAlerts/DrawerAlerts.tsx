@@ -337,7 +337,7 @@ export default function DrawerA({
                   style={{
                     color: "#000",
                     // fontFamily: "DM Sans",
-                    fontSize: "16px",
+                    // fontSize: "16px",
                     fontStyle: "normal",
                     fontWeight: 600,
                     lineHeight: "normal",
@@ -868,7 +868,7 @@ export default function DrawerA({
                                         ? "#DA7E05"
                                         : "black",
                                     // fontFamily: "DM Sans",
-                                    fontSize: ".7vw",
+                                    // fontSize: ".7vw",
                                     fontStyle: "normal",
                                     fontWeight: 600,
                                     lineHeight: "14px",
