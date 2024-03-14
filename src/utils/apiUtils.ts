@@ -233,10 +233,14 @@ export const fetchUniversal = async (
 export const fetchUniversalDetails = async (
   componentURL,
   detailsID?,
-  CRUD?
+  CRUD?,
+  setIsLoading?
 ) => {
   detailsID == undefined ? (detailsID = "") : detailsID;
   const url = `${baseUrl}/${componentURL}/${detailsID}`;
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
   const headers = {
     "Content-Type": "application/json",
   };
