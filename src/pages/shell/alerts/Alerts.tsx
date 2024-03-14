@@ -295,7 +295,7 @@ export default function Alerts() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.value.toLocaleString()}
+                          {cooler.value.toLocaleString("es-MX")}
                         </div>
                         <div
                           style={{

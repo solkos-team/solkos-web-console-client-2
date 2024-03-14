@@ -16,15 +16,15 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
   const mes1 = new Date(
     coolersData?.properties.energy_consumption_month_1.timestamp
   );
-  const mes11 = mes1.toLocaleString("es-ES", { month: "long" });
+  const mes11 = mes1.toLocaleString("es-MX", { month: "long" });
   const mes2 = new Date(
     coolersData?.properties?.energy_consumption_month_2.timestamp
   );
-  const mes22 = mes2.toLocaleString("es-ES", { month: "long" });
+  const mes22 = mes2.toLocaleString("es-MX", { month: "long" });
   const mes3 = new Date(
     coolersData?.properties?.energy_consumption_month_3.timestamp
   );
-  const mes33 = mes3.toLocaleString("es-ES", { month: "long" });
+  const mes33 = mes3.toLocaleString("es-MX", { month: "long" });
   const chartdata = [
     {
       name: mes33,
@@ -53,7 +53,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
   ];
 
   const valueFormatter = (number) =>
-    ` ${new Intl.NumberFormat("us").format(number).toString()} KW/h`;
+    ` ${new Intl.NumberFormat("es-MX").format(number).toString()} KW/h`;
 
   return (
     <Drawer
@@ -186,7 +186,9 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   {coolersData?.properties?.energy_cost.value === undefined
                     ? "Sin registro"
                     : "$" +
-                      `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
+                      `${coolersData?.properties?.energy_cost.value.toLocaleString(
+                        "es-MX"
+                      )}`}
                 </div>
               </div>
               <div

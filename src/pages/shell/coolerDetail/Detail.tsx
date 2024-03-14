@@ -815,7 +815,10 @@ export default function CoolerDetail() {
                                           marginTop: "-5px",
                                         }}
                                       >
-                                        $ {order.data.total.toLocaleString()}
+                                        ${" "}
+                                        {order.data.total.toLocaleString(
+                                          "es-MX"
+                                        )}
                                       </div>
                                       <div
                                         style={{
@@ -1264,7 +1267,9 @@ export default function CoolerDetail() {
                         ?.value === undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
+                          `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                   <div
@@ -1301,7 +1306,9 @@ export default function CoolerDetail() {
                       {coolersData?.properties?.sale_price?.value === undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
+                          `${coolersData?.properties?.sale_price.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                   <div
@@ -1339,7 +1346,9 @@ export default function CoolerDetail() {
                       undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
+                          `${coolersData?.properties?.total_expense_service.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                 </div>
@@ -1515,7 +1524,9 @@ export default function CoolerDetail() {
                       {coolersData?.properties?.energy_cost.value == undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.energy_cost.value.toLocaleString()}`}
+                          `${coolersData?.properties?.energy_cost.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                 </div>

@@ -279,7 +279,7 @@ export default function Fails() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.value.toLocaleString()}
+                          {cooler.value.toLocaleString("es-MX")}
                         </div>
                         <div
                           style={{

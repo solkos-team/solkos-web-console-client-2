@@ -239,7 +239,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         ?.value === undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.total_ownership_expense.value.toLocaleString()}`}
+                          `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                     <div
                       style={{
@@ -318,7 +320,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       {coolersData?.properties?.sale_price?.value === undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.sale_price.value.toLocaleString()}`}
+                          `${coolersData?.properties?.sale_price.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                   <div
@@ -357,7 +361,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       undefined
                         ? "Sin registro"
                         : "$" +
-                          `${coolersData?.properties?.total_expense_service.value.toLocaleString()}`}
+                          `${coolersData?.properties?.total_expense_service.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                 </div>
@@ -451,7 +457,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                           .value === undefined
                           ? "Sin registro"
                           : "$" +
-                            `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString()}`}
+                            `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString(
+                              "es-MX"
+                            )}`}
                       </div>
                       <div
                         style={{
@@ -512,7 +520,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         undefined
                           ? "Sin registro"
                           : "$" +
-                            `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}
+                            `${coolersData?.properties?.annual_decrement.value.toLocaleString(
+                              "es-MX"
+                            )}`}
                       </div>
                       <div
                         style={{
@@ -822,7 +832,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                                           lineHeight: "20px",
                                         }}
                                       >
-                                        ${adjustedPrice.toLocaleString()}
+                                        ${adjustedPrice.toLocaleString("es-MX")}
                                       </div>
                                     </div>
                                   );
@@ -1017,7 +1027,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     {coolersData?.properties?.annual_decrement.value ===
                     undefined
                       ? "Sin registro"
-                      : `${coolersData?.properties?.annual_decrement.value.toLocaleString()}`}
+                      : `${coolersData?.properties?.annual_decrement.value.toLocaleString(
+                          "es-MX"
+                        )}`}
                     )
                   </div>
                   <div

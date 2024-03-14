@@ -100,11 +100,11 @@ export default function Insights() {
   const markers = filteredMarkers;
   useEffect(() => {}, [markers]);
 
-  insightsData?.summary.coolers.toLocaleString() != null ||
-  insightsData?.summary.coolers.toLocaleString() != undefined
+  insightsData?.summary.coolers.toLocaleString("es-MX") != null ||
+  insightsData?.summary.coolers.toLocaleString("es-MX") != undefined
     ? sessionStorage.setItem(
         "TtlCoolers",
-        insightsData?.summary.coolers.toLocaleString()
+        insightsData?.summary.coolers.toLocaleString("es-MX")
       )
     : "";
 
@@ -271,7 +271,7 @@ export default function Insights() {
                       ) : insightsData?.summary.coolers === undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.summary.coolers.toLocaleString()
+                        insightsData?.summary.coolers.toLocaleString("es-MX")
                       )}
                     </div>
                   </div>
@@ -320,7 +320,7 @@ export default function Insights() {
                       ) : insightsData?.summary.regions === undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.summary.regions.toLocaleString()
+                        insightsData?.summary.regions.toLocaleString("es-MX")
                       )}
                     </div>
                   </div>
@@ -369,7 +369,7 @@ export default function Insights() {
                       ) : insightsData?.summary.zones === undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.summary.zones.toLocaleString()
+                        insightsData?.summary.zones.toLocaleString("es-MX")
                       )}
                     </div>
                   </div>
@@ -419,7 +419,9 @@ export default function Insights() {
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.summary.operative_units.toLocaleString()
+                        insightsData?.summary.operative_units.toLocaleString(
+                          "es-MX"
+                        )
                       )}
                     </div>
                   </div>
@@ -468,7 +470,7 @@ export default function Insights() {
                       ) : insightsData?.summary.routes === undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.summary.routes.toLocaleString()
+                        insightsData?.summary.routes.toLocaleString("es-MX")
                       )}
                     </div>
                   </div>
@@ -638,7 +640,7 @@ export default function Insights() {
                                   (total, algorithm) => total + algorithm.value,
                                   0
                                 )
-                                .toLocaleString()}
+                                .toLocaleString("es-MX")}
                             </div>
                             <div
                               style={{
@@ -772,7 +774,9 @@ export default function Insights() {
                                       >
                                         {algorithm.value === undefined
                                           ? "Sin registro"
-                                          : algorithm.value.toLocaleString()}
+                                          : algorithm.value.toLocaleString(
+                                              "es-MX"
+                                            )}
                                       </div>
                                     </div>
                                   );
@@ -1079,7 +1083,9 @@ export default function Insights() {
                             >
                               {insightsData?.insights?.FAIL?.total === undefined
                                 ? "Sin registro"
-                                : insightsData?.insights?.FAIL?.total.toLocaleString()}
+                                : insightsData?.insights?.FAIL?.total.toLocaleString(
+                                    "es-MX"
+                                  )}
                             </div>
                             <div
                               style={{
@@ -1230,7 +1236,9 @@ export default function Insights() {
                                       >
                                         {algorithm.value === undefined
                                           ? "Sin registro"
-                                          : algorithm.value.toLocaleString()}
+                                          : algorithm.value.toLocaleString(
+                                              "es-MX"
+                                            )}
                                       </div>
                                     </div>
                                   );
@@ -1337,7 +1345,9 @@ export default function Insights() {
                               {insightsData?.insights?.ALERT?.total ===
                               undefined
                                 ? "Sin registro"
-                                : insightsData?.insights?.ALERT?.total.toLocaleString()}
+                                : insightsData?.insights?.ALERT?.total.toLocaleString(
+                                    "es-MX"
+                                  )}
                             </div>
                             <div
                               style={{
@@ -1504,7 +1514,9 @@ export default function Insights() {
                                       >
                                         {algorithm.value === undefined
                                           ? "Sin registro"
-                                          : algorithm.value.toLocaleString()}
+                                          : algorithm.value.toLocaleString(
+                                              "es-MX"
+                                            )}
                                       </div>
                                     </div>
                                   );

@@ -413,7 +413,7 @@ export default function DrawerA({
                     lineHeight: "normal",
                   }}
                 >
-                  {value.toLocaleString()}
+                  {value.toLocaleString("es-MX")}
                 </div>
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
