@@ -1079,15 +1079,17 @@ body {
 }
 .users_title{
   width: 100%;
-  height: 10%;  
+  height: 10%;    
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 .users_title_h1{
   color: #000005;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
-  line-height: normal;
-  
+  line-height: normal;  
 }
 .users_form{
   width: 100%;

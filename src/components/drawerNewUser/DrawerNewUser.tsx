@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Drawer } from "@mantine/core";
+import { Button, Drawer,Input } from "@mantine/core";
 import { fetchUniversal } from "../../utils/apiUtils";
 import { useState, useEffect } from "react";
 
@@ -56,139 +56,47 @@ export default function DrawerNewUser({
       position="right"
       size="40rem"
     >
-      <div
-        style={{
-          display: "flex",
-          padding: "0px 32px",
-          alignItems: "flex-start",
-          gap: "8px",
-          alignSelf: "stretch",
-        }}
-      >
-        <img
-          src={"../../sampleData/user2.svg"}
-          alt="Descripción de la imagen"
-        />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            alignSelf: "stretch",
-          }}
-        >
-          <div
-            style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
-              fontSize: "20px",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginBottom: 100,
-            }}
-          >
-            Crear nuevo usuario
-          </div>
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          width: "450px",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "32px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            width: "450px",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "15px",
-          }}
-        >
-          <div
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "1rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: -150,
-            }}
-          >
-            Nombre
-          </div>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{
-              color: "#000",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "28px",
-              width: "50%",
-              backgroundColor: "#FFFF",
-            }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex",
-            width: "450px",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "15px",
-          }}
-        >
-          <div
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "1rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: -150,
-            }}
-          >
-            Correo
-          </div>
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              color: "#000",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "28px",
-              width: "50%",
-              backgroundColor: "#FFFF",
-            }}
-          />
-        </div>
-        <br></br>
-        <Button
-          style={{ background: "#ED5079", width: "50%", marginLeft: 0 }}
-          onClick={handleLogin}
-        >
-          Crear usuario
-        </Button>
-      </div>
+      <section className="users_principal">
+        <section className="users_content">
+          <section className="users_title">
+            <img
+              src={"../../sampleData/user2.svg"}
+              alt="Descripción de la imagen"
+            />
+            <h1 className="users_title_h1">
+              Crear Nuevo Usuario
+            </h1>
+          </section>
+          <section className="users_form">
+            <section className="users_form_1">
+              <Input.Wrapper label="Nombre" description="" error="">
+                <Input value={name}
+                  onChange={(e) => setName(e.target.value)} />
+              </Input.Wrapper>
+            </section>            
+            <section className="users_form_1">
+              <Input.Wrapper label="Correo" description="" error="">
+                <Input value={email}
+                  onChange={(e) => setEmail(e.target.value)} />
+              </Input.Wrapper>
+            </section>                                  
+            <section className="users_form_button">
+              <Button
+                style={{
+                  background: "#ED5079",
+                  width: "17rem",
+                  marginLeft: 0,
+                  color: "#FEF2F4",
+                  cursor: "pointer",
+                }}
+                onClick={handleLogin}
+              >
+                Crear usuario
+              </Button>
+            </section>
+          </section>
+        </section>
+      </section>
     </Drawer>
   );
 }
