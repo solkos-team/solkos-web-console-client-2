@@ -972,7 +972,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     {coolersData?.properties?.total_expense_service.value ===
                     undefined
                       ? "Sin registro"
-                      : `${coolersData?.properties?.total_expense_service.value}`}
+                      : `${coolersData?.properties?.total_expense_service.value.toLocaleString(
+                          "es-MX"
+                        )}`}
                   </div>
                   <div
                     style={{
@@ -1042,7 +1044,13 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       lineHeight: "14px",
                     }}
                   >
-                    $0
+                    {coolersData?.properties?.total_expense_service_last_year
+                      .value === undefined
+                      ? "Sin registro"
+                      : "$" +
+                        `${coolersData?.properties?.total_expense_service_last_year.value.toLocaleString(
+                          "es-MX"
+                        )}`}
                   </div>
                   <div
                     style={{

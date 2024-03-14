@@ -264,7 +264,7 @@ export default function Insights() {
                               height={15}
                               mt={6}
                               width="70px"
-                              radius="xl"
+                              radius="sm"
                             />
                           </div>
                         </>
@@ -313,7 +313,7 @@ export default function Insights() {
                               height={15}
                               mt={6}
                               width="70px"
-                              radius="xl"
+                              radius="sm"
                             />
                           </div>
                         </>
@@ -362,7 +362,7 @@ export default function Insights() {
                               height={15}
                               mt={6}
                               width="70px"
-                              radius="xl"
+                              radius="sm"
                             />
                           </div>
                         </>
@@ -411,7 +411,7 @@ export default function Insights() {
                               height={15}
                               mt={6}
                               width="70px"
-                              radius="xl"
+                              radius="sm"
                             />
                           </div>
                         </>
@@ -463,7 +463,7 @@ export default function Insights() {
                               height={15}
                               mt={6}
                               width="70px"
-                              radius="xl"
+                              radius="sm"
                             />
                           </div>
                         </>

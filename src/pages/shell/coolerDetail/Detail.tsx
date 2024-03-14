@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { Tooltip,Skeleton } from "@mantine/core";
+import { Tooltip, Skeleton } from "@mantine/core";
 import { useParams } from "react-router-dom";
 import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
@@ -36,9 +36,9 @@ export default function CoolerDetail() {
   const { serial_number } = useParams();
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
-  const [editSerie,setEditSerie]= useState(false)
+  const [editSerie, setEditSerie] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [serie,SetSerie] = useState(serial_number)
+  const [serie, SetSerie] = useState(serial_number);
   const [inversionOpened, { open: openInversion, close: closeInversion }] =
     useDisclosure(false);
   const [energyOpened, { open: openEnergy, close: closeEnergy }] =
@@ -46,9 +46,15 @@ export default function CoolerDetail() {
 
   const fetchData = async (serie?) => {
     try {
-      const data = await fetchUniversalDetails("coolers", serie, "GET",setIsLoading);
+      const data = await fetchUniversalDetails(
+        "coolers",
+        serie,
+        "GET",
+        setIsLoading
+      );
       setCoolersData(data);
-      setIsLoading(false)
+      console.log(data);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -58,13 +64,14 @@ export default function CoolerDetail() {
     fetchData(serie);
   }, []);
 
-  useEffect(() => {}, [serial_number, coolersData]);    
+  useEffect(() => {}, [serial_number, coolersData]);
   const searchSerial = (value) => {
-    value == '' || value == null || value == undefined ? alert("Ingresa datos correctos! ") 
-    : fetchData(value)
-    setEditSerie(false)
-  }
-  console.log(coolersData?.cooler?.channel)
+    value == "" || value == null || value == undefined
+      ? alert("Ingresa datos correctos! ")
+      : fetchData(value);
+    setEditSerie(false);
+  };
+  console.log(coolersData?.cooler?.channel);
   return (
     <>
       {localStorage.getItem("USER") == "Call Center" ? (
@@ -76,20 +83,25 @@ export default function CoolerDetail() {
         <section className="detail_image_info">
           <div className="detail_image_info_data">
             <div className="detail_image_show">
-              {isLoading == true ? <div style={{width:"50%" ,height:"50%",marginLeft:"2rem"}}><Skeleton height={90} radius="xl" /></div> 
-              :
-              <img
-                src={coolersData?.asset?.url}
-                alt="cooler"
-                width={"100%"}
-                height={"85%"}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null;
-                  currentTarget.src =
-                    "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
-                }}
-              />
-              }
+              {isLoading == true ? (
+                <div
+                  style={{ width: "50%", height: "50%", marginLeft: "2rem" }}
+                >
+                  <Skeleton height={90} radius="sm" />
+                </div>
+              ) : (
+                <img
+                  src={coolersData?.asset?.url}
+                  alt="cooler"
+                  width={"100%"}
+                  height={"85%"}
+                  onError={({ currentTarget }) => {
+                    currentTarget.onerror = null;
+                    currentTarget.src =
+                      "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
+                  }}
+                />
+              )}
             </div>
             <div className="detail_data_show">
               <div
@@ -117,7 +129,7 @@ export default function CoolerDetail() {
                       alignItems: "center",
                       gap: "10px",
                     }}
-                  >                    
+                  >
                     <div
                       style={{
                         color: "#000005",
@@ -128,31 +140,66 @@ export default function CoolerDetail() {
                         lineHeight: "normal",
                       }}
                     >
-                      {coolersData?.cooler?.serial_number === undefined
-                        ? "Sin registro"
-                        : <input  placeholder="Ingresa una nueva serie" value={serie} onChange={(e)=>{SetSerie(e.target.value)}} style={{
-                          color: "#000005",
-                          // fontFamily: "DM Sans",
-                          fontSize: "1.5vw",
-                          fontStyle: "normal",
-                          fontWeight: 700,
-                          lineHeight: "normal",
-                          width:`${coolersData?.cooler?.serial_number.length + 1}ch`,
-                          border: editSerie == false ? "transparent" : ''
-                        }}  disabled={!editSerie} onKeyDown={e => e.key === 'Enter' ? searchSerial(serie): ''} />}                      
+                      {coolersData?.cooler?.serial_number === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        <input
+                          placeholder="Ingresa una nueva serie"
+                          value={serie}
+                          onChange={(e) => {
+                            SetSerie(e.target.value);
+                          }}
+                          style={{
+                            color: "#000005",
+                            // fontFamily: "DM Sans",
+                            fontSize: "1.5vw",
+                            fontStyle: "normal",
+                            fontWeight: 700,
+                            lineHeight: "normal",
+                            width: `${
+                              coolersData?.cooler?.serial_number.length + 1
+                            }ch`,
+                            border: editSerie == false ? "transparent" : "",
+                          }}
+                          disabled={!editSerie}
+                          onKeyDown={(e) =>
+                            e.key === "Enter" ? searchSerial(serie) : ""
+                          }
+                        />
+                      )}
                     </div>
                     <Tooltip label="Ver otra serie">
-                      <div style={{ width: "1.5rem", height: "1.5rem",display:"none" }} onClick={() => { setEditSerie((o) => !o) }}>                        
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 50 50">
-                          <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" onClick={() => { setEditSerie((o) => !o) }}></path>
+                      <div
+                        style={{
+                          width: "1.5rem",
+                          height: "1.5rem",
+                          display: "none",
+                        }}
+                        onClick={() => {
+                          setEditSerie((o) => !o);
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 50 50"
+                        >
+                          <path
+                            d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"
+                            onClick={() => {
+                              setEditSerie((o) => !o);
+                            }}
+                          ></path>
                         </svg>
                       </div>
                     </Tooltip>
                     <>
                       <div
                         style={{
-                          width:
-                            "fit-content",
+                          width: "fit-content",
                           display: "flex",
                           padding: "4px",
                           justifyContent: "center",
@@ -174,9 +221,9 @@ export default function CoolerDetail() {
                           background: "#FFF",
                         }}
                       >
-                        {
-                          isLoading == true ? <Skeleton height={8} radius="xl" /> :
-                        coolersData?.cooler.actionable === "Visita PdV" ? (
+                        {isLoading == true ? (
+                          <Skeleton height={8} radius="xl" />
+                        ) : coolersData?.cooler.actionable === "Visita PdV" ? (
                           <img
                             src={"../../sampleData/p.svg"}
                             alt="Descripción de la imagen"
@@ -442,10 +489,16 @@ export default function CoolerDetail() {
                     marginTop: "-4px",
                   }}
                 >
-                  {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={20} radius="xl" /></div> :
-                  coolersData?.cooler?.channel === undefined || coolersData?.cooler?.channel === ''
-                    ? "Sin registro"
-                    : coolersData?.cooler?.channel}
+                  {isLoading == true ? (
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={20} radius="xl" />
+                    </div>
+                  ) : coolersData?.cooler?.channel === undefined ||
+                    coolersData?.cooler?.channel === "" ? (
+                    "Sin registro"
+                  ) : (
+                    coolersData?.cooler?.channel
+                  )}
                 </div>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -470,11 +523,16 @@ export default function CoolerDetail() {
                     marginTop: "-4px",
                   }}
                 >
-                  {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={20} radius="xl" /></div> :
-                  coolersData?.cooler?.region === "" ||
-                  coolersData?.cooler?.region === undefined
-                    ? "Sin registro"
-                    : coolersData?.cooler?.region}
+                  {isLoading == true ? (
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={20} radius="xl" />
+                    </div>
+                  ) : coolersData?.cooler?.region === "" ||
+                    coolersData?.cooler?.region === undefined ? (
+                    "Sin registro"
+                  ) : (
+                    coolersData?.cooler?.region
+                  )}
                 </div>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -499,11 +557,16 @@ export default function CoolerDetail() {
                     marginTop: "-4px",
                   }}
                 >
-                  {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={20} radius="xl" /></div> :
-                  coolersData?.cooler?.route === "" ||
-                  coolersData?.cooler?.route === undefined
-                    ? "Sin registro"
-                    : coolersData?.cooler?.route}
+                  {isLoading == true ? (
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={20} radius="xl" />
+                    </div>
+                  ) : coolersData?.cooler?.route === "" ||
+                    coolersData?.cooler?.route === undefined ? (
+                    "Sin registro"
+                  ) : (
+                    coolersData?.cooler?.route
+                  )}
                 </div>
               </div>
               <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -528,11 +591,16 @@ export default function CoolerDetail() {
                     marginTop: "-4px",
                   }}
                 >
-                  {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={20} radius="xl" /></div> :
-                  coolersData?.cooler?.zone === "" ||
-                  coolersData?.cooler?.zone === undefined
-                    ? "Sin registro"
-                    : coolersData?.cooler?.zone}
+                  {isLoading == true ? (
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={20} radius="xl" />
+                    </div>
+                  ) : coolersData?.cooler?.zone === "" ||
+                    coolersData?.cooler?.zone === undefined ? (
+                    "Sin registro"
+                  ) : (
+                    coolersData?.cooler?.zone
+                  )}
                 </div>
               </div>
             </div>
@@ -1026,10 +1094,15 @@ export default function CoolerDetail() {
                     Nombre PdV
                   </h1>
                   <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={20} radius="xl" /></div> :
-                    coolersData?.cooler?.outlet_name === undefined
-                      ? "Sin registro"
-                      : coolersData?.cooler?.outlet_name}
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={15} radius="sm" />
+                      </div>
+                    ) : coolersData?.cooler?.outlet_name === undefined ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.outlet_name
+                    )}
                     {coolersData?.cooler?.outlet_id === undefined ? (
                       "/Sin registro"
                     ) : (
@@ -1045,11 +1118,16 @@ export default function CoolerDetail() {
                     Dirección
                   </h1>
                   <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={20} radius="xl" /></div> :
-                    coolersData?.cooler?.outlet_address === "" ||
-                    coolersData?.cooler?.outlet_address == undefined
-                      ? "Sin registro"
-                      : coolersData?.cooler?.outlet_address}
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={20} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.outlet_address === "" ||
+                      coolersData?.cooler?.outlet_address == undefined ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.outlet_address
+                    )}
                   </h1>
                 </div>
                 <div className="clt_actividad_principal_title_nombre">
@@ -1057,19 +1135,28 @@ export default function CoolerDetail() {
                     Distancia al punto de instalación
                   </h1>
                   <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {isLoading == true ? <div style={{width:"100%" ,height:"100%"}}><Skeleton height={10} radius="xl" /></div> :
-                    coolersData?.cooler?.distance === undefined
-                      ? "Sin registro"
-                      : `${coolersData?.cooler?.last_latitude} metros`}
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={10} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.distance === undefined ? (
+                      "Sin registro"
+                    ) : (
+                      `${coolersData?.cooler?.last_latitude} metros`
+                    )}
                   </h1>
                 </div>
                 <div className="clt_actividad_principal_mapa">
-                  {
-                    isLoading == true ? <Skeleton height={10} radius="xl" style={{width:"100%" , height:"100%"}} /> : 
-                  (coolersData?.cooler?.last_latitude != null &&
-                    coolersData?.cooler?.latitude === 0) ||
-                  (coolersData?.cooler?.last_latitude != 0 &&
-                    coolersData?.cooler?.latitude === 0) ? (
+                  {isLoading == true ? (
+                    <Skeleton
+                      height={10}
+                      radius="xl"
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  ) : (coolersData?.cooler?.last_latitude != null &&
+                      coolersData?.cooler?.latitude === 0) ||
+                    (coolersData?.cooler?.last_latitude != 0 &&
+                      coolersData?.cooler?.latitude === 0) ? (
                     <>
                       <div>
                         <MapComponent1
@@ -1262,14 +1349,17 @@ export default function CoolerDetail() {
                         lineHeight: "normal",
                       }}
                     >
-                      {isLoading == true ? <Skeleton height={10} radius="xl" /> :
-                      coolersData?.properties?.total_ownership_expense
-                        ?.value === undefined
-                        ? "Sin registro"
-                        : "$" +
-                          `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
-                            "es-MX"
-                          )}`}
+                      {isLoading == true ? (
+                        <Skeleton height={10} radius="xl" />
+                      ) : coolersData?.properties?.total_ownership_expense
+                          ?.value === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        "$" +
+                        `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
+                          "es-MX"
+                        )}`
+                      )}
                     </div>
                   </div>
                   <div

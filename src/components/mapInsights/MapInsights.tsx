@@ -38,8 +38,8 @@ const MapInsightsComponent = ({ items, data }) => {
               .map((cooler) => ({
                 latitude: parseFloat(cooler.latitude),
                 longitude: parseFloat(cooler.longitude),
-                num_coolers : cooler.num_coolers,
-                area : cooler.area              
+                num_coolers: cooler.num_coolers,
+                area: cooler.area,
               }))
           : []
       );
@@ -52,40 +52,44 @@ const MapInsightsComponent = ({ items, data }) => {
   useEffect(() => {
     fetchData2();
   }, [dt, dto]);
-  
-  const [scale , setScale ] = useState(24)
+
+  const [scale, setScale] = useState(24);
   const handleApiLoaded = (map, maps) => {
     setMap(map);
     const bounds = new maps.LatLngBounds();
     var mIcon = {
       path: maps.SymbolPath.CIRCLE,
       fillOpacity: 0.8,
-      fillColor: '#BCDAFF',
+      fillColor: "#ED5079",
       strokeOpacity: 0.0,
-      strokeWeight: 1,      
-      scale: Number(scale),       
+      strokeWeight: 1,
+      scale: Number(scale),
     };
     markers === undefined
       ? []
-      : markers.forEach(({ latitude, longitude, num_coolers,area }, index) => {
+      : markers.forEach(({ latitude, longitude, num_coolers, area }, index) => {
           const marker = new maps.Marker({
             position: { lat: latitude, lng: longitude },
             map,
-            title: `${area}  ${num_coolers.toLocaleString('es-MX')} Coolers`,
+            title: `${area}  ${num_coolers.toLocaleString(
+              "es-MX"
+            )} Enfriadores`,
             icon: mIcon,
-            label : {
-              color: '#000', fontSize: '12px', fontWeight: '600',
-              text: `${num_coolers.toLocaleString('es-MX')}`
-            },            
+            label: {
+              color: "#000",
+              fontSize: "12px",
+              fontWeight: "600",
+              text: `${num_coolers.toLocaleString("es-MX")}`,
+            },
           });
 
-          marker.addListener('mouseover', e => {
-            marker.setIcon({ mIcon, scaledSize: 44 })            
-          })
+          marker.addListener("mouseover", (e) => {
+            marker.setIcon({ mIcon, scaledSize: 44 });
+          });
 
-          marker.addListener('mouseout', e => {
-            setScale(24)
-          })
+          marker.addListener("mouseout", (e) => {
+            setScale(24);
+          });
           bounds.extend(marker.getPosition());
         });
 
@@ -106,7 +110,7 @@ const MapInsightsComponent = ({ items, data }) => {
       {isLoading === true ? (
         <SkeletonMapInsights />
       ) : (
-        <GoogleMapReact      
+        <GoogleMapReact
           bootstrapURLKeys={{
             key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
           }}
