@@ -261,8 +261,8 @@ export default function Outlets() {
                 <ExportToExcel
                   datos={filteredOutlets}
                   nombre={"Puntos de Venta"}
-                  // body={body}
-                  // component="outlets"
+                  body={body}
+                  component="outlets"
                 />
               </div>
             </div>

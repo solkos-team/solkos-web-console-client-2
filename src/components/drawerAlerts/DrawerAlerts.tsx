@@ -598,6 +598,8 @@ export default function DrawerA({
                     ? "Falla asociada al compresor"
                     : selectedAlgorithm)
                 }
+                body={body}
+                component="coolers"
               />
             </div>
           </div>

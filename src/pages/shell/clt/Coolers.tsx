@@ -61,7 +61,6 @@ export default function Coolers() {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
       const datos = await data.json();
-      // console.log(datos);
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
@@ -251,7 +250,7 @@ export default function Coolers() {
             >
               <div>
                 <ExportToExcel datos={filteredCoolers} nombre={"Enfriadores"} 
-                // body={body} component="coolers" 
+                body={body} component="coolers" 
                 />
               </div>
             </div>
