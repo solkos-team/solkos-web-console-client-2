@@ -293,7 +293,7 @@ export default function DrawerA({
                       : selectedAlgorithm.endsWith("FAIL")
                       ? "#FFC7CD"
                       : "#BCDAFF",
-                    height: 8,
+                    height: "100%",
                   }}
                 >
                   {selectedAlgorithm.endsWith("ALERT") ? (

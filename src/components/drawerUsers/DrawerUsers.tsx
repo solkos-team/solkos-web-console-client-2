@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Drawer } from "@mantine/core";
+import { Button, Drawer,Input } from "@mantine/core";
 import { useEffect } from "react";
 
 export default function DrawerUsers({
@@ -80,320 +80,104 @@ export default function DrawerUsers({
       position="right"
       size="40rem"
     >
-      <div
-        style={{
-          display: "flex",
-          padding: "0px 2rem",
-          alignItems: "flex-start",
-          gap: "8px",
-          alignSelf: "stretch",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "flex-start",
-            alignSelf: "stretch",
-          }}
-        >
-          <h1
-            style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
-              fontSize: "20px",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginBottom: 50,
-            }}
-          >
-            {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-            localStorage.getItem("USER") === "Mayra Barrón Reséndiz"
-              ? "EDITAR USUARIO"
-              : "INFORMACIÓN USUARIO"}
-          </h1>
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          width: "28rem",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "1rem",
-        }}
-      >
-        <section
-          style={{
-            display: "flex",
-            width: "100%",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "1rem",
-          }}
-        >
-          <label
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "1rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: -220,
-            }}
-          >
-            Nombre
-          </label>
-          {userVerify() == true ? (
-            <>
-              <input
-                type="text"
-                value={nameUser}
-                onChange={(e) => setNameUser(e.target.value)}
+      <section className="users_principal">
+        <section className="users_content">
+          <section className="users_title">
+            <h1 className="users_title_h1">
+              {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
+                localStorage.getItem("USER") === "Mayra Barrón Reséndiz"
+                ? "EDITAR USUARIO"
+                : "INFORMACIÓN USUARIO"}
+            </h1>
+          </section>
+          <section className="users_form">
+            <section className="users_form_1">
+              {userVerify() == true ? (
+                <>
+                  <Input.Wrapper label="Nombre" description="" error="">
+                    <Input value={nameUser}
+                      onChange={(e) => setNameUser(e.target.value)} />
+                  </Input.Wrapper>
+                </>
+              ) : (
+                <>
+                  <Input.Wrapper label="Nombre" description="" error="">
+                    <Input value={nameUser}
+                      onChange={(e) => setNameUser(e.target.value)} disabled />
+                  </Input.Wrapper>
+                </>
+              )}
+            </section>            
+            <section className="users_form_1">
+              {userVerify() == true ? (
+                <>
+                  <Input.Wrapper label="Correo" description="" error="">
+                    <Input value={emailUser}
+                  onChange={(e) => setEmailUser(e.target.value)} />
+                  </Input.Wrapper>
+                </>
+              ) : (
+                <>
+                  <Input.Wrapper label="Correo" description="" error="">
+                    <Input value={emailUser}
+                    onChange={(e) => setEmailUser(e.target.value)} disabled />
+                  </Input.Wrapper>
+                </>
+              )}
+            </section>            
+            <section className="users_form_1">
+              {userVerify() == true ? (
+                <>
+                  <Input.Wrapper label="Customer" description="" error="">
+                    <Input value={customerUser}
+                     onChange={(e) => setCustomerUser(e.target.value)} />
+                  </Input.Wrapper>
+                </>
+              ) : (
+                <>
+                  <Input.Wrapper label="Customer" description="" error="">
+                    <Input value={customerUser}
+                      onChange={(e) => setCustomerUser(e.target.value)} disabled />
+                  </Input.Wrapper>
+                </>
+              )}
+            </section>            
+            <section className="users_form_1">
+              {userVerify() == true ? (
+                <>
+                  <Input.Wrapper label="Path" description="" error="">
+                    <Input value={path.toString()}
+                       // onChange={(e) => setPathUser(e.target.value)} 
+                       />
+                  </Input.Wrapper>
+                </>
+              ) : (
+                <>
+                    <Input.Wrapper label="Path" description="" error="">
+                      <Input value={path.toString()}
+                        // onChange={(e) => setPathUser(e.target.value)}
+                        disabled />
+                    </Input.Wrapper>
+                </>
+              )}
+            </section>            
+            <section className="users_form_button">
+              <Button
                 style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
+                  background: "#ED5079",
                   width: "17rem",
-                  backgroundColor: "#FFFF",
+                  marginLeft: 0,
+                  color: "#FEF2F4",
+                  cursor: "pointer",
                 }}
-              />
-            </>
-          ) : (
-            <>
-              <input
-                type="text"
-                value={nameUser}
-                onChange={(e) => setNameUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-                disabled
-              />
-            </>
-          )}
+                onClick={handleEditUser}
+              >
+                Editar usuario
+              </Button>
+            </section>
+          </section>
         </section>
-        <section
-          style={{
-            display: "flex",
-            width: "450px",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "1rem",
-          }}
-        >
-          <label
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "1rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: -220,
-            }}
-          >
-            Correo
-          </label>
-          {userVerify() == true ? (
-            <>
-              <input
-                type="text"
-                value={emailUser}
-                onChange={(e) => setEmailUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <input
-                type="text"
-                value={emailUser}
-                onChange={(e) => setEmailUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-                disabled
-              />
-            </>
-          )}
-        </section>
-        <section
-          style={{
-            display: "flex",
-            width: "450px",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "15px",
-          }}
-        >
-          <label
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "1rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: -200,
-            }}
-          >
-            Customer
-          </label>
-          {userVerify() == true ? (
-            <>
-              <input
-                type="text"
-                value={customerUser}
-                onChange={(e) => setCustomerUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <input
-                type="text"
-                value={customerUser}
-                onChange={(e) => setCustomerUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-                disabled
-              />
-            </>
-          )}
-        </section>
-        <section
-          style={{
-            display: "flex",
-            width: "450px",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            gap: "1rem",
-          }}
-        >
-          <label
-            style={{
-              color: "#3A3A3F",
-              // fontFamily: "DM Sans",
-              fontSize: "1rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "normal",
-              marginLeft: -230,
-            }}
-          >
-            Path
-          </label>
-          {userVerify() == true ? (
-            <>
-              <input
-                type="text"
-                value={path.toString()}
-                // onChange={(e) => setPathUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-              />
-            </>
-          ) : (
-            <>
-              <input
-                type="text"
-                value={path.toString()}
-                // onChange={(e) => setPathUser(e.target.value)}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: "17rem",
-                  backgroundColor: "#FFFF",
-                }}
-                disabled
-              />
-            </>
-          )}
-        </section>
-        {userVerify() == true ? (
-          <>
-            <br></br>
-            <Button
-              style={{
-                background: "#ED5079",
-                width: "17rem",
-                marginLeft: 0,
-                color: "#FEF2F4",
-                cursor: "pointer",
-              }}
-              onClick={handleEditUser}
-            >
-              Editar usuario
-            </Button>
-          </>
-        ) : (
-          ""
-        )}
-      </div>
+      </section>
     </Drawer>
   );
 }
