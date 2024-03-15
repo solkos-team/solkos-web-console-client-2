@@ -199,7 +199,8 @@ export default function CoolerDetail() {
                     <>
                       <div
                         style={{
-                          width: "fit-content",
+                          width:
+                            "max-content",
                           display: "flex",
                           padding: "4px",
                           justifyContent: "center",

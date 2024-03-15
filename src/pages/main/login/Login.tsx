@@ -61,169 +61,49 @@ export const Login = () => {
   return (
     // General
     <>
-      <div style={{ display: "flex", height: "89vh" }}>
-        <div
-          style={{
-            display: "flex",
-            width: "1500px",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            background: "#FFF",
-            margin: "0 auto",
-          }}
-        >
+      <div className="login_principal_body">
+        <div className="login_principal_title">
           {/* title */}
-          <div
-            style={{ display: "flex", alignItems: "flex-start", gap: "32px" }}
-          >
-            <img
+          <div className="login_principal_title_content">
+            <img className="login_principal_title_content_img"
               src={"../../sampleData/solkosSymbol.png"}
-              alt="Descripción de la imagen"
-              style={{ marginTop: 10, width: "30px", height: "30px" }}
-            />
+              alt="Descripción de la imagen" />
             <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-              }}
-            >
-              <div
-                style={{
-                  color: "#000005",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "19px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "155%",
-                }}
-              >
+            className="login_principal_title_content_nom_version">
+              <div className="login_principal_title_content_nom">
                 Consola Solkos
               </div>
 
-              <div
-                style={{
-                  color: "#3A3A3F",
-                  fontSize: "9px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  // fontFamily: "DM Mono",
-                }}
-              >
+              <div className="login_principal_title_content_nom_h2">
                 BY IMBERA
               </div>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "20px",
-              alignSelf: "stretch",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "8px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#000005",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "23px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "155%",
-                  marginRight: 280,
-                }}
-              >
+          <div className="login_principal_form">
+            <div className="login_principal_form_title">
+              <div className="login_principal_form_title_h1">
                 Inicia Sesión
               </div>
-              <div
-                style={{
-                  color: "#88888B",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "13px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "155%",
-                  marginRight: 70,
-                }}
-              >
+              <div className="login_principal_form_title_h2">
                 Utiliza las credenciales proporcionadas por tu administrador
               </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                width: "420px",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "8px",
-              }}
-            >
-              <div
-                style={{
-                  color: "#3A3A3F",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "normal",
-                }}
-              >
+            <div className="login_principal_form_label1">
+              <div className="login_principal_form_label1_1">
                 Correo
               </div>
               <Input
                 type="text"
                 value={email}
                 onChange={handleEmailChange}
-                style={{
-                  color: "#000",
-                  // fontFamily: "DM Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "28px",
-                  width: 430,
-                  backgroundColor: "#FFFF",
-                }}
-              />
+                className="login_principal_form_label1_input1"/>
             </div>
-            <div
-              style={{
-                display: "flex",
-                width: "420px",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "8px",
-                position: "relative",
-              }}
-            >
-              <div
-                style={{
-                  color: "#3A3A3F",
-                  //   fontFamily: "DM Sans",
-                  fontSize: "14px",
-                  fontStyle: "normal",
-                  fontWeight: 700,
-                  lineHeight: "normal",
-                }}
-              >
+            <div className="login_principal_form_label2">
+              <div className="login_principal_form_label2_2">
                 Contraseña
               </div>
-              <div
-                style={{
-                  position: "relative",
-                  width: 400,
-                }}
+              <div className="login_principal_form_label2_2_container"
+                
               >
                 <div
                   style={{
@@ -233,7 +113,7 @@ export const Login = () => {
                     transform: "translateY(-50%)",
                   }}
                 >
-                  {showPassword ? (
+                  {/* {showPassword ? (
                     <IconEye
                       style={{ cursor: "pointer" }}
                       onClick={handleTogglePasswordVisibility}
@@ -243,23 +123,14 @@ export const Login = () => {
                       style={{ cursor: "pointer" }}
                       onClick={handleTogglePasswordVisibility}
                     />
-                  )}
+                  )} */}
                 </div>
                 <PasswordInput
                   // type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  style={{
-                    color: "black",
-                    fontSize: "14px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "28px",
-                    width: 430,
-                    paddingRight: "30px",
-                  }}
-                />
+                  className="login_principal_form_label2_input2"/>
               </div>
               {errorMessage && (
                 <div
@@ -294,11 +165,7 @@ export const Login = () => {
             </div>
             <form onSubmit={handleSubmit}>
               <Button
-                style={{
-                  background: "#ED5079",
-                  width: "440px",
-                  marginLeft: 10,
-                }}
+              className="login_principal_form_button_ini"
                 onClick={handleLogin}
               >
                 Iniciar sesión
