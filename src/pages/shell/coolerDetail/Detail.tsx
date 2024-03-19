@@ -71,7 +71,8 @@ export default function CoolerDetail() {
       : fetchData(value);
     setEditSerie(false);
   };
-  console.log(coolersData?.cooler?.channel);
+  console.log(coolersData?.cooler?.last_latitude);
+  console.log(coolersData?.cooler);
   return (
     <>
       {localStorage.getItem("USER") == "Call Center" ? (
@@ -1099,13 +1100,13 @@ export default function CoolerDetail() {
                       <div style={{ width: "100%", height: "100%" }}>
                         <Skeleton height={15} radius="sm" />
                       </div>
-                    ) : coolersData?.cooler?.outlet_name === undefined ? (
+                    ) : coolersData?.cooler?.outlet_name === undefined || coolersData?.cooler?.outlet_name === "" ? (
                       "Sin registro"
                     ) : (
                       coolersData?.cooler?.outlet_name
                     )}
-                    {coolersData?.cooler?.outlet_id === undefined ? (
-                      "/Sin registro"
+                    {coolersData?.cooler?.outlet_id === undefined || coolersData?.cooler?.outlet_id === "" ? (
+                      " / Sin registro"
                     ) : (
                       <span>
                         {" "}
@@ -1140,7 +1141,7 @@ export default function CoolerDetail() {
                       <div style={{ width: "100%", height: "100%" }}>
                         <Skeleton height={10} radius="xl" />
                       </div>
-                    ) : coolersData?.cooler?.distance === undefined ? (
+                    ) : coolersData?.cooler?.distance === undefined || coolersData?.cooler?.distance === null ? (
                       "Sin registro"
                     ) : (
                       `${coolersData?.cooler?.last_latitude} metros`
@@ -1185,7 +1186,8 @@ export default function CoolerDetail() {
                         last_longitude={coolersData?.cooler?.last_longitude}
                       />
                     </>
-                  )}
+                  )                   
+                  } 
                 </div>
                 <div className="clt_actividad_mapa_info">
                   <div
