@@ -20,7 +20,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
-import solkosSymbol from "./sampleData/solkosSymbol.png";
+import solkosSymbol from "./sampleData/solkosSymbol.svg";
 import coolers from "./sampleData/coolers.png";
 import clt from "./sampleData/clt.png";
 import pv from "./sampleData/pv.png";
@@ -515,7 +515,7 @@ function App() {
                       <img
                         style={{
                           width: "1.5rem",
-                          height: "18px",
+                          height: "1.5rem",
                           // marginLeft: -10,
                         }}
                         src={solkosSymbol}
