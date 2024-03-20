@@ -53,7 +53,6 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -71,8 +70,6 @@ export default function CoolerDetail() {
       : fetchData(value);
     setEditSerie(false);
   };
-  console.log(coolersData?.cooler?.last_latitude);
-  console.log(coolersData?.cooler);
   return (
     <>
       {localStorage.getItem("USER") == "Call Center" ? (
@@ -135,10 +132,10 @@ export default function CoolerDetail() {
                       style={{
                         color: "#000005",
                         // fontFamily: "DM Sans",
-                        fontSize: "1.5vw",
+                        fontSize: "1.25rem",
                         fontStyle: "normal",
                         fontWeight: 700,
-                        lineHeight: "normal",
+                        lineHeight: "normal",                        
                       }}
                     >
                       {coolersData?.cooler?.serial_number === undefined ? (
@@ -153,7 +150,7 @@ export default function CoolerDetail() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "1.5vw",
+                            fontSize: "1.25rem",
                             fontStyle: "normal",
                             fontWeight: 700,
                             lineHeight: "normal",
@@ -271,7 +268,7 @@ export default function CoolerDetail() {
                                 ? "#DA7E05"
                                 : "black",
                             // fontFamily: "DM Sans",
-                            fontSize: "1vw",
+                            fontSize: "0.875rem",
                             fontStyle: "normal",
                             fontWeight: 600,
                             lineHeight: "14px",
@@ -297,7 +294,7 @@ export default function CoolerDetail() {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Mono",
-                    fontSize: ".9vw",
+                    fontSize: "0.75rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -313,7 +310,7 @@ export default function CoolerDetail() {
                   <div
                     style={{
                       color: "#88888B",
-                      fontSize: ".9vw",
+                      fontSize: "0.75rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -327,6 +324,7 @@ export default function CoolerDetail() {
                       style={{
                         display: "flex",
                         padding: "4px",
+                        fontSize:"0.625rem",
                         // justifyContent: "center",
                         alignItems: "center",
                         gap: "4px",
@@ -373,7 +371,7 @@ export default function CoolerDetail() {
                               ? "#451C03"
                               : "black",
                           // fontFamily: "Space Mono",
-                          fontSize: ".8vw",
+                          fontSize: "0.625.rem",
                           fontStyle: "normal",
                           fontWeight: 400,
                           lineHeight: "14px",
@@ -396,7 +394,7 @@ export default function CoolerDetail() {
                     style={{
                       color: "#88888B",
                       // fontFamily: "Inter",
-                      fontSize: ".9vw",
+                      fontSize: "0.75rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -409,7 +407,7 @@ export default function CoolerDetail() {
                     style={{
                       color: "#000005",
                       // fontFamily: "Inter",
-                      fontSize: "1vw",
+                      fontSize: "0.75rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -437,7 +435,7 @@ export default function CoolerDetail() {
                       style={{
                         color: "#313A49",
                         // fontFamily: "DM Mono",
-                        fontSize: "0.9vw",
+                        fontSize: "0.75rem",
                         fontStyle: "normal",
                         fontWeight: 500,
                         lineHeight: "14px",
@@ -473,7 +471,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#88888B",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                   }}
                 >
@@ -482,7 +480,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#313A49",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                     background: "#D4DAE3",
                     borderRadius: "2px",
@@ -507,7 +505,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#88888B",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                   }}
                 >
@@ -516,7 +514,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#313A49",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                     background: "#D4DAE3",
                     borderRadius: "2px",
@@ -541,7 +539,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#88888B",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                   }}
                 >
@@ -550,7 +548,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#313A49",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                     background: "#D4DAE3",
                     borderRadius: "2px",
@@ -575,7 +573,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#88888B",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                   }}
                 >
@@ -584,7 +582,7 @@ export default function CoolerDetail() {
                 <div
                   style={{
                     color: "#313A49",
-                    fontSize: ".7vw",
+                    fontSize: "0.625rem",
                     fontWeight: 500,
                     background: "#D4DAE3",
                     borderRadius: "2px",
