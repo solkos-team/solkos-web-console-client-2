@@ -59,34 +59,12 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title=""
+      title="Gastos de energía"
       position="bottom"
       size="35rem"
     >
-      <div style={{ height: "100vh" }}>
-        <div
-          style={{
-            display: "flex",
-            padding: "2px 32px",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "16px",
-            alignSelf: "stretch",
-            marginTop: -34,
-          }}
-        >
-          <div
-            style={{
-              color: "#000005",
-              fontSize: "15px",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "155%",
-            }}
-          >
-            Gastos de energía
-          </div>
-          {/* PRIMERO */}
+      <section className="clt_detail_drawer_energy">
+        <section className="clt_detail_drawer_energy_data">
           <div
             style={{
               display: "flex",
@@ -99,7 +77,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               borderRadius: "8px",
               border: "1px solid #88888B",
               background: "#FFF",
-              width: "93vw",
+              width: "90%",
             }}
           >
             <div
@@ -158,7 +136,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   flexDirection: "column",
                   justifyContent: "flex-end",
                   alignItems: "flex-start",
-                  width: "200px",
+                  width: "max-content",
                 }}
               >
                 <div
@@ -186,9 +164,9 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   {coolersData?.properties?.energy_cost.value === undefined
                     ? "Sin registro"
                     : "$" +
-                      `${coolersData?.properties?.energy_cost.value.toLocaleString(
-                        "es-MX"
-                      )}`}
+                    `${coolersData?.properties?.energy_cost.value.toLocaleString(
+                      "es-MX"
+                    )}`}
                 </div>
               </div>
               <div
@@ -197,7 +175,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   flexDirection: "column",
                   justifyContent: "flex-end",
                   alignItems: "flex-start",
-                  width: "200px",
+                  width: "max-content",
                 }}
               >
                 <div
@@ -223,15 +201,14 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   }}
                 >
                   {coolersData?.properties?.energy_consumption.value ===
-                  undefined
+                    undefined
                     ? "Sin registro"
-                    : `${
-                        (coolersData?.properties?.energy_consumption.value).toFixed(
-                          2
-                        ) +
-                        " " +
-                        "KW/h"
-                      }`}
+                    : `${(coolersData?.properties?.energy_consumption.value).toFixed(
+                      2
+                    ) +
+                    " " +
+                    "KW/h"
+                    }`}
                 </div>
               </div>
               <div
@@ -240,7 +217,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   flexDirection: "column",
                   justifyContent: "flex-end",
                   alignItems: "flex-start",
-                  width: "250px",
+                  width: "max-content",
                 }}
               >
                 <div
@@ -269,10 +246,10 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                     .value === undefined
                     ? "Sin registro"
                     : (coolersData?.properties?.power_consumption_reference.value).toFixed(
-                        2
-                      ) +
-                      " " +
-                      "KW/h"}
+                      2
+                    ) +
+                    " " +
+                    "KW/h"}
                 </div>
               </div>
               <div
@@ -281,7 +258,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   flexDirection: "column",
                   justifyContent: "flex-end",
                   alignItems: "flex-start",
-                  width: "200px",
+                  width: "max-content",
                 }}
               >
                 <div
@@ -307,15 +284,14 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   }}
                 >
                   {coolersData?.properties?.average_C02_emissions.value ===
-                  undefined
+                    undefined
                     ? "Sin registro"
-                    : `${
-                        (coolersData?.properties?.average_C02_emissions.value).toFixed(
-                          2
-                        ) +
-                        " " +
-                        "Kg/día"
-                      }`}
+                    : `${(coolersData?.properties?.average_C02_emissions.value).toFixed(
+                      2
+                    ) +
+                    " " +
+                    "Kg/día"
+                    }`}
                 </div>
               </div>
             </div>
@@ -351,12 +327,13 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               </a>
             </div>
           </div>
-          {/* SEGUNDO */}
+        </section>
+        <section className="clt_detail_drawer_energy_grap">
           <div
             style={{
               display: "flex",
-              width: "90.8vw",
-              height: "22vw",
+              width: "100%",
+              height: "max-content",
               padding: "24px",
               flexDirection: "column",
               alignItems: "flex-start",
@@ -409,7 +386,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
             </div>
             <div>
               {coolersData?.properties?.energy_consumption_month_1.value ===
-              0 ? (
+                0 ? (
                 <div
                   style={{ marginLeft: 500, marginTop: 100, fontSize: "1vw" }}
                 >
@@ -420,14 +397,14 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   <div
                     style={{
                       width: "800px",
-                      height: "500px",
+                      height: "100%",
                       marginTop: -110,
                       marginLeft: 130,
                     }}
                   >
                     <Card style={{ backgroundColor: "transparent" }}>
                       <BarChart
-                        className="h-80"
+                        className="h-60"
                         data={chartdata}
                         index="name"
                         categories={["Consumo de energía"]}
@@ -441,8 +418,8 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               )}
             </div>
           </div>
-        </div>{" "}
-      </div>
+        </section>
+      </section>     
     </Drawer>
   );
 }
