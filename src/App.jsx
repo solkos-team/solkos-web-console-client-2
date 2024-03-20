@@ -452,7 +452,7 @@ function App() {
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
         navbar={
-          <Navbar width={{ base: opened2 === false ? 240 : 60 }} p={"md"}>
+          <Navbar width={{ base: opened2 === false ? 240 : 67 }} p={"md"}>
             <Navbar.Section grow>
               <Group className={classes.header} position="apart">
                 <div
@@ -474,6 +474,7 @@ function App() {
                       justifyContent: "space-between",
                       alignItems: "center",
                       whiteSpace: "pre",
+                      marginLeft:"-7px"
                     }}
                   >
                     {/* <Burger
@@ -515,7 +516,7 @@ function App() {
                         style={{
                           width: "1.5rem",
                           height: "18px",
-                          marginLeft: -10,
+                          // marginLeft: -10,
                         }}
                         src={solkosSymbol}
                       />
