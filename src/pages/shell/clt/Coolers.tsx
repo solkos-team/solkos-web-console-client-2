@@ -259,33 +259,15 @@ export default function Coolers() {
         {/* Tabla */}
         <div
           style={{
-            display: "flex",
-            padding: "0px 32px",
+            display: "flex",            
             flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "0px",
+            alignItems: "flex-start",            
             alignSelf: "stretch",
+            boxSizing:"border-box",
+            marginLeft:"-1.5%"
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          ></div>
-          <div
-            style={{
-              display: "flex",
-              padding: "32px 0px",
-              justifyContent: "center",
-              alignItems: "center",
-              alignSelf: "stretch",
-              width: "100%",
-              marginTop: -30,
-            }}
-          >
-            <TextInput
+         <TextInput
               value={searchValue}
               onChange={(event) => handleSearchChange(event)}
               onKeyDown={handleKeyDown}
@@ -296,14 +278,13 @@ export default function Coolers() {
                 fontStyle: "normal",
                 fontWeight: 500,
                 lineHeight: "1,8rem",
-                width: "100%",
+                width: "98%",
                 paddingRight: "2.5rem",
                 margin: 0,
                 borderRadius: "4px",
                 color: "#88888B",
               }}
             />
-          </div>
         </div>
         <section
           style={{
