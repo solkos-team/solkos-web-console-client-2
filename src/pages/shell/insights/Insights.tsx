@@ -145,8 +145,7 @@ export default function Insights() {
               lineHeight: "155%",
             }}
           >
-            Haz el seguimiento de los enfriadores que tienen una alerta de
-            funcionamiento.
+            Ve el panorama general de los enfriadores y toma acciones.
           </div>
         </section>
         {/* principal */}

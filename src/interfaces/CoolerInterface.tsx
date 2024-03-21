@@ -130,7 +130,7 @@ export interface CoolerData {
     latitude: number;
     last_longitude: number;
     longitude: number;
-    distance: string;
+    distance: number;
     device_id: string;
     outlet_id: string;
   };

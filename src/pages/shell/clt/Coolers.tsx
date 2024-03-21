@@ -249,8 +249,11 @@ export default function Coolers() {
               }}
             >
               <div>
-                <ExportToExcel datos={filteredCoolers} nombre={"Enfriadores"} 
-                body={body} component="coolers" 
+                <ExportToExcel
+                  datos={filteredCoolers}
+                  nombre={"Enfriadores"}
+                  body={body}
+                  component="coolers"
                 />
               </div>
             </div>
@@ -429,7 +432,10 @@ export default function Coolers() {
                         new Date(cooler.last_read).toLocaleDateString()
                       )}
                     </td>
-                    <td data-label="CONTROL DE ACTIVOS" title={cooler.priority_status}>
+                    <td
+                      data-label="CONTROL DE ACTIVOS"
+                      title={cooler.priority_status}
+                    >
                       {isLoading == true ? (
                         <>
                           <Skeleton height={20} radius="sm" width="90%" />

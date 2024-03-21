@@ -474,7 +474,7 @@ function App() {
                       justifyContent: "space-between",
                       alignItems: "center",
                       whiteSpace: "pre",
-                      marginLeft:"-7px"
+                      marginLeft: "-7px",
                     }}
                   >
                     {/* <Burger

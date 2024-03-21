@@ -135,7 +135,7 @@ export default function CoolerDetail() {
                         fontSize: "1.25rem",
                         fontStyle: "normal",
                         fontWeight: 700,
-                        lineHeight: "normal",                        
+                        lineHeight: "normal",
                       }}
                     >
                       {coolersData?.cooler?.serial_number === undefined ? (
@@ -197,8 +197,7 @@ export default function CoolerDetail() {
                     <>
                       <div
                         style={{
-                          width:
-                            "max-content",
+                          width: "max-content",
                           display: "flex",
                           padding: "4px",
                           justifyContent: "center",
@@ -324,7 +323,7 @@ export default function CoolerDetail() {
                       style={{
                         display: "flex",
                         padding: "4px",
-                        fontSize:"0.625rem",
+                        fontSize: "0.625rem",
                         // justifyContent: "center",
                         alignItems: "center",
                         gap: "4px",
@@ -754,7 +753,6 @@ export default function CoolerDetail() {
                                             fontStyle: "normal",
                                             fontWeight: 500,
                                             lineHeight: "normal",
-                                            
                                           }}
                                         >
                                           {order.data.status === "D,D"
@@ -896,7 +894,7 @@ export default function CoolerDetail() {
                                           fontStyle: "normal",
                                           fontWeight: 500,
                                           lineHeight: "normal",
-                                          textAlign: "left",                                          
+                                          textAlign: "left",
                                         }}
                                       >
                                         {order.data.description}
@@ -1099,12 +1097,14 @@ export default function CoolerDetail() {
                       <div style={{ width: "100%", height: "100%" }}>
                         <Skeleton height={15} radius="sm" />
                       </div>
-                    ) : coolersData?.cooler?.outlet_name === undefined || coolersData?.cooler?.outlet_name === "" ? (
+                    ) : coolersData?.cooler?.outlet_name === undefined ||
+                      coolersData?.cooler?.outlet_name === "" ? (
                       "Sin registro"
                     ) : (
                       coolersData?.cooler?.outlet_name
                     )}
-                    {coolersData?.cooler?.outlet_id === undefined || coolersData?.cooler?.outlet_id === "" ? (
+                    {coolersData?.cooler?.outlet_id === undefined ||
+                    coolersData?.cooler?.outlet_id === "" ? (
                       " / Sin registro"
                     ) : (
                       <span>
@@ -1140,10 +1140,10 @@ export default function CoolerDetail() {
                       <div style={{ width: "100%", height: "100%" }}>
                         <Skeleton height={10} radius="xl" />
                       </div>
-                    ) : coolersData?.cooler?.distance === undefined || coolersData?.cooler?.distance === null ? (
+                    ) : coolersData?.cooler?.distance === undefined ? (
                       "Sin registro"
                     ) : (
-                      `${coolersData?.cooler?.last_latitude} metros`
+                      `${coolersData?.cooler?.distance.toFixed(0)} metros`
                     )}
                   </h1>
                 </div>
@@ -1185,8 +1185,7 @@ export default function CoolerDetail() {
                         last_longitude={coolersData?.cooler?.last_longitude}
                       />
                     </>
-                  )                   
-                  } 
+                  )}
                 </div>
                 <div className="clt_actividad_mapa_info">
                   <div
