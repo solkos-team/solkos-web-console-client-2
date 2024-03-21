@@ -618,7 +618,7 @@ export default function CoolerDetail() {
                   <img
                     src={"../../sampleData/actividad.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "1.5vw", height: "1.5vw" }}
+                    style={{ width: "1.5em", height: "1.5em" }}
                   />
                   <h1 className="clt_actividad_principal_title_h1">
                     Actividad del enfriador
@@ -632,7 +632,7 @@ export default function CoolerDetail() {
                       <p
                         style={{
                           fontWeight: "bold",
-                          fontSize: "1vw",
+                          fontSize: "0.75em",
                           marginTop: 130,
                         }}
                       >
@@ -750,10 +750,11 @@ export default function CoolerDetail() {
                                         <div
                                           style={{
                                             color: "#88888B",
-                                            fontSize: "10px",
+                                            fontSize: "0.75em",
                                             fontStyle: "normal",
                                             fontWeight: 500,
                                             lineHeight: "normal",
+                                            
                                           }}
                                         >
                                           {order.data.status === "D,D"
@@ -806,7 +807,7 @@ export default function CoolerDetail() {
                                           // fontFamily: "DM Sans",
                                           display: "flex",
                                           alignItems: "center",
-                                          fontSize: "10px",
+                                          fontSize: "0.875em",
                                           fontStyle: "normal",
                                           fontWeight: 600,
                                           lineHeight: "normal",
@@ -860,7 +861,7 @@ export default function CoolerDetail() {
                                           <div
                                             style={{
                                               color: "#3E83FF",
-                                              fontSize: "8px",
+                                              fontSize: "0.625rem",
                                               fontStyle: "normal",
                                               fontWeight: 400,
                                             }}
@@ -876,7 +877,7 @@ export default function CoolerDetail() {
                                       <div
                                         style={{
                                           color: "#000005",
-                                          fontSize: "12px",
+                                          fontSize: "0.875rem",
                                           fontStyle: "normal",
                                           fontWeight: 400,
                                           lineHeight: "normal",
@@ -891,11 +892,11 @@ export default function CoolerDetail() {
                                       <div
                                         style={{
                                           color: "#88888B",
-                                          fontSize: "10px",
+                                          fontSize: "0.75rem",
                                           fontStyle: "normal",
                                           fontWeight: 500,
                                           lineHeight: "normal",
-                                          textAlign: "left",
+                                          textAlign: "left",                                          
                                         }}
                                       >
                                         {order.data.description}
@@ -907,7 +908,7 @@ export default function CoolerDetail() {
                                       <div
                                         style={{
                                           color: "#88888B",
-                                          fontSize: "10px",
+                                          fontSize: "0.75rem",
                                           fontStyle: "normal",
                                           fontWeight: 500,
                                           lineHeight: "normal",
@@ -927,7 +928,7 @@ export default function CoolerDetail() {
                                           // fontFamily: "DM Sans",
                                           display: "flex",
                                           alignItems: "center",
-                                          fontSize: "10px",
+                                          fontSize: "0.75rem",
                                           fontStyle: "normal",
                                           fontWeight: 600,
                                           lineHeight: "normal",
@@ -1051,7 +1052,7 @@ export default function CoolerDetail() {
                                                   : order.data.level === "FAIL"
                                                   ? "#F93448"
                                                   : "#3E83FF",
-                                              fontSize: "8px",
+                                              fontSize: "0.5rem",
                                               fontStyle: "normal",
                                               fontWeight: 400,
                                             }}
@@ -1083,7 +1084,7 @@ export default function CoolerDetail() {
                   <img
                     src={"../../sampleData/buildings.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "1.5vw", height: "1.5vw" }}
+                    style={{ width: "1.5em", height: "1.5em" }}
                   />
                   <h1 className="clt_actividad_principal_title_h1">
                     Acerca del punto de venta
