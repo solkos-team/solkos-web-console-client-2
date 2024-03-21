@@ -134,7 +134,7 @@ export const Login = () => {
             © Imbera 2024
           </div>
         </div>
-        <div
+        <div className="login_principal_image"
           style={{
             background:
               "conic-gradient(from 180deg at 50% 50%, #FCCFD9 0deg, #ED5079 360deg)",

@@ -1364,15 +1364,11 @@ body {
     width: 1000%;
     height: 100vh; /* Ajusta la altura al 100% del viewport */
   }
-
-  /* .login_principal_title{
-    background-image: url('../public/sampleData/login.png');    
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: -5rem 40px;
+  .login_principal_image{
+    display: none;
   }
-  .login_principal_form{
-    backdrop-filter: blur(2px);
-  } */
+  .login_principal_title{
+    width: 100%;
+  }
 }
 /* Termina media */
