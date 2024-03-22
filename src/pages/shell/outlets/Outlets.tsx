@@ -319,7 +319,6 @@ export default function Outlets() {
         </div>
         <section
           style={{
-            padding: "1rem 0rem",
             marginLeft: -55,
             width: "100%",
             height: "100%",

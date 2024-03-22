@@ -514,8 +514,8 @@ function App() {
                     >
                       <img
                         style={{
-                          width: "1.5rem",
-                          height: "1.5rem",
+                          width: "1.3rem",
+                          height: "1.3rem",
                           // marginLeft: -10,
                         }}
                         src={solkosSymbol}
