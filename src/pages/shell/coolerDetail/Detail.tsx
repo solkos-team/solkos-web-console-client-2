@@ -171,7 +171,7 @@ export default function CoolerDetail() {
                         style={{
                           width: "1.5rem",
                           height: "1.5rem",
-                          display: "none",
+                          // display: "none",
                         }}
                         onClick={() => {
                           setEditSerie((o) => !o);
@@ -1140,11 +1140,11 @@ export default function CoolerDetail() {
                       <div style={{ width: "100%", height: "100%" }}>
                         <Skeleton height={10} radius="xl" />
                       </div>
-                    ) : coolersData?.cooler?.distance === undefined ? (
-                      "Sin registro"
-                    ) : (
-                      `${coolersData?.cooler?.distance.toFixed(0)} metros`
-                    )}
+                    ) 
+                    : coolersData?.cooler?.distance === undefined ? ("Sin registro") 
+                    : Number(coolersData?.cooler?.distance.toFixed(0)) < 0 ? ("Sin posición de instalación")
+                    : (`${coolersData?.cooler?.distance.toFixed(0)} metros`)                    
+                    }
                   </h1>
                 </div>
                 <div className="clt_actividad_principal_mapa">
