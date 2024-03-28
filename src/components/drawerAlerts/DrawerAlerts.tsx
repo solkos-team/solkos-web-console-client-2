@@ -175,7 +175,8 @@ export default function DrawerA({
                       ? "#FEF5C7"
                       : selectedAlgorithm === "Sin Riesgo"
                       ? "#C0F2C8"
-                      : selectedAlgorithm === "Toma de Decisiones"
+                      : selectedAlgorithm === "Toma de Decisiones" ||
+                        selectedAlgorithm === "Acciones urgentes"
                       ? "#FFC7CD"
                       : selectedAlgorithm === "Visita PdV"
                       ? "#FEF5C7"
@@ -255,7 +256,8 @@ export default function DrawerA({
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
-                  ) : selectedAlgorithm === "Toma de Decisiones" ? (
+                  ) : selectedAlgorithm === "Toma de Decisiones" ||
+                    selectedAlgorithm === "Acciones urgentes" ? (
                     <img
                       src={"../../sampleData/accio.svg"}
                       alt="Descripción de la imagen"
@@ -369,7 +371,7 @@ export default function DrawerA({
                         : selectedAlgorithm === "Sin Riesgo"
                         ? "Sin riesgo"
                         : selectedAlgorithm === "Toma de Decisiones"
-                        ? "Acciones urgentes"
+                        ? "Toma de decisiones"
                         : selectedAlgorithm === "Visita PdV"
                         ? "Visita PdV"
                         : selectedAlgorithm === "VOLTAGE_ALERT"
@@ -803,7 +805,9 @@ export default function DrawerA({
                                       : cooler.actionable === "Sin Riesgo"
                                       ? "1.5px solid #0F9F67"
                                       : cooler.actionable ===
-                                        "Toma de Decisiones"
+                                          "Toma de Decisiones" ||
+                                        cooler.actionable ===
+                                          "Acciones urgentes"
                                       ? "1.5px solid #F93448"
                                       : cooler.actionable === "Actualizar Info"
                                       ? "1.5px solid #DA7E05"
@@ -825,7 +829,8 @@ export default function DrawerA({
                                     style={{ width: "12px", height: "12px" }}
                                   />
                                 ) : cooler.actionable ===
-                                  "Toma de Decisiones" ? (
+                                    "Toma de Decisiones" ||
+                                  cooler.actionable === "Acciones urgentes" ? (
                                   <img
                                     src={"../../sampleData/a.svg"}
                                     alt="Descripción de la imagen"
@@ -847,9 +852,6 @@ export default function DrawerA({
                                       ? "Visita punto de venta"
                                       : cooler.actionable === "Sin Riesgo"
                                       ? "Sin riesgo"
-                                      : cooler.actionable ===
-                                        "Toma de Decisiones"
-                                      ? "Acciones urgentes"
                                       : cooler.actionable === "Actualizar Info"
                                       ? "Requiere actualización"
                                       : cooler.actionable
@@ -861,7 +863,9 @@ export default function DrawerA({
                                         : cooler.actionable === "Sin Riesgo"
                                         ? "#0F9F67"
                                         : cooler.actionable ===
-                                          "Toma de Decisiones"
+                                            "Toma de Decisiones" ||
+                                          cooler.actionable ===
+                                            "Acciones urgentes"
                                         ? "#F93448"
                                         : cooler.actionable ===
                                           "Actualizar Info"
@@ -879,6 +883,8 @@ export default function DrawerA({
                                     : cooler.actionable === "Sin Riesgo"
                                     ? "Sin riesgo"
                                     : cooler.actionable === "Toma de Decisiones"
+                                    ? "Toma de dec..."
+                                    : cooler.actionable === "Acciones urgentes"
                                     ? "Acciones urg.."
                                     : cooler.actionable === "Actualizar Info"
                                     ? "Requiere ac..."

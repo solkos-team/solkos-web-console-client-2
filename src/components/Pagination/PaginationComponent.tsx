@@ -13,34 +13,39 @@ export const PaginationComponent = ({
     accion(pageNum);
   };
   return (
-    <section className="principal_paginator"
-      // style={{
-      //   display: "flex",
-      //   flexDirection: "row",
-      //   justifyContent: "flex-end",
-      //   gap: "10px",
-      //   marginTop: "16px",
-      //   backgroundColor:"red"
-      // }}
-    >
-      <br />
-      <Pagination total={npage} onChange={handlePageChange} />
-      <br />
-      <Text>Por Página</Text>
-      <div>
-        <Select
-          checked={true}
-          // size="xs"
-          radius="md"
-          placeholder="Selecciona el numero de items"
-          data={data}
-          defaultValue={"25"}
-          onChange={numero}
-          style={{
-            width: "80px", // Establece el ancho deseado
-          }}
-        />
-      </div>
-    </section>
+    <>
+      <section
+        className="principal_paginator"
+        // style={{
+        //   display: "flex",
+        //   flexDirection: "row",
+        //   justifyContent: "flex-end",
+        //   gap: "10px",
+        //   marginTop: "16px",
+        //   backgroundColor:"red"
+        // }}
+      >
+        <br />
+        <Pagination total={npage} onChange={handlePageChange} />
+        <br />
+        <Text>Por Página</Text>
+        <div>
+          <Select
+            checked={true}
+            // size="xs"
+            radius="md"
+            placeholder="Selecciona el numero de items"
+            data={data}
+            defaultValue={"25"}
+            onChange={numero}
+            style={{
+              width: "100px",
+              fontSize: "12px", // Reducir el tamaño de la fuente
+              padding: "4px 8px", // Reducir el espaciado dentro del componente
+            }}
+          />
+        </div>
+      </section>
+    </>
   );
 };

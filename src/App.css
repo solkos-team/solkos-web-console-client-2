@@ -941,6 +941,9 @@ body {
   justify-content: flex-end;
   gap: 10px;
   margin-top: 1rem;
+  overflow-y: hidden;
+  overflow-y: hidden;
+  max-width: 100%;
 }
 .login_principal_body {
   display: flex;
@@ -1364,10 +1367,10 @@ body {
     width: 1000%;
     height: 100vh; /* Ajusta la altura al 100% del viewport */
   }
-  .login_principal_image{
+  .login_principal_image {
     display: none;
   }
-  .login_principal_title{
+  .login_principal_title {
     width: 100%;
   }
 }

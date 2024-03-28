@@ -160,6 +160,7 @@ export default function Indicator() {
                     "Visita PdV",
                     "Actualizar Info",
                     "Toma de Decisiones",
+                    "Acciones urgentes",
                   ];
                   const indexA = order.indexOf(a.algorithm);
                   const indexB = order.indexOf(b.algorithm);
@@ -212,7 +213,8 @@ export default function Indicator() {
                                 ? "#C0F2C8"
                                 : cooler.algorithm === "Actualizar Info"
                                 ? "#FEF5C7"
-                                : cooler.algorithm === "Toma de Decisiones"
+                                : cooler.algorithm === "Toma de Decisiones" ||
+                                  cooler.algorithm === "Acciones urgentes"
                                 ? "#FFC7CD"
                                 : cooler.algorithm === "Visita PdV"
                                 ? "#FEF5C7"
@@ -231,7 +233,8 @@ export default function Indicator() {
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "Toma de Decisiones" ? (
+                          ) : cooler.algorithm === "Toma de Decisiones" ||
+                            cooler.algorithm === "Acciones urgentes" ? (
                             <img
                               src={"../../sampleData/accio.svg"}
                               alt="Descripción de la imagen"
@@ -256,13 +259,7 @@ export default function Indicator() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.algorithm === "Visita PdV"
-                            ? "Visita PdV"
-                            : cooler.algorithm === "Actualizar Info"
-                            ? "Requiere actualizar información"
-                            : cooler.algorithm === "Toma de Decisiones"
-                            ? "Acciones urgentes"
-                            : cooler.algorithm}
+                          {cooler.algorithm}
                         </div>
                       </div>
                       <div

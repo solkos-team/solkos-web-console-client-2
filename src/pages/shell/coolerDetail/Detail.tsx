@@ -53,6 +53,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -171,7 +172,7 @@ export default function CoolerDetail() {
                         style={{
                           width: "1.5rem",
                           height: "1.5rem",
-                          // display: "none",
+                          display: "none",
                         }}
                         onClick={() => {
                           setEditSerie((o) => !o);
@@ -210,7 +211,9 @@ export default function CoolerDetail() {
                               : coolersData?.cooler.actionable === "Sin Riesgo"
                               ? "1.5px solid #0F9F67"
                               : coolersData?.cooler.actionable ===
-                                "Toma de Decisiones"
+                                  "Toma de Decisiones" ||
+                                coolersData?.cooler.actionable ===
+                                  "Acciones urgentes"
                               ? "1.5px solid #F93448"
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
@@ -234,7 +237,9 @@ export default function CoolerDetail() {
                             style={{ width: "15px", height: "15px" }}
                           />
                         ) : coolersData?.cooler.actionable ===
-                          "Toma de Decisiones" ? (
+                            "Toma de Decisiones" ||
+                          coolersData?.cooler.actionable ===
+                            "Acciones urgentes" ? (
                           <img
                             src={"../../sampleData/a.svg"}
                             alt="Descripción de la imagen"
@@ -260,7 +265,9 @@ export default function CoolerDetail() {
                                   "Sin Riesgo"
                                 ? "#0F9F67"
                                 : coolersData?.cooler.actionable ===
-                                  "Toma de Decisiones"
+                                    "Toma de Decisiones" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Acciones urgentes"
                                 ? "#F93448"
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
@@ -273,17 +280,7 @@ export default function CoolerDetail() {
                             lineHeight: "14px",
                           }}
                         >
-                          {coolersData?.cooler.actionable === "Visita PdV"
-                            ? "Visita punto de venta"
-                            : coolersData?.cooler.actionable === "Sin Riesgo"
-                            ? "Sin riesgo"
-                            : coolersData?.cooler.actionable ===
-                              "Toma de Decisiones"
-                            ? "Acciones urgentes"
-                            : coolersData?.cooler.actionable ===
-                              "Actualizar Info"
-                            ? "Requiere actualizar información"
-                            : coolersData?.cooler.actionable}
+                          {coolersData?.cooler.actionable}
                         </div>
                       </div>
                     </>
@@ -387,6 +384,7 @@ export default function CoolerDetail() {
                     alignItems: "center",
                     gap: "4px",
                     alignSelf: "stretch",
+                    width: "30rem",
                   }}
                 >
                   <div
@@ -664,15 +662,13 @@ export default function CoolerDetail() {
                                     "DISCONNECTION_ALERT" ||
                                   order.data.algorithm ===
                                     "HIGH_TEMPERATURE_ALERT" ||
-                                  order.data.algorithm ===
-                                    "HIGH_VOLTAGE_ALERT" ||
-                                  order.data.algorithm ===
-                                    "LOW_VOLTAGE_ALERT" ||
+                                  order.data.algorithm === "VOLTAGE_ALERT" ||
                                   order.data.algorithm === "Actualizar Info" ||
                                   order.data.algorithm === "Sin Riesgo" ||
                                   order.data.algorithm ===
                                     "Toma de Decisiones" ||
-                                  order.data.algorithm === "Visita PdV"))
+                                  order.data.algorithm === "Visita PdV" ||
+                                  order.data.algorithm === "Acciones urgentes"))
                           )
                           .sort((a, b) => {
                             let aDate, bDate;
@@ -681,7 +677,7 @@ export default function CoolerDetail() {
                               if (a.data.status === "D,D") {
                                 aDate = new Date(a.data.close_at).getTime();
                               } else if (a.data.status === "O,O") {
-                                aDate = new Date(a.data.created_at).getTime();
+                                aDate = new Date(a.data.received_at).getTime();
                               }
                             } else if (
                               a.type === "TRACKING" &&
@@ -694,7 +690,7 @@ export default function CoolerDetail() {
                               if (b.data.status === "D,D") {
                                 bDate = new Date(b.data.close_at).getTime();
                               } else if (b.data.status === "O,O") {
-                                bDate = new Date(b.data.created_at).getTime();
+                                bDate = new Date(b.data.received_at).getTime();
                               }
                             } else if (
                               b.type === "TRACKING" &&
@@ -764,12 +760,12 @@ export default function CoolerDetail() {
                                                   .utc(order.data.close_at)
                                                   .format("DD/MM/YYYY HH:mm")
                                             : order.data.status === "O,O"
-                                            ? order.data.created_at ===
+                                            ? order.data.received_at ===
                                                 undefined ||
-                                              order.data.created_at === null
+                                              order.data.received_at === null
                                               ? "Sin registro"
                                               : moment
-                                                  .utc(order.data.created_at)
+                                                  .utc(order.data.received_at)
                                                   .format("DD/MM/YYYY HH:mm")
                                             : "Sin registro"}
                                         </div>
@@ -956,23 +952,8 @@ export default function CoolerDetail() {
                                               "HIGH_TEMPERATURE_ALERT"
                                             ? "Alta temperatura"
                                             : order.data.algorithm ===
-                                              "HIGH_VOLTAGE_ALERT"
-                                            ? "Alto voltaje"
-                                            : order.data.algorithm ===
-                                              "LOW_VOLTAGE_ALERT"
-                                            ? "Bajo voltaje"
-                                            : order.data.algorithm ===
-                                              "Actualizar Info"
-                                            ? "Requiere actualizar información"
-                                            : order.data.algorithm ===
-                                              "Sin Riesgo"
-                                            ? "Sin riesgo"
-                                            : order.data.algorithm ===
-                                              "Toma de Decisiones"
-                                            ? "Acciones urgentes"
-                                            : order.data.algorithm ===
-                                              "Visita PdV"
-                                            ? "Visita punto de venta"
+                                              "VOLTAGE_ALERT"
+                                            ? "Bajo/Alto voltaje"
                                             : order.data.algorithm}
                                         </div>
                                         <div
@@ -1060,7 +1041,7 @@ export default function CoolerDetail() {
                                               : order.data.level === "FAIL"
                                               ? "FALLA"
                                               : order.data.level === "INDICATOR"
-                                              ? "INDICADOR"
+                                              ? "CONTROL DE ACTIVOS"
                                               : order.data.level}
                                           </div>
                                         </div>
@@ -1140,11 +1121,14 @@ export default function CoolerDetail() {
                       <div style={{ width: "100%", height: "100%" }}>
                         <Skeleton height={10} radius="xl" />
                       </div>
-                    ) 
-                    : coolersData?.cooler?.distance === undefined ? ("Sin registro") 
-                    : Number(coolersData?.cooler?.distance.toFixed(0)) < 0 ? ("Sin posición de instalación")
-                    : (`${coolersData?.cooler?.distance.toFixed(0)} metros`)                    
-                    }
+                    ) : coolersData?.cooler?.distance === undefined ||
+                      coolersData?.cooler?.distance === null ? (
+                      "Sin registro"
+                    ) : Number(coolersData?.cooler?.distance.toFixed(0)) < 0 ? (
+                      "Sin posición de instalación"
+                    ) : (
+                      `${coolersData?.cooler?.distance.toFixed(0)} metros`
+                    )}
                   </h1>
                 </div>
                 <div className="clt_actividad_principal_mapa">

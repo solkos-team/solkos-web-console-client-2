@@ -704,6 +704,7 @@ export default function Insights() {
                                     "Visita PdV",
                                     "Actualizar Info",
                                     "Toma de Decisiones",
+                                    "Acciones urgentes",
                                   ];
                                   const indexA = order.indexOf(a.algorithm);
                                   const indexB = order.indexOf(b.algorithm);
@@ -747,19 +748,7 @@ export default function Insights() {
                                             whiteSpace: "nowrap",
                                           }}
                                         >
-                                          {algorithm.algorithm ===
-                                          "Toma de Decisiones"
-                                            ? "Acciones urgentes"
-                                            : algorithm.algorithm ===
-                                              "Actualizar Info"
-                                            ? "Requiere actualizar información"
-                                            : algorithm.algorithm ===
-                                              "Sin Riesgo"
-                                            ? "Sin riesgo"
-                                            : algorithm.algorithm ===
-                                              "Visita PdV"
-                                            ? "Visita PdV"
-                                            : algorithm.algorithm}
+                                          {algorithm.algorithm}
                                         </div>
                                       </div>
                                       <div

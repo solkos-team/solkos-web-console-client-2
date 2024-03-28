@@ -262,32 +262,32 @@ export default function Coolers() {
         {/* Tabla */}
         <div
           style={{
-            display: "flex",            
+            display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",            
+            alignItems: "flex-start",
             alignSelf: "stretch",
-            boxSizing:"border-box",
-            marginLeft:"-1.5%"
+            boxSizing: "border-box",
+            marginLeft: "-1.5%",
           }}
         >
-         <TextInput
-              value={searchValue}
-              onChange={(event) => handleSearchChange(event)}
-              onKeyDown={handleKeyDown}
-              type="text"
-              placeholder="Busca por Serie/ Id Coolector / Mac"
-              style={{
-                fontSize: "0.8rem",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "1,8rem",
-                width: "98%",
-                paddingRight: "2.5rem",
-                margin: 0,
-                borderRadius: "4px",
-                color: "#88888B",
-              }}
-            />
+          <TextInput
+            value={searchValue}
+            onChange={(event) => handleSearchChange(event)}
+            onKeyDown={handleKeyDown}
+            type="text"
+            placeholder="Busca por Serie/ Id Coolector / Mac"
+            style={{
+              fontSize: "0.8rem",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "1,8rem",
+              width: "98%",
+              paddingRight: "2.5rem",
+              margin: 0,
+              borderRadius: "4px",
+              color: "#88888B",
+            }}
+          />
         </div>
         <section
           style={{
@@ -392,7 +392,9 @@ export default function Coolers() {
                                 lineHeight: "14px",
                               }}
                             >
-                              {cooler?.status}
+                              <div style={{ fontSize: "0.6rem" }}>
+                                {cooler?.status}
+                              </div>
                             </div>
                           </div>
                         </>
@@ -459,7 +461,9 @@ export default function Coolers() {
                                   ? "1.5px solid #DA7E05"
                                   : cooler.actionable === "Sin Riesgo"
                                   ? "1.5px solid #0F9F67"
-                                  : cooler.actionable === "Toma de Decisiones"
+                                  : cooler.actionable ===
+                                      "Toma de Decisiones" ||
+                                    cooler.actionable === "Acciones urgentes"
                                   ? "1.5px solid #F93448"
                                   : cooler.actionable === "Actualizar Info"
                                   ? "1.5px solid #DA7E05"
@@ -479,7 +483,8 @@ export default function Coolers() {
                                 alt="Descripción de la imagen"
                                 style={{ width: "15px", height: "15px" }}
                               />
-                            ) : cooler.actionable === "Toma de Decisiones" ? (
+                            ) : cooler.actionable === "Toma de Decisiones" ||
+                              cooler.actionable === "Acciones urgentes" ? (
                               <img
                                 src={"../../sampleData/a.svg"}
                                 alt="Descripción de la imagen"
@@ -502,7 +507,9 @@ export default function Coolers() {
                                     ? "#DA7E05"
                                     : cooler.actionable === "Sin Riesgo"
                                     ? "#0F9F67"
-                                    : cooler.actionable === "Toma de Decisiones"
+                                    : cooler.actionable ===
+                                        "Toma de Decisiones" ||
+                                      cooler.actionable === "Acciones urgentes"
                                     ? "#F93448"
                                     : cooler.actionable === "Actualizar Info"
                                     ? "#DA7E05"
@@ -514,15 +521,7 @@ export default function Coolers() {
                                 lineHeight: "14px",
                               }}
                             >
-                              {cooler.actionable === "Visita PdV"
-                                ? "Visita punto de venta"
-                                : cooler.actionable === "Sin Riesgo"
-                                ? "Sin riesgo"
-                                : cooler.actionable === "Toma de Decisiones"
-                                ? "Acciones urgentes"
-                                : cooler.actionable === "Actualizar Info"
-                                ? "Requiere actualizar ..."
-                                : cooler.actionable}
+                              {cooler.actionable}
                             </div>
                           </div>
                         </>
