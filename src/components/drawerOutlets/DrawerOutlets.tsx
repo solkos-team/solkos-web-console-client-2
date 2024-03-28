@@ -36,9 +36,10 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     outlet_name,
     outlet_address,
     days_without_visitC,
-    last_read_coolerC,
+    last_read,
     num_coolers,
   } = outletDetails;
+  const lastReadDate = new Date(last_read);
   const lastIndex = currentPage * Number(datosPorPagina);
   const firstIndex = lastIndex - Number(datosPorPagina);
   const drawerRef = useRef(null);
@@ -263,9 +264,9 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 >
                   Leído por última vez el:
                 </div>
-                {last_read_coolerC === undefined ||
-                last_read_coolerC === "" ||
-                last_read_coolerC === null ? (
+                {last_read === undefined ||
+                last_read === "" ||
+                last_read === null ? (
                   <div
                     style={{
                       color: "#88888B",
@@ -290,7 +291,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                         lineHeight: "normal",
                       }}
                     >
-                      {last_read_coolerC}
+                      {lastReadDate.toLocaleDateString("es-MX",{timeZone:"UTC"})}
                     </div>
                   </>
                 )}
