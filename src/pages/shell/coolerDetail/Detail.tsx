@@ -172,7 +172,7 @@ export default function CoolerDetail() {
                         style={{
                           width: "1.5rem",
                           height: "1.5rem",
-                          display: "none",
+                          // display: "none",
                         }}
                         onClick={() => {
                           setEditSerie((o) => !o);
