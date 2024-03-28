@@ -431,7 +431,9 @@ export default function Coolers() {
                         cooler.last_read == null ? (
                         "Sin registro"
                       ) : (
-                        new Date(cooler.last_read).toLocaleDateString()
+                        new Date(cooler.last_read).toLocaleDateString("es-MX", {
+                          timeZone: "UTC",
+                        })
                       )}
                     </td>
                     <td

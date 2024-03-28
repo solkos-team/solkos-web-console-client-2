@@ -354,10 +354,8 @@ export default function DrawerA({
                         ? "Desconexión"
                         : selectedAlgorithm === "HIGH_TEMPERATURE_ALERT"
                         ? "Alta temperatura"
-                        : selectedAlgorithm === "HIGH_VOLTAGE_ALERT"
-                        ? "Alto voltaje"
-                        : selectedAlgorithm === "LOW_VOLTAGE_ALERT"
-                        ? "Bajo voltaje"
+                        : selectedAlgorithm === "VOLTAGE_ALERT"
+                        ? "Bajo/Alto voltaje"
                         : selectedAlgorithm === "TEMPERATURE_FAIL"
                         ? "Alta temperatura"
                         : selectedAlgorithm === "VOLTAGE_FAIL"
@@ -366,16 +364,6 @@ export default function DrawerA({
                         ? "Falla asociada al compresor"
                         : selectedAlgorithm === "FREEZING_FAIL"
                         ? "Evaporador bloqueado"
-                        : selectedAlgorithm === "Actualizar Info"
-                        ? "Requiere actualizar información"
-                        : selectedAlgorithm === "Sin Riesgo"
-                        ? "Sin riesgo"
-                        : selectedAlgorithm === "Toma de Decisiones"
-                        ? "Toma de decisiones"
-                        : selectedAlgorithm === "Visita PdV"
-                        ? "Visita PdV"
-                        : selectedAlgorithm === "VOLTAGE_ALERT"
-                        ? "Bajo/Alto voltaje"
                         : selectedAlgorithm}
                     </div>
                   )}
@@ -847,15 +835,7 @@ export default function DrawerA({
                                 )}
 
                                 <div
-                                  title={
-                                    cooler.actionable === "Visita PdV"
-                                      ? "Visita punto de venta"
-                                      : cooler.actionable === "Sin Riesgo"
-                                      ? "Sin riesgo"
-                                      : cooler.actionable === "Actualizar Info"
-                                      ? "Requiere actualización"
-                                      : cooler.actionable
-                                  }
+                                  title={cooler.actionable}
                                   style={{
                                     color:
                                       cooler.actionable === "Visita PdV"
@@ -879,15 +859,15 @@ export default function DrawerA({
                                   }}
                                 >
                                   {cooler.actionable === "Visita PdV"
-                                    ? "Visita punt.."
+                                    ? "Visita PdV.."
                                     : cooler.actionable === "Sin Riesgo"
-                                    ? "Sin riesgo"
+                                    ? "Sin Riesgo"
                                     : cooler.actionable === "Toma de Decisiones"
-                                    ? "Toma de dec..."
+                                    ? "Toma de Dec..."
                                     : cooler.actionable === "Acciones urgentes"
                                     ? "Acciones urg.."
                                     : cooler.actionable === "Actualizar Info"
-                                    ? "Requiere ac..."
+                                    ? "Actualizar inf..."
                                     : cooler.actionable}
                                 </div>
                               </div>

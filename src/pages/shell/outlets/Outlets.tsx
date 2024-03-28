@@ -66,6 +66,7 @@ export default function Outlets() {
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
+      console.log(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -363,16 +364,13 @@ export default function Outlets() {
                           outlet.num_coolers
                         )}
                       </td>
-                      <td
-                        data-label="Última visita"
-                        title={outlet.days_without_visitC}
-                      >
+                      <td data-label="Última visita" title={outlet.last_read}>
                         {isLoading == true ? (
                           <>
                             <Skeleton height={20} radius="sm" width="90%" />
                           </>
-                        ) : outlet.days_without_visitC === undefined ||
-                          outlet.days_without_visitC === "" ? (
+                        ) : outlet.last_read === undefined ||
+                          outlet.last_read === null ? (
                           "Sin registro"
                         ) : (
                           <>
@@ -399,7 +397,10 @@ export default function Outlets() {
                                 }}
                               >
                                 {" "}
-                                {outlet.days_without_visitC}
+                                {new Date(outlet.last_read).toLocaleDateString(
+                                  "es-MX",
+                                  { timeZone: "UTC" }
+                                )}
                               </div>
                             </div>
                           </>
@@ -434,7 +435,9 @@ export default function Outlets() {
                                       : outlet.actionable === "Sin Riesgo"
                                       ? "1.5px solid #0F9F67"
                                       : outlet.actionable ===
-                                        "Toma de Decisiones"
+                                          "Toma de Decisiones" ||
+                                        outlet.actionable ===
+                                          "Acciones urgentes"
                                       ? "1.5px solid #F93448"
                                       : outlet.actionable === "Actualizar Info"
                                       ? "1.5px solid #DA7E05"
@@ -455,7 +458,8 @@ export default function Outlets() {
                                     style={{ width: "15px", height: "15px" }}
                                   />
                                 ) : outlet.actionable ===
-                                  "Toma de Decisiones" ? (
+                                    "Toma de Decisiones" ||
+                                  outlet.actionable === "Acciones urgentes" ? (
                                   <img
                                     src={"../../sampleData/a.svg"}
                                     alt="Descripción de la imagen"
@@ -479,7 +483,9 @@ export default function Outlets() {
                                         : outlet.actionable === "Sin Riesgo"
                                         ? "#0F9F67"
                                         : outlet.actionable ===
-                                          "Toma de Decisiones"
+                                            "Toma de Decisiones" ||
+                                          outlet.actionable ===
+                                            "Acciones urgentes"
                                         ? "#F93448"
                                         : outlet.actionable ===
                                           "Actualizar Info"
@@ -492,15 +498,7 @@ export default function Outlets() {
                                     lineHeight: "14px",
                                   }}
                                 >
-                                  {outlet.actionable === "Visita PdV"
-                                    ? "Visita punto de venta"
-                                    : outlet.actionable === "Sin Riesgo"
-                                    ? "Sin riesgo"
-                                    : outlet.actionable === "Toma de Decisiones"
-                                    ? "Acciones urgentes"
-                                    : outlet.actionable === "Actualizar Info"
-                                    ? "Requiere actualizar ..."
-                                    : outlet.actionable}
+                                  {outlet.actionable}
                                 </div>
                               </div>
                             </>

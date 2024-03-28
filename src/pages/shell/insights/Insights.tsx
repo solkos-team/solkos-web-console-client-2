@@ -1471,15 +1471,6 @@ export default function Insights() {
                                           "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
                                             ? "Alta demanda del compresor"
                                             : algorithm.algorithm ===
-                                              "LOW_VOLTAGE_ALERT"
-                                            ? "Bajo voltaje"
-                                            : algorithm.algorithm ===
-                                              "HIGH_VOLTAGE_ALERT"
-                                            ? "Alto voltaje"
-                                            : algorithm.algorithm ===
-                                              "MOVED_VISIT_ALERT"
-                                            ? "Movimiento"
-                                            : algorithm.algorithm ===
                                               "HIGH_TEMPERATURE_ALERT"
                                             ? "Alta temperatura"
                                             : algorithm.algorithm ===
