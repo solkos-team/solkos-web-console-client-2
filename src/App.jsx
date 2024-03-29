@@ -579,7 +579,7 @@ function App() {
                           textTransform: "uppercase",
                         }}
                       >
-                        V2.1.1
+                        V2.1.2
                       </div>
                     </div>
                   </section>

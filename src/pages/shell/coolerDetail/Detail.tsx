@@ -650,7 +650,9 @@ export default function CoolerDetail() {
                         {coolersData.activity
                           .filter(
                             (order) =>
-                              order.type === "SERVICE_ORDER" ||
+                              (order.type === "SERVICE_ORDER" &&
+                                (order.data.status === "D,D" ||
+                                  order.data.status === "O,O")) ||
                               (order.type === "TRACKING" &&
                                 (order.data.algorithm === "COMPRESSOR_FAIL" ||
                                   order.data.algorithm === "FREEZING_FAIL" ||
