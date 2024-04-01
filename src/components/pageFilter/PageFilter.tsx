@@ -8,19 +8,22 @@ import {
   IconCircleX,
   IconCirclePlus,
 } from "@tabler/icons-react";
-import { Text, Popover, Select } from "@mantine/core";
+import { Text, Popover, Select,Loader } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 import { addPath } from "../../app/works";
 import { fetchUniversal } from "../../utils/apiUtils";
+import { element } from "prop-types";
 
 export default function (props) {
   const dto = useSelector((state: any) => state.organization);
+  const dt = useSelector((state: any) => state.works);
   const dispatch = useDispatch();
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
   const [value, setValue] = useState<string | null>("");
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false);
-  const [dataZone, setDataZone] = useState([[""]]);
+  const [isLoading, setIsLoading] = useState(true);  
+  const [dataZone, setDataZone] = useState([['']]);
   const [dataSelect, setDataSelect] = useState([
     "Region",
     "Zona",
@@ -34,11 +37,14 @@ export default function (props) {
   const navigate = useNavigate();
   const checkVisibilityPath = () => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
-    if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
+    if (pathVerify().length >= 4) {
       setFilterVisibility(false);
     } else {
       setFilterVisibility(true);
     }
+  };
+  const pathVerify = () => {
+    return dt.length == 0 ? [] : JSON.parse(dt);
   };
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
@@ -47,7 +53,7 @@ export default function (props) {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-
+  dataZone.length == 1 && pathVerify().length > 0 ? dataZone.unshift(pathVerify()) : ''
   const clearPath = () => {
     setCustomer(dto);
     setData([]);
@@ -58,35 +64,36 @@ export default function (props) {
     checkVisibilityPath();
     localStorage.setItem("PATH", "");
   };
+  const [status , setStatus] = useState(false)
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
-    const body = { customer: dto, path: dataLocalStorage };
-    if (data.length < 4) {
+    const body = { customer: dto, path: dataLocalStorage };    
+    if (data.length < 4 && opened == true && status == false) {
+      setStatus(true)
       try {
         // const data = await fetchPath(dataLocalStorage);
-        const data = await fetchUniversal("paths", body);
+        const data = await fetchUniversal("paths", body,setIsLoading);
         const v1 = data === null ? [""] : data;
         //dataZone.push(data)
         dataZone.unshift(v1); // solucion path desde api
         checkVisibilityPath();
+        setIsLoading(false)
       } catch (error) {
         console.error("Error fetching path", error);
       }
     }
   };
-  index === 0 ? getPaths() : "";
-  dto === customer ? "" : clearPath();
-  useEffect(() => {
-    getPaths();
-  }, []);
+  pathVerify().length === 0 ? getPaths() : "";
+  dto === customer ? "" : clearPath();  
+  
   // Ctrl + x
-  useEffect(() => {
+  useEffect(() => {    
     dispatch(addPath());
     const storage = localStorage.getItem("PATH");
     if (storage === null) {
       localStorage.setItem("PATH", "");
     }
-    setIndex(JSON.parse(storage || "[]").length);
+    setIndex(pathVerify().length);
     const dataLocalStorage: any = JSON.parse(
       localStorage.getItem("PATH") || "[]"
     );
@@ -132,13 +139,9 @@ export default function (props) {
     };
   }, [mostrarVentanaEmergente, value]);
 
-  const verSelectData = (value) => {
+  const verSelectData = (value) => {    
     // Add new PATH
-    if (value != "") {
-      if (index >= 4 || data.length >= 4) {
-        alert("Filtros excedidos");
-        return;
-      }
+    if (value != "") {      
       if (index == 3) {
         setFilterVisibility(false);
         setStatusDelete(false);
@@ -173,25 +176,21 @@ export default function (props) {
     return typeof path === "undefined" ? "" : path;
   };
   const validaUser = JSON.parse(localStorage.getItem("RO0T") || "");
-  const bloqPath = (i) => {
-    // i == data.length - 1 ? false : true;
-    // return i >= validaUser?.length ? false : true;
+  const bloqPath = (i) => {    
     if (props.disabledPath === true) {
       return Boolean("false");
     }
     props.disabledPath === true ? "false" : "";
     if (validaUser.length === 0) {
-      return i === data.length - 1 || props.disabledPath === true
+     return i === data.length - 1 || props.disabledPath === true
         ? false
         : true;
     } else {
-      return (i >= validaUser?.length && i === data.length - 1) ||
-        props.disabledPath === true
+      return (i >= validaUser?.length && i === data.length - 1) || props.disabledPath === true      
         ? false
         : true;
     }
   };
-
   data.length > 0 ? getPaths(data) : "";
   return (
     <div>
@@ -228,7 +227,7 @@ export default function (props) {
                       border: "1px solid #ADBACC",
                       padding: "3px 7px",
                       background: bloqPath(i) === false ? "" : "#D4DAE3",
-                      backgroundColor: "#FFFF",
+                      backgroundColor: bloqPath(i) === false ? "" : "#D4DAE3",
                     }}
                     disabled={bloqPath(i)}
                     type="button"
@@ -328,23 +327,27 @@ export default function (props) {
                       userSelect: "none",
                       cursor: "pointer",
                     }}
-                    onClick={() => setOpened((o) => !o)}
+                    onClick={() => {setOpened((o) => !o);setStatus(false);}}
                   >
                     AÑADIR FILTRO
                   </Text>
                 </Popover.Target>
                 <Popover.Dropdown>
-                  <Select
-                    label={`Selecciona la ${dataSelect[index]}`}
-                    placeholder="Seleccionar"
-                    searchable
-                    defaultChecked
-                    data={dataZone[index]}
-                    // value={value}
-                    onChange={setValue}
-                    nothingFound="Dato no encontrado"
-                    dropdownPosition="flip"
-                  />
+                  {isLoading == true
+                    ? <>Cargando....<Loader color="blue" size="xs" /></>
+                    :
+                    <Select
+                      label={`Selecciona la ${dataSelect[index]}`}
+                      placeholder="Seleccionar"
+                      searchable
+                      defaultChecked
+                      data={dataZone[0]}
+                      // value={value}
+                      onChange={setValue}
+                      nothingFound="Dato no encontrado"
+                      dropdownPosition="flip"
+                    />
+                  }
                 </Popover.Dropdown>
               </Popover>
             </div>

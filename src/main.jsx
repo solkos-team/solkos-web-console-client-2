@@ -23,7 +23,7 @@ import { NewPassword } from "./pages/main/newPassword/NewPassword.tsx";
 import { MapInsights } from "./pages/shell/insights/MapInsights.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+
     <Provider store={store}>
       <MantineProvider>
         <ModalsProvider>
@@ -74,5 +74,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </ModalsProvider>
       </MantineProvider>
     </Provider>
-  </React.StrictMode>
+  
 );
