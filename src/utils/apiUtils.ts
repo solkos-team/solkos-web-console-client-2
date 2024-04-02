@@ -210,6 +210,7 @@ export const fetchUniversal = async (
   }
   const headers = {
     "Content-Type": "application/json",
+    'Authorization': `Bearer ${sessionStorage.getItem('Token')}`
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
@@ -243,6 +244,7 @@ export const fetchUniversalDetails = async (
   }
   const headers = {
     "Content-Type": "application/json",
+    'Authorization': `Bearer ${sessionStorage.getItem('Token')}`
   };
   const cuerpo = {
     method: "GET",
@@ -299,6 +301,7 @@ export const fetchUniversalTables = async (
   }
   const headers = {
     "Content-Type": "application/json",
+    'Authorization': `Bearer ${sessionStorage.getItem('Token')}`
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",

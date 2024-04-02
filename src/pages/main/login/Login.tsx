@@ -12,12 +12,13 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const pushUserConfig = (data) => {
-    const { user } = data;
+    const { user,token } = data;
     const { Customer, Path, Name } = user;
     localStorage.setItem("PATH", JSON.stringify(Path));
     localStorage.setItem("ORG", Customer);
     localStorage.setItem("RO0T", JSON.stringify(Path));
     localStorage.setItem("USER", Name);
+    sessionStorage.setItem("Token",token);
     String(Name) == "Call Center"
       ? navigate("/homeCallCenter")
       : navigate("/home");
