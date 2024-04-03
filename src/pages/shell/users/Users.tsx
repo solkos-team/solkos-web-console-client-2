@@ -87,6 +87,7 @@ export default function Users() {
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setDataUsers(datos);
+      console.log(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error", error);
@@ -199,6 +200,7 @@ export default function Users() {
       return false;
     }
   };
+
   return (
     <div>
       <PageFilter status={isLoading} />

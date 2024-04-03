@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Drawer,Input } from "@mantine/core";
+import { Button, Drawer, Input } from "@mantine/core";
 import { fetchUniversal } from "../../utils/apiUtils";
 import { useState, useEffect } from "react";
 
@@ -32,6 +32,7 @@ export default function DrawerNewUser({
       email: email,
       name: name,
       path: pathVerify(),
+      role: dt.length === 0 ? "user" : "path_user",
     };
     try {
       const data = await fetchUniversal("users/add", body);
@@ -63,23 +64,22 @@ export default function DrawerNewUser({
               src={"../../sampleData/user2.svg"}
               alt="Descripción de la imagen"
             />
-            <h1 className="users_title_h1">
-              Crear Nuevo Usuario
-            </h1>
+            <h1 className="users_title_h1">Crear Nuevo Usuario</h1>
           </section>
           <section className="users_form">
             <section className="users_form_1">
               <Input.Wrapper label="Nombre" description="" error="">
-                <Input value={name}
-                  onChange={(e) => setName(e.target.value)} />
+                <Input value={name} onChange={(e) => setName(e.target.value)} />
               </Input.Wrapper>
-            </section>            
+            </section>
             <section className="users_form_1">
               <Input.Wrapper label="Correo" description="" error="">
-                <Input value={email}
-                  onChange={(e) => setEmail(e.target.value)} />
+                <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </Input.Wrapper>
-            </section>                                  
+            </section>
             <section className="users_form_button">
               <Button
                 style={{

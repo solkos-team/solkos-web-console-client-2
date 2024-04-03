@@ -8,7 +8,7 @@ import {
   IconCircleX,
   IconCirclePlus,
 } from "@tabler/icons-react";
-import { Text, Popover, Select,Loader } from "@mantine/core";
+import { Text, Popover, Select, Loader } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 import { addPath } from "../../app/works";
 import { fetchUniversal } from "../../utils/apiUtils";
@@ -22,8 +22,8 @@ export default function (props) {
   const [value, setValue] = useState<string | null>("");
   const [opened, setOpened] = useState(false);
   const [statusDelete, setStatusDelete] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);  
-  const [dataZone, setDataZone] = useState([['']]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [dataZone, setDataZone] = useState([[""]]);
   const [dataSelect, setDataSelect] = useState([
     "Region",
     "Zona",
@@ -53,7 +53,9 @@ export default function (props) {
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
   };
-  dataZone.length == 1 && pathVerify().length > 0 ? dataZone.unshift(pathVerify()) : ''
+  dataZone.length == 1 && pathVerify().length > 0
+    ? dataZone.unshift(pathVerify())
+    : "";
   const clearPath = () => {
     setCustomer(dto);
     setData([]);
@@ -64,30 +66,30 @@ export default function (props) {
     checkVisibilityPath();
     localStorage.setItem("PATH", "");
   };
-  const [status , setStatus] = useState(false)
+  const [status, setStatus] = useState(false);
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
-    const body = { customer: dto, path: dataLocalStorage };    
+    const body = { customer: dto, path: dataLocalStorage };
     if (data.length < 4 && opened == true && status == false) {
-      setStatus(true)
+      setStatus(true);
       try {
         // const data = await fetchPath(dataLocalStorage);
-        const data = await fetchUniversal("paths", body,setIsLoading);
+        const data = await fetchUniversal("paths", body, setIsLoading);
         const v1 = data === null ? [""] : data;
         //dataZone.push(data)
         dataZone.unshift(v1); // solucion path desde api
         checkVisibilityPath();
-        setIsLoading(false)
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching path", error);
       }
     }
   };
   pathVerify().length === 0 ? getPaths() : "";
-  dto === customer ? "" : clearPath();  
-  
+  dto === customer ? "" : clearPath();
+
   // Ctrl + x
-  useEffect(() => {    
+  useEffect(() => {
     dispatch(addPath());
     const storage = localStorage.getItem("PATH");
     if (storage === null) {
@@ -139,9 +141,9 @@ export default function (props) {
     };
   }, [mostrarVentanaEmergente, value]);
 
-  const verSelectData = (value) => {    
+  const verSelectData = (value) => {
     // Add new PATH
-    if (value != "") {      
+    if (value != "") {
       if (index == 3) {
         setFilterVisibility(false);
         setStatusDelete(false);
@@ -176,17 +178,18 @@ export default function (props) {
     return typeof path === "undefined" ? "" : path;
   };
   const validaUser = JSON.parse(localStorage.getItem("RO0T") || "");
-  const bloqPath = (i) => {    
+  const bloqPath = (i) => {
     if (props.disabledPath === true) {
       return Boolean("false");
     }
     props.disabledPath === true ? "false" : "";
     if (validaUser.length === 0) {
-     return i === data.length - 1 || props.disabledPath === true
+      return i === data.length - 1 || props.disabledPath === true
         ? false
         : true;
     } else {
-      return (i >= validaUser?.length && i === data.length - 1) || props.disabledPath === true      
+      return (i >= validaUser?.length && i === data.length - 1) ||
+        props.disabledPath === true
         ? false
         : true;
     }
@@ -327,15 +330,20 @@ export default function (props) {
                       userSelect: "none",
                       cursor: "pointer",
                     }}
-                    onClick={() => {setOpened((o) => !o);setStatus(false);}}
+                    onClick={() => {
+                      setOpened((o) => !o);
+                      setStatus(false);
+                    }}
                   >
                     AÑADIR FILTRO
                   </Text>
                 </Popover.Target>
                 <Popover.Dropdown>
-                  {isLoading == true
-                    ? <>Cargando....<Loader color="blue" size="xs" /></>
-                    :
+                  {isLoading == true ? (
+                    <>
+                      <Loader color="blue" size="xs" />
+                    </>
+                  ) : (
                     <Select
                       label={`Selecciona la ${dataSelect[index]}`}
                       placeholder="Seleccionar"
@@ -347,7 +355,7 @@ export default function (props) {
                       nothingFound="Dato no encontrado"
                       dropdownPosition="flip"
                     />
-                  }
+                  )}
                 </Popover.Dropdown>
               </Popover>
             </div>

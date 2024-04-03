@@ -108,7 +108,7 @@ export default function CoolerDetail() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-start",
-                  gap: "4px",
+                  gap: "0.25rem",
                   flex: 100,
                   marginLeft: 10,
                 }}
@@ -126,7 +126,7 @@ export default function CoolerDetail() {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "10px",
+                      gap: "0.625rem",
                     }}
                   >
                     <div

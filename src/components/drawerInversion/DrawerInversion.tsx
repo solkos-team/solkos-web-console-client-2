@@ -131,7 +131,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               border: "1px solid #88888B",
               width: "60%",
               height: "100%",
-              boxSizing:"border-box"
+              boxSizing: "border-box",
             }}
           >
             <div
@@ -181,8 +181,8 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   }}
                 >
                   Es la suma del precio factura y los gastos en servicios
-                  asociados. Incluye todos los gastos incurridos desde su
-                  compra hasta la fecha actual.
+                  asociados. Incluye todos los gastos incurridos desde su compra
+                  hasta la fecha actual.
                 </div>
               </div>
               <div
@@ -206,13 +206,13 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     lineHeight: "normal",
                   }}
                 >
-                  {coolersData?.properties?.total_ownership_expense
-                    ?.value === undefined
+                  {coolersData?.properties?.total_ownership_expense?.value ===
+                  undefined
                     ? "Sin registro"
                     : "$" +
-                    `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                      `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
+                        "es-MX"
+                      )}`}
                 </div>
                 <div
                   style={{
@@ -230,10 +230,10 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
             </div>
             <div
               style={{
-                display: "flex",                
+                display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "center",              
+                alignItems: "center",
                 alignSelf: "stretch",
               }}
             >
@@ -289,9 +289,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   {coolersData?.properties?.sale_price?.value === undefined
                     ? "Sin registro"
                     : "$" +
-                    `${coolersData?.properties?.sale_price.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                      `${coolersData?.properties?.sale_price.value.toLocaleString(
+                        "es-MX"
+                      )}`}
                 </div>
               </div>
               <div
@@ -327,12 +327,12 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   }}
                 >
                   {coolersData?.properties?.total_expense_service.value ===
-                    undefined
+                  undefined
                     ? "Sin registro"
                     : "$" +
-                    `${coolersData?.properties?.total_expense_service.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                      `${coolersData?.properties?.total_expense_service.value.toLocaleString(
+                        "es-MX"
+                      )}`}
                 </div>
               </div>
             </div>
@@ -351,7 +351,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               border: "1px solid #88888B",
               width: "100%",
               height: "100%",
-              boxSizing:"border-box"
+              boxSizing: "border-box",
             }}
           >
             <div
@@ -427,9 +427,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       .value === undefined
                       ? "Sin registro"
                       : "$" +
-                      `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString(
-                        "es-MX"
-                      )}`}
+                        `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString(
+                          "es-MX"
+                        )}`}
                   </div>
                   <div
                     style={{
@@ -451,9 +451,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     gap: "8px",
                   }}
                 >
-                  <div
-                    style={{ display: "flex", alignItems: "flex-start" }}
-                  >
+                  <div style={{ display: "flex", alignItems: "flex-start" }}>
                     <div
                       style={{
                         display: "flex",
@@ -487,12 +485,12 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     }}
                   >
                     {coolersData?.properties?.annual_decrement.value ===
-                      undefined
+                    undefined
                       ? "Sin registro"
                       : "$" +
-                      `${coolersData?.properties?.annual_decrement.value.toLocaleString(
-                        "es-MX"
-                      )}`}
+                        `${coolersData?.properties?.annual_decrement.value.toLocaleString(
+                          "es-MX"
+                        )}`}
                   </div>
                   <div
                     style={{
@@ -567,7 +565,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   }}
                 >
                   {coolersData?.properties?.year_of_production.value ===
-                    undefined
+                  undefined
                     ? "Sin registro"
                     : `${coolersData?.properties?.year_of_production.value}`}
                 </div>
@@ -752,21 +750,19 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                             Precio
                           </div>
                         </div>
-                        {coolersData?.properties?.total_ownership_expense
-                          ?.value !== undefined &&
-                          coolersData?.properties?.year_of_production
-                            ?.value !== undefined ? (
+                        {coolersData?.properties?.sale_price?.value !==
+                          undefined &&
+                        coolersData?.properties?.year_of_production?.value !==
+                          undefined ? (
                           Array.from({ length: 10 }, (_, i) => i).map(
                             (_, index) => {
                               const year =
                                 coolersData.properties.year_of_production
                                   .value + index;
                               const adjustedPrice =
-                                coolersData.properties
-                                  .total_ownership_expense.value -
+                                coolersData.properties.sale_price.value -
                                 index *
-                                coolersData.properties.annual_decrement
-                                  .value;
+                                  coolersData.properties.annual_decrement.value;
                               return (
                                 <div
                                   key={index}
@@ -867,7 +863,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               border: "1px solid #88888B",
               width: "100%",
               height: "100%",
-              boxSizing:"border-box"
+              boxSizing: "border-box",
             }}
           >
             <div
@@ -915,8 +911,8 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     lineHeight: "normal",
                   }}
                 >
-                  Muestra la acumulación de los gastos generados en cada año
-                  por concepto de servicio
+                  Muestra la acumulación de los gastos generados en cada año por
+                  concepto de servicio
                 </div>
               </div>
 
@@ -942,11 +938,11 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   }}
                 >
                   {coolersData?.properties?.total_expense_service.value ===
-                    undefined
+                  undefined
                     ? "Sin registro"
                     : `${coolersData?.properties?.total_expense_service.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                        "es-MX"
+                      )}`}
                 </div>
                 <div
                   style={{
@@ -998,12 +994,11 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   }}
                 >
                   (+ $
-                  {coolersData?.properties?.annual_decrement.value ===
-                    undefined
+                  {coolersData?.properties?.annual_decrement.value === undefined
                     ? "Sin registro"
                     : `${coolersData?.properties?.annual_decrement.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                        "es-MX"
+                      )}`}
                   )
                 </div>
                 <div
@@ -1020,9 +1015,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     .value === undefined
                     ? "Sin registro"
                     : "$" +
-                    `${coolersData?.properties?.total_expense_service_last_year.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                      `${coolersData?.properties?.total_expense_service_last_year.value.toLocaleString(
+                        "es-MX"
+                      )}`}
                 </div>
                 <div
                   style={{
@@ -1083,7 +1078,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
             </div>
           </div>
         </section>
-      </section> 
+      </section>
     </Drawer>
   );
 }
