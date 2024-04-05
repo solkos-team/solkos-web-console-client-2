@@ -195,6 +195,7 @@ export default function (props) {
     }
   };
   data.length > 0 ? getPaths(data) : "";
+
   return (
     <div>
       <section className="pagefilter_return_principal">
@@ -236,20 +237,22 @@ export default function (props) {
                     type="button"
                   >
                     {bloqPath(i) === false ? (
-                      <IconCircleX
-                        style={{
-                          color: "#313A49",
-                          width: "1rem",
-                          height: "1rem",
-                          marginRight: "3px",
-                          // visibility:
-                          //   bloqPath(i) == false ? "visible" : "hidden",
-                        }}
-                        onClick={() => {
-                          deleteFilter(i);
-                        }}
-                        onClickCapture={(o) => !o}
-                      />
+                    <IconCircleX
+                      style={{
+                        color: "#313A49",
+                        width: "1rem",
+                        height: "1rem",
+                        marginRight: "3px",
+                        visibility:
+                          props.status == true || props.disabledPath == true
+                            ? "hidden"
+                            : "visible",
+                      }}
+                      onClick={() => {
+                        deleteFilter(i);
+                      }}
+                      onClickCapture={(o) => !o}
+                    />
                     ) : (
                       <IconLock
                         style={{
@@ -339,11 +342,9 @@ export default function (props) {
                   </Text>
                 </Popover.Target>
                 <Popover.Dropdown>
-                  {isLoading == true ? (
-                    <>
-                      <Loader color="blue" size="xs" />
-                    </>
-                  ) : (
+                  {isLoading == true
+                    ? <><Loader color="blue" size="xs" /></>
+                    :
                     <Select
                       label={`Selecciona la ${dataSelect[index]}`}
                       placeholder="Seleccionar"
@@ -355,7 +356,7 @@ export default function (props) {
                       nothingFound="Dato no encontrado"
                       dropdownPosition="flip"
                     />
-                  )}
+                  }
                 </Popover.Dropdown>
               </Popover>
             </div>
