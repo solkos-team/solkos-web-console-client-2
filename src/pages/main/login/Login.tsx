@@ -21,10 +21,10 @@ export const Login = () => {
     sessionStorage.setItem("Email", email);
     sessionStorage.setItem("Token", token);
     localStorage.setItem("Role", Role);
-    // console.log(Role);
+    
     String(Name) == "Call Center"
-      ? navigate("/homeCallCenter")
-      : navigate("/home");
+      ? setTimeout(()=>{navigate("/homeCallCenter")},2000)
+      : setTimeout(()=>{navigate("/home")},2000)
   };
   const body = {
     email: email,
