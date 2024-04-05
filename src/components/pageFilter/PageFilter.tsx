@@ -195,7 +195,6 @@ export default function (props) {
     }
   };
   data.length > 0 ? getPaths(data) : "";
-
   return (
     <div>
       <section className="pagefilter_return_principal">
@@ -222,7 +221,7 @@ export default function (props) {
           {data === null || data === undefined
             ? []
             : data.map((item, i) => (
-                <div style={{ display: "flex", alignItems: "center" }} key={i}>
+                <div style={{ display: "flex", alignItems: "center"}} key={i}>
                   <button
                     style={{
                       display: "flex",
@@ -231,7 +230,7 @@ export default function (props) {
                       border: "1px solid #ADBACC",
                       padding: "3px 7px",
                       background: bloqPath(i) === false ? "" : "#D4DAE3",
-                      backgroundColor: bloqPath(i) === false ? "" : "#D4DAE3",
+                      backgroundColor: bloqPath(i) === false ? "#D4DAE3" : "#D4DAE3",                                            
                     }}
                     disabled={bloqPath(i)}
                     type="button"
