@@ -142,7 +142,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     }
     return rows;
   };
-  console.log(filteredCoolers);
+  // console.log(filteredCoolers);
   return (
     <Drawer
       opened={opened}
@@ -291,7 +291,9 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                         lineHeight: "normal",
                       }}
                     >
-                      {lastReadDate.toLocaleDateString("es-MX",{timeZone:"UTC"})}
+                      {lastReadDate.toLocaleDateString("es-MX", {
+                        timeZone: "UTC",
+                      })}
                     </div>
                   </>
                 )}

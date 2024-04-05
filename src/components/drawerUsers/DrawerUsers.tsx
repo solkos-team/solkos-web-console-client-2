@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Drawer,Input } from "@mantine/core";
+import { Button, Drawer, Input } from "@mantine/core";
 import { useEffect } from "react";
 
 export default function DrawerUsers({
@@ -85,7 +85,7 @@ export default function DrawerUsers({
           <section className="users_title">
             <h1 className="users_title_h1">
               {localStorage.getItem("USER") === "Jose Iván Peréz Ugalde" ||
-                localStorage.getItem("USER") === "Mayra Barrón Reséndiz"
+              localStorage.getItem("USER") === "Mayra Barrón Reséndiz"
                 ? "EDITAR USUARIO"
                 : "INFORMACIÓN USUARIO"}
             </h1>
@@ -95,72 +95,90 @@ export default function DrawerUsers({
               {userVerify() == true ? (
                 <>
                   <Input.Wrapper label="Nombre" description="" error="">
-                    <Input value={nameUser}
-                      onChange={(e) => setNameUser(e.target.value)} />
+                    <Input
+                      value={nameUser}
+                      onChange={(e) => setNameUser(e.target.value)}
+                    />
                   </Input.Wrapper>
                 </>
               ) : (
                 <>
                   <Input.Wrapper label="Nombre" description="" error="">
-                    <Input value={nameUser}
-                      onChange={(e) => setNameUser(e.target.value)} disabled />
+                    <Input
+                      value={nameUser}
+                      onChange={(e) => setNameUser(e.target.value)}
+                      disabled
+                    />
                   </Input.Wrapper>
                 </>
               )}
-            </section>            
+            </section>
             <section className="users_form_1">
               {userVerify() == true ? (
                 <>
                   <Input.Wrapper label="Correo" description="" error="">
-                    <Input value={emailUser}
-                  onChange={(e) => setEmailUser(e.target.value)} />
+                    <Input
+                      value={emailUser}
+                      onChange={(e) => setEmailUser(e.target.value)}
+                    />
                   </Input.Wrapper>
                 </>
               ) : (
                 <>
                   <Input.Wrapper label="Correo" description="" error="">
-                    <Input value={emailUser}
-                    onChange={(e) => setEmailUser(e.target.value)} disabled />
+                    <Input
+                      value={emailUser}
+                      onChange={(e) => setEmailUser(e.target.value)}
+                      disabled
+                    />
                   </Input.Wrapper>
                 </>
               )}
-            </section>            
+            </section>
             <section className="users_form_1">
               {userVerify() == true ? (
                 <>
                   <Input.Wrapper label="Customer" description="" error="">
-                    <Input value={customerUser}
-                     onChange={(e) => setCustomerUser(e.target.value)} />
+                    <Input
+                      value={customerUser}
+                      onChange={(e) => setCustomerUser(e.target.value)}
+                    />
                   </Input.Wrapper>
                 </>
               ) : (
                 <>
                   <Input.Wrapper label="Customer" description="" error="">
-                    <Input value={customerUser}
-                      onChange={(e) => setCustomerUser(e.target.value)} disabled />
+                    <Input
+                      value={customerUser}
+                      onChange={(e) => setCustomerUser(e.target.value)}
+                      disabled
+                    />
                   </Input.Wrapper>
                 </>
               )}
-            </section>            
+            </section>
             <section className="users_form_1">
               {userVerify() == true ? (
                 <>
                   <Input.Wrapper label="Path" description="" error="">
-                    <Input value={path.toString()}
-                       // onChange={(e) => setPathUser(e.target.value)} 
-                       />
+                    <Input
+                      value={path.toString()}
+                      // onChange={(e) => setPathUser(e.target.value)}
+                    />
                   </Input.Wrapper>
                 </>
               ) : (
                 <>
-                    <Input.Wrapper label="Path" description="" error="">
-                      <Input value={path.toString()}
-                        // onChange={(e) => setPathUser(e.target.value)}
-                        disabled />
-                    </Input.Wrapper>
+                  <Input.Wrapper label="Path" description="" error="">
+                    <Input
+                      value={path.toString()}
+                      // onChange={(e) => setPathUser(e.target.value)}
+                      disabled
+                    />
+                  </Input.Wrapper>
                 </>
               )}
-            </section>            
+            </section>
             <section className="users_form_button">
               <Button
                 style={{

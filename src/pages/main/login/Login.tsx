@@ -12,15 +12,16 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const pushUserConfig = (data) => {
-    const { user,token } = data;
-    const { Customer, Path, Name,Role } = user;
+    const { user, token } = data;
+    const { Customer, Path, Name, Role } = user;
     localStorage.setItem("PATH", JSON.stringify(Path));
     localStorage.setItem("ORG", Customer);
     localStorage.setItem("RO0T", JSON.stringify(Path));
-    localStorage.setItem("USER", Name);    
-    sessionStorage.setItem('Email',email);
-    sessionStorage.setItem("Token",token);
-    sessionStorage.setItem("Role",Role);
+    localStorage.setItem("USER", Name);
+    sessionStorage.setItem("Email", email);
+    sessionStorage.setItem("Token", token);
+    localStorage.setItem("Role", Role);
+    // console.log(Role);
     String(Name) == "Call Center"
       ? navigate("/homeCallCenter")
       : navigate("/home");
@@ -137,7 +138,8 @@ export const Login = () => {
             © Imbera 2024
           </div>
         </div>
-        <div className="login_principal_image"
+        <div
+          className="login_principal_image"
           style={{
             background:
               "conic-gradient(from 180deg at 50% 50%, #FCCFD9 0deg, #ED5079 360deg)",

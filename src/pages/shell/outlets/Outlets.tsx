@@ -66,7 +66,7 @@ export default function Outlets() {
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
-      console.log(datos);
+      // console.log(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);

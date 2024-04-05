@@ -194,6 +194,9 @@ const routes2 = [
 ];
 function App() {
   const Name = localStorage.getItem("USER") || "";
+  const Role = localStorage.getItem("Role") || "";
+  // console.log(Name);
+  // console.log(Role);
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
   const [data, setData] = useState([]);
@@ -705,122 +708,130 @@ function App() {
                   </UnstyledButton>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "8px",
-                      alignItems: "flex-start",
-                      gap: "10px",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 600,
-                        lineHeight: "16px",
-                      }}
-                    >
-                      Cambiar de organización
-                    </div>
-                  </div>
-                  <div style={{ maxHeight: "300px", overflowY: "auto" }}>
-                    {/* Contenido del menú de cambio de organización */}
-                    {data === undefined
-                      ? "Sin registros"
-                      : data.map((nombre, index) =>
-                          JSON.parse(validaUser).length == 0 ? (
-                            <div
-                              style={{
-                                // display: "flex",
-                                padding: "10px 12px",
-                                alignItems: "center",
-                                gap: "10px",
-                                alignSelf: "stretch",
-                                display:
-                                  JSON.parse(validaUser).length === 0
-                                    ? ""
-                                    : "none",
-                              }}
-                              key={index}
-                              onChange={setData}
-                            >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "10px",
-                                  flex: "100",
-                                  fontSize: "12px",
-                                  textDecorationColor:
-                                    dt === nombre ? "#ec547c" : "",
-                                  color: dt === nombre ? "#ec547c" : "black",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  saveOrganization(nombre);
-                                }}
-                              >
-                                {nombre}
-                              </div>
-                            </div>
-                          ) : (
-                            <div
-                              style={{
-                                // display: "flex",
-                                padding: "10px 12px",
-                                alignItems: "center",
-                                gap: "10px",
-                                alignSelf: "stretch",
-                                display: dt === nombre ? "" : "none",
-                              }}
-                              key={index}
-                              onChange={setData}
-                            >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  gap: "10px",
-                                  flex: "100",
-                                  fontSize: "14px",
-                                  textDecorationColor:
-                                    dt === nombre ? "#ec547c" : "",
-                                  color: dt === nombre ? "#ec547c" : "",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                  saveOrganization(nombre);
-                                }}
-                              >
-                                {nombre}
-                              </div>
-                            </div>
-                          )
-                        )}
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "8px",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "10px",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "190px",
-                        height: "1px",
-                        background: "#CACACA",
-                      }}
-                    ></div>
-                  </div>
+                  {Role != "root" ? (
+                    ""
+                  ) : (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "8px",
+                          alignItems: "flex-start",
+                          gap: "10px",
+                          alignSelf: "stretch",
+                        }}
+                      >
+                        <div
+                          style={{
+                            color: "#88888B",
+                            // fontFamily: "DM Sans",
+                            fontSize: "12px",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "16px",
+                          }}
+                        >
+                          Cambiar de organización
+                        </div>
+                      </div>
+                      <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+                        {/* Contenido del menú de cambio de organización */}
+                        {data === undefined
+                          ? "Sin registros"
+                          : data.map((nombre, index) =>
+                              JSON.parse(validaUser).length == 0 ? (
+                                <div
+                                  style={{
+                                    // display: "flex",
+                                    padding: "10px 12px",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    alignSelf: "stretch",
+                                    display:
+                                      JSON.parse(validaUser).length === 0
+                                        ? ""
+                                        : "none",
+                                  }}
+                                  key={index}
+                                  onChange={setData}
+                                >
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      gap: "10px",
+                                      flex: "100",
+                                      fontSize: "12px",
+                                      textDecorationColor:
+                                        dt === nombre ? "#ec547c" : "",
+                                      color:
+                                        dt === nombre ? "#ec547c" : "black",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                      saveOrganization(nombre);
+                                    }}
+                                  >
+                                    {nombre}
+                                  </div>
+                                </div>
+                              ) : (
+                                <div
+                                  style={{
+                                    // display: "flex",
+                                    padding: "10px 12px",
+                                    alignItems: "center",
+                                    gap: "10px",
+                                    alignSelf: "stretch",
+                                    display: dt === nombre ? "" : "none",
+                                  }}
+                                  key={index}
+                                  onChange={setData}
+                                >
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      gap: "10px",
+                                      flex: "100",
+                                      fontSize: "14px",
+                                      textDecorationColor:
+                                        dt === nombre ? "#ec547c" : "",
+                                      color: dt === nombre ? "#ec547c" : "",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                      saveOrganization(nombre);
+                                    }}
+                                  >
+                                    {nombre}
+                                  </div>
+                                </div>
+                              )
+                            )}
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "8px",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "10px",
+                          alignSelf: "stretch",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "190px",
+                            height: "1px",
+                            background: "#CACACA",
+                          }}
+                        ></div>
+                      </div>
+                    </>
+                  )}
+
                   <div
                     style={{
                       display: "flex",
