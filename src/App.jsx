@@ -652,7 +652,7 @@ function App() {
                             // display: "flex",
                             flexDirection: "column",
                             alignItems: "flex-start",
-                            maxWidth: "150px",
+                            width: "100%",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
@@ -680,6 +680,7 @@ function App() {
                               borderRadius: "3px",
                               background: "#D4DAE3",
                               width: "100%",
+                              boxSizing: "border-box",
                             }}
                           >
                             <Text
@@ -899,7 +900,7 @@ function App() {
                       }}
                     >
                       <img
-                        src={arrow2}
+                        src={"../../sampleData/arrowmen.svg"}
                         style={{ width: "18px", height: "18px" }}
                       />
                       <Text
