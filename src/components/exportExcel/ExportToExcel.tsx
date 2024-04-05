@@ -6,7 +6,6 @@ import { fetchUniversalTables } from "../../utils/apiUtils";
 import { useSelector } from "react-redux";
 
 export const ExportToExcel = (props) => {
-  
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingPath, setIsLoadingPath] = useState(true);
   const dt = useSelector((state: any) => state.works);
@@ -14,10 +13,10 @@ export const ExportToExcel = (props) => {
   const [fileStateTotalPath,setFileStatePath] = useState<string>()
   const [total,setTotal] = useState<number>()
   const [totalPath,setTotalPath] = useState<number>()
+  const typeRole = localStorage.getItem('Role')
   const exportToExcel = () => {
     let wb = XLSX.utils.book_new();
     let ws = XLSX.utils.json_to_sheet(props.datos);
-
     const columnWidths = props.datos.reduce((acc, row) => {
       Object.keys(row).forEach((key) => {
         const cellValue = String(row[key]);
@@ -40,7 +39,6 @@ export const ExportToExcel = (props) => {
       `${props.nombre || "console2.0"}_${formatDate(new Date())}.xlsx`
     );
   };
-
   const padTo2Digits = (num) => {
     return num.toString().padStart(2, "0");
   };
@@ -119,7 +117,7 @@ export const ExportToExcel = (props) => {
       <Menu.Dropdown>
         <Menu.Label>Descarga de Información</Menu.Label>
         {/* <Menu.Item onClick={(e) => download(e)}> */}
-        <Menu.Item style={{display: props.component == undefined || props.body == undefined ? "none" : ''}}>
+        <Menu.Item style={{display: props.component == undefined || props.body == undefined || typeRole == 'path_user' ? "none" : ''}}>
           {isLoading == true 
           ? <>Cargando datos... <Loader color="blue" size="xs" /></>
           : <a style={{color:"#000"}} href={fileStateTotal} download>
