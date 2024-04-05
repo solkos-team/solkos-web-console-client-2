@@ -13,12 +13,14 @@ export const Login = () => {
 
   const pushUserConfig = (data) => {
     const { user,token } = data;
-    const { Customer, Path, Name } = user;
+    const { Customer, Path, Name,Role } = user;
     localStorage.setItem("PATH", JSON.stringify(Path));
     localStorage.setItem("ORG", Customer);
     localStorage.setItem("RO0T", JSON.stringify(Path));
-    localStorage.setItem("USER", Name);
+    localStorage.setItem("USER", Name);    
+    sessionStorage.setItem('Email',email);
     sessionStorage.setItem("Token",token);
+    sessionStorage.setItem("Role",Role);
     String(Name) == "Call Center"
       ? navigate("/homeCallCenter")
       : navigate("/home");
