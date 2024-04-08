@@ -3,12 +3,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchUniversal } from "../../../utils/apiUtils";
-
-export const Login = () => {
+import { useDispatch } from "react-redux";
+import { addPath } from "../../../app/works";
+export const Login = () => {  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   const pushUserConfig = (data) => {
@@ -21,7 +23,7 @@ export const Login = () => {
     sessionStorage.setItem("Email", email);
     sessionStorage.setItem("Token", token);
     localStorage.setItem("Role", Role);
-    
+    dispatch(addPath());
     String(Name) == "Call Center"
       ? setTimeout(()=>{navigate("/homeCallCenter")},2000)
       : setTimeout(()=>{navigate("/home")},2000)
