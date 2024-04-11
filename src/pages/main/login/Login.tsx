@@ -5,12 +5,14 @@ import { useState, useEffect } from "react";
 import { fetchUniversal } from "../../../utils/apiUtils";
 import { useDispatch } from "react-redux";
 import { addPath } from "../../../app/works";
-export const Login = () => {  
+import { addOrg } from "../../../app/organization";
+
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const pushUserConfig = (data) => {
@@ -23,10 +25,16 @@ export const Login = () => {
     sessionStorage.setItem("Email", email);
     sessionStorage.setItem("Token", token);
     localStorage.setItem("Role", Role);
+    console.log(Role);
     dispatch(addPath());
+    dispatch(addOrg());
     String(Name) == "Call Center"
-      ? setTimeout(()=>{navigate("/homeCallCenter")},2000)
-      : setTimeout(()=>{navigate("/home")},2000)
+      ? setTimeout(() => {
+          navigate("/homeCallCenter");
+        }, 2000)
+      : setTimeout(() => {
+          navigate("/home");
+        }, 2000);
   };
   const body = {
     email: email,

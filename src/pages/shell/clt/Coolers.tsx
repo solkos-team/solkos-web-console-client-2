@@ -9,8 +9,18 @@ import { PaginationComponent } from "../../../components/Pagination/PaginationCo
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput, Skeleton } from "@mantine/core";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
+import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
 
 export default function Coolers() {
+  const [sortByLastVisit, setSortByLastVisit] = useState(false);
+  const getSortIcon = () => {
+    return (
+      <img
+        src={"../../sampleData/arrows3.svg"}
+        style={{ verticalAlign: "top" }}
+      />
+    );
+  };
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [searchValue, setSearchValue] = useState("");
@@ -56,7 +66,17 @@ export default function Coolers() {
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     filter_by: searchValue,
+    order_by: {
+      asc: sortByLastVisit,
+      name: "last_read",
+    },
   };
+  const handleLastVisitClick = () => {
+    setSortByLastVisit(!sortByLastVisit);
+    setCurrentPage(1);
+    fetchData();
+  };
+  console.log(sortByLastVisit);
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
@@ -64,6 +84,7 @@ export default function Coolers() {
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
+      console.log(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -304,7 +325,9 @@ export default function Coolers() {
                 <th scope="col">Estatus</th>
                 <th scope="col">Serie</th>
                 <th scope="col">Modelo</th>
-                <th scope="col">Última visita</th>
+                <th scope="col" onClick={handleLastVisitClick}>
+                  Última visita {getSortIcon()}
+                </th>
                 <th scope="col">Control de activos</th>
                 <th scope="col">Acciones</th>
               </tr>

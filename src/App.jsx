@@ -195,8 +195,7 @@ const routes2 = [
 function App() {
   const Name = localStorage.getItem("USER") || "";
   const Role = localStorage.getItem("Role") || "";
-  // console.log(Name);
-  // console.log(Role);
+  console.log(Role);
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
   const [data, setData] = useState([]);
@@ -582,7 +581,7 @@ function App() {
                           textTransform: "uppercase",
                         }}
                       >
-                        V2.1.2
+                        V2.2.0
                       </div>
                     </div>
                   </section>

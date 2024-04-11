@@ -44,7 +44,7 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body);
       setInsightsData(data);
-      // console.log(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching outlets:", error);
@@ -62,6 +62,7 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("coolers", body2, setIsLoading);
       setCoolersData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
