@@ -267,6 +267,7 @@ export const fetchDeleteUsers = async (componentURL, detailsID?, CRUD?) => {
   const url = `${baseUrl}/${componentURL}/${Number(detailsID)}`;
   const headers = {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: "DELETE",
