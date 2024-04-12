@@ -13,11 +13,19 @@ import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
 
 export default function Coolers() {
   const [sortByLastVisit, setSortByLastVisit] = useState(false);
+
   const getSortIcon = () => {
-    return (
+    return sortByLastVisit ? (
       <img
-        src={"../../sampleData/arrows3.svg"}
-        style={{ verticalAlign: "top" }}
+        src={"../../sampleData/sort-ascending.svg"}
+        alt="Descripción de la imagen"
+        style={{ width: "15px", height: "15px", verticalAlign: "middle" }}
+      />
+    ) : (
+      <img
+        src={"../../sampleData/sort-descending.svg"}
+        alt="Descripción de la imagen"
+        style={{ width: "15px", height: "15px", verticalAlign: "middle" }}
       />
     );
   };
@@ -71,11 +79,27 @@ export default function Coolers() {
       name: "last_read",
     },
   };
+  // const handleLastVisitClick = () => {
+  //   setSortByLastVisit(!sortByLastVisit);
+  //   setCurrentPage(1);
+  //   fetchData();
+  // };
+
+  useEffect(() => {
+    console.log("sortByLastVisit:", sortByLastVisit);
+  }, [sortByLastVisit]);
+
   const handleLastVisitClick = () => {
     setSortByLastVisit(!sortByLastVisit);
-    setCurrentPage(1);
-    fetchData();
   };
+
+  useEffect(() => {
+    if (sortByLastVisit) {
+      setCurrentPage(1);
+      fetchData();
+    }
+  }, [sortByLastVisit]);
+
   console.log(sortByLastVisit);
   const fetchData = async () => {
     try {
@@ -325,8 +349,13 @@ export default function Coolers() {
                 <th scope="col">Estatus</th>
                 <th scope="col">Serie</th>
                 <th scope="col">Modelo</th>
-                <th scope="col" onClick={handleLastVisitClick}>
-                  Última visita {getSortIcon()}
+                <th scope="col">
+                  <span
+                    style={{ cursor: "pointer" }}
+                    onClick={handleLastVisitClick}
+                  >
+                    Última visita {getSortIcon()}
+                  </span>
                 </th>
                 <th scope="col">Control de activos</th>
                 <th scope="col">Acciones</th>
