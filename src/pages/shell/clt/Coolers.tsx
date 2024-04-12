@@ -13,27 +13,12 @@ import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
 
 export default function Coolers() {
   const [sortByLastVisit, setSortByLastVisit] = useState(false);
-
-  const getSortIcon = () => {
-    return sortByLastVisit ? (
-      <img
-        src={"../../sampleData/sort-ascending.svg"}
-        alt="Descripción de la imagen"
-        style={{ width: "15px", height: "15px", verticalAlign: "middle" }}
-      />
-    ) : (
-      <img
-        src={"../../sampleData/sort-descending.svg"}
-        alt="Descripción de la imagen"
-        style={{ width: "15px", height: "15px", verticalAlign: "middle" }}
-      />
-    );
-  };
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [searchValue, setSearchValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[]>();
   const [noInfoToShow, setNoInfoToShow] = useState(false);
+  const [changeAsc,setChangeAsc] = useState(false)
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
@@ -75,32 +60,16 @@ export default function Coolers() {
     page_number: currentPage,
     filter_by: searchValue,
     order_by: {
-      asc: sortByLastVisit,
+      asc: changeAsc,
       name: "last_read",
     },
-  };
-  // const handleLastVisitClick = () => {
-  //   setSortByLastVisit(!sortByLastVisit);
-  //   setCurrentPage(1);
-  //   fetchData();
-  // };
-
-  useEffect(() => {
-    console.log("sortByLastVisit:", sortByLastVisit);
-  }, [sortByLastVisit]);
-
-  const handleLastVisitClick = () => {
-    setSortByLastVisit(!sortByLastVisit);
-  };
-
-  useEffect(() => {
-    if (sortByLastVisit) {
+  };  
+  useEffect(() => { 
       setCurrentPage(1);
-      fetchData();
-    }
-  }, [sortByLastVisit]);
+      fetchData();   
+  }, [changeAsc]);
 
-  console.log(sortByLastVisit);
+  
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
@@ -108,7 +77,6 @@ export default function Coolers() {
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
-      console.log(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching coolers:", error);
@@ -352,9 +320,14 @@ export default function Coolers() {
                 <th scope="col">
                   <span
                     style={{ cursor: "pointer" }}
-                    onClick={handleLastVisitClick}
+                    onClick={() => setChangeAsc((o) => !o)}
                   >
-                    Última visita {getSortIcon()}
+                    Última visita
+                    <img
+                      src={`../../sampleData/${changeAsc == false ? 'sort-descending.svg': 'sort-ascending.svg'}`}
+                      alt="Descripción de la imagen"
+                      style={{ width: "15px", height: "15px", verticalAlign: "middle" }}
+                    />
                   </span>
                 </th>
                 <th scope="col">Control de activos</th>
