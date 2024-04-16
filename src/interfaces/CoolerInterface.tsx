@@ -95,6 +95,17 @@ export interface InsightLevel {
     routes: number;
     zones: number;
   };
+  assets_analytics : {
+    value : number;
+    total :number ;
+    percentage : number;
+  };
+  geo_data : [
+    area : string,
+    num_coolers: number,
+    latitude: number,
+    longitude: number,
+  ]
   coolers;
   operative_units;
   regions;

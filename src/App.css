@@ -10,7 +10,7 @@
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191,
     U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-
+::-webkit-input-placeholder { font-size: 12px; }
 #root {
   /* max-width: 1280px; */
   /* margin: 0 auto; */
@@ -321,19 +321,19 @@ table th {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 .insights_datas_info {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  height: 50%;
+  height: 40%;
 }
 .insights_datas_kpi {
   border: 1px solid #88888b;
   border-radius: 0.5rem;
   width: 100%;
-  height: 45%;
+  height: 50%;
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
@@ -426,7 +426,7 @@ table th {
 }
 .insights_datas_info2 {
   width: 100%;
-  height: 100%;
+  height: 60%;
   display: flex;
   flex-direction: row;
   /* flex-wrap: wrap; */
@@ -435,7 +435,7 @@ table th {
 .insigths_datas_info2_control {
   padding: 1rem;
   width: 48.97%;
-  height: 77%;
+  height: 96%;
   border: 1px solid #88888b;
   border-radius: 0.5rem;
   display: flex;
@@ -467,7 +467,7 @@ table th {
 .insigths_datas_info2_mantenimiento {
   padding: 1rem;
   width: 48.97%;
-  height: 77%;
+  height: 96%;
   border: 1px solid #88888b;
   border-radius: 0.5rem;
 }
@@ -537,7 +537,7 @@ table th {
   padding-left: 1rem;
 }
 .insights_datas_info_controlDeActivos_barras {
-  height: 2rem;
+  height: 1.5rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -560,7 +560,7 @@ table th {
 }
 .insights_datas_info_mantenimiento_datos_barras_title {
   color: #49060d;
-  font-size: clamp(0.7rem, 0.75rem, 0.9rem);
+  font-size: clamp(0.6rem, 0.65rem, 0.9rem);
   font-weight: 400;
   line-height: 20px;
   white-space: nowrap;
@@ -804,6 +804,7 @@ body {
   font-weight: 400;
   line-height: normal;
   margin-left: 20;
+  cursor: pointer;
 }
 .pagefilter_return_principal {
   display: flex;
