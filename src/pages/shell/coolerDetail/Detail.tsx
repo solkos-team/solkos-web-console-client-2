@@ -211,7 +211,7 @@ export default function CoolerDetail() {
                               : coolersData?.cooler.actionable === "Sin Riesgo"
                               ? "1.5px solid #0F9F67"
                               : coolersData?.cooler.actionable ===
-                                  "Toma de Decisiones" ||
+                                  "Estatus sin venta" ||
                                 coolersData?.cooler.actionable ===
                                   "Acciones urgentes"
                               ? "1.5px solid #F93448"
@@ -237,7 +237,7 @@ export default function CoolerDetail() {
                             style={{ width: "15px", height: "15px" }}
                           />
                         ) : coolersData?.cooler.actionable ===
-                            "Toma de Decisiones" ||
+                            "Estatus sin venta" ||
                           coolersData?.cooler.actionable ===
                             "Acciones urgentes" ? (
                           <img
@@ -265,7 +265,7 @@ export default function CoolerDetail() {
                                   "Sin Riesgo"
                                 ? "#0F9F67"
                                 : coolersData?.cooler.actionable ===
-                                    "Toma de Decisiones" ||
+                                    "Estatus sin venta" ||
                                   coolersData?.cooler.actionable ===
                                     "Acciones urgentes"
                                 ? "#F93448"
@@ -668,7 +668,7 @@ export default function CoolerDetail() {
                                   order.data.algorithm === "Actualizar Info" ||
                                   order.data.algorithm === "Sin Riesgo" ||
                                   order.data.algorithm ===
-                                    "Toma de Decisiones" ||
+                                    "Estatus sin venta" ||
                                   order.data.algorithm === "Visita PdV" ||
                                   order.data.algorithm === "Acciones urgentes"))
                           )

@@ -175,7 +175,7 @@ export default function DrawerA({
                       ? "#FEF5C7"
                       : selectedAlgorithm === "Sin Riesgo"
                       ? "#C0F2C8"
-                      : selectedAlgorithm === "Toma de Decisiones" ||
+                      : selectedAlgorithm === "Estatus sin venta" ||
                         selectedAlgorithm === "Acciones urgentes"
                       ? "#FFC7CD"
                       : selectedAlgorithm === "Visita PdV"
@@ -256,7 +256,7 @@ export default function DrawerA({
                       alt="Descripción de la imagen"
                       style={{ width: "44px", height: "44px" }}
                     />
-                  ) : selectedAlgorithm === "Toma de Decisiones" ||
+                  ) : selectedAlgorithm === "Estatus sin venta" ||
                     selectedAlgorithm === "Acciones urgentes" ? (
                     <img
                       src={"../../sampleData/accio.svg"}
@@ -793,7 +793,7 @@ export default function DrawerA({
                                       : cooler.actionable === "Sin Riesgo"
                                       ? "1.5px solid #0F9F67"
                                       : cooler.actionable ===
-                                          "Toma de Decisiones" ||
+                                          "Estatus sin venta" ||
                                         cooler.actionable ===
                                           "Acciones urgentes"
                                       ? "1.5px solid #F93448"
@@ -816,8 +816,7 @@ export default function DrawerA({
                                     alt="Descripción de la imagen"
                                     style={{ width: "12px", height: "12px" }}
                                   />
-                                ) : cooler.actionable ===
-                                    "Toma de Decisiones" ||
+                                ) : cooler.actionable === "Estatus sin venta" ||
                                   cooler.actionable === "Acciones urgentes" ? (
                                   <img
                                     src={"../../sampleData/a.svg"}
@@ -843,7 +842,7 @@ export default function DrawerA({
                                         : cooler.actionable === "Sin Riesgo"
                                         ? "#0F9F67"
                                         : cooler.actionable ===
-                                            "Toma de Decisiones" ||
+                                            "Estatus sin venta" ||
                                           cooler.actionable ===
                                             "Acciones urgentes"
                                         ? "#F93448"
@@ -862,8 +861,8 @@ export default function DrawerA({
                                     ? "Visita PdV.."
                                     : cooler.actionable === "Sin Riesgo"
                                     ? "Sin Riesgo"
-                                    : cooler.actionable === "Toma de Decisiones"
-                                    ? "Toma de Dec..."
+                                    : cooler.actionable === "Estatus sin venta"
+                                    ? "Estat sin v..."
                                     : cooler.actionable === "Acciones urgentes"
                                     ? "Acciones urg.."
                                     : cooler.actionable === "Actualizar Info"

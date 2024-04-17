@@ -191,6 +191,11 @@ const routes2 = [
     label: "Cooler Life Tracking",
     icon: <img src={clt} />,
   },
+  {
+    link: "/home/users",
+    label: "Colaboradores",
+    icon: <img src={"../../sampleData/user.svg"} />,
+  },
 ];
 function App() {
   const Name = localStorage.getItem("USER") || "";
@@ -277,8 +282,8 @@ function App() {
                         to={option.link}
                         className={classes.link}
                         key={option.label}
-                        activate={true.toString()} // Convert boolean to string
-                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                        activate={true.toString()}
+                        onClick={closeCoolerInsights}
                       >
                         {option.icon && option.icon}{" "}
                         <span

@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
-import PageFilter from "../../../components/pageFilter";
+import PageFilter from "../../../../components/pageFilter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconArrowRight } from "@tabler/icons-react";
-import { fetchUniversalTables } from "../../../utils/apiUtils";
+import { fetchUniversalTables } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
-import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
-import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
+import { PaginationComponent } from "../../../../components/Pagination/PaginationComponent";
+import { ExportToExcel } from "../../../../components/exportExcel/ExportToExcel";
 import { TextInput, Skeleton } from "@mantine/core";
-import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
-import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
+import { CoolerInterface as Cooler } from "../../../../interfaces/CoolerInterface";
 
-export default function Coolers() {
+export const clt = () => {
   const [sortByLastVisit, setSortByLastVisit] = useState(false);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
@@ -120,13 +119,7 @@ export default function Coolers() {
               </>
             }
           </td>
-          <td data-label="Última visita">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
-          </td>
+
           <td data-label="Prioridad">
             {
               <>
@@ -316,28 +309,8 @@ export default function Coolers() {
                 <th scope="col">Estatus</th>
                 <th scope="col">Serie</th>
                 <th scope="col">Modelo</th>
-                <th scope="col">
-                  <span
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setChangeAsc((o) => !o)}
-                  >
-                    Última visita
-                    <img
-                      src={`../../sampleData/${
-                        changeAsc == false
-                          ? "sort-descending.svg"
-                          : "sort-ascending.svg"
-                      }`}
-                      alt="Descripción de la imagen"
-                      style={{
-                        width: "15px",
-                        height: "15px",
-                        verticalAlign: "middle",
-                      }}
-                    />
-                  </span>
-                </th>
-                <th scope="col">Control de activos</th>
+
+                <th scope="col">Estado de la transmisión</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -454,20 +427,7 @@ export default function Coolers() {
                         cooler.model_id
                       )}
                     </td>
-                    <td data-label="Última visita" title={cooler.last_read}>
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton height={20} radius="sm" width="90%" />
-                        </>
-                      ) : cooler.last_read == undefined ||
-                        cooler.last_read == null ? (
-                        "Sin registro"
-                      ) : (
-                        new Date(cooler.last_read).toLocaleDateString("es-MX", {
-                          timeZone: "UTC",
-                        })
-                      )}
-                    </td>
+
                     <td
                       data-label="CONTROL DE ACTIVOS"
                       title={cooler.priority_status}
@@ -495,7 +455,8 @@ export default function Coolers() {
                                   ? "1.5px solid #DA7E05"
                                   : cooler.actionable === "Sin Riesgo"
                                   ? "1.5px solid #0F9F67"
-                                  : cooler.actionable === "Estatus sin venta" ||
+                                  : cooler.actionable ===
+                                      "Toma de Decisiones" ||
                                     cooler.actionable === "Acciones urgentes"
                                   ? "1.5px solid #F93448"
                                   : cooler.actionable === "Actualizar Info"
@@ -516,7 +477,7 @@ export default function Coolers() {
                                 alt="Descripción de la imagen"
                                 style={{ width: "15px", height: "15px" }}
                               />
-                            ) : cooler.actionable === "Estatus sin venta" ||
+                            ) : cooler.actionable === "Toma de Decisiones" ||
                               cooler.actionable === "Acciones urgentes" ? (
                               <img
                                 src={"../../sampleData/a.svg"}
@@ -541,7 +502,7 @@ export default function Coolers() {
                                     : cooler.actionable === "Sin Riesgo"
                                     ? "#0F9F67"
                                     : cooler.actionable ===
-                                        "Estatus sin venta" ||
+                                        "Toma de Decisiones" ||
                                       cooler.actionable === "Acciones urgentes"
                                     ? "#F93448"
                                     : cooler.actionable === "Actualizar Info"
@@ -628,4 +589,4 @@ export default function Coolers() {
       </div>
     </div>
   );
-}
+};

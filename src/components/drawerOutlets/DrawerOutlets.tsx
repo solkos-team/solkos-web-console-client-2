@@ -1018,7 +1018,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                         : cooler.actionable === "Sin Riesgo"
                                         ? "1.5px solid #0F9F67"
                                         : cooler.actionable ===
-                                            "Toma de Decisiones" ||
+                                            "Estatus sin venta" ||
                                           cooler.actionable ===
                                             "Acciones urgentes"
                                         ? "1.5px solid #F93448"
@@ -1043,7 +1043,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       style={{ width: "12px", height: "12px" }}
                                     />
                                   ) : cooler.actionable ===
-                                      "Toma de Decisiones" ||
+                                      "Estatus sin venta" ||
                                     cooler.actionable ===
                                       "Acciones urgentes" ? (
                                     <img
@@ -1071,7 +1071,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                           : cooler.actionable === "Sin Riesgo"
                                           ? "#0F9F67"
                                           : cooler.actionable ===
-                                              "Toma de Decisiones" ||
+                                              "Estatus sin venta" ||
                                             cooler.actionable ===
                                               "Acciones urgentes"
                                           ? "#F93448"
@@ -1091,8 +1091,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       : cooler.actionable === "Sin Riesgo"
                                       ? "Sin Riesgo"
                                       : cooler.actionable ===
-                                        "Toma de Decisiones"
-                                      ? "Toma de Dec..."
+                                        "Estatus sin venta"
+                                      ? "Estat sin v..."
                                       : cooler.actionable ===
                                         "Acciones urgentes"
                                       ? "Acciones urg.."
