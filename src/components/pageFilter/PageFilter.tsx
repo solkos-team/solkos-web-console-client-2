@@ -345,7 +345,7 @@ export default function (props) {
                     ? <><Loader color="blue" size="xs" /></>
                     :
                     <Select
-                      label={`Selecciona la ${dataSelect[index]}`}
+                      label={`Selecciona la ${dataSelect[pathVerify().length]}`}
                       placeholder="Seleccionar"
                       searchable
                       defaultChecked
