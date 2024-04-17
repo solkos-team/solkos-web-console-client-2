@@ -280,7 +280,7 @@ export const clt = () => {
             onChange={(event) => handleSearchChange(event)}
             onKeyDown={handleKeyDown}
             type="text"
-            placeholder="Busca por Serie/ Id Coolector / Mac"
+            placeholder="Busca por cualquier campo"
             style={{
               fontSize: "0.8rem",
               fontStyle: "normal",
@@ -324,9 +324,7 @@ export const clt = () => {
                         ? navigate(
                             `/homeCallCenter/coolerDetail/${cooler.serial_number}`
                           )
-                        : navigate(
-                            `/home/coolerDetail/${cooler.serial_number}`
-                          );
+                        : navigate(`/home/clt_n/${cooler.serial_number}`);
                     }}
                   >
                     <td data-label="ESTATUS" title={cooler.status}>
@@ -441,82 +439,13 @@ export const clt = () => {
                         "Sin registro"
                       ) : (
                         <>
-                          <div
-                            style={{
-                              width: "fit-content",
-                              display: "flex",
-                              padding: "4px",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              gap: "4px",
-                              borderRadius: "2px",
-                              border:
-                                cooler.actionable === "Visita PdV"
-                                  ? "1.5px solid #DA7E05"
-                                  : cooler.actionable === "Sin Riesgo"
-                                  ? "1.5px solid #0F9F67"
-                                  : cooler.actionable ===
-                                      "Toma de Decisiones" ||
-                                    cooler.actionable === "Acciones urgentes"
-                                  ? "1.5px solid #F93448"
-                                  : cooler.actionable === "Actualizar Info"
-                                  ? "1.5px solid #DA7E05"
-                                  : "1.5px solid black",
-                              background: "#FFF",
-                            }}
-                          >
-                            {cooler.actionable === "Visita PdV" ? (
-                              <img
-                                src={"../../sampleData/p.svg"}
-                                alt="Descripción de la imagen"
-                                style={{ width: "15px", height: "15px" }}
-                              />
-                            ) : cooler.actionable === "Sin Riesgo" ? (
-                              <img
-                                src={"../../sampleData/sn.svg"}
-                                alt="Descripción de la imagen"
-                                style={{ width: "15px", height: "15px" }}
-                              />
-                            ) : cooler.actionable === "Toma de Decisiones" ||
-                              cooler.actionable === "Acciones urgentes" ? (
-                              <img
-                                src={"../../sampleData/a.svg"}
-                                alt="Descripción de la imagen"
-                                style={{ width: "15px", height: "15px" }}
-                              />
-                            ) : cooler.actionable === "Actualizar Info" ? (
-                              <img
-                                src={"../../sampleData/p.svg"}
-                                alt="Descripción de la imagen"
-                                style={{ width: "15px", height: "15px" }}
-                              />
-                            ) : (
-                              ""
-                            )}
-
-                            <div
-                              style={{
-                                color:
-                                  cooler.actionable === "Visita PdV"
-                                    ? "#DA7E05"
-                                    : cooler.actionable === "Sin Riesgo"
-                                    ? "#0F9F67"
-                                    : cooler.actionable ===
-                                        "Toma de Decisiones" ||
-                                      cooler.actionable === "Acciones urgentes"
-                                    ? "#F93448"
-                                    : cooler.actionable === "Actualizar Info"
-                                    ? "#DA7E05"
-                                    : "black",
-                                // fontFamily: "DM Sans",
-                                // fontSize: "1vw",
-                                fontStyle: "normal",
-                                fontWeight: 600,
-                                lineHeight: "14px",
-                              }}
-                            >
-                              {cooler.actionable}
-                            </div>
+                          <div>
+                            {" "}
+                            <img
+                              src={"../../sampleData/transmiss.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "1.8em", height: "1.8em" }}
+                            />
                           </div>
                         </>
                       )}
@@ -576,6 +505,7 @@ export const clt = () => {
           </table>
           <br />
         </section>
+
         <section
           style={{ display: "flex", flexDirection: "column", width: "100%" }}
         >

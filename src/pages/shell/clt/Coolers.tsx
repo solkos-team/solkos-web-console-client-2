@@ -10,6 +10,25 @@ import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { TextInput, Skeleton } from "@mantine/core";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
+import moment from "moment";
+import "moment/locale/es";
+
+moment.locale("es", {
+  months: [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ],
+});
 
 export default function Coolers() {
   const [sortByLastVisit, setSortByLastVisit] = useState(false);
@@ -463,9 +482,7 @@ export default function Coolers() {
                         cooler.last_read == null ? (
                         "Sin registro"
                       ) : (
-                        new Date(cooler.last_read).toLocaleDateString("es-MX", {
-                          timeZone: "UTC",
-                        })
+                        moment(new Date(cooler?.last_read)).format("DD/MM/YYYY")
                       )}
                     </td>
                     <td

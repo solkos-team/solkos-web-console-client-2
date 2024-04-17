@@ -23,6 +23,7 @@ import { NewPassword } from "./pages/main/newPassword/NewPassword.tsx";
 import { MapInsights } from "./pages/shell/insights/MapInsights.tsx";
 import { Insights as InsightsNS } from "./pages/shell/nuevosSegmentos/Insights/Insights.tsx";
 import { clt as CltNS } from "./pages/shell/nuevosSegmentos/clt_n/clt.tsx";
+import { Detail } from "./pages/shell/nuevosSegmentos/clt_n/detail.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -45,12 +46,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 {/* Cooler life tracking */}
                 <Route path="/home/clt" element={<Coolers />} />
                 {/* Cooler detail */}
-                {/* <Route path="/home/clt" element={<Coolers />} /> */}
-                <Route path="/home/clt_n" element={<CltNS />} />
                 <Route
                   path="/home/coolerDetail/:serial_number"
                   element={<CoolerDetail />}
                 />
+                {/* Nuevos segmentos */}
+                <Route path="/home/clt_n" element={<CltNS />} />
+                <Route path="/home/clt_n/:serial_number" element={<Detail />} />
                 {/* Puntos de venta */}
                 <Route path="/home/outlets" element={<Outlets />} />
                 {/* Tableros */}
