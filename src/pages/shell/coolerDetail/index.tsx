@@ -1,3 +1,3 @@
-import CoolerDetail from "../coolerDetail/Detail";
+import CoolerDetail from "../clt/Detail";
 
 export default CoolerDetail;

@@ -841,9 +841,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                         <tr
                           key={index}
                           onClick={() => {
-                            navigate(
-                              `/home/coolerDetail/${cooler.serial_number}`
-                            );
+                            navigate(`/home/clt/${cooler.serial_number}`);
                           }}
                         >
                           <td data-label="ESTATUS" title={cooler.status}>
@@ -1110,7 +1108,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                 <Skeleton height={20} radius="sm" width="90%" />
                               </>
                             ) : (
-                              <Link to="/home/coolerDetail">
+                              <Link to="/home/clt">
                                 <div
                                   style={{
                                     color: "#3E83FF",

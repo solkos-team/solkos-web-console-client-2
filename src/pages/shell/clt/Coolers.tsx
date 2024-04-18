@@ -370,9 +370,7 @@ export default function Coolers() {
                         ? navigate(
                             `/homeCallCenter/coolerDetail/${cooler.serial_number}`
                           )
-                        : navigate(
-                            `/home/coolerDetail/${cooler.serial_number}`
-                          );
+                        : navigate(`/home/clt/${cooler.serial_number}`);
                     }}
                   >
                     <td data-label="ESTATUS" title={cooler.status}>
@@ -584,7 +582,7 @@ export default function Coolers() {
                         </>
                       ) : (
                         <div>
-                          <Link to="/home/coolerDetail">
+                          <Link to={`/home/clt/${cooler.serial_number}`}>
                             <div
                               style={{
                                 color: "#3E83FF",

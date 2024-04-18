@@ -47,7 +47,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/home/clt" element={<Coolers />} />
                 {/* Cooler detail */}
                 <Route
-                  path="/home/coolerDetail/:serial_number"
+                  path="/home/clt/:serial_number"
                   element={<CoolerDetail />}
                 />
                 {/* Nuevos segmentos */}

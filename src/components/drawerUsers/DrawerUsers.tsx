@@ -143,6 +143,7 @@ export default function DrawerUsers({
                     <Input
                       value={customerUser}
                       onChange={(e) => setCustomerUser(e.target.value)}
+                      disabled={true}
                     />
                   </Input.Wrapper>
                 </>

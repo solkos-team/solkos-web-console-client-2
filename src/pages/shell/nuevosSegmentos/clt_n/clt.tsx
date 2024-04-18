@@ -457,7 +457,7 @@ export const clt = () => {
                         </>
                       ) : (
                         <div>
-                          <Link to="/home/coolerDetail">
+                          <Link to="/home/clt">
                             <div
                               style={{
                                 color: "#3E83FF",
