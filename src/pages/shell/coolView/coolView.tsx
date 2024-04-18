@@ -17,7 +17,7 @@ export const CoolView = () => {
 
     return (
         <iframe 
-        src={`http://localhost:5174/`} 
+        src={`http://localhost:5173/`} 
         width='100%' 
         height='100%' 
         frameBorder='0'
