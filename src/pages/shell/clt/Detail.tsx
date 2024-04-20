@@ -172,7 +172,7 @@ export default function CoolerDetail() {
                         style={{
                           width: "1.5rem",
                           height: "1.5rem",
-                          display: "none",
+                          // display: "none",
                         }}
                         onClick={() => {
                           setEditSerie((o) => !o);
@@ -652,6 +652,7 @@ export default function CoolerDetail() {
                             (order) =>
                               (order.type === "SERVICE_ORDER" &&
                                 (order.data.status === "D,D" ||
+                                  order.data.status === "C,C" ||
                                   order.data.status === "O,O")) ||
                               (order.type === "TRACKING" &&
                                 (order.data.algorithm === "COMPRESSOR_FAIL" ||
@@ -678,7 +679,10 @@ export default function CoolerDetail() {
                             if (a.type === "SERVICE_ORDER") {
                               if (a.data.status === "D,D") {
                                 aDate = new Date(a.data.close_at).getTime();
-                              } else if (a.data.status === "O,O") {
+                              } else if (
+                                a.data.status === "O,O" ||
+                                a.data.status === "C,C"
+                              ) {
                                 aDate = new Date(a.data.received_at).getTime();
                               }
                             } else if (
@@ -691,7 +695,10 @@ export default function CoolerDetail() {
                             if (b.type === "SERVICE_ORDER") {
                               if (b.data.status === "D,D") {
                                 bDate = new Date(b.data.close_at).getTime();
-                              } else if (b.data.status === "O,O") {
+                              } else if (
+                                b.data.status === "O,O" ||
+                                b.data.status === "C,C"
+                              ) {
                                 bDate = new Date(b.data.received_at).getTime();
                               }
                             } else if (
@@ -761,7 +768,8 @@ export default function CoolerDetail() {
                                               : moment
                                                   .utc(order.data.close_at)
                                                   .format("DD/MM/YYYY HH:mm")
-                                            : order.data.status === "O,O"
+                                            : order.data.status === "O,O" ||
+                                              order.data.status === "C,C"
                                             ? order.data.received_at ===
                                                 undefined ||
                                               order.data.received_at === null
@@ -791,9 +799,9 @@ export default function CoolerDetail() {
                                               lineHeight: "14px",
                                             }}
                                           >
-                                            {order.data.status === "D,D"
-                                              ? "CERRADA"
-                                              : "ABIERTA"}
+                                            {order.data.status === "O,O"
+                                              ? "ABIERTA"
+                                              : "CERRADA"}
                                           </div>
                                         </div>
                                       </div>

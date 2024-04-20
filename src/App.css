@@ -196,7 +196,7 @@ table th {
   text-align: left;
   /* font-size: 0.8vw;   */
   font-weight: 400;
-  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  font-size: clamp(0.7rem, 0.875rem, 0.8rem);
   line-height: 21.7px;
   color: #88888b;
 }
@@ -240,7 +240,7 @@ table th {
   gap: 0.5rem;
 }
 .insights_mapa_info_descripcion {
-  margin-top: -1rem;
+  margin-top: -1.5rem;
   height: 10%;
 }
 .insights_mapa_info_descripcion_p {
@@ -249,7 +249,7 @@ table th {
   font-weight: 500;
   line-height: 18.23px;
   /* font-size: 0.875; */
-  font-size: clamp(0.7rem, 0.875, 1.1vw) !important;
+  font-size: clamp(0.7rem, 0.9rem, 1rem) !important;
 }
 .insights_mapa_info_datas {
   display: flex;
@@ -264,12 +264,13 @@ table th {
   font-weight: 400;
   font-size: clamp(0.7rem, 0.875rem, 1rem);
   line-height: 18.23px;
-  color: #88888b;
+  color: #000;
+  /* font-style: "normal"; */
 }
 .insights_mapa_info_datas_data_li_value {
   /* font-size: 1.2vw; */
   font-weight: 500;
-  font-size: clamp(0.7rem, 1.375rem, 1.4rem);
+  font-size: clamp(0.7rem, 1.375rem, 1.1rem);
   line-height: 28.64px;
   color: #000005;
   align-content: center;
@@ -312,7 +313,7 @@ table th {
 .insights_mapa_info_title_h1 {
   text-align: left;
   /* font-zise: 0.8vw; */
-  font-size: clamp(1rem, 0.8vw, 0.8rem);
+  font-size: clamp(0.9rem, 0.8vw, 0.8rem);
   color: #3a3a3f;
   font-weight: 500;
   margin-top: 2px;
@@ -351,7 +352,7 @@ table th {
 }
 .insights_datas_kpi_title_h1 {
   /* font-size: 1vw; */
-  font-size: clamp(1rem, 0.8vw, 0.8rem);
+  font-size: clamp(0.9rem, 0.8vw, 0.8rem);
   color: #3a3a3f;
   font-weight: 500;
   margin-left: 1rem;
@@ -359,7 +360,7 @@ table th {
 .insights_datas_kpi_title_data_h1 {
   /* font-size: 0.8vw; */
   font-weight: 400;
-  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  font-size: clamp(0.7rem, 0.8rem, 0.7rem);
   line-height: 18.23px;
   color: #88888b;
   font-weight: 500;
@@ -368,10 +369,10 @@ table th {
 .insights_datas_kpi_title_h1_data {
   /* font-size: 1.3vw; */
   font-weight: 500;
-  font-size: clamp(1rem, 1.375rem, 1.5rem);
+  font-size: clamp(1rem, 1.375rem, 1.3rem);
   line-height: 28.64px;
   color: #000005;
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   width: max-content;
 }
 .insights_datas_kpi_data {
@@ -380,7 +381,7 @@ table th {
   display: flex;
   /* flex-direction: row; */
   gap: 1vw;
-  justify-content: space-between;    
+  justify-content: space-between;
 }
 .insightsNS_datas_statusTransmition_data {
   width: 100%;
@@ -388,9 +389,9 @@ table th {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  justify-content: space-between;     
+  justify-content: space-between;
 }
-.insightsNS_datas_statusTransmition_data_data{
+.insightsNS_datas_statusTransmition_data_data {
   width: 100%;
   height: 33%;
   display: flex;
@@ -401,31 +402,31 @@ table th {
   font-size: 0.75rem;
   cursor: pointer;
 }
-.insights_drawer_container{
+.insights_drawer_container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-.insights_drawer_header{
+.insights_drawer_header {
   width: 100%;
-  height: 10%;  
+  height: 10%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 1px solid #CACACA;
+  border-bottom: 1px solid #cacaca;
 }
-.insights_drawer_header_iconHeader{
+.insights_drawer_header_iconHeader {
   width: 40%;
-  height: 100%;  
+  height: 100%;
 }
-.insights_drawer_header_max{
+.insights_drawer_header_max {
   width: 30%;
   height: 100%;
 }
-.insights_drawer_content{
+.insights_drawer_content {
   width: 100%;
-  height: 90%;  
+  height: 90%;
 }
 
 .insights_datas_kpi_data_data {
@@ -435,12 +436,12 @@ table th {
   height: 100%;
   display: flex;
   flex-direction: column;
-  text-align: left;  
+  text-align: left;
 }
 .insights_datas_kpi_data_data_1 {
   font-weight: 500;
   /* font-size: clamp(0.8rem,1rem,1.3rem); */
-  font-size: 1rem;
+  font-size: 0.85rem;
   line-height: 20.83px;
   width: 100%;
   height: 33%;
@@ -448,7 +449,15 @@ table th {
 }
 .insights_datas_kpi_data_data_2 {
   font-weight: 500;
-  font-size: clamp(1rem, 1.375rem, 1.5rem);
+  font-size: clamp(1.1rem, 1rem, 0.5rem);
+  line-height: 28.64px;
+  width: 100%;
+  height: 33%;
+  color: #000005;
+}
+.insights_datas_kpi_data_data_22 {
+  font-weight: 500;
+  font-size: clamp(0.8rem, 1rem, 0.5rem);
   line-height: 28.64px;
   width: 100%;
   height: 33%;
@@ -456,7 +465,7 @@ table th {
 }
 .insights_datas_kpi_data_data_3 {
   font-weight: 400;
-  font-size: clamp(0.5rem, 0.875rem, 1.2rem);
+  font-size: clamp(0.5rem, 0.8rem, 1rem);
   line-height: 18.23px;
   width: 100%;
   height: 33%;
@@ -498,7 +507,7 @@ table th {
 .insigths_datas_info2_control_title {
   display: flex;
   flex-direction: row;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   width: 90%;
   height: 10%;
   align-items: center;
@@ -537,7 +546,7 @@ table th {
 
 .insights_mapa_info_mapa_info_h1 {
   font-weight: 500;
-  font-size: clamp(0.7rem, 1rem, 1.1rem);
+  font-size: clamp(0.7rem, 1rem, 1rem);
   line-height: 20.83px;
   color: #3a3a3f;
 }
@@ -582,14 +591,14 @@ table th {
   /* background-color: #ffc4cc; */
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
 }
 .insights_datas_info_controlDeActivos_barras {
   height: 1.5rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
 }
 /* .insights_datas_info_mantenimiento_datos_barras_color_Fallas:hover{
   box-shadow: 0 0 10px red;
@@ -604,7 +613,7 @@ table th {
   /* background-color: #fef5c7; */
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
 }
 .insights_datas_info_mantenimiento_datos_barras_title {
   color: #49060d;
@@ -613,6 +622,7 @@ table th {
   line-height: 20px;
   white-space: nowrap;
   cursor: pointer;
+  margin-left: 8px;
 }
 .insights_datas_info_mantenimiento_datos_barras_cantidad {
   color: #000005;
