@@ -865,6 +865,17 @@ export default function DrawerA({
                                     ? "Acciones urg.."
                                     : cooler.actionable === "Actualizar Info"
                                     ? "Actualizar inf..."
+                                    : cooler.actionable ===
+                                      "Solicitar serv. correctivo"
+                                    ? "Solicitar serv..."
+                                    : cooler.actionable === "Actualizar dato"
+                                    ? "Actualizar da..."
+                                    : cooler.actionable ===
+                                      "Seguimiento a equipo"
+                                    ? "Seguimiento..."
+                                    : cooler.actionable ===
+                                      "Vista PdV prioritaria"
+                                    ? "Visita PdV p..."
                                     : cooler.actionable}
                                 </div>
                               </div>

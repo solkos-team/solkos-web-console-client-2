@@ -160,6 +160,7 @@ export default function (props) {
       setFilterVisibility(false);
     }
   };
+  // console.log(verSelectData(value));
   const deleteFilter = (i) => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
     dataLocalStorage.splice(i, 1);
@@ -221,7 +222,7 @@ export default function (props) {
           {data === null || data === undefined
             ? []
             : data.map((item, i) => (
-                <div style={{ display: "flex", alignItems: "center"}} key={i}>
+                <div style={{ display: "flex", alignItems: "center" }} key={i}>
                   <button
                     style={{
                       display: "flex",
@@ -230,28 +231,29 @@ export default function (props) {
                       border: "1px solid #ADBACC",
                       padding: "3px 7px",
                       background: bloqPath(i) === false ? "" : "#D4DAE3",
-                      backgroundColor: bloqPath(i) === false ? "#D4DAE3" : "#D4DAE3",                                            
+                      backgroundColor:
+                        bloqPath(i) === false ? "#D4DAE3" : "#D4DAE3",
                     }}
                     disabled={bloqPath(i)}
                     type="button"
                   >
                     {bloqPath(i) === false ? (
-                    <IconCircleX
-                      style={{
-                        color: "#313A49",
-                        width: "1rem",
-                        height: "1rem",
-                        marginRight: "3px",
-                        visibility:
-                          props.status == true || props.disabledPath == true
-                            ? "hidden"
-                            : "visible",
-                      }}
-                      onClick={() => {
-                        deleteFilter(i);
-                      }}
-                      onClickCapture={(o) => !o}
-                    />
+                      <IconCircleX
+                        style={{
+                          color: "#313A49",
+                          width: "1rem",
+                          height: "1rem",
+                          marginRight: "3px",
+                          visibility:
+                            props.status == true || props.disabledPath == true
+                              ? "hidden"
+                              : "visible",
+                        }}
+                        onClick={() => {
+                          deleteFilter(i);
+                        }}
+                        onClickCapture={(o) => !o}
+                      />
                     ) : (
                       <IconLock
                         style={{
@@ -341,9 +343,11 @@ export default function (props) {
                   </Text>
                 </Popover.Target>
                 <Popover.Dropdown>
-                  {isLoading == true
-                    ? <><Loader color="blue" size="xs" /></>
-                    :
+                  {isLoading == true ? (
+                    <>
+                      <Loader color="blue" size="xs" />
+                    </>
+                  ) : (
                     <Select
                       label={`Selecciona la ${dataSelect[pathVerify().length]}`}
                       placeholder="Seleccionar"
@@ -355,7 +359,7 @@ export default function (props) {
                       nothingFound="Dato no encontrado"
                       dropdownPosition="flip"
                     />
-                  }
+                  )}
                 </Popover.Dropdown>
               </Popover>
             </div>

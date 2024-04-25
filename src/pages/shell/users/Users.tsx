@@ -192,14 +192,14 @@ export default function Users() {
     }
     return rows;
   };
-  const userVerify = (): Boolean => {
-    const user = localStorage.getItem("USER");
-    if (user == "Jose Ivan Perez Ugalde" || user == "Mayra Barrón Reséndiz") {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  // const userVerify = (): Boolean => {
+  //   const user = localStorage.getItem("USER");
+  //   if (user == "Jose Ivan Perez Ugalde" || user == "Mayra Barrón Reséndiz") {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   return (
     <div>
@@ -462,9 +462,9 @@ export default function Users() {
                             )}
                           </td>
                           <td
-                            style={{
-                              display: userVerify() == true ? "" : "none",
-                            }}
+                          // style={{
+                          //   display: userVerify() == true ? "" : "none",
+                          // }}
                           >
                             <Button
                               variant="filled"

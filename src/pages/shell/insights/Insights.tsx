@@ -226,7 +226,7 @@ export default function Insights() {
                       Cobertura
                     </div>
                     <div
-                      className="insights_datas_kpi_data_data_22"
+                      className="insights_datas_kpi_data_data_2"
                       // style={{ marginTop: "-8px" }}
                     >
                       {isLoading == true ? (
@@ -238,37 +238,34 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
+                      ) : insightsData?.assets_analytics[4]?.percentage ==
+                        undefined ? (
+                        "Sin registro"
                       ) : (
-                        // insightsData?.assets_analytics[3]?.percentage ==
-                        //   undefined ? (
-                        //   "Sin registro"
-                        // ) : (
-                        //   insightsData?.assets_analytics[3]?.percentage + "%"
-                        // )
-                        "No disponible"
+                        insightsData?.assets_analytics[4]?.percentage + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="50%"
-                            radius="xs"
-                          />
-                        </>
-                      ) : (
-                        // insightsData?.assets_analytics[3]?.total ==
-                        //   undefined ? (
-                        //   "Sin registro"
-                        // ) : (
-                        //   insightsData?.assets_analytics[3]?.total.toLocaleString(
-                        //     "es-MX"
-                        //   ) + " Enfriadores"
-                        // )
-                        "0 Enfriadores"
-                      )}
+                      {
+                        isLoading == true ? (
+                          <>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="50%"
+                              radius="xs"
+                            />
+                          </>
+                        ) : insightsData?.assets_analytics[4]?.value ==
+                          undefined ? (
+                          "Sin registro"
+                        ) : (
+                          insightsData?.assets_analytics[4]?.value.toLocaleString(
+                            "es-MX"
+                          ) + " Enfriadores"
+                        )
+                        // "0 Enfriadores"
+                      }
                     </div>
                   </div>
                   <div className="insights_datas_kpi_data_data">
@@ -305,11 +302,11 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.assets_analytics[1]?.total ==
+                      ) : insightsData?.assets_analytics[1]?.value ==
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.assets_analytics[1]?.total.toLocaleString(
+                        insightsData?.assets_analytics[1]?.value.toLocaleString(
                           "es-MX"
                         ) + " Enfriadores"
                       )}
@@ -349,11 +346,11 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.assets_analytics[2]?.total ==
+                      ) : insightsData?.assets_analytics[2]?.value ==
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.assets_analytics[2]?.total.toLocaleString(
+                        insightsData?.assets_analytics[2]?.value.toLocaleString(
                           "es-MX"
                         ) + " Enfriadores"
                       )}
@@ -402,8 +399,13 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
+                      ) : insightsData?.status_parque[3]?.total ===
+                        undefined ? (
+                        "Sin registro"
                       ) : (
-                        "0 Enfriadores"
+                        insightsData?.status_parque[3]?.total.toLocaleString(
+                          "es-MX"
+                        ) + " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -435,8 +437,13 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
+                      ) : insightsData?.status_parque[1]?.total ===
+                        undefined ? (
+                        "Sin registro"
                       ) : (
-                        "0 Enfriadores"
+                        insightsData?.status_parque[1]?.total.toLocaleString(
+                          "es-MX"
+                        ) + " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -466,8 +473,13 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
+                      ) : insightsData?.status_parque[0]?.total ===
+                        undefined ? (
+                        "Sin registro"
                       ) : (
-                        "0 Enfriadores"
+                        insightsData?.status_parque[0]?.total.toLocaleString(
+                          "es-MX"
+                        ) + " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -499,8 +511,13 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
+                      ) : insightsData?.status_parque[2]?.total ===
+                        undefined ? (
+                        "Sin registro"
                       ) : (
-                        "0 Enfriadores"
+                        insightsData?.status_parque[2]?.total.toLocaleString(
+                          "es-MX"
+                        ) + " Enfriadores"
                       )}
                     </div>
                   </div>

@@ -52,7 +52,7 @@ export const Detail = () => {
         setIsLoading
       );
       setCoolersData(data);
-      console.log(data);
+      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -574,7 +574,7 @@ export const Detail = () => {
           <div
             style={{
               display: "flex",
-              padding: "20px",
+              padding: "12px",
               flexDirection: "column",
               alignItems: "flex-start",
               gap: "4px",
@@ -587,8 +587,9 @@ export const Detail = () => {
             <div
               style={{
                 display: "flex",
+                justifyContent: "space-between",
                 alignItems: "center",
-                gap: "4px",
+                alignSelf: "stretch",
               }}
             >
               <div
@@ -611,17 +612,78 @@ export const Detail = () => {
                   Alerta de funcionamiento
                 </text>
               </div>
-              <img
-                src={"../../sampleData/alertN.svg"}
-                alt="Descripción de la imagen"
-                style={{
-                  width: "1em",
-                  height: "1em",
-                  justifyContent: "space-between",
-                }}
-              />
+              <div>
+                {" "}
+                <img
+                  src={"../../sampleData/close-i.svg"}
+                  alt="Descripción de la imagen"
+                  style={{ width: "1em", height: "1em", cursor: "pointer" }}
+                />
+              </div>
             </div>
-            <div></div>
+            <div
+              style={{
+                color: "#F93448",
+                fontSize: "10px",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "normal",
+              }}
+            >
+              19 de septiembre de 2023 6:00
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                alignSelf: "stretch",
+                marginTop: 10,
+              }}
+            >
+              <div
+                style={{
+                  color: "#F93448",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
+                }}
+              >
+                Se ha detectado una falla en el compresor, esta trabajando más
+                tiempo de los rangos funcionales. Levanta una orden de servicio{" "}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  padding: "4px 8px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  alignSelf: "stretch",
+                  borderRadius: "4px",
+                  background: "#F93448",
+                  marginLeft: "auto",
+                }}
+              >
+                <button
+                  style={{
+                    color: "#FFF1F2",
+                    fontSize: "12px",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "normal",
+                    padding: "4px 4px",
+                    borderRadius: "4px",
+                    background: "#F93448",
+                    border: "none",
+                    cursor: "pointer",
+                    outline: "none",
+                  }}
+                >
+                  Solicitar servicio técnico
+                </button>
+              </div>
+            </div>
           </div>
         </section>
         <section className="detail_principal_body_content">

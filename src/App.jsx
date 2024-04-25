@@ -200,7 +200,7 @@ const routes2 = [
 function App() {
   const Name = localStorage.getItem("USER") || "";
   const Role = localStorage.getItem("Role") || "";
-  console.log(Role);
+  // console.log(Role);
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
   const [data, setData] = useState([]);

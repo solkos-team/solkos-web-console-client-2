@@ -22,6 +22,7 @@ export default function Indicator() {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
+      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -158,7 +159,12 @@ export default function Indicator() {
                       cooler.algorithm === "Visita PdV" ||
                       cooler.algorithm === "Actualizar Info" ||
                       cooler.algorithm === "Estatus sin venta" ||
-                      cooler.algorithm === "Acciones urgentes")
+                      cooler.algorithm === "Acciones urgentes" ||
+                      cooler.algorithm === "Actualizar dato" ||
+                      cooler.algorithm === "Seguimiento a equipo" ||
+                      cooler.algorithm === "Solicitar serv. correctivo" ||
+                      cooler.algorithm === "Visita PdV" ||
+                      cooler.algorithm === "Vista PdV prioritaria")
                 )
 
                 .sort((a, b) => {

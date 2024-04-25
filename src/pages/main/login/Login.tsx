@@ -25,7 +25,7 @@ export const Login = () => {
     sessionStorage.setItem("Email", email);
     sessionStorage.setItem("Token", token);
     localStorage.setItem("Role", Role);
-    console.log(Role);
+    // console.log(Role);
     dispatch(addPath());
     dispatch(addOrg());
     String(Name) == "Call Center"

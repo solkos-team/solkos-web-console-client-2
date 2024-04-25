@@ -53,7 +53,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      console.log(data);
+      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -218,7 +218,7 @@ export default function CoolerDetail() {
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
                               ? "1.5px solid #DA7E05"
-                              : "",
+                              : "1.5px solid black",
                           background: "#FFF",
                         }}
                       >
