@@ -1470,3 +1470,91 @@ body {
   }
 }
 /* Termina media */
+.drawerOutlets_Principal{
+  width: 100%;
+  height: 100%;  
+  display: flex;
+  flex-direction: column;
+}
+.drawerHeader{
+  height: max-content;
+  width: 100%;  
+  border-bottom: 1px solid #CACACA;
+  display: flex;
+  flex-direction: row;
+}
+.drawerHeaderImg{
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.drawerHeaderInfo{
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+  display: flex;
+  justify-content: end;
+}
+.drawerBody{
+  height: 85%;
+  width: 100%;  
+}
+.drawerMapaDescargar{
+  width: 100%;
+  height: 30%;
+  padding: 4px;
+  box-sizing: border-box;  
+  display: flex;
+  justify-content: center;
+}
+.drawerMapa{
+  width: 90%;
+  height: 100%;
+  background-color: #FFF;
+  border-radius: 8px;
+  border: 1px solid #313a49;
+  display: flex;
+  flex-direction: column;
+}
+.drawerMapa_Mapa{
+  width: 100%;
+  height: 85%;  
+}
+.drawerMapa_Info{
+  width: 100%;
+  height: 15%;  
+}
+.drawerTablaPaginador{
+  width: 100%;
+  height: 70%;
+}
+.drawerTabla_Descargar{
+  width: 100%;
+  height: 10%;
+  
+}
+.drawerTabla_Buscador{
+  width: 100%;
+  height: 10%;
+}
+.drawerTabla_Tabla{
+  width: 100%;
+  height: 80%;  
+}
+.drawerTABLA{
+  width: 100% !important;
+  height: 65% !important;  
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.drawerPAGINADOR{
+  width: 100%;
+  height: max-content;  
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}

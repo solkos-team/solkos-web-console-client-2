@@ -66,7 +66,7 @@ const MapComponentPv = ({ latitude, longitude }) => {
       style={{
         position: "relative",
         width: "100%",
-        height: "145px",
+        height: "100%",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",
