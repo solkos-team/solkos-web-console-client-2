@@ -8,12 +8,14 @@ import { Skeleton, Tooltip } from '@mantine/core';
 import MapInsightsComponent from '../../../../components/mapInsights';
 import { Insights as InsightsIT } from "../../../../interfaces/InsightsInterfaces";
 import { InsightsData,CoolerInterface as Cooler } from '../../../../interfaces/CoolerInterface';
-import AlertIcon from '../../../../sampleData/NS/AlertsNS.svg';
-import FailIcon from '../../../../sampleData/NS/failNS.svg';
-import TransmitionIcon from '../../../../sampleData/NS/TransmitionNS.svg';
+// import AlertIcon from '../../../../sampleData/NS/AlertsNS.svg';
+// import FailIcon from '../../../../sampleData/NS/failNS.svg';
+// import TransmitionIcon from '../../../../sampleData/NS/TransmitionNS.svg';
+// import IconEquiposTransmitiendo from '../../../../sampleData/NS/TransmitionNSDrawer.svg'
+// import IconEquiposNoTransmitiendo from "../../../../sampleData/NS/NoTransmitionNSDrawer.svg";
+import { AlertIcon,FailIcon,TransmitionIcon,IconEquiposTransmitiendo,IconEquiposNoTransmitiendo } from './Icons';
 import { DrawerNS } from './DrawerNS';
 import { useDisclosure } from '@mantine/hooks';
-
 
 export const Insights = () => {
   const [insightsData, setInsightsData] = useState<InsightsIT | null>(null);
@@ -24,7 +26,7 @@ export const Insights = () => {
   const navigate = useNavigate();
   const [mapKey, setMapKey] = useState(0);
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization);
+  const dto = useSelector((state: any) => state.organization);  
   const handleMapKeyChange = () => {
     setMapKey((prevKey) => prevKey + 1);
   };
@@ -74,6 +76,11 @@ export const Insights = () => {
   const IndicadoresData = insightsData?.insights?.INDICATOR?.algorithms.filter(data => data.class == "ASSET_MANAGEMENT_ACTIONABLE") || []
   const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
   insightsData?.summary.coolers.toLocaleString("es-MX") != null || insightsData?.summary.coolers.toLocaleString("es-MX") != undefined ? sessionStorage.setItem("TtlCoolers",insightsData?.summary.coolers.toLocaleString("es-MX")) : ''
+  const [drawerValues,setDrawerValues] = useState({})
+  const openDrawer = (icon,title)=>{
+    setDrawerValues({icon:icon,title:title})
+    open()
+  }
   
   return (
     <div className="insights_principal_container">
@@ -210,11 +217,11 @@ export const Insights = () => {
                     <div>Tipo</div>
                     <div>Cantidad</div>
                   </div>
-                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={open}>
+                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
                     <div style={{width:'50%',backgroundColor:'#C0F2C8',borderRadius:'4px'}}>Transmitiendo</div>
                     <div>10</div>                    
                   </div>
-                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={open}>
+                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={()=>{openDrawer(IconEquiposNoTransmitiendo,'Equipos no transmitiendo')}}>
                     <div style={{width:'20%',backgroundColor:'#FFC7CD',borderRadius:'4px'}}>Sin Transmisión</div>
                     <div>2</div>                    
                   </div>
@@ -396,7 +403,7 @@ export const Insights = () => {
                                   }%`,
                                 background: isLoading != true ? "#FFC7CD" : '',                
                               }}
-                              onClick={open}
+                              onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}
                             >
                               <div className="insights_datas_info_mantenimiento_datos_barras_title">
                                 {isLoading == true ? (
@@ -511,9 +518,9 @@ export const Insights = () => {
                           width: `${((insightsData?.insights?.FAIL?.total||0)  / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
                                   }%`,
                           backgroundColor: isLoading != true ? "#FEF5C7" :'',                           
-                        }}  onClick={open}>
+                        }}  onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
                           <Tooltip label="Ver mas">
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={open}>
+                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
                             {isLoading == true ? (
                             <>
                               <div style={{ width: "2rem", height: "1rem" }}>
@@ -550,10 +557,10 @@ export const Insights = () => {
                           width: `${((insightsData?.insights?.ALERT?.total||0)  / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
                                   }%`,
                           backgroundColor: isLoading != true ? "#fef5c7" : ''
-                        }} onClick={open}
+                        }} onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}
                         >
                           <Tooltip label="Ver mas">
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={open}>
+                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
                             {isLoading == true ? (
                             <>
                               <div style={{ width: "2rem", height: "1rem" }}>
@@ -592,7 +599,7 @@ export const Insights = () => {
           </section>
         </section>
       </section>
-      <DrawerNS opened={opened} close={close}/>
+      <DrawerNS opened={opened} close={close} values={drawerValues} setvalues={setDrawerValues} />
     </div>
   )
 }
