@@ -13,6 +13,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import DrawerInversion from "../../../../components/drawerInversion/DrawerInversion";
 import DrawerEnergy from "../../../../components/drawerEnergy/DrawerEnergy";
 import { useDisclosure } from "@mantine/hooks";
+import { Section } from "@mantine/core/lib/AppShell/HorizontalSection/Section/Section";
 moment.locale("es", {
   months: [
     "Enero",
@@ -570,124 +571,145 @@ export const Detail = () => {
         </section>
         <hr className="detail_hr" style={{ marginTop: 2 }} />
 
-        <section className="detail_principal_body">
-          <div
-            style={{
-              display: "flex",
-              padding: "12px",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "4px",
-              flex: 100,
-              borderRadius: "8px",
-              borderLeft: "4px solid #F93448",
-              background: "#FFF1F2",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                alignSelf: "stretch",
-              }}
-            >
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "4px" }}
-              >
-                <img
-                  src={"../../sampleData/alertN.svg"}
-                  alt="Descripción de la imagen"
-                  style={{ width: "1em", height: "1em" }}
-                />
-                <text
-                  style={{
-                    color: "#F93448",
-                    fontSize: "12px",
-                    fontStyle: "normal",
-                    fontWeight: 700,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Alerta de funcionamiento
-                </text>
-              </div>
-              <div>
-                {" "}
-                <img
-                  src={"../../sampleData/close-i.svg"}
-                  alt="Descripción de la imagen"
-                  style={{ width: "1em", height: "1em", cursor: "pointer" }}
-                />
-              </div>
-            </div>
-            <div
-              style={{
-                color: "#F93448",
-                fontSize: "10px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "normal",
-              }}
-            >
-              19 de septiembre de 2023 6:00
-            </div>
-
-            <div
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                alignSelf: "stretch",
-                marginTop: 10,
-              }}
-            >
-              <div
-                style={{
-                  color: "#F93448",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                }}
-              >
-                Se ha detectado una falla en el compresor, esta trabajando más
-                tiempo de los rangos funcionales. Levanta una orden de servicio{" "}
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  padding: "4px 8px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  alignSelf: "stretch",
-                  borderRadius: "4px",
-                  background: "#F93448",
-                  marginLeft: "auto",
-                }}
-              >
-                <button
-                  style={{
-                    color: "#FFF1F2",
-                    fontSize: "12px",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                    padding: "4px 4px",
-                    borderRadius: "4px",
-                    background: "#F93448",
-                    border: "none",
-                    cursor: "pointer",
-                    outline: "none",
-                  }}
-                >
-                  Solicitar servicio técnico
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
         <section className="detail_principal_body_content">
           <section className="detail_principal_actividad_acerca_1">
+            <section>
+              <div style={{ marginLeft: 10, width: "102%", marginBottom: 8 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "12px",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: "4px",
+                    borderRadius: "8px",
+                    borderLeft: "4px solid #F93448",
+                    background: "#FFF1F2",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "4px",
+                      }}
+                    >
+                      <img
+                        src={"../../sampleData/alertN.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "1em", height: "1em" }}
+                      />
+                      <text
+                        style={{
+                          color: "#F93448",
+                          fontSize: "12px",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "normal",
+                        }}
+                      >
+                        Alerta de funcionamiento
+                      </text>
+                    </div>
+                    <div>
+                      {" "}
+                      <img
+                        src={"../../sampleData/close-i.svg"}
+                        alt="Descripción de la imagen"
+                        style={{
+                          width: "1em",
+                          height: "1em",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      color: "#F93448",
+                      fontSize: "10px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    19 de septiembre de 2023 6:00
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      alignSelf: "stretch",
+                      marginTop: 10,
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#F93448",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Se ha detectado una falla en el compresor, esta trabajando
+                      más tiempo de los rangos funcionales. Levanta una orden de
+                      servicio{" "}
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        padding: "4px 8px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        alignSelf: "stretch",
+                        borderRadius: "4px",
+                        background: "#F93448",
+                        marginLeft: "auto",
+                      }}
+                    >
+                      <button
+                        style={{
+                          color: "#FFF1F2",
+                          fontSize: "12px",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "normal",
+                          padding: "4px 4px",
+                          borderRadius: "4px",
+                          background: "#F93448",
+                          border: "none",
+                          cursor: "pointer",
+                          outline: "none",
+                        }}
+                      >
+                        Solicitar servicio técnico
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section
+              style={{
+                borderRadius: "0.5rem",
+                border: "1px solid #cacaca",
+                marginLeft: 10,
+                width: "102%",
+                height: "10rem",
+              }}
+            >
+              <div>Gráfica</div>
+            </section>
             <div
               className="clt_actividad_acerca_principal"
               // style={{ overflowY: "auto" }}
