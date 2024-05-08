@@ -201,9 +201,19 @@ export default function Users() {
   //   }
   // };
 
+  console.log(dt);
+  console.log(dt.length);
+  console.log(pathVerify());
+  console.log(pathVerify().length);
   return (
     <div>
-      <PageFilter status={isLoading} />
+      {dto === "CALL CENTER" ? (
+        <>
+          <div style={{ marginTop: "-3rem" }}></div>{" "}
+        </>
+      ) : (
+        <PageFilter status={isLoading} />
+      )}
       <br></br>
       <div
         style={{

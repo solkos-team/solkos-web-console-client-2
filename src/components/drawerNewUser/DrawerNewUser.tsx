@@ -22,6 +22,7 @@ export default function DrawerNewUser({
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
+  console.log(dt.length);
   const clearInputs = () => {
     setName("");
     setEmail("");
@@ -32,7 +33,7 @@ export default function DrawerNewUser({
       email: email,
       name: name,
       path: pathVerify(),
-      role: dt.length === 0 ? "user" : "path_user",
+      role: pathVerify().length === 0 ? "user" : "path_user",
     };
     try {
       const data = await fetchUniversal("users/add", body);
