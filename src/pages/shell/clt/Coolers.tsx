@@ -366,9 +366,9 @@ export default function Coolers() {
                   <tr
                     key={index}
                     onClick={() => {
-                      localStorage.getItem("USER") == "Call Center"
+                      localStorage.getItem("ORG") == "CALL CENTER"
                         ? navigate(
-                            `/homeCallCenter/coolerDetail/${cooler.serial_number}`
+                            `/home/clt_callCenter/${cooler.serial_number}`
                           )
                         : navigate(`/home/clt/${cooler.serial_number}`);
                     }}

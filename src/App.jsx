@@ -187,9 +187,9 @@ const routes = [
 
 const routes2 = [
   {
-    link: "/homeCallCenter",
+    link: "/home/clt_callCenter",
     label: "Cooler Life Tracking",
-    icon: <img src={clt} />,
+    icon: <img src={"../../sampleData/devices.svg"} />,
   },
   {
     link: "/home/users",
@@ -210,6 +210,8 @@ function App() {
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
+  // console.log(dto);
+  // console.log(localStorage.getItem("ORG"));
   const stateM = sessionStorage.getItem("MenuState");
   stateM === undefined
     ? sessionStorage.setItem("MenuState", false)
@@ -239,7 +241,7 @@ function App() {
     }
   }, [location.pathname]);
   const links =
-    localStorage.getItem("USER") === "Call Center" ? (
+    localStorage.getItem("ORG") === "CALL CENTER" ? (
       <>
         {routes2.map((item) => (
           <div key={item.label}>
@@ -586,7 +588,8 @@ function App() {
                           textTransform: "uppercase",
                         }}
                       >
-                        V2.4.0
+                        {/* V2.3.0 */}
+                        V2.5.0
                       </div>
                     </div>
                   </section>
@@ -713,7 +716,8 @@ function App() {
                   </UnstyledButton>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  {Role != "root" ? (
+                  {Role != "root" ||
+                  localStorage.getItem("ORG") === "CALL CENTER" ? (
                     ""
                   ) : (
                     <>

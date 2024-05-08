@@ -25,12 +25,12 @@ export const Login = () => {
     sessionStorage.setItem("Email", email);
     sessionStorage.setItem("Token", token);
     localStorage.setItem("Role", Role);
-    // console.log(Role);
+    console.log(Role);
     dispatch(addPath());
     dispatch(addOrg());
-    String(Name) == "Call Center"
+    String(Customer) == "CALL CENTER"
       ? setTimeout(() => {
-          navigate("/homeCallCenter");
+          navigate("/home/clt_callCenter");
         }, 2000)
       : setTimeout(() => {
           navigate("/home");

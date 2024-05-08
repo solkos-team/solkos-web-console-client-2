@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ModalsProvider } from "@mantine/modals";
 import { NotificationsProvider } from "@mantine/notifications";
 import Coolers from "/src/pages/shell/clt";
+import CoolersCC from "./pages/shell/clt_callCenter/Coolers_CC.tsx";
 import Alerts from "/src/pages/shell/alerts";
 import Outlets from "/src/pages/shell/outlets";
 import Panel from "/src/pages/shell/panel";
@@ -14,6 +15,7 @@ import Users from "/src/pages/shell/users";
 import Fails from "/src/pages/shell/fails";
 import Indicator from "/src/pages/shell/indicator";
 import CoolerDetail from "./pages/shell/coolerDetail";
+import CoolerDetailCC from "./pages/shell/clt_callCenter/Detail_CC.tsx";
 import Insights from "./pages/shell/insights";
 import { Provider } from "react-redux";
 import { store } from "./app/store.js";
@@ -65,12 +67,16 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               </Route>
             </Routes>
             <Routes>
-              <Route path="/homeCallCenter" element={<App />}>
-                <Route index path="/homeCallCenter" element={<Coolers />} />
+              <Route path="/home/clt_callCenter" element={<App />}>
+                <Route
+                  index
+                  path="/home/clt_callCenter"
+                  element={<CoolersCC />}
+                />
                 {/* Cooler detail */}
                 <Route
-                  path="/homeCallCenter/coolerDetail/:serial_number"
-                  element={<CoolerDetail />}
+                  path="/home/clt_callCenter/:serial_number"
+                  element={<CoolerDetailCC />}
                 />
               </Route>
             </Routes>

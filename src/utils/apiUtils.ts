@@ -327,3 +327,23 @@ export const fetchUniversalTables = async (
     throw error;
   }
 };
+
+export const tableauFetch = async (URL?, setIsLoading?) => {
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
+  const cuerpo = {
+    method: "GET",
+  };
+  try {
+    const response = await fetch(URL, cuerpo);
+    if (!response.ok) {
+      throw new Error("Error fetching tableau");
+    }
+
+    const responseData = await response.text();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};

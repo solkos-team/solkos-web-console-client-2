@@ -53,7 +53,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      // console.log(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -73,7 +73,7 @@ export default function CoolerDetail() {
   };
   return (
     <>
-      {localStorage.getItem("USER") == "Call Center" ? (
+      {localStorage.getItem("ORG") == "CALL CENTER" ? (
         <PageFilter path="" disabledPath={true} />
       ) : (
         <PageFilter path="clt" disabledPath={true} />

@@ -202,8 +202,8 @@ export default function (props) {
         <section
           className="return_principal"
           onClick={() => {
-            localStorage.getItem("USER") === "Call Center"
-              ? navigate(`/homeCallCenter/` + getPath(props))
+            localStorage.getItem("ORG") === "CALL CENTER"
+              ? navigate(`/home/clt_callCenter/` + getPath(props))
               : navigate(`/home/` + getPath(props));
           }}
         >
