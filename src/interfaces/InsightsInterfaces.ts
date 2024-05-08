@@ -10,12 +10,14 @@ export interface Insights {
 export interface statusParque {
   name: string;
   total: number;
+  percentage: number;
 }
 export interface AssetsAnalytic {
   class: string;
   value: number;
   total: number;
   percentage: number;
+  name: string;
 }
 
 export interface GeoDatum {
