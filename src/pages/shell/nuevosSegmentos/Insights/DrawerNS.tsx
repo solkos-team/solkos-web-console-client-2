@@ -4,7 +4,7 @@ import { CoolerInterface } from '../../../../interfaces/CoolerInterface';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconArrowRight } from '@tabler/icons-react';
 import { ExportToExcel } from '../../../../components/exportExcel/ExportToExcel';
-import { ArrowIcon,TransmitiendoIcon } from './Icons';
+import { ALERTSIMBOLO, ArrowIcon,FAILSIMBOLO,TransmitiendoIcon } from './Icons';
 import { fetchUniversalTables } from '../../../../utils/apiUtils';
 import { pathVerify } from '../../../../Functions/pathVerify';
 import { PaginationComponent } from '../../../../components/Pagination/PaginationComponent';
@@ -16,9 +16,8 @@ export const DrawerNS = ({opened,close,values,setvalues,selectedAlgorithm,level,
   const [isLoading, setIsLoading] = useState(true);
   const [totalData, setTotalData] = useState<String | number>(0);
   const lastIndex = currentPage * Number(datosPorPagina);
-  const firstIndex = lastIndex - Number(datosPorPagina);
-  console.log(values)
-  const {icon,title,algoritmo,total} =  values
+  const firstIndex = lastIndex - Number(datosPorPagina);  
+  const {icon,title,algoritmo,total,type} =  values  
   const navigate = useNavigate();
   const body = {
     customer: dto,
@@ -91,7 +90,25 @@ export const DrawerNS = ({opened,close,values,setvalues,selectedAlgorithm,level,
          <section className="insights_drawer_header">
            <section className="insights_drawer_header_iconHeader">
              <img src={icon} alt="IconDrawer" style={{ width: '2rem', height: '2rem' }} />
-             <div>{title}</div>
+             <div>
+              <div style={{                
+                width:'100%' , 
+                height:'40%',
+                fontSize:'14px',
+                borderRadius:'2px',                
+                padding:'2px',
+                boxSizing:'border-box',
+                backgroundColor: type == 'ALERTA' ? 'var(--Semantic-Warning-Warning-Container, #FEF5C7)' : type == 'FALLA' ? 'var(--Semantic-Warning-Warning-Container, #FFC7CD)' : '',
+                alignItems:'center',justifyContent:'center',gap:'5px',display: type == undefined ? 'none' : 'flex',
+                color : 'var(--Semantic-Warning-On-Warning-Container, #451C03)'
+                }}>
+                <picture>
+                  <img src={type == 'ALERTA' ? ALERTSIMBOLO : type == 'FALLA' ? FAILSIMBOLO : ''} alt="DrawerIcon" loading='lazy' style={{marginTop:'4px'}} />
+                </picture>
+                {type}
+              </div>
+                {title}
+              </div>
            </section>
            <section className="insights_drawer_header_max">
              <div>{total}</div>

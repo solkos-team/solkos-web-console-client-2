@@ -8,7 +8,7 @@ import { Skeleton, Tooltip } from '@mantine/core';
 import MapInsightsComponent from '../../../../components/mapInsights';
 import { Insights as InsightsIT } from "../../../../interfaces/InsightsInterfaces";
 import { InsightsData, CoolerInterface as Cooler } from '../../../../interfaces/CoolerInterface';
-import { AlertIcon, FailIcon, TransmitionIcon, IconEquiposTransmitiendo, IconEquiposNoTransmitiendo } from './Icons';
+import { AlertIcon, FailIcon, TransmitionIcon, IconEquiposTransmitiendo, IconEquiposNoTransmitiendo, FallaACompresor, FallaAltaTemperatura, FallaPosibleDañoElectrico, AlertaACompresor, AlertaDesconexion, AlertaAltaTemperatura } from './Icons';
 import { DrawerNS } from './DrawerNS';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -70,10 +70,10 @@ export const Insights = () => {
   const IndicadoresData = insightsData ?? []
   // insightsData?.summary.coolers.toLocaleString("es-MX") != null || insightsData?.summary.coolers.toLocaleString("es-MX") != undefined ? sessionStorage.setItem("TtlCoolers",insightsData?.summary.coolers.toLocaleString("es-MX")) : ''
   const [drawerValues, setDrawerValues] = useState({})
-  const openDrawer = (icon, title, clase?, algorithm?,totalData?) => {
-    setDrawerValues({ icon: icon, title: title, class: clase, algoritmo: algorithm,total:totalData })
+  const openDrawer = (icon, title, clase?, algorithm?,totalData?,type?) => {
+    setDrawerValues({ icon: icon, title: title, class: clase, algoritmo: algorithm,total:totalData,type:type })
     open()
-  }
+  }  
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />
@@ -362,7 +362,6 @@ export const Insights = () => {
                                 alignSelf: "stretch",
                                 marginBottom: "16px",
                                 boxSizing: "border-box"
-
                               }}
                             >
                               <div className="insights_datas_info_controlDeActivos_barras"
@@ -370,7 +369,25 @@ export const Insights = () => {
                                   width: `${(algorithm.value / max) * 10000}%`,
                                   background: isLoading != true ? "#FFC7CD" : '',
                                 }}
-                                onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo', algorithm.class, algorithm.algorithm,algorithm.value) }}
+                                onClick={
+                                  () => {
+                                    openDrawer(algorithm.algorithm === "COMPRESSOR_FAIL"
+                                    ? FallaACompresor : algorithm.algorithm === "FREEZING_FAIL"
+                                    ? FallaACompresor :  algorithm.algorithm === "TEMPERATURE_FAIL"
+                                    ? FallaAltaTemperatura : algorithm.algorithm === "VOLTAGE_FAIL"
+                                    ? FallaPosibleDañoElectrico : ''
+                                      , algorithm.algorithm === "COMPRESSOR_FAIL"
+                                      ? "Falla asociada al compresor"
+                                      : algorithm.algorithm === "DISCONNECTIONS_FAIL"
+                                        ? "Desconexión"
+                                        : algorithm.algorithm === "TEMPERATURE_FAIL"
+                                          ? "Alta temperatura"
+                                          : algorithm.algorithm === "VOLTAGE_FAIL"
+                                            ? "Posible daño eléctrico"
+                                            : algorithm.algorithm === "FREEZING_FAIL"
+                                              ? "Evaporador bloqueado"
+                                              : algorithm.algorithm, algorithm.class, algorithm.algorithm, algorithm.value,'FALLA')
+                                  }}
                               >
                                 <div className="insights_datas_info_mantenimiento_datos_barras_title">
                                   {isLoading == true ? (
@@ -431,7 +448,7 @@ export const Insights = () => {
                     />
                     <h1 className="insights_datas_kpi_title_h1">Alertas</h1>
                   </div>
-                  <div className="insigths_datas_info2_control_title_grapics_container">
+                  <div className="insigths_datas_info2_control_title_grapics_container">                   
                     <section className="insights_datas_info_mantenimiento_datos">
                       <div className="insights_datas_info_mantenimiento_datos_h1">
                         Tipo
@@ -442,86 +459,118 @@ export const Insights = () => {
                     </section>
                     {/* Indicador barra */}
                     <section className="insights_datas_mantenimiento_barras">
-                      <div
-                        key={1}
-                        className="insights_datas_info_mantenimiento_datos_barras">
-                        <div className="insights_datas_info_mantenimiento_datos_barras_color_Fallas" style={{
-                          width: `${((insightsData?.insights?.FAIL?.total || 0) / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
-                            }%`,
-                          backgroundColor: isLoading != true ? "#FEF5C7" : '',
-                        }} onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
-                          <Tooltip label="Ver mas">
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
-                              {isLoading == true ? (
-                                <>
-                                  <div style={{ width: "2rem", height: "1rem" }}>
-                                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                                  </div>
-                                </>
-                              ) : insightsData?.insights?.FAIL?.level === undefined
-                                ? "Sin registro"
-                                : insightsData?.insights?.FAIL?.level ===
-                                  "FAIL"
-                                  ? "Fallas"
-                                  : ''}
-                            </div>
-                          </Tooltip>
-                        </div>
-                        <div className="insights_datas_info_mantenimiento_datos_barras_cantidad">
-                          {isLoading == true ? (
-                            <>
-                              <div style={{ width: "2rem", height: "1rem" }}>
-                                <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                      {/* INFORMACION ALERTAS  */}
+                      {IndicadoresData
+                     .filter(
+                      (algorithm) =>
+                        algorithm.algorithm ===
+                          "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
+                        algorithm.algorithm === "VOLTAGE_ALERT" ||
+                        algorithm.algorithm === "HIGH_TEMPERATURE_ALERT" ||
+                        algorithm.algorithm === "DISCONNECTION_ALERT"
+                    )
+                      .map(
+                        (algorithm, index) => {
+                          const max = Math.max(
+                            ...IndicadoresData.map(
+                              (alg) => alg.value
+                            )
+                          );
+
+                          return (
+                            <div
+                              key={index}
+                              style={{
+                                display: "flex",
+                                padding: "0px",
+                                gap: "16px",
+                                alignSelf: "stretch",
+                                marginBottom: "16px",
+                                boxSizing: "border-box"
+
+                              }}
+                            >
+                              <div className="insights_datas_info_controlDeActivos_barras"
+                                style={{
+                                  width: `${(algorithm.value / max) * 10000}%`,
+                                  background: isLoading != true ? "#FEF5C7" : '',
+                                }}
+                                onClick={
+                                  () => { openDrawer(
+                                    algorithm.algorithm ===
+                                  "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                    ? AlertaACompresor : algorithm.algorithm === "DISCONNECTION_ALERT"
+                                    ? AlertaDesconexion : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
+                                    ? AlertaAltaTemperatura : algorithm.algorithm === "VOLTAGE_ALERT"
+                                    ? AlertaACompresor : ''
+                                    ,algorithm.algorithm ===
+                                  "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                    ? "Alta demanda del compresor"
+                                    : algorithm.algorithm === "DISCONNECTION_ALERT"
+                                    ? "Desconexión"
+                                    : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
+                                    ? "Alta temperatura"
+                                    : algorithm.algorithm === "HIGH_VOLTAGE_ALERT"
+                                    ? "Alto voltaje"
+                                    : algorithm.algorithm === "LOW_VOLTAGE_ALERT"
+                                    ? "Bajo voltaje"
+                                    : algorithm.algorithm === "MOVED_VISIT_ALERT"
+                                    ? "Movimiento"
+                                    : algorithm.algorithm === "VOLTAGE_ALERT"
+                                    ? "Bajo/Alto voltaje"
+                                    : algorithm.algorithm, algorithm.class, algorithm.algorithm,algorithm.value,'ALERTA') }}
+                              >
+                                <div className="insights_datas_info_mantenimiento_datos_barras_title">
+                                  {isLoading == true ? (
+                                    <>
+                                      <div style={{ width: "2rem", height: "1rem" }}>
+                                        <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                                      </div>
+                                    </>
+                                  ) : algorithm.algorithm ===
+                                  "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                    ? "Alta demanda del compresor"
+                                    : algorithm.algorithm === "DISCONNECTION_ALERT"
+                                    ? "Desconexión"
+                                    : algorithm.algorithm === "HIGH_TEMPERATURE_ALERT"
+                                    ? "Alta temperatura"
+                                    : algorithm.algorithm === "HIGH_VOLTAGE_ALERT"
+                                    ? "Alto voltaje"
+                                    : algorithm.algorithm === "LOW_VOLTAGE_ALERT"
+                                    ? "Bajo voltaje"
+                                    : algorithm.algorithm === "MOVED_VISIT_ALERT"
+                                    ? "Movimiento"
+                                    : algorithm.algorithm === "VOLTAGE_ALERT"
+                                    ? "Bajo/Alto voltaje"
+                                    : algorithm.algorithm}
+                                </div>
                               </div>
-                            </>
-                          ) : insightsData?.insights?.FAIL?.total === undefined ? (
-                            "Sin registro"
-                          ) : (
-                            insightsData?.insights?.FAIL?.total.toLocaleString("es-MX")
-                          )}
-                        </div>
-                      </div>
-                      <div
-                        key={2}
-                        className="insights_datas_info_mantenimiento_datos_barras">
-                        <div className="insights_datas_info_mantenimiento_datos_barras_color_Alertas" style={{
-                          width: `${((insightsData?.insights?.ALERT?.total || 0) / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
-                            }%`,
-                          backgroundColor: isLoading != true ? "#fef5c7" : ''
-                        }} onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}
-                        >
-                          <Tooltip label="Ver mas">
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
-                              {isLoading == true ? (
-                                <>
-                                  <div style={{ width: "2rem", height: "1rem" }}>
-                                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                                  </div>
-                                </>
-                              ) : insightsData?.insights?.ALERT?.level === undefined
-                                ? "Sin registro"
-                                : insightsData?.insights?.ALERT?.level ===
-                                  "ALERT"
-                                  ? "Alertas"
-                                  : ''}
-                            </div>
-                          </Tooltip>
-                        </div>
-                        <div className="insights_datas_info_mantenimiento_datos_barras_cantidad"
-                        >
-                          {isLoading == true ? (
-                            <>
-                              <div style={{ width: "2rem", height: "1rem" }}>
-                                <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                              <div
+                                style={{
+                                  color: "#000005",
+                                  fontSize: "0.75rem",
+                                  fontWeight: 400,
+                                  lineHeight: "15.62px",
+                                  marginLeft: "auto",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center"
+                                }}
+                              >
+                                {isLoading == true ? (
+                                  <>
+                                    <div style={{ width: "2rem", height: "1rem" }}>
+                                      <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                                    </div>
+                                  </>
+                                ) : algorithm.value === undefined
+                                  ? "Sin registro"
+                                  : algorithm.value.toLocaleString("es-MX")}
                               </div>
-                            </>
-                          ) : insightsData?.insights?.ALERT?.total === undefined ? (
-                            "Sin registro"
-                          ) : (
-                            insightsData?.insights?.ALERT?.total.toLocaleString("es-MX")
-                          )}
-                        </div>
-                      </div>
+                            </div>
+                          );
+                        }
+                      )}
                     </section>
                   </div>
                 </div>

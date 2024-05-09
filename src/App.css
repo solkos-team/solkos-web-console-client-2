@@ -570,7 +570,7 @@ table th {
 .insights_datas_mantenimiento_barras {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0rem;
 }
 
 .insights_mapa_info_mapa_info_h1 {
