@@ -5,12 +5,13 @@ import IconEquiposTransmitiendo from '../../../../sampleData/NS/TransmitionNSDra
 import IconEquiposNoTransmitiendo from "../../../../sampleData/NS/NoTransmitionNSDrawer.svg";
 // import ArrowIcon from '../../../../sampleData/NS/Arrow.svg'
 import ArrowIcon from '../../../../sampleData/NS/Arrow.svg'
-
+import TransmitiendoIcon from '../../../../sampleData/NS/TransmitiendoIcon.svg'
 export {
     AlertIcon,
     FailIcon,
     TransmitionIcon,
     IconEquiposTransmitiendo,
     IconEquiposNoTransmitiendo,
-    ArrowIcon
+    ArrowIcon,
+    TransmitiendoIcon
 }

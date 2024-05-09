@@ -39,6 +39,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route index path="/home" element={<Insights />} />
                 {/* Insights */}
                 <Route path="/home/insights" element={<Insights />} />
+                <Route path="/home/insightsNS" element={<InsightsNS />} />
                 {/* Alertas */}
                 <Route path="/home/alerts" element={<Alerts />} />
                 {/* Fallas */}

@@ -7,18 +7,13 @@ import PageFilter from '../../../../components/pageFilter';
 import { Skeleton, Tooltip } from '@mantine/core';
 import MapInsightsComponent from '../../../../components/mapInsights';
 import { Insights as InsightsIT } from "../../../../interfaces/InsightsInterfaces";
-import { InsightsData,CoolerInterface as Cooler } from '../../../../interfaces/CoolerInterface';
-// import AlertIcon from '../../../../sampleData/NS/AlertsNS.svg';
-// import FailIcon from '../../../../sampleData/NS/failNS.svg';
-// import TransmitionIcon from '../../../../sampleData/NS/TransmitionNS.svg';
-// import IconEquiposTransmitiendo from '../../../../sampleData/NS/TransmitionNSDrawer.svg'
-// import IconEquiposNoTransmitiendo from "../../../../sampleData/NS/NoTransmitionNSDrawer.svg";
-import { AlertIcon,FailIcon,TransmitionIcon,IconEquiposTransmitiendo,IconEquiposNoTransmitiendo } from './Icons';
+import { InsightsData, CoolerInterface as Cooler } from '../../../../interfaces/CoolerInterface';
+import { AlertIcon, FailIcon, TransmitionIcon, IconEquiposTransmitiendo, IconEquiposNoTransmitiendo } from './Icons';
 import { DrawerNS } from './DrawerNS';
 import { useDisclosure } from '@mantine/hooks';
 
 export const Insights = () => {
-  const [insightsData, setInsightsData] = useState<InsightsIT | null>(null);
+  const [insightsData, setInsightsData] = useState<Cooler[] | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
   const [items, numIntems] = useState(0);
@@ -26,7 +21,7 @@ export const Insights = () => {
   const navigate = useNavigate();
   const [mapKey, setMapKey] = useState(0);
   const dt = useSelector((state: any) => state.works);
-  const dto = useSelector((state: any) => state.organization);  
+  const dto = useSelector((state: any) => state.organization);
   const handleMapKeyChange = () => {
     setMapKey((prevKey) => prevKey + 1);
   };
@@ -40,11 +35,11 @@ export const Insights = () => {
   const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("insights", body,setIsLoading);
+      const data = await fetchUniversal("alerts", body, setIsLoading);
       setInsightsData(data);
       setIsLoading(false);
     } catch (error) {
-      console.error("Error fetching insights:", error);
+      console.error("Error fetching alerts:", error);
     }
   };
   const body2 = {
@@ -68,20 +63,17 @@ export const Insights = () => {
   };
   useEffect(() => {
     fetchDataNumerOfItems();
-    fetchData();    
+    fetchData();
     handleMapKeyChange();
   }, [dt, dto]);
 
-  const filteredMarkers2 = insightsData?.geo_data  
-  const IndicadoresData = insightsData?.insights?.INDICATOR?.algorithms.filter(data => data.class == "ASSET_MANAGEMENT_ACTIONABLE") || []
-  const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
-  insightsData?.summary.coolers.toLocaleString("es-MX") != null || insightsData?.summary.coolers.toLocaleString("es-MX") != undefined ? sessionStorage.setItem("TtlCoolers",insightsData?.summary.coolers.toLocaleString("es-MX")) : ''
-  const [drawerValues,setDrawerValues] = useState({})
-  const openDrawer = (icon,title)=>{
-    setDrawerValues({icon:icon,title:title})
+  const IndicadoresData = insightsData ?? []
+  // insightsData?.summary.coolers.toLocaleString("es-MX") != null || insightsData?.summary.coolers.toLocaleString("es-MX") != undefined ? sessionStorage.setItem("TtlCoolers",insightsData?.summary.coolers.toLocaleString("es-MX")) : ''
+  const [drawerValues, setDrawerValues] = useState({})
+  const openDrawer = (icon, title, clase?, algorithm?,totalData?) => {
+    setDrawerValues({ icon: icon, title: title, class: clase, algoritmo: algorithm,total:totalData })
     open()
   }
-  
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />
@@ -217,13 +209,13 @@ export const Insights = () => {
                     <div>Tipo</div>
                     <div>Cantidad</div>
                   </div>
-                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
-                    <div style={{width:'50%',backgroundColor:'#C0F2C8',borderRadius:'4px'}}>Transmitiendo</div>
-                    <div>10</div>                    
+                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
+                    <div style={{ width: '50%', backgroundColor: '#C0F2C8', borderRadius: '4px' }}>Transmitiendo</div>
+                    <div>10</div>
                   </div>
-                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={()=>{openDrawer(IconEquiposNoTransmitiendo,'Equipos no transmitiendo')}}>
-                    <div style={{width:'20%',backgroundColor:'#FFC7CD',borderRadius:'4px'}}>Sin Transmisión</div>
-                    <div>2</div>                    
+                  <div className="insightsNS_datas_statusTransmition_data_data" onClick={() => { openDrawer(IconEquiposNoTransmitiendo, 'Equipos no transmitiendo') }}>
+                    <div style={{ width: '20%', backgroundColor: '#FFC7CD', borderRadius: '4px' }}>Sin Transmisión</div>
+                    <div>2</div>
                   </div>
                 </div>
               </div>
@@ -250,7 +242,7 @@ export const Insights = () => {
                         ) : insightsData?.assets_analytics[3]?.percentage == undefined ? ("Sin registro")
                       : insightsData?.assets_analytics[3]?.percentage + '%'} */}
                       10
-                    </div>                    
+                    </div>
                   </div>
                   <div className="insights_datas_kpi_data_data">
                     <div className="insights_datas_kpi_data_data_1">
@@ -295,7 +287,7 @@ export const Insights = () => {
                     </div>
                   </div>
                 </div>
-              </div>              
+              </div>
             </section>
             <section className="insights_datas_info2">
               <div className="insigths_datas_info2_control">
@@ -309,24 +301,6 @@ export const Insights = () => {
                     Fallas
                   </h1>
                 </div>
-                {/* <div className="insigths_datas_info2_control_title">
-                  <h1 className="insights_datas_kpi_title_h1_data">
-                    {isLoading == true ? (
-                      <>
-                        <div style={{ width: "2rem", height: "1rem" }}>
-                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                        </div>
-                      </>
-                    ) : sum2 == undefined && sum2 == undefined ? (
-                      "Sin registro"
-                    ) : (
-                      sum2.toLocaleString("es-MX")
-                    )}
-                  </h1>
-                  <h1 className="insights_datas_kpi_title_data_h1">
-                    Total de enfriadores
-                  </h1>
-                </div> */}
                 <div className="insigths_datas_info2_control_title_grapics">
                   <div className="insigths_datas_info2_control_title_grapics_container">
                     <div
@@ -364,111 +338,86 @@ export const Insights = () => {
                       </div>
                     </div>
                     {IndicadoresData
-                    .sort((a, b) => {
-                      const order = [
-                        "Sin Riesgo",
-                        "Visita PdV",
-                        "Actualizar Info",
-                        "Toma de Decisiones",
-                        "Acciones urgentes"
-                      ];
-                      const indexA = order.indexOf(a.algorithm);
-                      const indexB = order.indexOf(b.algorithm);
-                      return indexA - indexB;
-                    })
-                    .map(
-                      (algorithm, index) => {
-                        const max = Math.max(
-                          ...IndicadoresData.map(
-                            (alg) => alg.value
-                          )
-                        );
+                      .filter(
+                        (cooler) =>
+                          cooler.class === "OPE" &&
+                          cooler.algorithm.endsWith("FAIL") &&
+                          cooler.algorithm !== "NO_FAIL"
+                      )
+                      .map(
+                        (algorithm, index) => {
+                          const max = Math.max(
+                            ...IndicadoresData.map(
+                              (alg) => alg.value
+                            )
+                          );
 
-                        return (
-                          <div
-                            key={index}
-                            style={{
-                              display: "flex",
-                              padding: "0px",
-                              gap: "16px",
-                              alignSelf: "stretch",  
-                              marginBottom:"16px",   
-                              boxSizing:"border-box"
-                              
-                            }}
-                          >
-                            <div className="insights_datas_info_controlDeActivos_barras"
-                              style={{
-                                width: `${(algorithm.value / max) * 100
-                                  }%`,
-                                background: isLoading != true ? "#FFC7CD" : '',                
-                              }}
-                              onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}
-                            >
-                              <div className="insights_datas_info_mantenimiento_datos_barras_title">
-                                {isLoading == true ? (
-                            <>
-                              <div style={{ width: "2rem", height: "1rem" }}>
-                                <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                              </div>
-                            </>
-                          ) : algorithm.algorithm === undefined
-                                ? "Sin registro"
-                                : algorithm.algorithm ===
-                                "Toma de Decisiones"
-                                  ? "Toma de Decisiones"
-                                  : algorithm.algorithm ===
-                                    "Actualizar Info"
-                                  ? "Requiere Actualizar Información"
-                                  : algorithm.algorithm ===
-                                    "Sin Riesgo"
-                                  ? "Sin Riesgo"
-                                  : algorithm.algorithm ===
-                                    "Visita PdV"
-                                  ? "Visita Punto de Venta"
-                                  : algorithm.algorithm}
-                              </div>
-                            </div>
+                          return (
                             <div
+                              key={index}
                               style={{
-                                color: "#000005",
-                                fontSize: "0.75rem",
-                                fontWeight: 400,
-                                lineHeight: "15.62px",
-                                marginLeft: "auto",
-                                display:"flex",
-                                alignItems:"center",
-                                justifyContent:"center"
+                                display: "flex",
+                                padding: "0px",
+                                gap: "16px",
+                                alignSelf: "stretch",
+                                marginBottom: "16px",
+                                boxSizing: "border-box"
+
                               }}
                             >
-                              {isLoading == true ? (
-                            <>
-                              <div style={{ width: "2rem", height: "1rem" }}>
-                                <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                              <div className="insights_datas_info_controlDeActivos_barras"
+                                style={{
+                                  width: `${(algorithm.value / max) * 10000}%`,
+                                  background: isLoading != true ? "#FFC7CD" : '',
+                                }}
+                                onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo', algorithm.class, algorithm.algorithm,algorithm.value) }}
+                              >
+                                <div className="insights_datas_info_mantenimiento_datos_barras_title">
+                                  {isLoading == true ? (
+                                    <>
+                                      <div style={{ width: "2rem", height: "1rem" }}>
+                                        <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                                      </div>
+                                    </>
+                                  ) : algorithm.algorithm === "COMPRESSOR_FAIL"
+                                    ? "Falla asociada al compresor"
+                                    : algorithm.algorithm === "DISCONNECTIONS_FAIL"
+                                      ? "Desconexión"
+                                      : algorithm.algorithm === "TEMPERATURE_FAIL"
+                                        ? "Alta temperatura"
+                                        : algorithm.algorithm === "VOLTAGE_FAIL"
+                                          ? "Posible daño eléctrico"
+                                          : algorithm.algorithm === "FREEZING_FAIL"
+                                            ? "Evaporador bloqueado"
+                                            : algorithm.algorithm}
+                                </div>
                               </div>
-                            </>
-                          ) : algorithm.value === undefined
-                                ? "Sin registro"
-                                : algorithm.value.toLocaleString("es-MX")}
+                              <div
+                                style={{
+                                  color: "#000005",
+                                  fontSize: "0.75rem",
+                                  fontWeight: 400,
+                                  lineHeight: "15.62px",
+                                  marginLeft: "auto",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center"
+                                }}
+                              >
+                                {isLoading == true ? (
+                                  <>
+                                    <div style={{ width: "2rem", height: "1rem" }}>
+                                      <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                                    </div>
+                                  </>
+                                ) : algorithm.value === undefined
+                                  ? "Sin registro"
+                                  : algorithm.value.toLocaleString("es-MX")}
+                              </div>
                             </div>
-                          </div>
-                        );
-                      }
-                    )}
-                    {/* <hr className="insights_datas_hr" style={{display: isLoading == true ? "none" : '' }}/>
-                    <section 
-                    className="insights_datas_mantenimiento_VerDetalles_principal"
-                    style={{display: isLoading == true ? "none" : '' }}
-                      onClick={() => navigate("/home/indicator")} >
-                      <div className="insights_datas_mantenimiento_VerDetalles_h1">
-                        Ver detalles
-                      </div>
-                      <img
-                        src={"../../sampleData/arrow_b.png"}
-                        alt="Descripción de la imagen"
-                        style={{ marginTop: 4 }}
-                      />
-                    </section> */}
+                          );
+                        }
+                      )}
                   </div>
                 </div>
               </div>
@@ -482,24 +431,6 @@ export const Insights = () => {
                     />
                     <h1 className="insights_datas_kpi_title_h1">Alertas</h1>
                   </div>
-                  {/* <div className="insigths_datas_info2_control_title">
-                    <h1 className="insights_datas_kpi_title_h1_data">
-                      {isLoading == true ? (
-                        <>
-                          <div style={{ width: "2rem", height: "1rem" }}>
-                            <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                          </div>
-                        </>
-                      ) : insightsData?.insights?.ALERT?.total == undefined && insightsData?.insights?.FAIL?.total == undefined ? (
-                        "Sin registro"
-                      ) : (
-                        (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total)).toLocaleString("es-MX")
-                      )}
-                    </h1>
-                    <h1 className="insights_datas_kpi_title_data_h1">
-                      Total de alertas
-                    </h1>
-                  </div> */}
                   <div className="insigths_datas_info2_control_title_grapics_container">
                     <section className="insights_datas_info_mantenimiento_datos">
                       <div className="insights_datas_info_mantenimiento_datos_h1">
@@ -514,25 +445,25 @@ export const Insights = () => {
                       <div
                         key={1}
                         className="insights_datas_info_mantenimiento_datos_barras">
-                        <div className="insights_datas_info_mantenimiento_datos_barras_color_Fallas" style={{                           
-                          width: `${((insightsData?.insights?.FAIL?.total||0)  / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
-                                  }%`,
-                          backgroundColor: isLoading != true ? "#FEF5C7" :'',                           
-                        }}  onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
+                        <div className="insights_datas_info_mantenimiento_datos_barras_color_Fallas" style={{
+                          width: `${((insightsData?.insights?.FAIL?.total || 0) / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
+                            }%`,
+                          backgroundColor: isLoading != true ? "#FEF5C7" : '',
+                        }} onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
                           <Tooltip label="Ver mas">
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
-                            {isLoading == true ? (
-                            <>
-                              <div style={{ width: "2rem", height: "1rem" }}>
-                                <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                              </div>
-                            </>
-                          ) : insightsData?.insights?.FAIL?.level === undefined
+                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
+                              {isLoading == true ? (
+                                <>
+                                  <div style={{ width: "2rem", height: "1rem" }}>
+                                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                                  </div>
+                                </>
+                              ) : insightsData?.insights?.FAIL?.level === undefined
                                 ? "Sin registro"
                                 : insightsData?.insights?.FAIL?.level ===
-                                "FAIL"
-                                ? "Fallas"
-                                : ''}
+                                  "FAIL"
+                                  ? "Fallas"
+                                  : ''}
                             </div>
                           </Tooltip>
                         </div>
@@ -553,30 +484,30 @@ export const Insights = () => {
                       <div
                         key={2}
                         className="insights_datas_info_mantenimiento_datos_barras">
-                        <div className="insights_datas_info_mantenimiento_datos_barras_color_Alertas" style={{                           
-                          width: `${((insightsData?.insights?.ALERT?.total||0)  / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
-                                  }%`,
+                        <div className="insights_datas_info_mantenimiento_datos_barras_color_Alertas" style={{
+                          width: `${((insightsData?.insights?.ALERT?.total || 0) / (Number(insightsData?.insights?.ALERT?.total) + Number(insightsData?.insights?.FAIL?.total))) * 100
+                            }%`,
                           backgroundColor: isLoading != true ? "#fef5c7" : ''
-                        }} onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}
+                        }} onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}
                         >
                           <Tooltip label="Ver mas">
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={()=>{openDrawer(IconEquiposTransmitiendo,'Equipos Transmitiendo')}}>
-                            {isLoading == true ? (
-                            <>
-                              <div style={{ width: "2rem", height: "1rem" }}>
-                                <Skeleton height={15} mt={6} width="100%" radius="xl" />
-                              </div>
-                            </>
-                          ) : insightsData?.insights?.ALERT?.level === undefined
+                            <div className="insights_datas_info_mantenimiento_datos_barras_title" onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
+                              {isLoading == true ? (
+                                <>
+                                  <div style={{ width: "2rem", height: "1rem" }}>
+                                    <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                                  </div>
+                                </>
+                              ) : insightsData?.insights?.ALERT?.level === undefined
                                 ? "Sin registro"
                                 : insightsData?.insights?.ALERT?.level ===
-                                "ALERT"
-                                ? "Alertas"
-                                : ''}
+                                  "ALERT"
+                                  ? "Alertas"
+                                  : ''}
                             </div>
                           </Tooltip>
                         </div>
-                        <div className="insights_datas_info_mantenimiento_datos_barras_cantidad" 
+                        <div className="insights_datas_info_mantenimiento_datos_barras_cantidad"
                         >
                           {isLoading == true ? (
                             <>
@@ -591,7 +522,7 @@ export const Insights = () => {
                           )}
                         </div>
                       </div>
-                    </section>                  
+                    </section>
                   </div>
                 </div>
               </div>
@@ -599,7 +530,7 @@ export const Insights = () => {
           </section>
         </section>
       </section>
-      <DrawerNS opened={opened} close={close} values={drawerValues} setvalues={setDrawerValues} />
+      <DrawerNS opened={opened} close={close} values={drawerValues} setvalues={setDrawerValues} dto={dto} level={'OPE'} selectedAlgorithm={"COMPRESSOR_FAIL"} />
     </div>
   )
 }
