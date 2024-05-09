@@ -4,6 +4,8 @@ import { IconArrowDownRight } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import { Tabs } from "@mantine/core";
 import { Drawer } from "@mantine/core";
+import { BarChart } from "@tremor/react";
+import Plot from "react-plotly.js";
 
 export default function DrawerInversion({ opened, onClose, coolersData }) {
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
@@ -14,98 +16,20 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
     setMostrarVentanaEmergente(false);
   };
 
-  // datos grafica lineal
+  // Gráfica de barras
   const chartdata = [
     {
-      year: 1970,
-      "Export Growth Rate": 2.04,
-      "Import Growth Rate": 1.53,
+      name: "2023",
+      "Gasto real": 2488,
     },
     {
-      year: 1971,
-      "Export Growth Rate": 1.96,
-      "Import Growth Rate": 1.58,
-    },
-    {
-      year: 1972,
-      "Export Growth Rate": 1.96,
-      "Import Growth Rate": 1.61,
-    },
-    {
-      year: 1973,
-      "Export Growth Rate": 1.93,
-      "Import Growth Rate": 1.61,
-    },
-    {
-      year: 1974,
-      "Export Growth Rate": 1.88,
-      "Import Growth Rate": 1.67,
-    },
-    //...
-  ];
-  // datos grafica de barras
-  const chartdata3 = [
-    {
-      date: "Jan 23",
-      "2022": 45,
-      "2023": 78,
-    },
-    {
-      date: "Feb 23",
-      "2022": 52,
-      "2023": 71,
-    },
-    {
-      date: "Mar 23",
-      "2022": 48,
-      "2023": 80,
-    },
-    {
-      date: "Apr 23",
-      "2022": 61,
-      "2023": 65,
-    },
-    {
-      date: "May 23",
-      "2022": 55,
-      "2023": 58,
-    },
-    {
-      date: "Jun 23",
-      "2022": 67,
-      "2023": 62,
-    },
-    {
-      date: "Jul 23",
-      "2022": 60,
-      "2023": 54,
-    },
-    {
-      date: "Aug 23",
-      "2022": 72,
-      "2023": 49,
-    },
-    {
-      date: "Sep 23",
-      "2022": 65,
-      "2023": 52,
-    },
-    {
-      date: "Oct 23",
-      "2022": 68,
-      "2023": null,
-    },
-    {
-      date: "Nov 23",
-      "2022": 74,
-      "2023": null,
-    },
-    {
-      date: "Dec 23",
-      "2022": 71,
-      "2023": null,
+      name: "2024",
+      "Gasto real": 1445,
     },
   ];
+
+  const dataFormatter = (number: number) =>
+    Intl.NumberFormat("us").format(number).toString();
 
   return (
     <Drawer
@@ -152,22 +76,30 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   alignSelf: "stretch",
                 }}
               >
-                <img
-                  src={"../../sampleData/commerce.png"}
-                  alt="cooler"
-                  style={{ width: "15px", height: "15px" }}
-                ></img>
                 <div
                   style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
-                  Inversión total en el enfriador
+                  <img
+                    src={"../../sampleData/commerce.png"}
+                    alt="cooler"
+                    style={{ width: "15px", height: "15px" }}
+                  ></img>
+                  <div
+                    style={{
+                      color: "#3A3A3F",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                      marginLeft: 5,
+                    }}
+                  >
+                    Inversión total en el enfriador
+                  </div>
                 </div>
                 <div
                   style={{
@@ -372,22 +304,25 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   alignSelf: "stretch",
                 }}
               >
-                <img
-                  src={"../../sampleData/commerce.png"}
-                  alt="cooler"
-                  style={{ width: "15px", height: "15px" }}
-                ></img>
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Depreciación Anual
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    src={"../../sampleData/commerce.png"}
+                    alt="cooler"
+                    style={{ width: "15px", height: "15px" }}
+                  ></img>
+                  <div
+                    style={{
+                      color: "#3A3A3F",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                      marginLeft: 5,
+                    }}
+                  >
+                    Depreciación Anual
+                  </div>
                 </div>
                 <div
                   style={{
@@ -884,23 +819,30 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   alignSelf: "stretch",
                 }}
               >
-                <img
-                  src={"../../sampleData/commerce2.png"}
-                  alt="cooler"
-                  style={{ width: "15px", height: "15px" }}
-                ></img>
-                <div
-                  style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1vw",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Costo acumulado por servicio
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    src={"../../sampleData/commerce2.png"}
+                    alt="cooler"
+                    style={{
+                      width: "15px",
+                      height: "15px",
+                      marginRight: "5px",
+                    }} // Agregamos margen derecho para separar el icono del texto
+                  />
+                  <div
+                    style={{
+                      color: "#3A3A3F",
+                      // fontFamily: "DM Sans",
+                      fontSize: "1vw",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    Costo acumulado por servicio
+                  </div>
                 </div>
+
                 <div
                   style={{
                     color: "#88888B",
@@ -1061,17 +1003,98 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         height: "130px",
                         // background: "red",
                       }}
-                    ></div>
+                    >
+                      <div
+                        style={{
+                          color: "#88888B",
+                          // fontFamily: "DM Sans",
+                          fontSize: "1vw",
+                          fontStyle: "normal",
+                          fontWeight: 500,
+                          lineHeight: "normal",
+                          marginTop: 30,
+                          marginLeft: 500,
+                        }}
+                      >
+                        Sin información para mostrar
+                      </div>
+                    </div>
                   </Tabs.Panel>
 
                   <Tabs.Panel value="second">
+                    {/* <div
+                      style={{
+                        width: "900px",
+                        height: "130px",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Plot
+                        data={[
+                          {
+                            x: coolersData?.yearly_invoice?.años.map(
+                              (año) => año
+                            ),
+                            y: coolersData?.yearly_invoice?.total.map(
+                              (total) => total
+                            ),
+                            type: "bar",
+                            mode: "markers",
+                            name: "Gasto real",
+                            marker: {
+                              color: "#FFC7CD",
+                              line: {
+                                color: " #ec547c ",
+                                width: 1,
+                              },
+                            },
+                          },
+                        ]}
+                        layout={{
+                          paper_bgcolor: "rgba(0,0,0,0)",
+                          plot_bgcolor: "rgba(0,0,0,0)",
+                          width: 600,
+                          height: 200,
+                          margin: {
+                            t: 10,
+                            l: 50,
+                            r: 10,
+                            b: 40,
+                          },
+                          xaxis: {
+                            tickvals: coolersData?.yearly_invoice?.años.map(
+                              (año) => año
+                            ),
+                            ticktext: coolersData?.yearly_invoice?.años.map(
+                              (año) => año
+                            ),
+                          },
+                        }}
+                      />
+                    </div> */}
                     <div
                       style={{
                         width: "900px",
                         height: "130px",
                         // background: "red",
                       }}
-                    ></div>
+                    >
+                      <div
+                        style={{
+                          color: "#88888B",
+                          // fontFamily: "DM Sans",
+                          fontSize: "1vw",
+                          fontStyle: "normal",
+                          fontWeight: 500,
+                          lineHeight: "normal",
+                          marginTop: 30,
+                          marginLeft: 500,
+                        }}
+                      >
+                        Sin información para mostrar
+                      </div>
+                    </div>
                   </Tabs.Panel>
                 </div>
               </Tabs>

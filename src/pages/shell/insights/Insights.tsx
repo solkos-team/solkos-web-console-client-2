@@ -1621,7 +1621,7 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body, setIsLoading);
       setInsightsData(data);
-      console.log(data);
+      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching insights:", error);
@@ -1876,7 +1876,9 @@ export default function Insights() {
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.assets_analytics[1]?.percentage + "%"
+                        insightsData?.assets_analytics[1]?.percentage.toFixed(
+                          1
+                        ) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
@@ -1920,7 +1922,9 @@ export default function Insights() {
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.assets_analytics[2]?.percentage + "%"
+                        insightsData?.assets_analytics[2]?.percentage.toFixed(
+                          1
+                        ) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">

@@ -22,7 +22,7 @@ export default function DrawerNewUser({
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
-  console.log(dt.length);
+  // console.log(dt.length);
   const clearInputs = () => {
     setName("");
     setEmail("");
