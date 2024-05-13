@@ -288,6 +288,38 @@ export default function CoolerDetailCC() {
                 </div>
                 <div
                   style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "flex-start",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.625rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#000000",
+                        // fontFamily: "DM Sans",
+                        fontSize: "1.25rem",
+                        fontStyle: "normal",
+                        lineHeight: "normal",
+                      }}
+                    >
+                      {coolersData?.cooler?.asset_number === undefined ||
+                      coolersData?.cooler?.asset_number === ""
+                        ? "Sin registro"
+                        : coolersData?.cooler?.asset_number}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
                     color: "#88888B",
                     // fontFamily: "DM Mono",
                     fontSize: "0.75rem",
@@ -603,6 +635,7 @@ export default function CoolerDetailCC() {
             </div>
           </div>
         </section>
+        <br></br>
         <hr className="detail_hr" style={{ marginTop: 2 }} />
         <section className="detail_principal_body_content">
           <section className="detail_principal_actividad_acerca_1">

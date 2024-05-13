@@ -339,6 +339,7 @@ export default function CoolersCC() {
             overflowY: "auto",
           }}
         >
+          {/* <table style={{ display: coolersData === undefined ? "none" : "table" }}> */}
           <table>
             <thead>
               <tr>

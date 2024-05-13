@@ -1,42 +1,99 @@
 import React, { useState, useEffect } from "react";
-import PageFilter from "../../../components/pageFilter";
-import { useDisclosure } from "@mantine/hooks";
+import { tableauFetch } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
+import TableauReport from "tableau-react";
+import PageFilter from "../../../components/pageFilter";
+import { Loader } from "@mantine/core";
 
 export default function Panel() {
+  const [data, setData] = useState<string | null>("");
+  const [isLoading, setIsLoading] = useState(true);
+  const URL = `https://us-central1-imberalink-238816.cloudfunctions.net/get-trusted-ticket-cors`;
   const dt = useSelector((state: any) => state.works);
-  const pathVerify = () => {
+  const dto = useSelector((state: any) => state.organization);
+  function pathVerify() {
     return dt.length === 0 ? [] : JSON.parse(dt);
+  }
+  const verifiedPath = pathVerify();
+  const region = verifiedPath[0] || "";
+  const zone = verifiedPath[1] || "";
+  const operative_unit = verifiedPath[2] || "";
+  const route = verifiedPath[3] || "";
+
+  const fetchToken = async () => {
+    try {
+      const data = await tableauFetch(URL, setIsLoading);
+      const datos = await data;
+      setData(datos);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
-  // console.log(pathVerify()[0]);
-  // console.log(pathVerify()[1]);
-  const region = pathVerify()[0] === undefined ? "" : pathVerify()[0];
-  const zone = pathVerify()[1] === undefined ? "" : pathVerify()[1];
-  const operative_unit = pathVerify()[2] === undefined ? "" : pathVerify()[2];
-  const route = pathVerify()[3] === undefined ? "" : pathVerify()[3];
-  const iframeUrl = `https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y&region=${region}&management_zone=${zone}&operative_unit=${operative_unit}&route=${route}`;
-  // const iframeUrl = `https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y&region=Golfo&management_zone=Huasteca&operative_unit=&route=`;
 
-  // console.log(region, zone, operative_unit, route);
-  // Page (Body)
   useEffect(() => {
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+    fetchToken();
+  }, [region, zone, operative_unit, route]);
 
+  // console.log(data);
+  // console.log(isLoading);
+
+  const options = {
+    height: "800px",
+    width: "80%",
+  };
+
+  const parameters = {
+    region: region,
+    management_zone: zone,
+    operative_unit: operative_unit,
+    route: route,
+  };
   return (
-    <>
-      <PageFilter />
-      <iframe
-        src={iframeUrl}
-        title="iframe Example 1"
-        width="900"
-        height="800"
-        style={{ marginLeft: -30, marginTop: 20, border: "none" }}
-      >
-        <p></p>
-      </iframe>
-    </>
+    <section>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {dto === "Yza" ? (
+            <>
+              <PageFilter />
+              <br></br>
+              <TableauReport
+                url="https://tableau.efemsa.com/views/Yza/Performance?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
+                token={data}
+                options={options}
+              />
+            </>
+          ) : dto === "KOF" ? (
+            <>
+              <PageFilter />
+              <br></br>
+              <TableauReport
+                url={`https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                token={data}
+                options={options}
+                parameters={parameters}
+                query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+              />
+            </>
+          ) : dto === "HEINEKEN" ? (
+            <>
+              <PageFilter />
+              <br></br>
+              <TableauReport
+                url={`https://tableau.efemsa.com/views/HNK_17151853863070/Cobertura?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                token={data}
+                options={{ height: "800px", width: "100%" }}
+                parameters={parameters}
+                query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+              />
+            </>
+          ) : (
+            "Sin información"
+          )}
+        </>
+      )}
+    </section>
   );
 }
