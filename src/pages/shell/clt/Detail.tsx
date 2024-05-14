@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { Tooltip, Skeleton } from "@mantine/core";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
 import "moment/locale/es";
@@ -59,9 +59,19 @@ export default function CoolerDetail() {
       console.error("Error:", error);
     }
   };
-
+  const [fechaActual,setFechaActual] = useState('')
+  const [fechaAnterior,setFechaAnterior] = useState('')
+  function getFechas() {
+    var fechaActual = new Date();
+    var fechaAnterior = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() - 30);    
+    var fechaActualFormateada = fechaActual.toISOString().split('T')[0];
+    var fechaAnteriorFormateada = fechaAnterior.toISOString().split('T')[0];    
+    setFechaActual(fechaActualFormateada);
+    setFechaAnterior(fechaAnteriorFormateada);
+}
   useEffect(() => {
-    fetchData(serie);
+    fetchData(serie);  
+    getFechas() 
   }, []);
 
   useEffect(() => {}, [serial_number, coolersData]);
@@ -71,6 +81,7 @@ export default function CoolerDetail() {
       : fetchData(value);
     setEditSerie(false);
   };
+
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -600,6 +611,9 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
+                <div style={{ display: "none", justifyContent: "space-between" }}>
+                  <Link to={`/home/coolView/?device_id=${coolersData?.cooler.device_id}&date_from=${fechaAnterior}&date_to=${fechaActual}&clt=false`} style={{ fontSize: "0.625rem" }}>Ver en CoolView</Link>
+                </div>
             </div>
           </div>
         </section>
