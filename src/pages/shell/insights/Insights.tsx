@@ -1590,6 +1590,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import MapInsightsComponent from "../../../components/mapInsights";
 import { pathVerify } from "../../../Functions/pathVerify";
+import { AcercaDeLosEquiposIcon } from "../../../sampleData/icons";
 import {
   InsightsData,
   CoolerInterface as Cooler,
@@ -1597,6 +1598,8 @@ import {
 import { Insights as InsightsIT } from "../../../interfaces/InsightsInterfaces";
 import { Skeleton, Tooltip } from "@mantine/core";
 import { MapInsights } from "./MapInsights";
+import { HeaderInsights } from "./Responsive/HeaderInsights";
+import { MapInsightsResponsive } from "./Responsive/MapInsightsResponsive";
 export default function Insights() {
   const [insightsData, setInsightsData] = useState<InsightsIT | null>(null);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
@@ -1676,13 +1679,14 @@ export default function Insights() {
           <p className="insights_title_p">
             Ve el panorama general de los enfriadores y toma acciones
           </p>
+          <HeaderInsights />
         </section>
         <section className="insights_principal">
           <section className="insights_mapa">
             <div className="insights_mapa_info_title">
               <img
                 className="insights_mapa_info_title_mapa"
-                src={"../../sampleData/map.svg"}
+                src={AcercaDeLosEquiposIcon}
                 alt="Descripción de la imagen"
                 style={{ width: "20px", height: "20px" }}
               />
@@ -1791,6 +1795,7 @@ export default function Insights() {
                   data={insightsData?.geo_data}
                 />
               }
+              <MapInsightsResponsive />
             </div>
           </section>
           <section className="insights_datas">
@@ -1798,7 +1803,7 @@ export default function Insights() {
               <div className="insights_datas_kpi">
                 <div className="insights_datas_kpi_title">
                   <img
-                    src={"../../sampleData/kpi.svg"}
+                    src={AcercaDeLosEquiposIcon}
                     alt="Descripción de la imagen"
                     style={{ width: "20px", height: "20px" }}
                   />

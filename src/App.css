@@ -180,6 +180,9 @@ table th {
   display: flex;
   flex-direction: column;
 }
+.insights_title_responsive{
+  display: none;
+}
 .insights_title_h1 {
   width: 100%;
   height: 40%;
@@ -232,6 +235,9 @@ table th {
   margin-top: 1rem;
   height: 100%;
   border-radius: 0.5rem;
+}
+.MapInsightsResponsive {
+  display: none;  
 }
 .insights_mapa_info_title {
   height: 5%;
@@ -393,7 +399,8 @@ table th {
 }
 .insightsNS_datas_statusTransmition_data_data {
   width: 100%;
-  height: 33%;
+  /* height: 33%; */
+  height: 28%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -1345,6 +1352,18 @@ body {
 
 /* Inicia media responsive SMARTHPHONES */
 @media (width <= 767px) {
+  .insights_title_responsive{
+    display: contents;
+  }
+  .insights_title{
+    height: fit-content;
+  }
+  .insights_title_h1{
+    display: none;
+  }
+  .insights_title_p{
+    display: none;
+  }
   .insights_principal_container {
     gap: 0.5rem;
   }
@@ -1356,8 +1375,8 @@ body {
   .insights_mapa {
     display: flex;
     flex-direction: column;
-    width: 87%;
-    height: 64%;
+    width: 89%;
+    height: fit-content;
     gap: 1vw;
   }
   .insights_mapa_info_datas {
@@ -1402,7 +1421,7 @@ body {
     gap: 12px;
   }
   .insigths_datas_info2_control {
-    width: 87%;
+    width: 89%;
     height: fit-content;
     margin-top: 1rem;
   }
@@ -1429,7 +1448,25 @@ body {
     text-overflow: ellipsis; */
   }
   .insights_mapa_info_mapa {
-    height: 70%;
+    height: fit-content;    
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+  }
+  .MapInsights{
+    display: none;
+  }
+  .MapInsightsResponsive {
+    display: flex;
+    width: 8.2rem;
+    height: 3rem;
+    padding: 1px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 32px;
+    background: var(--pink-6, #ED5079);
+    color: #fff;
   }
   .principal_paginator {
     /* width: 100%;     */
