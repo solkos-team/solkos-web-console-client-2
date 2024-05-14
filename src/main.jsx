@@ -26,6 +26,7 @@ import { MapInsights } from "./pages/shell/insights/MapInsights.tsx";
 import { Insights as InsightsNS } from "./pages/shell/nuevosSegmentos/Insights/Insights.tsx";
 import { clt as CltNS } from "./pages/shell/nuevosSegmentos/clt_n/clt.tsx";
 import { Detail } from "./pages/shell/nuevosSegmentos/clt_n/detail.tsx";
+import { CoolView } from "./pages/shell/coolView/coolView.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -65,6 +66,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 {/* Login */}
                 <Route path="/home/login" element={<Login />} />
                 <Route path="/home/grafica" element={<MapInsights />} />
+                <Route path="/home/coolView" element={<CoolView />} />
               </Route>
             </Routes>
             <Routes>
