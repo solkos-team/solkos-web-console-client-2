@@ -434,7 +434,7 @@ table th {
   gap: 1rem;
 }
 .insights_drawer_header_max {
-  width: 35%;
+  width: fit-content;
   height: max-content;
   padding: 8px;
   flex-direction: column;
