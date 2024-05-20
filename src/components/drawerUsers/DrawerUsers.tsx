@@ -195,6 +195,7 @@ export default function DrawerUsers({
                   cursor: "pointer",
                 }}
                 onClick={handleEditUser}
+                disabled={true}
               >
                 Editar usuario
               </Button>

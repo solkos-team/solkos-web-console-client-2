@@ -347,3 +347,30 @@ export const tableauFetch = async (URL?, setIsLoading?) => {
     throw error;
   }
 };
+
+export const fetchSearchUniversal = async (URL, setIsLoading, data) => {
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+  };
+
+  const cuerpo = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(URL, cuerpo);
+    if (!response.ok) {
+      throw new Error("Error fetching search universal");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};

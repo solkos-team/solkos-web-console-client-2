@@ -153,18 +153,7 @@ export default function Indicator() {
               coolersData &&
               coolersData
                 .filter(
-                  (cooler) =>
-                    cooler.class === "ASSET_MANAGEMENT_ACTIONABLE" &&
-                    (cooler.algorithm === "Sin Riesgo" ||
-                      cooler.algorithm === "Visita PdV" ||
-                      cooler.algorithm === "Actualizar Info" ||
-                      cooler.algorithm === "Estatus sin venta" ||
-                      cooler.algorithm === "Acciones urgentes" ||
-                      cooler.algorithm === "Actualizar dato" ||
-                      cooler.algorithm === "Seguimiento a equipo" ||
-                      cooler.algorithm === "Solicitar serv. correctivo" ||
-                      cooler.algorithm === "Visita PdV" ||
-                      cooler.algorithm === "Vista PdV prioritaria")
+                  (cooler) => cooler.class === "ASSET_MANAGEMENT_ACTIONABLE"
                 )
 
                 .sort((a, b) => {
