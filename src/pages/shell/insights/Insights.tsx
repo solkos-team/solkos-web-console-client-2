@@ -1679,7 +1679,7 @@ export default function Insights() {
           <p className="insights_title_p">
             Ve el panorama general de los enfriadores y toma acciones
           </p>
-          <HeaderInsights />
+          <HeaderInsights title={'Cooler Insights'} description={'Haz un seguimiento de todos los parámetros de cada uno de tus enfriadores'} />
         </section>
         <section className="insights_principal">
           <section className="insights_mapa">

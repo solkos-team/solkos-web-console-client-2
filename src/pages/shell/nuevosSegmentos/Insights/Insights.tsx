@@ -402,12 +402,35 @@ const fetchDataAlertas = async () => {
                     <div>Cantidad</div>
                   </div>
                   <div className="insightsNS_datas_statusTransmition_data_data" onClick={() => { openDrawer(IconEquiposTransmitiendo, 'Equipos Transmitiendo') }}>
-                    <div style={{ width: '50%', backgroundColor: '#C0F2C8', borderRadius: '4px' }}>Transmitiendo</div>
-                    <div>10</div>
+                    {isLoading == true ? 
+                    (
+                      <>
+                        <div style={{ width: "30%", height: "1rem" }}>
+                          <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                        </div>
+                      </>
+                    ):
+                    <React.Fragment>
+                      <div style={{ width: '50%', backgroundColor: '#C0F2C8', borderRadius: '4px' }}>Transmitiendo</div>
+                      <div>10</div>
+                    </React.Fragment>                    
+                    }                    
                   </div>
                   <div className="insightsNS_datas_statusTransmition_data_data" onClick={() => { openDrawer(IconEquiposNoTransmitiendo, 'Equipos no transmitiendo') }}>
-                    <div style={{ width: '20%', backgroundColor: '#FFC7CD', borderRadius: '4px' }}>Sin Transmisión</div>
-                    <div>2</div>
+                    {
+                      isLoading == true ? 
+                      (
+                        <>
+                          <div style={{ width: "30%", height: "1rem" }}>
+                            <Skeleton height={15} mt={6} width="100%" radius="xl" />
+                          </div>
+                        </>
+                      ) :
+                      <React.Fragment>
+                        <div style={{ width: '20%', backgroundColor: '#FFC7CD', borderRadius: '4px' }}>Sin Transmisión</div>
+                        <div>2</div>
+                      </React.Fragment>
+                    }                    
                   </div>
                 </div>
               </div>

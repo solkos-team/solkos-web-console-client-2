@@ -347,7 +347,7 @@ table th {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.5rem;
 }
 .insights_datas_kpi_title {
   display: flex;
@@ -414,6 +414,7 @@ table th {
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .insights_drawer_header {
   width: 100%;
@@ -1605,4 +1606,7 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+.mantine-v4lv9f{
+  border-bottom: 1px solid transparent;
 }
