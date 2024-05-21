@@ -11,6 +11,7 @@ import { TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../interfaces/CoolerInterface";
+import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
 
 export default function Outlets() {
   const [searchValue, setSearchValue] = useState("");
@@ -152,178 +153,56 @@ export default function Outlets() {
     return rows;
   };
   return (
-    <div>
-      <PageFilter status={isLoading} />
-      <br></br>
-      <div
-        style={{
-          display: "flex",
-          padding: "16px 0px",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          gap: "16px",
-          flex: 100,
-          alignSelf: "stretch",
-          width: "100%",
-          marginLeft: 0,
-        }}
-      >
+    <section className="pdv_principal">
+      <section className="pdv_pathfilter">
+        <PageFilter status={isLoading} />      
+      </section>
+      <section className="pdv_titleInfo">
+        <div className="insights_title_h1">Puntos de venta</div>
+        <p className="insights_title_p">
+          Catálogo de los puntos de venta, realiza el seguimiento adecuado
+          para cada uno de ellos.
+        </p>
+        <p className="insights_title_p">Tabla</p>                
+        <p className="insights_title_p" style={{fontSize:'14px',color:'#000005'}}>Puntos de Venta</p>                
+      </section>
+      <section className="pdv_pathTable">
         <div
           style={{
             display: "flex",
-            padding: "0px 32px",
-            flexDirection: "column",
-            alignItems: "flex-start",
+            padding: "32px 0px",
+            justifyContent: "center",
+            alignItems: "center",
             alignSelf: "stretch",
-            width: "90%",
+            width: "100%",
+            marginTop: -30,
           }}
         >
-          <div
+          <TextInput
+            value={searchValue}
+            onChange={(event) => handleSearchChange(event)}
+            onKeyDown={handleKeyDown}
+            type="text"
+            placeholder="Busca por punto de venta"
             style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
-              fontSize: "1.5rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "155%",
-              marginLeft: -55,
-            }}
-          >
-            Puntos de venta
-          </div>
-          <div
-            style={{
-              color: "#88888B",
-              // fontFamily: "DM Sans",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "155%",
-              marginLeft: -55,
-            }}
-          >
-            Catálogo de los puntos de venta, realiza el seguimiento adecuado
-            para cada uno de ellos.
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 2rem",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            alignSelf: "stretch",
-            width: "90%",
-          }}
-        >
-          <h1
-            style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
               fontSize: "0.8rem",
               fontStyle: "normal",
               fontWeight: 500,
-              lineHeight: "155%",
-              marginLeft: -55,
-            }}
-          >
-            Tabla
-          </h1>
-          <div
-            style={{
-              display: "flex",
+              lineHeight: "1,8rem",
               width: "100%",
-              justifyContent: "space-between",
+              paddingRight: "2.5rem",
+              margin: 0,
+              borderRadius: "4px",
+              color: "#88888B",
             }}
-          >
-            <h1
-              style={{
-                color: "#88888B",
-                // fontFamily: "DM Sans",
-                fontSize: "1.0rem",
-                fontStyle: "normal",
-                fontWeight: 300,
-                marginLeft: -55,
-                marginTop: -10,
-              }}
-            >
-              Puntos de Venta
-            </h1>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                marginTop: -15,
-              }}
-            >
-              <div>
-                <ExportToExcel
-                  datos={filteredOutlets}
-                  nombre={"Puntos de Venta"}
-                  body={body}
-                  component="outlets"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Tabla */}
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 32px",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "0px",
-            alignSelf: "stretch",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          ></div>
-          <div
-            style={{
-              display: "flex",
-              padding: "32px 0px",
-              justifyContent: "center",
-              alignItems: "center",
-              alignSelf: "stretch",
-              width: "100%",
-              marginTop: -30,
-            }}
-          >
-            <TextInput
-              value={searchValue}
-              onChange={(event) => handleSearchChange(event)}
-              onKeyDown={handleKeyDown}
-              type="text"
-              placeholder="Busca por punto de venta"
-              style={{
-                fontSize: "0.8rem",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "1,8rem",
-                width: "100%",
-                paddingRight: "2.5rem",
-                margin: 0,
-                borderRadius: "4px",
-                color: "#88888B",
-              }}
-            />
-          </div>
+          />
         </div>
         <section
-          style={{
-            marginLeft: -55,
+          style={{            
             width: "100%",
-            height: "100%",
+            height: "30vw",
             overflowY: "auto",
+            scrollbarWidth:'thin'
           }}
         >
           <table>
@@ -569,7 +448,7 @@ export default function Outlets() {
             numero={setNumero}
           />
         </section>
-      </div>
+      </section>
       {selectedOutletDetails && (
         <DrawerO
           opened={opened}
@@ -577,6 +456,6 @@ export default function Outlets() {
           outletDetails={selectedOutletDetails}
         />
       )}
-    </div>
+    </section>
   );
 }

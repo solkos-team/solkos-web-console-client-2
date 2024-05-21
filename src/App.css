@@ -1282,7 +1282,17 @@ body {
   height: 63%;
   display: flex;
 }
-
+.pdv_principal{
+  width: 100%;  
+  display: flex;
+  flex-direction: column;    
+}
+.pdv_titleInfo{
+  margin-left: -2rem;  
+}
+.pdv_pathTable{  
+  margin-left: -2rem;
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
