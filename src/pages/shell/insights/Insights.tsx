@@ -1624,7 +1624,6 @@ export default function Insights() {
     try {
       const data = await fetchUniversal("insights", body, setIsLoading);
       setInsightsData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching insights:", error);

@@ -937,6 +937,11 @@ body {
   display: flex;
   align-items: center;
 }
+.pagefilter_container_items{
+  display: flex;
+  flex-direction: row;  
+  width: fit-content;
+}
 .pagefilter_container_principal_customer_container {
   display: flex;
   align-items: center;
@@ -1353,9 +1358,24 @@ body {
 
 /* Inicia media responsive SMARTHPHONES */
 @media (width <= 767px) {
+  .return_principal{
+    display: none;
+  }
+  .pagefilter_container_items{
+    overflow: auto;
+    scrollbar-width: thin;
+    scroll-snap-type: x;
+    width: 43%;
+  }
+  .pagefilter_container_principal{
+    border: 1px solid transparent;
+  }
+  .pagefilter_container_principal_addFilter{
+    width: fit-content;
+  }
   .insights_title_responsive{
     display: contents;
-  }
+  }  
   .insights_title{
     height: fit-content;
   }

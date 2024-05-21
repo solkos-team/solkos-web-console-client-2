@@ -210,19 +210,20 @@ export default function (props) {
           <IconArrowNarrowLeft color="black" />
         </section>
         <section className="pagefilter_container_principal">
-          <div className="pagefilter_container_principal_customer">
-            <div className="pagefilter_container_principal_customer_container">
-              <IconLock className="pagefilter_container_principal_customer_container_icon" />
-              <Text className="pagefilter_container_principal_customer_container_text">
-                {dto || "CLIENTE"}
-              </Text>
+          <div className="pagefilter_container_items">
+            <div className="pagefilter_container_principal_customer">
+              <div className="pagefilter_container_principal_customer_container">
+                <IconLock className="pagefilter_container_principal_customer_container_icon" />
+                <Text className="pagefilter_container_principal_customer_container_text">
+                  {dto || "CLIENTE"}
+                </Text>
+              </div>
+              <IconChevronRight className="pagefilter_container_principal_customer_container_icon_right" />
             </div>
-            <IconChevronRight className="pagefilter_container_principal_customer_container_icon_right" />
-          </div>
-          {data === null || data === undefined
-            ? []
-            : data.map((item, i) => (
-                <div style={{ display: "flex", alignItems: "center" }} key={i}>
+            {data === null || data === undefined
+              ? []
+              : data.map((item, i) => (
+                <div style={{ display: "flex", alignItems: "center",scrollSnapAlign:'end' }} key={i}>
                   <button
                     style={{
                       display: "flex",
@@ -296,76 +297,78 @@ export default function (props) {
                 </div>
               ))}
 
-          {/* ---------------------- */}
+            {/* ---------------------- */}
+            
+          </div>
           {filterVisibility ? (
-            <div
-              style={{
-                visibility:
-                  props.status == true || props.disabledPath == true
-                    ? "hidden"
-                    : "visible",
-              }}
-              className="pagefilter_container_principal_addFilter"
-            >
-              <IconCirclePlus
-                className="pagefilter_container_principal_addFilter_iconCircle"
-                onClick={() => setOpened((o) => !o)}
-              />
-              <Popover
-                position="bottom"
-                withArrow
-                shadow="md"
-                opened={opened}
-                onClose={() => setOpened(false)}
-                onChange={(opened) => {
-                  setOpened(opened);
+              <div
+                style={{
+                  visibility:
+                    props.status == true || props.disabledPath == true
+                      ? "hidden"
+                      : "visible",
                 }}
+                className="pagefilter_container_principal_addFilter"
               >
-                <Popover.Target>
-                  <Text
-                    style={{
-                      color: "#313A49",
-                      // fontFamily: "Space Mono",
-                      fontSize: "0.6rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "0.7rem",
-                      textTransform: "uppercase",
-                      userSelect: "none",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      setOpened((o) => !o);
-                      setStatus(false);
-                    }}
-                  >
-                    AÑADIR FILTRO
-                  </Text>
-                </Popover.Target>
-                <Popover.Dropdown>
-                  {isLoading == true ? (
-                    <>
-                      <Loader color="blue" size="xs" />
-                    </>
-                  ) : (
-                    <Select
-                      label={`Selecciona la ${dataSelect[pathVerify().length]}`}
-                      placeholder="Seleccionar"
-                      searchable
-                      defaultChecked
-                      data={dataZone[0]}
-                      // value={value}
-                      onChange={setValue}
-                      nothingFound="Dato no encontrado"
-                      dropdownPosition="flip"
-                    />
-                  )}
-                </Popover.Dropdown>
-              </Popover>
-            </div>
-          ) : (
-            ""
-          )}
+                <IconCirclePlus
+                  className="pagefilter_container_principal_addFilter_iconCircle"
+                  onClick={() => setOpened((o) => !o)}
+                />
+                <Popover
+                  position="bottom"
+                  withArrow
+                  shadow="md"
+                  opened={opened}
+                  onClose={() => setOpened(false)}
+                  onChange={(opened) => {
+                    setOpened(opened);
+                  }}
+                >
+                  <Popover.Target>
+                    <Text
+                      style={{
+                        color: "#313A49",
+                        // fontFamily: "Space Mono",
+                        fontSize: "0.6rem",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "0.7rem",
+                        textTransform: "uppercase",
+                        userSelect: "none",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        setOpened((o) => !o);
+                        setStatus(false);
+                      }}
+                    >
+                      AÑADIR FILTRO
+                    </Text>
+                  </Popover.Target>
+                  <Popover.Dropdown>
+                    {isLoading == true ? (
+                      <>
+                        <Loader color="blue" size="xs" />
+                      </>
+                    ) : (
+                      <Select
+                        label={`Selecciona la ${dataSelect[pathVerify().length]}`}
+                        placeholder="Seleccionar"
+                        searchable
+                        defaultChecked
+                        data={dataZone[0]}
+                        // value={value}
+                        onChange={setValue}
+                        nothingFound="Dato no encontrado"
+                        dropdownPosition="flip"
+                      />
+                    )}
+                  </Popover.Dropdown>
+                </Popover>
+              </div>
+            ) : (
+              ""
+            )}          
         </section>
         <div>
           <div
