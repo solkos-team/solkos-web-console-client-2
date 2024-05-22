@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pagination, Select } from "@mantine/core";
+import { Pagination, Select,Group } from "@mantine/core";
 import { Text } from "@mantine/core";
 export const PaginationComponent = ({
   accion,
@@ -26,13 +26,13 @@ export const PaginationComponent = ({
         // }}
       >
         <br />
-        <Pagination total={npage} onChange={handlePageChange} />
+        <Pagination total={npage} onChange={handlePageChange} />        
         <br />
+        <div style={{display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
         <Text>Por Página</Text>
-        <div>
           <Select
             checked={true}
-            // size="xs"
+            size="xs"
             radius="md"
             placeholder="Selecciona el numero de items"
             data={data}

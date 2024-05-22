@@ -1514,7 +1514,9 @@ body {
   .principal_paginator {
     /* width: 100%;     */
     height: fit-content;
-    margin-left: -3rem;
+    /* margin-left: -3rem; */
+    display: flex;
+    flex-direction: column;
   }
   .login_principal_form_label1_input1 {
     width: 70%;
