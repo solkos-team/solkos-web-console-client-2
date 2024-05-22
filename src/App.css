@@ -203,6 +203,12 @@ table th {
   line-height: 21.7px;
   color: #88888b;
 }
+.pdv_title_p{
+  width: 100%;
+  height: fit-content;  
+  display: flex;
+  justify-content: space-between;  
+}
 .insights_principal {
   width: 100%;
   /* height: 25rem; */
@@ -1293,6 +1299,12 @@ body {
 .pdv_pathTable{  
   margin-left: -2rem;
 }
+.pdv_table{
+  width: 100%;
+  height: 30vw;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -1547,6 +1559,9 @@ body {
   }
   .login_principal_title {
     width: 100%;
+  }
+  .pdv_table{
+    height: 140vw;
   }
 }
 /* Termina media */

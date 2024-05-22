@@ -163,21 +163,21 @@ export default function Outlets() {
           Catálogo de los puntos de venta, realiza el seguimiento adecuado
           para cada uno de ellos.
         </p>
+        <HeaderInsights title={'Puntos de venta'} description={'Catálogo de los puntos de venta, realiza el seguimiento adecuado para cada uno de ellos'} />
         <p className="insights_title_p">Tabla</p>                
-        <p className="insights_title_p" style={{fontSize:'14px',color:'#000005'}}>Puntos de Venta</p>                
+        <div className="pdv_title_p" >
+          <p style={{fontSize:'14px',color:'#000005'}}>
+            Puntos de Venta
+          </p>
+          <ExportToExcel
+                  datos={filteredOutlets}
+                  nombre={"Puntos de Venta"}
+                  body={body}
+                  component="outlets"
+                />
+        </div>                
       </section>
-      <section className="pdv_pathTable">
-        <div
-          style={{
-            display: "flex",
-            padding: "32px 0px",
-            justifyContent: "center",
-            alignItems: "center",
-            alignSelf: "stretch",
-            width: "100%",
-            marginTop: -30,
-          }}
-        >
+      <section className="pdv_pathTable">        
           <TextInput
             value={searchValue}
             onChange={(event) => handleSearchChange(event)}
@@ -196,15 +196,8 @@ export default function Outlets() {
               color: "#88888B",
             }}
           />
-        </div>
-        <section
-          style={{            
-            width: "100%",
-            height: "30vw",
-            overflowY: "auto",
-            scrollbarWidth:'thin'
-          }}
-        >
+          <br />
+        <section className="pdv_table">
           <table>
             <thead>
               <tr>
