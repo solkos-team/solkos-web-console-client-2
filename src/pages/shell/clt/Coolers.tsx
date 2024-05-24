@@ -389,55 +389,77 @@ export default function Coolers() {
                               // justifyContent: "center",
                               alignItems: "center",
                               gap: "4px",
-                              borderRadius: "2px",
+                              borderRadius: "4px",
                               background:
-                                cooler?.status === "EN FALLA"
-                                  ? "#FFC7CD"
-                                  : cooler?.status ===
-                                    "FUNCIONANDO CORRECTAMENTE"
-                                  ? "#DFF9E3"
+                                cooler?.status === "FUNCIONANDO CORRECTAMENTE"
+                                  ? "#B2F2BB"
                                   : cooler?.status === "FUNCIONANDO CON ALERTA"
-                                  ? "#FEF5C7"
-                                  : "#D4DAE3",
+                                  ? "#FFEC99"
+                                  : cooler?.status === "EN FALLA"
+                                  ? "#FFC9C9"
+                                  : cooler?.status === "EN ESPERA DE SERVICIO"
+                                  ? "#C7CBD2"
+                                  : cooler?.status === "EN ESPERA DE LECTURA"
+                                  ? "#A5D8FF"
+                                  : cooler?.status === "SERVICIO NO EFECTIVO"
+                                  ? "#FFC9C9"
+                                  : cooler?.status === "SERVICIO IMPRODUCTIVO"
+                                  ? "#FFC9C9"
+                                  : cooler?.status === "SIN DATOS"
+                                  ? "#C7CBD2"
+                                  : "#C7CBD2",
                               width: "fit-content",
                             }}
                           >
                             <div
                               style={{
-                                width: "4px",
-                                height: "4px",
+                                width: "5px",
+                                height: "5px",
                                 borderRadius: "5px",
                                 background:
-                                  cooler?.status === "EN FALLA"
-                                    ? "#F93448"
-                                    : cooler?.status ===
-                                      "FUNCIONANDO CORRECTAMENTE"
-                                    ? "#31B648"
+                                  cooler?.status === "FUNCIONANDO CORRECTAMENTE"
+                                    ? "#2B8A3E"
                                     : cooler?.status ===
                                       "FUNCIONANDO CON ALERTA"
-                                    ? "#F6A60A"
-                                    : "#808080",
+                                    ? "#E67700"
+                                    : cooler?.status === "EN FALLA"
+                                    ? "#E03131"
+                                    : cooler?.status === "EN ESPERA DE SERVICIO"
+                                    ? "#313A49"
+                                    : cooler?.status === "EN ESPERA DE LECTURA"
+                                    ? "#1864AB"
+                                    : cooler?.status === "SERVICIO NO EFECTIVO"
+                                    ? "#E03131"
+                                    : cooler?.status === "SERVICIO IMPRODUCTIVO"
+                                    ? "#E03131"
+                                    : cooler?.status === "SIN DATOS"
+                                    ? "#313A49"
+                                    : "#313A49",
                               }}
                             ></div>
                             <div
                               style={{
                                 color:
-                                  cooler?.status === "EN FALLA"
-                                    ? "#F93448"
-                                    : cooler?.status ===
-                                      "FUNCIONANDO CORRECTAMENTE"
-                                    ? "#1D5E29"
+                                  cooler?.status === "FUNCIONANDO CORRECTAMENTE"
+                                    ? "#2B8A3E"
                                     : cooler?.status ===
                                       "FUNCIONANDO CON ALERTA"
-                                    ? "#451C03"
-                                    : "black",
-                                // fontFamily: "Space Mono",
-                                // fontSize:
-                                //   cooler?.status === "FUNCIONANDO CORRECTAMENTE"
-                                //     ? ".75vw"
-                                //     : ".8vw",
+                                    ? "#E67700"
+                                    : cooler?.status === "EN FALLA"
+                                    ? "#E03131"
+                                    : cooler?.status === "EN ESPERA DE SERVICIO"
+                                    ? "#313A49"
+                                    : cooler?.status === "EN ESPERA DE LECTURA"
+                                    ? "#1864AB"
+                                    : cooler?.status === "SERVICIO NO EFECTIVO"
+                                    ? "#E03131"
+                                    : cooler?.status === "SERVICIO IMPRODUCTIVO"
+                                    ? "#E03131"
+                                    : cooler?.status === "SIN DATOS"
+                                    ? "#313A49"
+                                    : "#313A49",
                                 fontStyle: "normal",
-                                fontWeight: 400,
+                                fontWeight: 500,
                                 lineHeight: "14px",
                               }}
                             >
@@ -515,7 +537,23 @@ export default function Coolers() {
                                   ? "1.5px solid #F93448"
                                   : cooler.actionable === "Actualizar Info"
                                   ? "1.5px solid #DA7E05"
-                                  : "1.5px solid black",
+                                  : // : cooler.actionable === "Actualizar dato" ||
+                                    //   cooler.actionable === "Datos faltantes" ||
+                                    //   cooler.actionable === "Monitoreo" ||
+                                    //   cooler.actionable === "Movimiento"
+                                    // ? "1.5px solid #1864AB"
+                                    // : cooler.actionable ===
+                                    //     "Solicitar serv. correctivo" ||
+                                    //   cooler.actionable ===
+                                    //     "Solicitar serv. preventivos" ||
+                                    //   cooler.actionable ===
+                                    //     "Seguimiento a equipo" ||
+                                    //   cooler.actionable === "Visita PdV"
+                                    // ? "1.5px solid #E67700"
+                                    // : cooler.actionable ===
+                                    //   "Visita PdV prioritaria"
+                                    // ? "1.5px solid #C92A2A"
+                                    "1.5px solid black",
                               background: "#FFF",
                             }}
                           >
@@ -545,6 +583,59 @@ export default function Coolers() {
                                 style={{ width: "15px", height: "15px" }}
                               />
                             ) : (
+                              // : cooler.actionable === "Actualizar dato" ? (
+                              //   <img
+                              //     src={"../../sampleData/actDat.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable === "Datos faltantes" ? (
+                              //   <img
+                              //     src={"../../sampleData/datFal.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable === "Monitoreo" ? (
+                              //   <img
+                              //     src={"../../sampleData/Mont.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable === "Movimiento" ? (
+                              //   <img
+                              //     src={"../../sampleData/mov1.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable ===
+                              //     "Solicitar serv. correctivo" ||
+                              //   cooler.actionable ===
+                              //     "Solicitar serv. preventivos" ? (
+                              //   <img
+                              //     src={"../../sampleData/serCP.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable === "Seguimiento a equipo" ? (
+                              //   <img
+                              //     src={"../../sampleData/seguE.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable === "Visita PdV" ? (
+                              //   <img
+                              //     src={"../../sampleData/visitap.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // ) : cooler.actionable ===
+                              //   "Visita PdV prioritaria" ? (
+                              //   <img
+                              //     src={"../../sampleData/visitapd.svg"}
+                              //     alt="Descripción de la imagen"
+                              //     style={{ width: "15px", height: "15px" }}
+                              //   />
+                              // )
                               ""
                             )}
 
@@ -561,9 +652,24 @@ export default function Coolers() {
                                     ? "#F93448"
                                     : cooler.actionable === "Actualizar Info"
                                     ? "#DA7E05"
-                                    : "black",
-                                // fontFamily: "DM Sans",
-                                // fontSize: "1vw",
+                                    : // : cooler.actionable === "Actualizar dato" ||
+                                      //   cooler.actionable === "Datos faltantes" ||
+                                      //   cooler.actionable === "Monitoreo" ||
+                                      //   cooler.actionable === "Movimiento"
+                                      // ? "#1864AB"
+                                      // : cooler.actionable ===
+                                      //     "Solicitar serv. correctivo" ||
+                                      //   cooler.actionable ===
+                                      //     "Solicitar serv. preventivos" ||
+                                      //   cooler.actionable ===
+                                      //     "Seguimiento a equipo" ||
+                                      //   cooler.actionable === "Visita PdV"
+                                      // ? "#E67700"
+                                      // : cooler.actionable ===
+                                      //   "Visita PdV prioritaria"
+                                      // ? "#C92A2A"
+                                      "black",
+
                                 fontStyle: "normal",
                                 fontWeight: 600,
                                 lineHeight: "14px",

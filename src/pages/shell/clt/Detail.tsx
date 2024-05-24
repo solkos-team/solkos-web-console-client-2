@@ -53,25 +53,29 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      // console.log(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-  const [fechaActual,setFechaActual] = useState('')
-  const [fechaAnterior,setFechaAnterior] = useState('')
+  const [fechaActual, setFechaActual] = useState("");
+  const [fechaAnterior, setFechaAnterior] = useState("");
   function getFechas() {
     var fechaActual = new Date();
-    var fechaAnterior = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() - 30);    
-    var fechaActualFormateada = fechaActual.toISOString().split('T')[0];
-    var fechaAnteriorFormateada = fechaAnterior.toISOString().split('T')[0];    
+    var fechaAnterior = new Date(
+      fechaActual.getFullYear(),
+      fechaActual.getMonth(),
+      fechaActual.getDate() - 30
+    );
+    var fechaActualFormateada = fechaActual.toISOString().split("T")[0];
+    var fechaAnteriorFormateada = fechaAnterior.toISOString().split("T")[0];
     setFechaActual(fechaActualFormateada);
     setFechaAnterior(fechaAnteriorFormateada);
-}
+  }
   useEffect(() => {
-    fetchData(serie);  
-    getFechas() 
+    fetchData(serie);
+    getFechas();
   }, []);
 
   useEffect(() => {}, [serial_number, coolersData]);
@@ -229,7 +233,26 @@ export default function CoolerDetail() {
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
                               ? "1.5px solid #DA7E05"
-                              : "1.5px solid black",
+                              : // : coolersData?.cooler.actionable ===
+                                //     "Actualizar dato" ||
+                                //   coolersData?.cooler.actionable ===
+                                //     "Datos faltantes" ||
+                                //   coolersData?.cooler.actionable ===
+                                //     "Monitoreo" ||
+                                //   coolersData?.cooler.actionable === "Movimiento"
+                                // ? "1.5px solid #1864AB"
+                                // : coolersData?.cooler.actionable ===
+                                //     "Solicitar serv. correctivo" ||
+                                //   coolersData?.cooler.actionable ===
+                                //     "Solicitar serv. preventivos" ||
+                                //   coolersData?.cooler.actionable ===
+                                //     "Seguimiento a equipo" ||
+                                //   coolersData?.cooler.actionable === "Visita PdV"
+                                // ? "1.5px solid #E67700"
+                                // : coolersData?.cooler.actionable ===
+                                //   "Visita PdV prioritaria"
+                                // ? "1.5px solid #C92A2A"
+                                "1.5px solid black",
                           background: "#FFF",
                         }}
                       >
@@ -264,6 +287,62 @@ export default function CoolerDetail() {
                             style={{ width: "15px", height: "15px" }}
                           />
                         ) : (
+                          // : coolersData?.cooler.actionable ===
+                          //   "Actualizar dato" ? (
+                          //   <img
+                          //     src={"../../sampleData/actDat.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable ===
+                          //   "Datos faltantes" ? (
+                          //   <img
+                          //     src={"../../sampleData/datFal.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable === "Monitoreo" ? (
+                          //   <img
+                          //     src={"../../sampleData/Mont.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable === "Movimiento" ? (
+                          //   <img
+                          //     src={"../../sampleData/mov1.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable ===
+                          //     "Solicitar serv. correctivo" ||
+                          //   coolersData?.cooler.actionable ===
+                          //     "Solicitar serv. preventivos" ? (
+                          //   <img
+                          //     src={"../../sampleData/serCP.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable ===
+                          //   "Seguimiento a equipo" ? (
+                          //   <img
+                          //     src={"../../sampleData/seguE.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable === "Visita PdV" ? (
+                          //   <img
+                          //     src={"../../sampleData/visitap.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // ) : coolersData?.cooler.actionable ===
+                          //   "Visita PdV prioritaria" ? (
+                          //   <img
+                          //     src={"../../sampleData/visitapd.svg"}
+                          //     alt="Descripción de la imagen"
+                          //     style={{ width: "15px", height: "15px" }}
+                          //   />
+                          // )
                           ""
                         )}
 
@@ -283,7 +362,28 @@ export default function CoolerDetail() {
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
                                 ? "#DA7E05"
-                                : "black",
+                                : // : coolersData?.cooler.actionable ===
+                                  //     "Actualizar dato" ||
+                                  //   coolersData?.cooler.actionable ===
+                                  //     "Datos faltantes" ||
+                                  //   coolersData?.cooler.actionable ===
+                                  //     "Monitoreo" ||
+                                  //   coolersData?.cooler.actionable ===
+                                  //     "Movimiento"
+                                  // ? "#1864AB"
+                                  // : coolersData?.cooler.actionable ===
+                                  //     "Solicitar serv. correctivo" ||
+                                  //   coolersData?.cooler.actionable ===
+                                  //     "Solicitar serv. preventivos" ||
+                                  //   coolersData?.cooler.actionable ===
+                                  //     "Seguimiento a equipo" ||
+                                  //   coolersData?.cooler.actionable ===
+                                  //     "Visita PdV"
+                                  // ? "#E67700"
+                                  // : coolersData?.cooler.actionable ===
+                                  //   "Visita PdV prioritaria"
+                                  // ? "#C92A2A"
+                                  "black",
                             // fontFamily: "DM Sans",
                             fontSize: "0.875rem",
                             fontStyle: "normal",
@@ -337,50 +437,91 @@ export default function CoolerDetail() {
                         gap: "4px",
                         borderRadius: "2px",
                         background:
-                          coolersData?.cooler?.status === "EN FALLA"
-                            ? "#FFC7CD"
-                            : coolersData?.cooler?.status ===
-                              "FUNCIONANDO CORRECTAMENTE"
-                            ? "#DFF9E3"
+                          coolersData?.cooler?.status ===
+                          "FUNCIONANDO CORRECTAMENTE"
+                            ? "#B2F2BB"
                             : coolersData?.cooler?.status ===
                               "FUNCIONANDO CON ALERTA"
-                            ? "#FEF5C7"
-                            : "#D4DAE3",
+                            ? "#FFEC99"
+                            : coolersData?.cooler?.status === "EN FALLA"
+                            ? "#FFC9C9"
+                            : coolersData?.cooler?.status ===
+                              "EN ESPERA DE SERVICIO"
+                            ? "#C7CBD2"
+                            : coolersData?.cooler?.status ===
+                              "EN ESPERA DE LECTURA"
+                            ? "#A5D8FF"
+                            : coolersData?.cooler?.status ===
+                              "SERVICIO NO EFECTIVO"
+                            ? "#FFC9C9"
+                            : coolersData?.cooler?.status ===
+                              "SERVICIO IMPRODUCTIVO"
+                            ? "#FFC9C9"
+                            : coolersData?.cooler?.status === "SIN DATOS"
+                            ? "#C7CBD2"
+                            : "#C7CBD2",
                       }}
                     >
                       <div
                         style={{
-                          width: "4px",
-                          height: "4px",
+                          width: "5px",
+                          height: "5px",
                           borderRadius: "5px",
                           background:
-                            coolersData?.cooler?.status === "EN FALLA"
-                              ? "#F93448"
-                              : coolersData?.cooler?.status ===
-                                "FUNCIONANDO CORRECTAMENTE"
-                              ? "#31B648"
+                            coolersData?.cooler?.status ===
+                            "FUNCIONANDO CORRECTAMENTE"
+                              ? "#2B8A3E"
                               : coolersData?.cooler?.status ===
                                 "FUNCIONANDO CON ALERTA"
-                              ? "#F6A60A"
-                              : "#808080",
+                              ? "#E67700"
+                              : coolersData?.cooler?.status === "EN FALLA"
+                              ? "#E03131"
+                              : coolersData?.cooler?.status ===
+                                "EN ESPERA DE SERVICIO"
+                              ? "#313A49"
+                              : coolersData?.cooler?.status ===
+                                "EN ESPERA DE LECTURA"
+                              ? "#1864AB"
+                              : coolersData?.cooler?.status ===
+                                "SERVICIO NO EFECTIVO"
+                              ? "#E03131"
+                              : coolersData?.cooler?.status ===
+                                "SERVICIO IMPRODUCTIVO"
+                              ? "#E03131"
+                              : coolersData?.cooler?.status === "SIN DATOS"
+                              ? "#313A49"
+                              : "#313A49",
                         }}
                       ></div>
                       <div
                         style={{
                           color:
-                            coolersData?.cooler?.status === "EN FALLA"
-                              ? "#F93448"
-                              : coolersData?.cooler?.status ===
-                                "FUNCIONANDO CORRECTAMENTE"
-                              ? "#1D5E29"
+                            coolersData?.cooler?.status ===
+                            "FUNCIONANDO CORRECTAMENTE"
+                              ? "#2B8A3E"
                               : coolersData?.cooler?.status ===
                                 "FUNCIONANDO CON ALERTA"
-                              ? "#451C03"
-                              : "black",
-                          // fontFamily: "Space Mono",
+                              ? "#E67700"
+                              : coolersData?.cooler?.status === "EN FALLA"
+                              ? "#E03131"
+                              : coolersData?.cooler?.status ===
+                                "EN ESPERA DE SERVICIO"
+                              ? "#313A49"
+                              : coolersData?.cooler?.status ===
+                                "EN ESPERA DE LECTURA"
+                              ? "#1864AB"
+                              : coolersData?.cooler?.status ===
+                                "SERVICIO NO EFECTIVO"
+                              ? "#E03131"
+                              : coolersData?.cooler?.status ===
+                                "SERVICIO IMPRODUCTIVO"
+                              ? "#E03131"
+                              : coolersData?.cooler?.status === "SIN DATOS"
+                              ? "#313A49"
+                              : "#313A49",
                           fontSize: "0.625.rem",
                           fontStyle: "normal",
-                          fontWeight: 400,
+                          fontWeight: 500,
                           lineHeight: "14px",
                         }}
                       >
@@ -611,9 +752,14 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
-                <div style={{ display: "none", justifyContent: "space-between" }}>
-                  <Link to={`/home/coolView/?device_id=${coolersData?.cooler.device_id}&date_from=${fechaAnterior}&date_to=${fechaActual}&clt=false`} style={{ fontSize: "0.625rem" }}>Ver en CoolView</Link>
-                </div>
+              <div style={{ display: "none", justifyContent: "space-between" }}>
+                <Link
+                  to={`/home/coolView/?device_id=${coolersData?.cooler.device_id}&date_from=${fechaAnterior}&date_to=${fechaActual}&clt=false`}
+                  style={{ fontSize: "0.625rem" }}
+                >
+                  Ver en CoolView
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -669,17 +815,19 @@ export default function CoolerDetail() {
                                   order.data.status === "C,C" ||
                                   order.data.status === "O,O")) ||
                               (order.type === "TRACKING" &&
-                                (order.data.algorithm === "COMPRESSOR_FAIL" ||
-                                  order.data.algorithm === "FREEZING_FAIL" ||
-                                  order.data.algorithm === "TEMPERATURE_FAIL" ||
-                                  order.data.algorithm === "VOLTAGE_FAIL" ||
+                                (order.data.algorithm === "Bajo/Alto voltaje" ||
                                   order.data.algorithm ===
-                                    "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
+                                    "Alta demanda de compresor" ||
                                   order.data.algorithm ===
-                                    "DISCONNECTION_ALERT" ||
+                                    "Alerta alta temperatura" ||
+                                  order.data.algorithm === "Desconexión" ||
                                   order.data.algorithm ===
-                                    "HIGH_TEMPERATURE_ALERT" ||
-                                  order.data.algorithm === "VOLTAGE_ALERT" ||
+                                    "Falla asociada al compresor" ||
+                                  order.data.algorithm ===
+                                    "Evaporador bloqueado" ||
+                                  order.data.algorithm === "Alta temperatura" ||
+                                  order.data.algorithm ===
+                                    "Posible daño eléctrico" ||
                                   order.data.algorithm === "Actualizar Info" ||
                                   order.data.algorithm === "Sin Riesgo" ||
                                   order.data.algorithm ===

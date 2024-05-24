@@ -180,7 +180,7 @@ table th {
   display: flex;
   flex-direction: column;
 }
-.insights_title_responsive{
+.insights_title_responsive {
   display: none;
 }
 .insights_title_h1 {
@@ -243,7 +243,7 @@ table th {
   border-radius: 0.5rem;
 }
 .MapInsightsResponsive {
-  display: none;  
+  display: none;
 }
 .insights_mapa_info_title {
   height: 5%;
@@ -943,9 +943,9 @@ body {
   display: flex;
   align-items: center;
 }
-.pagefilter_container_items{
+.pagefilter_container_items {
   display: flex;
-  flex-direction: row;  
+  flex-direction: row;
   width: fit-content;
 }
 .pagefilter_container_principal_customer_container {
@@ -1380,31 +1380,31 @@ body {
 
 /* Inicia media responsive SMARTHPHONES */
 @media (width <= 767px) {
-  .return_principal{
+  .return_principal {
     display: none;
   }
-  .pagefilter_container_items{
+  .pagefilter_container_items {
     overflow: auto;
     scrollbar-width: thin;
     scroll-snap-type: x;
     width: 43%;
   }
-  .pagefilter_container_principal{
+  .pagefilter_container_principal {
     border: 1px solid transparent;
   }
-  .pagefilter_container_principal_addFilter{
+  .pagefilter_container_principal_addFilter {
     width: fit-content;
   }
-  .insights_title_responsive{
+  .insights_title_responsive {
     display: contents;
-  }  
-  .insights_title{
+  }
+  .insights_title {
     height: fit-content;
   }
-  .insights_title_h1{
+  .insights_title_h1 {
     display: none;
   }
-  .insights_title_p{
+  .insights_title_p {
     display: none;
   }
   .insights_principal_container {
@@ -1491,12 +1491,12 @@ body {
     text-overflow: ellipsis; */
   }
   .insights_mapa_info_mapa {
-    height: fit-content;    
+    height: fit-content;
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
   }
-  .MapInsights{
+  .MapInsights {
     display: none;
   }
   .MapInsightsResponsive {
@@ -1508,7 +1508,7 @@ body {
     align-items: center;
     gap: 10px;
     border-radius: 32px;
-    background: var(--pink-6, #ED5079);
+    background: var(--pink-6, #ed5079);
     color: #fff;
   }
   .principal_paginator {
@@ -1654,6 +1654,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-.mantine-v4lv9f{
+.mantine-v4lv9f {
   border-bottom: 1px solid transparent;
 }

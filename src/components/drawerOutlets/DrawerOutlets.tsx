@@ -196,8 +196,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 </div>
 
                 {outlet_address === undefined ||
-                  outlet_address === "" ||
-                  outlet_address === null ? (
+                outlet_address === "" ||
+                outlet_address === null ? (
                   <div
                     style={{
                       color: "#000005",
@@ -248,8 +248,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   Leído por última vez el:
                 </div>
                 {last_read === undefined ||
-                  last_read === "" ||
-                  last_read === null ? (
+                last_read === "" ||
+                last_read === null ? (
                   <div
                     style={{
                       color: "#88888B",
@@ -282,8 +282,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 )}
                 &nbsp;
                 {days_without_visitC === undefined ||
-                  days_without_visitC === "" ||
-                  days_without_visitC === null ? (
+                days_without_visitC === "" ||
+                days_without_visitC === null ? (
                   ""
                 ) : (
                   <>
@@ -330,7 +330,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               <div
                 style={{
                   display: "flex",
-                  
+
                   alignItems: "center",
                   gap: "4px",
                 }}
@@ -369,8 +369,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     }}
                   >
                     {channel === undefined ||
-                      channel === "" ||
-                      channel === null ? (
+                    channel === "" ||
+                    channel === null ? (
                       <div
                         style={{
                           color: "#88888B",
@@ -431,8 +431,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     }}
                   >
                     {region === undefined ||
-                      region === "" ||
-                      region === null ? (
+                    region === "" ||
+                    region === null ? (
                       <div
                         style={{
                           color: "#88888B",
@@ -559,7 +559,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   style={{
                     display: "flex",
                     padding: "1px",
-                    boxSizing : 'border-box',
+                    boxSizing: "border-box",
                     alignItems: "center",
                     alignContent: "center",
                     gap: "8px",
@@ -744,7 +744,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   value={searchValue}
                   onChange={handleSearchChange}
                   type="text"
-                  style={{ width: "100%",height:'100%' }}
+                  style={{ width: "100%", height: "100%" }}
                 />
               </section>
             </div>
@@ -762,7 +762,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     </tr>
                   </thead>
                   {filteredCoolers != undefined ? (
-                    <tbody >
+                    <tbody>
                       {filteredCoolers
                         .slice(firstIndex, lastIndex)
                         .map((cooler, index) => (
@@ -770,12 +770,16 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                             key={index}
                             onClick={() => {
                               navigate(`/home/clt/${cooler.serial_number}`);
-                            }}                            
+                            }}
                           >
                             <td data-label="ESTATUS" title={cooler.status}>
                               {isLoading == true ? (
                                 <>
-                                  <Skeleton height={20} radius="sm" width="90%" />
+                                  <Skeleton
+                                    height={20}
+                                    radius="sm"
+                                    width="90%"
+                                  />
                                 </>
                               ) : cooler.status === "" ||
                                 cooler.status === null ||
@@ -784,21 +788,36 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                               ) : (
                                 <div
                                   style={{
-                                    display: "flex",                                    
+                                    display: "flex",
                                     // justifyContent: "center",
                                     alignItems: "center",
                                     gap: "4px",
+                                    padding: "4px",
                                     borderRadius: "2px",
                                     background:
-                                      cooler?.status === "EN FALLA"
-                                        ? "#FFC7CD"
+                                      cooler?.status ===
+                                      "FUNCIONANDO CORRECTAMENTE"
+                                        ? "#B2F2BB"
                                         : cooler?.status ===
-                                          "FUNCIONANDO CORRECTAMENTE"
-                                          ? "#DFF9E3"
-                                          : cooler?.status ===
-                                            "FUNCIONANDO CON ALERTA"
-                                            ? "#FEF5C7"
-                                            : "#D4DAE3",
+                                          "FUNCIONANDO CON ALERTA"
+                                        ? "#FFEC99"
+                                        : cooler?.status === "EN FALLA"
+                                        ? "#FFC9C9"
+                                        : cooler?.status ===
+                                          "EN ESPERA DE SERVICIO"
+                                        ? "#C7CBD2"
+                                        : cooler?.status ===
+                                          "EN ESPERA DE LECTURA"
+                                        ? "#A5D8FF"
+                                        : cooler?.status ===
+                                          "SERVICIO NO EFECTIVO"
+                                        ? "#FFC9C9"
+                                        : cooler?.status ===
+                                          "SERVICIO IMPRODUCTIVO"
+                                        ? "#FFC9C9"
+                                        : cooler?.status === "SIN DATOS"
+                                        ? "#C7CBD2"
+                                        : "#C7CBD2",
                                     width: "fit-content",
                                   }}
                                 >
@@ -808,33 +827,59 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       height: "4px",
                                       borderRadius: "5px",
                                       background:
-                                        cooler?.status === "EN FALLA"
-                                          ? "#F93448"
+                                        cooler?.status ===
+                                        "FUNCIONANDO CORRECTAMENTE"
+                                          ? "#2B8A3E"
                                           : cooler?.status ===
-                                            "FUNCIONANDO CORRECTAMENTE"
-                                            ? "#31B648"
-                                            : cooler?.status ===
-                                              "FUNCIONANDO CON ALERTA"
-                                              ? "#F6A60A"
-                                              : "#808080",
+                                            "FUNCIONANDO CON ALERTA"
+                                          ? "#E67700"
+                                          : cooler?.status === "EN FALLA"
+                                          ? "#E03131"
+                                          : cooler?.status ===
+                                            "EN ESPERA DE SERVICIO"
+                                          ? "#313A49"
+                                          : "EN ESPERA DE LECTURA"
+                                          ? "#1864AB"
+                                          : cooler?.status ===
+                                            "SERVICIO NO EFECTIVO"
+                                          ? "#E03131"
+                                          : cooler?.status ===
+                                            "SERVICIO IMPRODUCTIVO"
+                                          ? "#E03131"
+                                          : cooler?.status === "SIN DATOS"
+                                          ? "#313A49"
+                                          : "#313A49",
                                     }}
                                   ></div>
                                   <div
                                     style={{
                                       color:
-                                        cooler?.status === "EN FALLA"
-                                          ? "#F93448"
+                                        cooler?.status ===
+                                        "FUNCIONANDO CORRECTAMENTE"
+                                          ? "#2B8A3E"
                                           : cooler?.status ===
-                                            "FUNCIONANDO CORRECTAMENTE"
-                                            ? "#1D5E29"
-                                            : cooler?.status ===
-                                              "FUNCIONANDO CON ALERTA"
-                                              ? "#451C03"
-                                              : "black",
-                                      // fontFamily: "Space Mono",
+                                            "FUNCIONANDO CON ALERTA"
+                                          ? "#E67700"
+                                          : cooler?.status === "EN FALLA"
+                                          ? "#E03131"
+                                          : cooler?.status ===
+                                            "EN ESPERA DE SERVICIO"
+                                          ? "#313A49"
+                                          : cooler?.status ===
+                                            "EN ESPERA DE LECTURA"
+                                          ? "#1864AB"
+                                          : cooler?.status ===
+                                            "SERVICIO NO EFECTIVO"
+                                          ? "#E03131"
+                                          : cooler?.status ===
+                                            "SERVICIO IMPRODUCTIVO"
+                                          ? "#E03131"
+                                          : cooler?.status === "SIN DATOS"
+                                          ? "#313A49"
+                                          : "#313A49",
                                       fontSize: "8px",
                                       fontStyle: "normal",
-                                      fontWeight: 400,
+                                      fontWeight: 500,
                                       lineHeight: "14px",
                                     }}
                                   >
@@ -846,7 +891,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                             <td data-label="SERIE" title={cooler.serial_number}>
                               {isLoading == true ? (
                                 <>
-                                  <Skeleton height={20} radius="sm" width="90%" />
+                                  <Skeleton
+                                    height={20}
+                                    radius="sm"
+                                    width="90%"
+                                  />
                                 </>
                               ) : cooler.serial_number === "" ||
                                 cooler.serial_number === null ||
@@ -859,7 +908,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                             <td data-label="Modelo" title={cooler.model_id}>
                               {isLoading == true ? (
                                 <>
-                                  <Skeleton height={20} radius="sm" width="90%" />
+                                  <Skeleton
+                                    height={20}
+                                    radius="sm"
+                                    width="90%"
+                                  />
                                 </>
                               ) : cooler.model_id === "" ||
                                 cooler.model_id === null ||
@@ -873,14 +926,18 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                               data-label="DIAS SIN VISITA"
                               title={
                                 cooler.days_without_visit === null ||
-                                  cooler.days_without_visit === undefined
+                                cooler.days_without_visit === undefined
                                   ? "Sin registro"
                                   : cooler.days_without_visit
                               }
                             >
                               {isLoading == true ? (
                                 <>
-                                  <Skeleton height={20} radius="sm" width="90%" />
+                                  <Skeleton
+                                    height={20}
+                                    radius="sm"
+                                    width="90%"
+                                  />
                                 </>
                               ) : cooler.serial_number === "" ||
                                 cooler.serial_number === null ||
@@ -910,9 +967,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                     }}
                                   >
                                     {cooler.days_without_visit === undefined ||
-                                      cooler.days_without_visit === null
+                                    cooler.days_without_visit === null
                                       ? "Sin registro"
-                                      : cooler.days_without_visit + " " + "DÍAS"}
+                                      : cooler.days_without_visit +
+                                        " " +
+                                        "DÍAS"}
                                   </div>
                                 </div>
                               )}
@@ -920,7 +979,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                             <td data-label="PRIORIDAD" title="Prioridad">
                               {isLoading == true ? (
                                 <>
-                                  <Skeleton height={20} radius="sm" width="90%" />
+                                  <Skeleton
+                                    height={20}
+                                    radius="sm"
+                                    width="90%"
+                                  />
                                 </>
                               ) : cooler.actionable === "" ||
                                 cooler.actionable === null ||
@@ -941,16 +1004,16 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                         cooler.actionable === "Visita PdV"
                                           ? "1.5px solid #DA7E05"
                                           : cooler.actionable === "Sin Riesgo"
-                                            ? "1.5px solid #0F9F67"
-                                            : cooler.actionable ===
+                                          ? "1.5px solid #0F9F67"
+                                          : cooler.actionable ===
                                               "Estatus sin venta" ||
-                                              cooler.actionable ===
+                                            cooler.actionable ===
                                               "Acciones urgentes"
-                                              ? "1.5px solid #F93448"
-                                              : cooler.actionable ===
-                                                "Actualizar Info"
-                                                ? "1.5px solid #DA7E05"
-                                                : "1.5px solid black",
+                                          ? "1.5px solid #F93448"
+                                          : cooler.actionable ===
+                                            "Actualizar Info"
+                                          ? "1.5px solid #DA7E05"
+                                          : "1.5px solid black",
                                       background: "#FFF",
                                       textOverflow: "ellipsis",
                                     }}
@@ -959,29 +1022,41 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       <img
                                         src={"../../sampleData/p.svg"}
                                         alt="Descripción de la imagen"
-                                        style={{ width: "12px", height: "12px" }}
+                                        style={{
+                                          width: "12px",
+                                          height: "12px",
+                                        }}
                                       />
                                     ) : cooler.actionable === "Sin Riesgo" ? (
                                       <img
                                         src={"../../sampleData/sn.svg"}
                                         alt="Descripción de la imagen"
-                                        style={{ width: "12px", height: "12px" }}
+                                        style={{
+                                          width: "12px",
+                                          height: "12px",
+                                        }}
                                       />
                                     ) : cooler.actionable ===
-                                      "Estatus sin venta" ||
+                                        "Estatus sin venta" ||
                                       cooler.actionable ===
-                                      "Acciones urgentes" ? (
+                                        "Acciones urgentes" ? (
                                       <img
                                         src={"../../sampleData/a.svg"}
                                         alt="Descripción de la imagen"
-                                        style={{ width: "12px", height: "12px" }}
+                                        style={{
+                                          width: "12px",
+                                          height: "12px",
+                                        }}
                                       />
                                     ) : cooler.actionable ===
                                       "Actualizar Info" ? (
                                       <img
                                         src={"../../sampleData/p.svg"}
                                         alt="Descripción de la imagen"
-                                        style={{ width: "12px", height: "12px" }}
+                                        style={{
+                                          width: "12px",
+                                          height: "12px",
+                                        }}
                                       />
                                     ) : (
                                       ""
@@ -994,16 +1069,16 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                           cooler.actionable === "Visita PdV"
                                             ? "#DA7E05"
                                             : cooler.actionable === "Sin Riesgo"
-                                              ? "#0F9F67"
-                                              : cooler.actionable ===
+                                            ? "#0F9F67"
+                                            : cooler.actionable ===
                                                 "Estatus sin venta" ||
-                                                cooler.actionable ===
+                                              cooler.actionable ===
                                                 "Acciones urgentes"
-                                                ? "#F93448"
-                                                : cooler.actionable ===
-                                                  "Actualizar Info"
-                                                  ? "#DA7E05"
-                                                  : "black",
+                                            ? "#F93448"
+                                            : cooler.actionable ===
+                                              "Actualizar Info"
+                                            ? "#DA7E05"
+                                            : "black",
                                         // fontFamily: "DM Sans",
                                         fontSize: ".7vw",
                                         fontStyle: "normal",
@@ -1014,27 +1089,29 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       {cooler.actionable === "Visita PdV"
                                         ? "Visita PdV.."
                                         : cooler.actionable === "Sin Riesgo"
-                                          ? "Sin Riesgo"
-                                          : cooler.actionable ===
-                                            "Estatus sin venta"
-                                            ? "Estat sin v..."
-                                            : cooler.actionable ===
-                                              "Acciones urgentes"
-                                              ? "Acciones urg.."
-                                              : cooler.actionable === "Actualizar Info"
-                                                ? "Actualizar inf..."
-                                                : cooler.actionable ===
-                                                  "Solicitar serv. correctivo"
-                                                  ? "Solicitar serv..."
-                                                  : cooler.actionable === "Actualizar dato"
-                                                    ? "Actualizar da..."
-                                                    : cooler.actionable ===
-                                                      "Seguimiento a equipo"
-                                                      ? "Seguimiento..."
-                                                      : cooler.actionable ===
-                                                        "Vista PdV prioritaria"
-                                                        ? "Visita PdV p..."
-                                                        : cooler.actionable}
+                                        ? "Sin Riesgo"
+                                        : cooler.actionable ===
+                                          "Estatus sin venta"
+                                        ? "Estat sin v..."
+                                        : cooler.actionable ===
+                                          "Acciones urgentes"
+                                        ? "Acciones urg.."
+                                        : cooler.actionable ===
+                                          "Actualizar Info"
+                                        ? "Actualizar inf..."
+                                        : cooler.actionable ===
+                                          "Solicitar serv. correctivo"
+                                        ? "Solicitar serv..."
+                                        : cooler.actionable ===
+                                          "Actualizar dato"
+                                        ? "Actualizar da..."
+                                        : cooler.actionable ===
+                                          "Seguimiento a equipo"
+                                        ? "Seguimiento..."
+                                        : cooler.actionable ===
+                                          "Vista PdV prioritaria"
+                                        ? "Visita PdV p..."
+                                        : cooler.actionable}
                                     </div>
                                   </div>
                                 </>
@@ -1043,7 +1120,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                             <td data-label="Acciones">
                               {isLoading == true ? (
                                 <>
-                                  <Skeleton height={20} radius="sm" width="90%" />
+                                  <Skeleton
+                                    height={20}
+                                    radius="sm"
+                                    width="90%"
+                                  />
                                 </>
                               ) : (
                                 <Link to="/home/clt">
