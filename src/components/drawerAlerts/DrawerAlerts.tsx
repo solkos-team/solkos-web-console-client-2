@@ -72,7 +72,7 @@ export default function DrawerA({
     }
   };
 
-  console.log(level);
+  // console.log(level);
   useEffect(() => {
     value != 0 ? fetchData() : "";
   }, [dt, datosPorPagina, opened, currentPage]);
@@ -142,7 +142,7 @@ export default function DrawerA({
     return rows;
   };
   coolersData === undefined ? [] : coolersData;
-  console.log(coolersData);
+  // console.log(coolersData);
   totalData === undefined ? 0 : totalData;
   return (
     <Drawer

@@ -22,7 +22,7 @@ export default function Fails() {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
       setCoolersData(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
