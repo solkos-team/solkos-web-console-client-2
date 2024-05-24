@@ -22,7 +22,7 @@ export default function Fails() {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
       setCoolersData(data);
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -156,9 +156,10 @@ export default function Fails() {
               coolersData
                 .filter(
                   (cooler) =>
-                    cooler.class === "OPE" &&
-                    cooler.algorithm.endsWith("FAIL") &&
-                    cooler.algorithm !== "NO_FAIL"
+                    cooler.algorithm === "Falla asociada al compresor" ||
+                    cooler.algorithm === "Evaporador bloqueado" ||
+                    cooler.algorithm === "Alta temperatura" ||
+                    cooler.algorithm === "Posible daño eléctrico"
                 )
 
                 .map((cooler, index) => (
@@ -208,7 +209,8 @@ export default function Fails() {
                             background: "#FFC7CD",
                           }}
                         >
-                          {cooler.algorithm === "COMPRESSOR_FAIL" ? (
+                          {cooler.algorithm ===
+                          "Falla asociada al compresor" ? (
                             <>
                               <img
                                 src={"../../sampleData/failc.svg"}
@@ -216,24 +218,26 @@ export default function Fails() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : cooler.algorithm === "Alta temperatura" ? (
                             <img
                               src={"../../sampleData/failt.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm.includes("VOLTAGE_FAIL") ? (
+                          ) : cooler.algorithm === "Posible daño eléctrico" ? (
                             <img
                               src={"../../sampleData/faile.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : (
+                          ) : cooler.algorithm === "Evaporador bloqueado" ? (
                             <img
                               src={"../../sampleData/failc.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
+                          ) : (
+                            ""
                           )}
                         </div>
                         <div
@@ -245,17 +249,7 @@ export default function Fails() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.algorithm === "COMPRESSOR_FAIL"
-                            ? "Falla asociada al compresor"
-                            : cooler.algorithm === "DISCONNECTIONS_FAIL"
-                            ? "Desconexión"
-                            : cooler.algorithm === "TEMPERATURE_FAIL"
-                            ? "Alta temperatura"
-                            : cooler.algorithm === "VOLTAGE_FAIL"
-                            ? "Posible daño eléctrico"
-                            : cooler.algorithm === "FREEZING_FAIL"
-                            ? "Evaporador bloqueado"
-                            : cooler.algorithm}
+                          {cooler.algorithm}
                         </div>
                       </div>
                       {/* Siguiente */}

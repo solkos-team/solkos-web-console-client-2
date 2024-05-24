@@ -1625,6 +1625,7 @@ export default function Insights() {
       const data = await fetchUniversal("insights", body, setIsLoading);
       setInsightsData(data);
       setIsLoading(false);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching insights:", error);
     }
@@ -1678,7 +1679,12 @@ export default function Insights() {
           <p className="insights_title_p">
             Ve el panorama general de los enfriadores y toma acciones
           </p>
-          <HeaderInsights title={'Cooler Insights'} description={'Haz un seguimiento de todos los parámetros de cada uno de tus enfriadores'} />
+          <HeaderInsights
+            title={"Cooler Insights"}
+            description={
+              "Haz un seguimiento de todos los parámetros de cada uno de tus enfriadores"
+            }
+          />
         </section>
         <section className="insights_principal">
           <section className="insights_mapa">

@@ -220,7 +220,21 @@ export default function Indicator() {
                                 ? "#FFC7CD"
                                 : cooler.algorithm === "Visita PdV"
                                 ? "#FEF5C7"
-                                : "",
+                                : // : cooler.algorithm === "Actualizar dato" ||
+                                  //   cooler.algorithm === "Datos faltantes" ||
+                                  //   cooler.algorithm === "Monitoreo" ||
+                                  //   cooler.algorithm === "Movimiento"
+                                  // ? "#A5D8FF"
+                                  // : cooler.algorithm ===
+                                  //     "Solicitar serv. correctivo" ||
+                                  //   cooler.algorithm ===
+                                  //     "Solicitar serv. preventivo" ||
+                                  //   cooler.algorithm === "Seguimiento a equipo" ||
+                                  //   cooler.algorithm === "Visita PdV"
+                                  // ? "#FFEC99"
+                                  // : cooler.algorithm === "Visita PdV prioritaria"
+                                  // ? "#FFC9C9"
+                                  "",
                           }}
                         >
                           {cooler.algorithm === "Sin Riesgo" ? (
@@ -249,6 +263,58 @@ export default function Indicator() {
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : (
+                            // : cooler.algorithm === "Actualizar dato" ? (
+                            //   <img
+                            //     src={"../../sampleData/actDat.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm === "Datos faltantes" ? (
+                            //   <img
+                            //     src={"../../sampleData/datFal.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm === "Monitoreo" ? (
+                            //   <img
+                            //     src={"../../sampleData/Mont.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm === "Movimiento" ? (
+                            //   <img
+                            //     src={"../../sampleData/mov1.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm ===
+                            //     "Solicitar serv. correctivo" ||
+                            //   cooler.algorithm ===
+                            //     "Solicitar serv. preventivo" ? (
+                            //   <img
+                            //     src={"../../sampleData/serCP.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm === "Seguimiento a equipo" ? (
+                            //   <img
+                            //     src={"../../sampleData/seguE.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm === "Visita PdV" ? (
+                            //   <img
+                            //     src={"../../sampleData/visitap.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // ) : cooler.algorithm === "Visita PdV prioritaria" ? (
+                            //   <img
+                            //     src={"../../sampleData/visitapd.svg"}
+                            //     alt="Descripción de la imagen"
+                            //     style={{ width: "18px", height: "18px" }}
+                            //   />
+                            // )
                             ""
                           )}
                         </div>

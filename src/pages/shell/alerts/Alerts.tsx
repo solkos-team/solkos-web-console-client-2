@@ -23,6 +23,7 @@ export default function Alerts() {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
       setAlertsData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {
@@ -142,11 +143,10 @@ export default function Alerts() {
               alertsData
                 .filter(
                   (algorithm) =>
-                    algorithm.algorithm ===
-                      "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
-                    algorithm.algorithm === "VOLTAGE_ALERT" ||
-                    algorithm.algorithm === "HIGH_TEMPERATURE_ALERT" ||
-                    algorithm.algorithm === "DISCONNECTION_ALERT"
+                    algorithm.algorithm === "Alta demanda de compresor" ||
+                    algorithm.algorithm === "Desconexión" ||
+                    algorithm.algorithm === "Alerta alta temperatura" ||
+                    algorithm.algorithm === "Bajo/Alto voltaje"
                 )
                 .map((cooler, index) => (
                   <div
@@ -195,8 +195,7 @@ export default function Alerts() {
                             background: "#FEF5C7",
                           }}
                         >
-                          {cooler.algorithm ===
-                          "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ? (
+                          {cooler.algorithm === "Alta demanda de compresor" ? (
                             <>
                               <img
                                 src={"../../sampleData/comp.svg"}
@@ -204,7 +203,7 @@ export default function Alerts() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : cooler.algorithm === "DISCONNECTION_ALERT" ? (
+                          ) : cooler.algorithm === "Desconexión" ? (
                             <>
                               {" "}
                               <img
@@ -213,38 +212,20 @@ export default function Alerts() {
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
-                          ) : cooler.algorithm.includes("TEMPERATURE") ? (
+                          ) : cooler.algorithm === "Alerta alta temperatura" ? (
                             <img
                               src={"../../sampleData/alt.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm.includes("MOVED_VISIT_ALERT") ? (
-                            <img
-                              src={"../../sampleData/mov.svg"}
-                              alt="Descripción de la imagen"
-                              style={{ width: "18px", height: "18px" }}
-                            />
-                          ) : cooler.algorithm.includes(
-                              "HIGH_VOLTAGE_ALERT"
-                            ) ? (
+                          ) : cooler.algorithm === "Bajo/Alto voltaje" ? (
                             <img
                               src={"../../sampleData/altv.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm.includes("LOW_VOLTAGE_ALERT") ? (
-                            <img
-                              src={"../../sampleData/bajv.svg"}
-                              alt="Descripción de la imagen"
-                              style={{ width: "18px", height: "18px" }}
-                            />
                           ) : (
-                            <img
-                              src={"../../sampleData/devices_2.png"}
-                              alt="Descripción de la imagen"
-                              style={{ width: "18px", height: "18px" }}
-                            />
+                            ""
                           )}
                         </div>
                         <div
@@ -256,22 +237,7 @@ export default function Alerts() {
                             lineHeight: "normal",
                           }}
                         >
-                          {cooler.algorithm ===
-                          "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                            ? "Alta demanda del compresor"
-                            : cooler.algorithm === "DISCONNECTION_ALERT"
-                            ? "Desconexión"
-                            : cooler.algorithm === "HIGH_TEMPERATURE_ALERT"
-                            ? "Alta temperatura"
-                            : cooler.algorithm === "HIGH_VOLTAGE_ALERT"
-                            ? "Alto voltaje"
-                            : cooler.algorithm === "LOW_VOLTAGE_ALERT"
-                            ? "Bajo voltaje"
-                            : cooler.algorithm === "MOVED_VISIT_ALERT"
-                            ? "Movimiento"
-                            : cooler.algorithm === "VOLTAGE_ALERT"
-                            ? "Bajo/Alto voltaje"
-                            : cooler.algorithm}
+                          {cooler.algorithm}
                         </div>
                       </div>
                       {/* Siguiente */}
