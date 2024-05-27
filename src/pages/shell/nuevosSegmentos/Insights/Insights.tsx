@@ -487,8 +487,9 @@ const fetchDataAlertas = async () => {
                     {insightsDataAlertas == null ? [] : insightsDataAlertas
                       .filter(
                         (cooler) =>
-                          cooler.class === "OPE" &&
-                          cooler.algorithm.endsWith("FAIL") &&
+                          cooler.class === "OPE"
+                         &&
+                          // cooler.algorithm.endsWith("FAIL") &&
                           cooler.algorithm !== "NO_FAIL"
                       )
                       .map(
@@ -636,10 +637,10 @@ const fetchDataAlertas = async () => {
                         .filter(
                           (algorithm) =>
                             algorithm.algorithm ===
-                            "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
-                            algorithm.algorithm === "VOLTAGE_ALERT" ||
-                            algorithm.algorithm === "HIGH_TEMPERATURE_ALERT" ||
-                            algorithm.algorithm === "DISCONNECTION_ALERT"
+                            "Alta demanda de compresor" ||
+                            algorithm.algorithm === "Bajo/Alto voltaje" ||
+                            algorithm.algorithm === "Alerta alta temperatura" ||
+                            algorithm.algorithm === "Desconexión"
                         )
                         .map(
                           (algorithm, index) => {

@@ -1,13 +1,4 @@
 import React from "react";
-import {
-  Card,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeaderCell,
-  TableRow,
-} from "@tremor/react";
 import { Skeleton } from "@mantine/core";
 
 export const SkeletonMapInsights = () => {

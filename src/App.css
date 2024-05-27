@@ -557,12 +557,14 @@ table th {
 }
 .insigths_datas_info2_control_title_grapics {
   width: 100%;
-  height: 80%;
+  height: 80%;  
 }
 .insigths_datas_info2_control_title_grapics_container {
-  width: 90%;
-  height: fit-content;
+  /* width: 90%; */
+  height: 90%;  
   margin-left: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 .insigths_datas_info2_mantenimiento {
   padding: 1rem;
@@ -579,6 +581,7 @@ table th {
   display: flex;
   flex-direction: row;
   justify-content: right;
+  align-items: center;
   height: 10%;
 }
 .insights_datas_mantenimiento_barras {
