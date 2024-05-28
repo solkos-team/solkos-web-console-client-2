@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import PageFilter from "../../../components/pageFilter";
-import { Tooltip, Skeleton } from "@mantine/core";
+import { Tooltip, Skeleton, Center } from "@mantine/core";
 import { Link, useParams } from "react-router-dom";
 import { fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
@@ -32,6 +33,7 @@ moment.locale("es", {
 });
 
 export default function CoolerDetail() {
+  const dto = useSelector((state: any) => state.organization);
   const b = "../../sampleData/devices.png";
   const { serial_number } = useParams();
   const [searchValue, setSearchValue] = useState("");
@@ -53,7 +55,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      // console.log(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -221,7 +223,8 @@ export default function CoolerDetail() {
                           gap: "4px",
                           borderRadius: "2px",
                           border:
-                            coolersData?.cooler.actionable === "Visita PdV"
+                            coolersData?.cooler.actionable === "Visita PdV" &&
+                            dto != "KOF Colombia"
                               ? "1.5px solid #DA7E05"
                               : coolersData?.cooler.actionable === "Sin Riesgo"
                               ? "1.5px solid #0F9F67"
@@ -233,32 +236,33 @@ export default function CoolerDetail() {
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
                               ? "1.5px solid #DA7E05"
-                              : // : coolersData?.cooler.actionable ===
-                                //     "Actualizar dato" ||
-                                //   coolersData?.cooler.actionable ===
-                                //     "Datos faltantes" ||
-                                //   coolersData?.cooler.actionable ===
-                                //     "Monitoreo" ||
-                                //   coolersData?.cooler.actionable === "Movimiento"
-                                // ? "1.5px solid #1864AB"
-                                // : coolersData?.cooler.actionable ===
-                                //     "Solicitar serv. correctivo" ||
-                                //   coolersData?.cooler.actionable ===
-                                //     "Solicitar serv. preventivos" ||
-                                //   coolersData?.cooler.actionable ===
-                                //     "Seguimiento a equipo" ||
-                                //   coolersData?.cooler.actionable === "Visita PdV"
-                                // ? "1.5px solid #E67700"
-                                // : coolersData?.cooler.actionable ===
-                                //   "Visita PdV prioritaria"
-                                // ? "1.5px solid #C92A2A"
-                                "1.5px solid black",
+                              : coolersData?.cooler.actionable ===
+                                  "Actualizar dato" ||
+                                coolersData?.cooler.actionable ===
+                                  "Datos faltantes" ||
+                                coolersData?.cooler.actionable ===
+                                  "Monitoreo" ||
+                                coolersData?.cooler.actionable === "Movimiento"
+                              ? "1.5px solid #1864AB"
+                              : coolersData?.cooler.actionable ===
+                                  "Solicitar serv. correctivo" ||
+                                coolersData?.cooler.actionable ===
+                                  "Solicitar serv. preventivos" ||
+                                coolersData?.cooler.actionable ===
+                                  "Seguimiento a equipo" ||
+                                coolersData?.cooler.actionable === "Visita PdV"
+                              ? "1.5px solid #E67700"
+                              : coolersData?.cooler.actionable ===
+                                "Visita PdV prioritaria"
+                              ? "1.5px solid #C92A2A"
+                              : "1.5px solid black",
                           background: "#FFF",
                         }}
                       >
                         {isLoading == true ? (
                           <Skeleton height={8} radius="xl" />
-                        ) : coolersData?.cooler.actionable === "Visita PdV" ? (
+                        ) : coolersData?.cooler.actionable === "Visita PdV" &&
+                          dto != "KOF Colombia" ? (
                           <img
                             src={"../../sampleData/p.svg"}
                             alt="Descripción de la imagen"
@@ -286,70 +290,70 @@ export default function CoolerDetail() {
                             alt="Descripción de la imagen"
                             style={{ width: "15px", height: "15px" }}
                           />
+                        ) : coolersData?.cooler.actionable ===
+                          "Actualizar dato" ? (
+                          <img
+                            src={"../../sampleData/actDat.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable ===
+                          "Datos faltantes" ? (
+                          <img
+                            src={"../../sampleData/datFal.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable === "Monitoreo" ? (
+                          <img
+                            src={"../../sampleData/Mont.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable === "Movimiento" ? (
+                          <img
+                            src={"../../sampleData/mov1.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable ===
+                            "Solicitar serv. correctivo" ||
+                          coolersData?.cooler.actionable ===
+                            "Solicitar serv. preventivos" ? (
+                          <img
+                            src={"../../sampleData/serCP.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable ===
+                          "Seguimiento a equipo" ? (
+                          <img
+                            src={"../../sampleData/seguE.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable === "Visita PdV" ? (
+                          <img
+                            src={"../../sampleData/visitap.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
+                        ) : coolersData?.cooler.actionable ===
+                          "Visita PdV prioritaria" ? (
+                          <img
+                            src={"../../sampleData/visitapd.svg"}
+                            alt="Descripción de la imagen"
+                            style={{ width: "15px", height: "15px" }}
+                          />
                         ) : (
-                          // : coolersData?.cooler.actionable ===
-                          //   "Actualizar dato" ? (
-                          //   <img
-                          //     src={"../../sampleData/actDat.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable ===
-                          //   "Datos faltantes" ? (
-                          //   <img
-                          //     src={"../../sampleData/datFal.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable === "Monitoreo" ? (
-                          //   <img
-                          //     src={"../../sampleData/Mont.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable === "Movimiento" ? (
-                          //   <img
-                          //     src={"../../sampleData/mov1.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable ===
-                          //     "Solicitar serv. correctivo" ||
-                          //   coolersData?.cooler.actionable ===
-                          //     "Solicitar serv. preventivos" ? (
-                          //   <img
-                          //     src={"../../sampleData/serCP.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable ===
-                          //   "Seguimiento a equipo" ? (
-                          //   <img
-                          //     src={"../../sampleData/seguE.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable === "Visita PdV" ? (
-                          //   <img
-                          //     src={"../../sampleData/visitap.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // ) : coolersData?.cooler.actionable ===
-                          //   "Visita PdV prioritaria" ? (
-                          //   <img
-                          //     src={"../../sampleData/visitapd.svg"}
-                          //     alt="Descripción de la imagen"
-                          //     style={{ width: "15px", height: "15px" }}
-                          //   />
-                          // )
                           ""
                         )}
 
                         <div
                           style={{
                             color:
-                              coolersData?.cooler.actionable === "Visita PdV"
+                              coolersData?.cooler.actionable === "Visita PdV" &&
+                              dto != "KOF Colombia"
                                 ? "#DA7E05"
                                 : coolersData?.cooler.actionable ===
                                   "Sin Riesgo"
@@ -362,28 +366,28 @@ export default function CoolerDetail() {
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
                                 ? "#DA7E05"
-                                : // : coolersData?.cooler.actionable ===
-                                  //     "Actualizar dato" ||
-                                  //   coolersData?.cooler.actionable ===
-                                  //     "Datos faltantes" ||
-                                  //   coolersData?.cooler.actionable ===
-                                  //     "Monitoreo" ||
-                                  //   coolersData?.cooler.actionable ===
-                                  //     "Movimiento"
-                                  // ? "#1864AB"
-                                  // : coolersData?.cooler.actionable ===
-                                  //     "Solicitar serv. correctivo" ||
-                                  //   coolersData?.cooler.actionable ===
-                                  //     "Solicitar serv. preventivos" ||
-                                  //   coolersData?.cooler.actionable ===
-                                  //     "Seguimiento a equipo" ||
-                                  //   coolersData?.cooler.actionable ===
-                                  //     "Visita PdV"
-                                  // ? "#E67700"
-                                  // : coolersData?.cooler.actionable ===
-                                  //   "Visita PdV prioritaria"
-                                  // ? "#C92A2A"
-                                  "black",
+                                : coolersData?.cooler.actionable ===
+                                    "Actualizar dato" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Datos faltantes" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Monitoreo" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Movimiento"
+                                ? "#1864AB"
+                                : coolersData?.cooler.actionable ===
+                                    "Solicitar serv. correctivo" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Solicitar serv. preventivos" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Seguimiento a equipo" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Visita PdV"
+                                ? "#E67700"
+                                : coolersData?.cooler.actionable ===
+                                  "Visita PdV prioritaria"
+                                ? "#C92A2A"
+                                : "black",
                             // fontFamily: "DM Sans",
                             fontSize: "0.875rem",
                             fontStyle: "normal",
@@ -1296,8 +1300,15 @@ export default function CoolerDetail() {
                     ) : coolersData?.cooler?.distance === undefined ||
                       coolersData?.cooler?.distance === null ? (
                       "Sin registro"
-                    ) : Number(coolersData?.cooler?.distance.toFixed(0)) < 0 ? (
+                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                        coolersData?.cooler.latitude === 0) ||
+                      coolersData?.cooler.latitude === undefined ? (
                       "Sin posición de instalación"
+                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                        coolersData?.cooler.last_latitude === 0) ||
+                      coolersData?.cooler.last_latitude === undefined ||
+                      coolersData?.cooler.last_latitude === null ? (
+                      "Sin posición de última visita"
                     ) : (
                       `${coolersData?.cooler?.distance.toFixed(0)} metros`
                     )}
@@ -1307,13 +1318,49 @@ export default function CoolerDetail() {
                   {isLoading == true ? (
                     <Skeleton
                       height={10}
-                      radius="xl"
+                      radius="xs"
                       style={{ width: "100%", height: "100%" }}
                     />
-                  ) : (coolersData?.cooler?.last_latitude != null &&
-                      coolersData?.cooler?.latitude === 0) ||
-                    (coolersData?.cooler?.last_latitude != 0 &&
-                      coolersData?.cooler?.latitude === 0) ? (
+                  ) : coolersData?.cooler?.last_latitude === null &&
+                    coolersData?.cooler?.latitude === 0 ? (
+                    <>
+                      <div
+                        style={{
+                          display: "inline-flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "8px",
+                          width: "100%", // Esto hará que el div ocupe el 100% del ancho del contenedor padre
+                          height: "100%",
+                          backgroundImage: "url('../../sampleData/fondd.png')",
+                          backgroundSize: "cover", // Esto asegurará que la imagen cubra todo el div
+                          backgroundPosition: "center", // Esto centrará la imagen en el div
+                        }}
+                      >
+                        <img
+                          src={"../../sampleData/notmap.svg"}
+                          alt="Descripción de la imagen"
+                          style={{
+                            width: "26px",
+                            height: "26px",
+                          }}
+                        />
+                        <text
+                          style={{
+                            color: "#ED5079",
+                            fontSize: "12px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "155%",
+                          }}
+                        >
+                          No hay datos de la ubicación
+                        </text>
+                      </div>
+                    </>
+                  ) : coolersData?.cooler?.last_latitude != null &&
+                    coolersData?.cooler?.latitude === 0 ? (
                     <>
                       <div>
                         <MapComponent1
@@ -1322,8 +1369,8 @@ export default function CoolerDetail() {
                         />
                       </div>
                     </>
-                  ) : coolersData?.cooler?.last_latitude === null ||
-                    coolersData?.cooler?.last_latitude === 0 ? (
+                  ) : coolersData?.cooler?.last_latitude === null &&
+                    coolersData?.cooler?.latitude != 0 ? (
                     <>
                       <div>
                         <MapComponent
@@ -1343,7 +1390,7 @@ export default function CoolerDetail() {
                     </>
                   )}
                 </div>
-                <div className="clt_actividad_mapa_info">
+                {/* <div className="clt_actividad_mapa_info">
                   <div
                     style={{
                       display: "flex",
@@ -1359,7 +1406,6 @@ export default function CoolerDetail() {
                     <div
                       style={{
                         color: "#88888B",
-                        // fontFamily: "DM Sans",
                         fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 400,
@@ -1385,7 +1431,6 @@ export default function CoolerDetail() {
                     <div
                       style={{
                         color: "#88888B",
-                        // fontFamily: "DM Sans",
                         fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 400,
@@ -1402,12 +1447,12 @@ export default function CoolerDetail() {
                       gap: "4px",
                     }}
                   >
-                    {/* <IconCircleX /> */}
+               
                     <div
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        gap: "4px", //
+                        gap: "4px", 
                       }}
                     >
                       <div
@@ -1438,7 +1483,7 @@ export default function CoolerDetail() {
                     <div
                       style={{
                         color: "#88888B",
-                        // fontFamily: "DM Sans",
+                    
                         fontSize: "12px",
                         fontStyle: "normal",
                         fontWeight: 400,
@@ -1448,7 +1493,7 @@ export default function CoolerDetail() {
                       Distancia entre puntos
                     </div>
                   </div>
-                </div>
+                </div> */}
               </section>
             </div>
           </section>

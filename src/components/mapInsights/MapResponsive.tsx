@@ -1,29 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import GoogleMapReact from "google-map-react";
-import { defaultProps,mapOptions } from './datos';
-import { useSelector } from 'react-redux';
-import { pathVerify } from '../../Functions/pathVerify';
-import { SkeletonMapInsights } from '../skeletonMapInsights/SkeletonMapInsights';
-import { fetchUniversal } from '../../utils/apiUtils';
-export const MapResponsive = ({data,setData,isLoading,setIsLoading}) => {
-
+import { defaultProps, mapOptions } from "./datos";
+import { useSelector } from "react-redux";
+import { pathVerify } from "../../Functions/pathVerify";
+import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
+import { fetchUniversal } from "../../utils/apiUtils";
+export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal('insights', body,setIsLoading)
-      setData(data)
-      setIsLoading(false)
+      const data = await fetchUniversal("insights", body, setIsLoading);
+      setData(data);
+      setIsLoading(false);
     } catch (error) {
-      throw(error)
+      throw error;
     }
-  }
+  };
   const data2 = [
     {
-      "area": "Monarca",
-      "num_coolers": 38146,
-      "geo": [
+      area: "Monarca",
+      num_coolers: 38146,
+      geo: [
         [17.38099060058594, -101.05696716308594],
         [16.850900610284828, -99.90836933443033],
         [16.803410212198894, -99.83320490519206],
@@ -70,13 +69,13 @@ export const MapResponsive = ({data,setData,isLoading,setIsLoading}) => {
         [14.887645880381266, -92.26803461710612],
         [16.78217863433838, -92.5521641982693],
         [17.548146565755207, -92.95303090413411],
-        [16.745538393656414, -92.63276545206706]
-      ]
+        [16.745538393656414, -92.63276545206706],
+      ],
     },
     {
-      "area": "Bajío",
-      "num_coolers": 33938,
-      "geo": [
+      area: "Bajío",
+      num_coolers: 33938,
+      geo: [
         [21.411961552530926, -97.71748495666503],
         [22.215882937113445, -98.40074284871419],
         [22.286808649698894, -98.64717483520508],
@@ -125,26 +124,29 @@ export const MapResponsive = ({data,setData,isLoading,setIsLoading}) => {
         [16.74756622314453, -92.52044296264648],
         [16.97973378499349, -92.28819020589192],
         [17.256745529174804, -92.11445617675781],
-        [17.504930814107258, -91.97705332438152]
-      ]
-    }
+        [17.504930814107258, -91.97705332438152],
+      ],
+    },
   ];
-  
+
   const handleApiLoaded2 = (map, maps) => {
     data2 === undefined
-    ? []
-    : data2.forEach(area => {
-      const polygonCoords = area.geo.map(coord => ({ lat: coord[0], lng: coord[1] }));
-      const polygon = new maps.Polygon({
-        paths: polygonCoords,
-        strokeColor: area.area === 'Monarca' ? '#FF0000' : '#0000FF',
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: area.area === 'Monarca' ? '#FF0000' : '#0000FF',
-        fillOpacity: 0.35
-      });
-      polygon.setMap(map);
-    });
+      ? []
+      : data2.forEach((area) => {
+          const polygonCoords = area.geo.map((coord) => ({
+            lat: coord[0],
+            lng: coord[1],
+          }));
+          const polygon = new maps.Polygon({
+            paths: polygonCoords,
+            strokeColor: area.area === "Monarca" ? "#FF0000" : "#0000FF",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: area.area === "Monarca" ? "#FF0000" : "#0000FF",
+            fillOpacity: 0.35,
+          });
+          polygon.setMap(map);
+        });
   };
   const handleApiLoaded = (map, maps) => {
     const bounds = new maps.LatLngBounds();
@@ -158,58 +160,60 @@ export const MapResponsive = ({data,setData,isLoading,setIsLoading}) => {
     };
     dataMapa === undefined
       ? []
-      : dataMapa.forEach(({ latitude, longitude, num_coolers, area }, index) => {
-          const marker = new maps.Marker({
-            position: { lat: latitude, lng: longitude },
-            map,
-            title: `${area}  ${num_coolers.toLocaleString(
-              "es-MX"
-            )} Enfriadores`,
-            icon: mIcon,
-            label: {
-              color: "#000",
-              fontSize: "12px",
-              fontWeight: "600",
-              text: `${num_coolers.toLocaleString("es-MX")}`,
-            },
-          });          
-          bounds.extend(marker.getPosition());
-        });
+      : dataMapa.forEach(
+          ({ latitude, longitude, num_coolers, area }, index) => {
+            const marker = new maps.Marker({
+              position: { lat: latitude, lng: longitude },
+              map,
+              title: `${area}  ${num_coolers.toLocaleString(
+                "es-MX"
+              )} Enfriadores`,
+              icon: mIcon,
+              label: {
+                color: "#000",
+                fontSize: "12px",
+                fontWeight: "600",
+                text: `${num_coolers.toLocaleString("es-MX")}`,
+              },
+            });
+            bounds.extend(marker.getPosition());
+          }
+        );
 
     map.fitBounds(bounds);
   };
-  const dataMapa = data?.geo_data == null ? [] : data?.geo_data
-  .filter(
-    (cooler) =>
-      parseFloat(cooler.latitude) != 0 &&
-      parseFloat(cooler.longitude) != 0
-  )
-  .map((cooler) => ({
-    latitude: parseFloat(cooler.latitude),
-    longitude: parseFloat(cooler.longitude),
-    num_coolers: cooler.num_coolers,
-    area: cooler.area,
-  }))
-  useEffect(()=>{
-    fetchData()
-  },[dt,dto])
+  const dataMapa =
+    data?.geo_data == null
+      ? []
+      : data?.geo_data
+          .filter(
+            (cooler) =>
+              parseFloat(cooler.latitude) != 0 &&
+              parseFloat(cooler.longitude) != 0
+          )
+          .map((cooler) => ({
+            latitude: parseFloat(cooler.latitude),
+            longitude: parseFloat(cooler.longitude),
+            num_coolers: cooler.num_coolers,
+            area: cooler.area,
+          }));
+  useEffect(() => {
+    fetchData();
+  }, [dt, dto]);
   return (
-    <div style={{ height: '100%', width: '100%' }}>
-      {
-        isLoading === true ? 
-        (<SkeletonMapInsights />)
-        : (
+    <div style={{ height: "100%", width: "100%" }}>
+      {isLoading === true ? (
+        <SkeletonMapInsights />
+      ) : (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w' }}
+          bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
-          options={mapOptions}
+          // options={mapOptions}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-        >
-        </GoogleMapReact>
-        )
-      }
+        ></GoogleMapReact>
+      )}
     </div>
-  )
-}
+  );
+};

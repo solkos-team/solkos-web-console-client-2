@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
-import { IconMap, IconMap2 } from "@tabler/icons-react";
+import { IconMap } from "@tabler/icons-react";
 
 interface Marker {
   setMap(map: any): void;
@@ -41,8 +41,10 @@ const MapComponent2 = ({
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/mappv.svg";
-    const iconUrl2 = "../../sampleData/icon2.svg";
+    const iconUrl = "../../sampleData/mappin.svg";
+    const iconUrlSmall = "../../sampleData/pdv.svg";
+    const iconUrl2 = "../../sampleData/mappin.svg";
+    const iconUrlSmall2 = "../../sampleData/ub.svg";
 
     const currentMarker = new maps.Marker({
       position: { lat: latitude, lng: longitude },
@@ -51,7 +53,25 @@ const MapComponent2 = ({
       icon: {
         url: iconUrl,
         scaledSize: new maps.Size(25, 25),
+        labelOrigin: new maps.Point(85, 12),
       },
+      label: {
+        text: "Punto de instalación",
+        color: "#ED5079",
+        fontSize: "12px",
+        fontWeight: "bold",
+      },
+    });
+
+    const currentMarkerSmall = new maps.Marker({
+      position: { lat: latitude, lng: longitude },
+      map,
+      icon: {
+        url: iconUrlSmall,
+        scaledSize: new maps.Size(12, 12),
+        anchor: new maps.Point(6.5, 20), // Ajustar para mover hacia arriba
+      },
+      zIndex: maps.Marker.MAX_ZINDEX + 1, // Asegura que esté por encima
     });
 
     const anotherMarker = new maps.Marker({
@@ -61,10 +81,34 @@ const MapComponent2 = ({
       icon: {
         url: iconUrl2,
         scaledSize: new maps.Size(25, 25),
+        labelOrigin: new maps.Point(75, 12),
+      },
+      label: {
+        text: "Última ubicación",
+        color: "#ED5079",
+        fontSize: "12px",
+        fontWeight: "bold",
+        labelOrigin: new maps.Point(1000, 200),
       },
     });
 
-    setMarkers([currentMarker, anotherMarker]);
+    const anotherMarkerSmall = new maps.Marker({
+      position: { lat: last_latitude, lng: last_longitude },
+      map,
+      icon: {
+        url: iconUrlSmall2,
+        scaledSize: new maps.Size(12, 12),
+        anchor: new maps.Point(6.5, 20), // Ajustar para mover hacia arriba
+      },
+      zIndex: maps.Marker.MAX_ZINDEX + 1, // Asegura que esté por encima
+    });
+
+    setMarkers([
+      currentMarker,
+      currentMarkerSmall,
+      anotherMarker,
+      anotherMarkerSmall,
+    ]);
 
     const lineCoordinates = [
       { lat: latitude, lng: longitude },
@@ -82,10 +126,10 @@ const MapComponent2 = ({
             path: "M 0,-1 0,1",
             strokeColor: "#f0547c",
             strokeOpacity: 1,
-            scale: 4,
+            scale: 2.8,
           },
           offset: "0",
-          repeat: "20px",
+          repeat: "15px",
         },
       ],
     });
@@ -134,7 +178,7 @@ const MapComponent2 = ({
       style={{
         position: "relative",
         width: "100%",
-        height: "15vw",
+        height: "17vw",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",
@@ -157,15 +201,21 @@ const MapComponent2 = ({
       <div
         style={{
           position: "absolute",
-          top: "25px",
+          top: "10px",
           right: "10px",
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          backgroundColor: "#868E96",
+          padding: "5px 10px",
+          borderRadius: "5px",
         }}
+        onClick={openGoogleMaps}
       >
-        <IconMap
-          size={30}
-          style={{ color: "#666666", cursor: "pointer" }}
-          onClick={openGoogleMaps}
-        />
+        <IconMap size={17} style={{ color: "#FFFFFF" }} />
+        <span style={{ marginLeft: "8px", color: "#FFFFFF", fontSize: 12 }}>
+          Ver en maps
+        </span>{" "}
       </div>
     </div>
   );

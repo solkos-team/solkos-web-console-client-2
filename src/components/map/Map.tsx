@@ -30,7 +30,8 @@ const MapComponent = ({ latitude, longitude }) => {
   const handleApiLoaded = (map, maps) => {
     setMap(map);
 
-    const iconUrl = "../../sampleData/mappv.svg";
+    const iconUrl = "../../sampleData/mappin.svg";
+    const iconUrlSmall = "../../sampleData/pdv.svg";
 
     new maps.Marker({
       position: { lat: latitude, lng: longitude },
@@ -38,14 +39,29 @@ const MapComponent = ({ latitude, longitude }) => {
       title: "Mi Marcador Fijo",
       icon: {
         url: iconUrl,
-        scaledSize: new maps.Size(25, 25),
+        scaledSize: new maps.Size(32, 32),
+        labelOrigin: new maps.Point(90, 12),
+      },
+      label: {
+        text: "Punto de instalación",
+        color: "#ED5079",
+        fontSize: "12px",
+        fontWeight: "bold",
+        labelOrigin: new maps.Point(1000, 200),
       },
     });
+    // Ícono pequeño superpuesto
+    new maps.Marker({
+      position: { lat: latitude, lng: longitude },
+      map,
+      icon: {
+        url: iconUrlSmall,
+        scaledSize: new maps.Size(16, 16),
+        anchor: new maps.Point(8, 28), // Centrar el ícono pequeño sobre el ícono principal
+      },
+      zIndex: maps.Marker.MAX_ZINDEX + 1, // Asegura que el ícono pequeño esté por encima
+    });
   };
-
-  if (!googleMapsLoaded) {
-    return <div>Cargando...</div>;
-  }
 
   const openGoogleMaps = () => {
     //@ts-ignore
@@ -66,7 +82,7 @@ const MapComponent = ({ latitude, longitude }) => {
       style={{
         position: "relative",
         width: "100%",
-        height: "15vw",
+        height: "17vw",
         flexShrink: 0,
         borderRadius: "8px",
         border: "1px solid #CACACA",
@@ -89,15 +105,21 @@ const MapComponent = ({ latitude, longitude }) => {
       <div
         style={{
           position: "absolute",
-          top: "25px",
+          top: "10px",
           right: "10px",
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          backgroundColor: "#868E96",
+          padding: "5px 10px",
+          borderRadius: "5px",
         }}
+        onClick={openGoogleMaps}
       >
-        <IconMap
-          size={30}
-          style={{ color: "#666666", cursor: "pointer" }}
-          onClick={openGoogleMaps}
-        />
+        <IconMap size={17} style={{ color: "#FFFFFF" }} />
+        <span style={{ marginLeft: "8px", color: "#FFFFFF", fontSize: 12 }}>
+          Ver en maps
+        </span>{" "}
       </div>
     </div>
   );

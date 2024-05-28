@@ -203,11 +203,11 @@ table th {
   line-height: 21.7px;
   color: #88888b;
 }
-.pdv_title_p{
+.pdv_title_p {
   width: 100%;
-  height: fit-content;  
+  height: fit-content;
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
 }
 .insights_principal {
   width: 100%;
@@ -557,14 +557,15 @@ table th {
 }
 .insigths_datas_info2_control_title_grapics {
   width: 100%;
-  height: 80%;  
+  height: 80%;
 }
 .insigths_datas_info2_control_title_grapics_container {
   /* width: 90%; */
-  height: 90%;  
+  height: 90%;
   margin-left: 0.5rem;
   overflow-x: auto;
   scrollbar-width: thin;
+  scrollbar-color: #cacaca transparent;
 }
 .insigths_datas_info2_mantenimiento {
   padding: 1rem;
@@ -814,7 +815,7 @@ body {
 }
 .clt_actividad_principal_mapa {
   width: 100%;
-  height: max-content;
+  height: 100%;
 }
 
 .insights_datas_container {
@@ -1291,22 +1292,22 @@ body {
   height: 63%;
   display: flex;
 }
-.pdv_principal{
-  width: 100%;  
+.pdv_principal {
+  width: 100%;
   display: flex;
-  flex-direction: column;    
+  flex-direction: column;
 }
-.pdv_titleInfo{
-  margin-left: -2rem;  
-}
-.pdv_pathTable{  
+.pdv_titleInfo {
   margin-left: -2rem;
 }
-.pdv_table{
+.pdv_pathTable {
+  margin-left: -2rem;
+}
+.pdv_table {
   width: 100%;
-  height: 30vw;
-  overflow-y: auto;
-  scrollbar-width: thin;
+  height: fit-content;
+  /* overflow-y: auto;
+  scrollbar-width: thin; */
 }
 @keyframes logo-spin {
   from {
@@ -1565,7 +1566,7 @@ body {
   .login_principal_title {
     width: 100%;
   }
-  .pdv_table{
+  .pdv_table {
     height: 140vw;
   }
 }
