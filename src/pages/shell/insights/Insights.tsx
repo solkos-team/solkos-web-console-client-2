@@ -1591,11 +1591,11 @@ import { Insights as InsightsIT } from "../../../interfaces/InsightsInterfaces";
 import { Skeleton, Tooltip } from "@mantine/core";
 import { HeaderInsights } from "./Responsive/HeaderInsights";
 import { MapInsightsResponsive } from "./Responsive/MapInsightsResponsive";
-import {MapResponsive} from '../../../components/mapInsights/MapResponsive';
+import { MapResponsive } from "../../../components/mapInsights/MapResponsive";
 export default function Insights() {
-  const [data,setData] = useState<InsightsIT | null>(null);  
+  const [data, setData] = useState<InsightsIT | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const IndicadoresData =
     data?.insights?.INDICATOR?.algorithms.filter(
@@ -1690,9 +1690,7 @@ export default function Insights() {
                   ) : data?.summary.operative_units === undefined ? (
                     "Sin registro"
                   ) : (
-                    data?.summary.operative_units.toLocaleString(
-                      "es-MX"
-                    )
+                    data?.summary.operative_units.toLocaleString("es-MX")
                   )}
                 </li>
               </div>
@@ -1740,7 +1738,12 @@ export default function Insights() {
                 //   items={items}
                 //   data={insightsData?.geo_data}
                 // />
-                <MapResponsive data={data} setData={setData} isLoading={isLoading} setIsLoading={setIsLoading} />
+                <MapResponsive
+                  data={data}
+                  setData={setData}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
+                />
               }
               <MapInsightsResponsive />
             </div>
@@ -1775,13 +1778,10 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[4]?.percentage ==
-                        undefined ? (
+                      ) : data?.assets_analytics[4]?.percentage == undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[4]?.percentage.toFixed(
-                          1
-                        ) + "%"
+                        data?.assets_analytics[4]?.percentage.toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
@@ -1795,8 +1795,7 @@ export default function Insights() {
                               radius="xs"
                             />
                           </>
-                        ) : data?.assets_analytics[4]?.value ==
-                          undefined ? (
+                        ) : data?.assets_analytics[4]?.value == undefined ? (
                           "Sin registro"
                         ) : (
                           data?.assets_analytics[4]?.value.toLocaleString(
@@ -1824,13 +1823,10 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[1]?.percentage ==
-                        undefined ? (
+                      ) : data?.assets_analytics[1]?.percentage == undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[1]?.percentage.toFixed(
-                          1
-                        ) + "%"
+                        data?.assets_analytics[1]?.percentage.toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
@@ -1843,8 +1839,7 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[1]?.value ==
-                        undefined ? (
+                      ) : data?.assets_analytics[1]?.value == undefined ? (
                         "Sin registro"
                       ) : (
                         data?.assets_analytics[1]?.value.toLocaleString(
@@ -1870,13 +1865,10 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[2]?.percentage ==
-                        undefined ? (
+                      ) : data?.assets_analytics[2]?.percentage == undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[2]?.percentage.toFixed(
-                          1
-                        ) + "%"
+                        data?.assets_analytics[2]?.percentage.toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
@@ -1889,8 +1881,7 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[2]?.value ==
-                        undefined ? (
+                      ) : data?.assets_analytics[2]?.value == undefined ? (
                         "Sin registro"
                       ) : (
                         data?.assets_analytics[2]?.value.toLocaleString(
@@ -1928,8 +1919,7 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[0]?.percentage ===
-                        undefined ? (
+                      ) : data?.status_parque[0]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
                         data?.status_parque[0]?.percentage.toLocaleString(
@@ -1947,13 +1937,11 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[0]?.total ===
-                        undefined ? (
+                      ) : data?.status_parque[0]?.total === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.status_parque[0]?.total.toLocaleString(
-                          "es-MX"
-                        ) + " Enfriadores"
+                        data?.status_parque[0]?.total.toLocaleString("es-MX") +
+                        " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -1971,8 +1959,7 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[3]?.percentage ===
-                        undefined ? (
+                      ) : data?.status_parque[3]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
                         data?.status_parque[3]?.percentage.toLocaleString(
@@ -1990,13 +1977,11 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[3]?.total ===
-                        undefined ? (
+                      ) : data?.status_parque[3]?.total === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.status_parque[3]?.total.toLocaleString(
-                          "es-MX"
-                        ) + " Enfriadores"
+                        data?.status_parque[3]?.total.toLocaleString("es-MX") +
+                        " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -2012,8 +1997,7 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[2]?.percentage ===
-                        undefined ? (
+                      ) : data?.status_parque[2]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
                         data?.status_parque[2]?.percentage.toLocaleString(
@@ -2031,13 +2015,11 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[2]?.total ===
-                        undefined ? (
+                      ) : data?.status_parque[2]?.total === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.status_parque[2]?.total.toLocaleString(
-                          "es-MX"
-                        ) + " Enfriadores"
+                        data?.status_parque[2]?.total.toLocaleString("es-MX") +
+                        " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -2055,8 +2037,7 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[1]?.percentage ===
-                        undefined ? (
+                      ) : data?.status_parque[1]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
                         data?.status_parque[1]?.percentage.toLocaleString(
@@ -2074,13 +2055,11 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.status_parque[1]?.total ===
-                        undefined ? (
+                      ) : data?.status_parque[1]?.total === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.status_parque[1]?.total.toLocaleString(
-                          "es-MX"
-                        ) + " Enfriadores"
+                        data?.status_parque[1]?.total.toLocaleString("es-MX") +
+                        " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -2123,7 +2102,10 @@ export default function Insights() {
                   </h1>
                 </div>
                 <div className="insigths_datas_info2_control_title_grapics">
-                  <div className="insigths_datas_info2_control_title_grapics_container" style={{borderBottom:'1px solid #cacaca'}}>
+                  <div
+                    className="insigths_datas_info2_control_title_grapics_container"
+                    style={{ borderBottom: "1px solid #cacaca" }}
+                  >
                     <div
                       style={{
                         display: "flex",
@@ -2255,22 +2237,22 @@ export default function Insights() {
                           </div>
                         </div>
                       );
-                    })}                   
+                    })}
                   </div>
                   <section
-                      className="insights_datas_mantenimiento_VerDetalles_principal"
-                      style={{ display: isLoading == true ? "none" : "" }}
-                      onClick={() => navigate("/home/indicator")}
-                    >
-                      <div className="insights_datas_mantenimiento_VerDetalles_h1">
-                        Ver detalles
-                      </div>
-                      <img
-                        src={"../../sampleData/arrow_b.png"}
-                        alt="Descripción de la imagen"
-                        style={{ marginTop: 4 }}
-                      />
-                    </section>
+                    className="insights_datas_mantenimiento_VerDetalles_principal"
+                    style={{ display: isLoading == true ? "none" : "" }}
+                    onClick={() => navigate("/home/indicator")}
+                  >
+                    <div className="insights_datas_mantenimiento_VerDetalles_h1">
+                      Ver detalles
+                    </div>
+                    <img
+                      src={"../../sampleData/arrow_b.png"}
+                      alt="Descripción de la imagen"
+                      style={{ marginTop: 4 }}
+                    />
+                  </section>
                 </div>
               </div>
               <div className="insigths_datas_info2_mantenimiento">
@@ -2333,9 +2315,7 @@ export default function Insights() {
                             width: `${
                               ((data?.insights?.FAIL?.total || 0) /
                                 (Number(data?.insights?.ALERT?.total) +
-                                  Number(
-                                    data?.insights?.FAIL?.total
-                                  ))) *
+                                  Number(data?.insights?.FAIL?.total))) *
                               100
                             }%`,
                             backgroundColor: isLoading != true ? "#ffc4cc" : "",
@@ -2360,11 +2340,9 @@ export default function Insights() {
                                     />
                                   </div>
                                 </>
-                              ) : data?.insights?.FAIL?.level ===
-                                undefined ? (
+                              ) : data?.insights?.FAIL?.level === undefined ? (
                                 "Sin registro"
-                              ) : data?.insights?.FAIL?.level ===
-                                "FAIL" ? (
+                              ) : data?.insights?.FAIL?.level === "FAIL" ? (
                                 <span
                                   style={{
                                     color: "#FA5252",
@@ -2392,13 +2370,10 @@ export default function Insights() {
                                 />
                               </div>
                             </>
-                          ) : data?.insights?.FAIL?.total ===
-                            undefined ? (
+                          ) : data?.insights?.FAIL?.total === undefined ? (
                             "Sin registro"
                           ) : (
-                            data?.insights?.FAIL?.total.toLocaleString(
-                              "es-MX"
-                            )
+                            data?.insights?.FAIL?.total.toLocaleString("es-MX")
                           )}
                         </div>
                       </div>
@@ -2412,9 +2387,7 @@ export default function Insights() {
                             width: `${
                               ((data?.insights?.ALERT?.total || 0) /
                                 (Number(data?.insights?.ALERT?.total) +
-                                  Number(
-                                    data?.insights?.FAIL?.total
-                                  ))) *
+                                  Number(data?.insights?.FAIL?.total))) *
                               100
                             }%`,
                             backgroundColor: isLoading != true ? "#fef5c7" : "",
@@ -2439,11 +2412,9 @@ export default function Insights() {
                                     />
                                   </div>
                                 </>
-                              ) : data?.insights?.ALERT?.level ===
-                                undefined ? (
+                              ) : data?.insights?.ALERT?.level === undefined ? (
                                 "Sin registro"
-                              ) : data?.insights?.ALERT?.level ===
-                                "ALERT" ? (
+                              ) : data?.insights?.ALERT?.level === "ALERT" ? (
                                 <span
                                   style={{
                                     color: "#E67700",
@@ -2471,13 +2442,10 @@ export default function Insights() {
                                 />
                               </div>
                             </>
-                          ) : data?.insights?.ALERT?.total ===
-                            undefined ? (
+                          ) : data?.insights?.ALERT?.total === undefined ? (
                             "Sin registro"
                           ) : (
-                            data?.insights?.ALERT?.total.toLocaleString(
-                              "es-MX"
-                            )
+                            data?.insights?.ALERT?.total.toLocaleString("es-MX")
                           )}
                         </div>
                       </div>

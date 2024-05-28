@@ -528,7 +528,8 @@ export default function Coolers() {
                               gap: "4px",
                               borderRadius: "2px",
                               border:
-                                cooler.actionable === "Visita PdV"
+                                cooler.actionable === "Visita PdV" &&
+                                dto != "KOF Colombia"
                                   ? "1.5px solid #DA7E05"
                                   : cooler.actionable === "Sin Riesgo"
                                   ? "1.5px solid #0F9F67"
@@ -537,27 +538,28 @@ export default function Coolers() {
                                   ? "1.5px solid #F93448"
                                   : cooler.actionable === "Actualizar Info"
                                   ? "1.5px solid #DA7E05"
-                                  : // : cooler.actionable === "Actualizar dato" ||
-                                    //   cooler.actionable === "Datos faltantes" ||
-                                    //   cooler.actionable === "Monitoreo" ||
-                                    //   cooler.actionable === "Movimiento"
-                                    // ? "1.5px solid #1864AB"
-                                    // : cooler.actionable ===
-                                    //     "Solicitar serv. correctivo" ||
-                                    //   cooler.actionable ===
-                                    //     "Solicitar serv. preventivos" ||
-                                    //   cooler.actionable ===
-                                    //     "Seguimiento a equipo" ||
-                                    //   cooler.actionable === "Visita PdV"
-                                    // ? "1.5px solid #E67700"
-                                    // : cooler.actionable ===
-                                    //   "Visita PdV prioritaria"
-                                    // ? "1.5px solid #C92A2A"
-                                    "1.5px solid black",
+                                  : cooler.actionable === "Actualizar dato" ||
+                                    cooler.actionable === "Datos faltantes" ||
+                                    cooler.actionable === "Monitoreo" ||
+                                    cooler.actionable === "Movimiento"
+                                  ? "1.5px solid #1864AB"
+                                  : cooler.actionable ===
+                                      "Solicitar serv. correctivo" ||
+                                    cooler.actionable ===
+                                      "Solicitar serv. preventivos" ||
+                                    cooler.actionable ===
+                                      "Seguimiento a equipo" ||
+                                    cooler.actionable === "Visita PdV"
+                                  ? "1.5px solid #E67700"
+                                  : cooler.actionable ===
+                                    "Visita PdV prioritaria"
+                                  ? "1.5px solid #C92A2A"
+                                  : "1.5px solid black",
                               background: "#FFF",
                             }}
                           >
-                            {cooler.actionable === "Visita PdV" ? (
+                            {cooler.actionable === "Visita PdV" &&
+                            dto != "KOF Colombia" ? (
                               <img
                                 src={"../../sampleData/p.svg"}
                                 alt="Descripción de la imagen"
@@ -582,67 +584,67 @@ export default function Coolers() {
                                 alt="Descripción de la imagen"
                                 style={{ width: "15px", height: "15px" }}
                               />
+                            ) : cooler.actionable === "Actualizar dato" ? (
+                              <img
+                                src={"../../sampleData/actDat.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Datos faltantes" ? (
+                              <img
+                                src={"../../sampleData/datFal.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Monitoreo" ? (
+                              <img
+                                src={"../../sampleData/Mont.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Movimiento" ? (
+                              <img
+                                src={"../../sampleData/mov1.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable ===
+                                "Solicitar serv. correctivo" ||
+                              cooler.actionable ===
+                                "Solicitar serv. preventivos" ? (
+                              <img
+                                src={"../../sampleData/serCP.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Seguimiento a equipo" ? (
+                              <img
+                                src={"../../sampleData/seguE.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable === "Visita PdV" ? (
+                              <img
+                                src={"../../sampleData/visitap.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
+                            ) : cooler.actionable ===
+                              "Visita PdV prioritaria" ? (
+                              <img
+                                src={"../../sampleData/visitapd.svg"}
+                                alt="Descripción de la imagen"
+                                style={{ width: "15px", height: "15px" }}
+                              />
                             ) : (
-                              // : cooler.actionable === "Actualizar dato" ? (
-                              //   <img
-                              //     src={"../../sampleData/actDat.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable === "Datos faltantes" ? (
-                              //   <img
-                              //     src={"../../sampleData/datFal.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable === "Monitoreo" ? (
-                              //   <img
-                              //     src={"../../sampleData/Mont.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable === "Movimiento" ? (
-                              //   <img
-                              //     src={"../../sampleData/mov1.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable ===
-                              //     "Solicitar serv. correctivo" ||
-                              //   cooler.actionable ===
-                              //     "Solicitar serv. preventivos" ? (
-                              //   <img
-                              //     src={"../../sampleData/serCP.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable === "Seguimiento a equipo" ? (
-                              //   <img
-                              //     src={"../../sampleData/seguE.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable === "Visita PdV" ? (
-                              //   <img
-                              //     src={"../../sampleData/visitap.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // ) : cooler.actionable ===
-                              //   "Visita PdV prioritaria" ? (
-                              //   <img
-                              //     src={"../../sampleData/visitapd.svg"}
-                              //     alt="Descripción de la imagen"
-                              //     style={{ width: "15px", height: "15px" }}
-                              //   />
-                              // )
                               ""
                             )}
 
                             <div
                               style={{
                                 color:
-                                  cooler.actionable === "Visita PdV"
+                                  cooler.actionable === "Visita PdV" &&
+                                  dto != "KOF Colombia"
                                     ? "#DA7E05"
                                     : cooler.actionable === "Sin Riesgo"
                                     ? "#0F9F67"
@@ -652,23 +654,23 @@ export default function Coolers() {
                                     ? "#F93448"
                                     : cooler.actionable === "Actualizar Info"
                                     ? "#DA7E05"
-                                    : // : cooler.actionable === "Actualizar dato" ||
-                                      //   cooler.actionable === "Datos faltantes" ||
-                                      //   cooler.actionable === "Monitoreo" ||
-                                      //   cooler.actionable === "Movimiento"
-                                      // ? "#1864AB"
-                                      // : cooler.actionable ===
-                                      //     "Solicitar serv. correctivo" ||
-                                      //   cooler.actionable ===
-                                      //     "Solicitar serv. preventivos" ||
-                                      //   cooler.actionable ===
-                                      //     "Seguimiento a equipo" ||
-                                      //   cooler.actionable === "Visita PdV"
-                                      // ? "#E67700"
-                                      // : cooler.actionable ===
-                                      //   "Visita PdV prioritaria"
-                                      // ? "#C92A2A"
-                                      "black",
+                                    : cooler.actionable === "Actualizar dato" ||
+                                      cooler.actionable === "Datos faltantes" ||
+                                      cooler.actionable === "Monitoreo" ||
+                                      cooler.actionable === "Movimiento"
+                                    ? "#1864AB"
+                                    : cooler.actionable ===
+                                        "Solicitar serv. correctivo" ||
+                                      cooler.actionable ===
+                                        "Solicitar serv. preventivos" ||
+                                      cooler.actionable ===
+                                        "Seguimiento a equipo" ||
+                                      cooler.actionable === "Visita PdV"
+                                    ? "#E67700"
+                                    : cooler.actionable ===
+                                      "Visita PdV prioritaria"
+                                    ? "#C92A2A"
+                                    : "black",
 
                                 fontStyle: "normal",
                                 fontWeight: 600,

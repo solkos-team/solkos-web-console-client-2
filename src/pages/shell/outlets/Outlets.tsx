@@ -63,7 +63,7 @@ export default function Outlets() {
     try {
       const data = await fetchUniversalTables("outlets", body, setIsLoading);
       const datos = await data.json();
-      // console.log(datos);
+      console.log(datos);
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
@@ -155,48 +155,51 @@ export default function Outlets() {
   return (
     <section className="pdv_principal">
       <section className="pdv_pathfilter">
-        <PageFilter status={isLoading} />      
+        <PageFilter status={isLoading} />
       </section>
       <section className="pdv_titleInfo">
         <div className="insights_title_h1">Puntos de venta</div>
         <p className="insights_title_p">
-          Catálogo de los puntos de venta, realiza el seguimiento adecuado
-          para cada uno de ellos.
+          Catálogo de los puntos de venta, realiza el seguimiento adecuado para
+          cada uno de ellos.
         </p>
-        <HeaderInsights title={'Puntos de venta'} description={'Catálogo de los puntos de venta, realiza el seguimiento adecuado para cada uno de ellos'} />
-        <p className="insights_title_p">Tabla</p>                
-        <div className="pdv_title_p" >
-          <p style={{fontSize:'14px',color:'#000005'}}>
-            Puntos de Venta
-          </p>
+        <HeaderInsights
+          title={"Puntos de venta"}
+          description={
+            "Catálogo de los puntos de venta, realiza el seguimiento adecuado para cada uno de ellos"
+          }
+        />
+        <p className="insights_title_p">Tabla</p>
+        <div className="pdv_title_p">
+          <p style={{ fontSize: "14px", color: "#000005" }}>Puntos de Venta</p>
           <ExportToExcel
-                  datos={filteredOutlets}
-                  nombre={"Puntos de Venta"}
-                  body={body}
-                  component="outlets"
-                />
-        </div>                
-      </section>
-      <section className="pdv_pathTable">        
-          <TextInput
-            value={searchValue}
-            onChange={(event) => handleSearchChange(event)}
-            onKeyDown={handleKeyDown}
-            type="text"
-            placeholder="Busca por punto de venta"
-            style={{
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "1,8rem",
-              width: "100%",
-              paddingRight: "2.5rem",
-              margin: 0,
-              borderRadius: "4px",
-              color: "#88888B",
-            }}
+            datos={filteredOutlets}
+            nombre={"Puntos de Venta"}
+            body={body}
+            component="outlets"
           />
-          <br />
+        </div>
+      </section>
+      <section className="pdv_pathTable">
+        <TextInput
+          value={searchValue}
+          onChange={(event) => handleSearchChange(event)}
+          onKeyDown={handleKeyDown}
+          type="text"
+          placeholder="Busca por punto de venta"
+          style={{
+            fontSize: "0.8rem",
+            fontStyle: "normal",
+            fontWeight: 500,
+            lineHeight: "1,8rem",
+            width: "100%",
+            paddingRight: "2.5rem",
+            margin: 0,
+            borderRadius: "4px",
+            color: "#88888B",
+          }}
+        />
+        <br />
         <section className="pdv_table">
           <table>
             <thead>
@@ -313,11 +316,30 @@ export default function Outlets() {
                                       ? "1.5px solid #F93448"
                                       : outlet.actionable === "Actualizar Info"
                                       ? "1.5px solid #DA7E05"
+                                      : outlet.actionable ===
+                                          "Actualizar dato" ||
+                                        outlet.actionable ===
+                                          "Datos faltantes" ||
+                                        outlet.actionable === "Monitoreo" ||
+                                        outlet.actionable === "Movimiento"
+                                      ? "1.5px solid #1864AB"
+                                      : outlet.actionable ===
+                                          "Solicitar serv. correctivo" ||
+                                        outlet.actionable ===
+                                          "Solicitar serv. preventivos" ||
+                                        outlet.actionable ===
+                                          "Seguimiento a equipo" ||
+                                        outlet.actionable === "Visita PdV"
+                                      ? "1.5px solid #E67700"
+                                      : outlet.actionable ===
+                                        "Visita PdV prioritaria"
+                                      ? "1.5px solid #C92A2A"
                                       : "1.5px solid black",
                                   background: "#FFF",
                                 }}
                               >
-                                {outlet.actionable === "Visita PdV" ? (
+                                {outlet.actionable === "Visita PdV" &&
+                                dto != "KOF Colombia" ? (
                                   <img
                                     src={"../../sampleData/p.svg"}
                                     alt="Descripción de la imagen"
@@ -343,6 +365,59 @@ export default function Outlets() {
                                     alt="Descripción de la imagen"
                                     style={{ width: "15px", height: "15px" }}
                                   />
+                                ) : outlet.actionable === "Actualizar dato" ? (
+                                  <img
+                                    src={"../../sampleData/actDat.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable === "Datos faltantes" ? (
+                                  <img
+                                    src={"../../sampleData/datFal.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable === "Monitoreo" ? (
+                                  <img
+                                    src={"../../sampleData/Mont.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable === "Movimiento" ? (
+                                  <img
+                                    src={"../../sampleData/mov1.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable ===
+                                    "Solicitar serv. correctivo" ||
+                                  outlet.actionable ===
+                                    "Solicitar serv. preventivos" ? (
+                                  <img
+                                    src={"../../sampleData/serCP.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable ===
+                                  "Seguimiento a equipo" ? (
+                                  <img
+                                    src={"../../sampleData/seguE.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable === "Visita PdV" ? (
+                                  <img
+                                    src={"../../sampleData/visitap.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : outlet.actionable ===
+                                  "Visita PdV prioritaria" ? (
+                                  <img
+                                    src={"../../sampleData/visitapd.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
                                 ) : (
                                   ""
                                 )}
@@ -362,6 +437,24 @@ export default function Outlets() {
                                         : outlet.actionable ===
                                           "Actualizar Info"
                                         ? "#DA7E05"
+                                        : outlet.actionable ===
+                                            "Actualizar dato" ||
+                                          outlet.actionable ===
+                                            "Datos faltantes" ||
+                                          outlet.actionable === "Monitoreo" ||
+                                          outlet.actionable === "Movimiento"
+                                        ? "#1864AB"
+                                        : outlet.actionable ===
+                                            "Solicitar serv. correctivo" ||
+                                          outlet.actionable ===
+                                            "Solicitar serv. preventivos" ||
+                                          outlet.actionable ===
+                                            "Seguimiento a equipo" ||
+                                          outlet.actionable === "Visita PdV"
+                                        ? "#E67700"
+                                        : outlet.actionable ===
+                                          "Visita PdV prioritaria"
+                                        ? "#C92A2A"
                                         : "black",
                                     // fontFamily: "DM Sans",
                                     // fontSize: "1vw",

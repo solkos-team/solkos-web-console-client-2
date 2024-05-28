@@ -199,7 +199,8 @@ export default function DrawerA({
                         : selectedAlgorithm === "Estatus sin venta" ||
                           selectedAlgorithm === "Acciones urgentes"
                         ? "#FFC7CD"
-                        : selectedAlgorithm === "Visita PdV"
+                        : selectedAlgorithm === "Visita PdV" &&
+                          dto != "KOF Colombia"
                         ? "#FEF5C7"
                         : selectedAlgorithm === "Actualizar dato" ||
                           selectedAlgorithm === "Datos faltantes" ||
@@ -235,7 +236,8 @@ export default function DrawerA({
                       alt="Descripción de la imagen"
                       style={{ width: "45px", height: "45px" }}
                     />
-                  ) : selectedAlgorithm === "Visita PdV" ? (
+                  ) : selectedAlgorithm === "Visita PdV" &&
+                    dto != "KOF Colombia" ? (
                     <img
                       src={"../../sampleData/vp.svg"}
                       alt="Descripción de la imagen"
@@ -655,20 +657,15 @@ export default function DrawerA({
                         }}
                       >
                         <td data-label="ESTATUS" title={cooler.status}>
-                          {isLoading == true ? (
-                            <>
-                              <Skeleton height={20} radius="sm" width="90%" />
-                            </>
-                          ) : cooler.status === "" ||
-                            cooler.status === null ||
-                            cooler.status === undefined ? (
+                          {isLoading ? (
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          ) : !cooler.status ? (
                             "Sin registro"
                           ) : (
                             <div
                               style={{
                                 display: "flex",
                                 padding: "4px",
-                                // justifyContent: "center",
                                 alignItems: "center",
                                 gap: "4px",
                                 borderRadius: "2px",
@@ -727,6 +724,7 @@ export default function DrawerA({
                               ></div>
                               <div
                                 style={{
+                                  maxWidth: "80px",
                                   color:
                                     cooler?.status ===
                                     "FUNCIONANDO CORRECTAMENTE"
@@ -755,6 +753,9 @@ export default function DrawerA({
                                   fontStyle: "normal",
                                   fontWeight: 500,
                                   lineHeight: "14px",
+                                  whiteSpace: "nowrap", // Evita que el texto se divida en varias líneas
+                                  overflow: "hidden", // Oculta cualquier contenido que se desborde del contenedor
+                                  textOverflow: "ellipsis", // Añade "..." al final del texto que se desborde
                                 }}
                               >
                                 {cooler.status}
@@ -762,6 +763,7 @@ export default function DrawerA({
                             </div>
                           )}
                         </td>
+
                         <td data-label="SERIE" title={cooler.serial_number}>
                           {isLoading == true ? (
                             <>
@@ -852,12 +854,12 @@ export default function DrawerA({
                                   width: "fit-content",
                                   display: "flex",
                                   padding: "4px",
-                                  // justifyContent: "center",
                                   alignItems: "center",
                                   gap: "4px",
                                   borderRadius: "2px",
                                   border:
-                                    cooler.actionable === "Visita PdV"
+                                    cooler.actionable === "Visita PdV" &&
+                                    dto != "KOF Colombia"
                                       ? "1.5px solid #DA7E05"
                                       : cooler.actionable === "Sin Riesgo"
                                       ? "1.5px solid #0F9F67"
@@ -868,12 +870,30 @@ export default function DrawerA({
                                       ? "1.5px solid #F93448"
                                       : cooler.actionable === "Actualizar Info"
                                       ? "1.5px solid #DA7E05"
+                                      : cooler.actionable ===
+                                          "Actualizar dato" ||
+                                        cooler.actionable ===
+                                          "Datos faltantes" ||
+                                        cooler.actionable === "Monitoreo" ||
+                                        cooler.actionable === "Movimiento"
+                                      ? "1.5px solid #1864AB"
+                                      : cooler.actionable ===
+                                          "Solicitar serv. correctivo" ||
+                                        cooler.actionable ===
+                                          "Solicitar serv. preventivos" ||
+                                        cooler.actionable ===
+                                          "Seguimiento a equipo" ||
+                                        cooler.actionable === "Visita PdV"
+                                      ? "1.5px solid #E67700"
+                                      : cooler.actionable ===
+                                        "Visita PdV prioritaria"
+                                      ? "1.5px solid #C92A2A"
                                       : "1.5px solid black",
                                   background: "#FFF",
-                                  textOverflow: "ellipsis",
                                 }}
                               >
-                                {cooler.actionable === "Visita PdV" ? (
+                                {cooler.actionable === "Visita PdV" &&
+                                dto != "KOF Colombia" ? (
                                   <img
                                     src={"../../sampleData/p.svg"}
                                     alt="Descripción de la imagen"
@@ -898,6 +918,59 @@ export default function DrawerA({
                                     alt="Descripción de la imagen"
                                     style={{ width: "12px", height: "12px" }}
                                   />
+                                ) : cooler.actionable === "Actualizar dato" ? (
+                                  <img
+                                    src={"../../sampleData/actDat.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable === "Datos faltantes" ? (
+                                  <img
+                                    src={"../../sampleData/datFal.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable === "Monitoreo" ? (
+                                  <img
+                                    src={"../../sampleData/Mont.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable === "Movimiento" ? (
+                                  <img
+                                    src={"../../sampleData/mov1.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable ===
+                                    "Solicitar serv. correctivo" ||
+                                  cooler.actionable ===
+                                    "Solicitar serv. preventivos" ? (
+                                  <img
+                                    src={"../../sampleData/serCP.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable ===
+                                  "Seguimiento a equipo" ? (
+                                  <img
+                                    src={"../../sampleData/seguE.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable === "Visita PdV" ? (
+                                  <img
+                                    src={"../../sampleData/visitap.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
+                                ) : cooler.actionable ===
+                                  "Visita PdV prioritaria" ? (
+                                  <img
+                                    src={"../../sampleData/visitapd.svg"}
+                                    alt="Descripción de la imagen"
+                                    style={{ width: "15px", height: "15px" }}
+                                  />
                                 ) : (
                                   ""
                                 )}
@@ -905,8 +978,10 @@ export default function DrawerA({
                                 <div
                                   title={cooler.actionable}
                                   style={{
+                                    maxWidth: "55px", // Ajusta según sea necesario
                                     color:
-                                      cooler.actionable === "Visita PdV"
+                                      cooler.actionable === "Visita PdV" &&
+                                      dto != "KOF Colombia"
                                         ? "#DA7E05"
                                         : cooler.actionable === "Sin Riesgo"
                                         ? "#0F9F67"
@@ -918,41 +993,40 @@ export default function DrawerA({
                                         : cooler.actionable ===
                                           "Actualizar Info"
                                         ? "#DA7E05"
+                                        : cooler.actionable ===
+                                            "Actualizar dato" ||
+                                          cooler.actionable ===
+                                            "Datos faltantes" ||
+                                          cooler.actionable === "Monitoreo" ||
+                                          cooler.actionable === "Movimiento"
+                                        ? "#1864AB"
+                                        : cooler.actionable ===
+                                            "Solicitar serv. correctivo" ||
+                                          cooler.actionable ===
+                                            "Solicitar serv. preventivos" ||
+                                          cooler.actionable ===
+                                            "Seguimiento a equipo" ||
+                                          cooler.actionable === "Visita PdV"
+                                        ? "#E67700"
+                                        : cooler.actionable ===
+                                          "Visita PdV prioritaria"
+                                        ? "#C92A2A"
                                         : "black",
-                                    // fontFamily: "DM Sans",
-                                    // fontSize: ".7vw",
                                     fontStyle: "normal",
                                     fontWeight: 600,
                                     lineHeight: "14px",
+                                    whiteSpace: "nowrap", // Evita que el texto se divida en varias líneas
+                                    overflow: "hidden", // Oculta el texto que se desborda del contenedor
+                                    textOverflow: "ellipsis", // Añade "..." al final del texto que se desborda
                                   }}
                                 >
-                                  {cooler.actionable === "Visita PdV"
-                                    ? "Visita PdV.."
-                                    : cooler.actionable === "Sin Riesgo"
-                                    ? "Sin Riesgo"
-                                    : cooler.actionable === "Estatus sin venta"
-                                    ? "Est sin v..."
-                                    : cooler.actionable === "Acciones urgentes"
-                                    ? "Acciones urg.."
-                                    : cooler.actionable === "Actualizar Info"
-                                    ? "Actualizar inf..."
-                                    : cooler.actionable ===
-                                      "Solicitar serv. correctivo"
-                                    ? "Solicitar serv..."
-                                    : cooler.actionable === "Actualizar dato"
-                                    ? "Actualizar da..."
-                                    : cooler.actionable ===
-                                      "Seguimiento a equipo"
-                                    ? "Seguimiento..."
-                                    : cooler.actionable ===
-                                      "Vista PdV prioritaria"
-                                    ? "Visita PdV p..."
-                                    : cooler.actionable}
+                                  {cooler.actionable}
                                 </div>
                               </div>
                             </>
                           )}
                         </td>
+
                         <td data-label="Acciones">
                           {isLoading == true ? (
                             <>
