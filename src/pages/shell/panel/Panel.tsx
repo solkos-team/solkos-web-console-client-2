@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import TableauReport from "tableau-react";
 import PageFilter from "../../../components/pageFilter";
 import { Loader } from "@mantine/core";
+import { Tabs } from "@mantine/core";
 
 export default function Panel() {
   const [data, setData] = useState<string | null>("");
@@ -55,43 +56,113 @@ export default function Panel() {
         <Loader />
       ) : (
         <>
-          {dto === "Yza" ? (
-            <>
-              <PageFilter />
-              <br></br>
-              <TableauReport
-                url="https://tableau.efemsa.com/views/Yza/Performance?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
-                token={data}
-                options={options}
-              />
-            </>
-          ) : dto === "KOF" ? (
-            <>
-              <PageFilter />
-              <br></br>
-              <TableauReport
-                url={`https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                token={data}
-                options={options}
-                parameters={parameters}
-                query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
-              />
-            </>
-          ) : dto === "HEINEKEN" ? (
-            <>
-              <PageFilter />
-              <br></br>
-              <TableauReport
-                url={`https://tableau.efemsa.com/views/HNK_17151853863070/Cobertura?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                token={data}
-                options={{ height: "800px", width: "100%" }}
-                parameters={parameters}
-                query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
-              />
-            </>
-          ) : (
-            "Sin información"
-          )}
+          <PageFilter />
+          <br></br>
+          <div
+            style={{
+              display: "flex",
+              padding: "16px",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              alignSelf: "stretch",
+            }}
+          >
+            <text
+              style={{
+                color: "#000",
+                fontSize: "1.5rem",
+                fontStyle: "normal",
+                fontWeight: 700,
+                lineHeight: "140%",
+                marginLeft: -55,
+              }}
+            >
+              Tableros
+            </text>
+          </div>
+
+          <div>
+            <Tabs color="teal" defaultValue="first" style={{ width: "100%" }}>
+              <Tabs.List>
+                <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
+                  <img
+                    src={"../../sampleData/star.svg"}
+                    alt="Icono"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  Tablero 1
+                </Tabs.Tab>
+                <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
+                  <img
+                    src={"../../sampleData/star.svg"}
+                    alt="Icono"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  Tablero 2
+                </Tabs.Tab>
+              </Tabs.List>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Tabs.Panel value="first">
+                  <>
+                    {dto === "YZA" ? (
+                      <>
+                        <br></br>
+                        <TableauReport
+                          url="https://tableau.efemsa.com/views/Yza/Performance?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
+                          token={data}
+                          options={options}
+                          parameters={parameters}
+                          query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+                        />
+                      </>
+                    ) : dto === "KOF" ? (
+                      <>
+                        <br></br>
+                        <TableauReport
+                          url={`https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                          token={data}
+                          options={options}
+                          parameters={parameters}
+                          query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+                        />
+                      </>
+                    ) : dto === "HEINEKEN" ? (
+                      <>
+                        <br></br>
+                        <TableauReport
+                          url={`https://tableau.efemsa.com/views/HNK_17151853863070/Cobertura?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                          token={data}
+                          options={{ height: "800px", width: "100%" }}
+                          parameters={parameters}
+                          query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+                        />
+                      </>
+                    ) : (
+                      "Sin información"
+                    )}
+                  </>
+                </Tabs.Panel>
+
+                <Tabs.Panel value="second">
+                  <></>
+                </Tabs.Panel>
+              </div>
+            </Tabs>
+          </div>
         </>
       )}
     </section>
