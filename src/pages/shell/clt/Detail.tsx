@@ -108,7 +108,9 @@ import MapComponent2 from "../../../components/map_2";
 import { IconArrowRight } from "@tabler/icons-react";
 import DrawerInversion from "../../../components/drawerInversion/DrawerInversion";
 import DrawerEnergy from "../../../components/drawerEnergy/DrawerEnergy";
+import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
 import { useDisclosure } from "@mantine/hooks";
+import { CoolviewIcon } from "../../../sampleData/icons";
 
 moment.locale("es", {
   months: [
@@ -140,6 +142,8 @@ export default function CoolerDetail() {
     useDisclosure(false);
   const [energyOpened, { open: openEnergy, close: closeEnergy }] =
     useDisclosure(false);
+  const [coolViewOpened, { open: openCoolview, close: closeCoolview }] =
+    useDisclosure(false);
 
   const fetchData = async (serie?) => {
     try {
@@ -150,7 +154,6 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -188,8 +191,7 @@ export default function CoolerDetail() {
       ? alert("Ingresa datos correctos! ")
       : fetchData(value);
     setEditSerie(false);
-  };
-
+  };  
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -858,14 +860,28 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
-              <div style={{ display: "none", justifyContent: "space-between" }}>
+              <div style={{ display: "none",gap:'5px' }}>
+                <div
+                  style={{
+                    color: 'var(--blue-6, #2393F4)',
+                    fontSize: "0.75rem",
+                    fontWeight: 500,
+                    cursor : 'pointer'
+                  }}
+                  onClick={openCoolview}
+                >
+                  Ver Coolview
+                </div>
+                <img src={CoolviewIcon} alt="CoolviewIcon"  loading="lazy"/>             
+              </div>
+              {/* <div style={{  justifyContent: "space-between" }}>
                 <Link
                   to={`/home/coolView/?device_id=${coolersData?.cooler.device_id}&date_from=${fechaAnterior}&date_to=${fechaActual}&clt=false`}
                   style={{ fontSize: "0.625rem" }}
                 >
                   Ver en CoolView
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -1965,6 +1981,11 @@ export default function CoolerDetail() {
         opened={energyOpened}
         onClose={closeEnergy}
         coolersData={coolersData}
+      />
+      <DrawerCoolview 
+      opened={coolViewOpened}
+      onClose={closeCoolview}
+      CoolerId={coolersData?.cooler.device_id}
       />
     </>
   );
