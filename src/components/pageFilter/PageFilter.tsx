@@ -795,6 +795,8 @@ export default function (props) {
 
       data[0].found_in === "serial_number"
         ? navigate(`/home/clt/${data[0].coincidence}`)
+        : data[0].found_in === "outlet_name" || data[0].found_in === "outlet_id"
+        ? navigate(`/home/outlets`)
         : "";
 
       // const coincidenceArray = coincidenceString.split(",");

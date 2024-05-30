@@ -22,7 +22,6 @@ export default function DrawerNewUser({
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
-  // console.log(dt.length);
   const clearInputs = () => {
     setName("");
     setEmail("");
@@ -51,6 +50,10 @@ export default function DrawerNewUser({
     }
   };
 
+  const handleClose = () => {
+    setOpenedDrawer(false);
+  };
+
   return (
     <Drawer
       opened={openedDrawer}
@@ -61,12 +64,23 @@ export default function DrawerNewUser({
       <section className="users_principal">
         <section className="users_content">
           <section className="users_title">
-            <img
-              src={"../../sampleData/user2.svg"}
-              alt="Descripción de la imagen"
-            />
-            <h1 className="users_title_h1">Crear Nuevo Usuario</h1>
+            <h1 className="users_title_h1">Nuevo Usuario</h1>
           </section>
+          <div
+            style={{
+              display: "flex",
+              padding: "4px 0px",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              alignSelf: "strech",
+            }}
+          >
+            <div
+              style={{ background: "#CACACA", height: "1px", width: "105%" }}
+            ></div>
+          </div>
           <section className="users_form">
             <section className="users_form_1">
               <Input.Wrapper label="Nombre" description="" error="">
@@ -81,20 +95,74 @@ export default function DrawerNewUser({
                 />
               </Input.Wrapper>
             </section>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
             <section className="users_form_button">
               <Button
                 style={{
-                  background: "#ED5079",
-                  width: "17rem",
+                  background: "#FFF5F5",
+                  width: "100%",
                   marginLeft: 0,
-                  color: "#FEF2F4",
+                  color: "#FA5252",
+                  cursor: "pointer",
+                }}
+                onClick={handleClose} // Cambiado para cerrar el Drawer
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px 26px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    flex: 100,
+                    borderRadius: "8px",
+                    background: "#FFF5F5",
+                  }}
+                >
+                  <img
+                    src={"../../sampleData/x.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "16px", height: "16px" }}
+                  />
+                  Cancelar
+                </div>
+              </Button>
+            </section>
+            <section className="users_form_button" style={{ marginTop: -20 }}>
+              <Button
+                style={{
+                  background: "#E7F5FF",
+                  width: "100%",
+                  marginLeft: 0,
+                  color: "#2393F4",
                   cursor: "pointer",
                 }}
                 onClick={handleLogin}
               >
-                Crear usuario
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px 26px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    flex: 100,
+                    borderRadius: "8px",
+                    background: "#E7F5FF",
+                  }}
+                >
+                  <img
+                    src={"../../sampleData/check.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "16px", height: "16px" }}
+                  />
+                  Guardar
+                </div>
               </Button>
-            </section>
+            </section>{" "}
           </section>
         </section>
       </section>
