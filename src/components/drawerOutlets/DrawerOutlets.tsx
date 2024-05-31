@@ -143,6 +143,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     return rows;
   };
   // console.log(filteredCoolers);
+
   return (
     <Drawer
       opened={opened}

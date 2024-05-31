@@ -795,8 +795,9 @@ export default function (props) {
 
       data[0].found_in === "serial_number"
         ? navigate(`/home/clt/${data[0].coincidence}`)
-        : data[0].found_in === "outlet_name" || data[0].found_in === "outlet_id"
-        ? navigate(`/home/outlets`)
+        : data[0].found_in === "outlet_name" ||
+          data[0].found_in === "outlet_name"
+        ? navigate(`/home/outlets?filter=${searchValue}`)
         : "";
 
       // const coincidenceArray = coincidenceString.split(",");
@@ -815,12 +816,6 @@ export default function (props) {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchToken();
-  }, []);
-
-  // **********************************************************
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {

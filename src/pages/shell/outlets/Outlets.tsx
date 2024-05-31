@@ -12,6 +12,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../interfaces/CoolerInterface";
 import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
+import { useLocation } from "react-router-dom";
 
 export default function Outlets() {
   const [searchValue, setSearchValue] = useState("");
@@ -52,12 +53,15 @@ export default function Outlets() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
+  const { search } = useLocation();
+  const params = new URLSearchParams(search);
+  const filter = params.get("filter");
   const body = {
     customer: dto,
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     path: pathVerify(),
-    filter_by: searchValue,
+    filter_by: searchValue || filter,
   };
   const fetchData = async () => {
     try {
@@ -67,12 +71,19 @@ export default function Outlets() {
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
-      // console.log(datos);
       setIsLoading(false);
+
+      // **************
+
+      if (filter && body.filter_by === filter) {
+        console.log("PRUEBA");
+      }
     } catch (error) {
       console.error("Error fetching outlets:", error);
     }
   };
+
+  console.log(filter);
   useEffect(() => {
     fetchData();
   }, [dt, dto, datosPorPagina, currentPage]);
@@ -152,6 +163,8 @@ export default function Outlets() {
     }
     return rows;
   };
+  console.log(selectedOutletDetails);
+
   return (
     <section className="pdv_principal">
       <section className="pdv_pathfilter">
