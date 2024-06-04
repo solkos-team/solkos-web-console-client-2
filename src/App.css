@@ -1313,6 +1313,20 @@ body {
   /* overflow-y: auto;
   scrollbar-width: thin; */
 }
+.mantine-Drawer-title {
+  color: var(--other-black, #000);
+  /* font-family: "DM Sans"; */
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+.coolview_printipal{
+  width: 100%;
+  height: 100%;
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
