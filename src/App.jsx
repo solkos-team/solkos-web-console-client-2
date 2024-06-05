@@ -743,7 +743,7 @@ function App() {
                           Cambiar de organización
                         </div>
                       </div>
-                      <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+                      <div style={{ maxHeight: "300px", overflowY: "auto",scrollbarWidth:'thin' }}>
                         {/* Contenido del menú de cambio de organización */}
                         {data === undefined
                           ? "Sin registros"
