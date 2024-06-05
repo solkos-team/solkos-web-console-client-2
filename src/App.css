@@ -702,8 +702,9 @@ body {
 .clt_actividad_principal {
   width: 50%;
   height: 100%;
-  border: 1px solid #cacaca;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: var(--gray-0, #F8F9FA);
   padding: 0.5rem;
   box-sizing: border-box;
   display: flex;
@@ -712,8 +713,9 @@ body {
 .clt_actividad_principal_actividad {
   width: 50%;
   height: 30vw;
-  border: 1px solid #cacaca;
-  border-radius: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: var(--gray-0, #F8F9FA);
   padding: 0.5rem;
   box-sizing: border-box;
   display: flex;
@@ -735,7 +737,7 @@ body {
   border-radius: 0.5rem;
   padding: 0.5rem;
   box-sizing: border-box;
-  background-color: #f4f4f4;
+  background-color: #FFF;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #cacaca transparent;

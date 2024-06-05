@@ -927,6 +927,7 @@ export default function CoolerDetail() {
                           display: "flex",
                           flexDirection: "column",
                           gap: "8px",
+                          
                         }}
                       >
                         {coolersData.activity
@@ -1015,10 +1016,10 @@ export default function CoolerDetail() {
                                     padding: "8px",
                                     flexDirection: "column",
                                     alignItems: "flex-start",
-
                                     alignSelf: "stretch",
-                                    borderRadius: "5px",
-                                    background: "#FFF",
+                                    borderRadius: '8px',
+                                    border: '1px solid var(--gray-4, #CED4DA)',
+                                    background: 'var(--gray-0, #F8F9FA)',
                                     boxShadow:
                                       "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
                                     width: "96%",

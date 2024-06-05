@@ -74,9 +74,9 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               gap: "5px",
               flex: 100,
               alignSelf: "stretch",
-              borderRadius: "8px",
-              border: "1px solid #88888B",
-              background: "#FFF",
+              borderRadius: '8px',
+              border: '1px solid var(--gray-4, #CED4DA)',
+              background: 'var(--gray-0, #F8F9FA)',
               width: "90%",
             }}
           >
@@ -338,9 +338,9 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               flexDirection: "column",
               alignItems: "flex-start",
               gap: "16px",
-              borderRadius: "8px",
-              border: "1px solid #88888B",
-              background: "#FFF",
+              borderRadius: '8px',
+              border: '1px solid var(--gray-4, #CED4DA)',
+              background: 'var(--gray-0, #F8F9FA)',
             }}
           >
             <div
