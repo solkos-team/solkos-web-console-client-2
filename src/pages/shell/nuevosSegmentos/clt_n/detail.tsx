@@ -53,7 +53,6 @@ export const Detail = () => {
         setIsLoading
       );
       setCoolersData(data);
-      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);

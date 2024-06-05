@@ -89,7 +89,6 @@ const fetchDataAlertas = async () => {
   const openDrawer = (icon, title, clase?, algorithm?, totalData?, type?) => {
     setDrawerValues({ icon: icon, title: title, class: clase, algoritmo: algorithm, total: totalData, type: type })
     open()
-    // console.log('funciona')
   }
   const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
   insightsData?.summary.coolers.toLocaleString("es-MX") != null ||

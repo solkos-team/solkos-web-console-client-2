@@ -36,8 +36,6 @@ export default function Panel() {
     fetchToken();
   }, [region, zone, operative_unit, route]);
 
-  // console.log(data);
-  // console.log(isLoading);
 
   const options = {
     height: "800px",

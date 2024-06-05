@@ -222,8 +222,19 @@ function App() {
     setCoolerInsightsOpen(false);
   };
   const fetctData = async () => {
-    const data = await fetchUniversalDetails("customers");
-    setData(data);
+    const datos = JSON.parse(sessionStorage.getItem('customers'))    
+    try {      
+      if(datos == null){        
+        const data = await fetchUniversalDetails("customers");      
+        sessionStorage.setItem('customers',JSON.stringify(data))
+        const datos = JSON.parse(sessionStorage.getItem('customers'))
+        setData(data ?? datos);
+      }else{
+        setData(datos)
+      }
+    } catch (error) {
+      throw(error)
+    }
   };
   useEffect(() => {
     const status = sessionStorage.getItem("MenuState");

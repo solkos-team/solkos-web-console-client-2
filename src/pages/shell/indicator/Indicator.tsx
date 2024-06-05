@@ -483,8 +483,7 @@ export default function Indicator() {
                           flex: 100,
                           cursor: "pointer",
                         }}
-                        onClick={() => {
-                          // console.log(cooler.level);
+                        onClick={() => {                          
                           setSelectedAlgorithm(cooler.algorithm);
                           setSelectedAlgorithmValues({
                             value: cooler.value,

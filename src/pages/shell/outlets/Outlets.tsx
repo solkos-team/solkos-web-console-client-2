@@ -66,8 +66,7 @@ export default function Outlets() {
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("outlets", body, setIsLoading);
-      const datos = await data.json();
-      console.log(datos);
+      const datos = await data.json();      
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
@@ -76,14 +75,11 @@ export default function Outlets() {
       // **************
 
       if (filter && body.filter_by === filter) {
-        console.log("PRUEBA");
       }
     } catch (error) {
       console.error("Error fetching outlets:", error);
     }
   };
-
-  console.log(filter);
   useEffect(() => {
     fetchData();
   }, [dt, dto, datosPorPagina, currentPage]);
@@ -163,7 +159,6 @@ export default function Outlets() {
     }
     return rows;
   };
-  console.log(selectedOutletDetails);
 
   return (
     <section className="pdv_principal">
