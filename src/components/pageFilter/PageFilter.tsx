@@ -152,8 +152,8 @@ export default function (props) {
     // Add new PATH
     if (value !== "") {
       const splitValues = value.split(",");
-      setData((current) => [...current, ...splitValues]);
-      localStorage.setItem("PATH", JSON.stringify([...data, ...splitValues]));
+      setData(splitValues);
+      localStorage.setItem("PATH", JSON.stringify(splitValues));
       setOpened(false);
       setValue("");
       if (index !== 3) {
@@ -393,7 +393,7 @@ export default function (props) {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.ctrlKey && event.key === "k") {
+      if (event.ctrlKey && event.key === "x") {
         event.preventDefault();
         setModalOpened(true);
       }
@@ -681,7 +681,7 @@ export default function (props) {
                   lineHeight: "14px",
                 }}
               >
-                Ctrl + k
+                Ctrl + X
               </div>
             </div>
           </div>
