@@ -150,16 +150,13 @@ export default function (props) {
 
   const verSelectData = (value) => {
     // Add new PATH
-    if (value != "") {
-      if (index == 3) {
-        setFilterVisibility(false);
-        setStatusDelete(false);
-      }
-      setData((current) => [...current, value]);
-      localStorage.setItem("PATH", JSON.stringify([...data, value]));
+    if (value !== "") {
+      const splitValues = value.split(",");
+      setData((current) => [...current, ...splitValues]);
+      localStorage.setItem("PATH", JSON.stringify([...data, ...splitValues]));
       setOpened(false);
       setValue("");
-      if (index != 3) {
+      if (index !== 3) {
         setIndex(index + 1);
         setStatusDelete(false);
       }
@@ -167,6 +164,7 @@ export default function (props) {
       setFilterVisibility(false);
     }
   };
+
   const deleteFilter = (i) => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
     dataLocalStorage.splice(i, 1);
