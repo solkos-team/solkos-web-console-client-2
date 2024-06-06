@@ -202,15 +202,57 @@ export default function (props) {
   data.length > 0 ? getPaths(data) : "";
 
   // ********************************************************************************************************************************
+  // const [searchHistory, setSearchHistory] = useState<
+  //   { searchItem: string; translatedItem: string }[]
+  // >([]);
+
+  // const addToHistory = (
+  //   searchItem: string,
+  //   foundItem: string,
+  //   isSearch: boolean
+  // ) => {
+  //   const translatedItem =
+  //     foundItem === "serial_number"
+  //       ? "Enfriador"
+  //       : foundItem === "region"
+  //       ? "Región"
+  //       : foundItem === "zone"
+  //       ? "Zona"
+  //       : foundItem === "operative_unit"
+  //       ? "Unidad operativa"
+  //       : foundItem === "route"
+  //       ? "Ruta"
+  //       : foundItem === "outlet_name" || foundItem === "outlet_id"
+  //       ? "PdV"
+  //       : "";
+
+  //   // Crear un nuevo historial con el nuevo objeto al principio
+  //   const updatedHistory = [
+  //     { searchItem, translatedItem },
+  //     ...searchHistory.filter((item) => item.searchItem !== searchItem),
+  //   ];
+  //   const limitedHistory = updatedHistory.slice(0, 5);
+  //   // Actualizar el estado del historial
+  //   setSearchHistory(limitedHistory);
+  //   localStorage.setItem("searchHistory", JSON.stringify(limitedHistory));
+  // };
+
   const [searchHistory, setSearchHistory] = useState<
     { searchItem: string; translatedItem: string }[]
   >([]);
 
   const addToHistory = (
-    searchItem: string,
+    searchItem: string | undefined, // Permitir que searchItem pueda ser undefined
     foundItem: string,
     isSearch: boolean
   ) => {
+    if (!searchItem) {
+      return; // Salir de la función si searchItem es undefined o vacío
+    }
+
+    // Obtener la última palabra del searchItem
+    const lastWord = searchItem.split(",").pop()?.trim() ?? "";
+
     const translatedItem =
       foundItem === "serial_number"
         ? "Enfriador"
@@ -228,10 +270,11 @@ export default function (props) {
 
     // Crear un nuevo historial con el nuevo objeto al principio
     const updatedHistory = [
-      { searchItem, translatedItem },
-      ...searchHistory.filter((item) => item.searchItem !== searchItem),
+      { searchItem: lastWord, translatedItem },
+      ...searchHistory.filter((item) => item.searchItem !== lastWord),
     ];
     const limitedHistory = updatedHistory.slice(0, 5);
+
     // Actualizar el estado del historial
     setSearchHistory(limitedHistory);
     localStorage.setItem("searchHistory", JSON.stringify(limitedHistory));
