@@ -154,6 +154,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -191,7 +192,7 @@ export default function CoolerDetail() {
       ? alert("Ingresa datos correctos! ")
       : fetchData(value);
     setEditSerie(false);
-  };  
+  };
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -860,19 +861,19 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
-              <div style={{ display: "none",gap:'5px' }}>
+              <div style={{ display: "none", gap: "5px" }}>
                 <div
                   style={{
-                    color: 'var(--blue-6, #2393F4)',
+                    color: "var(--blue-6, #2393F4)",
                     fontSize: "0.75rem",
                     fontWeight: 500,
-                    cursor : 'pointer'
+                    cursor: "pointer",
                   }}
                   onClick={openCoolview}
                 >
                   Ver Coolview
                 </div>
-                <img src={CoolviewIcon} alt="CoolviewIcon"  loading="lazy"/>             
+                <img src={CoolviewIcon} alt="CoolviewIcon" loading="lazy" />
               </div>
               {/* <div style={{  justifyContent: "space-between" }}>
                 <Link
@@ -1983,10 +1984,10 @@ export default function CoolerDetail() {
         onClose={closeEnergy}
         coolersData={coolersData}
       />
-      <DrawerCoolview 
-      opened={coolViewOpened}
-      onClose={closeCoolview}
-      CoolerId={coolersData?.cooler.device_id}
+      <DrawerCoolview
+        opened={coolViewOpened}
+        onClose={closeCoolview}
+        CoolerId={coolersData?.cooler.device_id}
       />
     </>
   );

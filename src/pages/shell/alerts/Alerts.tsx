@@ -23,7 +23,7 @@ export default function Alerts() {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
       setAlertsData(data);
-      // console.log(data);
+      console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {

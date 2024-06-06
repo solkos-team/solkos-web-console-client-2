@@ -183,15 +183,27 @@ table th {
 .insights_title_responsive {
   display: none;
 }
+.outlets_title_h1 {
+  width: 100%;
+  text-align: center;
+  /* font-size: 1.3vw; */
+  font-weight: 700;
+  font-size: clamp(2rem, 1.375rem, 1.5rem);
+  line-height: 34.1px;
+  color: #000005;
+  padding: 0px 32px;
+  margin-left: -40px;
+}
 .insights_title_h1 {
   width: 100%;
-  height: 40%;
   text-align: left;
   /* font-size: 1.3vw; */
   font-weight: 700;
-  font-size: clamp(1rem, 1.375rem, 1.5rem);
+  font-size: clamp(1.5rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
   color: #000005;
+  padding: 0px 32px;
+  margin-left: -40px;
 }
 .insights_title_p {
   width: 100%;
@@ -1302,12 +1314,18 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  padding: 45px 0px;
 }
 .pdv_titleInfo {
-  margin-left: -2rem;
+  align-items: center;
+  padding: 0px 32px;
+  flex-direction: column;
+  width: 90%;
 }
 .pdv_pathTable {
   margin-left: -2rem;
+  align-items: center;
 }
 .pdv_table {
   width: 100%;
@@ -1685,4 +1703,8 @@ body {
 .custom-alert {
   color: #000 !important;
   font-weight: 400 !important;
+}
+
+.no-border-input {
+  border: none !important;
 }

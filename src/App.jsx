@@ -29,6 +29,8 @@ import collab from "./sampleData/collab.png";
 import arrows from "./sampleData/arrows.png";
 import arrow2 from "./sampleData/arrow2.png";
 import arrow_1 from "./sampleData/arrow_1.png";
+import a1 from "../public/sampleData/a1.svg";
+import a2 from "../public/sampleData/a2.svg";
 import arrow_2 from "./sampleData/arrow_2.png";
 import alert from "./sampleData/alert.png";
 import fails from "./sampleData/fails.png";
@@ -277,13 +279,15 @@ function App() {
                   </span>
                   {coolerInsightsOpen ? (
                     <img
-                      src={arrow_1}
+                      src={a1}
                       style={{ marginLeft: opened2 === true ? 10 : 40 }}
                     />
                   ) : (
                     <img
-                      src={arrow_2}
-                      style={{ marginLeft: opened2 === true ? 10 : 40 }}
+                      src={a2}
+                      style={{
+                        marginLeft: opened2 === true ? 10 : 40,
+                      }}
                     />
                   )}
                 </div>
@@ -363,12 +367,12 @@ function App() {
                     </span>
                     {coolerInsightsOpen ? (
                       <img
-                        src={arrow_1}
+                        src={a1}
                         style={{ marginLeft: opened2 === true ? 1 : 40 }}
                       />
                     ) : (
                       <img
-                        src={arrow_2}
+                        src={a2}
                         style={{ marginLeft: opened2 === true ? 1 : 40 }}
                       />
                     )}
