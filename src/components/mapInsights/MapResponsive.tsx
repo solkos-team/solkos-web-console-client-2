@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { defaultProps, mapOptions } from "./datos";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { fetchUniversal } from "../../utils/apiUtils";
 export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
+  const [zoom, setZoom] = useState(defaultProps.zoom);
   const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
@@ -179,8 +180,15 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
             bounds.extend(marker.getPosition());
           }
         );
-
     map.fitBounds(bounds);
+    const MIN_ZOOM = 6;
+    const maxZoomService = new maps.MaxZoomService();
+    maxZoomService.getMaxZoomAtLatLng(bounds.getCenter(), (response) => {
+      if (response.status === "OK") {
+        const maxZoom = response.zoom;
+        map.setZoom(Math.min(maxZoom, MIN_ZOOM));
+      }
+    });
   };
   const dataMapa =
     data?.geo_data == null
@@ -200,6 +208,14 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   useEffect(() => {
     fetchData();
   }, [dt, dto]);
+
+  useEffect(() => {
+    if (dto === "KOF Guatemala") {
+      setZoom(6);
+    } else {
+      setZoom(11);
+    }
+  }, [dto]);
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {isLoading === true ? (
@@ -208,7 +224,11 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
           defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
+          defaultZoom={6}
+          options={{
+            gestureHandling: "greedy",
+            fullscreenControl: false,
+          }}
           // options={mapOptions}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
