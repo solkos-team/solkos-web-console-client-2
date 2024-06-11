@@ -876,7 +876,7 @@ export default function Coolers() {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
-    filter_by: searchValue,
+    filter_by: searchValue.trim(),
     order_by: {
       asc: changeAsc,
       name: "last_read",
