@@ -767,7 +767,8 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
-              <div style={{ display: "none", gap: "5px" }}>
+              <div style={{ display: 'flex',gap:'5px',background:'var(--blue-0, #E7F5FF)',width:'fit-content',padding:'5px',boxSizing:'border-box',borderRadius:'5px' }}>
+              {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
                 <div
                   style={{
                     color: "var(--blue-6, #2393F4)",

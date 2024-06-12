@@ -16,7 +16,7 @@ export const CoolView = () => {
     }, []);
     return (
         <iframe 
-        src={`http://localhost:5174?device_id=${deviceId}&start_date=${dateFrom}&end_date=${dateTo}&clt=false`} 
+        src={`http://localhost:5173?device_id=${deviceId}&start_date=${dateFrom}&end_date=${dateTo}&clt=false`} 
         width='100%' 
         height='100%' 
         frameBorder='0'
