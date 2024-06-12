@@ -200,7 +200,7 @@ export default function CoolerDetail() {
                         style={{
                           width: "1.5rem",
                           height: "1.5rem",
-                          // display: "none",
+                          display: "none",
                         }}
                         onClick={() => {
                           setEditSerie((o) => !o);
@@ -1415,110 +1415,6 @@ export default function CoolerDetail() {
                     </>
                   )}
                 </div>
-                {/* <div className="clt_actividad_mapa_info">
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    <img
-                      src={"../../sampleData/mappv.svg"}
-                      width={"20vw"}
-                      alt="cooler"
-                    ></img>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Instalación
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    <img
-                      src={"../../sampleData/icon2.svg"}
-                      width={"20vw"}
-                      alt="cooler"
-                    ></img>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Última ubicación
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-               
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px", 
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "1vw",
-                          height: "0.3vw",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                      &nbsp;
-                      <div
-                        style={{
-                          width: "1vw",
-                          height: "0.3vw",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                      &nbsp;
-                      <div
-                        style={{
-                          width: "1vw",
-                          height: "0.3vw",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                    </div>
-
-                    <div
-                      style={{
-                        color: "#88888B",
-                    
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Distancia entre puntos
-                    </div>
-                  </div>
-                </div> */}
               </section>
             </div>
           </section>

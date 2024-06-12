@@ -224,18 +224,18 @@ function App() {
     setCoolerInsightsOpen(false);
   };
   const fetctData = async () => {
-    const datos = JSON.parse(sessionStorage.getItem('customers'))    
-    try {      
-      if(datos == null){        
-        const data = await fetchUniversalDetails("customers");      
-        sessionStorage.setItem('customers',JSON.stringify(data))
-        const datos = JSON.parse(sessionStorage.getItem('customers'))
+    const datos = JSON.parse(sessionStorage.getItem("customers"));
+    try {
+      if (datos == null) {
+        const data = await fetchUniversalDetails("customers");
+        sessionStorage.setItem("customers", JSON.stringify(data));
+        const datos = JSON.parse(sessionStorage.getItem("customers"));
         setData(data ?? datos);
-      }else{
-        setData(datos)
+      } else {
+        setData(datos);
       }
     } catch (error) {
-      throw(error)
+      throw error;
     }
   };
   useEffect(() => {
@@ -758,7 +758,13 @@ function App() {
                           Cambiar de organización
                         </div>
                       </div>
-                      <div style={{ maxHeight: "300px", overflowY: "auto",scrollbarWidth:'thin' }}>
+                      <div
+                        style={{
+                          maxHeight: "300px",
+                          overflowY: "auto",
+                          scrollbarWidth: "thin",
+                        }}
+                      >
                         {/* Contenido del menú de cambio de organización */}
                         {data === undefined
                           ? "Sin registros"

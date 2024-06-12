@@ -209,13 +209,6 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
     fetchData();
   }, [dt, dto]);
 
-  useEffect(() => {
-    if (dto === "KOF Guatemala") {
-      setZoom(6);
-    } else {
-      setZoom(11);
-    }
-  }, [dto]);
   return (
     <div style={{ height: "100%", width: "100%" }}>
       {isLoading === true ? (
