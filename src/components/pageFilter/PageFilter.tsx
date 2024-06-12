@@ -404,7 +404,7 @@ export default function (props) {
         "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/search",
 
         setIsLoading,
-        { search_value: searchValueToUse, customer: dto }
+        { search_value: searchValueToUse.trim(), customer: dto }
       );
 
       if (data.length === 1) {
