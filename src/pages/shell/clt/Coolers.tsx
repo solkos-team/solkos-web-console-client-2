@@ -75,7 +75,8 @@ export default function Coolers() {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
-    filter_by: searchValue.split(","),
+    // filter_by: searchValue.split(","),
+    filter_by: searchValue.split(",").map((item) => item.trim()),
     order_by: {
       asc: changeAsc,
       name: "last_read",

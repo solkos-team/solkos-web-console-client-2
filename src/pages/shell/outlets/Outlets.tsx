@@ -65,7 +65,12 @@ export default function Outlets() {
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     path: pathVerify(),
-    filter_by: searchValue.split(",") || (filter ? [filter] : []),
+    // filter_by: searchValue.split(",") || (filter ? [filter] : []),
+    filter_by: searchValue
+      ? searchValue.split(",").map((item) => item.trim())
+      : filter
+      ? [filter]
+      : [],
   };
   const fetchData = async () => {
     try {
