@@ -17,6 +17,7 @@ import DrawerEnergy from "../../../components/drawerEnergy/DrawerEnergy";
 import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
 import { useDisclosure } from "@mantine/hooks";
 import { CoolviewIcon } from "../../../sampleData/icons";
+import { userVerify } from "../../../Functions/pathVerify";
 
 moment.locale("es", {
   months: [
@@ -767,7 +768,7 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
-              <div style={{ display: 'flex',gap:'5px',background:'var(--blue-0, #E7F5FF)',width:'fit-content',padding:'5px',boxSizing:'border-box',borderRadius:'5px' }}>
+              <div style={{ display: userVerify(localStorage.getItem('USER') ?? ''),gap:'5px',background:'var(--blue-0, #E7F5FF)',width:'fit-content',padding:'5px',boxSizing:'border-box',borderRadius:'5px' }}>
               {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
                 <div
                   style={{
