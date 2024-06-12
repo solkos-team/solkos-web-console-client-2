@@ -1344,7 +1344,7 @@ export default function Users() {
           <br />
           <PaginationComponent
             accion={setCurrentPage}
-            totalDatos={dataUsers === null ? 0 : dataUsers.length}
+            totalDatos={totalData}
             datosPorPagina={datosPorPagina}
             numero={setNumero}
           />
