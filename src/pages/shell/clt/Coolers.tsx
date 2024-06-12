@@ -13,6 +13,7 @@ import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
 import moment from "moment";
 
 import "moment/locale/es";
+import { miniSerializeError } from "@reduxjs/toolkit";
 
 moment.locale("es", {
   months: [
@@ -74,13 +75,12 @@ export default function Coolers() {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
-    filter_by: searchValue.trim(),
+    filter_by: searchValue.split(','),
     order_by: {
       asc: changeAsc,
       name: "last_read",
     },
   };
-
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
