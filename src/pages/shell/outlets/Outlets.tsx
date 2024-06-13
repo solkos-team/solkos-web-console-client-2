@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { CoolerInterface } from "../../../interfaces/CoolerInterface";
 import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
 import { useLocation } from "react-router-dom";
+import { TagInput } from "rsuite";
 
 export default function Outlets() {
   const [showTable, setShowTable] = useState(false);
@@ -30,17 +31,26 @@ export default function Outlets() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [totalData, setTotalData] = useState<String | number>(0);
+  const [tags, setTags] = useState<string[]>([]);
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);
   };
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      setShowTable(true);
-      setCurrentPage(1);
-      if (tableViewClicked) {
-        fetchData();
-      }
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter") {
+  //     setShowTable(true);
+  //     setCurrentPage(1);
+  //     if (tableViewClicked) {
+  //       fetchData();
+  //     }
+  //   }
+  // };
+  const handleTagChange = (newTags) => {    
+    setTags(newTags);
+  };
+  const handleKeyDown = (event) => {  
+    if(event.key === 'Enter' && tags.length > 0 && event.target.value == ''){
+      fetchData()
     }
   };
   const filterOutlets = (data, searchQuery) => {
@@ -66,11 +76,7 @@ export default function Outlets() {
     page_number: currentPage,
     path: pathVerify(),
     // filter_by: searchValue.split(",") || (filter ? [filter] : []),
-    filter_by: searchValue
-      ? searchValue.split(",").map((item) => item.trim())
-      : filter
-      ? [filter]
-      : [],
+    filter_by: tags
   };
   const fetchData = async () => {
     try {
@@ -80,7 +86,7 @@ export default function Outlets() {
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
       setIsLoading(false);
-
+      setShowTable(true)
       // Corrected comparison logic
       if (filter && body.filter_by.includes(filter)) {
         // Execute your conditional code here
@@ -205,9 +211,9 @@ export default function Outlets() {
                 width: "60%",
               }}
             >
-              <TextInput
+              {/* <TextInput
                 value={searchValue}
-                onChange={(event) => handleSearchChange(event)}
+                onChange={handleTagChange}
                 onKeyDown={handleKeyDown}
                 type="text"
                 placeholder="       Busca por Id Pvd/ PdV"
@@ -221,7 +227,24 @@ export default function Outlets() {
                   borderRadius: "4px",
                   color: "#88888B",
                 }}
-              />
+              /> */}
+              <TagInput
+              value={tags}
+              onChange={handleTagChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Busca por Id Pvd/ PdV"
+              style={{
+                fontSize: "0.8rem",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "1.8rem",
+                width: "100%",
+                paddingRight: "10rem",
+                borderRadius: "4px",
+                color: "#88888B",
+                border: "1px solid #ccc", // Puedes ajustar el borde según tu diseño
+              }}
+            />
               <img
                 src={"../../sampleData/searchC.svg"}
                 alt="Descripción de la imagen"
