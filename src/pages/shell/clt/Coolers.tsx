@@ -13,6 +13,7 @@ import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import moment from "moment";
 import "moment/locale/es";
 import { miniSerializeError } from "@reduxjs/toolkit";
+import { tagHandle } from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -49,9 +50,8 @@ export default function Coolers() {
   const [enterCount, setEnterCount] = useState(0);
   const navigate = useNavigate();
 
-  const handleTagChange = (newTags) => {
+  const handleTagChange = (newTags) => {    
     setTags(newTags);
-    setEnterCount(0); // Reset the enter count if the tags change
   };
 
   const handleInputChange = (value) => {
@@ -95,32 +95,14 @@ export default function Coolers() {
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
       setIsLoading(false);
+      setShowTable(true);
     } catch (error) {
       console.error("Error fetching coolers:", error);
     }
-  };
-  console.log(enterCount);
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      if (inputValue.trim() !== "") {
-        setTags([...tags, inputValue.trim()]);
-        setInputValue("");
-        setEnterCount(enterCount + 1);
-      } else {
-        setEnterCount(enterCount + 1);
-      }
-
-      if (enterCount + 1 >= 2) {
-        setShowTable(true);
-        setCurrentPage(1);
-        if (tableViewClicked) {
-          fetchData();
-        }
-        setEnterCount(0);
-      }
-    } else {
-      setEnterCount(0);
+  };  
+  const handleKeyDown = (event) => {  
+    if(event.key === 'Enter' && tags.length > 0 && event.target.value == ''){
+      fetchData()
     }
   };
 
