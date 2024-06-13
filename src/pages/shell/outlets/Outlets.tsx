@@ -242,7 +242,8 @@ export default function Outlets() {
                 paddingRight: "10rem",
                 borderRadius: "4px",
                 color: "#88888B",
-                border: "1px solid #ccc", // Puedes ajustar el borde según tu diseño
+                border: "1px solid #ccc", 
+                textAlign : 'left'
               }}
             />
               <img
