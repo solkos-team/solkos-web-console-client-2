@@ -2,16 +2,15 @@ import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { TagInput } from "rsuite";
+import "rsuite/dist/rsuite.min.css";
 import { IconArrowRight } from "@tabler/icons-react";
 import { fetchUniversalTables } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
-import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
-import { TextInput, Skeleton } from "@mantine/core";
+import { Skeleton } from "@mantine/core";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
-import { IconArrowUp, IconArrowDown } from "@tabler/icons-react";
 import moment from "moment";
-
 import "moment/locale/es";
 import { miniSerializeError } from "@reduxjs/toolkit";
 
@@ -38,7 +37,8 @@ export default function Coolers() {
   const [sortByLastVisit, setSortByLastVisit] = useState(true);
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
-  const [searchValue, setSearchValue] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState("");
   const [coolersData, setCoolersData] = useState<Cooler[]>();
   const [noInfoToShow, setNoInfoToShow] = useState(false);
   const [changeAsc, setChangeAsc] = useState(false);
@@ -46,26 +46,31 @@ export default function Coolers() {
   const [currentPage, setCurrentPage] = useState(1);
   const [datosPorPagina, setNumero] = useState(25);
   const [totalData, setTotalData] = useState<String | number>(0);
+  const [enterCount, setEnterCount] = useState(0);
   const navigate = useNavigate();
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
+  const handleTagChange = (newTags) => {
+    setTags(newTags);
+    setEnterCount(0); // Reset the enter count if the tags change
   };
 
-  const filterCoolers = (data, searchQuery) => {
-    const filteredData = data.filter((item) => {
-      const searchString = searchQuery.toLowerCase();
+  const handleInputChange = (value) => {
+    setInputValue(value);
+  };
+
+  const filterCoolers = (data, tags) => {
+    return data.filter((item) => {
+      const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
       const codeEnfriador = item.serial_number.toLowerCase();
       const deviceId = item.device_id.toLowerCase();
-      return (
-        codeEnfriador.includes(searchString) || deviceId.includes(searchString)
+      return lowerCaseTags.some(
+        (tag) => codeEnfriador.includes(tag) || deviceId.includes(tag)
       );
     });
-    return filteredData;
   };
 
   const pathVerify = () => {
-    return dt.length == 0 ? [] : JSON.parse(dt);
+    return dt.length === 0 ? [] : JSON.parse(dt);
   };
 
   const body = {
@@ -75,13 +80,13 @@ export default function Coolers() {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
-    // filter_by: searchValue.split(","),
-    filter_by: searchValue.split(",").map((item) => item.trim()),
+    filter_by: tags,
     order_by: {
       asc: changeAsc,
       name: "last_read",
     },
   };
+
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
@@ -94,13 +99,28 @@ export default function Coolers() {
       console.error("Error fetching coolers:", error);
     }
   };
+  console.log(enterCount);
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      setShowTable(true);
-      setCurrentPage(1);
-      if (tableViewClicked) {
-        fetchData();
+      if (inputValue.trim() !== "") {
+        setTags([...tags, inputValue.trim()]);
+        setInputValue("");
+        setEnterCount(enterCount + 1);
+      } else {
+        setEnterCount(enterCount + 1);
       }
+
+      if (enterCount + 1 >= 2) {
+        setShowTable(true);
+        setCurrentPage(1);
+        if (tableViewClicked) {
+          fetchData();
+        }
+        setEnterCount(0);
+      }
+    } else {
+      setEnterCount(0);
     }
   };
 
@@ -110,9 +130,7 @@ export default function Coolers() {
     }
   }, [showTable, currentPage, datosPorPagina, changeAsc]);
 
-  const filteredCoolers = coolersData
-    ? filterCoolers(coolersData, searchValue)
-    : [];
+  const filteredCoolers = coolersData ? filterCoolers(coolersData, tags) : [];
 
   useEffect(() => {
     setNoInfoToShow(filteredCoolers.length === 0);
@@ -126,52 +144,29 @@ export default function Coolers() {
   }, []);
   coolersData == undefined ? [] : coolersData;
   totalData == undefined ? 0 : totalData;
+
   const isloadingData = () => {
     let rows: any = [];
     for (let i = 0; i < 25; i++) {
       rows.push(
         <tr key={i}>
           <td data-label="Nombre">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
+            <Skeleton height={20} radius="sm" width="90%" />
           </td>
           <td data-label="# Enfriadores">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
+            <Skeleton height={20} radius="sm" width="90%" />
           </td>
           <td data-label="Última visita">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
+            <Skeleton height={20} radius="sm" width="90%" />
           </td>
           <td data-label="Prioridad">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
+            <Skeleton height={20} radius="sm" width="90%" />
           </td>
           <td data-label="Acciones">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
+            <Skeleton height={20} radius="sm" width="90%" />
           </td>
           <td data-label="Accion">
-            {
-              <>
-                <Skeleton height={20} radius="sm" width="90%" />
-              </>
-            }
+            <Skeleton height={20} radius="sm" width="90%" />
           </td>
         </tr>
       );
@@ -238,12 +233,11 @@ export default function Coolers() {
               width: "60%",
             }}
           >
-            <TextInput
-              value={searchValue}
-              onChange={(event) => handleSearchChange(event)}
+            <TagInput
+              value={tags}
+              onChange={handleTagChange}
               onKeyDown={handleKeyDown}
-              type="text"
-              placeholder="       Buscar por Serie/ Id Coolector / Mac / PdV"
+              placeholder="Buscar por Serie/ Id Coolector / Mac / PdV"
               style={{
                 fontSize: "0.8rem",
                 fontStyle: "normal",
@@ -253,6 +247,7 @@ export default function Coolers() {
                 paddingRight: "10rem",
                 borderRadius: "4px",
                 color: "#88888B",
+                border: "1px solid #ccc", // Puedes ajustar el borde según tu diseño
               }}
             />
             <img
@@ -266,7 +261,7 @@ export default function Coolers() {
                 width: "15px",
                 height: "15px",
                 pointerEvents: "none",
-                opacity: searchValue ? "0" : "1",
+                opacity: tags.length ? "0" : "1",
               }}
             />
           </div>
