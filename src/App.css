@@ -1708,7 +1708,3 @@ body {
 .no-border-input {
   border: none !important;
 }
-
-.rs-tag rs-tag-md rs-tag-default rs-tag-closable {
-  background-color: #49060d;
-}
