@@ -11,7 +11,7 @@ export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
             onClose={onClose}
             title="CoolView"
             position="bottom"
-            size="95%"
+            size="76%"
         >
             <section className="coolview_printipal">
                 {/* <iframe
