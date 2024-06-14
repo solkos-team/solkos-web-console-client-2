@@ -361,6 +361,7 @@ export default function Users() {
               onChange={handleSearchChange}
               type="text"
               placeholder="Busca por cualquier campo "
+              autoComplete="off"
               style={{
                 fontSize: "14px",
                 fontStyle: "normal",

@@ -70,13 +70,14 @@ export default function Outlets() {
   const { search } = useLocation();
   const params = new URLSearchParams(search);
   const filter = params.get("filter");
+  const filterBy = tags.length > 0 ? tags : filter ? [filter] : [];
+
   const body = {
     customer: dto,
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     path: pathVerify(),
-    // filter_by: searchValue.split(",") || (filter ? [filter] : []),
-    filter_by: tags,
+    filter_by: filterBy,
   };
   const fetchData = async () => {
     try {
@@ -217,25 +218,8 @@ export default function Outlets() {
                 width: "60%",
               }}
             >
-              {/* <TextInput
-                value={searchValue}
-                onChange={handleTagChange}
-                onKeyDown={handleKeyDown}
-                type="text"
-                placeholder="       Busca por Id Pvd/ PdV"
-                style={{
-                  fontSize: "0.8rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "1,8rem",
-                  width: "100%",
-                  paddingRight: "10rem",
-                  borderRadius: "4px",
-                  color: "#88888B",
-                }}
-              /> */}
               <TagInput
-                value={tags}
+                value={filterBy}
                 onChange={handleTagChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Busca por Id Pvd/ PdV"
