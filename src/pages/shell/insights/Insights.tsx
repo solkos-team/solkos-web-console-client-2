@@ -1583,7 +1583,7 @@
 // *************************************************
 // **********************************************************************************************
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
 import { useNavigate } from "react-router-dom";
 import { AcercaDeLosEquiposIcon } from "../../../sampleData/icons";
@@ -1609,7 +1609,11 @@ export default function Insights() {
         data?.summary.coolers.toLocaleString("es-MX")
       )
     : "";
-
+  useEffect(() => {
+    if (location.pathname === "/home/insights") {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location]);
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />

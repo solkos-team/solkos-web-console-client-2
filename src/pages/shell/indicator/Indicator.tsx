@@ -61,6 +61,11 @@ export default function Indicator() {
     level: string;
   }>({ value: 0, delta: 0, level: "" });
 
+  useEffect(() => {
+    if (location.pathname === "/home/indicator") {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location]);
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -483,7 +488,7 @@ export default function Indicator() {
                           flex: 100,
                           cursor: "pointer",
                         }}
-                        onClick={() => {                          
+                        onClick={() => {
                           setSelectedAlgorithm(cooler.algorithm);
                           setSelectedAlgorithmValues({
                             value: cooler.value,

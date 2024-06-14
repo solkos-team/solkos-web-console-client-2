@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PageFilter from "../../../components/pageFilter";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { TagInput } from "rsuite";
 import "rsuite/dist/rsuite-no-reset.min.css";
@@ -110,7 +110,8 @@ export default function Coolers() {
     if (showTable) {
       fetchData();
     }
-  }, [showTable, currentPage, datosPorPagina, changeAsc]);
+  }, [showTable, currentPage, datosPorPagina, changeAsc, dto]);
+
   useEffect(() => {
     const storedTags = localStorage.getItem("searchTags");
     if (storedTags) {
@@ -118,11 +119,6 @@ export default function Coolers() {
       setShowTable(true);
     }
   }, []);
-  useEffect(() => {
-    if (!location.pathname.includes("/home/clt")) {
-      localStorage.removeItem("searchTags");
-    }
-  }, [location.pathname]);
 
   const filteredCoolers = coolersData ? filterCoolers(coolersData, tags) : [];
 

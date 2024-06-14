@@ -1,5 +1,10 @@
 import { useSelector } from "react-redux";
 
+function validateAndExecute() {
+  if (!location.pathname.includes("/home/clt")) {
+    localStorage.removeItem("searchTags");
+  }
+}
 const pathVerify = () => {
   const dt = useSelector((state: any) => state.works);
   return dt.length == 0 ? [] : JSON.parse(dt);
@@ -26,4 +31,4 @@ const userVerify = (user) => {
       return "none";
   }
 };
-export { pathVerify, userVerify };
+export { pathVerify, userVerify, validateAndExecute };

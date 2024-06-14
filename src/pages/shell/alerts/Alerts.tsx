@@ -47,6 +47,12 @@ export default function Alerts() {
     level: string;
   }>();
 
+  useEffect(() => {
+    if (location.pathname === "/home/alerts") {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location]);
+
   return (
     <div>
       <PageFilter status={isLoading} />

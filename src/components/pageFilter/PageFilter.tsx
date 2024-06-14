@@ -611,6 +611,7 @@ export default function (props) {
     setModalOpened(true);
   };
 
+  // Consolidated useEffect for handling Ctrl + x and other keydown events
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "x") {
@@ -619,10 +620,10 @@ export default function (props) {
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 

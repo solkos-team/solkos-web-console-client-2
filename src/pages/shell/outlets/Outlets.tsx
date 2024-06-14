@@ -45,12 +45,12 @@ export default function Outlets() {
   //     }
   //   }
   // };
-  const handleTagChange = (newTags) => {    
+  const handleTagChange = (newTags) => {
     setTags(newTags);
   };
-  const handleKeyDown = (event) => {  
-    if(event.key === 'Enter' && tags.length > 0 && event.target.value == ''){
-      fetchData()
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
+      fetchData();
     }
   };
   const filterOutlets = (data, searchQuery) => {
@@ -76,7 +76,7 @@ export default function Outlets() {
     page_number: currentPage,
     path: pathVerify(),
     // filter_by: searchValue.split(",") || (filter ? [filter] : []),
-    filter_by: tags
+    filter_by: tags,
   };
   const fetchData = async () => {
     try {
@@ -86,7 +86,7 @@ export default function Outlets() {
       setTotalData(Number(totalData) || 0);
       setOutletsData(datos);
       setIsLoading(false);
-      setShowTable(true)
+      setShowTable(true);
       // Corrected comparison logic
       if (filter && body.filter_by.includes(filter)) {
         // Execute your conditional code here
@@ -185,6 +185,12 @@ export default function Outlets() {
     }
   }, [filter]);
 
+  useEffect(() => {
+    if (location.pathname === "/home/outlets") {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location]);
+
   return (
     <section>
       <section className="pdv_pathfilter">
@@ -229,23 +235,23 @@ export default function Outlets() {
                 }}
               /> */}
               <TagInput
-              value={tags}
-              onChange={handleTagChange}
-              onKeyDown={handleKeyDown}
-              placeholder="Busca por Id Pvd/ PdV"
-              style={{
-                fontSize: "0.8rem",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "1.8rem",
-                width: "100%",
-                paddingRight: "10rem",
-                borderRadius: "4px",
-                color: "#88888B",
-                border: "1px solid #ccc", 
-                textAlign : 'left'
-              }}
-            />
+                value={tags}
+                onChange={handleTagChange}
+                onKeyDown={handleKeyDown}
+                placeholder="Busca por Id Pvd/ PdV"
+                style={{
+                  fontSize: "0.8rem",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "1.8rem",
+                  width: "100%",
+                  paddingRight: "10rem",
+                  borderRadius: "4px",
+                  color: "#88888B",
+                  border: "1px solid #ccc",
+                  textAlign: "left",
+                }}
+              />
               <img
                 src={"../../sampleData/searchC.svg"}
                 alt="Descripción de la imagen"

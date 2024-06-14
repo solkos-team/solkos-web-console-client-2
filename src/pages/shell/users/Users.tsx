@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { validateAndExecute } from "../../../Functions/pathVerify";
 import PageFilter from "../../../components/pageFilter";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { Button, Center, Drawer, TextInput } from "@mantine/core";
@@ -44,6 +45,12 @@ export default function Users() {
   const [totalData, setTotalData] = useState<String | number>(0);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/home/users") {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location]);
 
   const handleSearchChange = (event) => {
     setSearchValue(event.target.value);

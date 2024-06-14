@@ -61,6 +61,13 @@ export default function Fails() {
   }>({ value: 0, delta: 0, level: "" });
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname === "/home/fails") {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location]);
+
   return (
     <div>
       <PageFilter status={isLoading} />
