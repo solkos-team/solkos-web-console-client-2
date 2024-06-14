@@ -3,7 +3,7 @@ import PageFilter from "../../../components/pageFilter";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { TagInput } from "rsuite";
-import "rsuite/dist/rsuite.min.css";
+import "rsuite/dist/rsuite-no-reset.min.css";
 import { IconArrowRight } from "@tabler/icons-react";
 import { fetchUniversalTables } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
@@ -13,7 +13,6 @@ import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import moment from "moment";
 import "moment/locale/es";
 import { miniSerializeError } from "@reduxjs/toolkit";
-import { tagHandle } from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -50,8 +49,9 @@ export default function Coolers() {
   const [enterCount, setEnterCount] = useState(0);
   const navigate = useNavigate();
 
-  const handleTagChange = (newTags) => {    
+  const handleTagChange = (newTags) => {
     setTags(newTags);
+    localStorage.setItem("searchTags", JSON.stringify(newTags));
   };
 
   const handleInputChange = (value) => {
@@ -99,10 +99,10 @@ export default function Coolers() {
     } catch (error) {
       console.error("Error fetching coolers:", error);
     }
-  };  
-  const handleKeyDown = (event) => {  
-    if(event.key === 'Enter' && tags.length > 0 && event.target.value == ''){
-      fetchData()
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
+      fetchData();
     }
   };
 
@@ -111,6 +111,18 @@ export default function Coolers() {
       fetchData();
     }
   }, [showTable, currentPage, datosPorPagina, changeAsc]);
+  useEffect(() => {
+    const storedTags = localStorage.getItem("searchTags");
+    if (storedTags) {
+      setTags(JSON.parse(storedTags));
+      setShowTable(true);
+    }
+  }, []);
+  useEffect(() => {
+    if (!location.pathname.includes("/home/clt")) {
+      localStorage.removeItem("searchTags");
+    }
+  }, [location.pathname]);
 
   const filteredCoolers = coolersData ? filterCoolers(coolersData, tags) : [];
 
@@ -229,8 +241,8 @@ export default function Coolers() {
                 paddingRight: "10rem",
                 borderRadius: "4px",
                 color: "#88888B",
-                border: "1px solid #ccc", 
-                textAlign : 'left'
+                border: "1px solid #ccc", // Puedes ajustar el borde según tu diseño
+                textAlign: "left",
               }}
             />
             <img
@@ -709,15 +721,15 @@ export default function Coolers() {
                 ) : (
                   <div
                     style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      width: "570%",
+                      margin: "0 auto",
+                      textAlign: "center",
                       fontWeight: "bold",
-                      fontSize: "1.5vw",
-                      width: "100%",
+                      fontSize: "18px",
+                      padding: "20px",
                     }}
                   >
-                    <p>Sin información para mostrar.</p>
+                    Sin información para mostrar.
                   </div>
                 )}
               </table>
