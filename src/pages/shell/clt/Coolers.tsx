@@ -165,6 +165,12 @@ export default function Coolers() {
     return rows;
   };
 
+  const getTagClassName = (cooler: Cooler) => {
+    return cooler.status === "Dato no encontrado"
+      ? "rs-tag-md error"
+      : "rs-tag-md";
+  };
+
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -229,6 +235,15 @@ export default function Coolers() {
               onChange={handleTagChange}
               onKeyDown={handleKeyDown}
               placeholder="Buscar por Serie/ Id Coolector / Mac / PdV"
+              tagProps={{
+                className: "custom-tag",
+                style: {
+                  // background: "#F93448",
+                  background: "#f0f0f0",
+                  color: "#333",
+                  borderRadius: "4px",
+                },
+              }}
               style={{
                 fontSize: "0.8rem",
                 fontStyle: "normal",

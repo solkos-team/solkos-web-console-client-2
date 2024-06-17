@@ -604,7 +604,7 @@ function App() {
                         }}
                       >
                         {/* V2.3.0 */}
-                        V2.5.0
+                        V2.6.0
                       </div>
                     </div>
                   </section>
