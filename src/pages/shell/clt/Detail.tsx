@@ -1787,7 +1787,7 @@ export default function CoolerDetail() {
         onClose={closeEnergy}
         coolersData={coolersData}
       />
-      <DrawerCoolview
+      <DrawerCoolview      
         opened={coolViewOpened}
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler.device_id}

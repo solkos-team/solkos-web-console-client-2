@@ -12,6 +12,8 @@ export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
             title="CoolView"
             position="bottom"
             size="76%"
+            overlayOpacity={0.1}
+            overlayBlur={0}                     
         >
             <section className="coolview_printipal">
                 {/* <iframe
