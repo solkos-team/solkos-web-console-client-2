@@ -31,4 +31,19 @@ const userVerify = (user) => {
       return "none";
   }
 };
-export { pathVerify, userVerify, validateAndExecute };
+const tagStyles = (value,tagElements) =>{    
+  if(value){      
+    const indexData = value.filter(item => item.status === "No encontrado")
+    .map(item => item.serial_number) ?? null      
+    const tags = tagElements ?? null      
+    if(indexData != null && tags != null){        
+      tags.forEach((tag, index) => {
+        if (indexData.includes(tag.getAttribute('title'))) {
+          (tag as HTMLElement).style.backgroundColor = 'red';
+          (tag as HTMLElement).style.color = '#fff';
+      }
+      });
+    }
+  }
+}
+export { pathVerify, userVerify, validateAndExecute ,tagStyles};
