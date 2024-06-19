@@ -215,7 +215,7 @@ export const fetchUniversal = async (
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
