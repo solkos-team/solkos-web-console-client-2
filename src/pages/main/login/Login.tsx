@@ -24,6 +24,7 @@ export const Login = () => {
     localStorage.setItem("USER", Name);
     sessionStorage.setItem("Email", email);
     sessionStorage.setItem("Token", token);
+    localStorage.setItem("Token", token);
     localStorage.setItem("Role", Role);
     // console.log(Role);
     dispatch(addPath());

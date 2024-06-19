@@ -652,9 +652,9 @@ export default function DrawerA({
                     .map((cooler, index) => (
                       <tr
                         key={index}
-                        onClick={() => {
-                          navigate(`/home/clt/${cooler.serial_number}`);
-                        }}
+                        // onClick={() => {
+                        //   navigate(`/home/clt/${cooler.serial_number}`);
+                        // }}
                       >
                         <td data-label="ESTATUS" title={cooler.status}>
                           {isLoading ? (
@@ -1033,7 +1033,7 @@ export default function DrawerA({
                               <Skeleton height={20} radius="sm" width="90%" />
                             </>
                           ) : (
-                            <Link to="/home/clt">
+                            <Link to={`/home/clt/${cooler.serial_number}`} target="_blank">
                               <div
                                 style={{
                                   color: "#3E83FF",
