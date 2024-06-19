@@ -168,62 +168,11 @@ export default function CoolerDetail() {
                         lineHeight: "normal",
                       }}
                     >
-                      {coolersData?.cooler?.serial_number === undefined ? (
-                        "Sin registro"
-                      ) : (
-                        <input
-                          placeholder="Ingresa una nueva serie"
-                          value={serie}
-                          onChange={(e) => {
-                            SetSerie(e.target.value);
-                          }}
-                          style={{
-                            color: "#000005",
-                            // fontFamily: "DM Sans",
-                            fontSize: "1.25rem",
-                            fontStyle: "normal",
-                            fontWeight: 700,
-                            lineHeight: "normal",
-                            width: `${
-                              coolersData?.cooler?.serial_number.length + 1
-                            }ch`,
-                            border: editSerie == false ? "transparent" : "",
-                          }}
-                          disabled={!editSerie}
-                          onKeyDown={(e) =>
-                            e.key === "Enter" ? searchSerial(serie) : ""
-                          }
-                        />
-                      )}
+                      {coolersData?.cooler?.serial_number === undefined
+                        ? "Sin registro"
+                        : coolersData?.cooler?.serial_number}
                     </div>
-                    <Tooltip label="Ver otra serie">
-                      <div
-                        style={{
-                          width: "1.5rem",
-                          height: "1.5rem",
-                          display: "none",
-                        }}
-                        onClick={() => {
-                          setEditSerie((o) => !o);
-                        }}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          x="0px"
-                          y="0px"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 50 50"
-                        >
-                          <path
-                            d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z"
-                            onClick={() => {
-                              setEditSerie((o) => !o);
-                            }}
-                          ></path>
-                        </svg>
-                      </div>
-                    </Tooltip>
+
                     <>
                       <div
                         style={{
@@ -768,8 +717,18 @@ export default function CoolerDetail() {
                   )}
                 </div>
               </div>
-              <div style={{ display: userVerify(localStorage.getItem('USER') ?? ''),gap:'5px',background:'var(--blue-0, #E7F5FF)',width:'fit-content',padding:'5px',boxSizing:'border-box',borderRadius:'5px' }}>
-              {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
+              <div
+                style={{
+                  display: userVerify(localStorage.getItem("USER") ?? ""),
+                  gap: "5px",
+                  background: "var(--blue-0, #E7F5FF)",
+                  width: "fit-content",
+                  padding: "5px",
+                  boxSizing: "border-box",
+                  borderRadius: "5px",
+                }}
+              >
+                {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
                 <div
                   style={{
                     color: "var(--blue-6, #2393F4)",
@@ -1787,7 +1746,7 @@ export default function CoolerDetail() {
         onClose={closeEnergy}
         coolersData={coolersData}
       />
-      <DrawerCoolview      
+      <DrawerCoolview
         opened={coolViewOpened}
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler.device_id}
