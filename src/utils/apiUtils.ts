@@ -249,7 +249,7 @@ export const fetchUniversalDetails = async (
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: "GET",
@@ -307,15 +307,13 @@ export const fetchUniversalTables = async (
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
   };
-  
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
     headers,
     body: JSON.stringify(data),
   };
-  
   try {
     const response = await fetch(url, cuerpo);
 
