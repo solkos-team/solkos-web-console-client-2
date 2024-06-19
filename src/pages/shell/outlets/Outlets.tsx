@@ -14,6 +14,7 @@ import { CoolerInterface } from "../../../interfaces/CoolerInterface";
 import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
 import { useLocation } from "react-router-dom";
 import { TagInput } from "rsuite";
+import { tagStyles } from "../../../Functions/pathVerify";
 
 export default function Outlets() {
   const [showTable, setShowTable] = useState(false);
@@ -92,6 +93,11 @@ export default function Outlets() {
       if (filter && body.filter_by.includes(filter)) {
         // Execute your conditional code here
       }
+
+      // const tagElements = document.querySelectorAll(
+      //   ".rs-picker-tag-list .rs-tag"
+      // );
+      // tagStyles(datos ?? [], tagElements);
     } catch (error) {
       console.error("Error fetching outlets:", error);
     }

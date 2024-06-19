@@ -93,9 +93,7 @@ export default function (props) {
         setIsLoading(false);
 
         // Establecer el mensaje en función de la longitud de los resultados
-        setMultipleResultsMessage(
-          data.length > 1 ? "Hay múltiples resultados." : ""
-        );
+        setMultipleResultsMessage(data.length > 1 ? "" : "");
       } catch (error) {
         console.error("Error fetching path", error);
       }
@@ -159,11 +157,23 @@ export default function (props) {
   }, [mostrarVentanaEmergente, value]);
 
   const verSelectData = (value) => {
-    // Add new PATH
     if (value !== "") {
       const splitValues = value.split(",");
-      setData(splitValues);
-      localStorage.setItem("PATH", JSON.stringify(splitValues));
+
+      // Verificar si el valor viene del modal (modalOpened === true)
+      if (modalOpened) {
+        // Este bloque se ejecuta si el valor viene del modal
+        setData(splitValues);
+        localStorage.setItem("PATH", JSON.stringify(splitValues));
+      } else {
+        // Este bloque se ejecuta si el valor no viene del modal
+        setData((prevData) => {
+          const newData = [...prevData, ...splitValues];
+          localStorage.setItem("PATH", JSON.stringify(newData));
+          return newData;
+        });
+      }
+
       setOpened(false);
       setValue("");
       if (index !== 3) {
@@ -174,6 +184,28 @@ export default function (props) {
       setFilterVisibility(false);
     }
   };
+
+  // const verSelectData = (value) => {
+  //   if (value !== "") {
+  //     const splitValues = value.split(",");
+
+  //     // Añadir nuevos valores sin reemplazar los existentes
+  //     setData((prevData) => {
+  //       const newData = [...prevData, ...splitValues];
+  //       localStorage.setItem("PATH", JSON.stringify(newData));
+  //       return newData;
+  //     });
+
+  //     setOpened(false);
+  //     setValue("");
+  //     if (index !== 3) {
+  //       setIndex(index + 1);
+  //       setStatusDelete(false);
+  //     }
+  //     setStatusDelete(false);
+  //     setFilterVisibility(false);
+  //   }
+  // };
 
   const deleteFilter = (i) => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "");
@@ -611,7 +643,6 @@ export default function (props) {
     setModalOpened(true);
   };
 
-  // Consolidated useEffect for handling Ctrl + x and other keydown events
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "x") {
@@ -620,10 +651,10 @@ export default function (props) {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -946,7 +977,6 @@ export default function (props) {
                       outline: "none",
                       marginTop: -15,
                     }}
-                    autoComplete="off"
                   />
                   {isLoading && ( // Si isLoading es verdadero, muestra el Loader
                     <Loader

@@ -8,7 +8,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { fetchUniversalTables } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
-import { BackgroundImage, Skeleton,Tooltip } from "@mantine/core";
+import { BackgroundImage, Skeleton, Tooltip } from "@mantine/core";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import moment from "moment";
 import "moment/locale/es";
@@ -73,7 +73,6 @@ export default function Coolers() {
   const pathVerify = () => {
     return dt.length === 0 ? [] : JSON.parse(dt);
   };
-  
 
   const body = {
     customer: dto,
@@ -98,8 +97,10 @@ export default function Coolers() {
       setCoolersData(datos);
       setIsLoading(false);
       setShowTable(true);
-      const tagElements = document.querySelectorAll('.rs-picker-tag-list .rs-tag');        
-      tagStyles(datos ?? [],tagElements)
+      const tagElements = document.querySelectorAll(
+        ".rs-picker-tag-list .rs-tag"
+      );
+      tagStyles(datos ?? [], tagElements);
     } catch (error) {
       console.error("Error fetching coolers:", error);
     }
@@ -167,9 +168,7 @@ export default function Coolers() {
     }
     return rows;
   };
-   
-  
-  
+
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -213,60 +212,62 @@ export default function Coolers() {
         </div>
 
         {/* Tabla */}
-        <Tooltip label='Ingresa tus Series,Mac,Pdv seguido de un enter para confirmar y otro para buscar !' position="bottom">        
+        {/* <Tooltip
+          label="Ingresa la serie, mac o pdv seguido de un enter para confirmar y otro para buscar."
+          position="bottom"
+        > */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            alignSelf: "stretch",
+            boxSizing: "border-box",
+            marginLeft: "-1.5%",
+          }}
+        >
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              alignSelf: "stretch",
-              boxSizing: "border-box",
-              marginLeft: "-1.5%",
+              position: "relative",
+              width: "60%",
             }}
           >
-            <div
+            <TagInput
+              value={tags}
+              trigger={["Enter", "Space", "Comma"]}
+              onChange={handleTagChange}
+              onKeyDown={handleKeyDown}
+              placeholder="Buscar por Serie/ Id Coolector / Mac / PdV"
               style={{
-                position: "relative",
-                width: "60%",
+                fontSize: "0.8rem",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "1.8rem",
+                width: "100%",
+                paddingRight: "10rem",
+                borderRadius: "4px",
+                color: "#88888B",
+                border: "1px solid #ccc",
+                textAlign: "left",
               }}
-            >            
-                <TagInput
-                  value={tags}                  
-                  trigger={["Enter", "Space", "Comma"]}
-                  onChange={handleTagChange}
-                  onKeyDown={handleKeyDown}              
-                  placeholder="Buscar por Serie/ Id Coolector / Mac / PdV"                  
-                  style={{
-                    fontSize: "0.8rem",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "1.8rem",
-                    width: "100%",
-                    paddingRight: "10rem",
-                    borderRadius: "4px",
-                    color: "#88888B",
-                    border: "1px solid #ccc",
-                    textAlign: "left",
-                  }}
-                 
-                />            
-              <img
-                src={"../../sampleData/searchC.svg"}
-                alt="Descripción de la imagen"
-                style={{
-                  position: "absolute",
-                  left: "15px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  width: "15px",
-                  height: "15px",
-                  pointerEvents: "none",
-                  opacity: tags.length ? "0" : "1",
-                }}
-              />
-            </div>
+            />
+            <img
+              src={"../../sampleData/searchC.svg"}
+              alt="Descripción de la imagen"
+              style={{
+                position: "absolute",
+                left: "15px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "15px",
+                height: "15px",
+                pointerEvents: "none",
+                opacity: tags.length ? "0" : "1",
+              }}
+            />
           </div>
-        </Tooltip>
+        </div>
+        {/* </Tooltip> */}
         <div
           style={{ display: "flex", alignItems: "flex-start" }}
           onClick={() => {
@@ -349,7 +350,6 @@ export default function Coolers() {
                                 )
                               : navigate(`/home/clt/${cooler.serial_number}`);
                           }}
-
                         >
                           <td data-label="ESTATUS" title={cooler.status}>
                             {isLoading == true ? (
