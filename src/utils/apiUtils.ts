@@ -215,7 +215,7 @@ export const fetchUniversal = async (
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
@@ -249,7 +249,7 @@ export const fetchUniversalDetails = async (
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: "GET",
@@ -272,7 +272,7 @@ export const fetchDeleteUsers = async (componentURL, detailsID?, CRUD?) => {
   const url = `${baseUrl}/${componentURL}/${Number(detailsID)}`;
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: "DELETE",
@@ -307,7 +307,7 @@ export const fetchUniversalTables = async (
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
   };
   const cuerpo = {
     method: CRUD ? CRUD : "POST",
@@ -354,7 +354,7 @@ export const fetchSearchUniversal = async (URL, setIsLoading, data) => {
   }
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+    Authorization: `Bearer ${sessionStorage.getItem("Token") ?? localStorage.getItem("Token")}`,
   };
 
   const cuerpo = {
