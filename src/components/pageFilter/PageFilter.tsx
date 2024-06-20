@@ -256,8 +256,8 @@ export default function (props) {
 
     // Crear un nuevo historial con el nuevo objeto al principio
     const updatedHistory = [
-      { searchItem, translatedItem },
-      ...searchHistory.filter((item) => item.searchItem !== searchItem),
+      { searchItem: lastWord, translatedItem },
+      ...searchHistory.filter((item) => item.searchItem !== lastWord),
     ];
     const limitedHistory = updatedHistory.slice(0, 5);
 
@@ -522,8 +522,10 @@ export default function (props) {
   };
 
   const handleHistoryItemClick2 = (item) => {
+    // Desestructuramos item y renombramos translatedItem a foundString
     const { coincidence, translatedItem: foundString } = item;
 
+    console.log("Opción seleccionada:", coincidence);
     setSearchValue(coincidence);
 
     fetchToken(coincidence)
