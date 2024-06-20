@@ -49,11 +49,11 @@ export default function Outlets() {
   const handleTagChange = (newTags) => {
     setTags(newTags);
   };
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
-      fetchData();
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
+  //     fetchData();
+  //   }
+  // };
   const filterOutlets = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
       const searchString = searchQuery.toLowerCase();
@@ -227,7 +227,7 @@ export default function Outlets() {
               <TagInput
                 value={filterBy}
                 onChange={handleTagChange}
-                onKeyDown={handleKeyDown}
+                // onKeyDown={handleKeyDown}
                 placeholder="Busca por Id Pvd/ PdV"
                 style={{
                   fontSize: "0.8rem",
@@ -258,30 +258,42 @@ export default function Outlets() {
               />
             </div>{" "}
             <br />
-            <div
-              style={{ display: "flex", alignItems: "flex-start" }}
-              onClick={() => {
-                setShowTable(true);
-                setTableViewClicked(true);
-              }}
-            >
-              <text
+            <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+              <button
                 style={{
-                  color: "#ED5079",
-                  fontSize: ".9rem",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "28px",
-                  cursor: "pointer",
+                  background: "#ED5079",
+                  color: "white",
+                  fontSize: ".85rem",
+                }}
+                onClick={fetchData} // Llama a fetchData al hacer clic
+              >
+                Buscar PdV
+              </button>
+              <div
+                style={{ display: "flex", alignItems: "flex-start" }}
+                onClick={() => {
+                  setShowTable(true);
+                  setTableViewClicked(true);
                 }}
               >
-                Ir a vista con tabla{"   "}
-              </text>
-              <img
-                src={"../../sampleData/table.svg"}
-                alt="Descripción de la imagen"
-                style={{ width: "18px", height: "15px", marginTop: 6 }}
-              />
+                <text
+                  style={{
+                    color: "#ED5079",
+                    fontSize: ".9rem",
+                    fontStyle: "normal",
+                    fontWeight: 400,
+                    lineHeight: "28px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Ir a vista con tabla{"   "}
+                </text>
+                <img
+                  src={"../../sampleData/table.svg"}
+                  alt="Descripción de la imagen"
+                  style={{ width: "18px", height: "15px", marginTop: 6 }}
+                />
+              </div>
             </div>
           </div>
           <br></br>

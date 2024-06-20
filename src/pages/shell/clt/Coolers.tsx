@@ -105,11 +105,11 @@ export default function Coolers() {
       console.error("Error fetching coolers:", error);
     }
   };
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
-      fetchData();
-    }
-  };
+  // const handleKeyDown = (event) => {
+  //   if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
+  //     fetchData();
+  //   }
+  // };
 
   useEffect(() => {
     if (showTable) {
@@ -236,7 +236,7 @@ export default function Coolers() {
               value={tags}
               trigger={["Enter", "Space", "Comma"]}
               onChange={handleTagChange}
-              onKeyDown={handleKeyDown}
+              // onKeyDown={handleKeyDown}
               placeholder="Buscar por Serie/ Id Coolector / Mac / PdV"
               style={{
                 fontSize: "0.8rem",
@@ -268,30 +268,47 @@ export default function Coolers() {
           </div>
         </div>
         {/* </Tooltip> */}
-        <div
-          style={{ display: "flex", alignItems: "flex-start" }}
-          onClick={() => {
-            setShowTable(true);
-            setTableViewClicked(true);
-          }}
-        >
-          <text
+        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+          <button
             style={{
-              color: "#ED5079",
-              fontSize: ".9rem",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "28px",
-              cursor: "pointer",
+              background: "#ED5079",
+              color: "white",
+              fontSize: ".85rem",
+            }}
+            onClick={fetchData} // Llama a fetchData al hacer clic
+          >
+            Buscar enfriadores
+          </button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "10px", // Espacio entre el botón y el texto con la imagen
+            }}
+            onClick={() => {
+              setShowTable(true);
+              setTableViewClicked(true);
             }}
           >
-            Ir a vista con tabla{"   "}
-          </text>
-          <img
-            src={"../../sampleData/table.svg"}
-            alt="Descripción de la imagen"
-            style={{ width: "18px", height: "15px", marginTop: 6 }}
-          />
+            <text
+              style={{
+                color: "#ED5079",
+                fontSize: ".9rem",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "28px",
+                cursor: "pointer",
+                marginRight: "5px", // Espacio entre el texto y la imagen
+              }}
+            >
+              Ir a vista con tabla{"   "}
+            </text>
+            <img
+              src={"../../sampleData/table.svg"}
+              alt="Descripción de la imagen"
+              style={{ width: "18px", height: "15px", marginTop: 6 }}
+            />
+          </div>
         </div>
 
         {showTable && (
