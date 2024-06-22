@@ -29,6 +29,8 @@ const userVerify = (user) => {
       return "flex";
     case "Maria Luisa Rojo Siliceo Hernández":
       return "flex";
+    case "Jose Carlos Bautista Olvera":
+      return "flex";
     default:
       return "none";
   }

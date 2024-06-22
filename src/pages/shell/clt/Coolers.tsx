@@ -105,17 +105,22 @@ export default function Coolers() {
       console.error("Error fetching coolers:", error);
     }
   };
-  // const handleKeyDown = (event) => {
-  //   if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
-  //     fetchData();
-  //   }
-  // };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
+      fetchData();
+    }
+  };
 
   useEffect(() => {
     if (showTable) {
       fetchData();
     }
   }, [showTable, currentPage, datosPorPagina, changeAsc, dto]);
+  useEffect(() => {
+    if (showTable) {
+      fetchData();
+    }
+  }, [showTable, currentPage, datosPorPagina, dto]);
 
   useEffect(() => {
     const storedTags = localStorage.getItem("searchTags");

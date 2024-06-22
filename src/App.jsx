@@ -12,8 +12,6 @@ import {
   createStyles,
   Menu,
   Header,
-  Select,
-  Button,
 } from "@mantine/core";
 import { NavLink, Outlet } from "react-router-dom";
 import dayjs from "dayjs";
@@ -21,23 +19,10 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import solkosSymbol from "./sampleData/solkosSymbol.svg";
-import coolers from "./sampleData/coolers.png";
-import clt from "./sampleData/clt.png";
-import pv from "./sampleData/pv.png";
-import boards from "./sampleData/boards.png";
-import collab from "./sampleData/collab.png";
-import arrows from "./sampleData/arrows.png";
-import arrow2 from "./sampleData/arrow2.png";
-import arrow_1 from "./sampleData/arrow_1.png";
 import a1 from "../public/sampleData/a1.svg";
 import a2 from "../public/sampleData/a2.svg";
-import arrow_2 from "./sampleData/arrow_2.png";
-import alert from "./sampleData/alert.png";
-import fails from "./sampleData/fails.png";
-import ind from "./sampleData/ind.png";
 import { addOrg } from "./app/organization";
 import { fetchUniversalDetails } from "./utils/apiUtils";
-
 import { Burger, Tooltip } from "@mantine/core";
 
 dayjs.extend(duration);
@@ -175,11 +160,57 @@ const routes = [
     label: "Puntos de venta",
     icon: <img src={"../../sampleData/pv.svg"} />,
   },
-  // {
-  //   link: "/home/panel",
-  //   label: "Tableros",
-  //   icon: <img src={"../../sampleData/tableros.svg"} />,
-  // },
+  {
+    link: "/home/panel",
+    label: "Tableros",
+    icon: <img src={"../../sampleData/tableros.svg"} />,
+  },
+  {
+    link: "/home/users",
+    label: "Colaboradores",
+    icon: <img src={"../../sampleData/user.svg"} />,
+  },
+];
+
+const routes1 = [
+  {
+    label: "Cooler Insights",
+    icon: <img src={"../../sampleData/insights.svg"} />,
+    initiallyOpened: true,
+    links: [
+      {
+        label: "Insights",
+        link: "/home/insights",
+        icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Indicadores",
+        link: "/home/indicator",
+        icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Fallas",
+        link: "/home/fails",
+        icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Alertas",
+        link: "/home/alerts",
+        icon: <img src={"../../sampleData/alert.svg"} alt="cooler"></img>,
+      },
+    ],
+  },
+  {
+    link: "/home/clt",
+    label: "Cooler Life Tracking",
+    icon: <img src={"../../sampleData/devices.svg"} />,
+  },
+  {
+    link: "/home/outlets",
+    label: "Puntos de venta",
+    icon: <img src={"../../sampleData/pv.svg"} />,
+  },
+
   {
     link: "/home/users",
     label: "Colaboradores",
@@ -202,7 +233,6 @@ const routes2 = [
 function App() {
   const Name = localStorage.getItem("USER") || "";
   const Role = localStorage.getItem("Role") || "";
-  // console.log(Role);
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
   const [data, setData] = useState([]);
@@ -212,8 +242,7 @@ function App() {
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
-  // console.log(dto);
-  // console.log(localStorage.getItem("ORG"));
+
   const stateM = sessionStorage.getItem("MenuState");
   stateM === undefined
     ? sessionStorage.setItem("MenuState", false)
@@ -238,14 +267,13 @@ function App() {
       throw error;
     }
   };
+
   useEffect(() => {
     const status = sessionStorage.getItem("MenuState");
     status != opened2 ? sessionStorage.setItem("MenuState", opened2) : "";
   }, [opened2]);
   useEffect(() => {
-    // fetch get customers
     fetctData();
-    // Cambia el estado de coolerInsightsOpen a true solo si la ubicación es el índice ("/")
     setCoolerInsightsOpen(location.pathname === "/");
     const storage = localStorage.getItem("ORG");
     if (storage === null) {
@@ -341,9 +369,103 @@ function App() {
           </div>
         ))}
       </>
-    ) : (
+    ) : localStorage.getItem("ORG") === "KOF" ? (
       <>
         {routes.map((item) => (
+          <div key={item.label}>
+            {item.links ? (
+              <div style={{ whiteSpace: "nowrap" }}>
+                <Tooltip label={item.label}>
+                  <div
+                    onClick={() => {
+                      setCoolerInsightsOpen(!coolerInsightsOpen);
+                    }}
+                    className={cx(classes.link, {
+                      [classes.linkActive]: coolerInsightsOpen,
+                    })}
+                  >
+                    {item.icon}
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: opened2 === true ? "none" : "",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    {coolerInsightsOpen ? (
+                      <img
+                        src={a1}
+                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                      />
+                    ) : (
+                      <img
+                        src={a2}
+                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                      />
+                    )}
+                  </div>
+                </Tooltip>
+                {coolerInsightsOpen && (
+                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
+                    {item.links.map((option) => (
+                      <NavLink
+                        to={option.link}
+                        className={classes.link}
+                        key={option.label}
+                        activate={true.toString()} // Convert boolean to string
+                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                      >
+                        <Tooltip label={option.label}>
+                          <div>
+                            {option.icon && option.icon}{" "}
+                            <span
+                              style={{
+                                marginLeft: 10,
+                                display: opened2 === true ? "none" : "",
+                              }}
+                            >
+                              {option.label}
+                            </span>
+                          </div>
+                        </Tooltip>
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink
+                className={({ isActive }) =>
+                  cx(classes.link, { [classes.linkActive]: isActive })
+                }
+                to={item.link || "/"}
+                onClick={() => {
+                  setActive(item.label);
+                  closeCoolerInsights();
+                }}
+              >
+                <Tooltip label={item.label}>
+                  <div>
+                    {item.icon}
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: opened2 === true ? "none" : "",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                </Tooltip>
+              </NavLink>
+            )}
+          </div>
+        ))}
+      </>
+    ) : (
+      <>
+        {routes1.map((item) => (
           <div key={item.label}>
             {item.links ? (
               <div style={{ whiteSpace: "nowrap" }}>
@@ -469,6 +591,7 @@ function App() {
       sessionStorage.setItem("MenuState", opened2);
     }
   }
+
   return (
     <>
       <AppShell
@@ -501,13 +624,6 @@ function App() {
                       marginLeft: "-7px",
                     }}
                   >
-                    {/* <Burger
-                      size="sm"
-                      opened={opened2}
-                      onClick={() => setOpened2((o) => !o)}
-                      aria-label="Toggle navigation"
-                      style={{ marginLeft: -10}}                    
-                    /> */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       class="icon icon-tabler icon-tabler-menu-2"
@@ -604,7 +720,7 @@ function App() {
                         }}
                       >
                         {/* V2.3.0 */}
-                        V2.6.0
+                        V2.7.1
                       </div>
                     </div>
                   </section>
@@ -884,28 +1000,7 @@ function App() {
                       Sistema
                     </div>
                   </div>
-                  {/* <div
-                    style={{
-                      display: "flex",
-                      padding: "10px 12px",
-                      alignItems: "center",
-                      gap: "10px",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#000005",
-                        fontSize: "14px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "16px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      Mi cuenta
-                    </div>
-                  </div> */}
+
                   <div
                     style={{
                       display: "flex",

@@ -49,11 +49,11 @@ export default function Outlets() {
   const handleTagChange = (newTags) => {
     setTags(newTags);
   };
-  // const handleKeyDown = (event) => {
-  //   if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
-  //     fetchData();
-  //   }
-  // };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && tags.length > 0 && event.target.value == "") {
+      fetchData();
+    }
+  };
   const filterOutlets = (data, searchQuery) => {
     const filteredData = data.filter((item) => {
       const searchString = searchQuery.toLowerCase();
@@ -106,7 +106,7 @@ export default function Outlets() {
     if (showTable) {
       fetchData();
     }
-  }, [showTable, currentPage, datosPorPagina]);
+  }, [showTable, currentPage, datosPorPagina, dto]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)

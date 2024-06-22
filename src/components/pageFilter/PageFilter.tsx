@@ -295,23 +295,45 @@ export default function (props) {
       ? "PdV"
       : "";
   };
+  // const formatOptions = (data) => {
+  //   return data.map((item) => {
+  //     const foundItem = item.found_in;
+  //     const coincidences = item.coincidence.split(",");
+  //     const lastWord =
+  //       foundItem === "region" ||
+  //       foundItem === "zone" ||
+  //       foundItem === "operative_unit" ||
+  //       foundItem === "route"
+  //         ? coincidences.length > 0
+  //           ? coincidences.pop().trim()
+  //           : null
+  //         : item.coincidence.trim();
 
+  //     const translatedItem = translateFoundItem(foundItem);
+  //     return { coincidence: lastWord, translatedItem };
+  //   });
+  // };
   const formatOptions = (data) => {
     return data.map((item) => {
       const foundItem = item.found_in;
       const coincidences = item.coincidence.split(",");
-      const lastWord =
+      console.log(coincidences.length);
+
+      const lastWords =
         foundItem === "region" ||
         foundItem === "zone" ||
         foundItem === "operative_unit" ||
         foundItem === "route"
           ? coincidences.length > 0
-            ? coincidences.pop().trim()
+            ? coincidences
+                .slice(-2)
+                .map((coin) => coin.trim())
+                .join(", ")
             : null
           : item.coincidence.trim();
 
       const translatedItem = translateFoundItem(foundItem);
-      return { coincidence: lastWord, translatedItem };
+      return { coincidence: lastWords, translatedItem };
     });
   };
 
@@ -481,7 +503,15 @@ export default function (props) {
   const handleHistoryItemClick = (item) => {
     setSearchValue(item.searchItem);
     setSearchValue("");
-    fetchToken(item.searchItem)
+
+    // Obtener el último valor de item.searchItem
+    const lastValue = item.searchItem.split(",").pop().trim();
+
+    // Verificar en consola el valor seleccionado
+    console.log("Último valor seleccionado del historial:", lastValue);
+
+    // Llamar a fetchToken con el último valor
+    fetchToken(lastValue)
       .then((data) => {
         const foundString = data[0].found_in;
 
@@ -526,9 +556,14 @@ export default function (props) {
     const { coincidence, translatedItem: foundString } = item;
 
     console.log("Opción seleccionada:", coincidence);
-    setSearchValue(coincidence);
 
-    fetchToken(coincidence)
+    // Dividir la cadena por comas y obtener el último elemento del array resultante
+    const parts = coincidence.split(",");
+    const lastPart = parts[parts.length - 1].trim(); // Obtener el último elemento y eliminar espacios en blanco alrededor
+
+    setSearchValue(lastPart);
+
+    fetchToken(lastPart)
       .then((data) => {
         if (Array.isArray(data) && data.length > 0 && data[0].found_in) {
           const dataFoundString = data[0].found_in;
