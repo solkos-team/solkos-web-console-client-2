@@ -115,12 +115,12 @@ export default function Coolers() {
     if (showTable) {
       fetchData();
     }
-  }, [showTable, currentPage, datosPorPagina, changeAsc, dto]);
+  }, [showTable, currentPage, datosPorPagina, changeAsc, dto, dt]);
   useEffect(() => {
     if (showTable) {
       fetchData();
     }
-  }, [showTable, currentPage, datosPorPagina, dto]);
+  }, [showTable, currentPage, datosPorPagina, dto, dt]);
 
   useEffect(() => {
     const storedTags = localStorage.getItem("searchTags");

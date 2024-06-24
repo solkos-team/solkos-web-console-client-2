@@ -106,7 +106,7 @@ export default function Outlets() {
     if (showTable) {
       fetchData();
     }
-  }, [showTable, currentPage, datosPorPagina, dto]);
+  }, [showTable, currentPage, datosPorPagina, dto, dt]);
 
   const filteredOutlets = outletsData
     ? filterOutlets(outletsData, searchValue)
