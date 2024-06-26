@@ -365,13 +365,13 @@ export default function Coolers() {
                       .map((cooler, index) => (
                         <tr
                           key={index}
-                          onClick={() => {
-                            localStorage.getItem("ORG") == "CALL CENTER"
-                              ? navigate(
-                                  `/home/clt_callCenter/${cooler.serial_number}`
-                                )
-                              : navigate(`/home/clt/${cooler.serial_number}`);
-                          }}
+                          // onClick={() => {
+                          //   localStorage.getItem("ORG") == "CALL CENTER"
+                          //     ? navigate(
+                          //         `/home/clt_callCenter/${cooler.serial_number}`
+                          //       )
+                          //     : navigate(`/home/clt/${cooler.serial_number}`);
+                          // }}
                         >
                           <td data-label="ESTATUS" title={cooler.status}>
                             {isLoading == true ? (
@@ -727,7 +727,10 @@ export default function Coolers() {
                               </>
                             ) : (
                               <div>
-                                <Link to={`/home/clt/${cooler.serial_number}`}>
+                                <Link 
+                                to={localStorage.getItem("ORG") == "CALL CENTER"
+                                  ? `/home/clt_callCenter/${cooler.serial_number}`                                    
+                                  : `/home/clt/${cooler.serial_number}`} target="_blank">
                                   <div
                                     style={{
                                       color: "#3E83FF",
