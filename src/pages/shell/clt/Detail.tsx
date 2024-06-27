@@ -18,6 +18,7 @@ import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
 import { useDisclosure } from "@mantine/hooks";
 import { CoolviewIcon } from "../../../sampleData/icons";
 import { userVerify } from "../../../Functions/pathVerify";
+import { formatDrawerCoolview } from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -50,8 +51,7 @@ export default function CoolerDetail() {
   const [energyOpened, { open: openEnergy, close: closeEnergy }] =
     useDisclosure(false);
   const [coolViewOpened, { open: openCoolview, close: closeCoolview }] =
-    useDisclosure(false);
-
+    useDisclosure(false);    
   const fetchData = async (serie?) => {
     try {
       const data = await fetchUniversalDetails(
@@ -100,6 +100,9 @@ export default function CoolerDetail() {
       : fetchData(value);
     setEditSerie(false);
   };
+  useEffect(()=>{
+    formatDrawerCoolview()
+  },[coolViewOpened])
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (

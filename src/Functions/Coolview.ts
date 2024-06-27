@@ -18,5 +18,13 @@ function getMonth(monthNumber: number) {
         lastDay: lastDayString
     };
 }
-
-export { getMonth }  
+const formatDrawerCoolview = () =>{
+    const drawerElement = document.querySelector(
+        ".mantine-Paper-root.mantine-Drawer-drawer.mantine-9zm2ny"
+      ) as HTMLElement;
+      if (drawerElement) {
+        drawerElement.style.maxWidth = "98%";
+        drawerElement.style.left = "67px";
+      }
+}
+export { getMonth ,formatDrawerCoolview}  
