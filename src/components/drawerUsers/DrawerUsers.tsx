@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Button, Drawer, Input } from "@mantine/core";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function DrawerUsers({
   setIsAlertOpen,
@@ -14,6 +15,7 @@ export default function DrawerUsers({
   oncloseDrawerEdit,
 }) {
   const { id, name, email, customer, path } = userData;
+  const dto = useSelector((state: any) => state.organization);
   const [nameUser, setNameUser] = useState(name);
   const [showAlert, setShowAlert] = useState(false);
   const [emailUser, setEmailUser] = useState(email);
@@ -173,28 +175,35 @@ export default function DrawerUsers({
                 </>
               )}
             </section>
-            <section className="users_form_1">
-              {userVerify() == true ? (
-                <>
-                  <Input.Wrapper label="Path" description="" error="">
-                    <Input
-                      value={path.toString()}
-                      // onChange={(e) => setPathUser(e.target.value)}
-                    />
-                  </Input.Wrapper>
-                </>
-              ) : (
-                <>
-                  <Input.Wrapper label="Path" description="" error="">
-                    <Input
-                      value={path.toString()}
-                      // onChange={(e) => setPathUser(e.target.value)}
-                      disabled
-                    />
-                  </Input.Wrapper>
-                </>
-              )}
-            </section>
+            {dto === "CALL CENTER" ? (
+              ""
+            ) : (
+              <>
+                <section className="users_form_1">
+                  {userVerify() == true ? (
+                    <>
+                      <Input.Wrapper label="Path" description="" error="">
+                        <Input
+                          value={path.toString()}
+                          // onChange={(e) => setPathUser(e.target.value)}
+                        />
+                      </Input.Wrapper>
+                    </>
+                  ) : (
+                    <>
+                      <Input.Wrapper label="Path" description="" error="">
+                        <Input
+                          value={path.toString()}
+                          // onChange={(e) => setPathUser(e.target.value)}
+                          disabled
+                        />
+                      </Input.Wrapper>
+                    </>
+                  )}
+                </section>
+              </>
+            )}
+
             <section className="users_form_button">
               <Button
                 style={{
