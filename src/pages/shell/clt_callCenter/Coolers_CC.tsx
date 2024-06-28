@@ -151,6 +151,9 @@ export default function CoolersCC() {
           <td data-label="# Enfriadores">
             <Skeleton height={20} radius="sm" width="90%" />
           </td>
+          <td data-label="Cliente">
+            <Skeleton height={20} radius="sm" width="90%" />
+          </td>
           <td data-label="Última visita">
             <Skeleton height={20} radius="sm" width="90%" />
           </td>
@@ -236,7 +239,7 @@ export default function CoolersCC() {
               value={tags}
               trigger={["Enter", "Space", "Comma"]}
               onChange={handleTagChange}
-              onKeyDown={handleKeyDown}
+              // onKeyDown={handleKeyDown}
               placeholder="Buscar por Serie/ Id Coolector / Mac / PdV"
               style={{
                 fontSize: "0.8rem",
@@ -268,30 +271,47 @@ export default function CoolersCC() {
           </div>
         </div>
         {/* </Tooltip> */}
-        <div
-          style={{ display: "flex", alignItems: "flex-start" }}
-          onClick={() => {
-            setShowTable(true);
-            setTableViewClicked(true);
-          }}
-        >
-          <text
+        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+          <button
             style={{
-              color: "#ED5079",
-              fontSize: ".9rem",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "28px",
-              cursor: "pointer",
+              background: "#ED5079",
+              color: "white",
+              fontSize: ".85rem",
+            }}
+            onClick={fetchData} // Llama a fetchData al hacer clic
+          >
+            Buscar enfriadores
+          </button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "10px", // Espacio entre el botón y el texto con la imagen
+            }}
+            onClick={() => {
+              setShowTable(true);
+              setTableViewClicked(true);
             }}
           >
-            Ir a vista con tabla{"   "}
-          </text>
-          <img
-            src={"../../sampleData/table.svg"}
-            alt="Descripción de la imagen"
-            style={{ width: "18px", height: "15px", marginTop: 6 }}
-          />
+            <text
+              style={{
+                color: "#ED5079",
+                fontSize: ".9rem",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "28px",
+                cursor: "pointer",
+                marginRight: "5px", // Espacio entre el texto y la imagen
+              }}
+            >
+              Ir a vista con tabla{"   "}
+            </text>
+            <img
+              src={"../../sampleData/table.svg"}
+              alt="Descripción de la imagen"
+              style={{ width: "18px", height: "15px", marginTop: 6 }}
+            />
+          </div>
         </div>
 
         {showTable && (
@@ -310,6 +330,7 @@ export default function CoolersCC() {
                   <tr>
                     <th scope="col">Estatus</th>
                     <th scope="col">Serie</th>
+                    <th scope="col">Cliente</th>
                     <th scope="col">Modelo</th>
                     <th scope="col">
                       <span
@@ -343,13 +364,13 @@ export default function CoolersCC() {
                       .map((cooler, index) => (
                         <tr
                           key={index}
-                          onClick={() => {
-                            localStorage.getItem("ORG") == "CALL CENTER"
-                              ? navigate(
-                                  `/home/clt_callCenter/${cooler.serial_number}`
-                                )
-                              : navigate(`/home/clt/${cooler.serial_number}`);
-                          }}
+                          // onClick={() => {
+                          //   localStorage.getItem("ORG") == "CALL CENTER"
+                          //     ? navigate(
+                          //         `/home/clt_callCenter/${cooler.serial_number}`
+                          //       )
+                          //     : navigate(`/home/clt/${cooler.serial_number}`);
+                          // }}
                         >
                           <td data-label="ESTATUS" title={cooler.status}>
                             {isLoading == true ? (
@@ -475,6 +496,17 @@ export default function CoolersCC() {
                               "Sin registro"
                             ) : (
                               cooler.serial_number
+                            )}
+                          </td>
+                          <td data-label="Cliente" title={cooler.customer}>
+                            {isLoading == true ? (
+                              <>
+                                <Skeleton height={20} radius="sm" width="90%" />
+                              </>
+                            ) : cooler.customer === undefined ? (
+                              "Sin registro"
+                            ) : (
+                              cooler.customer
                             )}
                           </td>
                           <td data-label="Modelo" title={cooler.model_id}>
@@ -705,7 +737,10 @@ export default function CoolersCC() {
                               </>
                             ) : (
                               <div>
-                                <Link to={`/home/clt/${cooler.serial_number}`}>
+                                <Link
+                                  to={`/home/clt_callCenter/${cooler.serial_number}`}
+                                  target="_blank"
+                                >
                                   <div
                                     style={{
                                       color: "#3E83FF",

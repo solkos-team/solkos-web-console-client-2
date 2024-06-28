@@ -13,6 +13,9 @@ import { IconArrowRight } from "@tabler/icons-react";
 import DrawerInversion from "../../../components/drawerInversion/DrawerInversion";
 import DrawerEnergy from "../../../components/drawerEnergy/DrawerEnergy";
 import { useDisclosure } from "@mantine/hooks";
+import { CoolviewIcon } from "../../../sampleData/icons";
+import { userVerify } from "../../../Functions/pathVerify";
+import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
 
 moment.locale("es", {
   months: [
@@ -32,6 +35,8 @@ moment.locale("es", {
 });
 
 export default function CoolerDetailCC() {
+  const [coolViewOpened, { open: openCoolview, close: closeCoolview }] =
+    useDisclosure(false);
   const b = "../../sampleData/devices.png";
   const { serial_number } = useParams();
   const [searchValue, setSearchValue] = useState("");
@@ -632,6 +637,31 @@ export default function CoolerDetailCC() {
                   )}
                 </div>
               </div>
+              <div
+                style={{
+                  display: userVerify(localStorage.getItem("USER") ?? ""),
+                  gap: "5px",
+                  background: "var(--blue-0, #E7F5FF)",
+                  width: "fit-content",
+                  padding: "5px",
+                  boxSizing: "border-box",
+                  borderRadius: "5px",
+                }}
+              >
+                {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
+                <div
+                  style={{
+                    color: "var(--blue-6, #2393F4)",
+                    fontSize: "0.75rem",
+                    fontWeight: 500,
+                    cursor: "pointer",
+                  }}
+                  onClick={openCoolview}
+                >
+                  Ver Coolview
+                </div>
+                <img src={CoolviewIcon} alt="CoolviewIcon" loading="lazy" />
+              </div>
             </div>
           </div>
         </section>
@@ -1214,112 +1244,6 @@ export default function CoolerDetailCC() {
                     </>
                   )}
                 </div>
-                <div className="clt_actividad_mapa_info">
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    <img
-                      src={"../../sampleData/mappv.svg"}
-                      width={"20vw"}
-                      alt="cooler"
-                    ></img>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Instalación
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    <img
-                      src={"../../sampleData/icon2.svg"}
-                      width={"20vw"}
-                      alt="cooler"
-                    ></img>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Última ubicación
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    {/* <IconCircleX /> */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px", //
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "1vw",
-                          height: "0.3vw",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                      &nbsp;
-                      <div
-                        style={{
-                          width: "1vw",
-                          height: "0.3vw",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                      &nbsp;
-                      <div
-                        style={{
-                          width: "1vw",
-                          height: "0.3vw",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                    </div>
-
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Distancia entre puntos
-                    </div>
-                  </div>
-                </div>
               </section>
             </div>
           </section>
@@ -1690,6 +1614,11 @@ export default function CoolerDetailCC() {
         onClose={closeEnergy}
         coolersData={coolersData}
       /> */}
+      <DrawerCoolview
+        opened={coolViewOpened}
+        onClose={closeCoolview}
+        CoolerId={coolersData?.cooler.device_id}
+      />
     </>
   );
 }
