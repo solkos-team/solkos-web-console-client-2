@@ -21,7 +21,7 @@ const userVerify = (user) => {
       return "flex";
     case "Jesus Angel Soria Lopez":
       return "flex";
-    case "Mayra":
+    case "Mayra Barrón Reséndiz":
       return "flex";
     case "Alondra Trejo Cruz":
       return "flex";
@@ -30,6 +30,8 @@ const userVerify = (user) => {
     case "Maria Luisa Rojo Siliceo Hernández":
       return "flex";
     case "Jose Carlos Bautista Olvera":
+      return "flex";
+    case "Mayra Barrón CallCenter":
       return "flex";
     default:
       return "none";

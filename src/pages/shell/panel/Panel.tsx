@@ -47,7 +47,7 @@ export default function Panel() {
 
   const options = {
     height: "1200px",
-    width: "80%",
+    width: "100%",
   };
 
   const parameters = {
@@ -97,7 +97,7 @@ export default function Panel() {
                     marginRight: "5px",
                   }}
                 />
-                Tablero 1
+                Detalle de rutas
               </Tabs.Tab>
               {/* <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
                   <img
@@ -124,53 +124,53 @@ export default function Panel() {
                   flexDirection: "column",
                 }}
               >
-                <Tabs.Panel value="first">
-                  <>
-                    {
-                      // dto === "YZA" ? (
+                {/* <Tabs.Panel value="first"> */}
+                <>
+                  {
+                    // dto === "YZA" ? (
+                    //   <>
+                    //     <br></br>
+                    //     <TableauReport
+                    //       url="https://tableau.efemsa.com/views/Yza/Performance?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
+                    //       token={data}
+                    //       options={options}
+                    //       parameters={parameters}
+                    //       query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+                    //     />
+                    //   </>
+                    // ) :
+                    dto === "KOF" ? (
+                      <>
+                        <br></br>
+                        <TableauReport
+                          // url={`https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                          url={`https://tableau.efemsa.com/views/KOF/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                          token={data}
+                          options={options}
+                          parameters={parameters}
+                          query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+                        />
+                      </>
+                    ) : (
+                      //  : dto === "HEINEKEN" ? (
                       //   <>
                       //     <br></br>
                       //     <TableauReport
-                      //       url="https://tableau.efemsa.com/views/Yza/Performance?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
+                      //       url={`https://tableau.efemsa.com/views/HNK_17151853863070/Cobertura?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                       //       token={data}
-                      //       options={options}
+                      //       options={{ height: "800px", width: "100%" }}
                       //       parameters={parameters}
                       //       query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
                       //     />
                       //   </>
-                      // ) :
-                      dto === "KOF" ? (
-                        <>
-                          <br></br>
-                          <TableauReport
-                            // url={`https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                            url={`https://tableau.efemsa.com/views/KOF_ControldeActivos/Control_Activos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                            token={data}
-                            options={options}
-                            parameters={parameters}
-                            query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
-                          />
-                        </>
-                      ) : (
-                        //  : dto === "HEINEKEN" ? (
-                        //   <>
-                        //     <br></br>
-                        //     <TableauReport
-                        //       url={`https://tableau.efemsa.com/views/HNK_17151853863070/Cobertura?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                        //       token={data}
-                        //       options={{ height: "800px", width: "100%" }}
-                        //       parameters={parameters}
-                        //       query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
-                        //     />
-                        //   </>
-                        // )
-                        <div style={{ marginTop: 30 }}>
-                          No hay tableros disponibles para mostrar
-                        </div>
-                      )
-                    }
-                  </>
-                </Tabs.Panel>
+                      // )
+                      <div style={{ marginTop: 30 }}>
+                        No hay tableros disponibles para mostrar
+                      </div>
+                    )
+                  }
+                </>
+                {/* </Tabs.Panel> */}
 
                 {/* <Tabs.Panel value="second">
                   <></>

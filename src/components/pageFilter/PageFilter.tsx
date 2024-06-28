@@ -295,24 +295,7 @@ export default function (props) {
       ? "PdV"
       : "";
   };
-  // const formatOptions = (data) => {
-  //   return data.map((item) => {
-  //     const foundItem = item.found_in;
-  //     const coincidences = item.coincidence.split(",");
-  //     const lastWord =
-  //       foundItem === "region" ||
-  //       foundItem === "zone" ||
-  //       foundItem === "operative_unit" ||
-  //       foundItem === "route"
-  //         ? coincidences.length > 0
-  //           ? coincidences.pop().trim()
-  //           : null
-  //         : item.coincidence.trim();
 
-  //     const translatedItem = translateFoundItem(foundItem);
-  //     return { coincidence: lastWord, translatedItem };
-  //   });
-  // };
   const formatOptions = (data) => {
     return data.map((item) => {
       const foundItem = item.found_in;
