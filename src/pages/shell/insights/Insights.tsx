@@ -1597,6 +1597,7 @@ export default function Insights() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
+  console.log(data);
   const IndicadoresData =
     data?.insights?.INDICATOR?.algorithms.filter(
       (data) => data.class == "ASSET_MANAGEMENT_ACTIONABLE"
@@ -1782,32 +1783,34 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[4]?.percentage == undefined ? (
+                      ) : !data ||
+                        !Array.isArray(data.assets_analytics) ||
+                        data.assets_analytics === null ||
+                        data.assets_analytics[2]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[4]?.percentage.toFixed(1) + "%"
+                        data.assets_analytics[2].percentage.toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
-                      {
-                        isLoading == true ? (
-                          <>
-                            <Skeleton
-                              height={15}
-                              mt={6}
-                              width="50%"
-                              radius="xs"
-                            />
-                          </>
-                        ) : data?.assets_analytics[4]?.value == undefined ? (
-                          "Sin registro"
-                        ) : (
-                          data?.assets_analytics[4]?.value.toLocaleString(
-                            "es-MX"
-                          ) + " Enfriadores"
-                        )
-                        // "0 Enfriadores"
-                      }
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton
+                            height={15}
+                            mt={6}
+                            width="50%"
+                            radius="xs"
+                          />
+                        </>
+                      ) : !data ||
+                        data.assets_analytics === null ||
+                        !Array.isArray(data.assets_analytics) ||
+                        data.assets_analytics[2]?.value === undefined ? (
+                        "Sin registro"
+                      ) : (
+                        data.assets_analytics[2].value.toLocaleString("es-MX") +
+                        " Enfriadores"
+                      )}
                     </div>
                   </div>
                   <div className="insights_datas_kpi_data_data">
@@ -1827,10 +1830,13 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[1]?.percentage == undefined ? (
+                      ) : !data ||
+                        data.assets_analytics === null ||
+                        !Array.isArray(data.assets_analytics) ||
+                        data.assets_analytics[0]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[1]?.percentage.toFixed(1) + "%"
+                        data.assets_analytics[0].percentage.toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
@@ -1843,12 +1849,14 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[1]?.value == undefined ? (
+                      ) : !data ||
+                        data.assets_analytics === null ||
+                        !Array.isArray(data.assets_analytics) ||
+                        data.assets_analytics[0]?.value === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[1]?.value.toLocaleString(
-                          "es-MX"
-                        ) + " Enfriadores"
+                        data.assets_analytics[0].value.toLocaleString("es-MX") +
+                        " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -1869,10 +1877,13 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[2]?.percentage == undefined ? (
+                      ) : !data ||
+                        data.assets_analytics === null ||
+                        !Array.isArray(data.assets_analytics) ||
+                        data.assets_analytics[1]?.percentage === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[2]?.percentage.toFixed(1) + "%"
+                        data.assets_analytics[1].percentage.toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
@@ -1885,12 +1896,14 @@ export default function Insights() {
                             radius="xs"
                           />
                         </>
-                      ) : data?.assets_analytics[2]?.value == undefined ? (
+                      ) : !data ||
+                        data.assets_analytics === null ||
+                        !Array.isArray(data.assets_analytics) ||
+                        data.assets_analytics[1]?.value === undefined ? (
                         "Sin registro"
                       ) : (
-                        data?.assets_analytics[2]?.value.toLocaleString(
-                          "es-MX"
-                        ) + " Enfriadores"
+                        data.assets_analytics[1].value.toLocaleString("es-MX") +
+                        " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -2286,7 +2299,7 @@ export default function Insights() {
                         </>
                       ) : data?.insights?.ALERT?.total == undefined &&
                         data?.insights?.FAIL?.total == undefined ? (
-                        "Sin registro"
+                        <div style={{ fontSize: ".9rem" }}>Sin registro</div>
                       ) : (
                         (
                           Number(data?.insights?.ALERT?.total) +
