@@ -116,11 +116,6 @@ export default function Coolers() {
       fetchData();
     }
   }, [showTable, currentPage, datosPorPagina, changeAsc, dto, dt]);
-  useEffect(() => {
-    if (showTable) {
-      fetchData();
-    }
-  }, [showTable, currentPage, datosPorPagina, dto, dt]);
 
   useEffect(() => {
     const storedTags = localStorage.getItem("searchTags");
@@ -727,10 +722,10 @@ export default function Coolers() {
                               </>
                             ) : (
                               <div>
-                                <Link 
-                                to={localStorage.getItem("ORG") == "CALL CENTER"
-                                  ? `/home/clt_callCenter/${cooler.serial_number}`                                    
-                                  : `/home/clt/${cooler.serial_number}`} target="_blank">
+                                <Link
+                                  to={`/home/clt/${cooler.serial_number}`}
+                                  target="_blank"
+                                >
                                   <div
                                     style={{
                                       color: "#3E83FF",
