@@ -235,6 +235,7 @@ function App() {
   const Role = localStorage.getItem("Role") || "";
   const { classes, cx } = useStyles();
   const [coolerInsightsOpen, setCoolerInsightsOpen] = useState(true);
+  const [vaultOpen, setVaultOpen] = useState(false); // Estado separado para Vault
   const [data, setData] = useState([]);
   const [opened, setOpened] = useState(false); // state of menu
   const location = useLocation();
@@ -242,15 +243,65 @@ function App() {
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
+  console.log(Name);
+
+  // *******************************
+  const [updatedRoutes, setUpdatedRoutes] = useState(routes);
+
+  useEffect(() => {
+    if (Name === "Mayra Barrón Reséndiz" || Name === "Jose Ivan Perez Ugalde") {
+      setUpdatedRoutes((prevRoutes) => [
+        ...prevRoutes,
+        {
+          label: "Vault",
+          icon: <img src={"../../sampleData/insights.svg"} />,
+          initiallyOpened: true,
+          links: [
+            {
+              label: "Vault",
+              link: "/home/insightsVault",
+              icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
+            },
+            {
+              label: "Procedimiento 1",
+              link: "/home/Process1Vault",
+              icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+            },
+            {
+              label: "Procedimiento 2",
+              link: "/home/Process2Vault",
+              icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
+            },
+          ],
+        },
+      ]);
+    }
+  }, [Name]);
+
+  // *******************************
+  const openVault = () => {
+    setVaultOpen(true);
+  };
+
+  const closeVault = () => {
+    setVaultOpen(false);
+  };
+
+  const openCoolerInsights = () => {
+    setCoolerInsightsOpen(true);
+    setVaultOpen(false); // Asegurarse de cerrar Vault al abrir Cooler Insights
+  };
 
   const stateM = sessionStorage.getItem("MenuState");
   stateM === undefined
     ? sessionStorage.setItem("MenuState", false)
     : sessionStorage.getItem("MenuState");
   const [opened2, setOpened2] = useState(true);
+  const [opened3, setOpened3] = useState(true);
   const navigate = useNavigate();
   const closeCoolerInsights = () => {
     setCoolerInsightsOpen(false);
+    setVaultOpen(false);
   };
   const fetctData = async () => {
     const datos = JSON.parse(sessionStorage.getItem("customers"));
@@ -369,11 +420,13 @@ function App() {
           </div>
         ))}
       </>
-    ) : localStorage.getItem("ORG") === "KOF" ? (
+    ) : // localStorage.getItem("ORG") === "KOF" ||
+    //   localStorage.getItem("ORG") === "KOF Colombia" ? (
+    localStorage.getItem("ORG") === "KOF" ? (
       <>
-        {routes.map((item) => (
+        {updatedRoutes.map((item) => (
           <div key={item.label}>
-            {item.links ? (
+            {item.label === "Cooler Insights" && item.links ? (
               <div style={{ whiteSpace: "nowrap" }}>
                 <Tooltip label={item.label}>
                   <div
@@ -407,6 +460,67 @@ function App() {
                   </div>
                 </Tooltip>
                 {coolerInsightsOpen && (
+                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
+                    {item.links.map((option) => (
+                      <NavLink
+                        to={option.link}
+                        className={classes.link}
+                        key={option.label}
+                        activate={true.toString()} // Convert boolean to string
+                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                      >
+                        <Tooltip label={option.label}>
+                          <div>
+                            {option.icon && option.icon}{" "}
+                            <span
+                              style={{
+                                marginLeft: 10,
+                                display: opened2 === true ? "none" : "",
+                              }}
+                            >
+                              {option.label}
+                            </span>
+                          </div>
+                        </Tooltip>
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : item.label === "Vault" && item.links ? (
+              <div style={{ whiteSpace: "nowrap" }}>
+                <Tooltip label={item.label}>
+                  <div
+                    onClick={() => {
+                      setVaultOpen(!vaultOpen);
+                    }}
+                    className={cx(classes.link, {
+                      [classes.linkActive]: vaultOpen,
+                    })}
+                  >
+                    {item.icon}
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: opened2 === true ? "none" : "",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    {vaultOpen ? (
+                      <img
+                        src={a1}
+                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                      />
+                    ) : (
+                      <img
+                        src={a2}
+                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                      />
+                    )}
+                  </div>
+                </Tooltip>
+                {vaultOpen && (
                   <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
                     {item.links.map((option) => (
                       <NavLink

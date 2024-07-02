@@ -28,6 +28,9 @@ import { clt as CltNS } from "./pages/shell/nuevosSegmentos/clt_n/clt.tsx";
 import { Detail } from "./pages/shell/nuevosSegmentos/clt_n/detail.tsx";
 import { CoolView } from "./pages/shell/coolView/coolView.tsx";
 import { MapResponsive } from "./components/mapInsights/MapResponsive.tsx";
+import InsightsVault from "./pages/shell/vault/insightsVault/InsightsVault.tsx";
+import Process1Vault from "./pages/shell/vault/process1/Process1Vault.tsx";
+import Process2Vault from "./pages/shell/vault/process2/Process2Vault.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -42,12 +45,17 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 {/* Insights */}
                 <Route path="/home/insights" element={<Insights />} />
                 <Route path="/home/insightsNS" element={<InsightsNS />} />
+                <Route path="/home/insightsVault" element={<InsightsVault />} />
                 {/* Alertas */}
                 <Route path="/home/alerts" element={<Alerts />} />
                 {/* Fallas */}
                 <Route path="/home/fails" element={<Fails />} />
                 {/* Indicadores */}
                 <Route path="/home/indicator" element={<Indicator />} />
+                {/* Proceso1 vault */}
+                <Route path="/home/Process1Vault" element={<Process1Vault />} />
+                {/* Proceso 2 vault */}
+                <Route path="/home/Process2Vault" element={<Process2Vault />} />
                 {/* Cooler life tracking */}
                 <Route path="/home/clt" element={<Coolers />} />
                 {/* Cooler detail */}

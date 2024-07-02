@@ -33,6 +33,8 @@ const userVerify = (user) => {
       return "flex";
     case "Mayra Barrón CallCenter":
       return "flex";
+    case "Natalia Ramirez Corona":
+      return "flex";
     default:
       return "none";
   }

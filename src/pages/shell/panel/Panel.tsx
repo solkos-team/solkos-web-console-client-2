@@ -36,6 +36,7 @@ export default function Panel() {
   };
 
   useEffect(() => {
+    // if (dto !== "KOF" && dto !== "KOF Colombia") {
     if (dto !== "KOF") {
       navigate("/home");
     }
@@ -127,15 +128,15 @@ export default function Panel() {
                 {/* <Tabs.Panel value="first"> */}
                 <>
                   {
-                    // dto === "YZA" ? (
+                    // dto === "KOF Colombia" ? (
                     //   <>
                     //     <br></br>
                     //     <TableauReport
-                    //       url="https://tableau.efemsa.com/views/Yza/Performance?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&:embed=y"
+                    //       url="https://tableau.efemsa.com/views/ConsolidadoHorizontalTablerostestsolkos/ParqueReparado?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&"
                     //       token={data}
                     //       options={options}
                     //       parameters={parameters}
-                    //       query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
+                    //       query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
                     //     />
                     //   </>
                     // ) :
