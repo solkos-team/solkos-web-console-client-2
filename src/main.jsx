@@ -18,7 +18,7 @@ import CoolerDetail from "./pages/shell/coolerDetail";
 import CoolerDetailCC from "./pages/shell/clt_callCenter/Detail_CC.tsx";
 import Insights from "./pages/shell/insights";
 import { Provider } from "react-redux";
-import { store } from "./app/store.js";
+import { store } from './app/Store.js'
 import { Login } from "./pages/main/login/Login.tsx";
 import { RecoverPassword } from "./pages/main/recover/RecoverPassword.tsx";
 import { NewPassword } from "./pages/main/newPassword/NewPassword.tsx";
@@ -30,7 +30,7 @@ import { CoolView } from "./pages/shell/coolView/coolView.tsx";
 import { MapResponsive } from "./components/mapInsights/MapResponsive.tsx";
 import InsightsVault from "./pages/shell/vault/insightsVault/InsightsVault.tsx";
 import Process1Vault from "./pages/shell/vault/process1/Process1Vault.tsx";
-import Process2Vault from "./pages/shell/vault/process2/Process2Vault.tsx";
+import { Process2Vault } from "./pages/shell/vault/process2/Process2Vault.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
