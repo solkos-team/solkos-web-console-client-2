@@ -1,16 +1,16 @@
 import React from "react";
 import { Button } from "rsuite";
 
-export const ButtonNext = () => {
+export const ButtonNext = ({nextStep,active}) => {
   return (
     <Button
+    className="vault_buttons"
       style={{
-        fontSize: "0.8rem",
         color: "white",
         background: "#ED5079",
-        width: "7rem",
-        height: '2rem'
-      }}
+      }}      
+      onClick={nextStep}
+      // disabled = {active == 0 ? true : false}
     >
       Continuar
     </Button>

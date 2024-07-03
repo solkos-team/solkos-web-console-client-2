@@ -1,17 +1,16 @@
 import React from 'react'
 import { Button } from 'rsuite'
 
-export const ButtonBack = () => {
+export const ButtonBack = ({prevStep,active}) => {
   return (
     <Button
+    className='vault_buttons'
       style={{
-        fontSize: "0.8rem",
         color: "#ED5079",
-        background: "#FFFF",
-        width: "7rem",
-        height: '2rem',
-        display : 'none'
+        background: "#FFFF", 
+        visibility : active == 0 ? 'hidden' : 'visible'     
       }}
+      onClick={prevStep}
     >
       Regresar
     </Button>

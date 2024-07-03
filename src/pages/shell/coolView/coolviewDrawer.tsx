@@ -21,7 +21,7 @@ export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
     >
       <section className="coolview_printipal">        
         <iframe
-          src={`https://solkos-coolview-2.firebaseapp.com?device_id=${CoolerId}&start_date=${
+          src={`http://localhost:5173/?device_id=${CoolerId}&start_date=${
             getMonth(mesToday.getMonth()).firstDay
           }&end_date=${getMonth(mesToday.getMonth() + 1).lastDay}&clt=false`}
           width="100%"

@@ -1607,6 +1607,29 @@ body {
   .pdv_table {
     height: 140vw;
   }
+  .vault_tag{
+    width: 120% !important;    
+  }
+  .vault_section_roadmap{
+    visibility: hidden !important;
+    /* display: none; */
+  }
+  .section_Vault_Buttons{
+    display: flex !important;
+    flex-direction: column ;
+  }
+  .vault_buttons{
+    width: 100% !important;
+  }
+  .vault_Information_Container {
+    width: 120% !important;
+    height: 100% !important;
+    border-radius: 8px;
+    border: 1px solid var(--gray-4, #CED4DA);
+    background: var(--gray-0, #F8F9FA);
+    padding: 0.9rem;
+    box-sizing: border-box;
+  }
 }
 /* Termina media */
 .drawerOutlets_Principal {
@@ -1711,4 +1734,154 @@ body {
 .drawerCoolview{  
   max-width: 98%;
   left: 67px;
+}
+.section_Vault_Title{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  
+}
+.vault_h1_title {
+  color: var(--other-black, #000);
+  font-family: "DM Sans";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+.vault_h2_description {
+  color: var(--gray-6, #868E96);
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 155%;
+}
+.section_Vault_Buttons{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+.section_Valult_Information{
+  width: 100%;
+  height: 70%;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vault_Information_Container{
+  width: 50%;
+  height: 80%;  
+  display: flex;
+  flex-direction: column;
+}
+.vault_Information_Data{
+  width: 100%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.vault_Information_Data_Title {
+  color: var(--Neutral-On-Surface-Variant, #3A3A3F);
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+}
+.vault_Information_Data_Title_container{
+  width: 100%;
+  height: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.vault_Information_Data_Title2 {
+  color: var(--Neutral-Outline, #88888B);
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.vault_Information_Data_Title3 {
+  color: var(--Neutral-On-Surface, #000005);
+  text-align: right;
+  font-family: "DM Sans";
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.vault_Information_Data_Title_container_password {
+  display: flex;
+  padding: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 19px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: var(--gray-0, #F8F9FA);
+  color: var(--gray-4, #CED4DA);
+  font-family: "DM Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+}
+.vault_container_final {
+  width: 20%;
+  height: max-content;
+  display: flex;
+  padding: 1rem;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: var(--gray-0, #F8F9FA);
+}
+.vault_container_final_h1 {
+  color: var(--other-black, #000);
+  font-family: "DM Sans";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 145%;
+}
+.vault_tag{
+  position: relative;
+  width: 60%;
+}
+.vault_section_roadmap{
+  width: 100%;
+  height: 10%;
+}
+.vault_buttons{
+  font-size: 0.8rem;
+  width: 7rem;
+  height: 2rem;
+}
+
+.mantine-n16n5[data-progress] {
+  border-color: #ED5079;
+}
+.mantine-n16n5[data-completed] {
+  background-color: #ED5079;
+  border-color: #ED5079;
+  color: #fff;
+}
+.mantine-1s0rj3f{
+  background-color: #ED5079;
 }
