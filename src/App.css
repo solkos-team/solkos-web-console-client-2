@@ -1840,7 +1840,7 @@ body {
   line-height: 28px;
 }
 .vault_container_final {
-  width: 20%;
+  width: max-content;
   height: max-content;
   display: flex;
   padding: 1rem;
@@ -1874,14 +1874,14 @@ body {
   height: 2rem;
 }
 
-.mantine-n16n5[data-progress] {
+.mantine-1oj4pmu[data-progress] {
   border-color: #ED5079;
 }
-.mantine-n16n5[data-completed] {
+.mantine-1oj4pmu[data-completed]  {
   background-color: #ED5079;
   border-color: #ED5079;
   color: #fff;
 }
-.mantine-1s0rj3f{
+.mantine-yfz32t{
   background-color: #ED5079;
 }
