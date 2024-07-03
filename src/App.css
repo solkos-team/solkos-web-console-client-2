@@ -1334,8 +1334,7 @@ body {
   scrollbar-width: thin; */
 }
 .mantine-Drawer-title {
-  color: var(--other-black, #000);
-  /* font-family: "DM Sans"; */
+  color: var(--other-black, #000);  
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -1744,7 +1743,7 @@ body {
 }
 .vault_h1_title {
   color: var(--other-black, #000);
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
@@ -1752,7 +1751,7 @@ body {
 }
 .vault_h2_description {
   color: var(--gray-6, #868E96);
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -1788,7 +1787,7 @@ body {
 }
 .vault_Information_Data_Title {
   color: var(--Neutral-On-Surface-Variant, #3A3A3F);
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -1807,7 +1806,7 @@ body {
 }
 .vault_Information_Data_Title2 {
   color: var(--Neutral-Outline, #88888B);
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -1816,7 +1815,7 @@ body {
 .vault_Information_Data_Title3 {
   color: var(--Neutral-On-Surface, #000005);
   text-align: right;
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -1833,7 +1832,7 @@ body {
   border: 1px solid var(--gray-4, #CED4DA);
   background: var(--gray-0, #F8F9FA);
   color: var(--gray-4, #CED4DA);
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -1854,7 +1853,7 @@ body {
 }
 .vault_container_final_h1 {
   color: var(--other-black, #000);
-  font-family: "DM Sans";
+  /* font-family: "DM Sans"; */
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
