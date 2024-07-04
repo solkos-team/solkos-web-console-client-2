@@ -1,18 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ButtonBack } from '../../Components/ButtonBack'
 import { ButtonNext } from '../../Components/ButtonNext'
 import { RoadMap } from '../../Components/RoadMap'
+import { TextInput } from '@mantine/core'
 
 export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
+    const [confirmationWord, setConfirmationWord] = useState("");
+    const [isConfirmed, setIsConfirmed] = useState(false);
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirmationWord(event.currentTarget.value);
+        if (event.currentTarget.value === "CONFIRMAR") {
+            setIsConfirmed(true);
+        } else {
+            setIsConfirmed(false);
+        }
+    };    
     return (
-        <section style={{ width: '100%', height: '100%', display: active == 2 ? 'flex' : 'none', flexDirection: 'column' }}>
+        <section style={{ width: '100%', height: '100%', display: active == 2 ? 'flex' : 'none', flexDirection: 'column', alignItems: 'center' }}>
             {/* Section Title & Info */}
             <section className='section_Vault_Title'>
-                <div className='vault_h1_title'>Valut</div>
+                <img
+                    src={"../../sampleData/logovault.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "5rem", height: "3rem", marginTop: -20 }}
+                />
                 <div className='vault_h2_description'>Proceder con los cambios.</div>
             </section>
             {/* Section Roadmap */}
-            <section style={{ width: '100%', height: '10%' }} className="vault_section_roadmap">
+            <section className="vault_section_roadmap">
                 <RoadMap active={active} setActive={setActive} nextStep={nextStep} prevStep={prevStep} />
             </section>
             {/* Section Information */}
@@ -22,7 +37,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                         <div className='vault_Information_Data_Title'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
                                 <circle cx="4.5" cy="4.5" r="4" fill="#3E83FF" />
-                            </svg>                            
+                            </svg>
                             Entradas de archivo
                         </div>
                         <div className='vault_Information_Data_Title_container'>
@@ -34,7 +49,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                         <div className='vault_Information_Data_Title'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
                                 <circle cx="4.5" cy="4.5" r="4" fill="#31B648" />
-                            </svg>                            
+                            </svg>
                             Entradas validas
                         </div>
                         <div className='vault_Information_Data_Title_container'>
@@ -46,7 +61,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                         <div className='vault_Information_Data_Title'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
                                 <circle cx="4.5" cy="4.5" r="4" fill="#F93448" />
-                            </svg>                            
+                            </svg>
                             Enfriadores a activar valut
                         </div>
                         <div className='vault_Information_Data_Title_container'>
@@ -58,7 +73,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                         <div className='vault_Information_Data_Title'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
                                 <circle cx="4.5" cy="4.5" r="4" fill="#F6A60A" />
-                            </svg>                            
+                            </svg>
                             Enfriadores a desactivar valut
                         </div>
                         <div className='vault_Information_Data_Title_container'>
@@ -73,16 +88,20 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                             </svg>
                             Para proceder con los cambios escribir la contraseña
                         </div>
-                        <div className='vault_Information_Data_Title_container_password'>
-                            °°°Contraseña
-                        </div>
+                        <TextInput
+                            placeholder="*** Contraseña"
+                            value={confirmationWord}
+                            onChange={handleInputChange}
+                            style={{ width: "100%" }}
+                            autoComplete="off"
+                        />
                     </section>
                 </section>
             </section>
             {/* Section Buttons */}
             <section className="section_Vault_Buttons">
                 <ButtonBack prevStep={prevStep} active={active} />
-                <ButtonNext nextStep={nextStep} />
+                <ButtonNext nextStep={nextStep} active={isConfirmed} />
             </section>
         </section>
     )

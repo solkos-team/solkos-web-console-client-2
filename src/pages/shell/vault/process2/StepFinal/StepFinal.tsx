@@ -4,7 +4,11 @@ export const StepFinal = ({ active }) => {
     return (
         <section style={{ width: '100%', height: '100%', display: active == 3 ? 'flex' : 'none', flexDirection: 'column' }}>
             <section className='section_Vault_Title'>
-                <div className='vault_h1_title'>Valut</div>
+                <img
+                    src={"../../sampleData/logovault.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "5rem", height: "3rem", marginTop: -20 }}
+                />
                 <div className='vault_h2_description'>Proceder con los cambios.</div>
             </section>
             <section style={{width:'100%',height:'90%',display:'flex',alignItems:'center',justifyContent:'center'}}>

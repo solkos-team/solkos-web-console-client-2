@@ -1787,10 +1787,10 @@ body {
 }
 .vault_Information_Data_Title {
   color: var(--Neutral-On-Surface-Variant, #3a3a3f);
-  font-family: "DM Sans";
-  font-size: 16px;
+  /* font-family: "DM Sans"; */
+  font-size:0.9rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   display: flex;
   gap: 5px;
@@ -1863,8 +1863,8 @@ body {
   position: relative;
   width: 60%;
 }
-.vault_section_roadmap {
-  width: 100%;
+.vault_section_roadmap{
+  width: 60%;
   height: 10%;
 }
 .vault_buttons {
@@ -1873,16 +1873,24 @@ body {
   height: 2rem;
 }
 
-.mantine-1oj4pmu[data-progress] {
-  border-color: #ed5079;
+.mantine-pmcyil[data-progress] {
+  border-color: #ED5079;
 }
-.mantine-1oj4pmu[data-completed] {
-  background-color: #ed5079;
-  border-color: #ed5079;
+.mantine-pmcyil[data-completed]  {
+  background-color: #ED5079;
+  border-color: #ED5079;
   color: #fff;
 }
 .mantine-yfz32t {
   background-color: #ed5079;
+}
+.mantine-1oj4pmu[data-progress] {
+  border-color: #ED5079;
+}
+.mantine-1oj4pmu[data-completed]  {
+  background-color: #ED5079;
+  border-color: #ED5079;
+  color: #fff;
 }
 @media (max-width: 768px) {
   .hide-on-mobile {

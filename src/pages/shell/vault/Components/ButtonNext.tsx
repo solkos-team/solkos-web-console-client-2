@@ -10,7 +10,7 @@ export const ButtonNext = ({nextStep,active}) => {
         background: "#ED5079",
       }}      
       onClick={nextStep}
-      // disabled = {active == 0 ? true : false}
+      disabled = {!active}
     >
       Continuar
     </Button>

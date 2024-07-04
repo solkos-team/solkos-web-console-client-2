@@ -8,13 +8,18 @@ import { IconArrowRight } from "@tabler/icons-react";
 
 export const StepOne = ({active,setActive,nextStep,prevStep}) => {
   const [visibilityTable,setVisibilityTable] = useState<boolean>(false)
+  const [tags, setTags] = useState<string[]>([]);
   // if(visibilityTable == true){
   //   // @ts-ignore
   //   setActive(1)
   // }else{setActive(0)}  
-  console.log(active)  
+
+  const handleTagChange = (newTags) => {        
+    setTags(newTags);    
+  };
+    
   return (
-    <section style={{width : '100%' ,height:'100%', display : active <= 1 ? '' : 'none'}}>
+    <section style={{width : '100%' ,height:'100%', display : active <= 1 ? 'flex' : 'none',flexDirection:'column',alignItems:'center'}}>
       {/* Seccion RoadMap */}
       <section
       className="vault_section_roadmap"
@@ -42,10 +47,10 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
         />
         <div className="vault_tag">
           <TagInput
-            //   value={tags}
+            value={tags}
             trigger={["Enter", "Space", "Comma"]}
-            //   onChange={handleTagChange}
-            // onKeyDown={handleKeyDown}
+            onChange={handleTagChange}
+            // onKeyDown={handleKeyDown}                        
             placeholder="Buscar por Serie o Mac"
             style={{
               fontSize: "0.8rem",
