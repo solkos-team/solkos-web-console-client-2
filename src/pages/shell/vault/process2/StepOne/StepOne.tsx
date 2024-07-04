@@ -5,8 +5,11 @@ import { ButtonBack } from "../../Components/ButtonBack";
 import { RoadMap } from "../../Components/RoadMap";
 import { Switch } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
+import { useDisclosure } from "@mantine/hooks";
+import { DrawerVault } from "../../Components/DrawerVault";
 
 export const StepOne = ({active,setActive,nextStep,prevStep}) => {
+  const [opened, { open, close }] = useDisclosure(false);
   const [visibilityTable,setVisibilityTable] = useState<boolean>(false)
   const [tags, setTags] = useState<string[]>([]);
   // if(visibilityTable == true){
@@ -147,6 +150,7 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
                     display: "flex",
                     cursor: "pointer",
                   }}
+                  // onClick={()=>{open()}}
                 >
                   Ver más
                   <IconArrowRight
@@ -164,8 +168,9 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
       {/* Seccion botones */}
       <section className="section_Vault_Buttons">
         <ButtonBack  prevStep={prevStep} active={active} />
-        <ButtonNext nextStep={nextStep} active={active}/>
+        <ButtonNext nextStep={nextStep} active={true}/>
       </section>
+      <DrawerVault opened={opened} onCLose={close} />
     </section>
   );
 };

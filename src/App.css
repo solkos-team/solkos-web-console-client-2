@@ -1892,6 +1892,57 @@ body {
   border-color: #ED5079;
   color: #fff;
 }
+.vault_drawer_container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  flex-direction: column;  
+  box-sizing: border-box;  
+}
+.vault_drawer_header{
+  width: 100%;
+  height: 25%;
+  background-color: aqua;
+}
+.vault_drawer_registro{
+  width: 100%;
+  height: 30%;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: var(--gray-0, #F8F9FA);
+  padding: 0.75rem;
+  box-sizing: border-box;
+  gap: 0.5rem;
+}
+.vault_drawer_mapa{
+  width: 100%;
+  height: 35%;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: var(--gray-0, #F8F9FA);  
+  padding: 0.75rem;
+  box-sizing: border-box;
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.vault_drawer_mapa_title{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;  
+  align-items: center;
+}
+.vault_drawer_mapa_mapa {
+  width: 100%;
+  height: 90%;
+  border-radius: 8px;
+  border: 1px solid var(--gray-4, #CED4DA);
+  background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+}
 @media (max-width: 768px) {
   .hide-on-mobile {
     display: none;
