@@ -18,7 +18,7 @@ import CoolerDetail from "./pages/shell/coolerDetail";
 import CoolerDetailCC from "./pages/shell/clt_callCenter/Detail_CC.tsx";
 import Insights from "./pages/shell/insights";
 import { Provider } from "react-redux";
-import { store } from './app/Store.js'
+import { store } from "./app/Store.js";
 import { Login } from "./pages/main/login/Login.tsx";
 import { RecoverPassword } from "./pages/main/recover/RecoverPassword.tsx";
 import { NewPassword } from "./pages/main/newPassword/NewPassword.tsx";
@@ -31,6 +31,12 @@ import { MapResponsive } from "./components/mapInsights/MapResponsive.tsx";
 import InsightsVault from "./pages/shell/vault/insightsVault/InsightsVault.tsx";
 import Process1Vault from "./pages/shell/vault/process1/Process1Vault.tsx";
 import { Process2Vault } from "./pages/shell/vault/process2/Process2Vault.tsx";
+import Stepper1 from "./pages/shell/vault/process1/Stepper1.tsx";
+import Stepper2 from "./pages/shell/vault/process1/Stepper2.tsx";
+import Stepper3 from "./pages/shell/vault/process1/Stepper3.tsx";
+import Stepper4 from "./pages/shell/vault/process1/Stepper4.tsx";
+import Stepper5 from "./pages/shell/vault/process1/Stepper5.tsx";
+import Stepper6 from "./pages/shell/vault/process1/Stepper6.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -54,6 +60,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/home/indicator" element={<Indicator />} />
                 {/* Proceso1 vault */}
                 <Route path="/home/Process1Vault" element={<Process1Vault />} />
+                {/* Stepper1 - Proceso 1 vault */}
+                <Route path="/home/Stepper1" element={<Stepper1 />} />
+                <Route path="/home/Stepper2" element={<Stepper2 />} />
+                <Route path="/home/Stepper3" element={<Stepper3 />} />
+                <Route path="/home/Stepper4" element={<Stepper4 />} />
+                <Route path="/home/Stepper5" element={<Stepper5 />} />
+                <Route path="/home/Stepper6" element={<Stepper6 />} />
                 {/* Proceso 2 vault */}
                 <Route path="/home/Process2Vault" element={<Process2Vault />} />
                 {/* Cooler life tracking */}

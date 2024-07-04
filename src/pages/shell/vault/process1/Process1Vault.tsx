@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "rsuite";
+import { useNavigate } from "react-router-dom";
 
 export default function Process1Vault() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -17,6 +19,16 @@ export default function Process1Vault() {
       // Aquí puedes manejar el archivo seleccionado
     }
   };
+
+  useEffect(() => {
+    // Añadir overflow hidden al montar el componente
+    document.body.style.overflow = "hidden";
+
+    // Eliminar overflow hidden al desmontar el componente
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, []);
 
   return (
     <div className="insights_principal_container" style={{ height: "90%" }}>
@@ -38,6 +50,10 @@ export default function Process1Vault() {
           enfriadores.
         </text>
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <div
         style={{
           display: "flex",
@@ -83,6 +99,9 @@ export default function Process1Vault() {
             color: "white",
             background: "#ED5079",
             width: "7rem",
+          }}
+          onClick={() => {
+            navigate(`/home/Stepper1`);
           }}
         >
           Continuar

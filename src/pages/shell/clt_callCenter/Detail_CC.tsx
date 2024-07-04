@@ -58,7 +58,7 @@ export default function CoolerDetailCC() {
         setIsLoading
       );
       setCoolersData(data);
-      // console.log(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -718,17 +718,19 @@ export default function CoolerDetailCC() {
                                   order.data.status === "C,C" ||
                                   order.data.status === "O,O")) ||
                               (order.type === "TRACKING" &&
-                                (order.data.algorithm === "COMPRESSOR_FAIL" ||
-                                  order.data.algorithm === "FREEZING_FAIL" ||
-                                  order.data.algorithm === "TEMPERATURE_FAIL" ||
-                                  order.data.algorithm === "VOLTAGE_FAIL" ||
+                                (order.data.algorithm === "Bajo/Alto voltaje" ||
                                   order.data.algorithm ===
-                                    "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT" ||
+                                    "Alta demanda de compresor" ||
                                   order.data.algorithm ===
-                                    "DISCONNECTION_ALERT" ||
+                                    "Alerta alta temperatura" ||
+                                  order.data.algorithm === "Desconexión" ||
                                   order.data.algorithm ===
-                                    "HIGH_TEMPERATURE_ALERT" ||
-                                  order.data.algorithm === "VOLTAGE_ALERT" ||
+                                    "Falla asociada al compresor" ||
+                                  order.data.algorithm ===
+                                    "Evaporador bloqueado" ||
+                                  order.data.algorithm === "Alta temperatura" ||
+                                  order.data.algorithm ===
+                                    "Posible daño eléctrico" ||
                                   order.data.algorithm === "Actualizar Info" ||
                                   order.data.algorithm === "Sin Riesgo" ||
                                   order.data.algorithm ===
@@ -794,10 +796,10 @@ export default function CoolerDetailCC() {
                                     padding: "8px",
                                     flexDirection: "column",
                                     alignItems: "flex-start",
-
                                     alignSelf: "stretch",
-                                    borderRadius: "5px",
-                                    background: "#FFF",
+                                    borderRadius: "8px",
+                                    border: "1px solid var(--gray-4, #CED4DA)",
+                                    background: "var(--gray-0, #F8F9FA)",
                                     boxShadow:
                                       "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
                                     width: "96%",
@@ -1197,8 +1199,15 @@ export default function CoolerDetailCC() {
                     ) : coolersData?.cooler?.distance === undefined ||
                       coolersData?.cooler?.distance === null ? (
                       "Sin registro"
-                    ) : Number(coolersData?.cooler?.distance.toFixed(0)) < 0 ? (
+                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                        coolersData?.cooler.latitude === 0) ||
+                      coolersData?.cooler.latitude === undefined ? (
                       "Sin posición de instalación"
+                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                        coolersData?.cooler.last_latitude === 0) ||
+                      coolersData?.cooler.last_latitude === undefined ||
+                      coolersData?.cooler.last_latitude === null ? (
+                      "Sin posición de última visita"
                     ) : (
                       `${coolersData?.cooler?.distance.toFixed(0)} metros`
                     )}
@@ -1208,13 +1217,49 @@ export default function CoolerDetailCC() {
                   {isLoading == true ? (
                     <Skeleton
                       height={10}
-                      radius="xl"
+                      radius="xs"
                       style={{ width: "100%", height: "100%" }}
                     />
-                  ) : (coolersData?.cooler?.last_latitude != null &&
-                      coolersData?.cooler?.latitude === 0) ||
-                    (coolersData?.cooler?.last_latitude != 0 &&
-                      coolersData?.cooler?.latitude === 0) ? (
+                  ) : coolersData?.cooler?.last_latitude === null &&
+                    coolersData?.cooler?.latitude === 0 ? (
+                    <>
+                      <div
+                        style={{
+                          display: "inline-flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "8px",
+                          width: "100%",
+                          height: "100%",
+                          backgroundImage: "url('../../sampleData/fondd.png')",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      >
+                        <img
+                          src={"../../sampleData/notmap.svg"}
+                          alt="Descripción de la imagen"
+                          style={{
+                            width: "26px",
+                            height: "26px",
+                          }}
+                        />
+                        <text
+                          style={{
+                            color: "#ED5079",
+                            fontSize: "12px",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            lineHeight: "155%",
+                          }}
+                        >
+                          No hay datos de la ubicación
+                        </text>
+                      </div>
+                    </>
+                  ) : coolersData?.cooler?.last_latitude != null &&
+                    coolersData?.cooler?.latitude === 0 ? (
                     <>
                       <div>
                         <MapComponent1
@@ -1223,8 +1268,8 @@ export default function CoolerDetailCC() {
                         />
                       </div>
                     </>
-                  ) : coolersData?.cooler?.last_latitude === null ||
-                    coolersData?.cooler?.last_latitude === 0 ? (
+                  ) : coolersData?.cooler?.last_latitude === null &&
+                    coolersData?.cooler?.latitude != 0 ? (
                     <>
                       <div>
                         <MapComponent

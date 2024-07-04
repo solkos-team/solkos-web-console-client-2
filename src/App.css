@@ -1334,7 +1334,7 @@ body {
   scrollbar-width: thin; */
 }
 .mantine-Drawer-title {
-  color: var(--other-black, #000);  
+  color: var(--other-black, #000);
   font-size: 22px;
   font-style: normal;
   font-weight: 500;
@@ -1606,26 +1606,26 @@ body {
   .pdv_table {
     height: 140vw;
   }
-  .vault_tag{
-    width: 120% !important;    
+  .vault_tag {
+    width: 120% !important;
   }
-  .vault_section_roadmap{
+  .vault_section_roadmap {
     visibility: hidden !important;
     /* display: none; */
   }
-  .section_Vault_Buttons{
+  .section_Vault_Buttons {
     display: flex !important;
-    flex-direction: column ;
+    flex-direction: column;
   }
-  .vault_buttons{
+  .vault_buttons {
     width: 100% !important;
   }
   .vault_Information_Container {
     width: 120% !important;
     height: 100% !important;
     border-radius: 8px;
-    border: 1px solid var(--gray-4, #CED4DA);
-    background: var(--gray-0, #F8F9FA);
+    border: 1px solid var(--gray-4, #ced4da);
+    background: var(--gray-0, #f8f9fa);
     padding: 0.9rem;
     box-sizing: border-box;
   }
@@ -1730,34 +1730,34 @@ body {
 .no-border-input {
   border: none !important;
 }
-.drawerCoolview{  
+.drawerCoolview {
   max-width: 98%;
   left: 67px;
 }
-.section_Vault_Title{
+.section_Vault_Title {
   width: 100%;
   height: 10%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;  
+  align-items: flex-start;
 }
 .vault_h1_title {
   color: var(--other-black, #000);
-  /* font-family: "DM Sans"; */
+  font-family: "DM Sans";
   font-size: 22px;
   font-style: normal;
   font-weight: 700;
   line-height: 140%;
 }
 .vault_h2_description {
-  color: var(--gray-6, #868E96);
-  /* font-family: "DM Sans"; */
+  color: var(--gray-6, #868e96);
+  font-family: "DM Sans";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: 155%;
 }
-.section_Vault_Buttons{
+.section_Vault_Buttons {
   width: 100%;
   height: 10%;
   display: flex;
@@ -1765,20 +1765,20 @@ body {
   align-items: flex-end;
   gap: 0.5rem;
 }
-.section_Valult_Information{
+.section_Valult_Information {
   width: 100%;
-  height: 70%;  
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.vault_Information_Container{
+.vault_Information_Container {
   width: 50%;
-  height: 80%;  
+  height: 80%;
   display: flex;
   flex-direction: column;
 }
-.vault_Information_Data{
+.vault_Information_Data {
   width: 100%;
   height: 20%;
   display: flex;
@@ -1786,8 +1786,8 @@ body {
   gap: 0.5rem;
 }
 .vault_Information_Data_Title {
-  color: var(--Neutral-On-Surface-Variant, #3A3A3F);
-  /* font-family: "DM Sans"; */
+  color: var(--Neutral-On-Surface-Variant, #3a3a3f);
+  font-family: "DM Sans";
   font-size: 16px;
   font-style: normal;
   font-weight: 500;
@@ -1797,7 +1797,7 @@ body {
   display: flex;
   align-items: center;
 }
-.vault_Information_Data_Title_container{
+.vault_Information_Data_Title_container {
   width: 100%;
   height: max-content;
   display: flex;
@@ -1805,8 +1805,8 @@ body {
   justify-content: space-between;
 }
 .vault_Information_Data_Title2 {
-  color: var(--Neutral-Outline, #88888B);
-  /* font-family: "DM Sans"; */
+  color: var(--Neutral-Outline, #88888b);
+  font-family: "DM Sans";
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -1829,10 +1829,10 @@ body {
   gap: 19px;
   align-self: stretch;
   border-radius: 8px;
-  border: 1px solid var(--gray-4, #CED4DA);
-  background: var(--gray-0, #F8F9FA);
-  color: var(--gray-4, #CED4DA);
-  /* font-family: "DM Sans"; */
+  border: 1px solid var(--gray-4, #ced4da);
+  background: var(--gray-0, #f8f9fa);
+  color: var(--gray-4, #ced4da);
+  font-family: "DM Sans";
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -1848,39 +1848,44 @@ body {
   align-items: center;
   gap: 16px;
   border-radius: 8px;
-  border: 1px solid var(--gray-4, #CED4DA);
-  background: var(--gray-0, #F8F9FA);
+  border: 1px solid var(--gray-4, #ced4da);
+  background: var(--gray-0, #f8f9fa);
 }
 .vault_container_final_h1 {
   color: var(--other-black, #000);
-  /* font-family: "DM Sans"; */
+  font-family: "DM Sans";
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 145%;
 }
-.vault_tag{
+.vault_tag {
   position: relative;
   width: 60%;
 }
-.vault_section_roadmap{
+.vault_section_roadmap {
   width: 100%;
   height: 10%;
 }
-.vault_buttons{
+.vault_buttons {
   font-size: 0.8rem;
   width: 7rem;
   height: 2rem;
 }
 
 .mantine-1oj4pmu[data-progress] {
-  border-color: #ED5079;
+  border-color: #ed5079;
 }
-.mantine-1oj4pmu[data-completed]  {
-  background-color: #ED5079;
-  border-color: #ED5079;
+.mantine-1oj4pmu[data-completed] {
+  background-color: #ed5079;
+  border-color: #ed5079;
   color: #fff;
 }
-.mantine-yfz32t{
-  background-color: #ED5079;
+.mantine-yfz32t {
+  background-color: #ed5079;
+}
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none;
+  }
 }
