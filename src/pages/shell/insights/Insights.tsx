@@ -2302,8 +2302,8 @@ export default function Insights() {
                         <div style={{ fontSize: ".9rem" }}>Sin registro</div>
                       ) : (
                         (
-                          Number(data?.insights?.ALERT?.total) +
-                          Number(data?.insights?.FAIL?.total)
+                          Number(data?.insights?.ALERT?.total ?? 0) +
+                          Number(data?.insights?.FAIL?.total ?? 0)
                         ).toLocaleString("es-MX")
                       )}
                     </h1>
