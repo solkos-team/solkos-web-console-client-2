@@ -169,7 +169,7 @@ export default function Coolers() {
     }
     return rows;
   };
-  
+
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -279,7 +279,7 @@ export default function Coolers() {
             onClick={fetchData} // Llama a fetchData al hacer clic
           >
             Buscar enfriadores
-          </button>          
+          </button>
           <div
             style={{
               display: "flex",
@@ -310,16 +310,24 @@ export default function Coolers() {
               style={{ width: "18px", height: "15px", marginTop: 6 }}
             />
           </div>
-          <ExportToExcel
-             datos={coolersData ?? []}
-             nombre={"Cooler Life Tracking"}
-             body={body}
-             component="coolers"
-           />
         </div>
 
         {showTable && (
           <>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginRight: "-900px",
+              }}
+            >
+              <ExportToExcel
+                datos={coolersData ?? []}
+                nombre={"Cooler Life Tracking"}
+                body={body}
+                component="coolers"
+              />
+            </div>
             <section
               style={{
                 padding: "1rem 0rem",
