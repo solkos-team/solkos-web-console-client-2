@@ -150,7 +150,7 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
                     display: "flex",
                     cursor: "pointer",
                   }}
-                  // onClick={()=>{open()}}
+                  onClick={()=>{open()}}
                 >
                   Ver más
                   <IconArrowRight
