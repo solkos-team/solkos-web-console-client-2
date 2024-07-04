@@ -109,6 +109,11 @@ export const ExportToExcel = (props) => {
             fontWeight: 300,
             lineHeight: "100%",
             backgroundColor: "transparent",
+            visibility : props.datos === null ||
+            props.datos.length === 0 ||
+            props.datos === undefined
+            ? 'hidden'
+            : 'visible'
           }}>Descargar&nbsp;
           <IconDownload size={20} />
         </Button>
