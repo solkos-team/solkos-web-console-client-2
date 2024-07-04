@@ -1,11 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
+import { IconArrowRight } from "@tabler/icons-react";
 import { Stepper } from "@mantine/core";
+import { TextInput } from "@mantine/core";
+import { DrawerVault } from "../Components/DrawerVault";
+import { useDisclosure } from "@mantine/hooks";
 
 export default function Stepper4() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [opened, { open, close }] = useDisclosure(false);
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -61,13 +66,12 @@ export default function Stepper4() {
         </span>
       </div>
       <br></br>
-      <br></br>
       <div>
         <Stepper
           active={4}
           onStepClick={setActive}
           radius="xs"
-          size="sm"
+          size="xs"
           className="hide-on-mobile"
         >
           <Stepper.Step label="Revisión inicial" description=""></Stepper.Step>
@@ -80,10 +84,6 @@ export default function Stepper4() {
           </Stepper.Completed>
         </Stepper>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
       <div
         style={{
           display: "flex",
@@ -138,16 +138,50 @@ export default function Stepper4() {
               Enfriadores
             </span>
           </div>
+          <TextInput
+            // value={searchValue}
+            // onChange={(event) => handleSearchChange(event)}
+            // onKeyDown={handleKeyDown}
+            type="text"
+            placeholder="Busca por Serie/ Id Coolector / Mac"
+            style={{
+              fontSize: "0.8rem",
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "1,8rem",
+              width: "98%",
+              paddingRight: "2.5rem",
+              margin: 0,
+              borderRadius: "4px",
+              color: "#88888B",
+            }}
+          />
+          <br></br>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Serie</th>
+                <th scope="col">Mac</th>
+                <th scope="col">Última visita</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Estatus">D56191001431</td>
+                <td data-label="Serie">B4A2EB</td>
+                <td data-label="Última Visita">04/07/2024</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-
+      </div>{" "}
       <div
         style={{
           display: "flex",
-          flexDirection: "row", // Cambiar a fila para alinear botones horizontalmente
-          justifyContent: "flex-end", // Alinear botones a la derecha
+          flexDirection: "row",
+          justifyContent: "flex-end",
           alignItems: "center",
-          gap: "1rem", // Añadir espacio entre los botones
+          gap: "1rem",
           alignSelf: "stretch",
         }}
       >
@@ -178,6 +212,7 @@ export default function Stepper4() {
           Continuar
         </Button>
       </div>
+      <DrawerVault opened={opened} onCLose={close} />
     </div>
   );
 }

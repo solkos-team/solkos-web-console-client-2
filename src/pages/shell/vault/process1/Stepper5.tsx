@@ -77,13 +77,12 @@ export default function Stepper5() {
         </span>
       </div>
       <br></br>
-      <br></br>
       <div>
         <Stepper
           active={5}
           onStepClick={setActive}
           radius="xs"
-          size="sm"
+          size="xs"
           className="hide-on-mobile"
         >
           <Stepper.Step label="Revisión inicial" description=""></Stepper.Step>
