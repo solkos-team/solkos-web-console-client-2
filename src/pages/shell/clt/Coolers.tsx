@@ -14,6 +14,7 @@ import moment from "moment";
 import "moment/locale/es";
 import { miniSerializeError } from "@reduxjs/toolkit";
 import { tagStyles } from "../../../Functions/pathVerify";
+import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 
 moment.locale("es", {
   months: [
@@ -168,7 +169,7 @@ export default function Coolers() {
     }
     return rows;
   };
-
+  
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -278,7 +279,7 @@ export default function Coolers() {
             onClick={fetchData} // Llama a fetchData al hacer clic
           >
             Buscar enfriadores
-          </button>
+          </button>          
           <div
             style={{
               display: "flex",
@@ -309,6 +310,12 @@ export default function Coolers() {
               style={{ width: "18px", height: "15px", marginTop: 6 }}
             />
           </div>
+          <ExportToExcel
+             datos={coolersData ?? []}
+             nombre={"Cooler Life Tracking"}
+             body={body}
+             component="coolers"
+           />
         </div>
 
         {showTable && (

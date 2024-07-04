@@ -268,7 +268,7 @@ export default function Outlets() {
                 onClick={fetchData} // Llama a fetchData al hacer clic
               >
                 Buscar PdV
-              </button>
+              </button>              
               <div
                 style={{ display: "flex", alignItems: "flex-start" }}
                 onClick={() => {
@@ -294,6 +294,12 @@ export default function Outlets() {
                   style={{ width: "18px", height: "15px", marginTop: 6 }}
                 />
               </div>
+              <ExportToExcel
+                datos={filteredOutlets}
+                nombre={"Puntos de Venta"}
+                body={body}
+                component="outlets"
+              />
             </div>
           </div>
           <br></br>

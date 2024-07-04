@@ -132,7 +132,7 @@ export const ExportToExcel = (props) => {
             </a>}                    
           {/* Vista Actual<Badge size="sm">{props.datos.lenght}</Badge> */}
         </Menu.Item>
-        <Menu.Item style={{display: props.component != undefined ? 'none' : ''}} onClick={exportToExcel}>
+        <Menu.Item style={{display: props.component != undefined ? '' : ''}} onClick={exportToExcel}>
           Datos actuales
         </Menu.Item>
       </Menu.Dropdown>
