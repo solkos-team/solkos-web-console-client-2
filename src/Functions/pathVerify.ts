@@ -35,6 +35,8 @@ const userVerify = (user) => {
       return "flex";
     case "Natalia Ramirez Corona":
       return "flex";
+    case "Luis Pablo Monroy Martinez":
+      return "flex";
     default:
       return "none";
   }
