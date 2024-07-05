@@ -1788,7 +1788,7 @@ body {
 .vault_Information_Data_Title {
   color: var(--Neutral-On-Surface-Variant, #3a3a3f);
   /* font-family: "DM Sans"; */
-  font-size:0.9rem;
+  font-size: 0.9rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -1853,8 +1853,7 @@ body {
 }
 .vault_container_final_h1 {
   color: var(--other-black, #000);
-  font-family: "DM Sans";
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 145%;
@@ -1863,7 +1862,7 @@ body {
   position: relative;
   width: 60%;
 }
-.vault_section_roadmap{
+.vault_section_roadmap {
   width: 60%;
   height: 10%;
 }
@@ -1874,73 +1873,73 @@ body {
 }
 
 .mantine-pmcyil[data-progress] {
-  border-color: #ED5079;
+  border-color: #ed5079;
 }
-.mantine-pmcyil[data-completed]  {
-  background-color: #ED5079;
-  border-color: #ED5079;
+.mantine-pmcyil[data-completed] {
+  background-color: #ed5079;
+  border-color: #ed5079;
   color: #fff;
 }
 .mantine-yfz32t {
   background-color: #ed5079;
 }
 .mantine-1oj4pmu[data-progress] {
-  border-color: #ED5079;
+  border-color: #ed5079;
 }
-.mantine-1oj4pmu[data-completed]  {
-  background-color: #ED5079;
-  border-color: #ED5079;
+.mantine-1oj4pmu[data-completed] {
+  background-color: #ed5079;
+  border-color: #ed5079;
   color: #fff;
 }
-.vault_drawer_container{
+.vault_drawer_container {
   width: 100%;
   height: 100%;
   display: flex;
   padding: 1rem;
   gap: 1rem;
-  flex-direction: column;  
-  box-sizing: border-box;  
+  flex-direction: column;
+  box-sizing: border-box;
 }
-.vault_drawer_header{
+.vault_drawer_header {
   width: 100%;
   height: 20%;
   background-color: aqua;
 }
-.vault_drawer_registro{
+.vault_drawer_registro {
   width: 100%;
   height: 30%;
   border-radius: 8px;
-  border: 1px solid var(--gray-4, #CED4DA);
-  background: var(--gray-0, #F8F9FA);
+  border: 1px solid var(--gray-4, #ced4da);
+  background: var(--gray-0, #f8f9fa);
   padding: 0.75rem;
   box-sizing: border-box;
   gap: 0.5rem;
 }
-.vault_drawer_mapa{
+.vault_drawer_mapa {
   width: 100%;
   height: 35%;
   border-radius: 8px;
-  border: 1px solid var(--gray-4, #CED4DA);
-  background: var(--gray-0, #F8F9FA);  
+  border: 1px solid var(--gray-4, #ced4da);
+  background: var(--gray-0, #f8f9fa);
   padding: 0.75rem;
   box-sizing: border-box;
   gap: 0.5rem;
   display: flex;
   flex-direction: column;
 }
-.vault_drawer_mapa_title{
+.vault_drawer_mapa_title {
   width: 100%;
   height: 10%;
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;  
+  gap: 0.5rem;
   align-items: center;
 }
 .vault_drawer_mapa_mapa {
   width: 100%;
   height: 90%;
   border-radius: 8px;
-  border: 1px solid var(--gray-4, #CED4DA);
+  border: 1px solid var(--gray-4, #ced4da);
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
 }
 
@@ -1950,29 +1949,28 @@ body {
   }
 }
 
-
 .headerPrincipal,
 .headerPrincipalResponsive {
   width: 100%;
   background-color: #fff;
   flex-direction: row;
-  height: 100%
+  height: 100%;
 }
 
 .headerPrincipal {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .headerPrincipalResponsive {
   display: none;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 .headerContentData2,
 .headerDataIMGh4,
 .headerIMG {
-  background-color: #d4dae3
+  background-color: #d4dae3;
 }
 
 .headerContentIMG {
@@ -1980,22 +1978,22 @@ body {
   height: 100%;
   display: flex;
   flex-direction: row;
-  gap: .5rem
+  gap: 0.5rem;
 }
 
 .headerIMG {
   width: 100%;
   height: auto;
   display: flex;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   align-items: center;
   align-content: center;
-  justify-content: center
+  justify-content: center;
 }
 
 .headerIMG__image {
   max-width: 100%;
-  height: 90%
+  height: 90%;
 }
 
 .headerDataIMG {
@@ -2003,7 +2001,7 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px
+  gap: 4px;
 }
 
 .headerDataIMGh1 {
@@ -2011,44 +2009,44 @@ body {
   height: 20%;
   display: flex;
   flex-direction: row;
-  gap: .25rem
+  gap: 0.25rem;
 }
 
 .headerContentDataContainer,
 .headerDataIMGh1p2 {
   flex-direction: row;
   text-transform: uppercase;
-  gap: .25rem;
-  display: flex
+  gap: 0.25rem;
+  display: flex;
 }
 
 .headerDataIMGh1p1 {
   font-weight: 700;
   line-height: 1.628rem;
   color: #000005;
-  width: max-content
+  width: max-content;
 }
 
 .headerDataIMGh1p2 {
   width: 50%;
   height: max-content;
-  border-radius: .125rem;
+  border-radius: 0.125rem;
   padding: 2px 4px;
   font-weight: 500;
-  font-size: clamp(.35rem, 2vw, .6rem);
+  font-size: clamp(0.35rem, 2vw, 0.6rem);
   line-height: 14px;
-  margin-top: .25rem;
-  white-space: nowrap
+  margin-top: 0.25rem;
+  white-space: nowrap;
 }
 
 .headerDataIMGh2 {
   width: 100%;
   height: 20%;
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: 15.62px;
   color: #88888b;
-  white-space: nowrap
+  white-space: nowrap;
 }
 
 .headerDataIMGh3,
@@ -2057,54 +2055,54 @@ body {
   height: max-content;
   padding: 0 4px;
   border-radius: 2px;
-  font-size: .625rem;
+  font-size: 0.625rem;
   font-weight: 500;
   line-height: 14px;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 .headerDataIMGh3 {
   display: flex;
-  gap: .25rem;
+  gap: 0.25rem;
   align-items: center;
-  align-content: center
+  align-content: center;
 }
 
 .headerDataIMGh4 {
-  color: #313a49
+  color: #313a49;
 }
 
 .headerContentData {
   width: 40%;
   height: 100%;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .headerContentDataContainer {
   width: 100%;
   height: 25%;
-  padding: .5rem;
+  padding: 0.5rem;
   box-sizing: border-box;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .headerContentData1,
 .headerContentData2 {
   width: fit-content;
-  font-size: .625rem;
+  font-size: 0.625rem;
   font-weight: 500;
-  line-height: 14px
+  line-height: 14px;
 }
 
 .headerContentData1 {
-  color: #88888b
+  color: #88888b;
 }
 
 .headerContentData2 {
   color: #313a49;
   height: fit-content;
-  border-radius: .125rem;
+  border-radius: 0.125rem;
   padding: 2px 4px;
-  box-sizing: border-box
+  box-sizing: border-box;
 }

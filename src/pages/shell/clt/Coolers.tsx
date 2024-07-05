@@ -170,6 +170,11 @@ export default function Coolers() {
     return rows;
   };
 
+  useEffect(() => {
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
+    }
+  }, [navigate, dto]);
   return (
     <div>
       <PageFilter status={isLoading} />

@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { useDisclosure } from "@mantine/hooks";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
+import { useNavigate } from "react-router-dom";
 
 export default function Alerts() {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +15,7 @@ export default function Alerts() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
+  const navigate = useNavigate();
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -52,6 +54,12 @@ export default function Alerts() {
       localStorage.removeItem("searchTags");
     }
   }, [location]);
+
+  useEffect(() => {
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
+    }
+  }, [navigate, dto]);
 
   return (
     <div>

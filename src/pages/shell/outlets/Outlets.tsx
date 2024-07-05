@@ -198,6 +198,12 @@ export default function Outlets() {
     }
   }, [location]);
 
+  useEffect(() => {
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
+    }
+  }, [navigate, dto]);
+
   return (
     <section>
       <section className="pdv_pathfilter">

@@ -1591,11 +1591,14 @@ import { Insights as InsightsIT } from "../../../interfaces/InsightsInterfaces";
 import { Skeleton, Tooltip } from "@mantine/core";
 import { HeaderInsights } from "./Responsive/HeaderInsights";
 import { MapInsightsResponsive } from "./Responsive/MapInsightsResponsive";
+import { useSelector } from "react-redux";
 import { MapResponsive } from "../../../components/mapInsights/MapResponsive";
 export default function Insights() {
   const [data, setData] = useState<InsightsIT | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const dt = useSelector((state: any) => state.works);
+  const dto = useSelector((state: any) => state.organization);
 
   console.log(data);
   const IndicadoresData =
@@ -1615,6 +1618,12 @@ export default function Insights() {
       localStorage.removeItem("searchTags");
     }
   }, [location]);
+
+  useEffect(() => {
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
+    }
+  }, [navigate, dto]);
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />

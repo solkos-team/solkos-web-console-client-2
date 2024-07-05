@@ -6,6 +6,7 @@ import { fetchUniversal } from "../../../utils/apiUtils";
 import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import { useDisclosure } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
 
 export default function Fails() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -13,6 +14,7 @@ export default function Fails() {
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
+  const navigate = useNavigate();
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
@@ -67,6 +69,12 @@ export default function Fails() {
       localStorage.removeItem("searchTags");
     }
   }, [location]);
+
+  useEffect(() => {
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
+    }
+  }, [navigate, dto]);
 
   return (
     <div>

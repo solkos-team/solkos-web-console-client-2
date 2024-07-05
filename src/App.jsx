@@ -258,7 +258,7 @@ function App() {
           initiallyOpened: true,
           links: [
             {
-              label: "Vault",
+              label: "Vault Insights",
               link: "/home/insightsVault",
               icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
             },
@@ -961,8 +961,7 @@ function App() {
                   </UnstyledButton>
                 </Menu.Target>
                 <Menu.Dropdown>
-                  {Role != "root" ||
-                  localStorage.getItem("ORG") === "CALL CENTER" ? (
+                  {Role != "root" ? (
                     ""
                   ) : (
                     <>

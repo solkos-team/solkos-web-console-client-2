@@ -216,6 +216,12 @@ export default function Panel() {
   }, [region, zone, operative_unit, route, navigate, dto]);
 
   useEffect(() => {
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
+    }
+  }, [region, zone, operative_unit, route, navigate, dto]);
+
+  useEffect(() => {
     fetchToken();
   }, [region, zone, operative_unit, route, activeTab]);
 

@@ -172,6 +172,12 @@ export default function CoolersCC() {
     return rows;
   };
 
+  useEffect(() => {
+    if (dto !== "CALL CENTER") {
+      navigate("/home");
+    }
+  }, [navigate, dto]);
+
   return (
     <div>
       {/* <PageFilter status={isLoading} /> */}
