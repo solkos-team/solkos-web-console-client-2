@@ -51,7 +51,7 @@ export default function CoolerDetail() {
   const [energyOpened, { open: openEnergy, close: closeEnergy }] =
     useDisclosure(false);
   const [coolViewOpened, { open: openCoolview, close: closeCoolview }] =
-    useDisclosure(false);    
+    useDisclosure(false);
   const fetchData = async (serie?) => {
     try {
       const data = await fetchUniversalDetails(
@@ -61,7 +61,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      console.log(data);
+      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -100,9 +100,9 @@ export default function CoolerDetail() {
       : fetchData(value);
     setEditSerie(false);
   };
-  useEffect(()=>{
-    formatDrawerCoolview()
-  },[coolViewOpened])
+  useEffect(() => {
+    formatDrawerCoolview();
+  }, [coolViewOpened]);
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (

@@ -300,7 +300,7 @@ export default function (props) {
     return data.map((item) => {
       const foundItem = item.found_in;
       const coincidences = item.coincidence.split(",");
-      console.log(coincidences.length);
+      // console.log(coincidences.length);
 
       const lastWords =
         foundItem === "region" ||

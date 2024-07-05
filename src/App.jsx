@@ -243,7 +243,7 @@ function App() {
   const dispatch = useDispatch();
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
-  console.log(Name);
+  // console.log(Name);
 
   // *******************************
   const [updatedRoutes, setUpdatedRoutes] = useState(routes);

@@ -27,14 +27,6 @@ export default function Stepper5() {
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      console.log("Selected file:", file.name);
-      // Aquí puedes manejar el archivo seleccionado
-    }
-  };
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmationWord(event.currentTarget.value);
     if (event.currentTarget.value === "CONFIRMAR") {

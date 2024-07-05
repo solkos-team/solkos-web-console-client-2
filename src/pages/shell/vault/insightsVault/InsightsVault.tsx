@@ -2,10 +2,8 @@ import React, { useRef, useEffect } from "react";
 
 export default function InsightsVault() {
   useEffect(() => {
-    // Añadir overflow hidden al montar el componente
     document.body.style.overflow = "hidden";
 
-    // Eliminar overflow hidden al desmontar el componente
     return () => {
       document.body.style.overflow = "auto";
     };
