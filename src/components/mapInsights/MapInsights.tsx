@@ -106,7 +106,7 @@ const MapInsightsComponent = ({ items, data }) => {
         // border: "1px solid #CACACA",
         overflow: "hidden",
       }}
-      className="MapInsights"
+      // className="MapInsights"
     >
       {isLoading === true ? (
         <SkeletonMapInsights />

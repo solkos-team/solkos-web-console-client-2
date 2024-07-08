@@ -5,10 +5,14 @@ import { useSelector } from "react-redux";
 import { pathVerify } from "../../Functions/pathVerify";
 import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
 import { fetchUniversal } from "../../utils/apiUtils";
+import { MapInsightsResponsive } from "../../pages/shell/insights/Responsive/MapInsightsResponsive";
+import { DrawerMap } from "../../pages/shell/insights/Responsive/DrawerMap";
 export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [zoom, setZoom] = useState(defaultProps.zoom);
+  const [opened, setOpened] = useState(false);
+  const toggleDrawer = () => setOpened((flag) => !flag);
   const body = { customer: dto, path: pathVerify() };
   const fetchData = async () => {
     try {
@@ -210,10 +214,11 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   }, [dt, dto]);
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%",display:'flex',flexDirection:'column' ,alignItems:'center'}}>
       {isLoading === true ? (
         <SkeletonMapInsights />
       ) : (
+        <>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
           defaultCenter={defaultProps.center}
@@ -223,7 +228,10 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
           }}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
-        ></GoogleMapReact>
+          />
+          <MapInsightsResponsive opened={toggleDrawer}/>
+          <DrawerMap opened={opened} onClose={toggleDrawer} handleApiLoaded={handleApiLoaded}/>
+        </>
       )}
     </div>
   );

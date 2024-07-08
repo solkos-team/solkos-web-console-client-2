@@ -1759,7 +1759,7 @@ export default function Insights() {
                   setIsLoading={setIsLoading}
                 />
               }
-              <MapInsightsResponsive />
+              
             </div>
           </section>
           <section className="insights_datas">

@@ -1534,6 +1534,7 @@ body {
   .insights_mapa_info_mapa {
     height: fit-content;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
