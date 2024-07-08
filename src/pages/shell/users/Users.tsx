@@ -633,8 +633,6 @@ export default function Users() {
             top: "50%",
             left: "50%",
             zIndex: 9999,
-            transform: "translate(-50%, -50%)",
-            width: "15%",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",
@@ -694,6 +692,7 @@ export default function Users() {
             flexDirection: "column",
             alignItems: "flex-end",
           }}
+          className="alert-container"
         >
           <Alert
             variant="light"
@@ -773,10 +772,8 @@ export default function Users() {
           style={{
             position: "fixed",
             top: "50%",
-            left: "50%",
+            left: "45%",
             zIndex: 9999,
-            transform: "translate(-50%, -50%)",
-            width: "15%",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-end",

@@ -692,12 +692,36 @@ function App() {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
   };
+
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
+
   useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+      if (window.innerWidth < 1000) {
+        // Filter out the "Tableros" module for responsive mode
+        setUpdatedRoutes(routes.filter((route) => route.label !== "Tableros"));
+      } else {
+        // Reset routes to original when not in responsive mode
+        setUpdatedRoutes(routes);
+      }
+    };
+
     window.addEventListener("resize", handleResize);
+    // Initial check
+    handleResize();
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   if (width < 1000) {
     if (opened2 === true) {
     } else {

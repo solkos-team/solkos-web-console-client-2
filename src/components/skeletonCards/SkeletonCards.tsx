@@ -13,13 +13,13 @@ export const SkeletonCards = () => {
       <Skeleton
         height={180}
         width="250px"
-        style={{ marginLeft: 10, borderRadius: "8px" }}
+        style={{ marginLeft: 1, borderRadius: "8px" }}
       />
       <Skeleton
         height={180}
         mt={2}
         width="250px"
-        style={{ marginLeft: 10, borderRadius: "8px" }}
+        style={{ marginLeft: 1, borderRadius: "8px" }}
       />
       <Skeleton
         height={180}
@@ -29,12 +29,12 @@ export const SkeletonCards = () => {
       <Skeleton
         height={180}
         width="250px"
-        style={{ marginLeft: 10, borderRadius: "8px" }}
+        style={{ marginLeft: 1, borderRadius: "8px" }}
       />
       <Skeleton
         height={180}
         width="250px"
-        style={{ marginLeft: 10, borderRadius: "8px" }}
+        style={{ marginLeft: 1, borderRadius: "8px" }}
       />
     </>
   );
