@@ -51,9 +51,17 @@ export default function Coolers() {
   const [enterCount, setEnterCount] = useState(0);
   const navigate = useNavigate();
 
+  // const handleTagChange = (newTags) => {
+  //   setTags(newTags);
+  //   localStorage.setItem("searchTags", JSON.stringify(newTags));
+  // };
+
   const handleTagChange = (newTags) => {
-    setTags(newTags);
-    localStorage.setItem("searchTags", JSON.stringify(newTags));
+    // Aquí implementamos la lógica para separar palabras pegadas por espacios
+    const updatedTags = newTags.flatMap((tag) => tag.split(" "));
+
+    setTags(updatedTags);
+    localStorage.setItem("searchTags", JSON.stringify(updatedTags));
   };
 
   const handleInputChange = (value) => {
