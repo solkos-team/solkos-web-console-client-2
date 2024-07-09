@@ -421,10 +421,11 @@ export default function Users() {
             width: "100%",
             height: "100%",
             overflowY: "auto",
+            overflowX:'auto'
           }}
         >
           <br />
-          <table>
+          <table className="table_responsive">
             <thead>
               <tr>
                 <th scope="col">Nombre</th>

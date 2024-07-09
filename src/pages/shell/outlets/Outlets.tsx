@@ -308,13 +308,7 @@ export default function Outlets() {
 
           {showTable && (
             <>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  marginRight: "50px",
-                }}
-              >
+              <div className="pdv_dowload">
                 {" "}
                 <ExportToExcel
                   datos={filteredOutlets}
@@ -325,7 +319,7 @@ export default function Outlets() {
               </div>
               <br></br>
               <section className="pdv_table">
-                <table>
+                <table className="table_responsive">
                   <thead>
                     <tr>
                       <th scope="col">Nombre</th>

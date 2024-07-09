@@ -313,15 +313,8 @@ export default function Coolers() {
               />
             </div>
             <section
-              style={{
-                padding: "1rem 0rem",
-                marginLeft: -55,
-                width: "100%",
-                height: "100%",
-                overflowY: "auto",
-              }}
-            >
-              <table>
+            className="clt_table_container" >
+              <table className="table_responsive">
                 <thead>
                   <tr>
                     <th scope="col">Estatus</th>
