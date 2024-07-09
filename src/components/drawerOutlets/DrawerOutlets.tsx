@@ -549,7 +549,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               </div>
             </div>
           </div>
-          <DrawerHeaderResponsive title={'Prueba'} description={'Prueba2'} />
+          <DrawerHeaderResponsive title={'Prueba'} description={'Prueba2'} outletDetails={outletDetails}/>
         </section>
         <section className="drawerBody">
           <section className="drawerMapaDescargar">
