@@ -1403,6 +1403,22 @@ body {
   width: 100%;
   height: 90%;
 }
+.drawerHeaderImg {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.drawerHeaderInfo {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -1741,6 +1757,15 @@ body {
   .clt_table_container{
     margin-left: 0px;
   }
+  .drawerHeaderImg {
+    display: none;
+  }
+  .drawerHeaderInfo {
+    display: none;
+  }
+  .pdv_drawer_header_responsive{
+    width: 100%;
+  }
 }
 /* Termina media */
 .drawerOutlets_Principal {
@@ -1756,22 +1781,7 @@ body {
   display: flex;
   flex-direction: row;
 }
-.drawerHeaderImg {
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  display: flex;
-  flex-direction: row;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-.drawerHeaderInfo {
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  display: flex;
-  justify-content: flex-end;
-}
+
 .drawerBody {
   height: 85%;
   width: 100%;

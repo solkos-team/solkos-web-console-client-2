@@ -18,6 +18,7 @@ import { CoolerInterface } from "../../interfaces/CoolerInterface";
 import { PaginationComponent } from "../Pagination/PaginationComponent";
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
 import { TextInput, Skeleton } from "@mantine/core";
+import { DrawerHeaderResponsive } from "../../pages/shell/outlets/DrawerHeaderResponsive";
 
 export default function DrawerO({ opened, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
@@ -548,6 +549,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               </div>
             </div>
           </div>
+          <DrawerHeaderResponsive title={'Prueba'} description={'Prueba2'} />
         </section>
         <section className="drawerBody">
           <section className="drawerMapaDescargar">
