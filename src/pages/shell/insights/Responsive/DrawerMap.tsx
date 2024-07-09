@@ -31,7 +31,9 @@ export const DrawerMap = ({opened,onClose,handleApiLoaded}) => {
             display : 'flex',
             justifyContent : 'center',
             alignItems : 'center',
-            gap :'10px'
+            gap :'10px',
+            borderRadius:'2rem',
+            color : '#FFFF'                    
           }}
           onClick={onClose}
         >

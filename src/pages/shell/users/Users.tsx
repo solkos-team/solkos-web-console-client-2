@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 import { UsersInterfaces } from "../../../interfaces/UsersInterfaces";
 import { PaginationComponent } from "../../../components/Pagination/PaginationComponent";
 import { SkeletonTableUsers } from "../../../components/skeletonTableUsers/SkeletonTableUsers";
+import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
 
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -240,33 +241,70 @@ export default function Users() {
             width: "90%",
           }}
         >
-          <div
-            style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
-              fontSize: "24px",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "155%",
-              marginLeft: -55,
-            }}
-          >
+          <div className="colaboradores_title_h1" style={{color:'#000005',fontWeight:'700',fontSize:'24px'}}>
             Colaboradores
           </div>
-          <div
+          <div className="colaboradores_title_h1"
             style={{
               color: "#88888B",
-              // fontFamily: "DM Sans",
               fontSize: "14px",
-              fontStyle: "normal",
               fontWeight: 400,
-              lineHeight: "155%",
-              marginLeft: -55,
             }}
           >
             Catálogo de los colaboradores
           </div>
+          <div style={{width:'100%',marginLeft:'-70px'}}>
+            <HeaderInsights
+                title={"Colaboradores"}
+                description={
+                  "Crea, administra y elimina usuarios, desde este modulo"
+                }
+                />
+          </div>          
         </div>
+        <div
+          style={{
+            display: "flex",
+            padding: "0px 2rem",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            marginLeft:'-40px',
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",              
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "stretch",                           
+              marginTop: -20,
+              width:'100%' ,                         
+            }}
+          >
+            <TextInput
+            className="colaboradores_search_1"            
+              value={searchValue}
+              onChange={handleSearchChange}
+              type="text"
+              placeholder="Busca por cualquier campo"
+              autoComplete="off"
+              style={{
+                fontSize: "14px",
+                fontStyle: "normal",
+                fontWeight: 500,
+                lineHeight: "28px",
+                width: "100%",
+                paddingRight: "40px",
+                margin: 0,
+                borderRadius: "4px",
+                color: "#88888B",
+              }}              
+            />
+            
+          </div>
+        </div>
+        
         <div
           style={{
             display: "flex",
@@ -321,7 +359,7 @@ export default function Users() {
               <div>
                 <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
-              <Button style={{ background: "#ED5079" }} onClick={toggleDrawer}>
+              <Button style={{ background: "#ED5079" }} onClick={toggleDrawer} className="colaboradores_button">
                 Nuevo colaborador
               </Button>
             </div>
@@ -357,6 +395,7 @@ export default function Users() {
             }}
           >
             <TextInput
+            className="colaboradores_button"
               value={searchValue}
               onChange={handleSearchChange}
               type="text"

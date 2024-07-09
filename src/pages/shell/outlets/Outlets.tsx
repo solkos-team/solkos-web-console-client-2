@@ -212,6 +212,12 @@ export default function Outlets() {
       <section className="pdv_principal">
         <section className="pdv_titleInfo">
           <div className="outlets_title_h1">Puntos de venta</div>
+          <HeaderInsights
+            title={"Puntos de venta"}
+            description={
+              "Catálogo de los puntos de venta, realiza el seguimiento adecuado para cada uno de ellos."
+            }
+          />
         </section>
         <section className="pdv_pathTable">
           <div
@@ -224,12 +230,7 @@ export default function Outlets() {
               marginLeft: "-1.5%",
             }}
           >
-            <div
-              style={{
-                position: "relative",
-                width: "60%",
-              }}
-            >
+            <div className="clt_search">
               <TagInput
                 value={filterBy}
                 onChange={handleTagChange}

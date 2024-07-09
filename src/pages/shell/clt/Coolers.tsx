@@ -15,6 +15,7 @@ import "moment/locale/es";
 import { miniSerializeError } from "@reduxjs/toolkit";
 import { tagStyles } from "../../../Functions/pathVerify";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
+import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
 
 moment.locale("es", {
   months: [
@@ -187,42 +188,17 @@ export default function Coolers() {
     <div>
       <PageFilter status={isLoading} />
       <br></br>
-      <div
-        style={{
-          display: "flex",
-          padding: "16px 0px",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "flex-start",
-          gap: "16px",
-          flex: 100,
-          alignSelf: "stretch",
-          width: "100%",
-          marginLeft: 0,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 32px",
-            flexDirection: "column",
-            alignItems: "center",
-            alignSelf: "stretch",
-            width: "90%",
-          }}
-        >
-          <div
-            style={{
-              color: "#000005",
-              // fontFamily: "DM Sans",
-              fontSize: "2rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "155%",
-            }}
-          >
-            Cooler Life Tracking
-          </div>
+      <div className="clt_principal">
+        <div className="clt_header">
+          <section className="insights_title">
+            <div className="clt_title_h1" >Cooler Life Tracking</div>
+            <HeaderInsights
+              title={"Cooler Life Tracking"}
+              description={
+                "Catálogo de los puntos de venta, realiza el seguimiento adecuado para cada uno de ellos."
+              }
+            />
+          </section>
         </div>
 
         {/* Tabla */}
@@ -240,12 +216,7 @@ export default function Coolers() {
             marginLeft: "-1.5%",
           }}
         >
-          <div
-            style={{
-              position: "relative",
-              width: "60%",
-            }}
-          >
+          <div className="clt_search" >
             <TagInput
               value={tags}
               trigger={["Enter", "Space", "Comma"]}
@@ -363,11 +334,10 @@ export default function Coolers() {
                       >
                         Última visita
                         <img
-                          src={`../../sampleData/${
-                            changeAsc == false
+                          src={`../../sampleData/${changeAsc == false
                               ? "sort-descending.svg"
                               : "sort-ascending.svg"
-                          }`}
+                            }`}
                           alt="Descripción de la imagen"
                           style={{
                             width: "15px",
@@ -388,13 +358,13 @@ export default function Coolers() {
                       .map((cooler, index) => (
                         <tr
                           key={index}
-                          // onClick={() => {
-                          //   localStorage.getItem("ORG") == "CALL CENTER"
-                          //     ? navigate(
-                          //         `/home/clt_callCenter/${cooler.serial_number}`
-                          //       )
-                          //     : navigate(`/home/clt/${cooler.serial_number}`);
-                          // }}
+                        // onClick={() => {
+                        //   localStorage.getItem("ORG") == "CALL CENTER"
+                        //     ? navigate(
+                        //         `/home/clt_callCenter/${cooler.serial_number}`
+                        //       )
+                        //     : navigate(`/home/clt/${cooler.serial_number}`);
+                        // }}
                         >
                           <td data-label="ESTATUS" title={cooler.status}>
                             {isLoading == true ? (
@@ -416,28 +386,28 @@ export default function Coolers() {
                                     borderRadius: "4px",
                                     background:
                                       cooler?.status ===
-                                      "FUNCIONANDO CORRECTAMENTE"
+                                        "FUNCIONANDO CORRECTAMENTE"
                                         ? "#B2F2BB"
                                         : cooler?.status ===
                                           "FUNCIONANDO CON ALERTA"
-                                        ? "#FFEC99"
-                                        : cooler?.status === "EN FALLA"
-                                        ? "#FFC9C9"
-                                        : cooler?.status ===
-                                          "EN ESPERA DE SERVICIO"
-                                        ? "#C7CBD2"
-                                        : cooler?.status ===
-                                          "EN ESPERA DE LECTURA"
-                                        ? "#A5D8FF"
-                                        : cooler?.status ===
-                                          "SERVICIO NO EFECTIVO"
-                                        ? "#FFC9C9"
-                                        : cooler?.status ===
-                                          "SERVICIO IMPRODUCTIVO"
-                                        ? "#FFC9C9"
-                                        : cooler?.status === "SIN DATOS"
-                                        ? "#C7CBD2"
-                                        : "#C7CBD2",
+                                          ? "#FFEC99"
+                                          : cooler?.status === "EN FALLA"
+                                            ? "#FFC9C9"
+                                            : cooler?.status ===
+                                              "EN ESPERA DE SERVICIO"
+                                              ? "#C7CBD2"
+                                              : cooler?.status ===
+                                                "EN ESPERA DE LECTURA"
+                                                ? "#A5D8FF"
+                                                : cooler?.status ===
+                                                  "SERVICIO NO EFECTIVO"
+                                                  ? "#FFC9C9"
+                                                  : cooler?.status ===
+                                                    "SERVICIO IMPRODUCTIVO"
+                                                    ? "#FFC9C9"
+                                                    : cooler?.status === "SIN DATOS"
+                                                      ? "#C7CBD2"
+                                                      : "#C7CBD2",
                                     width: "fit-content",
                                   }}
                                 >
@@ -448,56 +418,56 @@ export default function Coolers() {
                                       borderRadius: "5px",
                                       background:
                                         cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
+                                          "FUNCIONANDO CORRECTAMENTE"
                                           ? "#2B8A3E"
                                           : cooler?.status ===
                                             "FUNCIONANDO CON ALERTA"
-                                          ? "#E67700"
-                                          : cooler?.status === "EN FALLA"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE SERVICIO"
-                                          ? "#313A49"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE LECTURA"
-                                          ? "#1864AB"
-                                          : cooler?.status ===
-                                            "SERVICIO NO EFECTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "SERVICIO IMPRODUCTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status === "SIN DATOS"
-                                          ? "#313A49"
-                                          : "#313A49",
+                                            ? "#E67700"
+                                            : cooler?.status === "EN FALLA"
+                                              ? "#E03131"
+                                              : cooler?.status ===
+                                                "EN ESPERA DE SERVICIO"
+                                                ? "#313A49"
+                                                : cooler?.status ===
+                                                  "EN ESPERA DE LECTURA"
+                                                  ? "#1864AB"
+                                                  : cooler?.status ===
+                                                    "SERVICIO NO EFECTIVO"
+                                                    ? "#E03131"
+                                                    : cooler?.status ===
+                                                      "SERVICIO IMPRODUCTIVO"
+                                                      ? "#E03131"
+                                                      : cooler?.status === "SIN DATOS"
+                                                        ? "#313A49"
+                                                        : "#313A49",
                                     }}
                                   ></div>
                                   <div
                                     style={{
                                       color:
                                         cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
+                                          "FUNCIONANDO CORRECTAMENTE"
                                           ? "#2B8A3E"
                                           : cooler?.status ===
                                             "FUNCIONANDO CON ALERTA"
-                                          ? "#E67700"
-                                          : cooler?.status === "EN FALLA"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE SERVICIO"
-                                          ? "#313A49"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE LECTURA"
-                                          ? "#1864AB"
-                                          : cooler?.status ===
-                                            "SERVICIO NO EFECTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "SERVICIO IMPRODUCTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status === "SIN DATOS"
-                                          ? "#313A49"
-                                          : "#313A49",
+                                            ? "#E67700"
+                                            : cooler?.status === "EN FALLA"
+                                              ? "#E03131"
+                                              : cooler?.status ===
+                                                "EN ESPERA DE SERVICIO"
+                                                ? "#313A49"
+                                                : cooler?.status ===
+                                                  "EN ESPERA DE LECTURA"
+                                                  ? "#1864AB"
+                                                  : cooler?.status ===
+                                                    "SERVICIO NO EFECTIVO"
+                                                    ? "#E03131"
+                                                    : cooler?.status ===
+                                                      "SERVICIO IMPRODUCTIVO"
+                                                      ? "#E03131"
+                                                      : cooler?.status === "SIN DATOS"
+                                                        ? "#313A49"
+                                                        : "#313A49",
                                       fontStyle: "normal",
                                       fontWeight: 500,
                                       lineHeight: "14px",
@@ -574,42 +544,42 @@ export default function Coolers() {
                                     borderRadius: "2px",
                                     border:
                                       cooler.actionable === "Visita PdV" &&
-                                      dto != "KOF Colombia"
+                                        dto != "KOF Colombia"
                                         ? "1.5px solid #DA7E05"
                                         : cooler.actionable === "Sin Riesgo"
-                                        ? "1.5px solid #0F9F67"
-                                        : cooler.actionable ===
+                                          ? "1.5px solid #0F9F67"
+                                          : cooler.actionable ===
                                             "Estatus sin venta" ||
-                                          cooler.actionable ===
+                                            cooler.actionable ===
                                             "Acciones urgentes"
-                                        ? "1.5px solid #F93448"
-                                        : cooler.actionable ===
-                                          "Actualizar Info"
-                                        ? "1.5px solid #DA7E05"
-                                        : cooler.actionable ===
-                                            "Actualizar dato" ||
-                                          cooler.actionable ===
-                                            "Datos faltantes" ||
-                                          cooler.actionable === "Monitoreo" ||
-                                          cooler.actionable === "Movimiento"
-                                        ? "1.5px solid #1864AB"
-                                        : cooler.actionable ===
-                                            "Solicitar serv. correctivo" ||
-                                          cooler.actionable ===
-                                            "Solicitar serv. preventivos" ||
-                                          cooler.actionable ===
-                                            "Seguimiento a equipo" ||
-                                          cooler.actionable === "Visita PdV"
-                                        ? "1.5px solid #E67700"
-                                        : cooler.actionable ===
-                                          "Visita PdV prioritaria"
-                                        ? "1.5px solid #C92A2A"
-                                        : "1.5px solid black",
+                                            ? "1.5px solid #F93448"
+                                            : cooler.actionable ===
+                                              "Actualizar Info"
+                                              ? "1.5px solid #DA7E05"
+                                              : cooler.actionable ===
+                                                "Actualizar dato" ||
+                                                cooler.actionable ===
+                                                "Datos faltantes" ||
+                                                cooler.actionable === "Monitoreo" ||
+                                                cooler.actionable === "Movimiento"
+                                                ? "1.5px solid #1864AB"
+                                                : cooler.actionable ===
+                                                  "Solicitar serv. correctivo" ||
+                                                  cooler.actionable ===
+                                                  "Solicitar serv. preventivos" ||
+                                                  cooler.actionable ===
+                                                  "Seguimiento a equipo" ||
+                                                  cooler.actionable === "Visita PdV"
+                                                  ? "1.5px solid #E67700"
+                                                  : cooler.actionable ===
+                                                    "Visita PdV prioritaria"
+                                                    ? "1.5px solid #C92A2A"
+                                                    : "1.5px solid black",
                                     background: "#FFF",
                                   }}
                                 >
                                   {cooler.actionable === "Visita PdV" &&
-                                  dto != "KOF Colombia" ? (
+                                    dto != "KOF Colombia" ? (
                                     <img
                                       src={"../../sampleData/p.svg"}
                                       alt="Descripción de la imagen"
@@ -622,9 +592,9 @@ export default function Coolers() {
                                       style={{ width: "15px", height: "15px" }}
                                     />
                                   ) : cooler.actionable ===
-                                      "Estatus sin venta" ||
+                                    "Estatus sin venta" ||
                                     cooler.actionable ===
-                                      "Acciones urgentes" ? (
+                                    "Acciones urgentes" ? (
                                     <img
                                       src={"../../sampleData/a.svg"}
                                       alt="Descripción de la imagen"
@@ -664,9 +634,9 @@ export default function Coolers() {
                                       style={{ width: "15px", height: "15px" }}
                                     />
                                   ) : cooler.actionable ===
-                                      "Solicitar serv. correctivo" ||
+                                    "Solicitar serv. correctivo" ||
                                     cooler.actionable ===
-                                      "Solicitar serv. preventivos" ? (
+                                    "Solicitar serv. preventivos" ? (
                                     <img
                                       src={"../../sampleData/serCP.svg"}
                                       alt="Descripción de la imagen"
@@ -700,37 +670,37 @@ export default function Coolers() {
                                     style={{
                                       color:
                                         cooler.actionable === "Visita PdV" &&
-                                        dto != "KOF Colombia"
+                                          dto != "KOF Colombia"
                                           ? "#DA7E05"
                                           : cooler.actionable === "Sin Riesgo"
-                                          ? "#0F9F67"
-                                          : cooler.actionable ===
+                                            ? "#0F9F67"
+                                            : cooler.actionable ===
                                               "Estatus sin venta" ||
-                                            cooler.actionable ===
+                                              cooler.actionable ===
                                               "Acciones urgentes"
-                                          ? "#F93448"
-                                          : cooler.actionable ===
-                                            "Actualizar Info"
-                                          ? "#DA7E05"
-                                          : cooler.actionable ===
-                                              "Actualizar dato" ||
-                                            cooler.actionable ===
-                                              "Datos faltantes" ||
-                                            cooler.actionable === "Monitoreo" ||
-                                            cooler.actionable === "Movimiento"
-                                          ? "#1864AB"
-                                          : cooler.actionable ===
-                                              "Solicitar serv. correctivo" ||
-                                            cooler.actionable ===
-                                              "Solicitar serv. preventivos" ||
-                                            cooler.actionable ===
-                                              "Seguimiento a equipo" ||
-                                            cooler.actionable === "Visita PdV"
-                                          ? "#E67700"
-                                          : cooler.actionable ===
-                                            "Visita PdV prioritaria"
-                                          ? "#C92A2A"
-                                          : "black",
+                                              ? "#F93448"
+                                              : cooler.actionable ===
+                                                "Actualizar Info"
+                                                ? "#DA7E05"
+                                                : cooler.actionable ===
+                                                  "Actualizar dato" ||
+                                                  cooler.actionable ===
+                                                  "Datos faltantes" ||
+                                                  cooler.actionable === "Monitoreo" ||
+                                                  cooler.actionable === "Movimiento"
+                                                  ? "#1864AB"
+                                                  : cooler.actionable ===
+                                                    "Solicitar serv. correctivo" ||
+                                                    cooler.actionable ===
+                                                    "Solicitar serv. preventivos" ||
+                                                    cooler.actionable ===
+                                                    "Seguimiento a equipo" ||
+                                                    cooler.actionable === "Visita PdV"
+                                                    ? "#E67700"
+                                                    : cooler.actionable ===
+                                                      "Visita PdV prioritaria"
+                                                      ? "#C92A2A"
+                                                      : "black",
 
                                       fontStyle: "normal",
                                       fontWeight: 600,
