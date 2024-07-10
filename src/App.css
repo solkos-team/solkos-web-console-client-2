@@ -1197,7 +1197,30 @@ body {
 .detail_principal_actividad_acerca_1 {
   width: 100%;
   height: fit-content;
+  /* background-color: #3e83ff; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
 }
+
+.clt_actividad_acerca_principal {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.clt_actividad_principal_actividad {
+  padding: 1rem;
+  box-sizing: border-box;
+  /* background-color: #888; */
+}
+
+@media (max-width: 768px) {
+  .detail_principal_actividad_acerca_1 {
+    grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas pequeñas */
+  }
+}
+
 .detail_principal_actividad_acerca_2 {
   width: 100%;
   height: 100%;
@@ -2342,5 +2365,35 @@ body {
 @media (max-width: 768px) {
   .alert-container {
     left: 30% !important;
+  }
+}
+
+.inner-section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem; /* Espacio entre las tarjetas */
+}
+
+.card {
+  flex: 1; /* Las tarjetas ocuparán el mismo espacio */
+  padding: 1rem;
+  background: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
   }
 }
