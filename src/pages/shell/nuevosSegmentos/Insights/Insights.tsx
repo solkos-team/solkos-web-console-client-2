@@ -2,33 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { pathVerify } from '../../../../Functions/pathVerify';
-import { fetchInsights, fetchUniversal } from '../../../../utils/apiUtils';
+import { fetchUniversal } from '../../../../utils/apiUtils';
 import PageFilter from '../../../../components/pageFilter';
-import { Skeleton, Tooltip } from '@mantine/core';
-import MapInsightsComponent from '../../../../components/mapInsights';
+import { Skeleton } from '@mantine/core';
 import { Insights as InsightsIT } from "../../../../interfaces/InsightsInterfaces";
 import { InsightsData, CoolerInterface as Cooler } from '../../../../interfaces/CoolerInterface';
 import { AlertIcon, FailIcon, TransmitionIcon, IconEquiposTransmitiendo, IconEquiposNoTransmitiendo, FallaACompresor, FallaAltaTemperatura, FallaPosibleDañoElectrico, AlertaACompresor, AlertaDesconexion, AlertaAltaTemperatura } from './Icons';
 import { DrawerNS } from './DrawerNS';
 import { useDisclosure } from '@mantine/hooks';
-import { HeaderInsights } from '../../insights/Responsive/HeaderInsights';
 import { AcercaDeLosEquiposIcon } from '../../../../sampleData/icons';
-import { MapInsightsResponsive } from '../../insights/Responsive/MapInsightsResponsive';
+import { MapResponsive } from '../../../../components/mapInsights/MapResponsive';
+import { navigateModules } from '../../../../Functions/Routing';
 
 export const Insights = () => {
-  const [insightsData, setInsightsData] = useState<InsightsIT | null>(null);
-  const [insightsDataAlertas, setInsightsDataAlertas] = useState<Cooler[] | null>(null);
-  const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
   const [opened, { open, close }] = useDisclosure(false);
-  const [items, numIntems] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
-  const [mapKey, setMapKey] = useState(0);
+  const [data, setData] = useState<InsightsIT | null>(null);
+  const [isLoading, setIsLoading] = useState(true);  
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
-  const handleMapKeyChange = () => {
-    setMapKey((prevKey) => prevKey + 1);
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     return () => {
@@ -36,68 +28,30 @@ export const Insights = () => {
     };
   }, []);
 
-  const body = { customer: dto, path: pathVerify() };
-  const fetchData = async () => {
-    try {
-      const data = await fetchUniversal("insights", body, setIsLoading);
-      setInsightsData(data);
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching insights:", error);
-    }
-  };
-  const body2 = {
-    customer: dto,
-    class: "STK",
-    algorithm: ["INSTALLED"],
-    path: pathVerify(),
-    // page_size: 10000,
-    page_size: 10,
-    page_number: 1,
-  };
-const fetchDataAlertas = async () => {
-  try {
-    const data = await fetchUniversal("alerts", body, setIsLoading);
-    setInsightsDataAlertas(data);
-    setIsLoading(false);
-  } catch (error) {
-    console.error("Error fetching insights:", error);
-  }
-}
-  const fetchDataNumerOfItems = async () => {
-    try {
-      const data = await fetchInsights(pathVerify());
-      numIntems(Number(data.insights.INDICATOR.total));
-      setIsLoading(false);
-    } catch (error) {
-      console.error("Error fetching insights:", error);
-    }
-  };
-  useEffect(() => {
-    fetchDataNumerOfItems();
-    fetchData();
-    fetchDataAlertas();
-    handleMapKeyChange();
-  }, [dt, dto]);
-
   const IndicadoresData =
-    insightsData?.insights?.INDICATOR?.algorithms.filter(
+    data?.insights?.INDICATOR?.algorithms.filter(
       (data) => data.class == "ASSET_MANAGEMENT_ACTIONABLE"
     ) || [];
-  // insightsData?.summary.coolers.toLocaleString("es-MX") != null || insightsData?.summary.coolers.toLocaleString("es-MX") != undefined ? sessionStorage.setItem("TtlCoolers",insightsData?.summary.coolers.toLocaleString("es-MX")) : ''
+  // data?.summary.coolers.toLocaleString("es-MX") != null || data?.summary.coolers.toLocaleString("es-MX") != undefined ? sessionStorage.setItem("TtlCoolers",data?.summary.coolers.toLocaleString("es-MX")) : ''
   const [drawerValues, setDrawerValues] = useState({})
   const openDrawer = (icon, title, clase?, algorithm?, totalData?, type?) => {
     setDrawerValues({ icon: icon, title: title, class: clase, algoritmo: algorithm, total: totalData, type: type })
     open()
   }
   const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
-  insightsData?.summary.coolers.toLocaleString("es-MX") != null ||
-  insightsData?.summary.coolers.toLocaleString("es-MX") != undefined
+  data?.summary.coolers.toLocaleString("es-MX") != null ||
+  data?.summary.coolers.toLocaleString("es-MX") != undefined
     ? sessionStorage.setItem(
         "TtlCoolers",
-        insightsData?.summary.coolers.toLocaleString("es-MX")
+        data?.summary.coolers.toLocaleString("es-MX")
       )
     : "";
+    useEffect(() => {
+      //  if (dto === "CALL CENTER") {
+      //    navigate("/home/clt_callCenter");
+      //  }
+      navigateModules(dto,navigate)
+    }, [navigate, dto]);
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />
@@ -142,10 +96,10 @@ const fetchDataAlertas = async () => {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : insightsData?.summary.coolers === undefined ? (
+                  ) : data?.summary.coolers === undefined ? (
                     "Sin registro"
                   ) : (
-                    insightsData?.summary.coolers.toLocaleString("es-MX")
+                    data?.summary.coolers.toLocaleString("es-MX")
                   )}
                 </li>
               </div>   
@@ -156,10 +110,10 @@ const fetchDataAlertas = async () => {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : insightsData?.summary.regions === undefined ? (
+                  ) : data?.summary.regions === undefined ? (
                     "Sin registro"
                   ) : (
-                    insightsData?.summary.regions.toLocaleString("es-MX")
+                    data?.summary.regions.toLocaleString("es-MX")
                   )}
                 </li>
               </div>                         
@@ -170,10 +124,10 @@ const fetchDataAlertas = async () => {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : insightsData?.summary.zones === undefined ? (
+                  ) : data?.summary.zones === undefined ? (
                     "Sin registro"
                   ) : (
-                    insightsData?.summary.zones.toLocaleString("es-MX")
+                    data?.summary.zones.toLocaleString("es-MX")
                   )}
                 </li>
               </div>
@@ -189,13 +143,18 @@ const fetchDataAlertas = async () => {
             {/* </div> */}
             {/* Mapa */}
             <div className="insights_mapa_info_mapa">
-              {
-                <MapInsightsComponent
-                  items={items}
-                  data={insightsData?.geo_data}
+            {
+                // <MapInsightsComponent
+                //   items={items}
+                //   data={data?.geo_data}
+                // />
+                <MapResponsive
+                  data={data}
+                  setData={setData}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               }
-              <MapInsightsResponsive />
             </div>
           </section>
           <section className="insights_datas">
@@ -227,11 +186,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[0]?.percentage ===
+                      ) : data?.status_parque[0]?.percentage ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[0]?.percentage.toLocaleString(
+                        data?.status_parque[0]?.percentage.toLocaleString(
                           "es-MX"
                         ) + "%"
                       )}
@@ -246,11 +205,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[0]?.total ===
+                      ) : data?.status_parque[0]?.total ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[0]?.total.toLocaleString(
+                        data?.status_parque[0]?.total.toLocaleString(
                           "es-MX"
                         ) + " Enfriadores"
                       )}
@@ -270,11 +229,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[3]?.percentage ===
+                      ) : data?.status_parque[3]?.percentage ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[3]?.percentage.toLocaleString(
+                        data?.status_parque[3]?.percentage.toLocaleString(
                           "es-MX"
                         ) + "%"
                       )}
@@ -289,11 +248,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[3]?.total ===
+                      ) : data?.status_parque[3]?.total ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[3]?.total.toLocaleString(
+                        data?.status_parque[3]?.total.toLocaleString(
                           "es-MX"
                         ) + " Enfriadores"
                       )}
@@ -311,11 +270,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[2]?.percentage ===
+                      ) : data?.status_parque[2]?.percentage ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[2]?.percentage.toLocaleString(
+                        data?.status_parque[2]?.percentage.toLocaleString(
                           "es-MX"
                         ) + " %"
                       )}
@@ -330,11 +289,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[2]?.total ===
+                      ) : data?.status_parque[2]?.total ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[2]?.total.toLocaleString(
+                        data?.status_parque[2]?.total.toLocaleString(
                           "es-MX"
                         ) + " Enfriadores"
                       )}
@@ -354,11 +313,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[1]?.percentage ===
+                      ) : data?.status_parque[1]?.percentage ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[1]?.percentage.toLocaleString(
+                        data?.status_parque[1]?.percentage.toLocaleString(
                           "es-MX"
                         ) + "%"
                       )}
@@ -373,11 +332,11 @@ const fetchDataAlertas = async () => {
                             radius="xs"
                           />
                         </>
-                      ) : insightsData?.status_parque[1]?.total ===
+                      ) : data?.status_parque[1]?.total ===
                         undefined ? (
                         "Sin registro"
                       ) : (
-                        insightsData?.status_parque[1]?.total.toLocaleString(
+                        data?.status_parque[1]?.total.toLocaleString(
                           "es-MX"
                         ) + " Enfriadores"
                       )}
@@ -411,7 +370,7 @@ const fetchDataAlertas = async () => {
                     ):
                     <React.Fragment>
                       <div style={{ width: '50%', backgroundColor: '#C0F2C8', borderRadius: '4px' }}>Transmitiendo</div>
-                      <div>10</div>
+                      <div>{  data?.status_parque[0]?.total ?? 'Sin registro'  }</div>
                     </React.Fragment>                    
                     }                    
                   </div>
@@ -427,7 +386,7 @@ const fetchDataAlertas = async () => {
                       ) :
                       <React.Fragment>
                         <div style={{ width: '20%', backgroundColor: '#FFC7CD', borderRadius: '4px' }}>Sin Transmisión</div>
-                        <div>2</div>
+                        <div>{ data?.status_parque[2]?.total ?? 'Sin registro'}</div>
                       </React.Fragment>
                     }                    
                   </div>
@@ -483,13 +442,10 @@ const fetchDataAlertas = async () => {
                         Cantidad
                       </div>
                     </div>
-                    {insightsDataAlertas == null ? [] : insightsDataAlertas
+                    {data?.insights?.FAIL?.algorithms
                       .filter(
                         (cooler) =>
-                          cooler.class === "OPE"
-                         &&
-                          // cooler.algorithm.endsWith("FAIL") &&
-                          cooler.algorithm !== "NO_FAIL"
+                          cooler.class === "OPE"                         
                       )
                       .map(
                         (algorithm, index) => {
@@ -632,15 +588,15 @@ const fetchDataAlertas = async () => {
                         Cantidad
                       </div>
                     </div>
-                    {insightsDataAlertas == null ? [] : insightsDataAlertas
-                        .filter(
-                          (algorithm) =>
-                            algorithm.algorithm ===
-                            "Alta demanda de compresor" ||
-                            algorithm.algorithm === "Bajo/Alto voltaje" ||
-                            algorithm.algorithm === "Alerta alta temperatura" ||
-                            algorithm.algorithm === "Desconexión"
-                        )
+                    {data?.insights?.ALERT?.algorithms
+                        // .filter(
+                        //   (algorithm) =>
+                        //     algorithm.algorithm ===
+                        //     "Alta demanda de compresor" ||
+                        //     algorithm.algorithm === "Bajo/Alto voltaje" ||
+                        //     algorithm.algorithm === "Alerta alta temperatura" ||
+                        //     algorithm.algorithm === "Desconexión"
+                        // )
                         .map(
                           (algorithm, index) => {
                             const max = Math.max(
@@ -664,7 +620,7 @@ const fetchDataAlertas = async () => {
                               >
                                 <div className="insights_datas_info_controlDeActivos_barras"
                                   style={{
-                                    width: `${(algorithm.value / max) * 10000}%`,
+                                    width: `${(algorithm.value / max) * 100}%`,                                    
                                     background: isLoading != true ? "#FEF5C7" : '',
                                   }}
                                   onClick={

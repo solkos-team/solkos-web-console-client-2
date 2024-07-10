@@ -212,12 +212,12 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   useEffect(() => {
     fetchData();
   }, [dt, dto]);
-
   return (
     <div style={{ height: "100%", width: "100%",display:'flex',flexDirection:'column' ,alignItems:'center'}}>
       {isLoading === true ? (
         <SkeletonMapInsights />
       ) : (
+        dataMapa.length == 0 ? "Sin Coordenadas" : 
         <>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}

@@ -1593,6 +1593,7 @@ import { HeaderInsights } from "./Responsive/HeaderInsights";
 import { MapInsightsResponsive } from "./Responsive/MapInsightsResponsive";
 import { useSelector } from "react-redux";
 import { MapResponsive } from "../../../components/mapInsights/MapResponsive";
+import { navigateModules } from "../../../Functions/Routing";
 export default function Insights() {
   const [data, setData] = useState<InsightsIT | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -1620,10 +1621,12 @@ export default function Insights() {
   }, [location]);
 
   useEffect(() => {
-    if (dto === "CALL CENTER") {
-      navigate("/home/clt_callCenter");
-    }
+    //  if (dto === "CALL CENTER") {
+    //    navigate("/home/clt_callCenter");
+    //  }
+    navigateModules(dto,navigate)
   }, [navigate, dto]);
+  
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />
