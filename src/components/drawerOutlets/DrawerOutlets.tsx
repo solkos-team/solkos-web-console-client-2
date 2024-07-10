@@ -19,6 +19,8 @@ import { PaginationComponent } from "../Pagination/PaginationComponent";
 import { ExportToExcel } from "../exportExcel/ExportToExcel";
 import { TextInput, Skeleton } from "@mantine/core";
 import { DrawerHeaderResponsive } from "../../pages/shell/outlets/DrawerHeaderResponsive";
+import { MapInsightsResponsive } from "../../pages/shell/insights/Responsive/MapInsightsResponsive";
+import { DrawerMap } from "../../pages/shell/outlets/DrawerMap";
 
 export default function DrawerO({ opened, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
@@ -26,6 +28,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
   const [datosPorPagina, setNumero] = useState(50);
   const [searchValue, setSearchValue] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [opened2, setOpened] = useState(false);
+  const toggleDrawer = () => setOpened((flag) => !flag);
   const {
     region,
     route,
@@ -555,7 +559,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
           <section className="drawerMapaDescargar">
             <div className="drawerMapa">
               <div className="drawerMapa_Mapa">
-                <MapComponentPv latitude={latitude} longitude={longitude} />
+                <MapComponentPv latitude={latitude} longitude={longitude} />                
               </div>
               <div className="drawerMapa_Info">
                 <div
@@ -675,6 +679,17 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   </div>
                 </div>
               </div>
+              <div className="drawerMapa_title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                  <path d="M13.0002 15.1667C14.7951 15.1667 16.2502 13.7116 16.2502 11.9167C16.2502 10.1217 14.7951 8.66667 13.0002 8.66667C11.2052 8.66667 9.75016 10.1217 9.75016 11.9167C9.75016 13.7116 11.2052 15.1667 13.0002 15.1667Z" stroke="#313A49" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M19.1286 18.0451L14.532 22.6417C14.1257 23.0475 13.575 23.2755 13.0007 23.2755C12.4265 23.2755 11.8757 23.0475 11.4694 22.6417L6.87175 18.0451C5.65974 16.833 4.83436 15.2888 4.49999 13.6076C4.16563 11.9264 4.33728 10.1839 4.99325 8.60029C5.64923 7.01669 6.76006 5.66317 8.18527 4.71089C9.61049 3.7586 11.2861 3.25032 13.0002 3.25032C14.7143 3.25032 16.3898 3.7586 17.8151 4.71089C19.2403 5.66317 20.3511 7.01669 21.0071 8.60029C21.6631 10.1839 21.8347 11.9264 21.5003 13.6076C21.166 15.2888 20.3406 16.833 19.1286 18.0451Z" stroke="#313A49" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <h1 className="drawerMapa_title_h1">Ubicación en el mapa</h1>
+              </div>
+              <div className="drawerMapa_Button">
+                <MapInsightsResponsive  opened={toggleDrawer}/>
+                <DrawerMap opened={opened2} onClose={toggleDrawer} latitude={latitude} longitude={longitude} />
+              </div>
             </div>
           </section>
           <section className="drawerTablaPaginador">
@@ -753,7 +768,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
             </div>
             <div className="drawerTabla_Tabla">
               <div className="drawerTABLA">
-                <table>
+                <table className="table_responsive">
                   <thead>
                     <tr>
                       <th scope="col">ESTATUS</th>

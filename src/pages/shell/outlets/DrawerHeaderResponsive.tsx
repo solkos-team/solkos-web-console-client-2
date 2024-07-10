@@ -19,7 +19,7 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
     num_coolers,
     actionable
   } = outletDetails;
-  console.log(outletDetails)
+  
   return (
     <Accordion className="pdv_drawer_header_responsive">
       <Accordion.Item key="Header" value="HeaderResponsive">
@@ -61,7 +61,8 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
               <div
                 style={{
                   width: "100%",
-                  height: "30px",                  
+                  height: "30px",        
+                  fontSize:'0.563rem'          
                 }}
               >
                 {actionable === undefined || actionable === "" ? ('Sin registro'): (
@@ -309,8 +310,14 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
               </div>
               <div
                 style={{
-                  width: "100%",
+                  width: "200px",
                   height: "30px",
+                  overflowX: 'auto',  
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '0 5px',
+                  scrollbarWidth:'thin'
                 }}
               >
                 {outlet_address === undefined ||
@@ -349,10 +356,10 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
           </section>
         </Accordion.Control>
         <Accordion.Panel>
-          <section style={{width:'100%',display:'flex',flexDirection:'column',gap:'8px'}}>
+          <section style={{width:'100%',display:'flex',flexDirection:'column',gap:'8px',fontStyle:'normal'}}>
             <div style={{width:'100%',display:'flex',flexDirection:'row',gap:'8px',alignItems:'center'}}>
               <div style={{color:'var(--gray-6, #868E96)',fontSize:'12px',fontStyle:'normal',fontWeight:'400',lineHeight:'24px'}}>Leído por última vez:</div>
-              <div style={{fontSize:'9px',fontStyle:'normal',fontWeight:'700',lineHeight:'14px',textTransform:'uppercase'}}>{last_read ?? 'Sin registro'}</div>
+              <div style={{fontSize:'9px',fontStyle:'normal',fontWeight:'700',lineHeight:'14px',textTransform:'uppercase',backgroundColor:'var(--blue-0, #E7F5FF)',padding:'1px 6px',justifyContent:'center',alignItems:'center',color:'var(--blue-6, #2393F4)',borderRadius:'8px'}}>{last_read ?? 'Sin registro'}</div>
             </div>
             <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
               <div className='pdv_drawer_header_h1'>Canal:</div>
