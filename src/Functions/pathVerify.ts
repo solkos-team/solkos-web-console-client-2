@@ -41,6 +41,10 @@ const userVerify = (user) => {
       return "flex";
     case "Jose Salinas":
       return "flex";
+    case "Bertha Lilia Nieto Ramirez":
+      return "flex";
+    case "Gabriel Sanchez Najera":
+      return "flex";
     default:
       return "none";
   }

@@ -757,635 +757,641 @@ export default function CoolerDetail() {
           </div>
         </section>
         <hr className="detail_hr" style={{ marginTop: 2 }} />
-        <section className="detail_principal_body_content">
-          <section className="detail_principal_actividad_acerca_1">
-            <div
-              className="clt_actividad_acerca_principal"
-              // style={{ overflowY: "auto" }}
+        <section
+          className="detail_principal_body_content_detail"
+          // style={{ background: "red" }}
+        >
+          <div
+            className="clt_actividad_acerca_principal_detail"
+            // style={{ background: "green" }}
+          >
+            <section
+              className="clt_actividad_principal_actividad_detail"
+              // style={{ background: "yellow" }}
             >
-              <section className="clt_actividad_principal_actividad">
-                <div className="clt_actividad_principal_title">
-                  <img
-                    src={"../../sampleData/actividad.svg"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "1.5em", height: "1.5em" }}
-                  />
-                  <h1 className="clt_actividad_principal_title_h1">
-                    Actividad del enfriador
-                  </h1>
-                </div>
-                <div className="clt_acerca_principal_cards">
-                  {coolersData &&
+              <div className="clt_actividad_principal_title">
+                <img
+                  src={"../../sampleData/actividad.svg"}
+                  alt="Descripción de la imagen"
+                  style={{ width: "1.5em", height: "1.5em" }}
+                />
+                <h1 className="clt_actividad_principal_title_h1">
+                  Actividad del enfriador
+                </h1>
+              </div>
+              <div className="clt_acerca_principal_cards">
+                {coolersData &&
+                coolersData.activity &&
+                coolersData.activity.length <= 0 ? (
+                  <>
+                    <p
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "0.75em",
+                        marginTop: 130,
+                      }}
+                    >
+                      Sin actividad
+                    </p>
+                  </>
+                ) : (
+                  coolersData &&
                   coolersData.activity &&
-                  coolersData.activity.length <= 0 ? (
-                    <>
-                      <p
-                        style={{
-                          fontWeight: "bold",
-                          fontSize: "0.75em",
-                          marginTop: 130,
-                        }}
-                      >
-                        Sin actividad
-                      </p>
-                    </>
-                  ) : (
-                    coolersData &&
-                    coolersData.activity &&
-                    coolersData.activity.length > 0 && (
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          gap: "8px",
-                        }}
-                      >
-                        {coolersData.activity
-                          .filter(
-                            (order) =>
-                              (order.type === "SERVICE_ORDER" &&
-                                (order.data.status === "D,D" ||
-                                  order.data.status === "C,C" ||
-                                  order.data.status === "O,O")) ||
-                              (order.type === "TRACKING" &&
-                                (order.data.algorithm === "Bajo/Alto voltaje" ||
-                                  order.data.algorithm ===
-                                    "Alta demanda de compresor" ||
-                                  order.data.algorithm ===
-                                    "Alerta alta temperatura" ||
-                                  order.data.algorithm === "Desconexión" ||
-                                  order.data.algorithm ===
-                                    "Falla asociada al compresor" ||
-                                  order.data.algorithm ===
-                                    "Evaporador bloqueado" ||
-                                  order.data.algorithm === "Alta temperatura" ||
-                                  order.data.algorithm ===
-                                    "Posible daño eléctrico" ||
-                                  order.data.algorithm === "Actualizar Info" ||
-                                  order.data.algorithm === "Sin Riesgo" ||
-                                  order.data.algorithm ===
-                                    "Estatus sin venta" ||
-                                  order.data.algorithm === "Visita PdV" ||
-                                  order.data.algorithm === "Acciones urgentes"))
-                          )
-                          .sort((a, b) => {
-                            let aDate, bDate;
+                  coolersData.activity.length > 0 && (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "8px",
+                      }}
+                    >
+                      {coolersData.activity
+                        .filter(
+                          (order) =>
+                            (order.type === "SERVICE_ORDER" &&
+                              (order.data.status === "D,D" ||
+                                order.data.status === "C,C" ||
+                                order.data.status === "O,O")) ||
+                            (order.type === "TRACKING" &&
+                              (order.data.algorithm === "Bajo/Alto voltaje" ||
+                                order.data.algorithm ===
+                                  "Alta demanda de compresor" ||
+                                order.data.algorithm ===
+                                  "Alerta alta temperatura" ||
+                                order.data.algorithm === "Desconexión" ||
+                                order.data.algorithm ===
+                                  "Falla asociada al compresor" ||
+                                order.data.algorithm ===
+                                  "Evaporador bloqueado" ||
+                                order.data.algorithm === "Alta temperatura" ||
+                                order.data.algorithm ===
+                                  "Posible daño eléctrico" ||
+                                order.data.algorithm === "Actualizar Info" ||
+                                order.data.algorithm === "Sin Riesgo" ||
+                                order.data.algorithm === "Estatus sin venta" ||
+                                order.data.algorithm === "Visita PdV" ||
+                                order.data.algorithm === "Acciones urgentes"))
+                        )
+                        .sort((a, b) => {
+                          let aDate, bDate;
 
-                            if (a.type === "SERVICE_ORDER") {
-                              if (a.data.status === "D,D") {
-                                aDate = new Date(a.data.close_at).getTime();
-                              } else if (
-                                a.data.status === "O,O" ||
-                                a.data.status === "C,C"
-                              ) {
-                                aDate = new Date(a.data.received_at).getTime();
-                              }
+                          if (a.type === "SERVICE_ORDER") {
+                            if (a.data.status === "D,D") {
+                              aDate = new Date(a.data.close_at).getTime();
                             } else if (
-                              a.type === "TRACKING" &&
-                              a.data.notified_at
+                              a.data.status === "O,O" ||
+                              a.data.status === "C,C"
                             ) {
-                              aDate = new Date(a.data.notified_at).getTime();
+                              aDate = new Date(a.data.received_at).getTime();
                             }
+                          } else if (
+                            a.type === "TRACKING" &&
+                            a.data.notified_at
+                          ) {
+                            aDate = new Date(a.data.notified_at).getTime();
+                          }
 
-                            if (b.type === "SERVICE_ORDER") {
-                              if (b.data.status === "D,D") {
-                                bDate = new Date(b.data.close_at).getTime();
-                              } else if (
-                                b.data.status === "O,O" ||
-                                b.data.status === "C,C"
-                              ) {
-                                bDate = new Date(b.data.received_at).getTime();
-                              }
+                          if (b.type === "SERVICE_ORDER") {
+                            if (b.data.status === "D,D") {
+                              bDate = new Date(b.data.close_at).getTime();
                             } else if (
-                              b.type === "TRACKING" &&
-                              b.data.notified_at
+                              b.data.status === "O,O" ||
+                              b.data.status === "C,C"
                             ) {
-                              bDate = new Date(b.data.notified_at).getTime();
+                              bDate = new Date(b.data.received_at).getTime();
                             }
+                          } else if (
+                            b.type === "TRACKING" &&
+                            b.data.notified_at
+                          ) {
+                            bDate = new Date(b.data.notified_at).getTime();
+                          }
 
-                            if (!aDate && !bDate) {
-                              if (a.type === "SERVICE_ORDER") return -1;
-                              if (b.type === "SERVICE_ORDER") return 1;
-                              if (a.type === "TRACKING") return -1;
-                              if (b.type === "TRACKING") return 1;
-                              return 0;
-                            }
+                          if (!aDate && !bDate) {
+                            if (a.type === "SERVICE_ORDER") return -1;
+                            if (b.type === "SERVICE_ORDER") return 1;
+                            if (a.type === "TRACKING") return -1;
+                            if (b.type === "TRACKING") return 1;
+                            return 0;
+                          }
 
-                            if (!aDate) return -1;
-                            if (!bDate) return 1;
+                          if (!aDate) return -1;
+                          if (!bDate) return 1;
 
-                            return bDate - aDate;
-                          })
+                          return bDate - aDate;
+                        })
 
-                          .map((order, index) => (
-                            <>
-                              <div key={index}>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    padding: "8px",
-                                    flexDirection: "column",
-                                    alignItems: "flex-start",
-                                    alignSelf: "stretch",
-                                    borderRadius: "8px",
-                                    border: "1px solid var(--gray-4, #CED4DA)",
-                                    background: "var(--gray-0, #F8F9FA)",
-                                    boxShadow:
-                                      "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
-                                    width: "96%",
-                                    height: "100%",
-                                  }}
-                                >
-                                  {order.type === "SERVICE_ORDER" && (
-                                    <>
+                        .map((order, index) => (
+                          <>
+                            <div key={index}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  padding: "8px",
+                                  flexDirection: "column",
+                                  alignItems: "flex-start",
+                                  alignSelf: "stretch",
+                                  borderRadius: "8px",
+                                  border: "1px solid var(--gray-4, #CED4DA)",
+                                  background: "var(--gray-0, #F8F9FA)",
+                                  boxShadow:
+                                    "0px 4px 10px 0px rgba(0, 0, 0, 0.10)",
+                                  width: "96%",
+                                  height: "100%",
+                                }}
+                              >
+                                {order.type === "SERVICE_ORDER" && (
+                                  <>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "4px",
+                                        alignSelf: "stretch",
+                                      }}
+                                    >
+                                      <div
+                                        style={{
+                                          color: "#88888B",
+                                          fontSize: "0.75em",
+                                          fontStyle: "normal",
+                                          fontWeight: 500,
+                                          lineHeight: "normal",
+                                        }}
+                                      >
+                                        {order.data.status === "D,D"
+                                          ? order.data.close_at === undefined ||
+                                            order.data.close_at === null
+                                            ? "Sin registro"
+                                            : moment
+                                                .utc(order.data.close_at)
+                                                .format("DD/MM/YYYY HH:mm")
+                                          : order.data.status === "O,O" ||
+                                            order.data.status === "C,C"
+                                          ? order.data.received_at ===
+                                              undefined ||
+                                            order.data.received_at === null
+                                            ? "Sin registro"
+                                            : moment
+                                                .utc(order.data.received_at)
+                                                .format("DD/MM/YYYY HH:mm")
+                                          : "Sin registro"}
+                                      </div>
                                       <div
                                         style={{
                                           display: "flex",
+                                          padding: "4px",
                                           alignItems: "center",
                                           gap: "4px",
-                                          alignSelf: "stretch",
+                                          borderRadius: "2px",
+                                          background: "#D4DAE3",
+                                          marginLeft: "auto",
                                         }}
                                       >
                                         <div
                                           style={{
-                                            color: "#88888B",
-                                            fontSize: "0.75em",
+                                            color: "#313A49",
+                                            fontSize: "7px",
                                             fontStyle: "normal",
-                                            fontWeight: 500,
-                                            lineHeight: "normal",
+                                            fontWeight: 400,
+                                            lineHeight: "14px",
                                           }}
                                         >
-                                          {order.data.status === "D,D"
-                                            ? order.data.close_at ===
-                                                undefined ||
-                                              order.data.close_at === null
-                                              ? "Sin registro"
-                                              : moment
-                                                  .utc(order.data.close_at)
-                                                  .format("DD/MM/YYYY HH:mm")
-                                            : order.data.status === "O,O" ||
-                                              order.data.status === "C,C"
-                                            ? order.data.received_at ===
-                                                undefined ||
-                                              order.data.received_at === null
-                                              ? "Sin registro"
-                                              : moment
-                                                  .utc(order.data.received_at)
-                                                  .format("DD/MM/YYYY HH:mm")
-                                            : "Sin registro"}
+                                          {order.data.status === "O,O"
+                                            ? "ABIERTA"
+                                            : "CERRADA"}
                                         </div>
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            padding: "4px",
-                                            alignItems: "center",
-                                            gap: "4px",
-                                            borderRadius: "2px",
-                                            background: "#D4DAE3",
-                                            marginLeft: "auto",
-                                          }}
-                                        >
-                                          <div
-                                            style={{
-                                              color: "#313A49",
-                                              fontSize: "7px",
-                                              fontStyle: "normal",
-                                              fontWeight: 400,
-                                              lineHeight: "14px",
-                                            }}
-                                          >
-                                            {order.data.status === "O,O"
-                                              ? "ABIERTA"
-                                              : "CERRADA"}
-                                          </div>
-                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      style={{
+                                        color: "#000005",
+                                        // fontFamily: "DM Sans",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        fontSize: "0.875em",
+                                        fontStyle: "normal",
+                                        fontWeight: 600,
+                                        lineHeight: "normal",
+                                        textAlign: "left",
+                                        marginTop: "-5px",
+                                      }}
+                                    >
+                                      <div>
+                                        <p>Orden: {order.data.id}</p>
                                       </div>
                                       <div
                                         style={{
-                                          color: "#000005",
-                                          // fontFamily: "DM Sans",
                                           display: "flex",
+                                          padding: "2px",
+                                          justifyContent: "center",
                                           alignItems: "center",
-                                          fontSize: "0.875em",
-                                          fontStyle: "normal",
-                                          fontWeight: 600,
-                                          lineHeight: "normal",
-                                          textAlign: "left",
-                                          marginTop: "-5px",
+                                          gap: "4px",
+                                          borderRadius: "2px",
+                                          background: "#BCDAFF",
+                                          marginLeft: 10,
                                         }}
                                       >
-                                        <div>
-                                          <p>Orden: {order.data.id}</p>
-                                        </div>
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            padding: "2px",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            gap: "4px",
-                                            borderRadius: "2px",
-                                            background: "#BCDAFF",
-                                            marginLeft: 10,
-                                          }}
-                                        >
-                                          {order.data.service_id === "1003" ? (
-                                            <>
-                                              <img
-                                                src={
-                                                  "../../sampleData/mov2.svg"
-                                                }
-                                                alt="Descripción de la imagen"
-                                                style={{
-                                                  width: ".9vw",
-                                                  height: ".9vw",
-                                                  lineHeight: "14px",
-                                                }}
-                                              />
-                                            </>
-                                          ) : (
-                                            <>
-                                              <img
-                                                src={"../../sampleData/so.svg"}
-                                                alt="Descripción de la imagen"
-                                                style={{
-                                                  width: ".9vw",
-                                                  height: ".9vw",
-                                                  lineHeight: "14px",
-                                                }}
-                                              />
-                                            </>
-                                          )}
-
-                                          <div
-                                            style={{
-                                              color: "#3E83FF",
-                                              fontSize: "0.625rem",
-                                              fontStyle: "normal",
-                                              fontWeight: 400,
-                                            }}
-                                          >
-                                            {order.data.service_id === "1004"
-                                              ? "ORDEN DE INSTALACIÓN"
-                                              : order.data.service_id === "1003"
-                                              ? "ORDEN DE MOVIMIENTO"
-                                              : "ORDEN DE SERVICIO"}
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div
-                                        style={{
-                                          color: "#000005",
-                                          fontSize: "0.875rem",
-                                          fontStyle: "normal",
-                                          fontWeight: 400,
-                                          lineHeight: "normal",
-                                          marginTop: "-5px",
-                                        }}
-                                      >
-                                        ${" "}
-                                        {order.data.total.toLocaleString(
-                                          "es-MX"
+                                        {order.data.service_id === "1003" ? (
+                                          <>
+                                            <img
+                                              src={"../../sampleData/mov2.svg"}
+                                              alt="Descripción de la imagen"
+                                              style={{
+                                                width: ".9vw",
+                                                height: ".9vw",
+                                                lineHeight: "14px",
+                                              }}
+                                            />
+                                          </>
+                                        ) : (
+                                          <>
+                                            <img
+                                              src={"../../sampleData/so.svg"}
+                                              alt="Descripción de la imagen"
+                                              style={{
+                                                width: ".9vw",
+                                                height: ".9vw",
+                                                lineHeight: "14px",
+                                              }}
+                                            />
+                                          </>
                                         )}
-                                      </div>
-                                      <div
-                                        style={{
-                                          color: "#88888B",
-                                          fontSize: "0.75rem",
-                                          fontStyle: "normal",
-                                          fontWeight: 500,
-                                          lineHeight: "normal",
-                                          textAlign: "left",
-                                        }}
-                                      >
-                                        {order.data.description}
-                                      </div>
-                                    </>
-                                  )}
-                                  {order.type === "TRACKING" && (
-                                    <>
-                                      <div
-                                        style={{
-                                          color: "#88888B",
-                                          fontSize: "0.75rem",
-                                          fontStyle: "normal",
-                                          fontWeight: 500,
-                                          lineHeight: "normal",
-                                        }}
-                                      >
-                                        {order.data.notified_at === undefined ||
-                                        order.data.notified_at === null
-                                          ? "Sin registro"
-                                          : moment
-                                              .utc(order.data.notified_at)
-                                              .format("DD/MM/YYYY HH:mm")}
-                                      </div>
 
-                                      <div
-                                        style={{
-                                          color: "#000005",
-                                          // fontFamily: "DM Sans",
-                                          display: "flex",
-                                          alignItems: "center",
-                                          fontSize: "0.75rem",
-                                          fontStyle: "normal",
-                                          fontWeight: 600,
-                                          lineHeight: "normal",
-                                          textAlign: "left",
-                                        }}
-                                      >
-                                        <div>
-                                          {order.data.algorithm ===
-                                          "COMPRESSOR_FAIL"
-                                            ? "Falla asociada al compresor"
-                                            : order.data.algorithm ===
-                                              "TEMPERATURE_FAIL"
-                                            ? "Alta temperatura"
-                                            : order.data.algorithm ===
-                                              "VOLTAGE_FAIL"
-                                            ? "Posible daño eléctrico"
-                                            : order.data.algorithm ===
-                                              "FREEZING_FAIL"
-                                            ? "Evaporador bloqueado"
-                                            : order.data.algorithm ===
-                                              "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                                            ? "Alta demanda del compresor"
-                                            : order.data.algorithm ===
-                                              "DISCONNECTION_ALERT"
-                                            ? "Desconexión"
-                                            : order.data.algorithm ===
-                                              "HIGH_TEMPERATURE_ALERT"
-                                            ? "Alta temperatura"
-                                            : order.data.algorithm ===
-                                              "VOLTAGE_ALERT"
-                                            ? "Bajo/Alto voltaje"
-                                            : order.data.algorithm}
-                                        </div>
                                         <div
                                           style={{
-                                            display: "flex",
-                                            padding: "2px",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            gap: "4px",
-                                            borderRadius: "2px",
-                                            background:
-                                              order.data.level === "ALERT"
-                                                ? "#FEF5C7"
-                                                : order.data.level === "FAIL"
-                                                ? "#FFC7CD"
-                                                : "#BCDAFF",
-                                            marginLeft: 10,
+                                            color: "#3E83FF",
+                                            fontSize: "0.625rem",
+                                            fontStyle: "normal",
+                                            fontWeight: 400,
                                           }}
                                         >
-                                          {order.data.level === "ALERT" ? (
-                                            <>
-                                              {" "}
-                                              <img
-                                                src={
-                                                  "../../sampleData/alert3.svg"
-                                                }
-                                                alt="Descripción de la imagen"
-                                                style={{
-                                                  width: ".9vw",
-                                                  height: ".9vw",
-                                                  lineHeight: "14px",
-                                                }}
-                                              />
-                                            </>
-                                          ) : order.data.level === "FAIL" ? (
-                                            <>
-                                              {" "}
-                                              <img
-                                                src={
-                                                  "../../sampleData/fail3.svg"
-                                                }
-                                                alt="Descripción de la imagen"
-                                                style={{
-                                                  width: ".9vw",
-                                                  height: ".9vw",
-                                                  lineHeight: "14px",
-                                                }}
-                                              />
-                                            </>
-                                          ) : order.data.level ===
-                                            "INDICATOR" ? (
-                                            <>
-                                              {" "}
-                                              <img
-                                                src={
-                                                  "../../sampleData/ind3.svg"
-                                                }
-                                                alt="Descripción de la imagen"
-                                                style={{
-                                                  width: ".9vw",
-                                                  height: ".9vw",
-                                                  lineHeight: "14px",
-                                                }}
-                                              />
-                                            </>
-                                          ) : (
-                                            ""
-                                          )}
-
-                                          <div
-                                            style={{
-                                              color:
-                                                order.data.level === "ALERT"
-                                                  ? "#451C03"
-                                                  : order.data.level === "FAIL"
-                                                  ? "#F93448"
-                                                  : "#3E83FF",
-                                              fontSize: "0.5rem",
-                                              fontStyle: "normal",
-                                              fontWeight: 400,
-                                            }}
-                                          >
-                                            {order.data.level === "ALERT"
-                                              ? "ALERTA"
-                                              : order.data.level === "FAIL"
-                                              ? "FALLA"
-                                              : order.data.level === "INDICATOR"
-                                              ? "CONTROL DE ACTIVOS"
-                                              : order.data.level}
-                                          </div>
+                                          {order.data.service_id === "1004"
+                                            ? "ORDEN DE INSTALACIÓN"
+                                            : order.data.service_id === "1003"
+                                            ? "ORDEN DE MOVIMIENTO"
+                                            : "ORDEN DE SERVICIO"}
                                         </div>
                                       </div>
-                                    </>
-                                  )}
-                                </div>
-                              </div>
-                            </>
-                          ))}
-                      </div>
-                    )
-                  )}
-                </div>
-              </section>
+                                    </div>
+                                    <div
+                                      style={{
+                                        color: "#000005",
+                                        fontSize: "0.875rem",
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        lineHeight: "normal",
+                                        marginTop: "-5px",
+                                      }}
+                                    >
+                                      ${" "}
+                                      {order.data.total.toLocaleString("es-MX")}
+                                    </div>
+                                    <div
+                                      style={{
+                                        color: "#88888B",
+                                        fontSize: "0.75rem",
+                                        fontStyle: "normal",
+                                        fontWeight: 500,
+                                        lineHeight: "normal",
+                                        textAlign: "left",
+                                      }}
+                                    >
+                                      {order.data.description}
+                                    </div>
+                                  </>
+                                )}
+                                {order.type === "TRACKING" && (
+                                  <>
+                                    <div
+                                      style={{
+                                        color: "#88888B",
+                                        fontSize: "0.75rem",
+                                        fontStyle: "normal",
+                                        fontWeight: 500,
+                                        lineHeight: "normal",
+                                      }}
+                                    >
+                                      {order.data.notified_at === undefined ||
+                                      order.data.notified_at === null
+                                        ? "Sin registro"
+                                        : moment
+                                            .utc(order.data.notified_at)
+                                            .format("DD/MM/YYYY HH:mm")}
+                                    </div>
 
-              <section className="clt_actividad_principal_actividad">
-                <div className="clt_actividad_principal_title">
-                  <img
-                    src={"../../sampleData/buildings.svg"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "1.5em", height: "1.5em" }}
-                  />
-                  <h1 className="clt_actividad_principal_title_h1">
-                    Acerca del punto de venta
-                  </h1>
-                </div>
-                <div className="clt_actividad_principal_title_nombre">
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    Nombre PdV
-                  </h1>
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {isLoading == true ? (
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={15} radius="sm" />
-                      </div>
-                    ) : coolersData?.cooler?.outlet_name === undefined ||
-                      coolersData?.cooler?.outlet_name === "" ? (
-                      "Sin registro"
-                    ) : (
-                      coolersData?.cooler?.outlet_name
-                    )}
-                    {coolersData?.cooler?.outlet_id === undefined ||
-                    coolersData?.cooler?.outlet_id === "" ? (
-                      " / Sin registro"
-                    ) : (
-                      <span>
-                        {" "}
-                        / <strong>{coolersData?.cooler?.outlet_id}</strong>
-                      </span>
-                    )}
-                  </h1>
-                </div>
-                <div className="clt_actividad_principal_title_nombre">
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    Dirección
-                  </h1>
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {isLoading == true ? (
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={20} radius="xl" />
-                      </div>
-                    ) : coolersData?.cooler?.outlet_address === "" ||
-                      coolersData?.cooler?.outlet_address == undefined ? (
-                      "Sin registro"
-                    ) : (
-                      coolersData?.cooler?.outlet_address
-                    )}
-                  </h1>
-                </div>
-                <div className="clt_actividad_principal_title_nombre">
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    Distancia al punto de instalación
-                  </h1>
-                  <h1 className="clt_actividad_principal_title_nombre_h1">
-                    {isLoading == true ? (
-                      <div style={{ width: "100%", height: "100%" }}>
-                        <Skeleton height={10} radius="xl" />
-                      </div>
-                    ) : coolersData?.cooler?.distance === undefined ||
-                      coolersData?.cooler?.distance === null ? (
-                      "Sin registro"
-                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
-                        coolersData?.cooler.latitude === 0) ||
-                      coolersData?.cooler.latitude === undefined ? (
-                      "Sin posición de instalación"
-                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
-                        coolersData?.cooler.last_latitude === 0) ||
-                      coolersData?.cooler.last_latitude === undefined ||
-                      coolersData?.cooler.last_latitude === null ? (
-                      "Sin posición de última visita"
-                    ) : (
-                      `${coolersData?.cooler?.distance.toFixed(0)} metros`
-                    )}
-                  </h1>
-                </div>
-                <div className="clt_actividad_principal_mapa">
+                                    <div
+                                      style={{
+                                        color: "#000005",
+                                        // fontFamily: "DM Sans",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        fontSize: "0.75rem",
+                                        fontStyle: "normal",
+                                        fontWeight: 600,
+                                        lineHeight: "normal",
+                                        textAlign: "left",
+                                      }}
+                                    >
+                                      <div>
+                                        {order.data.algorithm ===
+                                        "COMPRESSOR_FAIL"
+                                          ? "Falla asociada al compresor"
+                                          : order.data.algorithm ===
+                                            "TEMPERATURE_FAIL"
+                                          ? "Alta temperatura"
+                                          : order.data.algorithm ===
+                                            "VOLTAGE_FAIL"
+                                          ? "Posible daño eléctrico"
+                                          : order.data.algorithm ===
+                                            "FREEZING_FAIL"
+                                          ? "Evaporador bloqueado"
+                                          : order.data.algorithm ===
+                                            "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                          ? "Alta demanda del compresor"
+                                          : order.data.algorithm ===
+                                            "DISCONNECTION_ALERT"
+                                          ? "Desconexión"
+                                          : order.data.algorithm ===
+                                            "HIGH_TEMPERATURE_ALERT"
+                                          ? "Alta temperatura"
+                                          : order.data.algorithm ===
+                                            "VOLTAGE_ALERT"
+                                          ? "Bajo/Alto voltaje"
+                                          : order.data.algorithm}
+                                      </div>
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          padding: "2px",
+                                          justifyContent: "center",
+                                          alignItems: "center",
+                                          gap: "4px",
+                                          borderRadius: "2px",
+                                          background:
+                                            order.data.level === "ALERT"
+                                              ? "#FEF5C7"
+                                              : order.data.level === "FAIL"
+                                              ? "#FFC7CD"
+                                              : "#BCDAFF",
+                                          marginLeft: 10,
+                                        }}
+                                      >
+                                        {order.data.level === "ALERT" ? (
+                                          <>
+                                            {" "}
+                                            <img
+                                              src={
+                                                "../../sampleData/alert3.svg"
+                                              }
+                                              alt="Descripción de la imagen"
+                                              style={{
+                                                width: ".9vw",
+                                                height: ".9vw",
+                                                lineHeight: "14px",
+                                              }}
+                                            />
+                                          </>
+                                        ) : order.data.level === "FAIL" ? (
+                                          <>
+                                            {" "}
+                                            <img
+                                              src={"../../sampleData/fail3.svg"}
+                                              alt="Descripción de la imagen"
+                                              style={{
+                                                width: ".9vw",
+                                                height: ".9vw",
+                                                lineHeight: "14px",
+                                              }}
+                                            />
+                                          </>
+                                        ) : order.data.level === "INDICATOR" ? (
+                                          <>
+                                            {" "}
+                                            <img
+                                              src={"../../sampleData/ind3.svg"}
+                                              alt="Descripción de la imagen"
+                                              style={{
+                                                width: ".9vw",
+                                                height: ".9vw",
+                                                lineHeight: "14px",
+                                              }}
+                                            />
+                                          </>
+                                        ) : (
+                                          ""
+                                        )}
+
+                                        <div
+                                          style={{
+                                            color:
+                                              order.data.level === "ALERT"
+                                                ? "#451C03"
+                                                : order.data.level === "FAIL"
+                                                ? "#F93448"
+                                                : "#3E83FF",
+                                            fontSize: "0.5rem",
+                                            fontStyle: "normal",
+                                            fontWeight: 400,
+                                          }}
+                                        >
+                                          {order.data.level === "ALERT"
+                                            ? "ALERTA"
+                                            : order.data.level === "FAIL"
+                                            ? "FALLA"
+                                            : order.data.level === "INDICATOR"
+                                            ? "CONTROL DE ACTIVOS"
+                                            : order.data.level}
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            </div>
+                          </>
+                        ))}
+                    </div>
+                  )
+                )}
+              </div>
+            </section>
+
+            <section className="clt_actividad_principal_actividad_detail">
+              <div className="clt_actividad_principal_title">
+                <img
+                  src={"../../sampleData/buildings.svg"}
+                  alt="Descripción de la imagen"
+                  style={{ width: "1.5em", height: "1.5em" }}
+                />
+                <h1 className="clt_actividad_principal_title_h1">
+                  Acerca del punto de venta
+                </h1>
+              </div>
+              <div className="clt_actividad_principal_title_nombre">
+                <h1 className="clt_actividad_principal_title_nombre_h1">
+                  Nombre PdV
+                </h1>
+                <h1 className="clt_actividad_principal_title_nombre_h1">
                   {isLoading == true ? (
-                    <Skeleton
-                      height={10}
-                      radius="xs"
-                      style={{ width: "100%", height: "100%" }}
-                    />
-                  ) : coolersData?.cooler?.last_latitude === null &&
-                    coolersData?.cooler?.latitude === 0 ? (
-                    <>
-                      <div
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={15} radius="sm" />
+                    </div>
+                  ) : coolersData?.cooler?.outlet_name === undefined ||
+                    coolersData?.cooler?.outlet_name === "" ? (
+                    "Sin registro"
+                  ) : (
+                    coolersData?.cooler?.outlet_name
+                  )}
+                  {coolersData?.cooler?.outlet_id === undefined ||
+                  coolersData?.cooler?.outlet_id === "" ? (
+                    " / Sin registro"
+                  ) : (
+                    <span>
+                      {" "}
+                      / <strong>{coolersData?.cooler?.outlet_id}</strong>
+                    </span>
+                  )}
+                </h1>
+              </div>
+              <div className="clt_actividad_principal_title_nombre">
+                <h1 className="clt_actividad_principal_title_nombre_h1">
+                  Dirección
+                </h1>
+                <h1 className="clt_actividad_principal_title_nombre_h1">
+                  {isLoading == true ? (
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={20} radius="xl" />
+                    </div>
+                  ) : coolersData?.cooler?.outlet_address === "" ||
+                    coolersData?.cooler?.outlet_address == undefined ? (
+                    "Sin registro"
+                  ) : (
+                    coolersData?.cooler?.outlet_address
+                  )}
+                </h1>
+              </div>
+              <div className="clt_actividad_principal_title_nombre">
+                <h1 className="clt_actividad_principal_title_nombre_h1">
+                  Distancia al punto de instalación
+                </h1>
+                <h1 className="clt_actividad_principal_title_nombre_h1">
+                  {isLoading == true ? (
+                    <div style={{ width: "100%", height: "100%" }}>
+                      <Skeleton height={10} radius="xl" />
+                    </div>
+                  ) : coolersData?.cooler?.distance === undefined ||
+                    coolersData?.cooler?.distance === null ? (
+                    "Sin registro"
+                  ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                      coolersData?.cooler.latitude === 0) ||
+                    coolersData?.cooler.latitude === undefined ? (
+                    "Sin posición de instalación"
+                  ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                      coolersData?.cooler.last_latitude === 0) ||
+                    coolersData?.cooler.last_latitude === undefined ||
+                    coolersData?.cooler.last_latitude === null ? (
+                    "Sin posición de última visita"
+                  ) : (
+                    `${coolersData?.cooler?.distance.toFixed(0)} metros`
+                  )}
+                </h1>
+              </div>
+              <div className="clt_actividad_principal_mapa">
+                {isLoading == true ? (
+                  <Skeleton
+                    height={10}
+                    radius="xs"
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                ) : coolersData?.cooler?.last_latitude === null &&
+                  coolersData?.cooler?.latitude === 0 ? (
+                  <>
+                    <div
+                      style={{
+                        display: "inline-flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "8px",
+                        width: "100%", // Esto hará que el div ocupe el 100% del ancho del contenedor padre
+                        height: "100%",
+                        backgroundImage: "url('../../sampleData/fondd.png')",
+                        backgroundSize: "cover", // Esto asegurará que la imagen cubra todo el div
+                        backgroundPosition: "center", // Esto centrará la imagen en el div
+                      }}
+                    >
+                      <img
+                        src={"../../sampleData/notmap.svg"}
+                        alt="Descripción de la imagen"
                         style={{
-                          display: "inline-flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "8px",
-                          width: "100%", // Esto hará que el div ocupe el 100% del ancho del contenedor padre
-                          height: "100%",
-                          backgroundImage: "url('../../sampleData/fondd.png')",
-                          backgroundSize: "cover", // Esto asegurará que la imagen cubra todo el div
-                          backgroundPosition: "center", // Esto centrará la imagen en el div
+                          width: "26px",
+                          height: "26px",
+                        }}
+                      />
+                      <text
+                        style={{
+                          color: "#ED5079",
+                          fontSize: "12px",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "155%",
                         }}
                       >
-                        <img
-                          src={"../../sampleData/notmap.svg"}
-                          alt="Descripción de la imagen"
-                          style={{
-                            width: "26px",
-                            height: "26px",
-                          }}
-                        />
-                        <text
-                          style={{
-                            color: "#ED5079",
-                            fontSize: "12px",
-                            fontStyle: "normal",
-                            fontWeight: 400,
-                            lineHeight: "155%",
-                          }}
-                        >
-                          No hay datos de la ubicación
-                        </text>
-                      </div>
-                    </>
-                  ) : coolersData?.cooler?.last_latitude != null &&
-                    coolersData?.cooler?.latitude === 0 ? (
-                    <>
-                      <div>
-                        <MapComponent1
-                          latitude={coolersData?.cooler?.last_latitude}
-                          longitude={coolersData?.cooler?.last_longitude}
-                        />
-                      </div>
-                    </>
-                  ) : coolersData?.cooler?.last_latitude === null &&
-                    coolersData?.cooler?.latitude != 0 ? (
-                    <>
-                      <div>
-                        <MapComponent
-                          latitude={coolersData?.cooler?.latitude}
-                          longitude={coolersData?.cooler?.longitude}
-                        />
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <MapComponent2
+                        No hay datos de la ubicación
+                      </text>
+                    </div>
+                  </>
+                ) : coolersData?.cooler?.last_latitude != null &&
+                  coolersData?.cooler?.latitude === 0 ? (
+                  <>
+                    <div>
+                      <MapComponent1
+                        latitude={coolersData?.cooler?.last_latitude}
+                        longitude={coolersData?.cooler?.last_longitude}
+                      />
+                    </div>
+                  </>
+                ) : coolersData?.cooler?.last_latitude === null &&
+                  coolersData?.cooler?.latitude != 0 ? (
+                  <>
+                    <div>
+                      <MapComponent
                         latitude={coolersData?.cooler?.latitude}
                         longitude={coolersData?.cooler?.longitude}
-                        last_latitude={coolersData?.cooler?.last_latitude}
-                        last_longitude={coolersData?.cooler?.last_longitude}
                       />
-                    </>
-                  )}
-                </div>
-              </section>
-            </div>
-          </section>
-          <section className="detail_principal_inv_gast_1">
-            <div className="clt_actividad_acerca_principal">
-              <section className="clt_actividad_principal">
-                <div className="clt_actividad_principal_title">
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <MapComponent2
+                      latitude={coolersData?.cooler?.latitude}
+                      longitude={coolersData?.cooler?.longitude}
+                      last_latitude={coolersData?.cooler?.last_latitude}
+                      last_longitude={coolersData?.cooler?.last_longitude}
+                    />
+                  </>
+                )}
+              </div>
+            </section>
+          </div>
+
+          <section
+            className="detail_principal_inv_gast_1"
+            style={{ marginTop: -23 }}
+          >
+            <div
+              className="clt_actividad_acerca_principal_detail"
+              // style={{ background: "pink" }}
+            >
+              <section
+                className="clt_actividad_principal_detail"
+                // style={{ background: "red" }}
+              >
+                <div
+                  className="clt_actividad_principal_title"
+                  style={{ marginTop: -10 }} // Ajusta el valor según sea necesario
+                >
                   <img
                     src={"../../sampleData/actividad.svg"}
                     alt="Descripción de la imagen"
@@ -1558,10 +1564,13 @@ export default function CoolerDetail() {
                 </div>
               </section>
               <section
-                className="clt_actividad_principal"
-                style={{ marginLeft: "6px" }}
+                className="clt_actividad_principal_detail"
+                // style={{ marginLeft: "6px" }}
               >
-                <div className="clt_actividad_principal_title">
+                <div
+                  className="clt_actividad_principal_title"
+                  style={{ marginTop: -10 }} // Ajusta el valor según sea necesario
+                >
                   <img
                     src={"../../sampleData/energy.svg"}
                     alt="Descripción de la imagen"
