@@ -769,13 +769,13 @@ export default function CoolerDetail() {
               className="clt_actividad_principal_actividad_detail"
               // style={{ background: "yellow" }}
             >
-              <div className="clt_actividad_principal_title">
+              <div className="clt_actividad_principal_title_detail">
                 <img
                   src={"../../sampleData/actividad.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "1.5em", height: "1.5em" }}
+                  style={{ width: "1.2rem", height: "1.2rem" }}
                 />
-                <h1 className="clt_actividad_principal_title_h1">
+                <h1 className="clt_actividad_principal_title_h1_detail">
                   Actividad del enfriador
                 </h1>
               </div>
@@ -951,7 +951,7 @@ export default function CoolerDetail() {
                                         <div
                                           style={{
                                             color: "#313A49",
-                                            fontSize: "7px",
+                                            fontSize: "0.438rem",
                                             fontStyle: "normal",
                                             fontWeight: 400,
                                             lineHeight: "14px",
@@ -969,7 +969,7 @@ export default function CoolerDetail() {
                                         // fontFamily: "DM Sans",
                                         display: "flex",
                                         alignItems: "center",
-                                        fontSize: "0.875em",
+                                        fontSize: "0.75em",
                                         fontStyle: "normal",
                                         fontWeight: 600,
                                         lineHeight: "normal",
@@ -1021,7 +1021,7 @@ export default function CoolerDetail() {
                                         <div
                                           style={{
                                             color: "#3E83FF",
-                                            fontSize: "0.625rem",
+                                            fontSize: "0.5rem",
                                             fontStyle: "normal",
                                             fontWeight: 400,
                                           }}
@@ -1217,18 +1217,28 @@ export default function CoolerDetail() {
               </div>
             </section>
 
-            <section className="clt_actividad_principal_actividad_detail">
-              <div className="clt_actividad_principal_title">
+            <section
+              className="clt_actividad_principal_actividad_detail"
+              // style={{ background: "red" }}
+            >
+              <div
+                className="clt_actividad_principal_title_detail"
+                // style={{ background: "red" }}
+              >
                 <img
                   src={"../../sampleData/buildings.svg"}
                   alt="Descripción de la imagen"
-                  style={{ width: "1.5em", height: "1.5em" }}
+                  style={{ width: "1.2rem", height: "1.2rem" }}
                 />
-                <h1 className="clt_actividad_principal_title_h1">
+                <h1 className="clt_actividad_principal_title_h1_detail">
                   Acerca del punto de venta
                 </h1>
               </div>
-              <div className="clt_actividad_principal_title_nombre">
+
+              <div
+                className="clt_actividad_principal_title_nombre"
+                // style={{ background: "blue" }}
+              >
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   Nombre PdV
                 </h1>
@@ -1254,7 +1264,10 @@ export default function CoolerDetail() {
                   )}
                 </h1>
               </div>
-              <div className="clt_actividad_principal_title_nombre">
+              <div
+                className="clt_actividad_principal_title_nombre"
+                // style={{ background: "pink" }}
+              >
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   Dirección
                 </h1>
@@ -1271,7 +1284,10 @@ export default function CoolerDetail() {
                   )}
                 </h1>
               </div>
-              <div className="clt_actividad_principal_title_nombre">
+              <div
+                className="clt_actividad_principal_title_nombre"
+                // style={{ background: "purple" }}
+              >
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   Distancia al punto de instalación
                 </h1>
@@ -1297,6 +1313,7 @@ export default function CoolerDetail() {
                   )}
                 </h1>
               </div>
+
               <div className="clt_actividad_principal_mapa">
                 {isLoading == true ? (
                   <Skeleton
@@ -1384,65 +1401,25 @@ export default function CoolerDetail() {
               className="clt_actividad_acerca_principal_detail"
               // style={{ background: "pink" }}
             >
-              <section
-                className="clt_actividad_principal_detail"
-                // style={{ background: "red" }}
-              >
+              <section className="clt_actividad_principal_detail">
                 <div
-                  className="clt_actividad_principal_title"
-                  style={{ marginTop: -10 }} // Ajusta el valor según sea necesario
+                  className="clt_actividad_principal_title_detail"
+                  style={{ marginTop: -10 }}
                 >
                   <img
                     src={"../../sampleData/actividad.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "1.5vw", height: "1.5vw" }}
+                    style={{ width: "1.2rem", height: "1.2rem" }}
                   />
-                  <h1 className="clt_actividad_principal_title_h1">
+                  <h1 className="clt_actividad_principal_title_h1_detail">
                     Inversión total en el enfriador
                   </h1>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    alignContent: "center",
-                    gap: "60px",
-                    alignSelf: "stretch",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: ".8vw",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {" "}
-                      Gasto total de propiedad
-                    </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.3vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {isLoading == true ? (
+                <div className="details-container">
+                  <div className="detail-item">
+                    <div className="detail-label">Gasto total de propiedad</div>
+                    <div className="detail-value">
+                      {isLoading ? (
                         <Skeleton height={10} radius="xl" />
                       ) : coolersData?.properties?.total_ownership_expense
                           ?.value === undefined ? (
@@ -1455,37 +1432,9 @@ export default function CoolerDetail() {
                       )}
                     </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: ".8vw",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {" "}
-                      Precio de venta
-                    </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.3vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                      }}
-                    >
+                  <div className="detail-item">
+                    <div className="detail-label">Precio de venta</div>
+                    <div className="detail-value">
                       {coolersData?.properties?.sale_price?.value === undefined
                         ? "Sin registro"
                         : "$" +
@@ -1494,37 +1443,9 @@ export default function CoolerDetail() {
                           )}`}
                     </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "0.8vw",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {" "}
-                      Gasto total por servicio
-                    </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.3vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                      }}
-                    >
+                  <div className="detail-item">
+                    <div className="detail-label">Gasto total por servicio</div>
+                    <div className="detail-value">
                       {coolersData?.properties?.total_expense_service.value ===
                       undefined
                         ? "Sin registro"
@@ -1535,92 +1456,32 @@ export default function CoolerDetail() {
                     </div>
                   </div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    gap: "4px",
-                    flex: 100,
-                    cursor: "pointer",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#3E83FF",
-                      // fontFamily: "DM Sans",
-                      fontSize: "1vw",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                    onClick={openInversion}
-                  >
-                    Ver detalles
-                  </div>
+                <div className="details-link" onClick={openInversion}>
+                  Ver detalles
                   <IconArrowRight
                     style={{ color: "#3E83FF", width: "15px", height: "15px" }}
                   />
                 </div>
               </section>
-              <section
-                className="clt_actividad_principal_detail"
-                // style={{ marginLeft: "6px" }}
-              >
+
+              <section className="clt_actividad_principal_detail">
                 <div
-                  className="clt_actividad_principal_title"
-                  style={{ marginTop: -10 }} // Ajusta el valor según sea necesario
+                  className="clt_actividad_principal_title_detail"
+                  style={{ marginTop: -10 }}
                 >
                   <img
                     src={"../../sampleData/energy.svg"}
                     alt="Descripción de la imagen"
-                    style={{ width: "1.5vw", height: "1.5vw" }}
+                    style={{ width: "1.2rem", height: "1.2rem" }}
                   />
-                  <h1 className="clt_actividad_principal_title_h1">
+                  <h1 className="clt_actividad_principal_title_h1_detail">
                     Gastos de energía
                   </h1>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    alignContent: "center",
-                    gap: "40px",
-                    alignSelf: "stretch",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: ".8vw",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {" "}
-                      Consumo de energía
-                    </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.3vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                      }}
-                    >
+                <div className="details-container">
+                  <div className="detail-item">
+                    <div className="detail-label">Consumo de energía</div>
+                    <div className="detail-value">
                       {coolersData?.properties?.energy_consumption?.value ===
                       undefined
                         ? "Sin registro"
@@ -1633,39 +1494,13 @@ export default function CoolerDetail() {
                           }`}
                     </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: ".8vw",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {" "}
-                      Referencia de consumo de energía
+                  <div className="detail-item">
+                    <div className="detail-label">
+                      Referencia consumo de energía
                     </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.3vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                      }}
-                    >
+                    <div className="detail-value">
                       {coolersData?.properties?.power_consumption_reference
-                        ?.value == undefined
+                        ?.value === undefined
                         ? "Sin registro"
                         : `${
                             coolersData?.properties?.power_consumption_reference.value.toFixed(
@@ -1676,38 +1511,10 @@ export default function CoolerDetail() {
                           }`}
                     </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "flex-end",
-                      alignItems: "flex-start",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: ".8vw",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {" "}
-                      Gasto en energía
-                    </div>
-                    <div
-                      style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.3vw",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {coolersData?.properties?.energy_cost.value == undefined
+                  <div className="detail-item">
+                    <div className="detail-label">Gasto en energía</div>
+                    <div className="detail-value">
+                      {coolersData?.properties?.energy_cost?.value === undefined
                         ? "Sin registro"
                         : "$" +
                           `${coolersData?.properties?.energy_cost.value.toLocaleString(
@@ -1716,29 +1523,8 @@ export default function CoolerDetail() {
                     </div>
                   </div>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    gap: "4px",
-                    flex: 100,
-                    cursor: "pointer",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#3E83FF",
-                      // fontFamily: "DM Sans",
-                      fontSize: "1vw",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                    onClick={openEnergy}
-                  >
-                    Ver detalles
-                  </div>
+                <div className="details-link" onClick={openEnergy}>
+                  Ver detalles
                   <IconArrowRight
                     style={{ color: "#3E83FF", width: "15px", height: "15px" }}
                   />
