@@ -1098,6 +1098,19 @@ body {
   border-radius: 4px;
   width: 100%;
 }
+.pagefilter_container_principal_search_responsive{
+  display: none;
+}
+.pagefilter_container_principal_search{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 31px;
+  stroke-width: 0.5px;
+  border: 0.5px solid #adbacc;
+  border-radius: 4px;
+}
 .pagefilter_container_principal_customer {
   display: flex;
   align-items: center;
@@ -1632,6 +1645,14 @@ body {
   }
   .pagefilter_container_principal {
     border: 1px solid transparent;
+  }
+  .pagefilter_container_principal_search_responsive{
+    display: flex;
+    width: 50px;    
+    height: 100%;
+  }
+  .pagefilter_container_principal_search{
+    display: none;
   }
   .pagefilter_container_principal_addFilter {
     width: fit-content;
