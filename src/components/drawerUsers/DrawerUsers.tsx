@@ -29,10 +29,10 @@ export default function DrawerUsers({
   openedDrawerEdit === false ? closeAndClearInfo : "";
   const handleEditUser = () => {
     // PRODUCTIVO
-    // const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
+    const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
 
     // QA
-    const url = `https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
+    // const url = `https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
     const data = {
       name: nameUser,
       email: emailUser,
