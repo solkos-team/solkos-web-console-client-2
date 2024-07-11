@@ -859,12 +859,21 @@ export default function (props) {
             ""
           )}
         </section>
-        <section className="pagefilter_container_principal_search_responsive" onClick={() => setModalOpened(true)}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M15.75 15.75L11.25 11.25M12.75 7.5C12.75 10.3995 10.3995 12.75 7.5 12.75C4.60051 12.75 2.25 10.3995 2.25 7.5C2.25 4.60051 4.60051 2.25 7.5 2.25C10.3995 2.25 12.75 4.60051 12.75 7.5Z" stroke="#868E96" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </section>        
-        <div className="pagefilter_container_principal_search">
+
+        <div
+          style={{
+            display: "flex",
+            // display: "none",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "200px",
+            height: "31px",
+            strokeWidth: "0.5",
+            border: "0.5px solid #ADBACC",
+            borderRadius: "4px",
+            // visibility: "hidden",
+          }}
+        >
           <div
             style={{
               display: "flex",
@@ -923,6 +932,7 @@ export default function (props) {
             </div>
           </div>
         </div>
+
         <div>
           <section>
             {modalOpened && (
