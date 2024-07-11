@@ -37,8 +37,9 @@ export const DrawerMap = ({opened,onClose,latitude,longitude}) => {
       <div style={{ width: "100%", height: "100%", backgroundColor: "red" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={6}
+          defaultCenter={{ lat: latitude, lng: longitude }}
+          // defaultZoom={6}
+          defaultZoom={20}
           options={{
             gestureHandling: "greedy",
             fullscreenControl: false,
