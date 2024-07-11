@@ -1688,7 +1688,6 @@ body {
   }
   .pdv_principal {
     margin-left: -40px;
-    width: 120%;
   }
   .outlets_title_h1 {
     display: none;
@@ -1712,7 +1711,7 @@ body {
     gap: 16px;
     flex: 100;
     align-self: stretch;
-    width: 125%;
+    width: 100%;
     margin-left: -40px;
   }
   .insights_title_p {
