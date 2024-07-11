@@ -1,9 +1,9 @@
 // PRODUCTIVO
-const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
+// const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
 // QA
-// const baseUrl =
-//   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
+const baseUrl =
+  "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
 
 export const fetchCoolers = async (path, setIsLoading?, id?) => {
   if (setIsLoading) {
