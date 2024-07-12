@@ -17,6 +17,7 @@ import { fetchUniversal, fetchSearchUniversal } from "../../utils/apiUtils";
 import { element } from "prop-types";
 import { Modal, Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { UniversalSearch } from "../universalSearch/UniversalSearch";
 
 export default function (props) {
   const [multipleResultsOptions, setMultipleResultsOptions] = useState<
@@ -860,78 +861,7 @@ export default function (props) {
           )}
         </section>
 
-        <div
-          style={{
-            display: "flex",
-            // display: "none",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "200px",
-            height: "31px",
-            strokeWidth: "0.5",
-            border: "0.5px solid #ADBACC",
-            borderRadius: "4px",
-            // visibility: "hidden",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              padding: "1px 10px",
-              alignItems: "center",
-              gap: "10px",
-              flex: "100",
-            }}
-            onClick={() => setModalOpened(true)}
-          >
-            <IconSearch
-              style={{
-                color: "#ADBACC",
-                width: "12px",
-                height: "12px",
-                marginRight: "3px",
-              }}
-            />
-            <Text
-              style={{
-                display: "flex",
-                color: "#ADBACC",
-                fontSize: "10px",
-                fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "14px",
-                textTransform: "uppercase",
-              }}
-            >
-              Buscar
-            </Text>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "8px",
-                alignSelf: "stretch",
-                borderRadius: "2px",
-                background: "#D4DAE3",
-                padding: "4px",
-                marginLeft: "auto",
-              }}
-            >
-              <div
-                style={{
-                  color: "#313A49",
-                  fontSize: "8px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "14px",
-                }}
-              >
-                Ctrl + X
-              </div>
-            </div>
-          </div>
-        </div>
+        <UniversalSearch setModalOpened={setModalOpened} />
 
         <div>
           <section>
