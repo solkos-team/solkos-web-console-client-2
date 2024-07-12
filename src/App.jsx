@@ -420,8 +420,7 @@ function App() {
           </div>
         ))}
       </>
-    ) : // localStorage.getItem("ORG") === "KOF" ||
-    //   localStorage.getItem("ORG") === "KOF Colombia" ? (
+    ) : // ||localStorage.getItem("ORG") === "KOF Colombia"
     localStorage.getItem("ORG") === "KOF" ? (
       <>
         {updatedRoutes.map((item) => (

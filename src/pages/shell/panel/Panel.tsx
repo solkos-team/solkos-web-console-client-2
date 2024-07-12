@@ -1,175 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import { tableauFetch } from "../../../utils/apiUtils";
-// import { useSelector } from "react-redux";
-// import TableauReport from "tableau-react";
-// import PageFilter from "../../../components/pageFilter";
-// import { Loader } from "@mantine/core";
-// import { Tabs } from "@mantine/core";
-// import { useNavigate } from "react-router-dom";
-
-// export default function Panel() {
-//   const navigate = useNavigate();
-
-//   const [data, setData] = useState<string | null>("");
-//   const [isLoading, setIsLoading] = useState(true);
-//   const URL = `https://us-central1-imberalink-238816.cloudfunctions.net/get-trusted-ticket-cors`;
-//   const dt = useSelector((state: any) => state.works);
-//   const dto = useSelector((state: any) => state.organization);
-//   function pathVerify() {
-//     return dt.length === 0 ? [] : JSON.parse(dt);
-//   }
-//   const verifiedPath = pathVerify();
-//   const region = verifiedPath[0] || "";
-//   const zone = verifiedPath[1] || "";
-//   const operative_unit = verifiedPath[2] || "";
-//   const route = verifiedPath[3] || "";
-
-//   const fetchToken = async () => {
-//     try {
-//       const data = await tableauFetch(URL, setIsLoading);
-//       const datos = await data;
-//       setData(datos);
-//       setIsLoading(false);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     // if (dto !== "KOF" && dto !== "KOF Colombia") {
-//     if (dto !== "KOF") {
-//       navigate("/home");
-//     }
-//   }, [region, zone, operative_unit, route, navigate, dto]);
-
-//   useEffect(() => {
-//     fetchToken();
-//   }, [region, zone, operative_unit, route]);
-
-//   const options = {
-//     height: "1200px",
-//     width: "100%",
-//   };
-
-//   const parameters = {
-//     region: region,
-//     management_zone: zone,
-//     operative_unit: operative_unit,
-//     route: route,
-//   };
-//   return (
-//     <section>
-//       <PageFilter />
-//       <br></br>
-//       <div
-//         style={{
-//           display: "flex",
-//           padding: "16px",
-//           flexDirection: "column",
-//           alignItems: "flex-start",
-//           alignSelf: "stretch",
-//         }}
-//       >
-//         <text
-//           style={{
-//             color: "#000",
-//             fontSize: "1.5rem",
-//             fontStyle: "normal",
-//             fontWeight: 700,
-//             lineHeight: "140%",
-//             marginLeft: -55,
-//           }}
-//         >
-//           Tableros
-//         </text>
-//       </div>
-
-//       <>
-//         <div>
-//           <Tabs color="teal" defaultValue="first" style={{ width: "100%" }}>
-//             <Tabs.List>
-//               <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
-//                 <img
-//                   src={"../../sampleData/star.svg"}
-//                   alt="Icono"
-//                   style={{
-//                     width: "12px",
-//                     height: "12px",
-//                     marginRight: "5px",
-//                   }}
-//                 />
-//                 Detalle de rutas
-//               </Tabs.Tab>
-
-//             </Tabs.List>
-//             {isLoading ? (
-//               <div style={{ marginTop: 30 }}>
-//                 {" "}
-//                 <Loader color="gray" />
-//               </div>
-//             ) : (
-//               <div
-//                 style={{
-//                   display: "flex",
-//                   flexDirection: "column",
-//                 }}
-//               >
-//                 {/* <Tabs.Panel value="first"> */}
-//                 <>
-//                   {
-//                     // dto === "KOF Colombia" ? (
-//                     //   <>
-//                     //     <br></br>
-//                     //     <TableauReport
-//                     //       url="https://tableau.efemsa.com/views/ConsolidadoHorizontalTablerostestsolkos/ParqueReparado?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&"
-//                     //       token={data}
-//                     //       options={options}
-//                     //       parameters={parameters}
-//                     //       query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-//                     //     />
-//                     //   </>
-//                     // ) :
-//                     dto === "KOF" ? (
-//                       <>
-//                         <br></br>
-//                         <TableauReport
-//                           // url={`https://tableau.efemsa.com/views/Test_KOF/ControldelActivos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-//                           url={`https://tableau.efemsa.com/views/KOF/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-//                           token={data}
-//                           options={options}
-//                           parameters={parameters}
-//                           query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-//                         />
-//                       </>
-//                     ) : (
-//                       //  : dto === "HEINEKEN" ? (
-//                       //   <>
-//                       //     <br></br>
-//                       //     <TableauReport
-//                       //       url={`https://tableau.efemsa.com/views/HNK_17151853863070/Cobertura?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-//                       //       token={data}
-//                       //       options={{ height: "800px", width: "100%" }}
-//                       //       parameters={parameters}
-//                       //       query="?:embed=yes&:comments=no&:toolbar=yes&:refresh=yes"
-//                       //     />
-//                       //   </>
-//                       // )
-//                       <div style={{ marginTop: 30 }}>
-//                         No hay tableros disponibles para mostrar
-//                       </div>
-//                     )
-//                   }
-//                 </>
-
-//               </div>
-//             )}
-//           </Tabs>
-//         </div>
-//       </>
-//     </section>
-//   );
-// }
-
 import React, { useState, useEffect } from "react";
 import { tableauFetch } from "../../../utils/apiUtils";
 import { useSelector } from "react-redux";
@@ -211,6 +39,7 @@ export default function Panel() {
 
   useEffect(() => {
     if (dto !== "KOF") {
+      // && dto !== "KOF Colombia"
       navigate("/home");
     }
   }, [region, zone, operative_unit, route, navigate, dto]);
@@ -268,98 +97,135 @@ export default function Panel() {
           Tableros
         </text>
       </div>
-
-      <>
-        <div>
-          <Tabs
-            color="teal"
-            value={activeTab}
-            onTabChange={handleTabChange}
-            style={{ width: "100%" }}
-          >
-            <Tabs.List>
-              <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
-                <img
-                  src={"../../sampleData/star.svg"}
-                  alt="Icono"
+      {dto === "KOF" ? (
+        <>
+          <div>
+            <Tabs
+              color="teal"
+              value={activeTab}
+              onTabChange={handleTabChange}
+              style={{ width: "100%" }}
+            >
+              <Tabs.List>
+                <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
+                  <img
+                    src={"../../sampleData/star.svg"}
+                    alt="Icono"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  Detalle de Rutas
+                </Tabs.Tab>
+                <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
+                  <img
+                    src={"../../sampleData/star.svg"}
+                    alt="Icono"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  Estatus Vault - Iniciativa Secop
+                </Tabs.Tab>
+                <Tabs.Tab value="third" style={{ fontSize: ".9vw" }}>
+                  <img
+                    src={"../../sampleData/star.svg"}
+                    alt="Icono"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      marginRight: "5px",
+                    }}
+                  />
+                  KPI's Históricos
+                </Tabs.Tab>
+              </Tabs.List>
+              {isLoading ? (
+                <div style={{ marginTop: 30 }}>
+                  <Loader color="gray" />
+                </div>
+              ) : (
+                <div
                   style={{
-                    width: "12px",
-                    height: "12px",
-                    marginRight: "5px",
+                    display: "flex",
+                    flexDirection: "column",
                   }}
-                />
-                Detalle de rutas
-              </Tabs.Tab>
-              <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
-                <img
-                  src={"../../sampleData/star.svg"}
-                  alt="Icono"
-                  style={{
-                    width: "12px",
-                    height: "12px",
-                    marginRight: "5px",
-                  }}
-                />
-                Estatus Vault - Iniciativa Secop
-              </Tabs.Tab>
-            </Tabs.List>
-            {isLoading ? (
-              <div style={{ marginTop: 30 }}>
-                <Loader color="gray" />
-              </div>
-            ) : (
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <Tabs.Panel value="first">
-                  <>
-                    {dto === "KOF" ? (
-                      <>
-                        <br></br>
-                        <TableauReport
-                          url={`https://tableau.efemsa.com/views/KOF/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                          token={data}
-                          options={options}
-                          parameters={parameters}
-                          query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-                        />
-                      </>
-                    ) : (
-                      <div style={{ marginTop: 30 }}>
-                        No hay tableros disponibles para mostrar
-                      </div>
-                    )}
-                  </>
-                </Tabs.Panel>
+                >
+                  <Tabs.Panel value="first">
+                    <>
+                      {dto === "KOF" ? (
+                        <>
+                          <br></br>
+                          <TableauReport
+                            url={`https://tableau.efemsa.com/views/KOF/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            token={data}
+                            options={options}
+                            parameters={parameters}
+                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+                          />
+                        </>
+                      ) : (
+                        <div style={{ marginTop: 30 }}>
+                          No hay tableros disponibles para mostrar
+                        </div>
+                      )}
+                    </>
+                  </Tabs.Panel>
 
-                <Tabs.Panel value="second">
-                  <>
-                    {dto === "KOF" ? (
-                      <>
-                        <br></br>
-                        <TableauReport
-                          url={`https://tableau.efemsa.com/views/KOF/Vault-Secop?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                          token={data}
-                          options={options}
-                          parameters={parameters}
-                          query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-                        />
-                      </>
-                    ) : (
-                      <div style={{ marginTop: 30 }}>
-                        No hay tableros disponibles para mostrar
-                      </div>
-                    )}
-                  </>
-                </Tabs.Panel>
-              </div>
-            )}
-          </Tabs>
-        </div>
-      </>
+                  <Tabs.Panel value="second">
+                    <>
+                      {dto === "KOF" ? (
+                        <>
+                          <br></br>
+                          <TableauReport
+                            url={`https://tableau.efemsa.com/views/KOF/Vault-Secop?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            token={data}
+                            options={options}
+                            parameters={parameters}
+                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+                          />
+                        </>
+                      ) : (
+                        <div style={{ marginTop: 30 }}>
+                          No hay tableros disponibles para mostrar
+                        </div>
+                      )}
+                    </>
+                  </Tabs.Panel>
+                  <Tabs.Panel value="third">
+                    <>
+                      {dto === "KOF" ? (
+                        <>
+                          <br></br>
+                          <TableauReport
+                            url={`https://tableau.efemsa.com/views/KPIs_KOF/KPIs_KOF?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link  &`}
+                            token={data}
+                            options={options}
+                            parameters={parameters}
+                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+                          />
+                        </>
+                      ) : (
+                        <div style={{ marginTop: 30 }}>
+                          No hay tableros disponibles para mostrar
+                        </div>
+                      )}
+                    </>
+                  </Tabs.Panel>
+                </div>
+              )}
+            </Tabs>
+          </div>
+        </>
+      ) : dto === "KOF Colombia" ? (
+        ""
+      ) : (
+        ""
+      )}
     </section>
   );
 }
