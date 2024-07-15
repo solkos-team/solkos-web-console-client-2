@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Drawer } from "@mantine/core";
 import { formatDrawerCoolview, getMonth } from "../../../Functions/Coolview";
-
+import { LogoCoolview } from "../../../sampleData/Coolview/coolviewIcons"; 
 export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
   const mesToday = new Date();
   useEffect(() => {
@@ -12,7 +12,7 @@ export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title={`.`}
+      title={<img src={LogoCoolview} alt={'LogoCoolview'} className="CoolviewLogo"></img>}
       position="bottom"
       size="76%"
       overlayOpacity={0.1}

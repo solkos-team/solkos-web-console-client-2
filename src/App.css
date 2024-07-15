@@ -1527,6 +1527,7 @@ body {
 .coolview_printipal {
   width: 100%;
   height: 90%;
+  margin-top: -2rem;
 }
 .drawerHeaderImg {
   width: 100%;
@@ -2557,9 +2558,8 @@ body {
 .gmnoprint{
   display: none;
 }
-/* .mantine-Drawer-title{
-  color: transparent;
-  width: 100%;
+ .CoolviewLogo{
   background-image: url('../src/sampleData/Coolview/CoolviewPrincipalLogoDrawer.svg');
-  background-repeat: no-repeat;
-} */
+  width: 100%;
+  height: 50px;
+ }
