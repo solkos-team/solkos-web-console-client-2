@@ -37,20 +37,20 @@ export default function DrawerA({
       selectedAlgorithm === "Bajo/Alto voltaje"
         ? "VOLTAGE_ALERT"
         : selectedAlgorithm === "Alta demanda de compresor"
-        ? "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-        : selectedAlgorithm === "Alerta alta temperatura"
-        ? "HIGH_TEMPERATURE_ALERT"
-        : selectedAlgorithm === "Desconexión"
-        ? "DISCONNECTION_ALERT"
-        : selectedAlgorithm === "Falla asociada al compresor"
-        ? "COMPRESSOR_FAIL"
-        : selectedAlgorithm === "Evaporador bloqueado"
-        ? "FREEZING_FAIL"
-        : selectedAlgorithm === "Alta temperatura"
-        ? "TEMPERATURE_FAIL"
-        : selectedAlgorithm === "Posible daño eléctrico"
-        ? "VOLTAGE_FAIL"
-        : selectedAlgorithm,
+          ? "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+          : selectedAlgorithm === "Alerta alta temperatura"
+            ? "HIGH_TEMPERATURE_ALERT"
+            : selectedAlgorithm === "Desconexión"
+              ? "DISCONNECTION_ALERT"
+              : selectedAlgorithm === "Falla asociada al compresor"
+                ? "COMPRESSOR_FAIL"
+                : selectedAlgorithm === "Evaporador bloqueado"
+                  ? "FREEZING_FAIL"
+                  : selectedAlgorithm === "Alta temperatura"
+                    ? "TEMPERATURE_FAIL"
+                    : selectedAlgorithm === "Posible daño eléctrico"
+                      ? "VOLTAGE_FAIL"
+                      : selectedAlgorithm,
     ],
     path: pathVerify(),
     page_size: Number(datosPorPagina),
@@ -152,488 +152,479 @@ export default function DrawerA({
       position="right"
       size="40rem"
     >
-      <>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "20px",
-          }}
-        >
-          {/* 2 */}
-          <div
-            style={{
-              display: "flex",
-              padding: "0px 30px",
-              alignItems: "center",
-              gap: "30px",
-              alignSelf: "stretch",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "16px",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    padding: "2px",
-                    alignItems: "center",
-                    gap: "10px",
-                    borderRadius: "4px",
-                    background:
-                      level === "ALERT"
-                        ? "#FEF5C7"
-                        : level === "FAIL"
-                        ? "#FFC7CD"
-                        : selectedAlgorithm === "Actualizar Info"
-                        ? "#FEF5C7"
-                        : selectedAlgorithm === "Sin Riesgo"
-                        ? "#C0F2C8"
-                        : selectedAlgorithm === "Estatus sin venta" ||
-                          selectedAlgorithm === "Acciones urgentes"
-                        ? "#FFC7CD"
-                        : selectedAlgorithm === "Visita PdV" &&
-                          dto != "KOF Colombia"
-                        ? "#FEF5C7"
-                        : selectedAlgorithm === "Actualizar dato" ||
-                          selectedAlgorithm === "Datos faltantes" ||
-                          selectedAlgorithm === "Monitoreo" ||
-                          selectedAlgorithm === "Movimiento"
-                        ? "#A5D8FF"
-                        : selectedAlgorithm === "Solicitar serv. correctivo" ||
-                          selectedAlgorithm === "Solicitar serv. preventivo" ||
-                          selectedAlgorithm === "Seguimiento a equipo" ||
-                          selectedAlgorithm === "Visita PdV"
-                        ? "#FFEC99"
-                        : selectedAlgorithm === "Visita PdV prioritaria"
-                        ? "#FFC9C9"
-                        : "",
-                  }}
-                >
-                  {selectedAlgorithm === "Sin Riesgo" ? (
-                    <img
-                      src={"../../sampleData/sinr.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Actualizar Info" ? (
-                    <img
-                      src={"../../sampleData/reqa.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Estatus sin venta" ||
-                    selectedAlgorithm === "Acciones urgentes" ? (
-                    <img
-                      src={"../../sampleData/accio.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Visita PdV" &&
-                    dto != "KOF Colombia" ? (
-                    <img
-                      src={"../../sampleData/vp.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Falla asociada al compresor" ? (
-                    <>
-                      <img
-                        src={"../../sampleData/failc.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                    </>
-                  ) : selectedAlgorithm === "Alta temperatura" ? (
-                    <img
-                      src={"../../sampleData/failt.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Posible daño eléctrico" ? (
-                    <img
-                      src={"../../sampleData/faile.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Evaporador bloqueado" ? (
-                    <img
-                      src={"../../sampleData/failc.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Alta demanda de compresor" ? (
-                    <>
-                      <img
-                        src={"../../sampleData/comp.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                    </>
-                  ) : selectedAlgorithm === "Desconexión" ? (
-                    <>
-                      {" "}
-                      <img
-                        src={"../../sampleData/desc.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
-                      />
-                    </>
-                  ) : selectedAlgorithm === "Alerta alta temperatura" ? (
-                    <img
-                      src={"../../sampleData/alt.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Bajo/Alto voltaje" ? (
-                    <img
-                      src={"../../sampleData/altv.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Actualizar dato" ? (
-                    <img
-                      src={"../../sampleData/actDat.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Datos faltantes" ? (
-                    <img
-                      src={"../../sampleData/datFal.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Monitoreo" ? (
-                    <img
-                      src={"../../sampleData/Mont.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Movimiento" ? (
-                    <img
-                      src={"../../sampleData/mov1.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Solicitar serv. correctivo" ||
-                    selectedAlgorithm === "Solicitar serv. preventivo" ? (
-                    <img
-                      src={"../../sampleData/serCP.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Seguimiento a equipo" ? (
-                    <img
-                      src={"../../sampleData/seguE.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Visita PdV" ? (
-                    <img
-                      src={"../../sampleData/visitap.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : selectedAlgorithm === "Visita PdV prioritaria" ? (
-                    <img
-                      src={"../../sampleData/visitapd.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "45px", height: "45px" }}
-                    />
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "4px",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    padding: "8px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "4px",
-                    borderRadius: "2px",
-                    background:
-                      level === "ALERT"
-                        ? "#FEF5C7"
-                        : level === "INDICATOR"
-                        ? "#BCDAFF"
-                        : "#FFC7CD",
-                    height: "100%",
-                  }}
-                >
-                  {level === "ALERT" ? (
-                    <img
-                      src={"../../sampleData/alert.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "16px", height: "16px" }}
-                    />
-                  ) : level === "INDICATOR" ? (
-                    <img
-                      src={"../../sampleData/act.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "16px", height: "16px" }}
-                    />
-                  ) : (
-                    <img
-                      src={"../../sampleData/fail1.svg"}
-                      alt="Descripción de la imagen"
-                      style={{ width: "16px", height: "16px" }}
-                    />
-                  )}
-
-                  <div
-                    style={{
-                      color: "#451C03",
-                      // fontFamily: "Space Mono",
-                      fontSize: "12px",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "14px",
-                    }}
-                  >
-                    {level === "ALERT"
-                      ? "ALERTA"
-                      : level === "INDICATOR"
-                      ? "CONTROL DE ACTIVOS"
-                      : "FALLA"}
-                  </div>
-                </div>
-                <div
-                  style={{
-                    color: "#000",
-                    // fontFamily: "DM Sans",
-                    // fontSize: "16px",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {selectedAlgorithm && <div>{selectedAlgorithm}</div>}
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                width: "265px",
-                padding: "8px",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "flex-start",
-                gap: "8px",
-                borderRadius: "8px",
-                border: "1px solid #88888B",
-                background: "#FFF",
-                marginLeft: "auto",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  alignSelf: "stretch",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: " DM Sans",
-                    fontSize: "26px",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {value.toLocaleString("es-MX")}
-                </div>
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      alignSelf: "stretch",
-                    }}
-                  >
-                    <div style={{ display: "flex", alignItems: "flex-start" }}>
-                      <div
-                        style={{
-                          display: "flex",
-                          padding: "8px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "4px",
-                          borderRadius: "8px",
-                          background:
-                            delta < 0
-                              ? "#C0F2C8"
-                              : delta === 0
-                              ? "#ADBACC"
-                              : delta > 0
-                              ? "#FFC7CD"
-                              : "",
-                        }}
-                      >
-                        {delta < 0 ? (
-                          <>
-                            {" "}
-                            <img
-                              src={"../../sampleData/arrow2.svg"}
-                              alt="Descripción de la imagen"
-                            />
-                          </>
-                        ) : delta === 0 ? (
-                          <>
-                            <img
-                              src={"../../sampleData/arrow1.svg"}
-                              alt="Descripción de la imagen"
-                            />
-                          </>
-                        ) : delta > 0 ? (
-                          <>
-                            {" "}
-                            <img
-                              src={"../../sampleData/arrow3.svg"}
-                              alt="Descripción de la imagen"
-                            />
-                          </>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        color:
-                          delta < 0
-                            ? "#31B648"
-                            : delta === 0
-                            ? "#313A49"
-                            : delta > 0
-                            ? "#F93448"
-                            : "",
-                        // fontFamily: "DM Sans",
-                        fontSize: "16px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      {delta > 0 ? "+" + delta : delta}
-                    </div>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "14px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      desde ayer
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              padding: "4px 0px",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "10px",
-              alignSelf: "stretch",
-            }}
-          >
-            <div
-              style={{ width: "100%", height: "1px", background: "#CACACA" }}
-            ></div>
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 64px",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+      <section className="drawerAlertsPrincipal" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '',gap:'4px' }}>
+        <div className="drawerAlertHeader" style={{ width: '100%', height: '10%', backgroundColor: ''}}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
+              gap: "20px",
+              
             }}
           >
+            {/* 2 */}
             <div
               style={{
-                color: "#88888B",
-                // fontFamily: "DM Sans",
-                fontSize: "12px",
-                fontStyle: "normal",
-                fontWeight: 500,
-                lineHeight: "155%",
+                display: "flex",
+                padding: "0px 30px",
+                alignItems: "center",
+                gap: "30px",
+                alignSelf: "stretch",
               }}
             >
-              TABLA
-            </div>
-            <div
-              style={{
-                color: "#000005",
-                // fontFamily: "DM Sans",
-                fontSize: "14px",
-                fontStyle: "normal",
-                fontWeight: 300,
-                lineHeight: "155%",
-              }}
-            >
-              ENFRIADORES
-            </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "16px",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "2px",
+                      alignItems: "center",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background:
+                        level === "ALERT"
+                          ? "#FEF5C7"
+                          : level === "FAIL"
+                            ? "#FFC7CD"
+                            : selectedAlgorithm === "Actualizar Info"
+                              ? "#FEF5C7"
+                              : selectedAlgorithm === "Sin Riesgo"
+                                ? "#C0F2C8"
+                                : selectedAlgorithm === "Estatus sin venta" ||
+                                  selectedAlgorithm === "Acciones urgentes"
+                                  ? "#FFC7CD"
+                                  : selectedAlgorithm === "Visita PdV" &&
+                                    dto != "KOF Colombia"
+                                    ? "#FEF5C7"
+                                    : selectedAlgorithm === "Actualizar dato" ||
+                                      selectedAlgorithm === "Datos faltantes" ||
+                                      selectedAlgorithm === "Monitoreo" ||
+                                      selectedAlgorithm === "Movimiento"
+                                      ? "#A5D8FF"
+                                      : selectedAlgorithm === "Solicitar serv. correctivo" ||
+                                        selectedAlgorithm === "Solicitar serv. preventivo" ||
+                                        selectedAlgorithm === "Seguimiento a equipo" ||
+                                        selectedAlgorithm === "Visita PdV"
+                                        ? "#FFEC99"
+                                        : selectedAlgorithm === "Visita PdV prioritaria"
+                                          ? "#FFC9C9"
+                                          : "",
+                    }}
+                  >
+                    {selectedAlgorithm === "Sin Riesgo" ? (
+                      <img
+                        src={"../../sampleData/sinr.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Actualizar Info" ? (
+                      <img
+                        src={"../../sampleData/reqa.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Estatus sin venta" ||
+                      selectedAlgorithm === "Acciones urgentes" ? (
+                      <img
+                        src={"../../sampleData/accio.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Visita PdV" &&
+                      dto != "KOF Colombia" ? (
+                      <img
+                        src={"../../sampleData/vp.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Falla asociada al compresor" ? (
+                      <>
+                        <img
+                          src={"../../sampleData/failc.svg"}
+                          alt="Descripción de la imagen"
+                          style={{ width: "45px", height: "45px" }}
+                        />
+                      </>
+                    ) : selectedAlgorithm === "Alta temperatura" ? (
+                      <img
+                        src={"../../sampleData/failt.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Posible daño eléctrico" ? (
+                      <img
+                        src={"../../sampleData/faile.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Evaporador bloqueado" ? (
+                      <img
+                        src={"../../sampleData/failc.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Alta demanda de compresor" ? (
+                      <>
+                        <img
+                          src={"../../sampleData/comp.svg"}
+                          alt="Descripción de la imagen"
+                          style={{ width: "45px", height: "45px" }}
+                        />
+                      </>
+                    ) : selectedAlgorithm === "Desconexión" ? (
+                      <>
+                        {" "}
+                        <img
+                          src={"../../sampleData/desc.svg"}
+                          alt="Descripción de la imagen"
+                          style={{ width: "45px", height: "45px" }}
+                        />
+                      </>
+                    ) : selectedAlgorithm === "Alerta alta temperatura" ? (
+                      <img
+                        src={"../../sampleData/alt.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Bajo/Alto voltaje" ? (
+                      <img
+                        src={"../../sampleData/altv.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Actualizar dato" ? (
+                      <img
+                        src={"../../sampleData/actDat.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Datos faltantes" ? (
+                      <img
+                        src={"../../sampleData/datFal.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Monitoreo" ? (
+                      <img
+                        src={"../../sampleData/Mont.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Movimiento" ? (
+                      <img
+                        src={"../../sampleData/mov1.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Solicitar serv. correctivo" ||
+                      selectedAlgorithm === "Solicitar serv. preventivo" ? (
+                      <img
+                        src={"../../sampleData/serCP.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Seguimiento a equipo" ? (
+                      <img
+                        src={"../../sampleData/seguE.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Visita PdV" ? (
+                      <img
+                        src={"../../sampleData/visitap.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : selectedAlgorithm === "Visita PdV prioritaria" ? (
+                      <img
+                        src={"../../sampleData/visitapd.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "45px", height: "45px" }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: "4px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      borderRadius: "2px",
+                      background:
+                        level === "ALERT"
+                          ? "#FEF5C7"
+                          : level === "INDICATOR"
+                            ? "#BCDAFF"
+                            : "#FFC7CD",
+                      height: "100%",
+                    }}
+                  >
+                    {level === "ALERT" ? (
+                      <img
+                        src={"../../sampleData/alert.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "16px", height: "16px" }}
+                      />
+                    ) : level === "INDICATOR" ? (
+                      <img
+                        src={"../../sampleData/act.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "16px", height: "16px" }}
+                      />
+                    ) : (
+                      <img
+                        src={"../../sampleData/fail1.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "16px", height: "16px" }}
+                      />
+                    )}
+
+                    <div
+                      style={{
+                        color: "#451C03",
+                        // fontFamily: "Space Mono",
+                        fontSize: "12px",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "14px",
+                      }}
+                    >
+                      {level === "ALERT"
+                        ? "ALERTA"
+                        : level === "INDICATOR"
+                          ? "CONTROL DE ACTIVOS"
+                          : "FALLA"}
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      color: "#000",
+                      // fontFamily: "DM Sans",
+                      // fontSize: "16px",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {selectedAlgorithm && <div>{selectedAlgorithm}</div>}
+                  </div>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  width: "265px",
+                  padding: "8px",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  gap: "8px",
+                  borderRadius: "8px",
+                  border: "1px solid #88888B",
+                  background: "#FFF",
+                  marginLeft: "auto",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    alignSelf: "stretch",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#000005",
+                      // fontFamily: " DM Sans",
+                      fontSize: "26px",
+                      fontStyle: "normal",
+                      fontWeight: 500,
+                      lineHeight: "normal",
+                    }}
+                  >
+                    {value.toLocaleString("es-MX")}
+                  </div>
+                  <div
+                    style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        alignSelf: "stretch",
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "flex-start" }}>
+                        <div
+                          style={{
+                            display: "flex",
+                            padding: "8px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "8px",
+                            background:
+                              delta < 0
+                                ? "#C0F2C8"
+                                : delta === 0
+                                  ? "#ADBACC"
+                                  : delta > 0
+                                    ? "#FFC7CD"
+                                    : "",
+                          }}
+                        >
+                          {delta < 0 ? (
+                            <>
+                              {" "}
+                              <img
+                                src={"../../sampleData/arrow2.svg"}
+                                alt="Descripción de la imagen"
+                              />
+                            </>
+                          ) : delta === 0 ? (
+                            <>
+                              <img
+                                src={"../../sampleData/arrow1.svg"}
+                                alt="Descripción de la imagen"
+                              />
+                            </>
+                          ) : delta > 0 ? (
+                            <>
+                              {" "}
+                              <img
+                                src={"../../sampleData/arrow3.svg"}
+                                alt="Descripción de la imagen"
+                              />
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          color:
+                            delta < 0
+                              ? "#31B648"
+                              : delta === 0
+                                ? "#313A49"
+                                : delta > 0
+                                  ? "#F93448"
+                                  : "",
+                          // fontFamily: "DM Sans",
+                          fontSize: "16px",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "normal",
+                        }}
+                      >
+                        {delta > 0 ? "+" + delta : delta}
+                      </div>
+                      <div
+                        style={{
+                          color: "#88888B",
+                          // fontFamily: "DM Sans",
+                          fontSize: "14px",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          lineHeight: "normal",
+                        }}
+                      >
+                        desde ayer
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>            
           </div>
+          <hr style={{borderBottom:'1px solid #CACACA'}} />
+        </div>        
+        <div className="drawerAlertsDescargar" style={{ width: '100%', height: '9%', backgroundColor: '' }}>
           <div
             style={{
               display: "flex",
+              padding: "0px 64px",
+              justifyContent: "space-between",
               alignItems: "center",
-              gap: "4px",
-              marginLeft: 350,
+              boxSizing:'border-box'
             }}
           >
-            <div style={{ marginLeft: "auto" }}>
-              <ExportToExcel
-                datos={filterCoolersDataDownload(coolersData)}
-                nombre={"Enfriadores_" + selectedAlgorithm}
-                body={body}
-                component="coolers"
-              />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <div
+                style={{
+                  color: "#88888B",
+                  // fontFamily: "DM Sans",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "155%",
+                }}
+              >
+                TABLA
+              </div>
+              <div
+                style={{
+                  color: "#000005",
+                  // fontFamily: "DM Sans",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 300,
+                  lineHeight: "155%",
+                }}
+              >
+                ENFRIADORES
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                marginLeft: 350,
+              }}
+            >
+              <div style={{ marginLeft: "auto" }}>
+                <ExportToExcel
+                  datos={filterCoolersDataDownload(coolersData)}
+                  nombre={"Enfriadores_" + selectedAlgorithm}
+                  body={body}
+                  component="coolers"
+                />
+              </div>
             </div>
           </div>
         </div>
-        <br></br>
         <div className="drawers_principal">
-          <section className="drawers_table">
+        <section className="drawers_table">
             <table>
               <thead>
                 <tr>
@@ -1084,7 +1075,7 @@ export default function DrawerA({
             />
           </section>
         </div>
-      </>
+      </section>
     </Drawer>
   );
 }

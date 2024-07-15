@@ -149,21 +149,24 @@ table th {
 }
 .drawers_principal {
   width: 100%;
-  height: 94%;
+  height: 82%;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  
   padding: "0px 24px";
+  display: flex;
 }
 .drawers_table {
-  height: 60%;
+  height: 80%;
   overflow: auto;
   scrollbar-width: thin;
   margin-left: 15px;
+  
 }
 .drawer_pagination {
   width: 100%;
-  height: 10%;
+  height: 10%;    
+  display: flex;
 }
 
 .insights_principal_container {
@@ -2554,9 +2557,9 @@ body {
 .gmnoprint{
   display: none;
 }
-.mantine-Drawer-title{
+/* .mantine-Drawer-title{
   color: transparent;
   width: 100%;
   background-image: url('../src/sampleData/Coolview/CoolviewPrincipalLogoDrawer.svg');
   background-repeat: no-repeat;
-}
+} */
