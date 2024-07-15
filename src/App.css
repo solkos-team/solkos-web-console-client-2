@@ -2551,3 +2551,12 @@ body {
     font-size: 0.6rem;
   }
 }
+.gmnoprint{
+  display: none;
+}
+.mantine-Drawer-title{
+  color: transparent;
+  width: 100%;
+  background-image: url('../src/sampleData/Coolview/CoolviewPrincipalLogoDrawer.svg');
+  background-repeat: no-repeat;
+}
