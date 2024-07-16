@@ -47,6 +47,8 @@ const userVerify = (user) => {
       return "flex";
     case "Miguel Salvador García Enciso":
       return "flex";
+    case "Cejudo Avalos Luis Antonio":
+      return "flex";
     default:
       return "none";
   }
