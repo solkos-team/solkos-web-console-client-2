@@ -283,6 +283,7 @@ table th {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
 }
 .GrapInsights {
   width: 1.2rem;
