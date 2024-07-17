@@ -46,6 +46,8 @@ export default function Users() {
   const [totalData, setTotalData] = useState<String | number>(0);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
+  const Role = localStorage.getItem("Role") || "";
+  console.log(Role);
 
   useEffect(() => {
     if (location.pathname === "/home/users") {
@@ -84,6 +86,7 @@ export default function Users() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
+
   const body = {
     customer: dto,
     page_number: currentPage,
@@ -207,6 +210,10 @@ export default function Users() {
     }
     return rows;
   };
+
+  const currentUserRole = Role;
+
+  console.log(totalData);
   return (
     <div>
       {dto === "CALL CENTER" ? (
@@ -241,10 +248,14 @@ export default function Users() {
             width: "90%",
           }}
         >
-          <div className="colaboradores_title_h1" style={{color:'#000005',fontWeight:'700',fontSize:'24px'}}>
+          <div
+            className="colaboradores_title_h1"
+            style={{ color: "#000005", fontWeight: "700", fontSize: "24px" }}
+          >
             Colaboradores
           </div>
-          <div className="colaboradores_title_h1"
+          <div
+            className="colaboradores_title_h1"
             style={{
               color: "#88888B",
               fontSize: "14px",
@@ -253,14 +264,14 @@ export default function Users() {
           >
             Catálogo de los colaboradores
           </div>
-          <div style={{width:'100%',marginLeft:'-70px'}}>
+          <div style={{ width: "100%", marginLeft: "-70px" }}>
             <HeaderInsights
-                title={"Colaboradores"}
-                description={
-                  "Crea, administra y elimina usuarios, desde este modulo"
-                }
-                />
-          </div>          
+              title={"Colaboradores"}
+              description={
+                "Crea, administra y elimina usuarios, desde este modulo"
+              }
+            />
+          </div>
         </div>
         <div
           style={{
@@ -268,22 +279,22 @@ export default function Users() {
             padding: "0px 2rem",
             flexDirection: "column",
             alignItems: "flex-start",
-            marginLeft:'-40px',
+            marginLeft: "-40px",
             width: "100%",
           }}
         >
           <div
             style={{
-              display: "flex",              
+              display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              alignSelf: "stretch",                           
+              alignSelf: "stretch",
               marginTop: -20,
-              width:'100%' ,                         
+              width: "100%",
             }}
           >
             <TextInput
-            className="colaboradores_search_1"            
+              className="colaboradores_search_1"
               value={searchValue}
               onChange={handleSearchChange}
               type="text"
@@ -299,12 +310,11 @@ export default function Users() {
                 margin: 0,
                 borderRadius: "4px",
                 color: "#88888B",
-              }}              
+              }}
             />
-            
           </div>
         </div>
-        
+
         <div
           style={{
             display: "flex",
@@ -359,7 +369,11 @@ export default function Users() {
               <div>
                 <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
-              <Button style={{ background: "#ED5079" }} onClick={toggleDrawer} className="colaboradores_button">
+              <Button
+                style={{ background: "#ED5079" }}
+                onClick={toggleDrawer}
+                className="colaboradores_button"
+              >
                 Nuevo colaborador
               </Button>
             </div>
@@ -395,7 +409,7 @@ export default function Users() {
             }}
           >
             <TextInput
-            className="colaboradores_button"
+              className="colaboradores_button"
               value={searchValue}
               onChange={handleSearchChange}
               type="text"
@@ -421,7 +435,7 @@ export default function Users() {
             width: "100%",
             height: "100%",
             overflowY: "auto",
-            overflowX:'auto'
+            overflowX: "auto",
           }}
         >
           <br />
@@ -441,6 +455,7 @@ export default function Users() {
                   <tbody>
                     {filteredUsers
                       // .slice(firstIndex, lastIndex)
+
                       .map((user, index) => (
                         <tr key={index}>
                           <td data-label="Nombre" title={user.name}>

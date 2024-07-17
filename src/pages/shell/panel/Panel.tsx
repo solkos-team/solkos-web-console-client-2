@@ -433,7 +433,7 @@ export default function Panel() {
                         <>
                           <br></br>
                           <TableauReport
-                            url={`https://tableau.efemsa.com/views/KPIs_KOF/KPIs_KOF?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link  &`}
+                            url={`https://tableau.efemsa.com/views/KOF/KPIsHistricos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
                             options={options}
                             parameters={parameters}

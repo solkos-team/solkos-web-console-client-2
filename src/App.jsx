@@ -240,15 +240,15 @@ const routes3Coolview = [
         label: "Insights",
         link: "/home/insightsNS",
         icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
-      }
+      },
     ],
   },
   {
     link: "/home/clt_n",
     label: "Cooler Life Tracking",
     icon: <img src={"../../sampleData/devices.svg"} />,
-  }, 
-]
+  },
+];
 function App() {
   const Name = localStorage.getItem("USER") || "";
   const Role = localStorage.getItem("Role") || "";
@@ -439,9 +439,8 @@ function App() {
           </div>
         ))}
       </>
-    ) :
-    localStorage.getItem("ORG") === "IMBERA HEALTH" ? 
-    <>
+    ) : localStorage.getItem("ORG") === "IMBERA HEALTH" ? (
+      <>
         {routes3Coolview.map((item) => (
           <div key={item.label}>
             {item.label === "Cooler Insights" && item.links ? (
@@ -595,8 +594,7 @@ function App() {
           </div>
         ))}
       </>
-    :
-     // ||localStorage.getItem("ORG") === "KOF Colombia"
+    ) : // ||localStorage.getItem("ORG") === "KOF Colombia"
     localStorage.getItem("ORG") === "KOF" ||
       localStorage.getItem("ORG") === "KOF Colombia" ? (
       <>

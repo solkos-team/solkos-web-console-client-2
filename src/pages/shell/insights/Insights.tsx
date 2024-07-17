@@ -1601,7 +1601,7 @@ export default function Insights() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
 
-  // console.log(data);
+  console.log(data);
   const IndicadoresData =
     data?.insights?.INDICATOR?.algorithms.filter(
       (data) => data.class == "ASSET_MANAGEMENT_ACTIONABLE"
@@ -1624,9 +1624,9 @@ export default function Insights() {
     //  if (dto === "CALL CENTER") {
     //    navigate("/home/clt_callCenter");
     //  }
-    navigateModules(dto,navigate)
+    navigateModules(dto, navigate);
   }, [navigate, dto]);
-  
+
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />
@@ -1762,7 +1762,6 @@ export default function Insights() {
                   setIsLoading={setIsLoading}
                 />
               }
-              
             </div>
           </section>
           <section className="insights_datas">

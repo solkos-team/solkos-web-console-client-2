@@ -49,6 +49,8 @@ const userVerify = (user) => {
       return "flex";
     case "Cejudo Avalos Luis Antonio":
       return "flex";
+    case "Aldo Moreno Martinez":
+      return "flex";
     default:
       return "none";
   }

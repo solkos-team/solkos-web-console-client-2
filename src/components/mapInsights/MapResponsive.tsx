@@ -501,3 +501,217 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 // VERSION DINAMICA API
 
 // *******************************************************************************************
+
+// import React, { useEffect, useState } from "react";
+// import GoogleMapReact from "google-map-react";
+// import { defaultProps, mapOptions } from "./datos";
+// import { useSelector } from "react-redux";
+// import { pathVerify } from "../../Functions/pathVerify";
+// import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
+// import { fetchUniversal } from "../../utils/apiUtils";
+// import polygonsData from "../../Functions/polyg.json";
+
+// interface GeoJSON {
+//   type: string;
+//   features: GeoJSONFeature[];
+// }
+
+// interface GeoJSONFeature {
+//   type: string;
+//   properties: {
+//     area: string;
+//   };
+//   geometry: {
+//     type: string;
+//     coordinates: number[][][] | number[][][][];
+//   };
+// }
+
+// export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
+//   const dt = useSelector((state: any) => state.works);
+//   const dto = useSelector((state: any) => state.organization);
+//   const [zoom, setZoom] = useState(defaultProps.zoom);
+//   const body = { customer: dto, path: pathVerify() };
+//   const [geojson, setGeojson] = useState<GeoJSON | null>(null);
+//   const [selectedArea, setSelectedArea] = useState(
+//     localStorage.getItem("selectedArea") || null
+//   );
+//   console.log(selectedArea);
+
+//   const fetchData = async () => {
+//     try {
+//       setIsLoading(true);
+
+//       const data = await fetchUniversal("insights", body, setIsLoading);
+//       console.log("API Response Data:", data);
+
+//       if (data && data.polygon_data) {
+//         const geoJsonData: GeoJSON = {
+//           type: "FeatureCollection",
+//           features: data.polygon_data
+//             .map((polygon: any) => {
+//               if (!polygon.geometry || !Array.isArray(polygon.geometry)) {
+//                 console.error("Invalid geometry data for polygon:", polygon);
+//                 return null;
+//               }
+
+//               const coordinates = polygon.geometry;
+
+//               return {
+//                 type: "Feature",
+//                 properties: {
+//                   area: polygon.region,
+//                 },
+//                 geometry: {
+//                   type: "MultiPolygon",
+//                   coordinates: coordinates,
+//                 },
+//               };
+//             })
+//             .filter((feature) => feature !== null),
+//         };
+
+//         setGeojson(geoJsonData);
+//         setData(data);
+//       } else {
+//         console.error("No polygon_data found in API response");
+//       }
+
+//       setIsLoading(false);
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const getRandomColor = () => {
+//     const letters = "0123456789ABCDEF";
+//     let color = "#";
+//     for (let i = 0; i < 6; i++) {
+//       color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, [dt, dto]);
+
+//   useEffect(() => {
+//     if (selectedArea) {
+//       localStorage.setItem("selectedArea", selectedArea);
+//     }
+//   }, [selectedArea]);
+
+//   const handleApiLoaded2 = (map, maps) => {
+//     if (geojson) {
+//       const bounds = new maps.LatLngBounds();
+
+//       geojson.features.forEach((feature, index) => {
+//         const areaColor = getRandomColor();
+
+//         if (feature.geometry.type === "Polygon") {
+//           const polygonCoords = feature.geometry.coordinates[0].map(
+//             (coord) => ({
+//               lat: coord[1],
+//               lng: coord[0],
+//             })
+//           );
+
+//           const polygon = new maps.Polygon({
+//             paths: polygonCoords,
+//             strokeColor: areaColor,
+//             strokeOpacity: 0.8,
+//             strokeWeight: 2,
+//             fillColor: areaColor,
+//             fillOpacity: 0.35,
+//           });
+
+//           polygon.addListener("click", () => {
+//             console.log("Clic en el polígono:", feature.properties.area);
+//             setSelectedArea(feature.properties.area);
+//           });
+
+//           polygon.setMap(map);
+
+//           polygonCoords.forEach((coord) => {
+//             bounds.extend(coord);
+//           });
+//         } else if (feature.geometry.type === "MultiPolygon") {
+//           feature.geometry.coordinates.forEach((polygonCoords) => {
+//             const outerCoords = polygonCoords[0].map((coord) => ({
+//               lat: coord[1],
+//               lng: coord[0],
+//             }));
+
+//             const outerPolygon = new maps.Polygon({
+//               paths: [outerCoords],
+//               strokeColor: areaColor,
+//               strokeOpacity: 0.8,
+//               strokeWeight: 2,
+//               fillColor: areaColor,
+//               fillOpacity: 0.35,
+//             });
+
+//             outerPolygon.addListener("click", () => {
+//               console.log("Clic en el polígono:", feature.properties.area);
+//               setSelectedArea(feature.properties.area);
+//             });
+
+//             outerPolygon.setMap(map);
+
+//             outerCoords.forEach((coord) => {
+//               bounds.extend(coord);
+//             });
+
+//             for (let i = 1; i < polygonCoords.length; i++) {
+//               const innerCoords = polygonCoords[i].map((coord) => ({
+//                 lat: coord[1],
+//                 lng: coord[0],
+//               }));
+
+//               const innerPolygon = new maps.Polygon({
+//                 paths: [innerCoords],
+//                 strokeColor: areaColor,
+//                 strokeOpacity: 0.8,
+//                 strokeWeight: 2,
+//                 fillColor: "#FFFFFF",
+//                 fillOpacity: 1,
+//               });
+
+//               innerPolygon.setMap(map);
+
+//               innerCoords.forEach((coord) => {
+//                 bounds.extend(coord);
+//               });
+//             }
+//           });
+//         }
+//       });
+
+//       map.fitBounds(bounds);
+//     }
+//   };
+
+//   return (
+//     <div style={{ height: "100%", width: "100%" }}>
+//       {isLoading === true ? (
+//         <SkeletonMapInsights />
+//       ) : (
+//         <GoogleMapReact
+//           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
+//           defaultCenter={defaultProps.center}
+//           defaultZoom={defaultProps.zoom}
+//           options={{
+//             gestureHandling: "greedy",
+//             ...mapOptions,
+//           }}
+//           yesIWantToUseGoogleMapApiInternals
+//           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded2(map, maps)}
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// ******************************************* ZOOM V1, ZOOM V2
