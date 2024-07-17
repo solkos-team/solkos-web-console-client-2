@@ -1,15 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Drawer } from "@mantine/core";
-import { formatDrawerCoolview, getMonth } from "../../../Functions/Coolview";
+import { formatDrawerCoolview, getMonth, obtenerFechas } from "../../../Functions/Coolview";
 import { LogoCoolview } from "../../../sampleData/Coolview/coolviewIcons"; 
-export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
+export const coolviewDrawer = ({ opened, onClose, CoolerId,mesLastStat,dateStat }) => {  
+  const [URL,setURL] = useState<string>('')  
+  if(dateStat != undefined && URL == ''){  
+  setURL(`https://solkos-coolview-2.firebaseapp.com?device_id=${CoolerId}&start_date=${            
+            obtenerFechas(dateStat.getUTCMonth() + 1,dateStat.getFullYear())[1]
+          }&end_date=${obtenerFechas(dateStat.getUTCMonth() + 1,dateStat.getFullYear())[0]}&clt=false`)
+  }
+  
   const mesToday = new Date();
+
   useEffect(() => {
     formatDrawerCoolview()
   }, [opened]);
-  formatDrawerCoolview()
+  formatDrawerCoolview()    
   return (
-    <Drawer
+    dateStat !== undefined 
+   ?
+   <Drawer
       opened={opened}
       onClose={onClose}
       title={<img src={LogoCoolview} alt={'LogoCoolview'} className="CoolviewLogo"></img>}
@@ -21,15 +31,14 @@ export const coolviewDrawer = ({ opened, onClose, CoolerId }) => {
     >
       <section className="coolview_printipal">  
         <iframe
-          src={`https://solkos-coolview-2.firebaseapp.com?device_id=${CoolerId}&start_date=${
-            getMonth(mesToday.getMonth()).firstDay
-          }&end_date=${getMonth(mesToday.getMonth() + 1).lastDay}&clt=false`}
+          src={URL}
           width="100%"
           height="100%"
           frameBorder="0"
         />
       </section>
-    </Drawer>
-  );
+    </Drawer> 
+   : <h1>Esperando....</h1> 
+  )
 };
 

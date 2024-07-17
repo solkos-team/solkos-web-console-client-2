@@ -42,6 +42,7 @@ export default function CoolerDetail() {
   const b = "../../sampleData/devices.png";
   const { serial_number } = useParams();
   const [searchValue, setSearchValue] = useState("");
+  const [mesLastStat,setMesLastStat] = useState<number>();
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
   const [editSerie, setEditSerie] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,7 +62,6 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
-      // console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -102,7 +102,13 @@ export default function CoolerDetail() {
   };
   useEffect(() => {
     formatDrawerCoolview();
-  }, [coolViewOpened]);
+  }, [coolViewOpened]);  
+  const [dateTelemetri,setDateTelemetri] = useState<Date>()
+  if(coolersData?.activity?.find(item => item.data.class === 'ASSET_MANAGEMENT_LAST_STAT')?.data.notified_at && mesLastStat == undefined ){
+    const mesLastStat = new Date(coolersData?.activity?.find(item => item.data.class === 'ASSET_MANAGEMENT_LAST_STAT')?.data.notified_at)      
+    setMesLastStat(mesLastStat.getMonth()+1 ?? 1)
+    setDateTelemetri(mesLastStat)   
+  }
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -1548,6 +1554,8 @@ export default function CoolerDetail() {
         opened={coolViewOpened}
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler.device_id}
+        mesLastStat={mesLastStat}
+        dateStat={dateTelemetri}
       />
     </>
   );

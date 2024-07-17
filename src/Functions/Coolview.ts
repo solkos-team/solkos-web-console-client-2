@@ -1,5 +1,5 @@
 // Funcion para traer la fecha de a cuerdo al mes
-function getMonth(monthNumber: number) {
+function getMonth(monthNumber: number,year:number) {
     if (monthNumber < 1 || monthNumber > 12) {
         throw new Error("El número de mes debe estar entre 1 y 12.");
     }
@@ -7,8 +7,8 @@ function getMonth(monthNumber: number) {
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
     ];
-    const firstDay = new Date(new Date().getFullYear(), monthNumber - 1, 1);
-    const lastDay = new Date(new Date().getFullYear(), monthNumber, 0);
+    const firstDay = new Date(year, monthNumber - 1, 1);
+    const lastDay = new Date(year, monthNumber, 0);
     const firstDayString = firstDay.toISOString().split('T')[0];
     const lastDayString = lastDay.toISOString().split('T')[0];
 
@@ -27,4 +27,25 @@ const formatDrawerCoolview = () =>{
         drawerElement.style.left = "67px";
       }
 }
-export { getMonth ,formatDrawerCoolview}  
+function obtenerFechas(mes, año) {
+    // Validar mes y año
+    if (mes < 1 || mes > 12) {
+        throw new Error('El mes debe estar entre 1 y 12.');
+    }
+
+    // Obtener el último día del mes y año proporcionados
+    const ultimoDia = new Date(año, mes, 0).getDate();
+    const fechaUltimoDia = `${año}-${String(mes).padStart(2, '0')}-${ultimoDia}`;
+
+    // Obtener el primer día del mes anterior
+    let mesAnterior = mes - 1;
+    let añoAnterior = año;
+    if (mesAnterior === 0) {
+        mesAnterior = 12;  // Si el mes es enero, el mes anterior es diciembre
+        añoAnterior--;     // Restamos 1 al año
+    }
+    const fechaPrimerDiaMesAnterior = `${añoAnterior}-${String(mesAnterior).padStart(2, '0')}-01`;
+
+    return [fechaUltimoDia, fechaPrimerDiaMesAnterior];
+}
+export { getMonth ,formatDrawerCoolview,obtenerFechas}  
