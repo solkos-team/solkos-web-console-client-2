@@ -27,7 +27,10 @@ export const MenuResponsive = () => {
           // viewport size > theme.breakpoints.lg – width is 400px
           width={{ sm: 300, lg: 400 }}
         >
-          <Text>Application navbar</Text>
+          <div style={{width:'100%',height:'100%',background:'blue',display:'flex',flexDirection:'column'}}>
+            <div style={{width:'100%',height:'90%',backgroundColor:'gold'}}>ruteo</div>
+            <div style={{width:'100%',height:'10%',backgroundColor:'gray'}}>organizacion</div>
+          </div>
         </Navbar>
       }
       header={
@@ -43,8 +46,11 @@ export const MenuResponsive = () => {
                 mr="xl"
               />
             </MediaQuery>
-            <div style={{width:'100%' , backgroundColor:'red'}}>
-            <Text>Application header</Text>
+            <div style={{width:'90%' , backgroundColor:'red'}}>
+            <Text>Logo Consola Soolkos</Text>
+            </div>
+            <div style={{width:'10%' , backgroundColor:'aqua'}}>
+            <Text>🔎</Text>
             </div>
           </div>
         </Header>
