@@ -40,7 +40,9 @@ export default function CoolerDetailCC() {
   const b = "../../sampleData/devices.png";
   const { serial_number } = useParams();
   const [searchValue, setSearchValue] = useState("");
+  const [mesLastStat, setMesLastStat] = useState<number>();
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
+  const [dateTelemetri, setDateTelemetri] = useState<Date>();
   const [editSerie, setEditSerie] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [serie, SetSerie] = useState(serial_number);
@@ -76,6 +78,22 @@ export default function CoolerDetailCC() {
       : fetchData(value);
     setEditSerie(false);
   };
+
+  if (
+    coolersData?.activity?.find(
+      (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
+    )?.data.notified_at &&
+    mesLastStat == undefined
+  ) {
+    const mesLastStat = new Date(
+      coolersData?.activity?.find(
+        (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
+      )?.data.notified_at
+    );
+    setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
+    setDateTelemetri(mesLastStat);
+  }
+
   return (
     <>
       {/* {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -1298,6 +1316,8 @@ export default function CoolerDetailCC() {
         opened={coolViewOpened}
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler.device_id}
+        mesLastStat={mesLastStat}
+        dateStat={dateTelemetri}
       />
     </>
   );

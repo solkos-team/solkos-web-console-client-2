@@ -8,7 +8,7 @@
       },
       "geometry": {
         "type": "MultiPolygon",
-        "coordinates": []
+        "coordinates": [[[[-101.271974, 20.664279]]]]
       }
     }
   ]

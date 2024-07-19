@@ -42,7 +42,7 @@ export default function CoolerDetail() {
   const b = "../../sampleData/devices.png";
   const { serial_number } = useParams();
   const [searchValue, setSearchValue] = useState("");
-  const [mesLastStat,setMesLastStat] = useState<number>();
+  const [mesLastStat, setMesLastStat] = useState<number>();
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
   const [editSerie, setEditSerie] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,6 +61,7 @@ export default function CoolerDetail() {
         "GET",
         setIsLoading
       );
+      console.log(data);
       setCoolersData(data);
       setIsLoading(false);
     } catch (error) {
@@ -102,12 +103,21 @@ export default function CoolerDetail() {
   };
   useEffect(() => {
     formatDrawerCoolview();
-  }, [coolViewOpened]);  
-  const [dateTelemetri,setDateTelemetri] = useState<Date>()
-  if(coolersData?.activity?.find(item => item.data.class === 'ASSET_MANAGEMENT_LAST_STAT')?.data.notified_at && mesLastStat == undefined ){
-    const mesLastStat = new Date(coolersData?.activity?.find(item => item.data.class === 'ASSET_MANAGEMENT_LAST_STAT')?.data.notified_at)      
-    setMesLastStat(mesLastStat.getMonth()+1 ?? 1)
-    setDateTelemetri(mesLastStat)   
+  }, [coolViewOpened]);
+  const [dateTelemetri, setDateTelemetri] = useState<Date>();
+  if (
+    coolersData?.activity?.find(
+      (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
+    )?.data.notified_at &&
+    mesLastStat == undefined
+  ) {
+    const mesLastStat = new Date(
+      coolersData?.activity?.find(
+        (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
+      )?.data.notified_at
+    );
+    setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
+    setDateTelemetri(mesLastStat);
   }
   return (
     <>
