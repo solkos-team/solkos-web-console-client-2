@@ -100,7 +100,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 style={{
                   color: "#3A3A3F",
                   // fontFamily: "DM Sans",
-                  fontSize: "1vw",
+                  fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: 500,
                   lineHeight: "normal",
@@ -112,7 +112,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 style={{
                   color: "#88888B",
                   // fontFamily: "DM Sans",
-                  fontSize: ".9vw",
+                  fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: 500,
                   lineHeight: "normal",
@@ -143,7 +143,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "28px",
@@ -155,7 +155,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.625rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "28px",
@@ -182,7 +182,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "28px",
@@ -194,7 +194,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "28px",
@@ -224,7 +224,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "28px",
@@ -236,7 +236,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.625rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "28px",
@@ -265,7 +265,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "28px",
@@ -277,7 +277,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.625rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "28px",
@@ -312,7 +312,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                   alignItems: "center",
                   textDecoration: "none", // Elimina el subrayado del enlace
                   color: "#3E83FF",
-                  fontSize: "1vw",
+                  fontSize: "0.875rem",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "normal",
@@ -362,7 +362,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 style={{
                   color: "#3A3A3F",
                   // fontFamily: "DM Sans",
-                  fontSize: "1vw",
+                  fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: 500,
                   lineHeight: "normal",
@@ -375,7 +375,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 style={{
                   color: "#88888B",
                   // fontFamily: "DM Sans",
-                  fontSize: ".9vw",
+                  fontSize: "1rem",
                   fontStyle: "normal",
                   fontWeight: 500,
                   lineHeight: "normal",
@@ -388,7 +388,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               {coolersData?.properties?.energy_consumption_month_1.value ===
                 0 ? (
                 <div
-                  style={{ marginLeft: 500, marginTop: 100, fontSize: "1vw" }}
+                  style={{ marginLeft: 500, marginTop: 100, fontSize: "1rem" }}
                 >
                   Sin información para mostrar
                 </div>

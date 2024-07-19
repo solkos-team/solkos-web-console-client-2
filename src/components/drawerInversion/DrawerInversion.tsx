@@ -92,7 +92,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     style={{
                       color: "#3A3A3F",
                       // fontFamily: "DM Sans",
-                      fontSize: "1vw",
+                      fontSize: "1rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -107,7 +107,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     textAlign: "justify",
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.7vw",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -133,7 +133,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.625rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -212,7 +212,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     alignSelf: "stretch",
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -253,7 +253,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -316,7 +316,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     style={{
                       color: "#3A3A3F",
                       // fontFamily: "DM Sans",
-                      fontSize: "1vw",
+                      fontSize: "1rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -331,7 +331,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     textAlign: "justify",
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -354,7 +354,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     style={{
                       color: "#000005",
                       // fontFamily: "DM Sans",
-                      fontSize: "1.2vw",
+                      fontSize: "1.625rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -372,7 +372,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     style={{
                       color: "#88888B",
                       // fontFamily: "DM Sans",
-                      fontSize: ".9vw",
+                      fontSize: "0.875rem",
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "normal",
@@ -433,7 +433,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     style={{
                       color: "#88888B",
                       // fontFamily: "DM Sans",
-                      fontSize: ".9vw",
+                      fontSize: "0.875rem",
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "14px",
@@ -483,7 +483,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#3A3A3F",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "normal",
@@ -495,7 +495,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.375rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -519,7 +519,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#3A3A3F",
                     // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "normal",
@@ -531,7 +531,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.375rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -836,7 +836,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     style={{
                       color: "#3A3A3F",
                       // fontFamily: "DM Sans",
-                      fontSize: "1vw",
+                      fontSize: "1rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
@@ -850,7 +850,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: ".7vw",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -876,7 +876,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.2vw",
+                    fontSize: "1.625rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -893,7 +893,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: ".7vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "normal",
@@ -932,7 +932,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#F93448",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.9vw",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "14px",
@@ -950,7 +950,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#000005",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.9vw",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "14px",
@@ -968,7 +968,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   style={{
                     color: "#88888B",
                     // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
                     lineHeight: "14px",
@@ -985,10 +985,10 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 style={{ width: "100%", marginLeft: 60 }}
               >
                 <Tabs.List>
-                  <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
+                  <Tabs.Tab value="first" style={{ fontSize: "0.75rem" }}>
                     Gráfica del acumulado
                   </Tabs.Tab>
-                  <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
+                  <Tabs.Tab value="second" style={{ fontSize: "0.75rem" }}>
                     Gráfica por año
                   </Tabs.Tab>
                 </Tabs.List>
