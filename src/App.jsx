@@ -24,6 +24,7 @@ import a2 from "../public/sampleData/a2.svg";
 import { addOrg } from "./app/organization";
 import { fetchUniversalDetails } from "./utils/apiUtils";
 import { Burger, Tooltip } from "@mantine/core";
+import { MenuResponsive } from "./components/MenuResponsive/MenuResponsive";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -895,7 +896,7 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
+  const [menuResponsive,setMenuResponsive] = useState(false)
   if (width < 1000) {
     if (opened2 === true) {
     } else {
@@ -903,10 +904,16 @@ function App() {
       sessionStorage.setItem("MenuState", opened2);
     }
   }
-
+  if(width <= 767 && menuResponsive == false){
+    setMenuResponsive(true)
+  }else{width > 767 && menuResponsive == true ? setMenuResponsive(false):''}
+  
+  
   return (
     <>
-      <AppShell
+      {menuResponsive == false 
+      ?
+      (<AppShell
         navbarOffsetBreakpoint={"sm"}
         asideOffsetBreakpoint={"sm"}
         padding={"md"}
@@ -1361,7 +1368,9 @@ function App() {
         header={<Header height={0}></Header>}
       >
         <Outlet />
-      </AppShell>
+      </AppShell>)
+      : (<MenuResponsive links={links}/>)
+      }
     </>
   );
 }
