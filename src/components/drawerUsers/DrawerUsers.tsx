@@ -13,9 +13,10 @@ export default function DrawerUsers({
   openedDrawerEdit,
   setOpenedDrawerEdit,
   oncloseDrawerEdit,
+  deleteUserDrawer
 }) {
   const { id, name, email, customer, path } = userData;
-  const dto = useSelector((state: any) => state.organization);
+  const dto = useSelector((state: any) => state.organization);  
   const [nameUser, setNameUser] = useState(name);
   const [showAlert, setShowAlert] = useState(false);
   const [emailUser, setEmailUser] = useState(email);
@@ -72,14 +73,15 @@ export default function DrawerUsers({
     setPathUser(path);
   }, [userData]);
 
-  const userVerify = (): Boolean => {
+  const userVerify = (): boolean => {
     const user = localStorage.getItem("USER");
     if (user == "Jose Ivan Perez Ugalde" || user == "Mayra Barrón Reséndiz") {
       return true;
     } else {
       return false;
     }
-  };
+  };  
+  
   return (
     <Drawer
       opened={openedDrawerEdit}
@@ -108,6 +110,7 @@ export default function DrawerUsers({
             ></div>
           </div>
           <section className="users_form">
+            <section style={{width:'100%',height:'60%',display:'flex',flexDirection:'column',gap:'1rem'}}>
             <section className="users_form_1">
               {userVerify() == true ? (
                 <>
@@ -203,8 +206,46 @@ export default function DrawerUsers({
                 </section>
               </>
             )}
+            </section>            
 
             <section className="users_form_button">
+              {/* Boton Eliminar */}
+              <Button
+                style={{
+                  background: "var(--red-0, #FFF5F5)",
+                  width: "100%",
+                  marginLeft: 0,
+                  color: "#FA5252",
+                  cursor: "pointer",
+                }}
+                onClick={()=>{                  
+                  deleteUserDrawer(id)
+                  oncloseDrawerEdit()
+                }                  
+                }
+                disabled={!userVerify()}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    padding: "8px 26px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                    flex: 100,
+                    borderRadius: "8px",
+                    background: "var(--red-0, #FFF5F5)",
+                  }}
+                >
+                  <img
+                    src={"../../sampleData/delete.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "16px", height: "16px" }}
+                  />
+                  Eliminar
+                </div>
+              </Button>
+              {/* Boton Editar */}
               <Button
                 style={{
                   background: "#E7F5FF",
@@ -214,7 +255,7 @@ export default function DrawerUsers({
                   cursor: "pointer",
                 }}
                 onClick={handleEditUser}
-                disabled={true}
+                disabled={!userVerify()}
               >
                 <div
                   style={{
@@ -235,7 +276,7 @@ export default function DrawerUsers({
                   />
                   Editar
                 </div>
-              </Button>
+              </Button>              
             </section>
           </section>
         </section>

@@ -628,6 +628,7 @@ export default function Users() {
           openedDrawerEdit={openedEdit}
           oncloseDrawerEdit={toggleDrawerEdit}
           setOpenedDrawerEdit={setOpenedEdit}
+          deleteUserDrawer={deleteUserDrawer}
         ></DrawerUsers>
       )}
       {isUpdateOpen && (
