@@ -897,7 +897,7 @@ function App() {
     };
   }, []);
   const [menuResponsive,setMenuResponsive] = useState(false)
-  if (width < 1000) {
+  if (width < 1000 && menuResponsive == false ) {
     if (opened2 === true) {
     } else {
       setOpened2(true);
@@ -905,9 +905,9 @@ function App() {
     }
   }
   if(width <= 767 && menuResponsive == false){
-    setMenuResponsive(true)
-  }else{width > 767 && menuResponsive == true ? setMenuResponsive(false):''}
-  
+    setMenuResponsive(true)   
+    setOpened2(false) 
+  }else{width > 767 && menuResponsive == true ? (setMenuResponsive(false) ,setOpened2(true)):''}
   
   return (
     <>
