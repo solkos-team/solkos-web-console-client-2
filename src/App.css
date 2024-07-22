@@ -1047,11 +1047,11 @@ body {
 }
 .pagefilter_return_principal {
   display: flex;
-  margin-left: -35px;
+  /* margin-left: -35px; */
   align-items: center;
   gap: 1rem;
   align-self: stretch;
-  margin-top: -30px;
+  /* margin-top: -30px; */
   max-width: 100%;
   white-space: "nowrap";
 }
@@ -1620,7 +1620,7 @@ body {
   }
   .universal_search_principal_responsive {
     display: flex;
-    width: 200px;
+    width: max-content;
     height: 31px;
     align-items: center;
     justify-content: center;
