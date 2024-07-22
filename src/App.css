@@ -187,8 +187,7 @@ table th {
 }
 .outlets_title_h1 {
   width: 100%;
-  text-align: center;
-  /* font-size: 1.3vw; */
+  text-align: center;  
   font-weight: 700;
   font-size: clamp(2rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
@@ -199,7 +198,6 @@ table th {
 .insights_title_h1 {
   width: 100%;
   text-align: left;
-  /* font-size: 1.3vw; */
   font-weight: 700;
   font-size: clamp(1.5rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
@@ -245,7 +243,6 @@ table th {
   align-items: center;
   width: 100%;
   text-align: left;
-  /* font-size: 1.3vw; */
   font-weight: 700;
   font-size: clamp(2rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
@@ -257,7 +254,6 @@ table th {
   width: 100%;
   height: 50%;
   text-align: left;
-  /* font-size: 0.8vw;   */
   font-weight: 400;
   font-size: clamp(0.7rem, 0.875rem, 0.8rem);
   line-height: 21.7px;
@@ -334,7 +330,6 @@ table th {
   gap: 1rem;
 }
 .insights_mapa_info_datas_data_li {
-  /* font-size: 1vw; */
   font-weight: 400;
   font-size: clamp(0.7rem, 0.875rem, 1rem);
   line-height: 18.23px;
@@ -342,7 +337,6 @@ table th {
   /* font-style: "normal"; */
 }
 .insights_mapa_info_datas_data_li_value {
-  /* font-size: 1.2vw; */
   font-weight: 500;
   font-size: clamp(0.7rem, 1.375rem, 1.1rem);
   line-height: 28.64px;
@@ -356,7 +350,7 @@ table th {
   width: 20%;     */
   /* margin-left: -2.5rem; */
   list-style: none;
-  font-size: 0.8vw;
+  font-size: 0.8rem;  
 }
 .insights_mapa_info_datas_data_name {
   width: 100%;
@@ -365,16 +359,16 @@ table th {
 .insights_mapa_info_datas_data_name_h1 {
   color: #88888b;
   /* font-size: 1em; */
-  font-size: 0.8vw;
+  font-size: 0.8rem;
   text-align: left;
 }
 .insights_mapa_info_datas_data_name_h1_value {
   color: #000005;
   /* font-size: 1.2em; */
-  font-size: 1vw;
+  font-size: 1rem;
   width: 100%;
   margin-left: -10px;
-  margin-top: -0.1rem;
+  margin-top: -0.1rem;  
 }
 .insights_mapa_info_datas_data_value {
   width: 100%;
@@ -385,9 +379,8 @@ table th {
   height: 1.5rem;
 }
 .insights_mapa_info_title_h1 {
-  text-align: left;
-  /* font-zise: 0.8vw; */
-  font-size: clamp(0.9rem, 0.8vw, 0.8rem);
+  text-align: left;  
+  font-size: 1rem;
   color: #3a3a3f;
   font-weight: 500;
   margin-top: 2px;
@@ -426,14 +419,12 @@ table th {
   align-items: center;
 }
 .insights_datas_kpi_title_h1 {
-  /* font-size: 1vw; */
-  font-size: clamp(0.9rem, 0.8vw, 0.8rem);
+  font-size: clamp(0.9rem, 0.8rem, 0.8rem);
   color: #3a3a3f;
   font-weight: 500;
   margin-left: 1rem;
 }
 .insights_datas_kpi_title_data_h1 {
-  /* font-size: 0.8vw; */
   font-weight: 400;
   font-size: clamp(0.7rem, 0.8rem, 0.7rem);
   line-height: 18.23px;
@@ -442,20 +433,17 @@ table th {
   margin-left: 1rem;
 }
 .insights_datas_kpi_title_h1_data {
-  /* font-size: 1.3vw; */
   font-weight: 500;
   font-size: clamp(1rem, 1.375rem, 1.3rem);
   line-height: 28.64px;
   color: #000005;
-  /* margin-left: 1rem; */
   width: max-content;
 }
 .insights_datas_kpi_data {
   width: 100%;
   height: 89%;
   display: flex;
-  /* flex-direction: row; */
-  gap: 1vw;
+  gap: 1rem;
   justify-content: space-between;
 }
 .insightsNS_datas_statusTransmition_data {
@@ -536,8 +524,6 @@ table th {
 }
 
 .insights_datas_kpi_data_data {
-  /* list-style: none;
-  font-size: 0.8vw; */
   width: 30%;
   height: 100%;
   display: flex;
@@ -663,8 +649,7 @@ table th {
   color: #3a3a3f;
 }
 .insights_mapa_info_mapa_info {
-  /* font-zise: 0.8vw; */
-  font-size: 0.8vw;
+  font-size: 0.8rem;
   color: #3a3a3f;
   font-weight: 500;
   text-align: left;
@@ -697,32 +682,21 @@ table th {
   margin-bottom: 5px;
 }
 .insights_datas_info_mantenimiento_datos_barras_color_Fallas {
-  /* width: 13vw; */
   height: 2rem;
   border-radius: 4px;
-  /* background-color: #ffc4cc; */
   display: flex;
   align-items: center;
-  /* padding-left: 1rem; */
 }
 .insights_datas_info_controlDeActivos_barras {
   height: 1.5rem;
   border-radius: 4px;
   display: flex;
   align-items: center;
-  /* padding-left: 1rem; */
 }
-/* .insights_datas_info_mantenimiento_datos_barras_color_Fallas:hover{
-  box-shadow: 0 0 10px red;
-}
-.insights_datas_info_mantenimiento_datos_barras_color_Alertas:hover{
-  box-shadow: 0 0 10px yellow;
-} */
+
 .insights_datas_info_mantenimiento_datos_barras_color_Alertas {
-  /* width: 13vw; */
-  height: 2vw;
+  height: 2rem;
   border-radius: 4px;
-  /* background-color: #fef5c7; */
   display: flex;
   align-items: center;
   /* padding-left: 1rem; */
@@ -807,10 +781,10 @@ body {
 }
 .clt_actividad_principal_actividad {
   width: 50%;
-  height: 30vw;
+  height: 30rem;
   border-radius: 8px;
   border: 1px solid var(--gray-4, #ced4da);
-  background: var(--gray-0, #f8f9fa);
+  background: var(--gray-0, #f8f9fa);  
   padding: 0.5rem;
   box-sizing: border-box;
   display: flex;
