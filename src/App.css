@@ -2213,7 +2213,7 @@ body {
   height: 100%;
   display: flex;
   padding: 1rem;
-  gap: 1rem;
+  gap: 0.5rem;
   flex-direction: column;
   box-sizing: border-box;
 }
@@ -2224,7 +2224,7 @@ body {
 }
 .vault_drawer_registro {
   width: 100%;
-  height: 30%;
+  height: 25%;
   border-radius: 8px;
   border: 1px solid var(--gray-4, #ced4da);
   background: var(--gray-0, #f8f9fa);
@@ -2236,7 +2236,7 @@ body {
 }
 .vault_drawer_mapa {
   width: 100%;
-  height: 35%;
+  height: 43%;
   border-radius: 8px;
   border: 1px solid var(--gray-4, #ced4da);
   background: var(--gray-0, #f8f9fa);
@@ -2246,6 +2246,20 @@ body {
   display: flex;
   flex-direction: column;
 }
+.vault_drawer_mapa_info_p {
+  color: var(--gray-6, #868E96);  
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 155%;
+}
+.vault_drawer_mapa_info_p2 {
+  color: var(--gray-7, #495057);
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 155%;
+}
 .vault_drawer_mapa_title {
   width: 100%;
   height: 10%;
@@ -2254,9 +2268,23 @@ body {
   gap: 0.5rem;
   align-items: center;
 }
+.vault_drawer_mapa_info{
+  width: 100%;
+  height: 30%;  
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.vault_drawer_mapa_title_p {
+  color: var(--other-black, #000);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 145%;
+}
 .vault_drawer_mapa_mapa {
   width: 100%;
-  height: 90%;
+  height: 60%;
   border-radius: 8px;
   border: 1px solid var(--gray-4, #ced4da);
   background: url(<path-to-image>) lightgray 50% / cover no-repeat;

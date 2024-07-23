@@ -249,27 +249,24 @@ export const DrawerVault = ({ opened, onCLose }) => {
                 </section>
                 <section className="vault_drawer_mapa">
                     <div className="vault_drawer_mapa_title">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="26"
-                            height="27"
-                            viewBox="0 0 26 27"
-                            fill="none"
-                        >
-                            <path
-                                d="M13.0007 15.6666C14.7956 15.6666 16.2507 14.2115 16.2507 12.4166C16.2507 10.6217 14.7956 9.1666 13.0007 9.1666C11.2057 9.1666 9.75065 10.6217 9.75065 12.4166C9.75065 14.2115 11.2057 15.6666 13.0007 15.6666Z"
-                                stroke="#313A49"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
-                            <path
-                                d="M19.1291 18.545L14.5325 23.1416C14.1262 23.5474 13.5755 23.7754 13.0012 23.7754C12.4269 23.7754 11.8762 23.5474 11.4699 23.1416L6.87224 18.545C5.66023 17.3329 4.83485 15.7887 4.50048 14.1075C4.16611 12.4264 4.33777 10.6838 4.99374 9.10022C5.64971 7.51662 6.76054 6.1631 8.18576 5.21081C9.61098 4.25852 11.2866 3.75024 13.0007 3.75024C14.7147 3.75024 16.3903 4.25852 17.8156 5.21081C19.2408 6.1631 20.3516 7.51662 21.0076 9.10022C21.6635 10.6838 21.8352 12.4264 21.5008 14.1075C21.1665 15.7887 20.3411 17.3329 19.1291 18.545Z"
-                                stroke="#313A49"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                            <path d="M3.25 22.75H22.75M3.25 7.58333V8.66667C3.25 9.52862 3.59241 10.3553 4.2019 10.9648C4.8114 11.5743 5.63805 11.9167 6.5 11.9167C7.36195 11.9167 8.1886 11.5743 8.7981 10.9648C9.40759 10.3553 9.75 9.52862 9.75 8.66667M3.25 7.58333H22.75M3.25 7.58333L5.41667 3.25H20.5833L22.75 7.58333M9.75 8.66667V7.58333M9.75 8.66667C9.75 9.52862 10.0924 10.3553 10.7019 10.9648C11.3114 11.5743 12.138 11.9167 13 11.9167C13.862 11.9167 14.6886 11.5743 15.2981 10.9648C15.9076 10.3553 16.25 9.52862 16.25 8.66667M16.25 8.66667V7.58333M16.25 8.66667C16.25 9.52862 16.5924 10.3553 17.2019 10.9648C17.8114 11.5743 18.638 11.9167 19.5 11.9167C20.362 11.9167 21.1886 11.5743 21.7981 10.9648C22.4076 10.3553 22.75 9.52862 22.75 8.66667V7.58333M5.41667 22.75V11.7541M20.5833 22.75V11.7541M9.75 22.75V18.4167C9.75 17.842 9.97827 17.2909 10.3846 16.8846C10.7909 16.4783 11.342 16.25 11.9167 16.25H14.0833C14.658 16.25 15.2091 16.4783 15.6154 16.8846C16.0217 17.2909 16.25 17.842 16.25 18.4167V22.75" stroke="#313A49" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <p>Ubicación en el mapa</p>
+                        <div className='vault_drawer_mapa_title_p'>Acerca del punto de venta</div>
+                    </div>
+                    <div className="vault_drawer_mapa_info">
+                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                            <div className='vault_drawer_mapa_info_p'>Nombre del PdV</div>
+                            <div className='vault_drawer_mapa_info_p2'>Pizza Planeta / 120151181</div>
+                        </div>
+                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                            <div className='vault_drawer_mapa_info_p'>Dirección</div>
+                            <div className='vault_drawer_mapa_info_p2'>Av Mexico 11 Santa Maria Aztahuacan iztapalapa</div>
+                        </div>
+                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                            <div className='vault_drawer_mapa_info_p'>Distancia al punto de instalación</div>
+                            <div className='vault_drawer_mapa_info_p2'>50m</div>
+                        </div>
                     </div>
                     <div className="vault_drawer_mapa_mapa"></div>
                 </section>
