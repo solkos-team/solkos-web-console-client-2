@@ -31,8 +31,7 @@ dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
 const useStyles = createStyles((theme, _params, getRef) => {
-  const icon = getRef("icon");
-
+  const icon = getRef("icon");  
   return {
     header: {
       overflowY: "hidden",
@@ -267,7 +266,7 @@ function App() {
 
   // *******************************
   const [updatedRoutes, setUpdatedRoutes] = useState(routes);
-
+  const [menuResponsive,setMenuResponsive] = useState(false)
   useEffect(() => {
     if (Name === "Mayra Barrón Reséndiz" || Name === "Jose Ivan Perez Ugalde") {
       setUpdatedRoutes((prevRoutes) => [
@@ -352,6 +351,7 @@ function App() {
       dispatch(addOrg());
     }
   }, [location.pathname]);
+  
   const links =
     localStorage.getItem("ORG") === "CALL CENTER" ? (
       <>
@@ -379,15 +379,13 @@ function App() {
                   {coolerInsightsOpen ? (
                     <img
                       src={a1}
-                      style={{ marginLeft: opened2 === true ? 10 : 40 }}
+                      style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
                     />
                   ) : (
                     <img
-                      src={a2}
-                      style={{
-                        marginLeft: opened2 === true ? 10 : 40,
-                      }}
-                    />
+                        src={a2}
+                        style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
+                      />
                   )}
                 </div>
 
@@ -466,13 +464,13 @@ function App() {
                     </span>
                     {coolerInsightsOpen ? (
                       <img
-                        src={a1}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
-                      />
+                      src={a1}
+                      style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
+                    />
                     ) : (
                       <img
                         src={a2}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
                       />
                     )}
                   </div>
@@ -527,13 +525,13 @@ function App() {
                     </span>
                     {vaultOpen ? (
                       <img
-                        src={a1}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
-                      />
+                      src={a1}
+                      style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
+                    />
                     ) : (
                       <img
                         src={a2}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
                       />
                     )}
                   </div>
@@ -623,13 +621,13 @@ function App() {
                     </span>
                     {coolerInsightsOpen ? (
                       <img
-                        src={a1}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
-                      />
+                      src={a1}
+                      style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
+                    />
                     ) : (
                       <img
                         src={a2}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
                       />
                     )}
                   </div>
@@ -684,13 +682,13 @@ function App() {
                     </span>
                     {vaultOpen ? (
                       <img
-                        src={a1}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
-                      />
+                      src={a1}
+                      style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
+                    />
                     ) : (
                       <img
                         src={a2}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
                       />
                     )}
                   </div>
@@ -778,13 +776,13 @@ function App() {
                     </span>
                     {coolerInsightsOpen ? (
                       <img
-                        src={a1}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
-                      />
+                      src={a1}
+                      style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
+                    />
                     ) : (
                       <img
                         src={a2}
-                        style={{ marginLeft: opened2 === true ? 1 : 40 }}
+                        style={{ marginLeft: opened2 === true ? 1 : (opened2 == false && menuResponsive == true ? 240 : 40) }}
                       />
                     )}
                   </div>
@@ -896,7 +894,7 @@ function App() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const [menuResponsive,setMenuResponsive] = useState(false)
+  
   if (width < 1000 && menuResponsive == false ) {
     if (opened2 === true) {
     } else {
@@ -907,7 +905,7 @@ function App() {
   if(width <= 767 && menuResponsive == false){
     setMenuResponsive(true)   
     setOpened2(false) 
-  }else{width > 767 && menuResponsive == true ? (setMenuResponsive(false) ,setOpened2(true)):''}
+  }else{width > 767 && menuResponsive == true ? (setMenuResponsive(false) ,setOpened2(true)):''}  
   
   return (
     <>
@@ -1369,7 +1367,7 @@ function App() {
       >
         <Outlet />
       </AppShell>)
-      : (<MenuResponsive links={links}/>)
+      : (<MenuResponsive links={links} data={data} setData={setData} validaUser={validaUser} saveOrganization={saveOrganization} resultado={resultado} />)
       }
     </>
   );

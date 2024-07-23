@@ -1,15 +1,21 @@
 import { useState } from 'react';
 import { AppShell, Burger, Header, MediaQuery, Navbar, Text, useMantineTheme } from '@mantine/core';
 import React from 'react';
+
 import { Outlet } from 'react-router-dom';
 //@ts-ignore
 import solkosSymbol from '../../sampleData/solkosSymbol.svg'
 import PageFilter from '../pageFilter/PageFilter';
+import { useSelector } from 'react-redux';
+import { useDisclosure } from '@mantine/hooks';
+import { DrawerOrganizationResponsive } from './DrawerOrganizationResponsive';
 
-export const MenuResponsive = ({links}) => {
-  const [opened, setOpened] = useState(false);
+export const MenuResponsive = ({ links,data ,setData,validaUser,saveOrganization,resultado}) => {
+  const [openedMenu, setOpened] = useState(false);
   const theme = useMantineTheme();
-  
+  const dt = useSelector((state: any) => state.organization);
+  const Name = localStorage.getItem("USER") || "";  
+  const [opened, { open, close }] = useDisclosure(false);
   return (
     <section
     // style={{display:'none'}}
@@ -25,17 +31,54 @@ export const MenuResponsive = ({links}) => {
             // Breakpoint at which navbar will be hidden if hidden prop is true
             hiddenBreakpoint="sm"
             // Hides navbar when viewport size is less than value specified in hiddenBreakpoint
-            hidden={!opened}
+            hidden={!openedMenu}
             // when viewport size is less than theme.breakpoints.sm navbar width is 100%
             // viewport size > theme.breakpoints.sm – width is 300px
             // viewport size > theme.breakpoints.lg – width is 400px
             width={{ sm: 300, lg: 400 }}
           >
-            <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column',padding:'0.625rem',boxSizing:'border-box' }}>
+            <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', padding: '0.625rem', boxSizing: 'border-box' }}>
               <div style={{ width: '100%', height: '90%' }}>
                 {links}
               </div>
-              <div style={{ width: '100%', height: '10%', backgroundColor: 'gray' }}>organizacion</div>
+              <div style={{ width: '100%', height: '10%', display: 'flex', flexDirection: 'row', padding: '0.5rem', boxSizing: 'border-box' ,gap:'1rem',borderTop:'1px solid  var(--gray-4, #CED4DA)'}} onClick={() => open()}>
+                <div style={{ width: '20%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <Text
+                    style={{
+                      color: "#313A49",
+                      fontSize: "0.875rem",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "14px",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {/* {dt || "IMBERA"} */}
+                    {resultado.toUpperCase() || "US"}
+                  </Text>
+                </div>
+                <div style={{ width: '60%', height: '100%', display: 'flex',flexDirection:'column', justifyContent: 'center', alignItems: 'flex-start'}}>                  
+                  <Text
+                    style={{
+                      color: "#000005",
+                      fontSize: "0.875rem",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      lineHeight: "155%",
+                    }}
+                  >
+                    <div style={{ fontSize: 12 }}>{Name || "User"}</div>
+                  </Text>
+                  <div style={{color:'var(--blue-6, #2393F4)',fontSize:'0.625rem',fontStyle:'normal',fontWeight:'700',lineHeight:'1rem',textTransform:'uppercase',padding:'1px 8px',boxSizing:'border-box',justifyContent:'center',alignItems:'center'}}>Imbera</div>
+                </div>
+                <div style={{ width: '20%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M6 6.75L9 3.75L12 6.75M12 11.25L9 14.25L6 11.25" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>                
+              </div>
+              <DrawerOrganizationResponsive opened={opened}
+            onClose={close} data={data} dt={dt} validaUser={validaUser} setData={setData} saveOrganization={saveOrganization}/>
             </div>
           </Navbar>
         }
@@ -45,14 +88,14 @@ export const MenuResponsive = ({links}) => {
             <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
               <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
                 <Burger
-                  opened={opened}
+                  opened={openedMenu}
                   onClick={() => setOpened((o) => !o)}
                   size="sm"
                   color={theme.colors.gray[6]}
                   mr="xl"
                 />
               </MediaQuery>
-              <div style={{ width: '90%',display:'flex',justifyContent:'center',alignItems:'center',gap:'0.5rem' }}>
+              <div style={{ width: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
                 <img
                   style={{
                     width: "1.3rem",
@@ -77,7 +120,7 @@ export const MenuResponsive = ({links}) => {
                   <path d="M7.0732 14C5.74715 14 4.59961 13.7131 3.63058 13.1394C2.67429 12.5528 1.93477 11.7432 1.412 10.7104C0.901982 9.66485 0.646973 8.45993 0.646973 7.09564C0.646973 5.71859 0.901982 4.51367 1.412 3.48088C1.93477 2.43535 2.67429 1.61932 3.63058 1.0328C4.59961 0.446276 5.74715 0.153015 7.0732 0.153015C8.66701 0.153015 9.96755 0.548279 10.9748 1.33881C11.9821 2.11658 12.6196 3.2195 12.8874 4.64755H10.3628C10.1843 3.89527 9.82092 3.30238 9.27265 2.86886C8.72439 2.43535 7.98486 2.21859 7.05408 2.21859C6.21255 2.21859 5.48577 2.41622 4.87375 2.81148C4.27448 3.194 3.80908 3.75502 3.47757 4.49454C3.15881 5.22132 2.99943 6.08835 2.99943 7.09564C2.99943 8.10292 3.15881 8.96995 3.47757 9.69673C3.80908 10.4108 4.27448 10.9654 4.87375 11.3607C5.48577 11.7432 6.21255 11.9344 7.05408 11.9344C7.98486 11.9344 8.72439 11.7368 9.27265 11.3415C9.82092 10.9335 10.1843 10.3725 10.3628 9.65848H12.8874C12.6324 11.01 11.9949 12.0747 10.9748 12.8525C9.96755 13.6175 8.66701 14 7.0732 14Z" fill="black" />
                 </svg>
               </div>
-              <div style={{ width: '10%',height:'10%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+              <div style={{ width: '10%', height: '10%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Text>
                   <PageFilter menuResponsive={true} />
                 </Text>
