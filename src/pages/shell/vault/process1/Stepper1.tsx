@@ -32,7 +32,7 @@ export default function Stepper1() {
   return (
     <div
       className="insights_principal_container"
-      style={{ height: "90%", padding: "0 0rem" }} // Mantener el padding a la derecha
+      style={{ height: "90%", padding: "0 0rem", marginTop: 30 }} // Mantener el padding a la derecha
     >
       <div
         style={{
@@ -71,10 +71,6 @@ export default function Stepper1() {
           </Stepper.Completed>
         </Stepper>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
       <div
         style={{
           display: "flex",
@@ -375,23 +371,10 @@ export default function Stepper1() {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row", // Cambiar a fila para alinear botones horizontalmente
-          justifyContent: "flex-end", // Alinear botones a la derecha
-          alignItems: "center",
-          gap: "1rem", // Añadir espacio entre los botones
-          alignSelf: "stretch",
-        }}
-      >
+      <div className="button-container">
         <Button
-          style={{
-            fontSize: "0.8rem",
-            color: "#ED5079",
-            background: "white",
-            width: "7rem",
-          }}
+          style={{ fontSize: "0.8rem", color: "#ED5079", background: "white" }}
+          className="button"
           onClick={() => {
             navigate(`/home/Process1Vault`);
           }}
@@ -399,12 +382,8 @@ export default function Stepper1() {
           Regresar
         </Button>
         <Button
-          style={{
-            fontSize: "0.8rem",
-            color: "white",
-            background: "#ED5079",
-            width: "7rem",
-          }}
+          className="continue-button"
+          style={{ fontSize: "0.8rem", color: "white", background: "#ED5079" }}
           onClick={() => {
             navigate(`/home/Stepper2`);
           }}

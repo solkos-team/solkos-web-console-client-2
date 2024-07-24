@@ -119,6 +119,10 @@ export default function CoolerDetail() {
     setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
     setDateTelemetri(mesLastStat);
   }
+
+  const Role = localStorage.getItem("Role") || "";
+  console.log(Role);
+
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -738,7 +742,10 @@ export default function CoolerDetail() {
               </div>
               <div
                 style={{
-                  display: userVerify(localStorage.getItem("USER") ?? ""),
+                  // display: userVerify(localStorage.getItem("USER") ?? ""),
+                  // display: Role === "root" ? "flex" : "none",
+                  display:
+                    Role === "root" && isLoading === false ? "flex" : "none",
                   gap: "5px",
                   background: "var(--blue-0, #E7F5FF)",
                   width: "fit-content",
