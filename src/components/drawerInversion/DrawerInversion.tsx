@@ -6,6 +6,7 @@ import { Tabs } from "@mantine/core";
 import { Drawer } from "@mantine/core";
 import { BarChart } from "@tremor/react";
 import Plot from "react-plotly.js";
+import { CostoAcumulado, Depreciacion, PromedioConsumoEnergia } from "../../sampleData/icons";
 
 export default function DrawerInversion({ opened, onClose, coolersData }) {
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
@@ -35,7 +36,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title="Desglose económico"
+      title={<div style={{color:'var(--other-black, #000)',fontSize:'1.375rem',fontWeight:'500',lineHeight:'140%',fontStyle:'normal'}}>Desglose económico</div>}
       position="bottom"
       size="95%"
     >
@@ -84,19 +85,19 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   }}
                 >
                   <img
-                    src={"../../sampleData/commerce.png"}
+                    src={PromedioConsumoEnergia}
                     alt="cooler"
                     style={{ width: "15px", height: "15px" }}
                   ></img>
                   <div
                     style={{
-                      color: "#3A3A3F",
+                      color: "var(--other-black, #000)",
                       // fontFamily: "DM Sans",
                       fontSize: "1rem",
                       fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                      marginLeft: 5,
+                      fontWeight: 400,
+                      lineHeight: "145%",
+                      marginLeft: 5,                      
                     }}
                   >
                     Inversión total en el enfriador
@@ -105,12 +106,12 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     textAlign: "justify",
-                    color: "#88888B",
+                    color: "var(--gray-6, #868E96)",
                     // fontFamily: "DM Sans",
-                    fontSize: "1rem",
+                    fontSize: "0.75rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 400,
+                    lineHeight: "155%",
                   }}
                 >
                   Es la suma del precio factura y los gastos en servicios
@@ -123,20 +124,32 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   display: "flex",
                   minWidth: "160px",
                   maxWidth: "400px",
-                  alignItems: "flex-end",
-                  alignContent: "flex-end",
-                  gap: "12px",
-                  flexWrap: "wrap",
+                  // alignItems: "flex-end",
+                  // alignContent: "flex-end",
+                  gap: "0.5rem",
+                  flexWrap: "wrap",                  
+                  flexDirection:'column'
                 }}
               >
                 <div
                   style={{
-                    color: "#000005",
+                    color: "var(--gray-7, #495057)",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.625rem",
+                    fontSize: "1rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 400,
+                    lineHeight: "155%",
+                  }}
+                >
+                  Gasto total de propiedad
+                </div>
+                <div
+                  style={{
+                    color: "var(--other-black, #000)",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                    lineHeight: "155%",
                   }}
                 >
                   {coolersData?.properties?.total_ownership_expense?.value ===
@@ -146,19 +159,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
                         "es-MX"
                       )}`}
-                </div>
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Gasto total de propiedad
-                </div>
+                </div>                
               </div>
             </div>
             <div
@@ -197,12 +198,12 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     alignSelf: "stretch",
-                    color: "#88888B",
+                    color: "var(--gray-7, #495057)",
                     // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "normal",
+                    lineHeight: "155%",
                   }}
                 >
                   Precio de venta
@@ -210,12 +211,11 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     alignSelf: "stretch",
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
+                    color: "var(--other-black, #000)",
+                    fontSize: "1.25rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 700,
+                    lineHeight: "155%",
                     marginRight: 75,
                   }}
                 >
@@ -239,24 +239,23 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     alignSelf: "stretch",
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: ".9vw",
+                    color: "var(--gray-7, #495057)",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "normal",
+                    lineHeight: "155%",
                   }}
                 >
                   Gastos en servicios
                 </div>
                 <div
                   style={{
-                    color: "#000005",
+                    color: "var(--other-black, #000)",
                     // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
+                    fontSize: "1.25rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 700,
+                    lineHeight: "155%",
                   }}
                 >
                   {coolersData?.properties?.total_expense_service.value ===
@@ -308,18 +307,17 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
-                    src={"../../sampleData/commerce.png"}
+                    src={Depreciacion}
                     alt="cooler"
                     style={{ width: "15px", height: "15px" }}
                   ></img>
                   <div
                     style={{
-                      color: "#3A3A3F",
-                      // fontFamily: "DM Sans",
+                      color: "var(--other-black, #000)",
                       fontSize: "1rem",
                       fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
+                      fontWeight: 400,
+                      lineHeight: "145%",
                       marginLeft: 5,
                     }}
                   >
@@ -329,35 +327,45 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     textAlign: "justify",
-                    color: "#88888B",
+                    color: "var(--gray-6, #868E96)",
                     // fontFamily: "DM Sans",
-                    fontSize: "1rem",
+                    fontSize: "0.75rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 400,
+                    lineHeight: "155%",
                   }}
                 >
                   Valor del enfriador a lo largo del tiempo.
                 </div>
+                <section style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
                 <div
                   style={{
                     display: "flex",
                     minWidth: "160px",
-                    maxWidth: "400px",
-                    alignItems: "flex-end",
-                    alignContent: "flex-end",
+                    maxWidth: "400px",                    
                     gap: "12px",
                     flexWrap: "wrap",
+                    flexDirection:'column'
                   }}
                 >
                   <div
                     style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "1.625rem",
+                      color: "var(--gray-7, #495057)",
+                      fontSize: "1rem",
                       fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
+                      fontWeight: 400,
+                      lineHeight: "155%",
+                    }}
+                  >
+                    Valor actual de depreciación
+                  </div>
+                  <div
+                    style={{
+                      color: "var(--other-black, #000)",
+                      fontSize: "1.25rem",
+                      fontStyle: "normal",
+                      fontWeight: 700,
+                      lineHeight: "155%",
                     }}
                   >
                     {coolersData?.properties?.present_value_of_depreciation
@@ -367,19 +375,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                         `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString(
                           "es-MX"
                         )}`}
-                  </div>
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "0.875rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    Valor actual de depreciación
-                  </div>
+                  </div>                  
                 </div>
                 <div
                   style={{
@@ -413,12 +409,12 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   </div>
                   <div
                     style={{
-                      color: "#F93448",
+                      color: "var(--red-6, #FA5252)",
                       // fontFamily: "DM Sans",
-                      fontSize: "1vw",
+                      fontSize: "0.75rem",
                       fontStyle: "normal",
                       fontWeight: 400,
-                      lineHeight: "14px",
+                      lineHeight: "155%",
                     }}
                   >
                     {coolersData?.properties?.annual_decrement.value ===
@@ -431,17 +427,17 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   </div>
                   <div
                     style={{
-                      color: "#88888B",
-                      // fontFamily: "DM Sans",
-                      fontSize: "0.875rem",
+                      color: "var(--gray-6, #868E96)",
+                      fontSize: "0.75rem",
                       fontStyle: "normal",
                       fontWeight: 400,
-                      lineHeight: "14px",
+                      lineHeight: "155%",
                     }}
                   >
                     Decremento anual
                   </div>
                 </div>
+                </section>
               </div>
               <div
                 style={{
@@ -481,24 +477,22 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               >
                 <div
                   style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
+                    color: "var(--gray-7, #495057)",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "normal",
+                    lineHeight: "155%",
                   }}
                 >
                   Año de fabricación
                 </div>
                 <div
                   style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.375rem",
+                    color: "var(--other-black, #000)",
+                    fontSize: "1.25rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 700,
+                    lineHeight: "155%",
                   }}
                 >
                   {coolersData?.properties?.year_of_production.value ===
@@ -517,24 +511,22 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               >
                 <div
                   style={{
-                    color: "#3A3A3F",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
+                    color: "var(--gray-7, #495057)",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "normal",
+                    lineHeight: "155%",
                   }}
                 >
                   Depreciación lineal
                 </div>
                 <div
                   style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.375rem",
+                    color: "var(--other-black, #000)",
+                    fontSize: "1.25rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 700,
+                    lineHeight: "155%",
                   }}
                 >
                   {/* {coolersData?.cooler?.customer === "KOF"
@@ -824,7 +816,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <img
-                    src={"../../sampleData/commerce2.png"}
+                    src={CostoAcumulado}
                     alt="cooler"
                     style={{
                       width: "15px",
@@ -834,12 +826,11 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   />
                   <div
                     style={{
-                      color: "#3A3A3F",
-                      // fontFamily: "DM Sans",
+                      color: "var(--other-black, #000)",
                       fontSize: "1rem",
                       fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
+                      fontWeight: 400,
+                      lineHeight: "145%",
                     }}
                   >
                     Costo acumulado por servicio
@@ -848,12 +839,11 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
 
                 <div
                   style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1rem",
+                    color: "var(--gray-6, #868E96)",
+                    fontSize: "0.75rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 400,
+                    lineHeight: "155%",
                   }}
                 >
                   Muestra la acumulación de los gastos generados en cada año por

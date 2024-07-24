@@ -1431,6 +1431,7 @@ body {
   padding: 1rem;
   box-sizing: border-box;
   gap: 0.5rem;
+  margin-top: -1.9rem;
 }
 .clt_detail_drawer_energy_data {
   width: 100%;
@@ -2700,4 +2701,8 @@ body {
 }
 .gm-style-iw-d {
   display: none !important;
+}
+
+.mantine-wzaro2 > *{
+  overflow: hidden;
 }

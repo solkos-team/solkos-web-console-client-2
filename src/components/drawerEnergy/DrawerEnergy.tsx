@@ -3,6 +3,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import { Drawer } from "@mantine/core";
 import { BarChart, Card } from "@tremor/react";
+import { GastosEnergia, PromedioConsumoEnergia } from "../../sampleData/icons";
 
 export default function DrawerEnergy({ opened, onClose, coolersData }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -59,7 +60,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title="Gastos de energía"
+      title={<div style={{color:'var(--other-black, #000)',fontSize:'1.375rem',fontStyle:'normal',fontWeight:'500',lineHeight:'140%'}}>Gastos de energía</div>}
       position="bottom"
       size="35rem"
     >
@@ -90,32 +91,33 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 marginBottom: "-10px",
               }}
             >
+              <section style={{display:'flex',flex:'row',gap:'0.625rem',alignItems:'center'}}>
               <img
-                src={"../../sampleData/nature.png"}
+                src={PromedioConsumoEnergia}
                 width={"13px"}
                 alt="cooler"
                 style={{ width: "15px", height: "15px" }}
               ></img>
               <div
                 style={{
-                  color: "#3A3A3F",
-                  // fontFamily: "DM Sans",
+                  color: "var(--other-black, #000)",
                   fontSize: "1rem",
                   fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
+                  fontWeight: 400,
+                  lineHeight: "145%",
                 }}
               >
                 Promedio de consumo de energía diario
               </div>
+              </section>
+              
               <div
                 style={{
-                  color: "#88888B",
-                  // fontFamily: "DM Sans",
-                  fontSize: "1rem",
+                  color: "var(--gray-6, #868E96)",
+                  fontSize: "0.75rem",
                   fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
+                  fontWeight: 400,
+                  lineHeight: "155%",
                 }}
               >
                 Visión general del rendimiento energético.
@@ -180,12 +182,11 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               >
                 <div
                   style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
+                    color: "var(--other-black, #000)",
+                    fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "28px",
+                    lineHeight: "145%",
                   }}
                 >
                   Consumo de energía
@@ -352,8 +353,9 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 alignSelf: "stretch",
               }}
             >
+              <section style={{display:'flex',flex:'row',gap:'0.625rem',alignItems:'center'}}>
               <img
-                src={"../../sampleData/nature.png"}
+                src={GastosEnergia}
                 width={"15px"}
                 height={"15px"}
                 alt="cooler"
@@ -370,15 +372,14 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               >
                 Consumo de energía por mes
               </div>
-
+              </section>
               <div
                 style={{
-                  color: "#88888B",
-                  // fontFamily: "DM Sans",
-                  fontSize: "1rem",
+                  color: "var(--gray-6, #868E96)",
+                  fontSize: "0.75rem",
                   fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
+                  fontWeight: 400,
+                  lineHeight: "155%",
                 }}
               >
                 Consumo de energía consumida por cada mes.
