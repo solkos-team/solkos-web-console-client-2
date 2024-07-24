@@ -2,7 +2,7 @@ import { IconSearch } from "@tabler/icons-react";
 import React from "react";
 import { Text } from "@mantine/core";
 
-export const UniversalSearch = ({ setModalOpened,menuResponsive }) => {
+export const UniversalSearch = ({ setModalOpened, menuResponsive }) => {
   const container = document.querySelector(".pagefilter_container_items");
 
   function scrollToEnd() {
@@ -67,12 +67,15 @@ export const UniversalSearch = ({ setModalOpened,menuResponsive }) => {
                 lineHeight: "14px",
               }}
             >
-              Ctrl + X
+              Ctrl + K
             </div>
           </div>
         </div>
       </div>
-      <div className="universal_search_principal_responsive" style={{display: menuResponsive == true ? '' : 'none'}}  >
+      <div
+        className="universal_search_principal_responsive"
+        style={{ display: menuResponsive == true ? "" : "none" }}
+      >
         <IconSearch
           style={{
             color: "#ADBACC",
