@@ -927,7 +927,7 @@ function App() {
                     alignItems: "center",
                     alignSelf: "stretch",
                     flexDirection: "row",
-                    overflowX: opened2 === true ? "hidden" : "",
+                    overflowX: 'hidden',
                   }}
                 >
                   <section
