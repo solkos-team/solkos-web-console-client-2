@@ -1741,14 +1741,7 @@ export default function Insights() {
               </div>
             </div>
             <br></br>
-            {/* Mapa inf and filters */}
-            {/* <div className="insights_mapa_info_mapa_info">
-              <h1 className="insights_mapa_info_mapa_info_h1">
-                Visualización de enfriadores:
-              </h1> */}
-            {/* <div className="insights_mapa_info_mapa_filters"></div> */}
-            {/* </div> */}
-            {/* Mapa */}
+            
             <div className="insights_mapa_info_mapa">
               {
                 // <MapInsightsComponent
