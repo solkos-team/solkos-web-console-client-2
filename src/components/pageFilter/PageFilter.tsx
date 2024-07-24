@@ -870,8 +870,9 @@ export default function (props) {
                 onClose={() => setModalOpened(false)}
                 centered
                 withCloseButton={false}
+                size="50%"                
               >
-                <div style={{ position: "relative", width: "100%" }}>
+                <div style={{ position: "relative", width: "100%",borderBottom:'1px solid #CED4DA' }}>
                   <img
                     src={"../../sampleData/searchB.svg"}
                     alt="Descripción de la imagen"
@@ -917,17 +918,7 @@ export default function (props) {
                       }}
                     />
                   )}
-                </div>
-                <div
-                  style={{
-                    width: "110%",
-                    padding: "0",
-                    margin: "0",
-                    height: "1px",
-                    background: "#CED4DA",
-                    marginLeft: -20,
-                  }}
-                ></div>
+                </div>                
                 <div style={{ marginTop: "10px" }}></div>
 
                 {isDeleteAlertOpen2 ? (
