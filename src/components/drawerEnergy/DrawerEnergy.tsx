@@ -182,11 +182,11 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
               >
                 <div
                   style={{
-                    color: "var(--other-black, #000)",
-                    fontSize: "1rem",
+                    color: "#88888B",
+                    fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "145%",
+                    lineHeight: "28px",
                   }}
                 >
                   Consumo de energía
@@ -194,8 +194,7 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
+                    fontSize: "1.625rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "28px",
@@ -224,7 +223,6 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 <div
                   style={{
                     color: "#88888B",
-                    // fontFamily: "DM Sans",
                     fontSize: "0.875rem",
                     fontStyle: "normal",
                     fontWeight: 400,
