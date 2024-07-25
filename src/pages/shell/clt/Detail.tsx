@@ -60,8 +60,7 @@ export default function CoolerDetail() {
         serie,
         "GET",
         setIsLoading
-      );
-      console.log(data);
+      );      
       setCoolersData(data);
       setIsLoading(false);
     } catch (error) {
@@ -111,18 +110,11 @@ export default function CoolerDetail() {
     )?.data.notified_at &&
     mesLastStat == undefined
   ) {
-    const mesLastStat = new Date(
-      coolersData?.activity?.find(
-        (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
-      )?.data.notified_at
-    );
+    const mesLastStat = new Date(coolersData?.cooler.last_stat);
     setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
     setDateTelemetri(mesLastStat);
   }
-
-  const Role = localStorage.getItem("Role") || "";
-  console.log(Role);
-
+  const Role = localStorage.getItem("Role") || "";  
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -1571,7 +1563,6 @@ export default function CoolerDetail() {
         opened={coolViewOpened}
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler.device_id}
-        mesLastStat={mesLastStat}
         dateStat={dateTelemetri}
       />
     </>

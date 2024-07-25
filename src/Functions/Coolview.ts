@@ -48,4 +48,10 @@ function obtenerFechas(mes, año) {
 
     return [fechaUltimoDia, fechaPrimerDiaMesAnterior];
 }
-export { getMonth ,formatDrawerCoolview,obtenerFechas}  
+const updateTelemetriaStatus = (dateStat: Date | null | undefined,telemetriaStatus,setTelemetriaStatus) => {
+    const isDateValid = dateStat !== null && dateStat !== undefined && dateStat.getFullYear()+1 !== 2000;
+    if (telemetriaStatus !== isDateValid) {
+      setTelemetriaStatus(isDateValid);
+    }
+  }
+export { getMonth ,formatDrawerCoolview,obtenerFechas,updateTelemetriaStatus}  

@@ -151,6 +151,7 @@ export interface CoolerData {
     distance: number;
     device_id: string;
     outlet_id: string;
+    last_stat: string;
   };
   properties: {
     annual_decrement: {
