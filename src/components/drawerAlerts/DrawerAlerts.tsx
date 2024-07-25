@@ -144,6 +144,7 @@ export default function DrawerA({
   coolersData === undefined ? [] : coolersData;
   // console.log(coolersData);
   totalData === undefined ? 0 : totalData;
+  
   return (
     <Drawer
       opened={opened}
@@ -152,15 +153,16 @@ export default function DrawerA({
       position="right"
       size="40rem"
     >
-      <section className="drawerAlertsPrincipal" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '',gap:'4px' }}>
-        <div className="drawerAlertHeader" style={{ width: '100%', height: '10%', backgroundColor: ''}}>
+      <section className="drawerAlertsPrincipal" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '',gap:'4px',marginTop:'1rem' }}>
+        <div className="drawerAlertHeader" style={{ width: '100%', height: '10%', backgroundColor: '',borderBottom:'1px solid var(--gray-4, #CED4DA)',}}>
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              gap: "20px",
-              
+              gap: "20px",              
+              paddingBottom:'0.5rem',
+              boxSizing:'border-box'
             }}
           >
             {/* 2 */}
@@ -169,17 +171,18 @@ export default function DrawerA({
                 display: "flex",
                 padding: "0px 30px",
                 alignItems: "center",
-                gap: "30px",
+                gap: "8px",
                 alignSelf: "stretch",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                <div
+              <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "16px",
                     alignSelf: "stretch",
+                    backgroundColor:'',
+                    flexDirection:'column'
                   }}
                 >
                   <div
@@ -223,60 +226,60 @@ export default function DrawerA({
                       <img
                         src={"../../sampleData/sinr.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Actualizar Info" ? (
                       <img
                         src={"../../sampleData/reqa.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Estatus sin venta" ||
                       selectedAlgorithm === "Acciones urgentes" ? (
                       <img
                         src={"../../sampleData/accio.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Visita PdV" &&
                       dto != "KOF Colombia" ? (
                       <img
                         src={"../../sampleData/vp.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Falla asociada al compresor" ? (
                       <>
                         <img
                           src={"../../sampleData/failc.svg"}
                           alt="Descripción de la imagen"
-                          style={{ width: "45px", height: "45px" }}
+                          style={{ width: "1.813rem", height: "1.813rem" }}
                         />
                       </>
                     ) : selectedAlgorithm === "Alta temperatura" ? (
                       <img
                         src={"../../sampleData/failt.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Posible daño eléctrico" ? (
                       <img
                         src={"../../sampleData/faile.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Evaporador bloqueado" ? (
                       <img
                         src={"../../sampleData/failc.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Alta demanda de compresor" ? (
                       <>
                         <img
-                          src={"../../sampleData/comp.svg"}
+                          src={"../../sampleData/AlertsDrawer/compressor.svg"}
                           alt="Descripción de la imagen"
-                          style={{ width: "45px", height: "45px" }}
+                          style={{ width: "1.813rem", height: "1.813rem" }}
                         />
                       </>
                     ) : selectedAlgorithm === "Desconexión" ? (
@@ -285,75 +288,76 @@ export default function DrawerA({
                         <img
                           src={"../../sampleData/desc.svg"}
                           alt="Descripción de la imagen"
-                          style={{ width: "45px", height: "45px" }}
+                          style={{ width: "1.813rem", height: "1.813rem" }}
                         />
                       </>
                     ) : selectedAlgorithm === "Alerta alta temperatura" ? (
                       <img
                         src={"../../sampleData/alt.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Bajo/Alto voltaje" ? (
                       <img
                         src={"../../sampleData/altv.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Actualizar dato" ? (
                       <img
                         src={"../../sampleData/actDat.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Datos faltantes" ? (
                       <img
                         src={"../../sampleData/datFal.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Monitoreo" ? (
                       <img
                         src={"../../sampleData/Mont.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Movimiento" ? (
                       <img
                         src={"../../sampleData/mov1.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Solicitar serv. correctivo" ||
                       selectedAlgorithm === "Solicitar serv. preventivo" ? (
                       <img
                         src={"../../sampleData/serCP.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Seguimiento a equipo" ? (
                       <img
                         src={"../../sampleData/seguE.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Visita PdV" ? (
                       <img
                         src={"../../sampleData/visitap.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : selectedAlgorithm === "Visita PdV prioritaria" ? (
                       <img
                         src={"../../sampleData/visitapd.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "45px", height: "45px" }}
+                        style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     ) : (
                       ""
                     )}
                   </div>
-                </div>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" ,backgroundColor:''}}>                
                 <div
                   style={{
                     display: "flex",
@@ -381,9 +385,9 @@ export default function DrawerA({
                   >
                     {level === "ALERT" ? (
                       <img
-                        src={"../../sampleData/alert.svg"}
+                        src={"../../sampleData/AlertsDrawer/alert.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "16px", height: "16px" }}
+                        style={{ width: "16px", height: "16px",color:'red' }}
                       />
                     ) : level === "INDICATOR" ? (
                       <img
@@ -401,7 +405,9 @@ export default function DrawerA({
 
                     <div
                       style={{
-                        color: "#451C03",
+                        color: level === "ALERT"
+                        ? "var(--yellow-9, #E67700)"
+                        : "#451C03",
                         // fontFamily: "Space Mono",
                         fontSize: "12px",
                         fontStyle: "normal",
@@ -410,7 +416,7 @@ export default function DrawerA({
                       }}
                     >
                       {level === "ALERT"
-                        ? "ALERTA"
+                        ? "ALERTAS"
                         : level === "INDICATOR"
                           ? "CONTROL DE ACTIVOS"
                           : "FALLA"}
@@ -418,12 +424,11 @@ export default function DrawerA({
                   </div>
                   <div
                     style={{
-                      color: "#000",
-                      // fontFamily: "DM Sans",
-                      // fontSize: "16px",
+                      color: "var(--other-black, #000)",
                       fontStyle: "normal",
-                      fontWeight: 600,
+                      fontWeight: 500,
                       lineHeight: "normal",
+                      fontSize:'1.2rem'
                     }}
                   >
                     {selectedAlgorithm && <div>{selectedAlgorithm}</div>}
@@ -433,15 +438,14 @@ export default function DrawerA({
               <div
                 style={{
                   display: "flex",
-                  width: "265px",
+                  width: "30%",
                   padding: "8px",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "flex-start",
-                  gap: "8px",
-                  borderRadius: "8px",
-                  border: "1px solid #88888B",
-                  background: "#FFF",
+                  borderRadius: "0.5rem",
+                  border: "1px solid var(--gray-4, #CED4DA)",
+                  background: "var(--gray-0, #F8F9FA)",
                   marginLeft: "auto",
                 }}
               >
@@ -457,9 +461,9 @@ export default function DrawerA({
                     style={{
                       color: "#000005",
                       // fontFamily: " DM Sans",
-                      fontSize: "26px",
+                      fontSize: "1.125rem",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "normal",
                     }}
                   >
@@ -544,15 +548,15 @@ export default function DrawerA({
                       </div>
                       <div
                         style={{
-                          color: "#88888B",
+                          color: "var(--gray-6, #868E96)",
                           // fontFamily: "DM Sans",
-                          fontSize: "14px",
+                          fontSize: "0.75rem",
                           fontStyle: "normal",
                           fontWeight: 400,
                           lineHeight: "normal",
                         }}
                       >
-                        desde ayer
+                        Desde ayer
                       </div>
                     </div>
                   </div>
@@ -560,13 +564,13 @@ export default function DrawerA({
               </div>
             </div>            
           </div>
-          <hr style={{borderBottom:'1px solid #CACACA'}} />
+          {/* <hr style={{borderBottom:'1px solid #CACACA'}} /> */}
         </div>        
-        <div className="drawerAlertsDescargar" style={{ width: '100%', height: '9%', backgroundColor: '' }}>
+        <div className="drawerAlertsDescargar" style={{ width: '100%', height: 'max-content', backgroundColor: '' }}>
           <div
             style={{
               display: "flex",
-              padding: "0px 64px",
+              padding: "0px 30px",
               justifyContent: "space-between",
               alignItems: "center",
               boxSizing:'border-box'
@@ -583,7 +587,7 @@ export default function DrawerA({
                 style={{
                   color: "#88888B",
                   // fontFamily: "DM Sans",
-                  fontSize: "12px",
+                  fontSize: "0.563rem",
                   fontStyle: "normal",
                   fontWeight: 500,
                   lineHeight: "155%",
@@ -595,7 +599,7 @@ export default function DrawerA({
                 style={{
                   color: "#000005",
                   // fontFamily: "DM Sans",
-                  fontSize: "14px",
+                  fontSize: "0.875rem",
                   fontStyle: "normal",
                   fontWeight: 300,
                   lineHeight: "155%",
