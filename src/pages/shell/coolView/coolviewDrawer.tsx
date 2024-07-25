@@ -6,8 +6,9 @@ import {
   obtenerFechas,
   updateTelemetriaStatus,
 } from "../../../Functions/Coolview";
-import { LogoCoolview } from "../../../sampleData/Coolview/coolviewIcons";
+import { LogoCoolview } from "../../../sampleData/Coolview/CoolviewIcons";
 import { IconInfoCircle } from "@tabler/icons-react";
+// import { LogoCoolview } from "../../../sampleData/Coolview/coolviewIcons";
 export const coolviewDrawer = ({
   opened,
   onClose,

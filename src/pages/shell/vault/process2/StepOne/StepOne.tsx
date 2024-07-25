@@ -7,6 +7,7 @@ import { Switch } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../../Components/DrawerVault";
+import { InsightsVault } from "../../Components/InsightsVault";
 
 export const StepOne = ({active,setActive,nextStep,prevStep}) => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -24,14 +25,14 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
   return (
     <section style={{width : '100%' ,height:'100%', display : active <= 1 ? 'flex' : 'none',flexDirection:'column',alignItems:'center'}}>
       {/* Seccion RoadMap */}
-      <section
-      className="vault_section_roadmap"
-        style={{
-          visibility: visibilityTable == false ? 'hidden' : 'visible',          
-        }}
-      >
-        <RoadMap active={active} setActive={setActive} nextStep={nextStep} prevStep={prevStep} />
-      </section>
+      
+      {
+        visibilityTable == false 
+        ? <section style={{width:'100%',display:'flex'}}><InsightsVault /></section>
+        : <section className="vault_section_roadmap">
+            <RoadMap active={active} setActive={setActive} nextStep={nextStep} prevStep={prevStep} />
+          </section>
+      }
       {/* Seccion Buscador */}
       <section
         style={{
@@ -115,7 +116,7 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
       <section
         style={{
           width: "100%",
-          height: "55%",          
+          height: "50%",          
           visibility : visibilityTable == false ? 'hidden' : 'visible'
         }}
       >

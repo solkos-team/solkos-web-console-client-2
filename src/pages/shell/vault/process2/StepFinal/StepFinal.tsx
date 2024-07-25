@@ -1,9 +1,10 @@
 import React from 'react'
+import { InsightsVault } from '../../Components/InsightsVault'
 
 export const StepFinal = ({ active }) => {
     return (
         <section style={{ width: '100%', height: '100%', display: active == 3 ? 'flex' : 'none', flexDirection: 'column' }}>
-            <section className='section_Vault_Title'>
+            <section className='section_Vault_Title' >
                 <img
                     src={"../../sampleData/logovault.svg"}
                     alt="Descripción de la imagen"
@@ -11,7 +12,10 @@ export const StepFinal = ({ active }) => {
                 />
                 <div className='vault_h2_description'>Proceder con los cambios.</div>
             </section>
-            <section style={{width:'100%',height:'90%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <section style={{width:'100%',height:'20%',display:'flex'}}>
+                <InsightsVault />
+            </section>
+            <section style={{width:'100%',height:'70%',display:'flex',alignItems:'center',justifyContent:'center'}}>
                 <section className="vault_container_final">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
                         <rect width="24" height="24" rx="4" fill="#B2F2BB" />
