@@ -188,7 +188,7 @@ table th {
   width: 100%;
   text-align: center;
   font-weight: 700;
-  font-size: 1.375rem;
+  font-size: clamp(2rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
   color: #000005;
   padding: 0px 32px;
@@ -198,7 +198,7 @@ table th {
   width: 100%;
   text-align: left;
   font-weight: 700;
-  font-size: 1.375rem;
+  font-size: clamp(1.5rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
   color: #000005;
   padding: 0px 32px;
@@ -243,7 +243,7 @@ table th {
   width: 100%;
   text-align: left;
   font-weight: 700;
-  font-size: 2.875rem;
+  font-size: clamp(2rem, 1.375rem, 1.5rem);
   line-height: 34.1px;
   color: #000005;
   padding: 0px 32px;
@@ -254,7 +254,7 @@ table th {
   height: 50%;
   text-align: left;
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: clamp(0.7rem, 0.875rem, 0.8rem);
   line-height: 21.7px;
   color: #88888b;
 }
@@ -318,7 +318,7 @@ table th {
   font-weight: 500;
   line-height: 18.23px;
   /* font-size: 0.875; */
-  font-size: 0.75rem !important;
+  font-size: clamp(0.7rem, 0.9rem, 1rem) !important;
 }
 .insights_mapa_info_datas {
   display: flex;
@@ -327,18 +327,21 @@ table th {
   margin-top: -1rem;
   /* margin-left: -5%; */
   gap: 1rem;
+  justify-content: space-between;
+  padding-right: 40px;
+  box-sizing: border-box;
 }
 .insights_mapa_info_datas_data_li {
   font-weight: 400;
-  font-size: 1rem;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
   line-height: 18.23px;
-  color: #000;
+  color: #495057;
   /* font-style: "normal"; */
 }
 .insights_mapa_info_datas_data_li_value {
-  font-weight: 500;
-  font-size: 1.25rem;
-  line-height: 28.64px;
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1.375rem, 1.1rem);
+  line-height: 155%;
   color: #000005;
   align-content: center;
 }
@@ -379,11 +382,11 @@ table th {
 }
 .insights_mapa_info_title_h1 {
   text-align: left;
-  font-size: 1rem;
-  color: #3a3a3f;
+  font-size: 1.1rem;
+  color: #000;
   font-weight: 500;
   margin-top: 2px;
-  line-height: 20.83px;
+  line-height: 145%;
 }
 .insights_datas {
   width: 48.5%;
@@ -418,22 +421,22 @@ table th {
   align-items: center;
 }
 .insights_datas_kpi_title_h1 {
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 0.8rem, 0.8rem);
   color: #3a3a3f;
   font-weight: 500;
   margin-left: 1rem;
 }
 .insights_datas_kpi_title_data_h1 {
   font-weight: 400;
-  font-size: 0.563rem;
+  font-size: clamp(0.7rem, 0.8rem, 0.7rem);
   line-height: 18.23px;
   color: #88888b;
   font-weight: 500;
   margin-left: 1rem;
 }
 .insights_datas_kpi_title_h1_data {
-  font-weight: 500;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.1rem, 1.3rem);
   line-height: 28.64px;
   color: #000005;
   width: max-content;
@@ -530,7 +533,8 @@ table th {
   text-align: left;
 }
 .insights_datas_kpi_data_data_1 {
-  font-weight: 500;  
+  font-weight: 500;
+  /* font-size: clamp(0.8rem,1rem,1.3rem); */
   font-size: 0.85rem;
   line-height: 20.83px;
   width: 100%;
@@ -538,21 +542,28 @@ table th {
   color: #3a3a3f;
 }
 .insights_datas_kpi_data_data_2 {
+  font-weight: 700;
+  font-size: clamp(1.1rem, 1rem, 0.5rem);
+  line-height: 28.64px;
+  width: 100%;
+  height: 33%;
+  color: #000;
+}
+.insights_datas_kpi_data_data_22 {
   font-weight: 500;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 1rem, 0.5rem);
   line-height: 28.64px;
   width: 100%;
   height: 33%;
   color: #000005;
 }
-
 .insights_datas_kpi_data_data_3 {
   font-weight: 400;
-  font-size: 0.875rem;
+  font-size: clamp(0.7rem, 0.7rem, 1rem);
   line-height: 18.23px;
   width: 100%;
   height: 33%;
-  color: var(--gray-6, #868E96);
+  color: #868e96;
 }
 .insights_datas_grafica {
   border: 1px solid #88888b;
@@ -633,6 +644,12 @@ table th {
   gap: 0rem;
 }
 
+.insights_mapa_info_mapa_info_h1 {
+  font-weight: 500;
+  font-size: clamp(0.7rem, 1rem, 1rem);
+  line-height: 20.83px;
+  color: #3a3a3f;
+}
 .insights_mapa_info_mapa_info {
   font-size: 0.8rem;
   color: #3a3a3f;
@@ -653,9 +670,9 @@ table th {
   align-self: stretch;
 }
 .insights_datas_info_mantenimiento_datos_h1 {
-  color: var(--other-black, #000);
+  color: #3a3a3f;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: clamp(0.5rem, 0.75rem, 0.9rem);
   line-height: 20px;
   font-style: normal;
 }
@@ -688,7 +705,7 @@ table th {
 }
 .insights_datas_info_mantenimiento_datos_barras_title {
   color: #49060d;
-  font-size: 0.875rem;
+  font-size: clamp(0.6rem, 0.65rem, 0.9rem);
   font-weight: 400;
   line-height: 20px;
   white-space: nowrap;
@@ -697,7 +714,7 @@ table th {
 }
 .insights_datas_info_mantenimiento_datos_barras_cantidad {
   color: #000005;
-  font-size: 0.875rem;
+  font-size: clamp(0.7rem, 0.75rem, 0.9rem);
   font-weight: 400;
   line-height: 15.62px;
   margin-left: auto;
@@ -974,13 +991,28 @@ body {
   /* margin-left: 1.2rem;   */
 }
 .insights_datas_container_Grafica_Datas_li_title {
+  /* font-size: 0.8vw; */
   font-weight: 500;
+  /* font-size: clamp(0.8rem, 1rem, 1rem); */
   font-size: 1rem;
   line-height: 20.83px;
   color: #3a3a3f;
   width: max-content;
 }
-
+.insights_datas_container_Grafica_Datas_li_Enf {
+  font-size: 0.875rem;
+  font-weight: 400;
+  font-size: clamp(0.7rem, 0.875rem, 1rem);
+  line-height: 18.23px;
+  color: #88888b;
+}
+.insights_datas_container_Grafica_Datas_li_total {
+  /* font-size: 0.9vw; */
+  font-weight: 500;
+  font-size: clamp(1rem, 1.2vw, 1.375rem);
+  line-height: 28.64px;
+  color: #000005;
+}
 .clt_actividad_principal_actividad {
   width: 50%;
   height: 27vw;
@@ -1008,7 +1040,7 @@ body {
 }
 .insights_datas_mantenimiento_VerDetalles_h1 {
   color: #3e83ff;
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 0.9vw, 1vw);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -1402,7 +1434,6 @@ body {
   padding: 1rem;
   box-sizing: border-box;
   gap: 0.5rem;
-  margin-top: -1.9rem;
 }
 .clt_detail_drawer_energy_data {
   width: 100%;
@@ -1717,10 +1748,10 @@ body {
     line-height: 20.83px;
   }
   .insights_datas_kpi_data_data_2 {
-    font-size: 1rem;
+    font-size: clamp(1rem, 1vw, 1rem);
   }
   .insights_datas_kpi_data_data_3 {
-    font-size: 0.625rem;
+    font-size: clamp(0.7rem, 0.7vw, 0.7rem);
   }
   .insights_datas_info2 {
     display: flex;
@@ -2336,7 +2367,8 @@ body {
   gap: 0.25rem;
 }
 
-.headerContentDataContainer{
+.headerContentDataContainer,
+.headerDataIMGh1p2 {
   flex-direction: row;
   text-transform: uppercase;
   gap: 0.25rem;
@@ -2350,7 +2382,17 @@ body {
   width: max-content;
 }
 
-
+.headerDataIMGh1p2 {
+  width: 50%;
+  height: max-content;
+  border-radius: 0.125rem;
+  padding: 2px 4px;
+  font-weight: 500;
+  font-size: clamp(0.35rem, 2vw, 0.6rem);
+  line-height: 14px;
+  margin-top: 0.25rem;
+  white-space: nowrap;
+}
 
 .headerDataIMGh2 {
   width: 100%;
@@ -2661,8 +2703,4 @@ body {
 }
 .gm-style-iw-d {
   display: none !important;
-}
-
-.mantine-wzaro2 > *{
-  overflow: hidden;
 }

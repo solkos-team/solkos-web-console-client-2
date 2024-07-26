@@ -299,10 +299,10 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 
 // VERSION MANUAL
 
-// ****************************************************************************************************************************************************
-// ****************************************************************************************************************************************************
+// ***************************************************************************************
+// ***************************************************************************************
 
-// import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState, useRef } from "react";
 // import GoogleMapReact from "google-map-react";
 // import { defaultProps, mapOptions } from "./datos";
 // import { useSelector } from "react-redux";
@@ -325,6 +325,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //     operative_unit: string;
 //     type: string;
 //     route: string;
+//     serial_number?: string;
 //   };
 //   geometry: {
 //     type: string;
@@ -338,9 +339,11 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //   const [zoom, setZoom] = useState(defaultProps.zoom);
 //   const body = { customer: dto, path: pathVerify() };
 //   const [geojson, setGeojson] = useState<GeoJSON | null>(null);
-//   const [selectedArea, setSelectedArea] = useState(
+//   const [selectedArea, setSelectedArea] = useState<string | null>(
 //     localStorage.getItem("selectedArea") || null
 //   );
+//   const [mapInstance, setMapInstance] = useState<any>(null);
+//   const [mapsInstance, setMapsInstance] = useState<any>(null);
 
 //   const fetchData = async () => {
 //     try {
@@ -354,28 +357,66 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //           type: "FeatureCollection",
 //           features: data.polygon_data
 //             .map((polygon: any) => {
-//               if (!polygon.geometry || !Array.isArray(polygon.geometry)) {
-//                 console.error("Invalid geometry data for polygon:", polygon);
-//                 return null;
+//               if (polygon.type === "coolers") {
+//                 return polygon.coolers.map((cooler: any) => ({
+//                   type: "Feature",
+//                   properties: {
+//                     area: cooler.region,
+//                     region: cooler.region,
+//                     zone: cooler.zone,
+//                     operative_unit: cooler.operative_unit,
+//                     route: cooler.route,
+//                     type: "coolers",
+//                     serial_number: cooler.serial_number,
+//                   },
+//                   geometry: {
+//                     type: "Point",
+//                     coordinates: [
+//                       parseFloat(cooler.longitude),
+//                       parseFloat(cooler.latitude),
+//                     ],
+//                   },
+//                 }));
+//               } else if (polygon.type === "route") {
+//                 return {
+//                   type: "Feature",
+//                   properties: {
+//                     area: polygon.region,
+//                     region: polygon.region,
+//                     zone: polygon.zone,
+//                     operative_unit: polygon.operative_unit,
+//                     route: polygon.route,
+//                   },
+//                   geometry: {
+//                     type: "Point",
+//                     coordinates: polygon.geometry,
+//                   },
+//                 };
+//               } else {
+//                 if (!polygon.geometry || !Array.isArray(polygon.geometry)) {
+//                   console.error("Invalid geometry data for polygon:", polygon);
+//                   return null;
+//                 }
+
+//                 const coordinates = polygon.geometry;
+
+//                 return {
+//                   type: "Feature",
+//                   properties: {
+//                     area: polygon.region,
+//                     region: polygon.region,
+//                     zone: polygon.zone,
+//                     operative_unit: polygon.operative_unit,
+//                     route: polygon.route,
+//                   },
+//                   geometry: {
+//                     type: "MultiPolygon",
+//                     coordinates: coordinates,
+//                   },
+//                 };
 //               }
-
-//               const coordinates = polygon.geometry;
-
-//               return {
-//                 type: "Feature",
-//                 properties: {
-//                   area: polygon.region,
-//                   region: polygon.region,
-//                   zone: polygon.zone,
-//                   operative_unit: polygon.operative_unit,
-//                   route: polygon.route,
-//                 },
-//                 geometry: {
-//                   type: polygon.type === "route" ? "Point" : "MultiPolygon",
-//                   coordinates: coordinates,
-//                 },
-//               };
 //             })
+//             .flat()
 //             .filter((feature) => feature !== null),
 //         };
 
@@ -415,7 +456,12 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //     if (geojson) {
 //       const bounds = new maps.LatLngBounds();
 
-//       geojson.features.forEach((feature, index) => {
+//       // Limpia los antiguos overlays
+//       map.data.forEach((feature) => {
+//         map.data.remove(feature);
+//       });
+
+//       geojson.features.forEach((feature) => {
 //         const areaColor = getRandomColor();
 //         if (feature.geometry.type === "MultiPolygon") {
 //           feature.geometry.coordinates.forEach((polygonCoords) => {
@@ -472,6 +518,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //           const [lng, lat] = feature.geometry.coordinates;
 //           const iconUrl = "../../sampleData/pin_r.svg";
 //           const iconUrl2 = "../../sampleData/pin_r2.svg";
+//           const iconUrl3 = "../../sampleData/fridge_r.svg";
 
 //           const marker = new maps.Marker({
 //             position: { lat, lng },
@@ -487,11 +534,14 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //             },
 //           });
 
+//           const icon =
+//             feature.properties.type === "coolers" ? iconUrl3 : iconUrl2;
+
 //           const markerSmall = new maps.Marker({
 //             position: { lat, lng },
 //             map,
 //             icon: {
-//               url: iconUrl2,
+//               url: icon,
 //               scaledSize: new maps.Size(16, 16),
 //               anchor: new maps.Point(8, 28), // Center the small icon
 //             },
@@ -499,8 +549,14 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //           });
 
 //           const handleClick = () => {
-//             setSelectedArea(feature.properties.route);
-//             console.log("Clic en:", feature.properties.route);
+//             const { route, serial_number, type } = feature.properties;
+//             const areaName = type === "coolers" ? serial_number : route;
+//             setSelectedArea(areaName ?? ""); // Provide a fallback to empty string
+//             console.log("Clic en:", areaName);
+
+//             if (type === "coolers" && serial_number) {
+//               window.open(`/home/clt/${serial_number}`, "_blank");
+//             }
 //           };
 
 //           marker.addListener("click", handleClick);
@@ -513,6 +569,12 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //       map.fitBounds(bounds);
 //     }
 //   };
+
+//   useEffect(() => {
+//     if (geojson && mapInstance && mapsInstance) {
+//       handleApiLoaded2(mapInstance, mapsInstance);
+//     }
+//   }, [geojson, mapInstance, mapsInstance]);
 
 //   return (
 //     <div style={{ height: "100%", width: "100%" }}>
@@ -528,14 +590,17 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //             ...mapOptions,
 //           }}
 //           yesIWantToUseGoogleMapApiInternals
-//           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded2(map, maps)}
+//           onGoogleApiLoaded={({ map, maps }) => {
+//             setMapInstance(map);
+//             setMapsInstance(maps);
+//             handleApiLoaded2(map, maps);
+//           }}
 //         />
 //       )}
 //     </div>
 //   );
 // };
 
-// VERSION COMPLETA HASTA RUTAS SIN TOOLTIP(zoom, onlcik, api)
-
-// *******************************************************************************
-// *******************************************************************************
+// con nueva ventana a clt onclick a cooler
+// Sin tooltip y sin funcion de onclick path
+// actualizando el mapa cuando se ejecute el useffect del fetch

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useHotkeys } from "@mantine/hooks";
 import { Alert, Skeleton } from "@mantine/core";
 import {
   IconSearch,
@@ -56,12 +57,15 @@ export default function (props) {
       setFilterVisibility(true);
     }
   };
+
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
   const handleClick = () => {
     setMostrarVentanaEmergente(true);
   };
+
+  console.log(pathVerify().length);
 
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
@@ -677,10 +681,19 @@ export default function (props) {
     cursor: "pointer",
     backgroundColor:
       index === selectedItemIndex ? "rgba(206, 212, 218, 0.5)" : "transparent",
-  });  
+  });
+
+  useHotkeys([["ctrl+K", () => setModalOpened(true)]]);
+
   return (
     <div>
-      <section className="pagefilter_return_principal" style={{marginLeft:props.menuResponsive == true ? '10px' : '-35px',marginTop : props.menuResponsive == true ? '1px' : '-30px'}}>
+      <section
+        className="pagefilter_return_principal"
+        style={{
+          marginLeft: props.menuResponsive == true ? "10px" : "-35px",
+          marginTop: props.menuResponsive == true ? "1px" : "-30px",
+        }}
+      >
         <section
           className="return_principal"
           onClick={() => {
@@ -691,7 +704,10 @@ export default function (props) {
         >
           <IconArrowNarrowLeft color="black" />
         </section>
-        <section className="pagefilter_container_principal" style={{display: props.menuResponsive == true ? 'none':''}}>
+        <section
+          className="pagefilter_container_principal"
+          style={{ display: props.menuResponsive == true ? "none" : "" }}
+        >
           <div className="pagefilter_container_items">
             <div className="pagefilter_container_principal_customer">
               <div className="pagefilter_container_principal_customer_container">
@@ -860,7 +876,10 @@ export default function (props) {
           )}
         </section>
 
-          <UniversalSearch setModalOpened={setModalOpened} menuResponsive={props.menuResponsive} />
+        <UniversalSearch
+          setModalOpened={setModalOpened}
+          menuResponsive={props.menuResponsive}
+        />
 
         <div>
           <section>
