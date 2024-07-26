@@ -684,7 +684,7 @@ export default function (props) {
   });
 
   useHotkeys([["ctrl+K", () => setModalOpened(true)]]);
-
+  
   return (
     <div>
       <section
@@ -889,7 +889,8 @@ export default function (props) {
                 onClose={() => setModalOpened(false)}
                 centered
                 withCloseButton={false}
-                size="50%"                
+                size= {props.menuResponsive == undefined ? "50%" : ''}
+                // className="unisersal_search_principal"
               >
                 <div style={{ position: "relative", width: "100%",borderBottom:'1px solid #CED4DA' }}>
                   <img
