@@ -490,9 +490,7 @@ export default function Panel() {
       setError(null); // Clear any previous errors
     } catch (error) {
       console.error(error);
-      setError(
-        "No se pudo obtener el ticket de acceso. Por favor, intente de nuevo más tarde."
-      );
+      setError("Sin conexión a internet.");
       setIsLoading(false);
     }
   };
@@ -844,5 +842,3 @@ export default function Panel() {
     </section>
   );
 }
-
-// ************** CACHAR EL ERROR Y CAMBIAR EL MENSAJE
