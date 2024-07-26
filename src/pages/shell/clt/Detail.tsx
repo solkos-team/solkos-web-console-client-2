@@ -53,6 +53,7 @@ export default function CoolerDetail() {
     useDisclosure(false);
   const [coolViewOpened, { open: openCoolview, close: closeCoolview }] =
     useDisclosure(false);
+
   const fetchData = async (serie?) => {
     try {
       const data = await fetchUniversalDetails(
@@ -1562,7 +1563,7 @@ export default function CoolerDetail() {
       <DrawerCoolview
         opened={coolViewOpened}
         onClose={closeCoolview}
-        CoolerId={coolersData?.cooler.device_id}
+        CoolerId={coolersData?.cooler?.serial_number}
         dateStat={dateTelemetri}
       />
     </>

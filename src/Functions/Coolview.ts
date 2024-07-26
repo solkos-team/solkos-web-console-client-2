@@ -54,4 +54,17 @@ const updateTelemetriaStatus = (dateStat: Date | null | undefined,telemetriaStat
       setTelemetriaStatus(isDateValid);
     }
   }
-export { getMonth ,formatDrawerCoolview,obtenerFechas,updateTelemetriaStatus}  
+  // Funcion recibe dia mes y año , y retorna el mismo dia del mes anterior
+  function getDates(day, month, year) {
+    const baseDate = new Date(year, month - 1, day);
+    const previousMonthDate = new Date(year, month - 2, day);
+    if (month === 1) {
+        previousMonthDate.setFullYear(year - 1);
+        previousMonthDate.setMonth(11); 
+    }
+    return [
+        baseDate.toISOString().split('T')[0],
+        previousMonthDate.toISOString().split('T')[0]
+    ];
+}
+export {getDates, getMonth ,formatDrawerCoolview,obtenerFechas,updateTelemetriaStatus}  

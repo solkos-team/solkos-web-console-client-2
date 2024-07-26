@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Alert, Drawer } from "@mantine/core";
 import {
   formatDrawerCoolview,
-  getMonth,
-  obtenerFechas,
+  getDates,
   updateTelemetriaStatus,
 } from "../../../Functions/Coolview";
 import { LogoCoolview } from "../../../sampleData/Coolview/CoolviewIcons";
 import { IconInfoCircle } from "@tabler/icons-react";
-// import { LogoCoolview } from "../../../sampleData/Coolview/coolviewIcons";
+
 export const coolviewDrawer = ({
   opened,
   onClose,
@@ -17,12 +16,10 @@ export const coolviewDrawer = ({
 }) => {
   const [telemetriaStatus,setTelemetriaStatus] = useState(true)
   const [URL, setURL] = useState<string>("");
-  const mesToday = new Date();
+  const mesToday = new Date();  
   if (dateStat != undefined && URL == "") {
     setURL(
-      `https://solkos-coolview-2.firebaseapp.com?device_id=${CoolerId}&start_date=${obtenerFechas(dateStat.getUTCMonth() + 1, dateStat.getFullYear())[1]
-      }&end_date=${obtenerFechas(dateStat.getUTCMonth() + 1, dateStat.getFullYear())[0]
-      }&clt=false`
+      `https://solkos-coolview-2.firebaseapp.com?device_id=${CoolerId}&start_date=${getDates(dateStat.getDate()+1,dateStat.getMonth()+1,dateStat.getFullYear())[1]}&end_date=${getDates(dateStat.getDate()+1,dateStat.getMonth()+1,dateStat.getFullYear())[0]}&clt=false`
     );
   }
 
