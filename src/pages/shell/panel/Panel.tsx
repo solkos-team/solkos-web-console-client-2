@@ -38,8 +38,7 @@
 //   };
 
 //   useEffect(() => {
-//     if (dto !== "KOF") {
-//       // && dto !== "KOF Colombia"
+//     if (dto !== "KOF" && dto !== "KOF Colombia") {
 //       navigate("/home");
 //     }
 //   }, [region, zone, operative_unit, route, navigate, dto]);
@@ -202,7 +201,7 @@
 //                         <>
 //                           <br></br>
 //                           <TableauReport
-//                             url={`https://tableau.efemsa.com/views/KPIs_KOF/KPIs_KOF?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link  &`}
+//                             url={`https://tableau.efemsa.com/views/KOF/KPIsHistricos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
 //                             token={data}
 //                             options={options}
 //                             parameters={parameters}
@@ -222,13 +221,235 @@
 //           </div>
 //         </>
 //       ) : dto === "KOF Colombia" ? (
-//         ""
+//         <>
+//           <div>
+//             <Tabs
+//               color="teal"
+//               value={activeTab}
+//               onTabChange={handleTabChange}
+//               style={{ width: "100%" }}
+//             >
+//               <Tabs.List>
+//                 <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
+//                   <img
+//                     src={"../../sampleData/star.svg"}
+//                     alt="Icono"
+//                     style={{
+//                       width: "12px",
+//                       height: "12px",
+//                       marginRight: "5px",
+//                     }}
+//                   />
+//                   Conectividad
+//                 </Tabs.Tab>
+//                 <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
+//                   <img
+//                     src={"../../sampleData/star.svg"}
+//                     alt="Icono"
+//                     style={{
+//                       width: "12px",
+//                       height: "12px",
+//                       marginRight: "5px",
+//                     }}
+//                   />
+//                   Parque reparado
+//                 </Tabs.Tab>
+//                 <Tabs.Tab value="third" style={{ fontSize: ".9vw" }}>
+//                   <img
+//                     src={"../../sampleData/star.svg"}
+//                     alt="Icono"
+//                     style={{
+//                       width: "12px",
+//                       height: "12px",
+//                       marginRight: "5px",
+//                     }}
+//                   />
+//                   Cumplimiento mantenimiento
+//                 </Tabs.Tab>
+//                 <Tabs.Tab value="fourth" style={{ fontSize: ".9vw" }}>
+//                   <img
+//                     src={"../../sampleData/star.svg"}
+//                     alt="Icono"
+//                     style={{
+//                       width: "12px",
+//                       height: "12px",
+//                       marginRight: "5px",
+//                     }}
+//                   />
+//                   Tiempo de respuesta mercado
+//                 </Tabs.Tab>
+//                 <Tabs.Tab value="fifth" style={{ fontSize: ".9vw" }}>
+//                   <img
+//                     src={"../../sampleData/star.svg"}
+//                     alt="Icono"
+//                     style={{
+//                       width: "12px",
+//                       height: "12px",
+//                       marginRight: "5px",
+//                     }}
+//                   />
+//                   Reincidencia
+//                 </Tabs.Tab>
+//                 <Tabs.Tab value="sixth" style={{ fontSize: ".9vw" }}>
+//                   <img
+//                     src={"../../sampleData/star.svg"}
+//                     alt="Icono"
+//                     style={{
+//                       width: "12px",
+//                       height: "12px",
+//                       marginRight: "5px",
+//                     }}
+//                   />
+//                   Detalle O.S
+//                 </Tabs.Tab>
+//               </Tabs.List>
+//               {isLoading ? (
+//                 <div style={{ marginTop: 30 }}>
+//                   <Loader color="gray" />
+//                 </div>
+//               ) : (
+//                 <div
+//                   style={{
+//                     display: "flex",
+//                     flexDirection: "column",
+//                   }}
+//                 >
+//                   <Tabs.Panel value="first">
+//                     <>
+//                       {dto === "KOF Colombia" ? (
+//                         <>
+//                           <br></br>
+//                           <TableauReport
+//                             url={`https://tableau.efemsa.com/views/Conectividad/ActividaddelParque?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+//                             token={data}
+//                             options={options}
+//                             parameters={parameters}
+//                             query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+//                           />
+//                         </>
+//                       ) : (
+//                         <div style={{ marginTop: 30 }}>
+//                           No hay tableros disponibles para mostrar
+//                         </div>
+//                       )}
+//                     </>
+//                   </Tabs.Panel>
+
+//                   <Tabs.Panel value="second">
+//                     <>
+//                       {dto === "KOF Colombia" ? (
+//                         <>
+//                           <br></br>
+//                           <TableauReport
+//                             url={`https://tableau.efemsa.com/views/ParqueReparado/ParqueReparado?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+//                             token={data}
+//                             options={options}
+//                             parameters={parameters}
+//                             query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+//                           />
+//                         </>
+//                       ) : (
+//                         <div style={{ marginTop: 30 }}>
+//                           No hay tableros disponibles para mostrar
+//                         </div>
+//                       )}
+//                     </>
+//                   </Tabs.Panel>
+//                   <Tabs.Panel value="third">
+//                     <>
+//                       {dto === "KOF Colombia" ? (
+//                         <>
+//                           <br></br>
+//                           <TableauReport
+//                             url={`https://tableau.efemsa.com/views/CumplimientoMtoMensual-Piso/CumplimientoMtoanual?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+//                             token={data}
+//                             options={options}
+//                             parameters={parameters}
+//                             query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+//                           />
+//                         </>
+//                       ) : (
+//                         <div style={{ marginTop: 30 }}>
+//                           No hay tableros disponibles para mostrar
+//                         </div>
+//                       )}
+//                     </>
+//                   </Tabs.Panel>
+//                   <Tabs.Panel value="fourth">
+//                     <>
+//                       {dto === "KOF Colombia" ? (
+//                         <>
+//                           <br></br>
+//                           <TableauReport
+//                             url={`https://tableau.efemsa.com/views/Tiemporespuesta/TRMAo?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+//                             token={data}
+//                             options={options}
+//                             parameters={parameters}
+//                             query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+//                           />
+//                         </>
+//                       ) : (
+//                         <div style={{ marginTop: 30 }}>
+//                           No hay tableros disponibles para mostrar
+//                         </div>
+//                       )}
+//                     </>
+//                   </Tabs.Panel>
+//                   <Tabs.Panel value="fifth">
+//                     <>
+//                       {dto === "KOF Colombia" ? (
+//                         <>
+//                           <br></br>
+//                           <TableauReport
+//                             url={`https://tableau.efemsa.com/views/Reincidencia/Reincidencia?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+//                             token={data}
+//                             options={options}
+//                             parameters={parameters}
+//                             query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+//                           />
+//                         </>
+//                       ) : (
+//                         <div style={{ marginTop: 30 }}>
+//                           No hay tableros disponibles para mostrar
+//                         </div>
+//                       )}
+//                     </>
+//                   </Tabs.Panel>
+//                   <Tabs.Panel value="sixth">
+//                     <>
+//                       {dto === "KOF Colombia" ? (
+//                         <>
+//                           <br></br>
+//                           <TableauReport
+//                             url={`https://tableau.efemsa.com/views/DetalleO_S/DetalleO_SMes?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+//                             token={data}
+//                             options={options}
+//                             parameters={parameters}
+//                             query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+//                           />
+//                         </>
+//                       ) : (
+//                         <div style={{ marginTop: 30 }}>
+//                           No hay tableros disponibles para mostrar
+//                         </div>
+//                       )}
+//                     </>
+//                   </Tabs.Panel>
+//                 </div>
+//               )}
+//             </Tabs>
+//           </div>
+//         </>
 //       ) : (
 //         ""
 //       )}
 //     </section>
 //   );
 // }
+
+// Versión Original
+// ************************************************************************************************************
+// ************************************************************************************************************
 
 import React, { useState, useEffect } from "react";
 import { tableauFetch } from "../../../utils/apiUtils";
@@ -243,7 +464,9 @@ export default function Panel() {
 
   const [data, setData] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<string | null>("first");
+  const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<string>("first");
+  const [tabsEnabled, setTabsEnabled] = useState(true);
   const URL = `https://us-central1-imberalink-238816.cloudfunctions.net/get-trusted-ticket-cors`;
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
@@ -264,26 +487,45 @@ export default function Panel() {
       const datos = await data;
       setData(datos);
       setIsLoading(false);
+      setError(null); // Clear any previous errors
     } catch (error) {
       console.error(error);
+      setError(
+        "No se pudo obtener el ticket de acceso. Por favor, intente de nuevo más tarde."
+      );
+      setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchToken();
+  }, [region, zone, operative_unit, route]);
 
   useEffect(() => {
     if (dto !== "KOF" && dto !== "KOF Colombia") {
       navigate("/home");
     }
-  }, [region, zone, operative_unit, route, navigate, dto]);
+  }, [navigate, dto]);
 
   useEffect(() => {
     if (dto === "CALL CENTER") {
       navigate("/home/clt_callCenter");
     }
-  }, [region, zone, operative_unit, route, navigate, dto]);
+  }, [navigate, dto]);
 
   useEffect(() => {
-    fetchToken();
-  }, [region, zone, operative_unit, route, activeTab]);
+    const handleTabChange = async (tab: string) => {
+      console.log("Current tab:", tab);
+      setActiveTab(tab);
+      await fetchToken();
+      setTabsEnabled(false);
+      const timer = setTimeout(() => {
+        setTabsEnabled(true);
+      }, 10000);
+      return () => clearTimeout(timer);
+    };
+    handleTabChange(activeTab);
+  }, [activeTab, dto, dt]);
 
   const options = {
     height: "1200px",
@@ -298,14 +540,12 @@ export default function Panel() {
   };
 
   const handleTabChange = (tab: string) => {
-    console.log("Current tab:", tab);
     setActiveTab(tab);
   };
-
   return (
     <section>
       <PageFilter />
-      <br></br>
+      <br />
       <div
         style={{
           display: "flex",
@@ -333,12 +573,16 @@ export default function Panel() {
           <div>
             <Tabs
               color="teal"
-              value={activeTab}
+              value={activeTab || "first"} // Valor predeterminado
               onTabChange={handleTabChange}
               style={{ width: "100%" }}
             >
               <Tabs.List>
-                <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
+                <Tabs.Tab
+                  value="first"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
                   <img
                     src={"../../sampleData/star.svg"}
                     alt="Icono"
@@ -350,7 +594,11 @@ export default function Panel() {
                   />
                   Detalle de Rutas
                 </Tabs.Tab>
-                <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
+                <Tabs.Tab
+                  value="second"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
                   <img
                     src={"../../sampleData/star.svg"}
                     alt="Icono"
@@ -362,7 +610,11 @@ export default function Panel() {
                   />
                   Estatus Vault - Iniciativa Secop
                 </Tabs.Tab>
-                <Tabs.Tab value="third" style={{ fontSize: ".9vw" }}>
+                <Tabs.Tab
+                  value="third"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
                   <img
                     src={"../../sampleData/star.svg"}
                     alt="Icono"
@@ -390,7 +642,7 @@ export default function Panel() {
                     <>
                       {dto === "KOF" ? (
                         <>
-                          <br></br>
+                          <br />
                           <TableauReport
                             url={`https://tableau.efemsa.com/views/KOF/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
@@ -411,7 +663,7 @@ export default function Panel() {
                     <>
                       {dto === "KOF" ? (
                         <>
-                          <br></br>
+                          <br />
                           <TableauReport
                             url={`https://tableau.efemsa.com/views/KOF/Vault-Secop?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
@@ -431,7 +683,7 @@ export default function Panel() {
                     <>
                       {dto === "KOF" ? (
                         <>
-                          <br></br>
+                          <br />
                           <TableauReport
                             url={`https://tableau.efemsa.com/views/KOF/KPIsHistricos?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
@@ -457,12 +709,16 @@ export default function Panel() {
           <div>
             <Tabs
               color="teal"
-              value={activeTab}
+              value={activeTab || "first"} // Valor predeterminado
               onTabChange={handleTabChange}
               style={{ width: "100%" }}
             >
               <Tabs.List>
-                <Tabs.Tab value="first" style={{ fontSize: ".9vw" }}>
+                <Tabs.Tab
+                  value="first"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
                   <img
                     src={"../../sampleData/star.svg"}
                     alt="Icono"
@@ -474,7 +730,11 @@ export default function Panel() {
                   />
                   Conectividad
                 </Tabs.Tab>
-                <Tabs.Tab value="second" style={{ fontSize: ".9vw" }}>
+                <Tabs.Tab
+                  value="second"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
                   <img
                     src={"../../sampleData/star.svg"}
                     alt="Icono"
@@ -486,7 +746,11 @@ export default function Panel() {
                   />
                   Parque reparado
                 </Tabs.Tab>
-                <Tabs.Tab value="third" style={{ fontSize: ".9vw" }}>
+                <Tabs.Tab
+                  value="third"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
                   <img
                     src={"../../sampleData/star.svg"}
                     alt="Icono"
@@ -496,43 +760,7 @@ export default function Panel() {
                       marginRight: "5px",
                     }}
                   />
-                  Cumplimiento mantenimiento
-                </Tabs.Tab>
-                <Tabs.Tab value="fourth" style={{ fontSize: ".9vw" }}>
-                  <img
-                    src={"../../sampleData/star.svg"}
-                    alt="Icono"
-                    style={{
-                      width: "12px",
-                      height: "12px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  Tiempo de respuesta mercado
-                </Tabs.Tab>
-                <Tabs.Tab value="fifth" style={{ fontSize: ".9vw" }}>
-                  <img
-                    src={"../../sampleData/star.svg"}
-                    alt="Icono"
-                    style={{
-                      width: "12px",
-                      height: "12px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  Reincidencia
-                </Tabs.Tab>
-                <Tabs.Tab value="sixth" style={{ fontSize: ".9vw" }}>
-                  <img
-                    src={"../../sampleData/star.svg"}
-                    alt="Icono"
-                    style={{
-                      width: "12px",
-                      height: "12px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  Detalle O.S
+                  Soporte
                 </Tabs.Tab>
               </Tabs.List>
               {isLoading ? (
@@ -550,9 +778,9 @@ export default function Panel() {
                     <>
                       {dto === "KOF Colombia" ? (
                         <>
-                          <br></br>
+                          <br />
                           <TableauReport
-                            url={`https://tableau.efemsa.com/views/Conectividad/ActividaddelParque?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            url={`https://tableau.efemsa.com/views/KOF/Conectividad?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
                             options={options}
                             parameters={parameters}
@@ -571,9 +799,9 @@ export default function Panel() {
                     <>
                       {dto === "KOF Colombia" ? (
                         <>
-                          <br></br>
+                          <br />
                           <TableauReport
-                            url={`https://tableau.efemsa.com/views/ParqueReparado/ParqueReparado?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            url={`https://tableau.efemsa.com/views/KOF/Parque_reparado?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
                             options={options}
                             parameters={parameters}
@@ -591,69 +819,9 @@ export default function Panel() {
                     <>
                       {dto === "KOF Colombia" ? (
                         <>
-                          <br></br>
+                          <br />
                           <TableauReport
-                            url={`https://tableau.efemsa.com/views/CumplimientoMtoMensual-Piso/CumplimientoMtoanual?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                            token={data}
-                            options={options}
-                            parameters={parameters}
-                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-                          />
-                        </>
-                      ) : (
-                        <div style={{ marginTop: 30 }}>
-                          No hay tableros disponibles para mostrar
-                        </div>
-                      )}
-                    </>
-                  </Tabs.Panel>
-                  <Tabs.Panel value="fourth">
-                    <>
-                      {dto === "KOF Colombia" ? (
-                        <>
-                          <br></br>
-                          <TableauReport
-                            url={`https://tableau.efemsa.com/views/Tiemporespuesta/TRMAo?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                            token={data}
-                            options={options}
-                            parameters={parameters}
-                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-                          />
-                        </>
-                      ) : (
-                        <div style={{ marginTop: 30 }}>
-                          No hay tableros disponibles para mostrar
-                        </div>
-                      )}
-                    </>
-                  </Tabs.Panel>
-                  <Tabs.Panel value="fifth">
-                    <>
-                      {dto === "KOF Colombia" ? (
-                        <>
-                          <br></br>
-                          <TableauReport
-                            url={`https://tableau.efemsa.com/views/Reincidencia/Reincidencia?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
-                            token={data}
-                            options={options}
-                            parameters={parameters}
-                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
-                          />
-                        </>
-                      ) : (
-                        <div style={{ marginTop: 30 }}>
-                          No hay tableros disponibles para mostrar
-                        </div>
-                      )}
-                    </>
-                  </Tabs.Panel>
-                  <Tabs.Panel value="sixth">
-                    <>
-                      {dto === "KOF Colombia" ? (
-                        <>
-                          <br></br>
-                          <TableauReport
-                            url={`https://tableau.efemsa.com/views/DetalleO_S/DetalleO_SMes?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            url={`https://tableau.efemsa.com/views/KOF/Soporte?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
                             options={options}
                             parameters={parameters}
@@ -672,9 +840,9 @@ export default function Panel() {
             </Tabs>
           </div>
         </>
-      ) : (
-        ""
-      )}
+      ) : null}
     </section>
   );
 }
+
+// ************** CACHAR EL ERROR Y CAMBIAR EL MENSAJE
