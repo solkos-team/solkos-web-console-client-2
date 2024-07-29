@@ -595,10 +595,14 @@ export default function Insights() {
                     {IndicadoresData.sort((a, b) => {
                       const order = [
                         "Sin Riesgo",
+                        "SIN RIESGO",
                         "Visita PdV",
+                        "VISITA PDV PARA LECTURA",
                         "Actualizar Info",
                         "Estatus sin venta",
+                        "SIN VENTA",
                         "Acciones urgentes",
+                        "SIN COINCIDENCIA",
                       ];
                       const indexA = order.indexOf(a.algorithm);
                       const indexB = order.indexOf(b.algorithm);

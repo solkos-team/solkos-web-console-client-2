@@ -553,13 +553,17 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               </div>
             </div>
           </div>
-          <DrawerHeaderResponsive title={'Prueba'} description={'Prueba2'} outletDetails={outletDetails}/>
+          <DrawerHeaderResponsive
+            title={"Prueba"}
+            description={"Prueba2"}
+            outletDetails={outletDetails}
+          />
         </section>
         <section className="drawerBody">
           <section className="drawerMapaDescargar">
             <div className="drawerMapa">
               <div className="drawerMapa_Mapa">
-                <MapComponentPv latitude={latitude} longitude={longitude} />                
+                <MapComponentPv latitude={latitude} longitude={longitude} />
               </div>
               <div className="drawerMapa_Info">
                 <div
@@ -680,15 +684,36 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 </div>
               </div>
               <div className="drawerMapa_title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
-                  <path d="M13.0002 15.1667C14.7951 15.1667 16.2502 13.7116 16.2502 11.9167C16.2502 10.1217 14.7951 8.66667 13.0002 8.66667C11.2052 8.66667 9.75016 10.1217 9.75016 11.9167C9.75016 13.7116 11.2052 15.1667 13.0002 15.1667Z" stroke="#313A49" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M19.1286 18.0451L14.532 22.6417C14.1257 23.0475 13.575 23.2755 13.0007 23.2755C12.4265 23.2755 11.8757 23.0475 11.4694 22.6417L6.87175 18.0451C5.65974 16.833 4.83436 15.2888 4.49999 13.6076C4.16563 11.9264 4.33728 10.1839 4.99325 8.60029C5.64923 7.01669 6.76006 5.66317 8.18527 4.71089C9.61049 3.7586 11.2861 3.25032 13.0002 3.25032C14.7143 3.25032 16.3898 3.7586 17.8151 4.71089C19.2403 5.66317 20.3511 7.01669 21.0071 8.60029C21.6631 10.1839 21.8347 11.9264 21.5003 13.6076C21.166 15.2888 20.3406 16.833 19.1286 18.0451Z" stroke="#313A49" stroke-linecap="round" stroke-linejoin="round" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="26"
+                  height="26"
+                  viewBox="0 0 26 26"
+                  fill="none"
+                >
+                  <path
+                    d="M13.0002 15.1667C14.7951 15.1667 16.2502 13.7116 16.2502 11.9167C16.2502 10.1217 14.7951 8.66667 13.0002 8.66667C11.2052 8.66667 9.75016 10.1217 9.75016 11.9167C9.75016 13.7116 11.2052 15.1667 13.0002 15.1667Z"
+                    stroke="#313A49"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M19.1286 18.0451L14.532 22.6417C14.1257 23.0475 13.575 23.2755 13.0007 23.2755C12.4265 23.2755 11.8757 23.0475 11.4694 22.6417L6.87175 18.0451C5.65974 16.833 4.83436 15.2888 4.49999 13.6076C4.16563 11.9264 4.33728 10.1839 4.99325 8.60029C5.64923 7.01669 6.76006 5.66317 8.18527 4.71089C9.61049 3.7586 11.2861 3.25032 13.0002 3.25032C14.7143 3.25032 16.3898 3.7586 17.8151 4.71089C19.2403 5.66317 20.3511 7.01669 21.0071 8.60029C21.6631 10.1839 21.8347 11.9264 21.5003 13.6076C21.166 15.2888 20.3406 16.833 19.1286 18.0451Z"
+                    stroke="#313A49"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
                 <h1 className="drawerMapa_title_h1">Ubicación en el mapa</h1>
               </div>
               <div className="drawerMapa_Button">
-                <MapInsightsResponsive  opened={toggleDrawer}/>
-                <DrawerMap opened={opened2} onClose={toggleDrawer} latitude={latitude} longitude={longitude} />
+                <MapInsightsResponsive opened={toggleDrawer} />
+                <DrawerMap
+                  opened={opened2}
+                  onClose={toggleDrawer}
+                  latitude={latitude}
+                  longitude={longitude}
+                />
               </div>
             </div>
           </section>
@@ -999,239 +1024,6 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                 </div>
                               )}
                             </td>
-                            {/* <td data-label="PRIORIDAD" title="Prioridad">
-                              {isLoading == true ? (
-                                <>
-                                  <Skeleton
-                                    height={20}
-                                    radius="sm"
-                                    width="90%"
-                                  />
-                                </>
-                              ) : cooler.actionable === "" ||
-                                cooler.actionable === null ||
-                                cooler.actionable === undefined ? (
-                                "Sin registro"
-                              ) : (
-                                <>
-                                  <div
-                                    style={{
-                                      width: "fit-content",
-                                      display: "flex",
-                                      padding: "4px",
-                                      // justifyContent: "center",
-                                      alignItems: "center",
-                                      gap: "4px",
-                                      borderRadius: "2px",
-                                      border:
-                                        cooler.actionable === "Visita PdV"
-                                          ? "1.5px solid #DA7E05"
-                                          : cooler.actionable === "Sin Riesgo"
-                                          ? "1.5px solid #0F9F67"
-                                          : cooler.actionable ===
-                                              "Estatus sin venta" ||
-                                            cooler.actionable ===
-                                              "Acciones urgentes"
-                                          ? "1.5px solid #F93448"
-                                          : cooler.actionable ===
-                                            "Actualizar Info"
-                                          ? "1.5px solid #DA7E05"
-                                          : cooler.actionable ===
-                                              "Actualizar dato" ||
-                                            cooler.actionable ===
-                                              "Datos faltantes" ||
-                                            cooler.actionable === "Monitoreo" ||
-                                            cooler.actionable === "Movimiento"
-                                          ? "1.5px solid #1864AB"
-                                          : cooler.actionable ===
-                                              "Solicitar serv. correctivo" ||
-                                            cooler.actionable ===
-                                              "Solicitar serv. preventivos" ||
-                                            cooler.actionable ===
-                                              "Seguimiento a equipo" ||
-                                            cooler.actionable === "Visita PdV"
-                                          ? "1.5px solid #E67700"
-                                          : cooler.actionable ===
-                                            "Visita PdV prioritaria"
-                                          ? "1.5px solid #C92A2A"
-                                          : "1.5px solid black",
-                                      background: "#FFF",
-                                      textOverflow: "ellipsis",
-                                    }}
-                                  >
-                                    {cooler.actionable === "Visita PdV" &&
-                                    dto != "KOF Colombia" ? (
-                                      <img
-                                        src={"../../sampleData/p.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "12px",
-                                          height: "12px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable === "Sin Riesgo" ? (
-                                      <img
-                                        src={"../../sampleData/sn.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "12px",
-                                          height: "12px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                        "Estatus sin venta" ||
-                                      cooler.actionable ===
-                                        "Acciones urgentes" ? (
-                                      <img
-                                        src={"../../sampleData/a.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "12px",
-                                          height: "12px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                      "Actualizar Info" ? (
-                                      <img
-                                        src={"../../sampleData/p.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "12px",
-                                          height: "12px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                      "Actualizar dato" ? (
-                                      <img
-                                        src={"../../sampleData/actDat.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                      "Datos faltantes" ? (
-                                      <img
-                                        src={"../../sampleData/datFal.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable === "Monitoreo" ? (
-                                      <img
-                                        src={"../../sampleData/Mont.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable === "Movimiento" ? (
-                                      <img
-                                        src={"../../sampleData/mov1.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                        "Solicitar serv. correctivo" ||
-                                      cooler.actionable ===
-                                        "Solicitar serv. preventivos" ? (
-                                      <img
-                                        src={"../../sampleData/serCP.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                      "Seguimiento a equipo" ? (
-                                      <img
-                                        src={"../../sampleData/seguE.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable === "Visita PdV" ? (
-                                      <img
-                                        src={"../../sampleData/visitap.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : cooler.actionable ===
-                                      "Visita PdV prioritaria" ? (
-                                      <img
-                                        src={"../../sampleData/visitapd.svg"}
-                                        alt="Descripción de la imagen"
-                                        style={{
-                                          width: "15px",
-                                          height: "15px",
-                                        }}
-                                      />
-                                    ) : (
-                                      ""
-                                    )}
-
-                                    <div
-                                      title={cooler.actionable}
-                                      style={{
-                                        color:
-                                          cooler.actionable === "Visita PdV"
-                                            ? "#DA7E05"
-                                            : cooler.actionable === "Sin Riesgo"
-                                            ? "#0F9F67"
-                                            : cooler.actionable ===
-                                                "Estatus sin venta" ||
-                                              cooler.actionable ===
-                                                "Acciones urgentes"
-                                            ? "#F93448"
-                                            : cooler.actionable ===
-                                              "Actualizar Info"
-                                            ? "#DA7E05"
-                                            : cooler.actionable ===
-                                                "Actualizar dato" ||
-                                              cooler.actionable ===
-                                                "Datos faltantes" ||
-                                              cooler.actionable ===
-                                                "Monitoreo" ||
-                                              cooler.actionable === "Movimiento"
-                                            ? "#1864AB"
-                                            : cooler.actionable ===
-                                                "Solicitar serv. correctivo" ||
-                                              cooler.actionable ===
-                                                "Solicitar serv. preventivos" ||
-                                              cooler.actionable ===
-                                                "Seguimiento a equipo" ||
-                                              cooler.actionable === "Visita PdV"
-                                            ? "#E67700"
-                                            : cooler.actionable ===
-                                              "Visita PdV prioritaria"
-                                            ? "#C92A2A"
-                                            : "black",
-
-                                        fontSize: ".7vw",
-                                        fontStyle: "normal",
-                                        fontWeight: 600,
-                                        lineHeight: "14px",
-                                      }}
-                                    >
-                                      {cooler.actionable}
-                                    </div>
-                                  </div>
-                                </>
-                              )}
-                            </td> */}
                             <td data-label="PRIORIDAD" title="Prioridad">
                               {isLoading ? (
                                 <Skeleton height={20} radius="sm" width="90%" />
@@ -1247,14 +1039,19 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                     gap: "4px",
                                     borderRadius: "2px",
                                     border:
-                                      cooler.actionable === "Visita PdV"
+                                      cooler.actionable === "Visita PdV" ||
+                                      cooler.actionable ===
+                                        "VISITA PDV PARA LECTURA"
                                         ? "1.5px solid #DA7E05"
-                                        : cooler.actionable === "Sin Riesgo"
+                                        : cooler.actionable === "Sin Riesgo" ||
+                                          cooler.actionable === "SIN RIESGO"
                                         ? "1.5px solid #0F9F67"
                                         : cooler.actionable ===
                                             "Estatus sin venta" ||
+                                          cooler.actionable === "SIN VENTA" ||
                                           cooler.actionable ===
-                                            "Acciones urgentes"
+                                            "Acciones urgentes" ||
+                                          "SIN COINCIDENCIA "
                                         ? "1.5px solid #F93448"
                                         : cooler.actionable ===
                                           "Actualizar Info"
@@ -1288,7 +1085,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       alt="Descripción de la imagen"
                                       style={{ width: "12px", height: "12px" }}
                                     />
-                                  ) : cooler.actionable === "Sin Riesgo" ? (
+                                  ) : cooler.actionable === "Sin Riesgo" ||
+                                    cooler.actionable === "SIN RIESGO" ? (
                                     <img
                                       src={"../../sampleData/sn.svg"}
                                       alt="Descripción de la imagen"
@@ -1296,8 +1094,9 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                     />
                                   ) : cooler.actionable ===
                                       "Estatus sin venta" ||
-                                    cooler.actionable ===
-                                      "Acciones urgentes" ? (
+                                    cooler.actionable === "SIN VENTA" ||
+                                    cooler.actionable === "Acciones urgentes" ||
+                                    cooler.actionable === "SIN COINCIDENCIA" ? (
                                     <img
                                       src={"../../sampleData/a.svg"}
                                       alt="Descripción de la imagen"
@@ -1352,7 +1151,9 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       alt="Descripción de la imagen"
                                       style={{ width: "15px", height: "15px" }}
                                     />
-                                  ) : cooler.actionable === "Visita PdV" ? (
+                                  ) : cooler.actionable === "Visita PdV" ||
+                                    cooler.actionable ===
+                                      "VISITA PDV PARA LECTURA" ? (
                                     <img
                                       src={"../../sampleData/visitap.svg"}
                                       alt="Descripción de la imagen"
@@ -1376,14 +1177,21 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                       overflow: "hidden",
                                       textOverflow: "ellipsis",
                                       color:
-                                        cooler.actionable === "Visita PdV"
+                                        cooler.actionable === "Visita PdV" ||
+                                        cooler.actionable ===
+                                          "VISITA PDV PARA LECTURA"
                                           ? "#DA7E05"
-                                          : cooler.actionable === "Sin Riesgo"
+                                          : cooler.actionable ===
+                                              "Sin Riesgo" ||
+                                            cooler.actionable === "SIN RIESGO"
                                           ? "#0F9F67"
                                           : cooler.actionable ===
                                               "Estatus sin venta" ||
+                                            cooler.actionable === "SIN VENTA" ||
                                             cooler.actionable ===
-                                              "Acciones urgentes"
+                                              "Acciones urgentes" ||
+                                            cooler.actionable ===
+                                              "SIN COINCIDENCIA"
                                           ? "#F93448"
                                           : cooler.actionable ===
                                             "Actualizar Info"

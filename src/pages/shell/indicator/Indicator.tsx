@@ -172,10 +172,14 @@ export default function Indicator() {
                 .sort((a, b) => {
                   const order = [
                     "Sin Riesgo",
+                    "SIN RIESGO",
                     "Visita PdV",
+                    "VISITA PDV PARA LECTURA",
                     "Actualizar Info",
                     "Estatus sin venta",
+                    "SIN VENTA",
                     "Acciones urgentes",
+                    "SIN COINCIDENCIA",
                   ];
                   const indexA = order.indexOf(a.algorithm);
                   const indexB = order.indexOf(b.algorithm);
@@ -224,12 +228,15 @@ export default function Indicator() {
                             gap: "10px",
                             borderRadius: "4px",
                             background:
-                              cooler.algorithm === "Sin Riesgo"
+                              cooler.algorithm === "Sin Riesgo" ||
+                              cooler.algorithm === "SIN RIESGO"
                                 ? "#C0F2C8"
                                 : cooler.algorithm === "Actualizar Info"
                                 ? "#FEF5C7"
                                 : cooler.algorithm === "Estatus sin venta" ||
-                                  cooler.algorithm === "Acciones urgentes"
+                                  cooler.algorithm === "SIN VENTA" ||
+                                  cooler.algorithm === "Acciones urgentes" ||
+                                  cooler.algorithm === "SIN COINCIDENCIA"
                                 ? "#FFC7CD"
                                 : cooler.algorithm === "Visita PdV" &&
                                   dto != "KOF Colombia"
@@ -244,14 +251,16 @@ export default function Indicator() {
                                   cooler.algorithm ===
                                     "Solicitar serv. preventivo" ||
                                   cooler.algorithm === "Seguimiento a equipo" ||
-                                  cooler.algorithm === "Visita PdV"
+                                  cooler.algorithm === "Visita PdV" ||
+                                  cooler.algorithm === "VISITA PDV PARA LECTURA"
                                 ? "#FFEC99"
                                 : cooler.algorithm === "Visita PdV prioritaria"
                                 ? "#FFC9C9"
                                 : "",
                           }}
                         >
-                          {cooler.algorithm === "Sin Riesgo" ? (
+                          {cooler.algorithm === "Sin Riesgo" ||
+                          cooler.algorithm === "SIN RIESGO" ? (
                             <img
                               src={"../../sampleData/sinr.svg"}
                               alt="Descripción de la imagen"
@@ -264,7 +273,9 @@ export default function Indicator() {
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm === "Estatus sin venta" ||
-                            cooler.algorithm === "Acciones urgentes" ? (
+                            cooler.algorithm === "SIN VENTA" ||
+                            cooler.algorithm === "Acciones urgentes" ||
+                            cooler.algorithm === "SIN COINCIDENCIA" ? (
                             <img
                               src={"../../sampleData/accio.svg"}
                               alt="Descripción de la imagen"
@@ -316,7 +327,8 @@ export default function Indicator() {
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "Visita PdV" ? (
+                          ) : cooler.algorithm === "Visita PdV" ||
+                            cooler.algorithm === "VISITA PDV PARA LECTURA" ? (
                             <img
                               src={"../../sampleData/visitap.svg"}
                               alt="Descripción de la imagen"

@@ -37,25 +37,35 @@ export default function DrawerA({
       selectedAlgorithm === "Bajo/Alto voltaje"
         ? "VOLTAGE_ALERT"
         : selectedAlgorithm === "Alta demanda de compresor"
-          ? "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-          : selectedAlgorithm === "Alerta alta temperatura"
-            ? "HIGH_TEMPERATURE_ALERT"
-            : selectedAlgorithm === "Desconexión"
-              ? "DISCONNECTION_ALERT"
-              : selectedAlgorithm === "Falla asociada al compresor"
-                ? "COMPRESSOR_FAIL"
-                : selectedAlgorithm === "Evaporador bloqueado"
-                  ? "FREEZING_FAIL"
-                  : selectedAlgorithm === "Alta temperatura"
-                    ? "TEMPERATURE_FAIL"
-                    : selectedAlgorithm === "Posible daño eléctrico"
-                      ? "VOLTAGE_FAIL"
-                      : selectedAlgorithm,
+        ? "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+        : selectedAlgorithm === "Alerta alta temperatura"
+        ? "HIGH_TEMPERATURE_ALERT"
+        : selectedAlgorithm === "Desconexión"
+        ? "DISCONNECTION_ALERT"
+        : selectedAlgorithm === "Falla asociada al compresor"
+        ? "COMPRESSOR_FAIL"
+        : selectedAlgorithm === "Evaporador bloqueado"
+        ? "FREEZING_FAIL"
+        : selectedAlgorithm === "Alta temperatura"
+        ? "TEMPERATURE_FAIL"
+        : selectedAlgorithm === "Posible daño eléctrico"
+        ? "VOLTAGE_FAIL"
+        : selectedAlgorithm === "SIN RIESGO"
+        ? "Sin Riesgo"
+        : selectedAlgorithm === "SIN VENTA"
+        ? "Estatus sin venta"
+        : selectedAlgorithm === "VISITA PDV PARA LECTURA"
+        ? "Visita PdV"
+        : selectedAlgorithm === "SIN COINCIDENCIA"
+        ? "Acciones urgentes"
+        : selectedAlgorithm,
     ],
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
   };
+
+  console.log(selectedAlgorithm);
   const fetchData = async () => {
     try {
       const data = await fetchUniversalTables("coolers", body, setIsLoading);
@@ -144,7 +154,7 @@ export default function DrawerA({
   coolersData === undefined ? [] : coolersData;
   // console.log(coolersData);
   totalData === undefined ? 0 : totalData;
-  
+
   return (
     <Drawer
       opened={opened}
@@ -153,16 +163,35 @@ export default function DrawerA({
       position="right"
       size="40rem"
     >
-      <section className="drawerAlertsPrincipal" style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: '',gap:'4px',marginTop:'1rem' }}>
-        <div className="drawerAlertHeader" style={{ width: '100%', height: '10%', backgroundColor: '',borderBottom:'1px solid var(--gray-4, #CED4DA)',}}>
+      <section
+        className="drawerAlertsPrincipal"
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "",
+          gap: "4px",
+          marginTop: "1rem",
+        }}
+      >
+        <div
+          className="drawerAlertHeader"
+          style={{
+            width: "100%",
+            height: "10%",
+            backgroundColor: "",
+            borderBottom: "1px solid var(--gray-4, #CED4DA)",
+          }}
+        >
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
-              gap: "20px",              
-              paddingBottom:'0.5rem',
-              boxSizing:'border-box'
+              gap: "20px",
+              paddingBottom: "0.5rem",
+              boxSizing: "border-box",
             }}
           >
             {/* 2 */}
@@ -176,188 +205,203 @@ export default function DrawerA({
               }}
             >
               <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "16px",
+                  alignSelf: "stretch",
+                  backgroundColor: "",
+                  flexDirection: "column",
+                }}
+              >
+                <div
                   style={{
                     display: "flex",
+                    padding: "2px",
                     alignItems: "center",
-                    gap: "16px",
-                    alignSelf: "stretch",
-                    backgroundColor:'',
-                    flexDirection:'column'
+                    gap: "10px",
+                    borderRadius: "4px",
+                    background:
+                      level === "ALERT"
+                        ? "#FEF5C7"
+                        : level === "FAIL"
+                        ? "#FFC7CD"
+                        : selectedAlgorithm === "Actualizar Info"
+                        ? "#FEF5C7"
+                        : selectedAlgorithm === "Sin Riesgo" ||
+                          selectedAlgorithm === "SIN RIESGO"
+                        ? "#C0F2C8"
+                        : selectedAlgorithm === "Estatus sin venta" ||
+                          selectedAlgorithm === "SIN VENTA" ||
+                          selectedAlgorithm === "Acciones urgentes" ||
+                          selectedAlgorithm === "SIN COINCIDENCIA"
+                        ? "#FFC7CD"
+                        : selectedAlgorithm === "Visita PdV" &&
+                          dto != "KOF Colombia"
+                        ? "#FEF5C7"
+                        : selectedAlgorithm === "Actualizar dato" ||
+                          selectedAlgorithm === "Datos faltantes" ||
+                          selectedAlgorithm === "Monitoreo" ||
+                          selectedAlgorithm === "Movimiento"
+                        ? "#A5D8FF"
+                        : selectedAlgorithm === "Solicitar serv. correctivo" ||
+                          selectedAlgorithm === "Solicitar serv. preventivo" ||
+                          selectedAlgorithm === "Seguimiento a equipo" ||
+                          selectedAlgorithm === "Visita PdV" ||
+                          selectedAlgorithm === "VISITA PDV PARA LECTURA"
+                        ? "#FFEC99"
+                        : selectedAlgorithm === "Visita PdV prioritaria"
+                        ? "#FFC9C9"
+                        : "",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "2px",
-                      alignItems: "center",
-                      gap: "10px",
-                      borderRadius: "4px",
-                      background:
-                        level === "ALERT"
-                          ? "#FEF5C7"
-                          : level === "FAIL"
-                            ? "#FFC7CD"
-                            : selectedAlgorithm === "Actualizar Info"
-                              ? "#FEF5C7"
-                              : selectedAlgorithm === "Sin Riesgo"
-                                ? "#C0F2C8"
-                                : selectedAlgorithm === "Estatus sin venta" ||
-                                  selectedAlgorithm === "Acciones urgentes"
-                                  ? "#FFC7CD"
-                                  : selectedAlgorithm === "Visita PdV" &&
-                                    dto != "KOF Colombia"
-                                    ? "#FEF5C7"
-                                    : selectedAlgorithm === "Actualizar dato" ||
-                                      selectedAlgorithm === "Datos faltantes" ||
-                                      selectedAlgorithm === "Monitoreo" ||
-                                      selectedAlgorithm === "Movimiento"
-                                      ? "#A5D8FF"
-                                      : selectedAlgorithm === "Solicitar serv. correctivo" ||
-                                        selectedAlgorithm === "Solicitar serv. preventivo" ||
-                                        selectedAlgorithm === "Seguimiento a equipo" ||
-                                        selectedAlgorithm === "Visita PdV"
-                                        ? "#FFEC99"
-                                        : selectedAlgorithm === "Visita PdV prioritaria"
-                                          ? "#FFC9C9"
-                                          : "",
-                    }}
-                  >
-                    {selectedAlgorithm === "Sin Riesgo" ? (
-                      <img
-                        src={"../../sampleData/sinr.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Actualizar Info" ? (
-                      <img
-                        src={"../../sampleData/reqa.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Estatus sin venta" ||
-                      selectedAlgorithm === "Acciones urgentes" ? (
-                      <img
-                        src={"../../sampleData/accio.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Visita PdV" &&
-                      dto != "KOF Colombia" ? (
-                      <img
-                        src={"../../sampleData/vp.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Falla asociada al compresor" ? (
-                      <>
-                        <img
-                          src={"../../sampleData/failc.svg"}
-                          alt="Descripción de la imagen"
-                          style={{ width: "1.813rem", height: "1.813rem" }}
-                        />
-                      </>
-                    ) : selectedAlgorithm === "Alta temperatura" ? (
-                      <img
-                        src={"../../sampleData/failt.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Posible daño eléctrico" ? (
-                      <img
-                        src={"../../sampleData/faile.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Evaporador bloqueado" ? (
+                  {selectedAlgorithm === "Sin Riesgo" ||
+                  selectedAlgorithm === "SIN RIESGO" ? (
+                    <img
+                      src={"../../sampleData/sinr.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Actualizar Info" ? (
+                    <img
+                      src={"../../sampleData/reqa.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Estatus sin venta" ||
+                    selectedAlgorithm === "SIN VENTA" ||
+                    selectedAlgorithm === "Acciones urgentes" ||
+                    selectedAlgorithm === "SIN COINCIDENCIA" ? (
+                    <img
+                      src={"../../sampleData/accio.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Visita PdV" &&
+                    dto != "KOF Colombia" ? (
+                    <img
+                      src={"../../sampleData/vp.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Falla asociada al compresor" ? (
+                    <>
                       <img
                         src={"../../sampleData/failc.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "1.813rem", height: "1.813rem" }}
                       />
-                    ) : selectedAlgorithm === "Alta demanda de compresor" ? (
-                      <>
-                        <img
-                          src={"../../sampleData/AlertsDrawer/compressor.svg"}
-                          alt="Descripción de la imagen"
-                          style={{ width: "1.813rem", height: "1.813rem" }}
-                        />
-                      </>
-                    ) : selectedAlgorithm === "Desconexión" ? (
-                      <>
-                        {" "}
-                        <img
-                          src={"../../sampleData/desc.svg"}
-                          alt="Descripción de la imagen"
-                          style={{ width: "1.813rem", height: "1.813rem" }}
-                        />
-                      </>
-                    ) : selectedAlgorithm === "Alerta alta temperatura" ? (
+                    </>
+                  ) : selectedAlgorithm === "Alta temperatura" ? (
+                    <img
+                      src={"../../sampleData/failt.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Posible daño eléctrico" ? (
+                    <img
+                      src={"../../sampleData/faile.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Evaporador bloqueado" ? (
+                    <img
+                      src={"../../sampleData/failc.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Alta demanda de compresor" ? (
+                    <>
                       <img
-                        src={"../../sampleData/alt.svg"}
+                        src={"../../sampleData/AlertsDrawer/compressor.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "1.813rem", height: "1.813rem" }}
                       />
-                    ) : selectedAlgorithm === "Bajo/Alto voltaje" ? (
+                    </>
+                  ) : selectedAlgorithm === "Desconexión" ? (
+                    <>
+                      {" "}
                       <img
-                        src={"../../sampleData/altv.svg"}
+                        src={"../../sampleData/desc.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "1.813rem", height: "1.813rem" }}
                       />
-                    ) : selectedAlgorithm === "Actualizar dato" ? (
-                      <img
-                        src={"../../sampleData/actDat.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Datos faltantes" ? (
-                      <img
-                        src={"../../sampleData/datFal.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Monitoreo" ? (
-                      <img
-                        src={"../../sampleData/Mont.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Movimiento" ? (
-                      <img
-                        src={"../../sampleData/mov1.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Solicitar serv. correctivo" ||
-                      selectedAlgorithm === "Solicitar serv. preventivo" ? (
-                      <img
-                        src={"../../sampleData/serCP.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Seguimiento a equipo" ? (
-                      <img
-                        src={"../../sampleData/seguE.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Visita PdV" ? (
-                      <img
-                        src={"../../sampleData/visitap.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : selectedAlgorithm === "Visita PdV prioritaria" ? (
-                      <img
-                        src={"../../sampleData/visitapd.svg"}
-                        alt="Descripción de la imagen"
-                        style={{ width: "1.813rem", height: "1.813rem" }}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </div>
+                    </>
+                  ) : selectedAlgorithm === "Alerta alta temperatura" ? (
+                    <img
+                      src={"../../sampleData/alt.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Bajo/Alto voltaje" ? (
+                    <img
+                      src={"../../sampleData/altv.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Actualizar dato" ? (
+                    <img
+                      src={"../../sampleData/actDat.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Datos faltantes" ? (
+                    <img
+                      src={"../../sampleData/datFal.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Monitoreo" ? (
+                    <img
+                      src={"../../sampleData/Mont.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Movimiento" ? (
+                    <img
+                      src={"../../sampleData/mov1.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Solicitar serv. correctivo" ||
+                    selectedAlgorithm === "Solicitar serv. preventivo" ? (
+                    <img
+                      src={"../../sampleData/serCP.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Seguimiento a equipo" ? (
+                    <img
+                      src={"../../sampleData/seguE.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Visita PdV" ||
+                    selectedAlgorithm === "VISITA PDV PARA LECTURA" ? (
+                    <img
+                      src={"../../sampleData/visitap.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "Visita PdV prioritaria" ? (
+                    <img
+                      src={"../../sampleData/visitapd.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : (
+                    ""
+                  )}
+                </div>
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px" ,backgroundColor:''}}>                
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "16px",
+                  backgroundColor: "",
+                }}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -378,8 +422,8 @@ export default function DrawerA({
                         level === "ALERT"
                           ? "#FEF5C7"
                           : level === "INDICATOR"
-                            ? "#BCDAFF"
-                            : "#FFC7CD",
+                          ? "#BCDAFF"
+                          : "#FFC7CD",
                       height: "100%",
                     }}
                   >
@@ -387,7 +431,7 @@ export default function DrawerA({
                       <img
                         src={"../../sampleData/AlertsDrawer/alert.svg"}
                         alt="Descripción de la imagen"
-                        style={{ width: "16px", height: "16px",color:'red' }}
+                        style={{ width: "16px", height: "16px", color: "red" }}
                       />
                     ) : level === "INDICATOR" ? (
                       <img
@@ -405,9 +449,10 @@ export default function DrawerA({
 
                     <div
                       style={{
-                        color: level === "ALERT"
-                        ? "var(--yellow-9, #E67700)"
-                        : "#451C03",
+                        color:
+                          level === "ALERT"
+                            ? "var(--yellow-9, #E67700)"
+                            : "#451C03",
                         // fontFamily: "Space Mono",
                         fontSize: "12px",
                         fontStyle: "normal",
@@ -418,8 +463,8 @@ export default function DrawerA({
                       {level === "ALERT"
                         ? "ALERTAS"
                         : level === "INDICATOR"
-                          ? "CONTROL DE ACTIVOS"
-                          : "FALLA"}
+                        ? "CONTROL DE ACTIVOS"
+                        : "FALLA"}
                     </div>
                   </div>
                   <div
@@ -428,7 +473,7 @@ export default function DrawerA({
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
-                      fontSize:'1.2rem'
+                      fontSize: "1.2rem",
                     }}
                   >
                     {selectedAlgorithm && <div>{selectedAlgorithm}</div>}
@@ -470,7 +515,11 @@ export default function DrawerA({
                     {value.toLocaleString("es-MX")}
                   </div>
                   <div
-                    style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
                   >
                     <div
                       style={{
@@ -480,7 +529,9 @@ export default function DrawerA({
                         alignSelf: "stretch",
                       }}
                     >
-                      <div style={{ display: "flex", alignItems: "flex-start" }}>
+                      <div
+                        style={{ display: "flex", alignItems: "flex-start" }}
+                      >
                         <div
                           style={{
                             display: "flex",
@@ -493,10 +544,10 @@ export default function DrawerA({
                               delta < 0
                                 ? "#C0F2C8"
                                 : delta === 0
-                                  ? "#ADBACC"
-                                  : delta > 0
-                                    ? "#FFC7CD"
-                                    : "",
+                                ? "#ADBACC"
+                                : delta > 0
+                                ? "#FFC7CD"
+                                : "",
                           }}
                         >
                           {delta < 0 ? (
@@ -533,10 +584,10 @@ export default function DrawerA({
                             delta < 0
                               ? "#31B648"
                               : delta === 0
-                                ? "#313A49"
-                                : delta > 0
-                                  ? "#F93448"
-                                  : "",
+                              ? "#313A49"
+                              : delta > 0
+                              ? "#F93448"
+                              : "",
                           // fontFamily: "DM Sans",
                           fontSize: "16px",
                           fontStyle: "normal",
@@ -562,18 +613,21 @@ export default function DrawerA({
                   </div>
                 </div>
               </div>
-            </div>            
+            </div>
           </div>
           {/* <hr style={{borderBottom:'1px solid #CACACA'}} /> */}
-        </div>        
-        <div className="drawerAlertsDescargar" style={{ width: '100%', height: 'max-content', backgroundColor: '' }}>
+        </div>
+        <div
+          className="drawerAlertsDescargar"
+          style={{ width: "100%", height: "max-content", backgroundColor: "" }}
+        >
           <div
             style={{
               display: "flex",
               padding: "0px 30px",
               justifyContent: "space-between",
               alignItems: "center",
-              boxSizing:'border-box'
+              boxSizing: "border-box",
             }}
           >
             <div
@@ -628,7 +682,7 @@ export default function DrawerA({
           </div>
         </div>
         <div className="drawers_principal">
-        <section className="drawers_table">
+          <section className="drawers_table">
             <table>
               <thead>
                 <tr>
@@ -856,12 +910,15 @@ export default function DrawerA({
                                     cooler.actionable === "Visita PdV" &&
                                     dto != "KOF Colombia"
                                       ? "1.5px solid #DA7E05"
-                                      : cooler.actionable === "Sin Riesgo"
+                                      : cooler.actionable === "Sin Riesgo" ||
+                                        cooler.actionable === "SIN RIESGO"
                                       ? "1.5px solid #0F9F67"
                                       : cooler.actionable ===
                                           "Estatus sin venta" ||
+                                        cooler.actionable === "SIN VENTA" ||
                                         cooler.actionable ===
-                                          "Acciones urgentes"
+                                          "Acciones urgentes" ||
+                                        cooler.actionable === "SIN COINCIDENCIA"
                                       ? "1.5px solid #F93448"
                                       : cooler.actionable === "Actualizar Info"
                                       ? "1.5px solid #DA7E05"
@@ -878,7 +935,9 @@ export default function DrawerA({
                                           "Solicitar serv. preventivos" ||
                                         cooler.actionable ===
                                           "Seguimiento a equipo" ||
-                                        cooler.actionable === "Visita PdV"
+                                        cooler.actionable === "Visita PdV" ||
+                                        cooler.actionable ===
+                                          "VISITA PDV PARA LECTURA"
                                       ? "1.5px solid #E67700"
                                       : cooler.actionable ===
                                         "Visita PdV prioritaria"
@@ -894,14 +953,17 @@ export default function DrawerA({
                                     alt="Descripción de la imagen"
                                     style={{ width: "12px", height: "12px" }}
                                   />
-                                ) : cooler.actionable === "Sin Riesgo" ? (
+                                ) : cooler.actionable === "Sin Riesgo" ||
+                                  cooler.actionable === "SIN RIESGO" ? (
                                   <img
                                     src={"../../sampleData/sn.svg"}
                                     alt="Descripción de la imagen"
                                     style={{ width: "12px", height: "12px" }}
                                   />
                                 ) : cooler.actionable === "Estatus sin venta" ||
-                                  cooler.actionable === "Acciones urgentes" ? (
+                                  cooler.actionable === "SIN VENTA" ||
+                                  cooler.actionable === "Acciones urgentes" ||
+                                  cooler.actionable === "SIN COINCIDENCIA" ? (
                                   <img
                                     src={"../../sampleData/a.svg"}
                                     alt="Descripción de la imagen"
@@ -953,7 +1015,9 @@ export default function DrawerA({
                                     alt="Descripción de la imagen"
                                     style={{ width: "15px", height: "15px" }}
                                   />
-                                ) : cooler.actionable === "Visita PdV" ? (
+                                ) : cooler.actionable === "Visita PdV" ||
+                                  cooler.actionable ===
+                                    "VISITA PDV PARA LECTURA" ? (
                                   <img
                                     src={"../../sampleData/visitap.svg"}
                                     alt="Descripción de la imagen"
@@ -978,12 +1042,17 @@ export default function DrawerA({
                                       cooler.actionable === "Visita PdV" &&
                                       dto != "KOF Colombia"
                                         ? "#DA7E05"
-                                        : cooler.actionable === "Sin Riesgo"
+                                        : cooler.actionable === "Sin Riesgo" ||
+                                          cooler.actionable === "SIN RIESGO"
                                         ? "#0F9F67"
                                         : cooler.actionable ===
                                             "Estatus sin venta" ||
+                                          cooler.actionable === "SIN VENTA" ||
                                           cooler.actionable ===
-                                            "Acciones urgentes"
+                                            "Acciones urgentes" ||
+                                          cooler.actionable === "SIN VENTA" ||
+                                          cooler.actionable ===
+                                            "SIN COINCIDENCIA"
                                         ? "#F93448"
                                         : cooler.actionable ===
                                           "Actualizar Info"
@@ -1001,7 +1070,9 @@ export default function DrawerA({
                                             "Solicitar serv. preventivos" ||
                                           cooler.actionable ===
                                             "Seguimiento a equipo" ||
-                                          cooler.actionable === "Visita PdV"
+                                          cooler.actionable === "Visita PdV" ||
+                                          cooler.actionable ===
+                                            "VISITA PDV PARA LECTURA"
                                         ? "#E67700"
                                         : cooler.actionable ===
                                           "Visita PdV prioritaria"
@@ -1028,7 +1099,10 @@ export default function DrawerA({
                               <Skeleton height={20} radius="sm" width="90%" />
                             </>
                           ) : (
-                            <Link to={`/home/clt/${cooler.serial_number}`} target="_blank">
+                            <Link
+                              to={`/home/clt/${cooler.serial_number}`}
+                              target="_blank"
+                            >
                               <div
                                 style={{
                                   color: "#3E83FF",

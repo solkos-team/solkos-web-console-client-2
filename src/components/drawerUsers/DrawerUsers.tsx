@@ -13,10 +13,10 @@ export default function DrawerUsers({
   openedDrawerEdit,
   setOpenedDrawerEdit,
   oncloseDrawerEdit,
-  deleteUserDrawer
+  deleteUserDrawer,
 }) {
   const { id, name, email, customer, path } = userData;
-  const dto = useSelector((state: any) => state.organization);  
+  const dto = useSelector((state: any) => state.organization);
   const [nameUser, setNameUser] = useState(name);
   const [showAlert, setShowAlert] = useState(false);
   const [emailUser, setEmailUser] = useState(email);
@@ -80,8 +80,8 @@ export default function DrawerUsers({
     } else {
       return false;
     }
-  };  
-  
+  };
+
   return (
     <Drawer
       opened={openedDrawerEdit}
@@ -110,103 +110,111 @@ export default function DrawerUsers({
             ></div>
           </div>
           <section className="users_form">
-            <section style={{width:'100%',height:'60%',display:'flex',flexDirection:'column',gap:'1rem'}}>
-            <section className="users_form_1">
-              {userVerify() == true ? (
-                <>
-                  <Input.Wrapper label="Nombre" description="" error="">
-                    <Input
-                      value={nameUser}
-                      onChange={(e) => setNameUser(e.target.value)}
-                    />
-                  </Input.Wrapper>
-                </>
+            <section
+              style={{
+                width: "100%",
+                height: "60%",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+              }}
+            >
+              <section className="users_form_1">
+                {userVerify() == true ? (
+                  <>
+                    <Input.Wrapper label="Nombre" description="" error="">
+                      <Input
+                        value={nameUser}
+                        onChange={(e) => setNameUser(e.target.value)}
+                      />
+                    </Input.Wrapper>
+                  </>
+                ) : (
+                  <>
+                    <Input.Wrapper label="Nombre" description="" error="">
+                      <Input
+                        value={nameUser}
+                        onChange={(e) => setNameUser(e.target.value)}
+                        disabled
+                      />
+                    </Input.Wrapper>
+                  </>
+                )}
+              </section>
+              <section className="users_form_1">
+                {userVerify() == true ? (
+                  <>
+                    <Input.Wrapper label="Correo" description="" error="">
+                      <Input
+                        value={emailUser}
+                        onChange={(e) => setEmailUser(e.target.value)}
+                      />
+                    </Input.Wrapper>
+                  </>
+                ) : (
+                  <>
+                    <Input.Wrapper label="Correo" description="" error="">
+                      <Input
+                        value={emailUser}
+                        onChange={(e) => setEmailUser(e.target.value)}
+                        disabled
+                      />
+                    </Input.Wrapper>
+                  </>
+                )}
+              </section>
+              <section className="users_form_1">
+                {userVerify() == true ? (
+                  <>
+                    <Input.Wrapper label="Customer" description="" error="">
+                      <Input
+                        value={customerUser}
+                        onChange={(e) => setCustomerUser(e.target.value)}
+                        disabled={true}
+                      />
+                    </Input.Wrapper>
+                  </>
+                ) : (
+                  <>
+                    <Input.Wrapper label="Customer" description="" error="">
+                      <Input
+                        value={customerUser}
+                        onChange={(e) => setCustomerUser(e.target.value)}
+                        disabled
+                      />
+                    </Input.Wrapper>
+                  </>
+                )}
+              </section>
+              {dto === "CALL CENTER" ? (
+                ""
               ) : (
                 <>
-                  <Input.Wrapper label="Nombre" description="" error="">
-                    <Input
-                      value={nameUser}
-                      onChange={(e) => setNameUser(e.target.value)}
-                      disabled
-                    />
-                  </Input.Wrapper>
+                  <section className="users_form_1">
+                    {userVerify() == true ? (
+                      <>
+                        <Input.Wrapper label="Path" description="" error="">
+                          <Input
+                            value={path.toString()}
+                            // onChange={(e) => setPathUser(e.target.value)}
+                          />
+                        </Input.Wrapper>
+                      </>
+                    ) : (
+                      <>
+                        <Input.Wrapper label="Path" description="" error="">
+                          <Input
+                            value={path.toString()}
+                            // onChange={(e) => setPathUser(e.target.value)}
+                            disabled
+                          />
+                        </Input.Wrapper>
+                      </>
+                    )}
+                  </section>
                 </>
               )}
             </section>
-            <section className="users_form_1">
-              {userVerify() == true ? (
-                <>
-                  <Input.Wrapper label="Correo" description="" error="">
-                    <Input
-                      value={emailUser}
-                      onChange={(e) => setEmailUser(e.target.value)}
-                    />
-                  </Input.Wrapper>
-                </>
-              ) : (
-                <>
-                  <Input.Wrapper label="Correo" description="" error="">
-                    <Input
-                      value={emailUser}
-                      onChange={(e) => setEmailUser(e.target.value)}
-                      disabled
-                    />
-                  </Input.Wrapper>
-                </>
-              )}
-            </section>
-            <section className="users_form_1">
-              {userVerify() == true ? (
-                <>
-                  <Input.Wrapper label="Customer" description="" error="">
-                    <Input
-                      value={customerUser}
-                      onChange={(e) => setCustomerUser(e.target.value)}
-                      disabled={true}
-                    />
-                  </Input.Wrapper>
-                </>
-              ) : (
-                <>
-                  <Input.Wrapper label="Customer" description="" error="">
-                    <Input
-                      value={customerUser}
-                      onChange={(e) => setCustomerUser(e.target.value)}
-                      disabled
-                    />
-                  </Input.Wrapper>
-                </>
-              )}
-            </section>
-            {dto === "CALL CENTER" ? (
-              ""
-            ) : (
-              <>
-                <section className="users_form_1">
-                  {userVerify() == true ? (
-                    <>
-                      <Input.Wrapper label="Path" description="" error="">
-                        <Input
-                          value={path.toString()}
-                          // onChange={(e) => setPathUser(e.target.value)}
-                        />
-                      </Input.Wrapper>
-                    </>
-                  ) : (
-                    <>
-                      <Input.Wrapper label="Path" description="" error="">
-                        <Input
-                          value={path.toString()}
-                          // onChange={(e) => setPathUser(e.target.value)}
-                          disabled
-                        />
-                      </Input.Wrapper>
-                    </>
-                  )}
-                </section>
-              </>
-            )}
-            </section>            
 
             <section className="users_form_button">
               {/* Boton Eliminar */}
@@ -218,11 +226,10 @@ export default function DrawerUsers({
                   color: "#FA5252",
                   cursor: "pointer",
                 }}
-                onClick={()=>{                  
-                  deleteUserDrawer(id)
-                  oncloseDrawerEdit()
-                }                  
-                }
+                onClick={() => {
+                  deleteUserDrawer(id);
+                  oncloseDrawerEdit();
+                }}
                 disabled={!userVerify()}
               >
                 <div
@@ -276,7 +283,7 @@ export default function DrawerUsers({
                   />
                   Editar
                 </div>
-              </Button>              
+              </Button>
             </section>
           </section>
         </section>

@@ -446,14 +446,20 @@ export default function Outlets() {
                                         gap: "4px",
                                         borderRadius: "2px",
                                         border:
-                                          outlet.actionable === "Visita PdV"
+                                          outlet.actionable === "Visita PdV" ||
+                                          outlet.actionable ===
+                                            "VISITA PDV PARA LECTURA"
                                             ? "1.5px solid #DA7E05"
-                                            : outlet.actionable === "Sin Riesgo"
+                                            : outlet.actionable ===
+                                                "Sin Riesgo" ||
+                                              outlet.actionable === "SIN RIESGO"
                                             ? "1.5px solid #0F9F67"
                                             : outlet.actionable ===
                                                 "Toma de Decisiones" ||
                                               outlet.actionable ===
-                                                "Acciones urgentes"
+                                                "Acciones urgentes" ||
+                                              outlet.actionable ===
+                                                "SIN COINCIDENCIA"
                                             ? "1.5px solid #F93448"
                                             : outlet.actionable ===
                                               "Actualizar Info"
@@ -472,7 +478,10 @@ export default function Outlets() {
                                                 "Solicitar serv. preventivos" ||
                                               outlet.actionable ===
                                                 "Seguimiento a equipo" ||
-                                              outlet.actionable === "Visita PdV"
+                                              outlet.actionable ===
+                                                "Visita PdV" ||
+                                              outlet.actionable ===
+                                                "VISITA PDV PARA LECTURA"
                                             ? "1.5px solid #E67700"
                                             : outlet.actionable ===
                                               "Visita PdV prioritaria"
@@ -491,7 +500,8 @@ export default function Outlets() {
                                             height: "15px",
                                           }}
                                         />
-                                      ) : outlet.actionable === "Sin Riesgo" ? (
+                                      ) : outlet.actionable === "Sin Riesgo" ||
+                                        outlet.actionable === "SIN RIESGO" ? (
                                         <img
                                           src={"../../sampleData/sn.svg"}
                                           alt="Descripción de la imagen"
@@ -503,7 +513,9 @@ export default function Outlets() {
                                       ) : outlet.actionable ===
                                           "Toma de Decisiones" ||
                                         outlet.actionable ===
-                                          "Acciones urgentes" ? (
+                                          "Acciones urgentes" ||
+                                        outlet.actionable ===
+                                          "SIN COINCIDENCIA" ? (
                                         <img
                                           src={"../../sampleData/a.svg"}
                                           alt="Descripción de la imagen"
@@ -582,7 +594,9 @@ export default function Outlets() {
                                             height: "15px",
                                           }}
                                         />
-                                      ) : outlet.actionable === "Visita PdV" ? (
+                                      ) : outlet.actionable === "Visita PdV" ||
+                                        outlet.actionable ===
+                                          "VISITA PDV PARA LECTURA" ? (
                                         <img
                                           src={"../../sampleData/visitap.svg"}
                                           alt="Descripción de la imagen"
@@ -592,7 +606,9 @@ export default function Outlets() {
                                           }}
                                         />
                                       ) : outlet.actionable ===
-                                        "Visita PdV prioritaria" ? (
+                                          "Visita PdV prioritaria" ||
+                                        outlet.actionable ===
+                                          "VISITA PDV PARA LECTURA" ? (
                                         <img
                                           src={"../../sampleData/visitapd.svg"}
                                           alt="Descripción de la imagen"
@@ -608,15 +624,22 @@ export default function Outlets() {
                                       <div
                                         style={{
                                           color:
-                                            outlet.actionable === "Visita PdV"
+                                            outlet.actionable ===
+                                              "Visita PdV" ||
+                                            outlet.actionable ===
+                                              "VISITA PDV PARA LECTURA"
                                               ? "#DA7E05"
                                               : outlet.actionable ===
-                                                "Sin Riesgo"
+                                                  "Sin Riesgo" ||
+                                                outlet.actionable ===
+                                                  "SIN RIESGO"
                                               ? "#0F9F67"
                                               : outlet.actionable ===
                                                   "Toma de Decisiones" ||
                                                 outlet.actionable ===
-                                                  "Acciones urgentes"
+                                                  "Acciones urgentes" ||
+                                                outlet.actionable ===
+                                                  "SIN COINCIDENCIA"
                                               ? "#F93448"
                                               : outlet.actionable ===
                                                 "Actualizar Info"
@@ -637,7 +660,9 @@ export default function Outlets() {
                                                 outlet.actionable ===
                                                   "Seguimiento a equipo" ||
                                                 outlet.actionable ===
-                                                  "Visita PdV"
+                                                  "Visita PdV" ||
+                                                outlet.actionable ===
+                                                  "VISITA PDV PARA LECTURA"
                                               ? "#E67700"
                                               : outlet.actionable ===
                                                 "Visita PdV prioritaria"

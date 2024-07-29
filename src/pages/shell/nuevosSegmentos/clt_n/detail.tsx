@@ -770,10 +770,15 @@ export const Detail = () => {
                                   order.data.algorithm === "VOLTAGE_ALERT" ||
                                   order.data.algorithm === "Actualizar Info" ||
                                   order.data.algorithm === "Sin Riesgo" ||
+                                  order.data.algorithm === "SIN RIESGO" ||
                                   order.data.algorithm ===
                                     "Estatus sin venta" ||
+                                  order.data.algorithm === "SIN VENTA" ||
                                   order.data.algorithm === "Visita PdV" ||
-                                  order.data.algorithm === "Acciones urgentes"))
+                                  order.data.algorithm ===
+                                    "VISITA PDV PARA LECTURA" ||
+                                  order.data.algorithm === "Acciones urgentes",
+                                order.data.algorithm === "SIN COINCIDENCIA"))
                           )
                           .sort((a, b) => {
                             let aDate, bDate;

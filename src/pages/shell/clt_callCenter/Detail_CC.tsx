@@ -231,14 +231,22 @@ export default function CoolerDetailCC() {
                           gap: "4px",
                           borderRadius: "2px",
                           border:
-                            coolersData?.cooler.actionable === "Visita PdV"
+                            coolersData?.cooler.actionable === "Visita PdV" ||
+                            coolersData?.cooler.actionable ===
+                              "VISITA PDV PARA LECTURA"
                               ? "1.5px solid #DA7E05"
-                              : coolersData?.cooler.actionable === "Sin Riesgo"
+                              : coolersData?.cooler.actionable ===
+                                  "Sin Riesgo" ||
+                                coolersData?.cooler.actionable === "SIN RIESGO"
                               ? "1.5px solid #0F9F67"
                               : coolersData?.cooler.actionable ===
                                   "Estatus sin venta" ||
                                 coolersData?.cooler.actionable ===
-                                  "Acciones urgentes"
+                                  "SIN VENTA" ||
+                                coolersData?.cooler.actionable ===
+                                  "Acciones urgentes" ||
+                                coolersData?.cooler.actionable ===
+                                  "SIN COINCIDENCIA"
                               ? "1.5px solid #F93448"
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
@@ -249,13 +257,16 @@ export default function CoolerDetailCC() {
                       >
                         {isLoading == true ? (
                           <Skeleton height={8} radius="xl" />
-                        ) : coolersData?.cooler.actionable === "Visita PdV" ? (
+                        ) : coolersData?.cooler.actionable === "Visita PdV" ||
+                          coolersData?.cooler.actionable ===
+                            "VISITA PDV PARA LECTURA" ? (
                           <img
                             src={"../../sampleData/p.svg"}
                             alt="Descripción de la imagen"
                             style={{ width: "15px", height: "15px" }}
                           />
-                        ) : coolersData?.cooler.actionable === "Sin Riesgo" ? (
+                        ) : coolersData?.cooler.actionable === "Sin Riesgo" ||
+                          coolersData?.cooler.actionable === "SIN RIESGO" ? (
                           <img
                             src={"../../sampleData/sn.svg"}
                             alt="Descripción de la imagen"
@@ -263,8 +274,11 @@ export default function CoolerDetailCC() {
                           />
                         ) : coolersData?.cooler.actionable ===
                             "Estatus sin venta" ||
+                          coolersData?.cooler.actionable === "SIN VENTA" ||
                           coolersData?.cooler.actionable ===
-                            "Acciones urgentes" ? (
+                            "Acciones urgentes" ||
+                          coolersData?.cooler.actionable ===
+                            "SIN COINCIDENCIA" ? (
                           <img
                             src={"../../sampleData/a.svg"}
                             alt="Descripción de la imagen"
@@ -284,15 +298,23 @@ export default function CoolerDetailCC() {
                         <div
                           style={{
                             color:
-                              coolersData?.cooler.actionable === "Visita PdV"
+                              coolersData?.cooler.actionable === "Visita PdV" ||
+                              coolersData?.cooler.actionable ===
+                                "VISITA PDV PARA LECTURA"
                                 ? "#DA7E05"
                                 : coolersData?.cooler.actionable ===
-                                  "Sin Riesgo"
+                                    "Sin Riesgo" ||
+                                  coolersData?.cooler.actionable ===
+                                    "SIN RIESGO"
                                 ? "#0F9F67"
                                 : coolersData?.cooler.actionable ===
                                     "Estatus sin venta" ||
                                   coolersData?.cooler.actionable ===
-                                    "Acciones urgentes"
+                                    "SIN VENTA" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Acciones urgentes" ||
+                                  coolersData?.cooler.actionable ===
+                                    "SIN COINCIDENCIA"
                                 ? "#F93448"
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
@@ -756,10 +778,16 @@ export default function CoolerDetailCC() {
                                     "Posible daño eléctrico" ||
                                   order.data.algorithm === "Actualizar Info" ||
                                   order.data.algorithm === "Sin Riesgo" ||
+                                  order.data.algorithm === "SIN RIESGO" ||
                                   order.data.algorithm ===
                                     "Estatus sin venta" ||
+                                  order.data.algorithm === "SIN VENTA" ||
                                   order.data.algorithm === "Visita PdV" ||
-                                  order.data.algorithm === "Acciones urgentes"))
+                                  order.data.algorithm ===
+                                    "VISITA PDV PARA LECTURA" ||
+                                  order.data.algorithm ===
+                                    "Acciones urgentes" ||
+                                  order.data.algorithm === "SIN COINCIDENCIA"))
                           )
                           .sort((a, b) => {
                             let aDate, bDate;
@@ -1320,8 +1348,7 @@ export default function CoolerDetailCC() {
       <DrawerCoolview
         opened={coolViewOpened}
         onClose={closeCoolview}
-        CoolerId={coolersData?.cooler.device_id}
-        mesLastStat={mesLastStat}
+        CoolerId={coolersData?.cooler?.serial_number}
         dateStat={dateTelemetri}
       />
     </>

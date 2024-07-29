@@ -61,7 +61,7 @@ export default function CoolerDetail() {
         serie,
         "GET",
         setIsLoading
-      );      
+      );
       setCoolersData(data);
       setIsLoading(false);
     } catch (error) {
@@ -115,7 +115,7 @@ export default function CoolerDetail() {
     setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
     setDateTelemetri(mesLastStat);
   }
-  const Role = localStorage.getItem("Role") || "";  
+  const Role = localStorage.getItem("Role") || "";
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -203,12 +203,18 @@ export default function CoolerDetail() {
                             coolersData?.cooler.actionable === "Visita PdV" &&
                             dto != "KOF Colombia"
                               ? "1.5px solid #DA7E05"
-                              : coolersData?.cooler.actionable === "Sin Riesgo"
+                              : coolersData?.cooler.actionable ===
+                                  "Sin Riesgo" ||
+                                coolersData?.cooler.actionable === "SIN RIESGO"
                               ? "1.5px solid #0F9F67"
                               : coolersData?.cooler.actionable ===
                                   "Estatus sin venta" ||
                                 coolersData?.cooler.actionable ===
-                                  "Acciones urgentes"
+                                  "SIN VENTA" ||
+                                coolersData?.cooler.actionable ===
+                                  "Acciones urgentes" ||
+                                coolersData?.cooler.actionable ===
+                                  "SIN COINCIDENCIA"
                               ? "1.5px solid #F93448"
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
@@ -227,7 +233,10 @@ export default function CoolerDetail() {
                                   "Solicitar serv. preventivos" ||
                                 coolersData?.cooler.actionable ===
                                   "Seguimiento a equipo" ||
-                                coolersData?.cooler.actionable === "Visita PdV"
+                                coolersData?.cooler.actionable ===
+                                  "Visita PdV" ||
+                                coolersData?.cooler.actionable ===
+                                  "VISITA PDV PARA LECTURA"
                               ? "1.5px solid #E67700"
                               : coolersData?.cooler.actionable ===
                                 "Visita PdV prioritaria"
@@ -245,7 +254,8 @@ export default function CoolerDetail() {
                             alt="Descripción de la imagen"
                             style={{ width: "15px", height: "15px" }}
                           />
-                        ) : coolersData?.cooler.actionable === "Sin Riesgo" ? (
+                        ) : coolersData?.cooler.actionable === "Sin Riesgo" ||
+                          coolersData?.cooler.actionable === "SIN RIESGO" ? (
                           <img
                             src={"../../sampleData/sn.svg"}
                             alt="Descripción de la imagen"
@@ -253,8 +263,11 @@ export default function CoolerDetail() {
                           />
                         ) : coolersData?.cooler.actionable ===
                             "Estatus sin venta" ||
+                          coolersData?.cooler.actionable === "SIN VENTA" ||
                           coolersData?.cooler.actionable ===
-                            "Acciones urgentes" ? (
+                            "Acciones urgentes" ||
+                          coolersData?.cooler.actionable ===
+                            "SIN COINCIDENCIA" ? (
                           <img
                             src={"../../sampleData/a.svg"}
                             alt="Descripción de la imagen"
@@ -309,7 +322,9 @@ export default function CoolerDetail() {
                             alt="Descripción de la imagen"
                             style={{ width: "15px", height: "15px" }}
                           />
-                        ) : coolersData?.cooler.actionable === "Visita PdV" ? (
+                        ) : coolersData?.cooler.actionable === "Visita PdV" ||
+                          coolersData?.cooler.actionable ===
+                            "VISITA PDV PARA LECTURA" ? (
                           <img
                             src={"../../sampleData/visitap.svg"}
                             alt="Descripción de la imagen"
@@ -333,12 +348,18 @@ export default function CoolerDetail() {
                               dto != "KOF Colombia"
                                 ? "#DA7E05"
                                 : coolersData?.cooler.actionable ===
-                                  "Sin Riesgo"
+                                    "Sin Riesgo" ||
+                                  coolersData?.cooler.actionable ===
+                                    "SIN RIESGO"
                                 ? "#0F9F67"
                                 : coolersData?.cooler.actionable ===
                                     "Estatus sin venta" ||
                                   coolersData?.cooler.actionable ===
-                                    "Acciones urgentes"
+                                    "SIN VENTA" ||
+                                  coolersData?.cooler.actionable ===
+                                    "Acciones urgentes" ||
+                                  coolersData?.cooler.actionable ===
+                                    "SIN COINCIDENCIA"
                                 ? "#F93448"
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
@@ -359,7 +380,9 @@ export default function CoolerDetail() {
                                   coolersData?.cooler.actionable ===
                                     "Seguimiento a equipo" ||
                                   coolersData?.cooler.actionable ===
-                                    "Visita PdV"
+                                    "Visita PdV" ||
+                                  coolersData?.cooler.actionable ===
+                                    "VISITA PDV PARA LECTURA"
                                 ? "#E67700"
                                 : coolersData?.cooler.actionable ===
                                   "Visita PdV prioritaria"
@@ -846,7 +869,10 @@ export default function CoolerDetail() {
                                 order.data.algorithm === "Sin Riesgo" ||
                                 order.data.algorithm === "Estatus sin venta" ||
                                 order.data.algorithm === "Visita PdV" ||
-                                order.data.algorithm === "Acciones urgentes"))
+                                order.data.algorithm ===
+                                  "VISITA PDV PARA LECTURA" ||
+                                order.data.algorithm === "Acciones urgentes" ||
+                                order.data.algorithm === "SIN COINCIDENCIA"))
                         )
                         .sort((a, b) => {
                           let aDate, bDate;

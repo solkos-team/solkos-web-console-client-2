@@ -1,8 +1,12 @@
-import React from 'react'
-import { Accordion } from '@mantine/core';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Accordion } from "@mantine/core";
+import { useSelector } from "react-redux";
 
-export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
+export const DrawerHeaderResponsive = ({
+  title,
+  description,
+  outletDetails,
+}) => {
   const dto = useSelector((state: any) => state.organization);
   const {
     region,
@@ -17,9 +21,9 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
     days_without_visitC,
     last_read,
     num_coolers,
-    actionable
+    actionable,
   } = outletDetails;
-  
+
   return (
     <Accordion className="pdv_drawer_header_responsive">
       <Accordion.Item key="Header" value="HeaderResponsive">
@@ -57,237 +61,224 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
                 />
               </svg>
             </div>
-            <div style={{ width: "70%", display:'flex',gap:'var(--Sizes-Spacers-2xs, 4px)',flexDirection:'column' }}>
+            <div
+              style={{
+                width: "70%",
+                display: "flex",
+                gap: "var(--Sizes-Spacers-2xs, 4px)",
+                flexDirection: "column",
+              }}
+            >
               <div
                 style={{
                   width: "100%",
-                  height: "30px",        
-                  fontSize:'0.563rem'          
+                  height: "30px",
+                  fontSize: "0.563rem",
                 }}
               >
-                {actionable === undefined || actionable === "" ? ('Sin registro'): (
-                                <>
-                                  <>
-                                    <div
-                                      style={{
-                                        width: "fit-content",
-                                        display: "flex",
-                                        padding: "4px",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        gap: "4px",
-                                        borderRadius: "2px",
-                                        border:
-                                          actionable === "Visita PdV"
-                                            ? "1.5px solid #DA7E05"
-                                            : actionable === "Sin Riesgo"
-                                            ? "1.5px solid #0F9F67"
-                                            : actionable ===
-                                                "Toma de Decisiones" ||
-                                              actionable ===
-                                                "Acciones urgentes"
-                                            ? "1.5px solid #F93448"
-                                            : actionable ===
-                                              "Actualizar Info"
-                                            ? "1.5px solid #DA7E05"
-                                            : actionable ===
-                                                "Actualizar dato" ||
-                                              actionable ===
-                                                "Datos faltantes" ||
-                                              actionable ===
-                                                "Monitoreo" ||
-                                              actionable === "Movimiento"
-                                            ? "1.5px solid #1864AB"
-                                            : actionable ===
-                                                "Solicitar serv. correctivo" ||
-                                              actionable ===
-                                                "Solicitar serv. preventivos" ||
-                                              actionable ===
-                                                "Seguimiento a equipo" ||
-                                              actionable === "Visita PdV"
-                                            ? "1.5px solid #E67700"
-                                            : actionable ===
-                                              "Visita PdV prioritaria"
-                                            ? "1.5px solid #C92A2A"
-                                            : "1.5px solid black",
-                                        background: "#FFF",
-                                      }}
-                                    >
-                                      {actionable === "Visita PdV" &&
-                                      dto != "KOF Colombia" ? (
-                                        <img
-                                          src={"../../sampleData/p.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable === "Sin Riesgo" ? (
-                                        <img
-                                          src={"../../sampleData/sn.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                          "Toma de Decisiones" ||
-                                        actionable ===
-                                          "Acciones urgentes" ? (
-                                        <img
-                                          src={"../../sampleData/a.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                        "Actualizar Info" ? (
-                                        <img
-                                          src={"../../sampleData/p.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                        "Actualizar dato" ? (
-                                        <img
-                                          src={"../../sampleData/actDat.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                        "Datos faltantes" ? (
-                                        <img
-                                          src={"../../sampleData/datFal.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable === "Monitoreo" ? (
-                                        <img
-                                          src={"../../sampleData/Mont.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable === "Movimiento" ? (
-                                        <img
-                                          src={"../../sampleData/mov1.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                          "Solicitar serv. correctivo" ||
-                                        actionable ===
-                                          "Solicitar serv. preventivos" ? (
-                                        <img
-                                          src={"../../sampleData/serCP.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                        "Seguimiento a equipo" ? (
-                                        <img
-                                          src={"../../sampleData/seguE.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable === "Visita PdV" ? (
-                                        <img
-                                          src={"../../sampleData/visitap.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : actionable ===
-                                        "Visita PdV prioritaria" ? (
-                                        <img
-                                          src={"../../sampleData/visitapd.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : (
-                                        ""
-                                      )}
+                {actionable === undefined || actionable === "" ? (
+                  "Sin registro"
+                ) : (
+                  <>
+                    <>
+                      <div
+                        style={{
+                          width: "fit-content",
+                          display: "flex",
+                          padding: "4px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "4px",
+                          borderRadius: "2px",
+                          border:
+                            actionable === "Visita PdV" ||
+                            actionable === "VISITA PDV PARA LECTURA"
+                              ? "1.5px solid #DA7E05"
+                              : actionable === "Sin Riesgo" ||
+                                actionable === "SIN RIESGO"
+                              ? "1.5px solid #0F9F67"
+                              : actionable === "Toma de Decisiones" ||
+                                actionable === "Acciones urgentes" ||
+                                actionable === "SIN COINCIDENCIA"
+                              ? "1.5px solid #F93448"
+                              : actionable === "Actualizar Info"
+                              ? "1.5px solid #DA7E05"
+                              : actionable === "Actualizar dato" ||
+                                actionable === "Datos faltantes" ||
+                                actionable === "Monitoreo" ||
+                                actionable === "Movimiento"
+                              ? "1.5px solid #1864AB"
+                              : actionable === "Solicitar serv. correctivo" ||
+                                actionable === "Solicitar serv. preventivos" ||
+                                actionable === "Seguimiento a equipo" ||
+                                actionable === "Visita PdV"
+                              ? "1.5px solid #E67700"
+                              : actionable === "Visita PdV prioritaria"
+                              ? "1.5px solid #C92A2A"
+                              : "1.5px solid black",
+                          background: "#FFF",
+                        }}
+                      >
+                        {actionable === "Visita PdV" &&
+                        dto != "KOF Colombia" ? (
+                          <img
+                            src={"../../sampleData/p.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Sin Riesgo" ||
+                          actionable === "SIN RIESGO" ? (
+                          <img
+                            src={"../../sampleData/sn.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Toma de Decisiones" ||
+                          actionable === "Acciones urgentes" ||
+                          actionable === "SIN COINCIDENCIA" ? (
+                          <img
+                            src={"../../sampleData/a.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Actualizar Info" ? (
+                          <img
+                            src={"../../sampleData/p.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Actualizar dato" ? (
+                          <img
+                            src={"../../sampleData/actDat.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Datos faltantes" ? (
+                          <img
+                            src={"../../sampleData/datFal.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Monitoreo" ? (
+                          <img
+                            src={"../../sampleData/Mont.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Movimiento" ? (
+                          <img
+                            src={"../../sampleData/mov1.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Solicitar serv. correctivo" ||
+                          actionable === "Solicitar serv. preventivos" ? (
+                          <img
+                            src={"../../sampleData/serCP.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Seguimiento a equipo" ? (
+                          <img
+                            src={"../../sampleData/seguE.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Visita PdV" ||
+                          actionable === "VISITA PDV PARA LECTURA" ? (
+                          <img
+                            src={"../../sampleData/visitap.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : actionable === "Visita PdV prioritaria" ? (
+                          <img
+                            src={"../../sampleData/visitapd.svg"}
+                            alt="Descripción de la imagen"
+                            style={{
+                              width: "15px",
+                              height: "15px",
+                            }}
+                          />
+                        ) : (
+                          ""
+                        )}
 
-                                      <div
-                                        style={{
-                                          color:
-                                            actionable === "Visita PdV"
-                                              ? "#DA7E05"
-                                              : actionable ===
-                                                "Sin Riesgo"
-                                              ? "#0F9F67"
-                                              : actionable ===
-                                                  "Toma de Decisiones" ||
-                                                actionable ===
-                                                  "Acciones urgentes"
-                                              ? "#F93448"
-                                              : actionable ===
-                                                "Actualizar Info"
-                                              ? "#DA7E05"
-                                              : actionable ===
-                                                  "Actualizar dato" ||
-                                                actionable ===
-                                                  "Datos faltantes" ||
-                                                actionable ===
-                                                  "Monitoreo" ||
-                                                actionable ===
-                                                  "Movimiento"
-                                              ? "#1864AB"
-                                              : actionable ===
-                                                  "Solicitar serv. correctivo" ||
-                                                actionable ===
-                                                  "Solicitar serv. preventivos" ||
-                                                actionable ===
-                                                  "Seguimiento a equipo" ||
-                                                actionable ===
-                                                  "Visita PdV"
-                                              ? "#E67700"
-                                              : actionable ===
-                                                "Visita PdV prioritaria"
-                                              ? "#C92A2A"
-                                              : "black",
-                                          // fontFamily: "DM Sans",
-                                          // fontSize: "1vw",
-                                          fontStyle: "normal",
-                                          fontWeight: 600,
-                                          lineHeight: "9px",
-                                        }}
-                                      >
-                                        {actionable}
-                                      </div>
-                                    </div>
-                                  </>
-                                </>
-                              ) }
+                        <div
+                          style={{
+                            color:
+                              actionable === "Visita PdV" ||
+                              actionable === "VISITA PDV PARA LECTURA"
+                                ? "#DA7E05"
+                                : actionable === "Sin Riesgo" ||
+                                  actionable === "SIN RIESGO"
+                                ? "#0F9F67"
+                                : actionable === "Toma de Decisiones" ||
+                                  actionable === "Acciones urgentes" ||
+                                  actionable === "SIN COINCIDENCIA"
+                                ? "#F93448"
+                                : actionable === "Actualizar Info"
+                                ? "#DA7E05"
+                                : actionable === "Actualizar dato" ||
+                                  actionable === "Datos faltantes" ||
+                                  actionable === "Monitoreo" ||
+                                  actionable === "Movimiento"
+                                ? "#1864AB"
+                                : actionable === "Solicitar serv. correctivo" ||
+                                  actionable ===
+                                    "Solicitar serv. preventivos" ||
+                                  actionable === "Seguimiento a equipo" ||
+                                  actionable === "Visita PdV"
+                                ? "#E67700"
+                                : actionable === "Visita PdV prioritaria"
+                                ? "#C92A2A"
+                                : "black",
+                            // fontFamily: "DM Sans",
+                            // fontSize: "1vw",
+                            fontStyle: "normal",
+                            fontWeight: 600,
+                            lineHeight: "9px",
+                          }}
+                        >
+                          {actionable}
+                        </div>
+                      </div>
+                    </>
+                  </>
+                )}
               </div>
               <div
                 style={{
@@ -296,28 +287,28 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
                 }}
               >
                 <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "18px",
-                      fontStyle: "normal",
-                      fontWeight: 700,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {outlet_name}
-                  </div>
+                  style={{
+                    color: "#000005",
+                    // fontFamily: "DM Sans",
+                    fontSize: "18px",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                    lineHeight: "normal",
+                  }}
+                >
+                  {outlet_name}
+                </div>
               </div>
               <div
                 style={{
                   width: "200px",
                   height: "30px",
-                  overflowX: 'auto',  
-                  whiteSpace: 'nowrap',
-                  display: 'flex',
-                  alignItems: 'center',
-                  padding: '0 5px',
-                  scrollbarWidth:'thin'
+                  overflowX: "auto",
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "0 5px",
+                  scrollbarWidth: "thin",
                 }}
               >
                 {outlet_address === undefined ||
@@ -356,31 +347,108 @@ export const DrawerHeaderResponsive = ({title,description,outletDetails}) => {
           </section>
         </Accordion.Control>
         <Accordion.Panel>
-          <section style={{width:'100%',display:'flex',flexDirection:'column',gap:'8px',fontStyle:'normal'}}>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',gap:'8px',alignItems:'center'}}>
-              <div style={{color:'var(--gray-6, #868E96)',fontSize:'12px',fontStyle:'normal',fontWeight:'400',lineHeight:'24px'}}>Leído por última vez:</div>
-              <div style={{fontSize:'9px',fontStyle:'normal',fontWeight:'700',lineHeight:'14px',textTransform:'uppercase',backgroundColor:'var(--blue-0, #E7F5FF)',padding:'1px 6px',justifyContent:'center',alignItems:'center',color:'var(--blue-6, #2393F4)',borderRadius:'8px'}}>{last_read ?? 'Sin registro'}</div>
+          <section
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+              fontStyle: "normal",
+            }}
+          >
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                gap: "8px",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  color: "var(--gray-6, #868E96)",
+                  fontSize: "12px",
+                  fontStyle: "normal",
+                  fontWeight: "400",
+                  lineHeight: "24px",
+                }}
+              >
+                Leído por última vez:
+              </div>
+              <div
+                style={{
+                  fontSize: "9px",
+                  fontStyle: "normal",
+                  fontWeight: "700",
+                  lineHeight: "14px",
+                  textTransform: "uppercase",
+                  backgroundColor: "var(--blue-0, #E7F5FF)",
+                  padding: "1px 6px",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "var(--blue-6, #2393F4)",
+                  borderRadius: "8px",
+                }}
+              >
+                {last_read ?? "Sin registro"}
+              </div>
             </div>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-              <div className='pdv_drawer_header_h1'>Canal:</div>
-              <div className='pdv_drawer_header_h2'>{channel ?? 'Sin registro'}</div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="pdv_drawer_header_h1">Canal:</div>
+              <div className="pdv_drawer_header_h2">
+                {channel ?? "Sin registro"}
+              </div>
             </div>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-              <div className='pdv_drawer_header_h1'>Región:</div>
-              <div className='pdv_drawer_header_h2'>{region ?? 'Sin registro'}</div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="pdv_drawer_header_h1">Región:</div>
+              <div className="pdv_drawer_header_h2">
+                {region ?? "Sin registro"}
+              </div>
             </div>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-              <div className='pdv_drawer_header_h1'>Ruta:</div>
-              <div className='pdv_drawer_header_h2'>{route ?? 'Sin registro'}</div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="pdv_drawer_header_h1">Ruta:</div>
+              <div className="pdv_drawer_header_h2">
+                {route ?? "Sin registro"}
+              </div>
             </div>
-            <div style={{width:'100%',display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
-              <div className='pdv_drawer_header_h1'>Gerencia de zona:</div>
-              <div className='pdv_drawer_header_h2'>{zone ?? 'Sin registro'}</div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="pdv_drawer_header_h1">Gerencia de zona:</div>
+              <div className="pdv_drawer_header_h2">
+                {zone ?? "Sin registro"}
+              </div>
             </div>
-            
           </section>
         </Accordion.Panel>
       </Accordion.Item>
     </Accordion>
   );
-}
+};
