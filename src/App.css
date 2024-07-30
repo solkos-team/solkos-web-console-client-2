@@ -2704,3 +2704,12 @@ body {
 .gm-style-iw-d {
   display: none !important;
 }
+
+.tooltip {
+  position: absolute;
+  background-color: white;
+  border: 1px solid black;
+  padding: 5px;
+  display: none; /* Ocultar inicialmente */
+  pointer-events: none; /* Permite que el tooltip no interfiera con los eventos del mouse */
+}

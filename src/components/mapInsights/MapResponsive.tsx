@@ -302,7 +302,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 // ***************************************************************************************
 // ***************************************************************************************
 
-// import React, { useEffect, useState, useRef } from "react";
+// import React, { useEffect, useState } from "react";
 // import GoogleMapReact from "google-map-react";
 // import { defaultProps, mapOptions } from "./datos";
 // import { useSelector } from "react-redux";
@@ -352,78 +352,90 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //       const data = await fetchUniversal("insights", body, setIsLoading);
 //       console.log("API Response Data:", data);
 
-//       if (data && data.polygon_data) {
-//         const geoJsonData: GeoJSON = {
-//           type: "FeatureCollection",
-//           features: data.polygon_data
-//             .map((polygon: any) => {
-//               if (polygon.type === "coolers") {
-//                 return polygon.coolers.map((cooler: any) => ({
-//                   type: "Feature",
-//                   properties: {
-//                     area: cooler.region,
-//                     region: cooler.region,
-//                     zone: cooler.zone,
-//                     operative_unit: cooler.operative_unit,
-//                     route: cooler.route,
-//                     type: "coolers",
-//                     serial_number: cooler.serial_number,
-//                   },
-//                   geometry: {
-//                     type: "Point",
-//                     coordinates: [
-//                       parseFloat(cooler.longitude),
-//                       parseFloat(cooler.latitude),
-//                     ],
-//                   },
-//                 }));
-//               } else if (polygon.type === "route") {
-//                 return {
-//                   type: "Feature",
-//                   properties: {
-//                     area: polygon.region,
-//                     region: polygon.region,
-//                     zone: polygon.zone,
-//                     operative_unit: polygon.operative_unit,
-//                     route: polygon.route,
-//                   },
-//                   geometry: {
-//                     type: "Point",
-//                     coordinates: polygon.geometry,
-//                   },
-//                 };
-//               } else {
-//                 if (!polygon.geometry || !Array.isArray(polygon.geometry)) {
-//                   console.error("Invalid geometry data for polygon:", polygon);
-//                   return null;
+//       if (data) {
+//         // Manejo de polygon_data solo si está presente y no es null
+//         if (data.polygon_data) {
+//           const geoJsonData = {
+//             type: "FeatureCollection",
+//             features: data.polygon_data
+//               .map((polygon) => {
+//                 if (polygon.type === "coolers") {
+//                   return polygon.coolers.map((cooler) => ({
+//                     type: "Feature",
+//                     properties: {
+//                       area: cooler.region,
+//                       region: cooler.region,
+//                       zone: cooler.zone,
+//                       operative_unit: cooler.operative_unit,
+//                       route: cooler.route,
+//                       type: "coolers",
+//                       serial_number: cooler.serial_number,
+//                     },
+//                     geometry: {
+//                       type: "Point",
+//                       coordinates: [
+//                         parseFloat(cooler.longitude),
+//                         parseFloat(cooler.latitude),
+//                       ],
+//                     },
+//                   }));
+//                 } else if (polygon.type === "route") {
+//                   return {
+//                     type: "Feature",
+//                     properties: {
+//                       area: polygon.region,
+//                       region: polygon.region,
+//                       zone: polygon.zone,
+//                       operative_unit: polygon.operative_unit,
+//                       route: polygon.route,
+//                       type: polygon.type,
+//                     },
+//                     geometry: {
+//                       type: "Point",
+//                       coordinates: polygon.geometry,
+//                     },
+//                   };
+//                 } else {
+//                   if (!polygon.geometry || !Array.isArray(polygon.geometry)) {
+//                     console.error(
+//                       "Invalid geometry data for polygon:",
+//                       polygon
+//                     );
+//                     return null;
+//                   }
+
+//                   const coordinates = polygon.geometry;
+
+//                   return {
+//                     type: "Feature",
+//                     properties: {
+//                       area: polygon.region,
+//                       region: polygon.region,
+//                       zone: polygon.zone,
+//                       operative_unit: polygon.operative_unit,
+//                       route: polygon.route,
+//                       type: polygon.type,
+//                     },
+//                     geometry: {
+//                       type: "MultiPolygon",
+//                       coordinates: coordinates,
+//                     },
+//                   };
 //                 }
+//               })
+//               .flat()
+//               .filter((feature) => feature !== null),
+//           };
 
-//                 const coordinates = polygon.geometry;
+//           setGeojson(geoJsonData);
+//         } else {
+//           console.warn("No polygon_data found in API response");
+//         }
 
-//                 return {
-//                   type: "Feature",
-//                   properties: {
-//                     area: polygon.region,
-//                     region: polygon.region,
-//                     zone: polygon.zone,
-//                     operative_unit: polygon.operative_unit,
-//                     route: polygon.route,
-//                   },
-//                   geometry: {
-//                     type: "MultiPolygon",
-//                     coordinates: coordinates,
-//                   },
-//                 };
-//               }
-//             })
-//             .flat()
-//             .filter((feature) => feature !== null),
-//         };
-
-//         setGeojson(geoJsonData);
+//         // Configura el resto de los datos independientemente de polygon_data
 //         setData(data);
 //       } else {
-//         console.error("No polygon_data found in API response");
+//         console.error("No data found in API response");
 //       }
 
 //       setIsLoading(false);
@@ -461,8 +473,18 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //         map.data.remove(feature);
 //       });
 
+//       const tooltipElement = document.createElement("div");
+//       tooltipElement.className = "tooltip";
+//       tooltipElement.style.position = "absolute";
+//       tooltipElement.style.backgroundColor = "white";
+//       tooltipElement.style.border = "1px solid black";
+//       tooltipElement.style.padding = "5px";
+//       tooltipElement.style.display = "none"; // Ocultar inicialmente
+//       document.body.appendChild(tooltipElement);
+
 //       geojson.features.forEach((feature) => {
 //         const areaColor = getRandomColor();
+
 //         if (feature.geometry.type === "MultiPolygon") {
 //           feature.geometry.coordinates.forEach((polygonCoords) => {
 //             const outerCoords = polygonCoords[0].map((coord) => ({
@@ -484,6 +506,32 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //               const smallestHierarchy = operative_unit || zone || region;
 //               setSelectedArea(smallestHierarchy);
 //               console.log("Clic en:", smallestHierarchy);
+//             });
+
+//             outerPolygon.addListener("mouseover", (event) => {
+//               const { type } = feature.properties;
+//               const value = feature.properties[type] || "";
+
+//               tooltipElement.innerHTML = value;
+//               tooltipElement.style.display = "block";
+
+//               // Ajustar la posición del tooltip
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             outerPolygon.addListener("mousemove", (event) => {
+//               // Obtener la posición del cursor
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             outerPolygon.addListener("mouseout", () => {
+//               tooltipElement.style.display = "none"; // Ocultar el tooltip
 //             });
 
 //             outerPolygon.setMap(map);
@@ -516,51 +564,81 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //           });
 //         } else if (feature.geometry.type === "Point") {
 //           const [lng, lat] = feature.geometry.coordinates;
-//           const iconUrl = "../../sampleData/pin_r.svg";
-//           const iconUrl2 = "../../sampleData/pin_r2.svg";
-//           const iconUrl3 = "../../sampleData/fridge_r.svg";
+//           const { type } = feature.properties;
+//           const baseIconUrl = "../../sampleData/pin_r.svg"; // Base icon
+
+//           // Definir el segundo icono según el tipo
+//           let overlayIconUrl;
+//           if (type === "route") {
+//             overlayIconUrl = "../../sampleData/pin_r2.svg";
+//           } else if (type === "coolers") {
+//             overlayIconUrl = "../../sampleData/fridge_r.svg";
+//           }
 
 //           const marker = new maps.Marker({
 //             position: { lat, lng },
 //             map,
 //             icon: {
-//               url: iconUrl,
+//               url: baseIconUrl,
 //               scaledSize: new maps.Size(32, 32),
-//               labelOrigin: new maps.Point(16, 16), // Center the label
-//             },
-//             label: {
-//               text: "",
-//               color: "transparent", // Make the text invisible
 //             },
 //           });
 
-//           const icon =
-//             feature.properties.type === "coolers" ? iconUrl3 : iconUrl2;
+//           // Añadir el segundo icono como overlay
+//           if (overlayIconUrl) {
+//             const overlayMarker = new maps.Marker({
+//               position: { lat, lng },
+//               map,
+//               icon: {
+//                 url: overlayIconUrl,
+//                 scaledSize: new maps.Size(16, 16), // Tamaño del overlay
+//                 anchor: new maps.Point(8, 28), // Ajustar para centrar el overlay
+//               },
+//             });
 
-//           const markerSmall = new maps.Marker({
-//             position: { lat, lng },
-//             map,
-//             icon: {
-//               url: icon,
-//               scaledSize: new maps.Size(16, 16),
-//               anchor: new maps.Point(8, 28), // Center the small icon
-//             },
-//             zIndex: maps.Marker.MAX_ZINDEX + 1, // Ensure it is on top
-//           });
+//             overlayMarker.addListener("click", () => {
+//               const { route, serial_number } = feature.properties;
+//               const areaName = type === "coolers" ? serial_number : route;
+//               setSelectedArea(areaName ?? ""); // Provide a fallback to empty string
+//               console.log("Clic en:", areaName);
 
-//           const handleClick = () => {
-//             const { route, serial_number, type } = feature.properties;
-//             const areaName = type === "coolers" ? serial_number : route;
-//             setSelectedArea(areaName ?? ""); // Provide a fallback to empty string
-//             console.log("Clic en:", areaName);
+//               if (type === "coolers" && serial_number) {
+//                 window.open(`/home/clt/${serial_number}`, "_blank");
+//               }
+//             });
 
-//             if (type === "coolers" && serial_number) {
-//               window.open(`/home/clt/${serial_number}`, "_blank");
-//             }
-//           };
+//             overlayMarker.addListener("mouseover", (event) => {
+//               let value = "";
 
-//           marker.addListener("click", handleClick);
-//           markerSmall.addListener("click", handleClick);
+//               // Ajuste para manejar ambos tipos de puntos
+//               if (type === "coolers") {
+//                 value = feature.properties.serial_number || "No serial number";
+//               } else if (type === "route") {
+//                 value = feature.properties.route || "No route info";
+//               }
+
+//               tooltipElement.innerHTML = value;
+//               tooltipElement.style.display = "block";
+
+//               // Ajustar la posición del tooltip
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             overlayMarker.addListener("mousemove", (event) => {
+//               // Obtener la posición del cursor
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             overlayMarker.addListener("mouseout", () => {
+//               tooltipElement.style.display = "none"; // Ocultar el tooltip
+//             });
+//           }
 
 //           bounds.extend({ lat, lng });
 //         }
@@ -568,39 +646,406 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 
 //       map.fitBounds(bounds);
 //     }
+
+//     setMapInstance(map);
+//     setMapsInstance(maps);
 //   };
 
-//   useEffect(() => {
-//     if (geojson && mapInstance && mapsInstance) {
-//       handleApiLoaded2(mapInstance, mapsInstance);
-//     }
-//   }, [geojson, mapInstance, mapsInstance]);
-
-//   return (
-//     <div style={{ height: "100%", width: "100%" }}>
-//       {isLoading === true ? (
-//         <SkeletonMapInsights />
-//       ) : (
-//         <GoogleMapReact
-//           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
-//           defaultCenter={defaultProps.center}
-//           defaultZoom={defaultProps.zoom}
-//           options={{
-//             gestureHandling: "greedy",
-//             ...mapOptions,
-//           }}
-//           yesIWantToUseGoogleMapApiInternals
-//           onGoogleApiLoaded={({ map, maps }) => {
-//             setMapInstance(map);
-//             setMapsInstance(maps);
-//             handleApiLoaded2(map, maps);
-//           }}
-//         />
-//       )}
+//   return isLoading ? (
+//     <SkeletonMapInsights />
+//   ) : (
+//     <div style={{ height: "100vh", width: "100%" }}>
+//       <GoogleMapReact
+//         bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
+//         defaultCenter={defaultProps.center}
+//         defaultZoom={defaultProps.zoom}
+//         options={{
+//           gestureHandling: "greedy",
+//           ...mapOptions,
+//         }}
+//         yesIWantToUseGoogleMapApiInternals
+//         onGoogleApiLoaded={({ map, maps }) => {
+//           setMapInstance(map);
+//           setMapsInstance(maps);
+//           handleApiLoaded2(map, maps);
+//         }}
+//       />
 //     </div>
 //   );
 // };
 
-// con nueva ventana a clt onclick a cooler
-// Sin tooltip y sin funcion de onclick path
-// actualizando el mapa cuando se ejecute el useffect del fetch
+// Con tooltip
+
+// import React, { useEffect, useState } from "react";
+// import GoogleMapReact from "google-map-react";
+// import { defaultProps, mapOptions } from "./datos";
+// import { useSelector } from "react-redux";
+// import { pathVerify } from "../../Functions/pathVerify";
+// import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
+// import { fetchUniversal } from "../../utils/apiUtils";
+// import polygonsData from "../../Functions/polyg.json";
+
+// interface GeoJSON {
+//   type: string;
+//   features: GeoJSONFeature[];
+// }
+
+// interface GeoJSONFeature {
+//   type: string;
+//   properties: {
+//     area: string;
+//     region: string;
+//     zone: string;
+//     operative_unit: string;
+//     type: string;
+//     route: string;
+//     serial_number?: string;
+//   };
+//   geometry: {
+//     type: string;
+//     coordinates: number[][][] | number[][][][];
+//   };
+// }
+
+// export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
+//   const dt = useSelector((state: any) => state.works);
+//   const dto = useSelector((state: any) => state.organization);
+//   const [zoom, setZoom] = useState(defaultProps.zoom);
+//   const body = { customer: dto, path: pathVerify() };
+//   const [geojson, setGeojson] = useState<GeoJSON | null>(null);
+//   const [selectedArea, setSelectedArea] = useState<string | null>(
+//     localStorage.getItem("selectedArea") || null
+//   );
+//   const [mapInstance, setMapInstance] = useState<any>(null);
+//   const [mapsInstance, setMapsInstance] = useState<any>(null);
+
+//   const fetchData = async () => {
+//     try {
+//       setIsLoading(true);
+
+//       const data = await fetchUniversal("insights", body, setIsLoading);
+//       console.log("API Response Data:", data);
+
+//       if (data) {
+//         // Manejo de polygon_data solo si está presente y no es null
+//         if (data.polygon_data) {
+//           const geoJsonData = {
+//             type: "FeatureCollection",
+//             features: data.polygon_data
+//               .map((polygon) => {
+//                 if (polygon.type === "coolers") {
+//                   return polygon.coolers.map((cooler) => ({
+//                     type: "Feature",
+//                     properties: {
+//                       area: cooler.region,
+//                       region: cooler.region,
+//                       zone: cooler.zone,
+//                       operative_unit: cooler.operative_unit,
+//                       route: cooler.route,
+//                       type: "coolers",
+//                       serial_number: cooler.serial_number,
+//                     },
+//                     geometry: {
+//                       type: "Point",
+//                       coordinates: [
+//                         parseFloat(cooler.longitude),
+//                         parseFloat(cooler.latitude),
+//                       ],
+//                     },
+//                   }));
+//                 } else if (polygon.type === "route") {
+//                   return {
+//                     type: "Feature",
+//                     properties: {
+//                       area: polygon.region,
+//                       region: polygon.region,
+//                       zone: polygon.zone,
+//                       operative_unit: polygon.operative_unit,
+//                       route: polygon.route,
+//                       type: polygon.type,
+//                     },
+//                     geometry: {
+//                       type: "Point",
+//                       coordinates: polygon.geometry,
+//                     },
+//                   };
+//                 } else {
+//                   if (!polygon.geometry || !Array.isArray(polygon.geometry)) {
+//                     console.error(
+//                       "Invalid geometry data for polygon:",
+//                       polygon
+//                     );
+//                     return null;
+//                   }
+
+//                   const coordinates = polygon.geometry;
+
+//                   return {
+//                     type: "Feature",
+//                     properties: {
+//                       area: polygon.region,
+//                       region: polygon.region,
+//                       zone: polygon.zone,
+//                       operative_unit: polygon.operative_unit,
+//                       route: polygon.route,
+//                       type: polygon.type,
+//                     },
+//                     geometry: {
+//                       type: "MultiPolygon",
+//                       coordinates: coordinates,
+//                     },
+//                   };
+//                 }
+//               })
+//               .flat()
+//               .filter((feature) => feature !== null),
+//           };
+
+//           setGeojson(geoJsonData);
+//         } else {
+//           console.warn("No polygon_data found in API response");
+//         }
+
+//         // Configura el resto de los datos independientemente de polygon_data
+//         setData(data);
+//       } else {
+//         console.error("No data found in API response");
+//       }
+
+//       setIsLoading(false);
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//       setIsLoading(false);
+//     }
+//   };
+
+//   const getRandomColor = () => {
+//     const letters = "0123456789ABCDEF";
+//     let color = "#";
+//     for (let i = 0; i < 6; i++) {
+//       color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, [dt, dto]);
+
+//   useEffect(() => {
+//     if (selectedArea) {
+//       localStorage.setItem("selectedArea", selectedArea);
+//     }
+//   }, [selectedArea]);
+
+//   const handleApiLoaded2 = (map, maps) => {
+//     if (geojson) {
+//       const bounds = new maps.LatLngBounds();
+
+//       // Limpia los antiguos overlays
+//       map.data.forEach((feature) => {
+//         map.data.remove(feature);
+//       });
+
+//       const tooltipElement = document.createElement("div");
+//       tooltipElement.className = "tooltip";
+//       tooltipElement.style.position = "absolute";
+//       tooltipElement.style.backgroundColor = "white";
+//       tooltipElement.style.border = "1px solid black";
+//       tooltipElement.style.padding = "5px";
+//       tooltipElement.style.display = "none"; // Ocultar inicialmente
+//       document.body.appendChild(tooltipElement);
+
+//       geojson.features.forEach((feature) => {
+//         const areaColor = getRandomColor();
+
+//         if (feature.geometry.type === "MultiPolygon") {
+//           feature.geometry.coordinates.forEach((polygonCoords) => {
+//             const outerCoords = polygonCoords[0].map((coord) => ({
+//               lat: coord[1],
+//               lng: coord[0],
+//             }));
+
+//             const outerPolygon = new maps.Polygon({
+//               paths: [outerCoords],
+//               strokeColor: areaColor,
+//               strokeOpacity: 0.8,
+//               strokeWeight: 2,
+//               fillColor: areaColor,
+//               fillOpacity: 0.35,
+//             });
+
+//             outerPolygon.addListener("click", () => {
+//               const { region, zone, operative_unit } = feature.properties;
+//               const smallestHierarchy = operative_unit || zone || region;
+//               setSelectedArea(smallestHierarchy);
+//               console.log("Clic en:", smallestHierarchy);
+//             });
+
+//             outerPolygon.addListener("mouseover", (event) => {
+//               const { type } = feature.properties;
+//               const value = feature.properties[type] || "";
+
+//               tooltipElement.innerHTML = value;
+//               tooltipElement.style.display = "block";
+
+//               // Ajustar la posición del tooltip
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             outerPolygon.addListener("mousemove", (event) => {
+//               // Obtener la posición del cursor
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             outerPolygon.addListener("mouseout", () => {
+//               tooltipElement.style.display = "none"; // Ocultar el tooltip
+//             });
+
+//             outerPolygon.setMap(map);
+
+//             outerCoords.forEach((coord) => {
+//               bounds.extend(coord);
+//             });
+
+//             for (let i = 1; i < polygonCoords.length; i++) {
+//               const innerCoords = polygonCoords[i].map((coord) => ({
+//                 lat: coord[1],
+//                 lng: coord[0],
+//               }));
+
+//               const innerPolygon = new maps.Polygon({
+//                 paths: [innerCoords],
+//                 strokeColor: areaColor,
+//                 strokeOpacity: 0.8,
+//                 strokeWeight: 2,
+//                 fillColor: "#FFFFFF",
+//                 fillOpacity: 1,
+//               });
+
+//               innerPolygon.setMap(map);
+
+//               innerCoords.forEach((coord) => {
+//                 bounds.extend(coord);
+//               });
+//             }
+//           });
+//         } else if (feature.geometry.type === "Point") {
+//           const [lng, lat] = feature.geometry.coordinates;
+//           const { type } = feature.properties;
+//           const baseIconUrl = "../../sampleData/pin_r.svg"; // Base icon
+
+//           // Definir el segundo icono según el tipo
+//           let overlayIconUrl;
+//           if (type === "route") {
+//             overlayIconUrl = "../../sampleData/pin_r2.svg";
+//           } else if (type === "coolers") {
+//             overlayIconUrl = "../../sampleData/fridge_r.svg";
+//           }
+
+//           const marker = new maps.Marker({
+//             position: { lat, lng },
+//             map,
+//             icon: {
+//               url: baseIconUrl,
+//               scaledSize: new maps.Size(32, 32),
+//             },
+//           });
+
+//           // Añadir el segundo icono como overlay
+//           if (overlayIconUrl) {
+//             const overlayMarker = new maps.Marker({
+//               position: { lat, lng },
+//               map,
+//               icon: {
+//                 url: overlayIconUrl,
+//                 scaledSize: new maps.Size(16, 16), // Tamaño del overlay
+//                 anchor: new maps.Point(8, 28), // Ajustar para centrar el overlay
+//               },
+//             });
+
+//             overlayMarker.addListener("click", () => {
+//               const { route, serial_number } = feature.properties;
+//               const areaName = type === "coolers" ? serial_number : route;
+//               setSelectedArea(areaName ?? ""); // Provide a fallback to empty string
+//               console.log("Clic en:", areaName);
+
+//               if (type === "coolers" && serial_number) {
+//                 window.open(`/home/clt/${serial_number}`, "_blank");
+//               }
+//             });
+
+//             overlayMarker.addListener("mouseover", (event) => {
+//               let value = "";
+
+//               // Ajuste para manejar ambos tipos de puntos
+//               if (type === "coolers") {
+//                 value = feature.properties.serial_number || "No serial number";
+//               } else if (type === "route") {
+//                 value = feature.properties.route || "No route info";
+//               }
+
+//               tooltipElement.innerHTML = value;
+//               tooltipElement.style.display = "block";
+
+//               // Ajustar la posición del tooltip
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             overlayMarker.addListener("mousemove", (event) => {
+//               // Obtener la posición del cursor
+//               const x = event.domEvent.clientX;
+//               const y = event.domEvent.clientY;
+//               tooltipElement.style.left = `${x + 10}px`; // Ajusta la posición horizontal
+//               tooltipElement.style.top = `${y + 10}px`; // Ajusta la posición vertical
+//             });
+
+//             overlayMarker.addListener("mouseout", () => {
+//               tooltipElement.style.display = "none"; // Ocultar el tooltip
+//             });
+//           }
+
+//           bounds.extend({ lat, lng });
+//         }
+//       });
+
+//       map.fitBounds(bounds);
+//     }
+
+//     setMapInstance(map);
+//     setMapsInstance(maps);
+//   };
+
+//   return isLoading ? (
+//     <SkeletonMapInsights />
+//   ) : (
+//     <div style={{ height: "100%", width: "100%" }}>
+//       <GoogleMapReact
+//         bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
+//         defaultCenter={defaultProps.center}
+//         defaultZoom={defaultProps.zoom}
+//         options={{
+//           gestureHandling: "greedy",
+//           ...mapOptions,
+//         }}
+//         yesIWantToUseGoogleMapApiInternals
+//         onGoogleApiLoaded={({ map, maps }) => {
+//           setMapInstance(map);
+//           setMapsInstance(maps);
+//           handleApiLoaded2(map, maps);
+//         }}
+//       />
+//     </div>
+//   );
+// };
+
+// Igual que con tooltip (copia tal cual que la de CON TOOLTIP)

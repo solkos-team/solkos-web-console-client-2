@@ -57,7 +57,7 @@ export default function DrawerA({
         : selectedAlgorithm === "VISITA PDV PARA LECTURA"
         ? "Visita PdV"
         : selectedAlgorithm === "SIN COINCIDENCIA"
-        ? "Acciones urgentes"
+        ? "Acciones urgentes" || "Actualizar Info"
         : selectedAlgorithm,
     ],
     path: pathVerify(),
