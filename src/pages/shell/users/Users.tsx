@@ -322,7 +322,7 @@ export default function Users() {
             flexDirection: "column",
             alignItems: "flex-start",
             alignSelf: "stretch",
-            width: "90%",
+            width: "96.5%",
           }}
         >
           <h1
@@ -388,6 +388,8 @@ export default function Users() {
             alignItems: "flex-start",
             gap: "32px",
             alignSelf: "stretch",
+            marginLeft:'-55px',
+            width:'100%'
           }}
         >
           <div
@@ -400,7 +402,7 @@ export default function Users() {
           <div
             style={{
               display: "flex",
-              padding: "0px 0px",
+              // padding: "0px 0px",
               justifyContent: "center",
               alignItems: "center",
               alignSelf: "stretch",
@@ -421,7 +423,7 @@ export default function Users() {
                 fontWeight: 500,
                 lineHeight: "28px",
                 width: "100%",
-                paddingRight: "40px",
+                // paddingRight: "40px",
                 margin: 0,
                 borderRadius: "4px",
                 color: "#88888B",
