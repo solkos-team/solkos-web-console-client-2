@@ -869,10 +869,10 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //             const outerPolygon = new maps.Polygon({
 //               paths: [outerCoords],
 //               strokeColor: areaColor,
-//               strokeOpacity: 0.8,
-//               strokeWeight: 2,
+//               strokeOpacity: 1,
+//               strokeWeight: 0.6,
 //               fillColor: areaColor,
-//               fillOpacity: 0.35,
+//               fillOpacity: 0.7,
 //             });
 
 //             outerPolygon.addListener("click", () => {
@@ -924,7 +924,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //                 paths: [innerCoords],
 //                 strokeColor: areaColor,
 //                 strokeOpacity: 0.8,
-//                 strokeWeight: 2,
+//                 strokeWeight: 0.5,
 //                 fillColor: "#FFFFFF",
 //                 fillOpacity: 1,
 //               });
@@ -1048,4 +1048,4 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 //   );
 // };
 
-// Igual que con tooltip (copia tal cual que la de CON TOOLTIP)
+// Modificacion en colores del mapa stroke y opacity
