@@ -297,7 +297,7 @@ export default function Alerts() {
                       {/* ***** */}
                       <div
                         style={{
-                          display: "flex",
+                          display: "none",
                           alignItems: "center",
                           gap: "8px",
                           alignSelf: "stretch",
@@ -394,6 +394,7 @@ export default function Alerts() {
                           alignItems: "center",
                           gap: "10px",
                           alignSelf: "stretch",
+                          marginTop: 10,
                         }}
                       >
                         <div
