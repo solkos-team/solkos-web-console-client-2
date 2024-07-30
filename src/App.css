@@ -2710,6 +2710,30 @@ body {
   background-color: white;
   border: 1px solid black;
   padding: 5px;
-  display: none; /* Ocultar inicialmente */
-  pointer-events: none; /* Permite que el tooltip no interfiera con los eventos del mouse */
+  display: none;
+  pointer-events: none;
+}
+
+.tabs-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.tabs-list::-webkit-scrollbar {
+  height: 5px;
+}
+
+.tabs-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.tabs-list::-webkit-scrollbar-thumb {
+  background: #d0cccc;
+  border-radius: 3px;
+}
+
+.tabs-list::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
