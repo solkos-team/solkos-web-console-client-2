@@ -853,7 +853,7 @@ export default function (props) {
                 <Popover.Dropdown>
                   {isLoading == true ? (
                     <>
-                      <Loader color="blue" size="xs" />
+                      <Loader color="gray" size="xs" />
                     </>
                   ) : (
                     <Select
@@ -928,7 +928,7 @@ export default function (props) {
                   />
                   {isLoading && ( // Si isLoading es verdadero, muestra el Loader
                     <Loader
-                      color="blue"
+                      color="gray"
                       size="xs"
                       style={{
                         position: "absolute",

@@ -124,14 +124,14 @@ export const ExportToExcel = (props) => {
         {/* <Menu.Item onClick={(e) => download(e)}> */}
         <Menu.Item style={{display: props.component == undefined || props.body == undefined || typeRole == 'path_user' ? "none" : ''}}>
           {isLoading == true 
-          ? <>Cargando datos... <Loader color="blue" size="xs" /></>
+          ? <>Cargando datos... <Loader color="gray"size="xs" /></>
           : <a style={{color:"#000"}} href={fileStateTotal} download>
             Todos los datos <Badge >{total?.toLocaleString("en-US")}</Badge>
             </a>}                    
         </Menu.Item>
         <Menu.Item style={{display: pathVerify().length > 0 && props.component != undefined  ? '' : 'none'}}>
           {isLoadingPath == true 
-          ? <>Cargando datos... <Loader color="blue" size="xs" /></>
+          ? <>Cargando datos... <Loader color="gray"size="xs" /></>
           : <a style={{color:"#000"}} href={fileStateTotalPath} download>
             Datos conforme filtro <Badge >{totalPath?.toLocaleString("en-US")}</Badge>
             </a>}                    

@@ -18,7 +18,7 @@ export const DrawerVault = ({ opened, onCLose }) => {
                                 {/* {
                         load == true
                             ?
-                            <Loader color="blue" />
+                            <Loader color="gray" size="xs" />
                             :
                             <img
                                 // src={data?.Asset?.Url ?? ''}

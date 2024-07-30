@@ -145,7 +145,7 @@
 //               </Tabs.List>
 //               {isLoading ? (
 //                 <div style={{ marginTop: 30 }}>
-//                   <Loader color="gray" />
+//                   <Loader color="gray" size="xs" />
 //                 </div>
 //               ) : (
 //                 <div
@@ -305,7 +305,7 @@
 //               </Tabs.List>
 //               {isLoading ? (
 //                 <div style={{ marginTop: 30 }}>
-//                   <Loader color="gray" />
+//                   <Loader color="gray" size="xs" />
 //                 </div>
 //               ) : (
 //                 <div
@@ -627,7 +627,7 @@ export default function Panel() {
               </Tabs.List>
               {isLoading ? (
                 <div style={{ marginTop: 30 }}>
-                  <Loader color="gray" />
+                  <Loader color="gray" size="xs" />
                 </div>
               ) : (
                 <div
@@ -763,7 +763,7 @@ export default function Panel() {
               </Tabs.List>
               {isLoading ? (
                 <div style={{ marginTop: 30 }}>
-                  <Loader color="gray" />
+                  <Loader color="gray" size="xs"/>
                 </div>
               ) : (
                 <div
