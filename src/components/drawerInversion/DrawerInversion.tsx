@@ -560,7 +560,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   <div
                     style={{
                       color: "#3E83FF",
-                      fontSize: ".9vw",
+                      fontSize: "0.875rem",
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "normal",
