@@ -1411,6 +1411,8 @@ body {
   gap: 1rem;
   padding: 1rem;
   box-sizing: border-box;
+  padding-bottom: 3rem;
+  justify-content: space-between;
 }
 .users_form_1 {
   width: 100%;
