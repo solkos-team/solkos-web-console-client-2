@@ -3,33 +3,55 @@ import { TagInput } from "rsuite";
 import { ButtonNext } from "../../Components/ButtonNext";
 import { ButtonBack } from "../../Components/ButtonBack";
 import { RoadMap } from "../../Components/RoadMap";
-import { Switch } from "@mantine/core";
+import { Skeleton, Switch } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../../Components/DrawerVault";
 import { InsightsVault } from "../../Components/InsightsVault";
+import { fetchUniversal } from "../../../../../utils/apiUtils";
+import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
+import { useSelector } from "react-redux";
+import { pathVerify } from "../../../../../Functions/pathVerify";
+import moment from "moment";
 
-export const StepOne = ({active,setActive,nextStep,prevStep}) => {
+export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
+  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
-  const [visibilityTable,setVisibilityTable] = useState<boolean>(false)
+  const [visibilityTable, setVisibilityTable] = useState<boolean>(false)
   const [tags, setTags] = useState<string[]>([]);
+  const dto = useSelector((state: any) => state.organization);
+  const dt = useSelector((state: any) => state.works);
   // if(visibilityTable == true){
   //   // @ts-ignore
   //   setActive(1)
   // }else{setActive(0)}  
 
-  const handleTagChange = (newTags) => {        
-    setTags(newTags);    
+  const handleTagChange = (newTags) => {
+    setTags(newTags);
   };
-    
+  const body = { customer: dto, path: pathVerify(), page_number: 1, page_size: 10 };
+  const fetchData = async () => {
+    try {
+      const data = await fetchUniversal("vaultlist", body, setIsLoading);
+      // console.log(data);
+      setIsLoading(false);
+      setCoolersData(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  useEffect(() => {
+    visibilityTable == true ? fetchData() : ''
+  }, [visibilityTable])
   return (
-    <section style={{width : '100%' ,height:'100%', display : active <= 1 ? 'flex' : 'none',flexDirection:'column',alignItems:'center'}}>
+    <section style={{ width: '100%', height: '100%', display: active <= 1 ? 'flex' : 'none', flexDirection: 'column', alignItems: 'center' }}>
       {/* Seccion RoadMap */}
-      
+
       {
-        visibilityTable == false 
-        ? <section style={{width:'100%',display:'flex'}}><InsightsVault /></section>
-        : <section className="vault_section_roadmap">
+        visibilityTable == false
+          ? <section style={{ width: '100%', display: 'flex' }}><InsightsVault /></section>
+          : <section className="vault_section_roadmap">
             <RoadMap active={active} setActive={setActive} nextStep={nextStep} prevStep={prevStep} />
           </section>
       }
@@ -41,13 +63,13 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",          
+          justifyContent: "center",
         }}
       >
         <img
           src={"../../sampleData/logovault.svg"}
           alt="Descripción de la imagen"
-          style={{ width: "5rem", height: "3rem", marginTop: -20 }}
+          style={{ width: "5rem", height: "3rem" }}
         />
         <div className="vault_tag">
           <TagInput
@@ -101,7 +123,7 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
               cursor: "pointer",
               marginRight: "5px", // Espacio entre el texto y la imagen
             }}
-            onClick={()=>setVisibilityTable((o) => !o)}
+            onClick={() => setVisibilityTable((o) => !o)}
           >
             Ir a vista con tabla{"   "}
           </text>
@@ -115,61 +137,119 @@ export const StepOne = ({active,setActive,nextStep,prevStep}) => {
       {/* Seccion Tabla */}
       <section
         style={{
+          height: '50vh', // 50% de la altura del viewport
+          overflowY: 'auto', // Agrega una barra de desplazamiento vertical si es necesario
+          scrollbarWidth: 'thin',
+          visibility: visibilityTable == false ? 'hidden' : 'visible'
+        }}>
+        <table style={{
           width: "100%",
-          height: "50%",          
-          visibility : visibilityTable == false ? 'hidden' : 'visible'
-        }}
-      >
-        <table>
+          borderCollapse: "collapse",
+          tableLayout: "fixed",
+        }}>
           <thead>
             <tr>
-              <th scope="col">Estatus</th>
-              <th scope="col">Serie</th>
-              <th scope="col">Modelo</th>
-              <th scope="col">Última Visita</th>
-              <th scope="col">Prioridad</th>
-              <th scope="col">Acciones</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Estatus</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Serie</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Modelo</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Última Visita</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Prioridad</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Acciones</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td data-label='Estatus'>
-                <Switch
-                  
-                /></td>
-              <td data-label='Serie'>Serie</td>
-              <td data-label='Modelo'>Modelo</td>
-              <td data-label='Última Visita'>Última Visita</td>
-              <td data-label='Prioridad'>Prioridad</td>
-              <td data-label='Acciones'>
-                <div
-                  style={{
-                    color: "#3E83FF",
-                    fontSize: "0.8rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    display: "flex",
-                    cursor: "pointer",
-                  }}
-                  onClick={()=>{open()}}
-                >
-                  Ver más
-                  <IconArrowRight
+            {coolersData?.map((cooler, index) => (
+              <tr key={index}>
+                <td data-label='Estatus'>
+                  <Switch checked={cooler.estatus} />
+                </td>
+                <td data-label='Serie'>
+                  {isLoading == true ? (
+                    <>
+                      <Skeleton height={20} radius="sm" width="90%" />
+                    </>
+                  ) : cooler.serial_number == undefined ||
+                    cooler.serial_number == "" ? (
+                    <div style={{ fontSize: "0.75rem", color: 'var(--gray-6, #868E96)', fontWeight: '400' }}>
+                      {"Sin registro"}
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ fontSize: "0.75rem", color: 'var(--gray-6, #868E96)', fontWeight: '400' }}>
+                        {cooler.serial_number}
+                      </div>
+                    </>
+                  )}
+                </td>
+                <td data-label='Modelo'>
+                  {isLoading == true ? (
+                    <>
+                      <Skeleton height={20} radius="sm" width="90%" />
+                    </>
+                  ) : cooler.model_id == undefined ||
+                    cooler.model_id == "" ? (
+                    <div style={{ fontSize: "0.75rem", color: 'var(--gray-6, #868E96)', fontWeight: '400' }}>
+                      {"Sin registro"}
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ fontSize: "0.75rem", color: 'var(--gray-6, #868E96)', fontWeight: '400' }}>
+                        {cooler.model_id}
+                      </div>
+                    </>
+                  )}
+                </td>
+                <td data-label='Última Visita'>
+                  {isLoading == true ? (
+                    <>
+                      <Skeleton height={20} radius="sm" width="90%" />
+                    </>
+                  ) : cooler.last_read == undefined ||
+                    cooler.last_read == "" ? (
+                    <div style={{ fontSize: "0.75rem", color: 'var(--gray-6, #868E96)', fontWeight: '400' }}>
+                      {"Sin registro"}
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ fontSize: "0.75rem", color: 'var(--gray-6, #868E96)', fontWeight: '400' }}>
+                        {moment(new Date(cooler?.last_read)).format(
+                          "DD/MM/YYYY"
+                        )}
+                      </div>
+                    </>
+                  )}
+                </td>
+                <td data-label='Prioridad'>Prioridad</td>
+                <td data-label='Acciones'>
+                  <div
                     style={{
-                      color: "#3E83FF",
-                      width: "1.0rem",
+                      color: "var(--blue-6, #2393F4)",
+                      fontSize: "0.8rem",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      display: "flex",
+                      cursor: "pointer",
                     }}
-                  />
-                </div>
-              </td>
-            </tr>
+                    onClick={() => { open() }}
+                  >
+                    Ver más
+                    <IconArrowRight
+                      style={{
+                        color: "#3E83FF",
+                        width: "1.0rem",
+                      }}
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </section>
       {/* Seccion botones */}
       <section className="section_Vault_Buttons">
-        <ButtonBack  prevStep={prevStep} active={active} />
-        <ButtonNext nextStep={nextStep} active={true}/>
+        <ButtonBack prevStep={prevStep} active={active} />
+        <ButtonNext nextStep={nextStep} active={true} />
       </section>
       <DrawerVault opened={opened} onCLose={close} />
     </section>

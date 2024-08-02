@@ -1039,8 +1039,8 @@ body {
   flex-wrap: wrap;
 }
 .insights_datas_mantenimiento_VerDetalles_h1 {
-  color: #3e83ff;
-  font-size: clamp(0.8rem, 0.9vw, 1vw);
+  color: var(--blue-6, #2393F4);
+  font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -1411,6 +1411,8 @@ body {
   gap: 1rem;
   padding: 1rem;
   box-sizing: border-box;
+  padding-bottom: 3rem;
+  justify-content: space-between;
 }
 .users_form_1 {
   width: 100%;

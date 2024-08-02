@@ -1,6 +1,8 @@
 // PRODUCTIVO
 // const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
+import { FetchOptions } from "../interfaces/ApiInterfaces";
+
 // QA
 const baseUrl =
   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
@@ -333,6 +335,65 @@ export const fetchUniversalTables = async (
     return await response;
   } catch (error) {
     throw error;
+  }
+};
+export const fetchUniversalTables2 = async (
+  componentURL: string,
+  data?: any,
+  setIsLoading?: (loading: boolean) => void,
+  detailsID?: string,
+  CRUD?: string,
+  setErrorMessage?: (error: string) => void
+) => {
+  const url = `${baseUrl}/${componentURL}`;
+  detailsID ? url + "/" + detailsID : url;
+  // Actualiza el estado de carga si se proporciona la función setIsLoading
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
+
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${
+      sessionStorage.getItem("Token") ?? localStorage.getItem("Token")
+    }`,
+  };
+
+  const cuerpo: FetchOptions = {
+    method: CRUD ?? "POST",
+    headers,
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(url, cuerpo);
+
+    // Verifica si la respuesta es OK (código de estado en el rango 200-299)
+    if (!response.ok) {
+      // Lanza un error con el estatus y el texto de error
+      const errorText = await response.text();
+      const errorMessage = `Error ${response.status}: ${errorText}`;
+      if (setErrorMessage) {
+        setErrorMessage(errorMessage);
+      }
+      throw new Error(errorMessage);
+    }
+
+    // Extrae los datos en formato JSON
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    // Maneja el error y lo relanza para que pueda ser capturado por el llamador
+    if (setErrorMessage) {
+      setErrorMessage(`Fetch error: ${error.message}`);
+    }
+    console.error("Fetch error:", error);
+    throw error;
+  } finally {
+    // Asegúrate de actualizar el estado de carga a falso en cualquier caso
+    if (setIsLoading) {
+      setIsLoading(false);
+    }
   }
 };
 
