@@ -1092,7 +1092,7 @@ export default function Panel() {
   }, [region, zone, operative_unit, route]);
 
   useEffect(() => {
-    if (dto !== "KOF" && dto !== "KOF Colombia") {
+    if (dto !== "KOF" && dto !== "KOF Colombia" && dto !== "KOF Guatemala") {
       navigate("/home");
     }
   }, [navigate, dto]);
@@ -1373,7 +1373,7 @@ export default function Panel() {
               </Tabs.List>
               {isLoading ? (
                 <div style={{ marginTop: 30 }}>
-                  <Loader color="gray" size="xs"/>
+                  <Loader color="gray" size="xs" />
                 </div>
               ) : (
                 <div
@@ -1610,6 +1610,60 @@ export default function Panel() {
                           <br />
                           <TableauReport
                             url={`https://tableau.efemsa.com/views/O_Sporactivo/O_Sporactivo?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            token={data}
+                            options={options}
+                            parameters={parameters}
+                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+                          />
+                        </>
+                      ) : (
+                        <div style={{ marginTop: 30 }}>
+                          No hay tableros disponibles para mostrar
+                        </div>
+                      )}
+                    </>
+                  </Tabs.Panel>
+                </div>
+              )}
+            </Tabs>
+          </div>
+        </>
+      ) : dto === "KOF Guatemala" ? (
+        <>
+          <div>
+            <Tabs
+              color="teal"
+              value={activeTab || "first"} // Valor predeterminado
+              onTabChange={handleTabChange}
+              style={{ width: "94%" }}
+            >
+              <Tabs.List className="tabs-list">
+                <Tabs.Tab
+                  value="first"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
+                  Rutas
+                </Tabs.Tab>
+              </Tabs.List>
+              {isLoading ? (
+                <div style={{ marginTop: 30 }}>
+                  <Loader color="gray" size="xs" />
+                </div>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Tabs.Panel value="first">
+                    <>
+                      {dto === "KOF Guatemala" ? (
+                        <>
+                          <br />
+                          <TableauReport
+                            url={`https://tableau.efemsa.com/views/KOFGuatemala/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
                             options={options}
                             parameters={parameters}

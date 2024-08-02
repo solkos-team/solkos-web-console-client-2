@@ -63,6 +63,7 @@ export default function CoolerDetail() {
         setIsLoading
       );
       setCoolersData(data);
+      console.log(data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
