@@ -1039,7 +1039,7 @@ body {
   flex-wrap: wrap;
 }
 .insights_datas_mantenimiento_VerDetalles_h1 {
-  color: var(--blue-6, #2393F4);
+  color: var(--blue-6, #2393f4);
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
