@@ -2,16 +2,18 @@ import { Button, PasswordInput, Input } from "@mantine/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchUniversal } from "../../../utils/apiUtils";
+import { fetchUniversal, fetchUniversalTables, fetchUniversalTables2 } from "../../../utils/apiUtils";
 import { useDispatch } from "react-redux";
 import { addPath } from "../../../app/works";
 import { addOrg } from "../../../app/organization";
+import { loginErrors } from "../../../Functions/ReturnErrors";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,19 +39,23 @@ export const Login = () => {
           navigate("/home");
         }, 2000);
   };
+  
   const body = {
     email: email,
     password: password,
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("login", body);
+      const data = await fetchUniversalTables2("login", body, setIsLoading,
+        undefined,
+        'POST',
+        setErrorMessage);            
       pushUserConfig(data);
     } catch (error) {
       console.error("Error fetching login:", error);
-      setErrorMessage("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
     }
   };
+  
   const handleLogin = () => {
     fetchData();
   };
@@ -71,7 +77,7 @@ export const Login = () => {
       event.preventDefault();
       handleLogin();
     }
-  };
+  };  
   return (
     <>
       <div className="login_principal_body">
@@ -123,7 +129,7 @@ export const Login = () => {
                 <div
                   style={{ color: "red", fontSize: "14px", marginTop: "8px" }}
                 >
-                  {errorMessage}
+                  {loginErrors(errorMessage)}
                 </div>
               )}
             </div>
