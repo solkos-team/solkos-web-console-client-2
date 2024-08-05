@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TagInput } from "rsuite";
 import { ButtonNext } from "../../Components/ButtonNext";
 import { ButtonBack } from "../../Components/ButtonBack";
@@ -15,11 +15,12 @@ import { pathVerify } from "../../../../../Functions/pathVerify";
 import moment from "moment";
 
 export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
-  const [coolersData, setCoolersData] = useState<CoolerInterface[] | null>(null);
+  const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
   const [visibilityTable, setVisibilityTable] = useState<boolean>(false)
   const [tags, setTags] = useState<string[]>([]);
+  const [pageNumber,setPageNumber] = useState(1)
   const dto = useSelector((state: any) => state.organization);
   const dt = useSelector((state: any) => state.works);
   // if(visibilityTable == true){
@@ -30,20 +31,43 @@ export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
   const handleTagChange = (newTags) => {
     setTags(newTags);
   };
-  const body = { customer: dto, path: pathVerify(), page_number: 1, page_size: 10 };
+  
+  
+  const body = { customer: dto, path: pathVerify(), page_number: pageNumber, page_size: 25 };
   const fetchData = async () => {
     try {
       const data = await fetchUniversal("vaultlist", body, setIsLoading);
-      // console.log(data);
       setIsLoading(false);
-      setCoolersData(data);
+      setCoolersData(prevData => [...prevData, ...data]);
     } catch (error) {
       console.error("Error:", error);
     }
   };
   useEffect(() => {
     visibilityTable == true ? fetchData() : ''
-  }, [visibilityTable])
+  }, [visibilityTable,pageNumber])
+  const containerRef = useRef(null);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
+        if (scrollTop + clientHeight >= scrollHeight-1) {                    
+          setPageNumber(prevPage => prevPage + 1);
+        }
+      }
+    };
+    const container:any = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+  
   return (
     <section style={{ width: '100%', height: '100%', display: active <= 1 ? 'flex' : 'none', flexDirection: 'column', alignItems: 'center' }}>
       {/* Seccion RoadMap */}
@@ -136,11 +160,12 @@ export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
       </section>
       {/* Seccion Tabla */}
       <section
+      ref={containerRef}
         style={{
           height: '50vh', // 50% de la altura del viewport
           overflowY: 'auto', // Agrega una barra de desplazamiento vertical si es necesario
           scrollbarWidth: 'thin',
-          visibility: visibilityTable == false ? 'hidden' : 'visible'
+          visibility: visibilityTable == false ? 'hidden' : 'visible',          
         }}>
         <table style={{
           width: "100%",
