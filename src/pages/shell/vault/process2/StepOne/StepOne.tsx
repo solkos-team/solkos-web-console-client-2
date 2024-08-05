@@ -17,6 +17,7 @@ import moment from "moment";
 export const StepOne = ({ active, setActive, nextStep, prevStep ,coolersToChange,setCoolersToChange,coolersData, setCoolersData}) => {
   // const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
   // const [coolersToChange,setCoolersToChange] = useState<CoolerInterface[]>([])
+  const [coolerDrawer,SetCoolerDrawer] = useState<CoolerInterface[]>([])
   const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
   const [visibilityTable, setVisibilityTable] = useState<boolean>(false)
@@ -76,6 +77,12 @@ export const StepOne = ({ active, setActive, nextStep, prevStep ,coolersToChange
       return updatedData;
     });
   };
+
+  useEffect(() => {
+    if (!opened) {
+      SetCoolerDrawer([]);
+    }
+  }, [opened]);
   return (
     <section style={{ width: '100%', height: '100%', display: active <= 1 ? 'flex' : 'none', flexDirection: 'column', alignItems: 'center' }}>
       {/* Seccion RoadMap */}
@@ -263,7 +270,7 @@ export const StepOne = ({ active, setActive, nextStep, prevStep ,coolersToChange
                       display: "flex",
                       cursor: "pointer",
                     }}
-                    onClick={() => { open() }}
+                    onClick={() => { open();SetCoolerDrawer(cooler) }}
                   >
                     Ver más
                     <IconArrowRight
@@ -284,7 +291,7 @@ export const StepOne = ({ active, setActive, nextStep, prevStep ,coolersToChange
         <ButtonBack prevStep={prevStep} active={active} />
         <ButtonNext nextStep={nextStep} active={true} />
       </section>
-      <DrawerVault opened={opened} onCLose={close} />
+      <DrawerVault opened={opened} onCLose={close} cooler={coolerDrawer} />
     </section>
   );
 };

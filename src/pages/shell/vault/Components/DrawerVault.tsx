@@ -1,7 +1,8 @@
 import { Drawer, Loader } from '@mantine/core'
 import React from 'react'
 
-export const DrawerVault = ({ opened, onCLose }) => {
+export const DrawerVault = ({ opened, onCLose,cooler }) => {
+    // console.log(cooler)
     return (
         <Drawer
             opened={opened}
