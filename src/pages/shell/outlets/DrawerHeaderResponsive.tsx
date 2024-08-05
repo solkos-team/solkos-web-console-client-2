@@ -93,10 +93,10 @@ export const DrawerHeaderResponsive = ({
                           border:
                             actionable === "Visita PdV" ||
                             actionable === "VISITA PDV PARA LECTURA"
-                              ? "1.5px solid #DA7E05"
+                              ? "1.5px solid #E67700"
                               : actionable === "Sin Riesgo" ||
                                 actionable === "SIN RIESGO"
-                              ? "1.5px solid #0F9F67"
+                              ? "1.5px solid #40C057"
                               : actionable === "Toma de Decisiones" ||
                                 actionable === "Acciones urgentes" ||
                                 actionable === "SIN COINCIDENCIA"
@@ -119,7 +119,7 @@ export const DrawerHeaderResponsive = ({
                           background: "#FFF",
                         }}
                       >
-                        {actionable === "Visita PdV" &&
+                        {/* {actionable === "Visita PdV" &&
                         dto != "KOF Colombia" ? (
                           <img
                             src={"../../sampleData/p.svg"}
@@ -235,17 +235,17 @@ export const DrawerHeaderResponsive = ({
                           />
                         ) : (
                           ""
-                        )}
+                        )} */}
 
                         <div
                           style={{
                             color:
                               actionable === "Visita PdV" ||
                               actionable === "VISITA PDV PARA LECTURA"
-                                ? "#DA7E05"
+                                ? "#E67700"
                                 : actionable === "Sin Riesgo" ||
                                   actionable === "SIN RIESGO"
-                                ? "#0F9F67"
+                                ? "#40C057"
                                 : actionable === "Toma de Decisiones" ||
                                   actionable === "Acciones urgentes" ||
                                   actionable === "SIN COINCIDENCIA"

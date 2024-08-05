@@ -449,11 +449,11 @@ export default function Outlets() {
                                           outlet.actionable === "Visita PdV" ||
                                           outlet.actionable ===
                                             "VISITA PDV PARA LECTURA"
-                                            ? "1.5px solid #DA7E05"
+                                            ? "1.5px solid #E67700"
                                             : outlet.actionable ===
                                                 "Sin Riesgo" ||
                                               outlet.actionable === "SIN RIESGO"
-                                            ? "1.5px solid #0F9F67"
+                                            ? "1.5px solid #40C057"
                                             : outlet.actionable ===
                                                 "Toma de Decisiones" ||
                                               outlet.actionable ===
@@ -490,7 +490,7 @@ export default function Outlets() {
                                         background: "#FFF",
                                       }}
                                     >
-                                      {outlet.actionable === "Visita PdV" &&
+                                      {/* {outlet.actionable === "Visita PdV" &&
                                       dto != "KOF Colombia" ? (
                                         <img
                                           src={"../../sampleData/p.svg"}
@@ -619,7 +619,7 @@ export default function Outlets() {
                                         />
                                       ) : (
                                         ""
-                                      )}
+                                      )} */}
 
                                       <div
                                         style={{
@@ -628,12 +628,12 @@ export default function Outlets() {
                                               "Visita PdV" ||
                                             outlet.actionable ===
                                               "VISITA PDV PARA LECTURA"
-                                              ? "#DA7E05"
+                                              ? "#E67700"
                                               : outlet.actionable ===
                                                   "Sin Riesgo" ||
                                                 outlet.actionable ===
                                                   "SIN RIESGO"
-                                              ? "#0F9F67"
+                                              ? "#40C057"
                                               : outlet.actionable ===
                                                   "Toma de Decisiones" ||
                                                 outlet.actionable ===

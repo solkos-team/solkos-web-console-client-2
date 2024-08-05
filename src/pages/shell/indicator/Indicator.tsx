@@ -227,6 +227,25 @@ export default function Indicator() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
+                            border:
+                              cooler.algorithm === "Sin Riesgo" ||
+                              cooler.algorithm === "SIN RIESGO"
+                                ? "1px solid #40C057"
+                                : cooler.algorithm === "Sin Riesgo" ||
+                                  cooler.algorithm ===
+                                    "Solicitar serv. correctivo" ||
+                                  cooler.algorithm ===
+                                    "Solicitar serv. preventivo" ||
+                                  cooler.algorithm === "Seguimiento a equipo" ||
+                                  cooler.algorithm === "Visita PdV" ||
+                                  cooler.algorithm === "VISITA PDV PARA LECTURA"
+                                ? "1px solid #E67700"
+                                : cooler.algorithm === "Estatus sin venta" ||
+                                  cooler.algorithm === "SIN VENTA" ||
+                                  cooler.algorithm === "Acciones urgentes" ||
+                                  cooler.algorithm === "SIN COINCIDENCIA"
+                                ? "1px solid #FA5252"
+                                : "1px",
                             background:
                               cooler.algorithm === "Sin Riesgo" ||
                               cooler.algorithm === "SIN RIESGO"
@@ -237,7 +256,7 @@ export default function Indicator() {
                                   cooler.algorithm === "SIN VENTA" ||
                                   cooler.algorithm === "Acciones urgentes" ||
                                   cooler.algorithm === "SIN COINCIDENCIA"
-                                ? "#FFC7CD"
+                                ? "#FFF5F5"
                                 : cooler.algorithm === "Visita PdV" &&
                                   dto != "KOF Colombia"
                                 ? "#FEF5C7"
@@ -253,7 +272,7 @@ export default function Indicator() {
                                   cooler.algorithm === "Seguimiento a equipo" ||
                                   cooler.algorithm === "Visita PdV" ||
                                   cooler.algorithm === "VISITA PDV PARA LECTURA"
-                                ? "#FFEC99"
+                                ? "#FFF9DB"
                                 : cooler.algorithm === "Visita PdV prioritaria"
                                 ? "#FFC9C9"
                                 : "",
@@ -262,7 +281,7 @@ export default function Indicator() {
                           {cooler.algorithm === "Sin Riesgo" ||
                           cooler.algorithm === "SIN RIESGO" ? (
                             <img
-                              src={"../../sampleData/sinr.svg"}
+                              src={"../../sampleData/circle-check.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -277,7 +296,7 @@ export default function Indicator() {
                             cooler.algorithm === "Acciones urgentes" ||
                             cooler.algorithm === "SIN COINCIDENCIA" ? (
                             <img
-                              src={"../../sampleData/accio.svg"}
+                              src={"../../sampleData/alert-circle2.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -330,7 +349,7 @@ export default function Indicator() {
                           ) : cooler.algorithm === "Visita PdV" ||
                             cooler.algorithm === "VISITA PDV PARA LECTURA" ? (
                             <img
-                              src={"../../sampleData/visitap.svg"}
+                              src={"../../sampleData/building-store.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />

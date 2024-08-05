@@ -234,11 +234,11 @@ export default function CoolerDetailCC() {
                             coolersData?.cooler.actionable === "Visita PdV" ||
                             coolersData?.cooler.actionable ===
                               "VISITA PDV PARA LECTURA"
-                              ? "1.5px solid #DA7E05"
+                              ? "1.5px solid #E67700"
                               : coolersData?.cooler.actionable ===
                                   "Sin Riesgo" ||
                                 coolersData?.cooler.actionable === "SIN RIESGO"
-                              ? "1.5px solid #0F9F67"
+                              ? "1.5px solid #40C057"
                               : coolersData?.cooler.actionable ===
                                   "Estatus sin venta" ||
                                 coolersData?.cooler.actionable ===
@@ -247,7 +247,7 @@ export default function CoolerDetailCC() {
                                   "Acciones urgentes" ||
                                 coolersData?.cooler.actionable ===
                                   "SIN COINCIDENCIA"
-                              ? "1.5px solid #F93448"
+                              ? "1.5px solid #FA5252"
                               : coolersData?.cooler.actionable ===
                                 "Actualizar Info"
                               ? "1.5px solid #DA7E05"
@@ -255,7 +255,7 @@ export default function CoolerDetailCC() {
                           background: "#FFF",
                         }}
                       >
-                        {isLoading == true ? (
+                        {/* {isLoading == true ? (
                           <Skeleton height={8} radius="xl" />
                         ) : coolersData?.cooler.actionable === "Visita PdV" ||
                           coolersData?.cooler.actionable ===
@@ -293,7 +293,7 @@ export default function CoolerDetailCC() {
                           />
                         ) : (
                           ""
-                        )}
+                        )} */}
 
                         <div
                           style={{
@@ -301,12 +301,12 @@ export default function CoolerDetailCC() {
                               coolersData?.cooler.actionable === "Visita PdV" ||
                               coolersData?.cooler.actionable ===
                                 "VISITA PDV PARA LECTURA"
-                                ? "#DA7E05"
+                                ? "#E67700"
                                 : coolersData?.cooler.actionable ===
                                     "Sin Riesgo" ||
                                   coolersData?.cooler.actionable ===
                                     "SIN RIESGO"
-                                ? "#0F9F67"
+                                ? "#40C057"
                                 : coolersData?.cooler.actionable ===
                                     "Estatus sin venta" ||
                                   coolersData?.cooler.actionable ===
@@ -315,7 +315,7 @@ export default function CoolerDetailCC() {
                                     "Acciones urgentes" ||
                                   coolersData?.cooler.actionable ===
                                     "SIN COINCIDENCIA"
-                                ? "#F93448"
+                                ? "#FA5252"
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
                                 ? "#DA7E05"

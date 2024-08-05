@@ -541,7 +541,7 @@ export default function Coolers() {
                                         ? "1.5px solid #DA7E05"
                                         : cooler.actionable === "Sin Riesgo" ||
                                           cooler.actionable === "SIN RIESGO"
-                                        ? "1.5px solid #0F9F67"
+                                        ? "1.5px solid #40C057"
                                         : cooler.actionable ===
                                             "Estatus sin venta" ||
                                           cooler.actionable === "SIN VENTA" ||
@@ -549,7 +549,7 @@ export default function Coolers() {
                                             "Acciones urgentes" ||
                                           cooler.actionable ===
                                             "SIN COINCIDENCIA"
-                                        ? "1.5px solid #F93448"
+                                        ? "1.5px solid #FA5252"
                                         : cooler.actionable ===
                                           "Actualizar Info"
                                         ? "1.5px solid #DA7E05"
@@ -577,7 +577,7 @@ export default function Coolers() {
                                     background: "#FFF",
                                   }}
                                 >
-                                  {cooler.actionable === "Visita PdV" &&
+                                  {/* {cooler.actionable === "Visita PdV" &&
                                   dto != "KOF Colombia" ? (
                                     <img
                                       src={"../../sampleData/p.svg"}
@@ -667,7 +667,7 @@ export default function Coolers() {
                                     />
                                   ) : (
                                     ""
-                                  )}
+                                  )} */}
 
                                   <div
                                     style={{
@@ -678,7 +678,7 @@ export default function Coolers() {
                                           : cooler.actionable ===
                                               "Sin Riesgo" ||
                                             cooler.actionable === "SIN RIESGO"
-                                          ? "#0F9F67"
+                                          ? "#40C057"
                                           : cooler.actionable ===
                                               "Estatus sin venta" ||
                                             cooler.actionable === "SIN VENTA" ||
@@ -686,7 +686,7 @@ export default function Coolers() {
                                               "Acciones urgentes" ||
                                             cooler.actionable ===
                                               "SIN COINCIDENCIA"
-                                          ? "#F93448"
+                                          ? "#FA5252"
                                           : cooler.actionable ===
                                             "Actualizar Info"
                                           ? "#DA7E05"
