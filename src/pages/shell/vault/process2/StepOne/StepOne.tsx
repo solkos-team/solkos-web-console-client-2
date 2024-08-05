@@ -16,6 +16,7 @@ import moment from "moment";
 
 export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
+  const [coolersToChange,setCoolersToChange] = useState<CoolerInterface[]>([])
   const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
   const [visibilityTable, setVisibilityTable] = useState<boolean>(false)
@@ -67,7 +68,23 @@ export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
       }
     };
   }, []);
-  
+  const handleSwitchChange = (index: number,data:any) => {
+    setCoolersToChange(prevData=>[...prevData,data])
+    setCoolersData(prevData => {
+      const updatedData = [...prevData];
+      updatedData[index].estatus = !updatedData[index].estatus;
+      return updatedData;
+    });
+  };
+
+const countMap = coolersToChange.reduce((map, item) => {
+  map[item.serial_number] = (map[item.serial_number] || 0) + 1;
+  return map;
+}, {});
+
+// datos filtrados , cuando se cambia un estado del switch dos o mas veces
+const filteredData = coolersToChange.filter(item => countMap[item.serial_number] === 1);
+console.log(filteredData);
   return (
     <section style={{ width: '100%', height: '100%', display: active <= 1 ? 'flex' : 'none', flexDirection: 'column', alignItems: 'center' }}>
       {/* Seccion RoadMap */}
@@ -174,7 +191,7 @@ export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
         }}>
           <thead>
             <tr>
-              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Estatus</th>
+              <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Vault</th>
               <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Serie</th>
               <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Modelo</th>
               <th scope="col" style={{ position: 'sticky', top: '0', backgroundColor: 'white', zIndex: '1' }}>Última Visita</th>
@@ -185,8 +202,8 @@ export const StepOne = ({ active, setActive, nextStep, prevStep }) => {
           <tbody>
             {coolersData?.map((cooler, index) => (
               <tr key={index}>
-                <td data-label='Estatus'>
-                  <Switch checked={cooler.estatus} />
+                <td data-label='Vault'>
+                  <Switch checked={cooler.estatus} onLabel="ON" offLabel="OFF" color="gray" onChange={() => handleSwitchChange(index,cooler)} />
                 </td>
                 <td data-label='Serie'>
                   {isLoading == true ? (
