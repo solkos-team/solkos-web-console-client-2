@@ -98,25 +98,25 @@ export default function Alerts() {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "4px",
-                borderRadius: "2px",
-                background: "#FEF5C7",
+                borderRadius: "8px",
+                background: "#FFF9DB",
               }}
             >
               <img
-                src={"../../sampleData/alert.svg"}
+                src={"../../sampleData/alert-triangle.svg"}
                 alt="Descripción de la imagen"
               />
               <div
                 style={{
-                  color: "#451C03",
+                  color: "#E67700",
                   // fontFamily: "Space Mono",
-                  fontSize: "12px",
+                  fontSize: "14px",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "14px",
                 }}
               >
-                ALERTAS
+                Alertas
               </div>
             </div>
           </div>
@@ -206,13 +206,14 @@ export default function Alerts() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
+                            border: "1px solid #E67700",
                             background: "#FEF5C7",
                           }}
                         >
                           {cooler.algorithm === "Alta demanda de compresor" ? (
                             <>
                               <img
-                                src={"../../sampleData/comp.svg"}
+                                src={"../../sampleData/compressor2.svg"}
                                 alt="Descripción de la imagen"
                                 style={{ width: "18px", height: "18px" }}
                               />
@@ -221,20 +222,20 @@ export default function Alerts() {
                             <>
                               {" "}
                               <img
-                                src={"../../sampleData/desc.svg"}
+                                src={"../../sampleData/plug-connected-x.svg"}
                                 alt="Descripción de la imagen"
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : cooler.algorithm === "Alerta alta temperatura" ? (
                             <img
-                              src={"../../sampleData/alt.svg"}
+                              src={"../../sampleData/temperature-up2.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm === "Bajo/Alto voltaje" ? (
                             <img
-                              src={"../../sampleData/altv.svg"}
+                              src={"../../sampleData/bolt-up2.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />

@@ -109,12 +109,12 @@ export default function Indicator() {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "4px",
-                borderRadius: "2px",
-                background: "#BCDAFF",
+                borderRadius: "8px",
+                background: "#E7F5FF",
               }}
             >
               <img
-                src={"../../sampleData/act.svg"}
+                src={"../../sampleData/gauge2.svg"}
                 alt="Descripción de la imagen"
                 style={{ width: "18px", height: "18px" }}
               />
@@ -122,13 +122,13 @@ export default function Indicator() {
                 style={{
                   color: "#3E83FF",
                   // fontFamily: "Space Mono",
-                  fontSize: "12px",
+                  fontSize: "14px",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "14px",
                 }}
               >
-                CONTROL DE ACTIVOS
+                Control de activos
               </div>
             </div>
           </div>

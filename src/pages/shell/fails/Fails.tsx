@@ -112,8 +112,8 @@ export default function Fails() {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "4px",
-                borderRadius: "2px",
-                background: "#FFC7CD",
+                borderRadius: "8px",
+                background: "#FFF5F5",
               }}
             >
               <img
@@ -124,13 +124,13 @@ export default function Fails() {
                 style={{
                   color: "#F93448",
                   // fontFamily: "Space Mono",
-                  fontSize: "12px",
+                  fontSize: "14px",
                   fontStyle: "normal",
                   fontWeight: 400,
                   lineHeight: "14px",
                 }}
               >
-                FALLAS
+                Fallas
               </div>
             </div>
           </div>
@@ -221,33 +221,34 @@ export default function Fails() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
-                            background: "#FFC7CD",
+                            border: "1px solid #FA5252",
+                            background: "#FFF5F5",
                           }}
                         >
                           {cooler.algorithm ===
                           "Falla asociada al compresor" ? (
                             <>
                               <img
-                                src={"../../sampleData/failc.svg"}
+                                src={"../../sampleData/compressor.svg"}
                                 alt="Descripción de la imagen"
                                 style={{ width: "18px", height: "18px" }}
                               />
                             </>
                           ) : cooler.algorithm === "Alta temperatura" ? (
                             <img
-                              src={"../../sampleData/failt.svg"}
+                              src={"../../sampleData/temperature-up.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm === "Posible daño eléctrico" ? (
                             <img
-                              src={"../../sampleData/faile.svg"}
+                              src={"../../sampleData/bolt-off.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
                           ) : cooler.algorithm === "Evaporador bloqueado" ? (
                             <img
-                              src={"../../sampleData/failc.svg"}
+                              src={"../../sampleData/evaporador-off.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />

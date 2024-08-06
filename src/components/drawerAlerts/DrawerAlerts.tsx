@@ -236,12 +236,16 @@ export default function DrawerA({
                           selectedAlgorithm === "Acciones urgentes" ||
                           selectedAlgorithm === "SIN COINCIDENCIA"
                         ? "1px solid #FA5252"
+                        : level === "FAIL"
+                        ? "1px solid #FA5252"
+                        : level === "ALERT"
+                        ? "1px solid #E67700"
                         : "",
                     background:
                       level === "ALERT"
                         ? "#FEF5C7"
                         : level === "FAIL"
-                        ? "#FFC7CD"
+                        ? "#FFF5F5"
                         : selectedAlgorithm === "Actualizar Info"
                         ? "#FEF5C7"
                         : selectedAlgorithm === "Sin Riesgo" ||
@@ -303,26 +307,26 @@ export default function DrawerA({
                   ) : selectedAlgorithm === "Falla asociada al compresor" ? (
                     <>
                       <img
-                        src={"../../sampleData/failc.svg"}
+                        src={"../../sampleData/compressor.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     </>
                   ) : selectedAlgorithm === "Alta temperatura" ? (
                     <img
-                      src={"../../sampleData/failt.svg"}
+                      src={"../../sampleData/temperature-up.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
                   ) : selectedAlgorithm === "Posible daño eléctrico" ? (
                     <img
-                      src={"../../sampleData/faile.svg"}
+                      src={"../../sampleData/bolt-off.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
                   ) : selectedAlgorithm === "Evaporador bloqueado" ? (
                     <img
-                      src={"../../sampleData/failc.svg"}
+                      src={"../../sampleData/evaporador-off.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
@@ -338,20 +342,20 @@ export default function DrawerA({
                     <>
                       {" "}
                       <img
-                        src={"../../sampleData/desc.svg"}
+                        src={"../../sampleData/plug-connected-x.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "1.813rem", height: "1.813rem" }}
                       />
                     </>
                   ) : selectedAlgorithm === "Alerta alta temperatura" ? (
                     <img
-                      src={"../../sampleData/alt.svg"}
+                      src={"../../sampleData/temperature-up2.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
                   ) : selectedAlgorithm === "Bajo/Alto voltaje" ? (
                     <img
-                      src={"../../sampleData/altv.svg"}
+                      src={"../../sampleData/bolt-up2.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
@@ -433,13 +437,14 @@ export default function DrawerA({
                       justifyContent: "center",
                       alignItems: "center",
                       gap: "4px",
-                      borderRadius: "2px",
+                      // border: "1px solid #FA5252",
+                      borderRadius: "8px",
                       background:
                         level === "ALERT"
                           ? "#FEF5C7"
                           : level === "INDICATOR"
                           ? "#BCDAFF"
-                          : "#FFC7CD",
+                          : "#FFF5F5",
                       height: "100%",
                     }}
                   >
@@ -451,7 +456,7 @@ export default function DrawerA({
                       />
                     ) : level === "INDICATOR" ? (
                       <img
-                        src={"../../sampleData/act.svg"}
+                        src={"../../sampleData/gauge2.svg"}
                         alt="Descripción de la imagen"
                         style={{ width: "16px", height: "16px" }}
                       />
@@ -466,9 +471,11 @@ export default function DrawerA({
                     <div
                       style={{
                         color:
-                          level === "ALERT"
-                            ? "var(--yellow-9, #E67700)"
-                            : "#451C03",
+                          level === "INDICATOR"
+                            ? "#2393F4"
+                            : level === "FAIL"
+                            ? "#FA5252"
+                            : "#E67700",
                         // fontFamily: "Space Mono",
                         fontSize: "12px",
                         fontStyle: "normal",
@@ -477,10 +484,10 @@ export default function DrawerA({
                       }}
                     >
                       {level === "ALERT"
-                        ? "ALERTAS"
+                        ? "Alertas"
                         : level === "INDICATOR"
-                        ? "CONTROL DE ACTIVOS"
-                        : "FALLA"}
+                        ? "Control de activos"
+                        : "Fallas"}
                     </div>
                   </div>
                   <div
@@ -489,7 +496,7 @@ export default function DrawerA({
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
-                      fontSize: "1.2rem",
+                      fontSize: "1.1rem",
                     }}
                   >
                     {selectedAlgorithm && <div>{selectedAlgorithm}</div>}
