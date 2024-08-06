@@ -1405,7 +1405,7 @@ export default function CoolerDetail() {
                 ) : coolersData?.cooler?.last_latitude != null &&
                   coolersData?.cooler?.latitude === 0 ? (
                   <>
-                    <div>
+                    <div style={{height:'100%'}}>
                       <MapComponent1
                         latitude={coolersData?.cooler?.last_latitude}
                         longitude={coolersData?.cooler?.last_longitude}
@@ -1415,7 +1415,7 @@ export default function CoolerDetail() {
                 ) : coolersData?.cooler?.last_latitude === null &&
                   coolersData?.cooler?.latitude != 0 ? (
                   <>
-                    <div>
+                    <div style={{height:'100%'}}>
                       <MapComponent
                         latitude={coolersData?.cooler?.latitude}
                         longitude={coolersData?.cooler?.longitude}
