@@ -3,8 +3,10 @@ import { ButtonBack } from '../../Components/ButtonBack'
 import { ButtonNext } from '../../Components/ButtonNext'
 import { RoadMap } from '../../Components/RoadMap'
 import { TextInput } from '@mantine/core'
+import { CoolerInterface } from '../../../../../interfaces/CoolerInterface'
+import { vaultProces2RemoveDuplicades } from '../../../../../Functions/Vault'
 
-export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
+export const StepTwo = ({ active, setActive, nextStep, prevStep, coolersToChange }) => {
     const [confirmationWord, setConfirmationWord] = useState("");
     const [isConfirmed, setIsConfirmed] = useState(false);
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +16,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
         } else {
             setIsConfirmed(false);
         }
-    };    
+    };
     return (
         <section style={{ width: '100%', height: '100%', display: active == 2 ? 'flex' : 'none', flexDirection: 'column', alignItems: 'center' }}>
             {/* Section Title & Info */}
@@ -24,7 +26,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                     alt="Descripción de la imagen"
                     style={{ width: "5rem", height: "3rem", marginTop: -20 }}
                 />
-                <div className='vault_h2_description'>Proceder con los cambios.</div>
+                <div className='vault_h2_description'>Haz seguimiento de todos los parámetros de cada uno de tus enfriadores.</div>
             </section>
             {/* Section Roadmap */}
             <section className="vault_section_roadmap">
@@ -36,37 +38,13 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                     <section className="vault_Information_Data">
                         <div className='vault_Information_Data_Title'>
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                <circle cx="4.5" cy="4.5" r="4" fill="#3E83FF" />
-                            </svg>
-                            Entradas de archivo
-                        </div>
-                        <div className='vault_Information_Data_Title_container'>
-                            <div className='vault_Information_Data_Title2'>Enfriadores</div>
-                            <div className='vault_Information_Data_Title3'>100</div>
-                        </div>
-                    </section>
-                    <section className="vault_Information_Data">
-                        <div className='vault_Information_Data_Title'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
-                                <circle cx="4.5" cy="4.5" r="4" fill="#31B648" />
-                            </svg>
-                            Entradas validas
-                        </div>
-                        <div className='vault_Information_Data_Title_container'>
-                            <div className='vault_Information_Data_Title2'>Enfriadores</div>
-                            <div className='vault_Information_Data_Title3'>98</div>
-                        </div>
-                    </section>
-                    <section className="vault_Information_Data">
-                        <div className='vault_Information_Data_Title'>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 9 9" fill="none">
                                 <circle cx="4.5" cy="4.5" r="4" fill="#F93448" />
                             </svg>
                             Enfriadores a activar valut
                         </div>
                         <div className='vault_Information_Data_Title_container'>
                             <div className='vault_Information_Data_Title2'>Enfriadores</div>
-                            <div className='vault_Information_Data_Title3'>70</div>
+                            <div className='vault_Information_Data_Title3'>{vaultProces2RemoveDuplicades(coolersToChange).filter((cooler) => cooler.estatus == true).length ?? 0}</div>
                         </div>
                     </section>
                     <section className="vault_Information_Data">
@@ -78,7 +56,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep }) => {
                         </div>
                         <div className='vault_Information_Data_Title_container'>
                             <div className='vault_Information_Data_Title2'>Enfriadores</div>
-                            <div className='vault_Information_Data_Title3'>0</div>
+                            <div className='vault_Information_Data_Title3'>{vaultProces2RemoveDuplicades(coolersToChange).filter((cooler) => cooler.estatus == false).length ?? 0}</div>
                         </div>
                     </section>
                     <section className="vault_Information_Data">

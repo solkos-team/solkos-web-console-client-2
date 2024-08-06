@@ -70,7 +70,8 @@ export const StepOne = ({ active, setActive, nextStep, prevStep ,coolersToChange
     };
   }, []);
   const handleSwitchChange = (index: number,data:any) => {
-    setCoolersToChange(prevData=>[...prevData,{device_id:data.device_id,estatus:data.estatus}])
+    // setCoolersToChange(prevData=>[...prevData,{device_id:data.device_id,estatus:data.estatus}])
+    setCoolersToChange(prevData=>[...prevData,data])
     setCoolersData(prevData => {
       const updatedData = [...prevData];
       updatedData[index].estatus = !updatedData[index].estatus;
