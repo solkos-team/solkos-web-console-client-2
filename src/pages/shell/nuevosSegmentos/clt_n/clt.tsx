@@ -57,7 +57,7 @@ export const clt = () => {
     path: pathVerify(),
     page_size: Number(datosPorPagina),
     page_number: currentPage,
-    filter_by: searchValue,
+    filter_by: searchValue == "" ? [] : searchValue,
     order_by: {
       asc: changeAsc,
       name: "last_read",
