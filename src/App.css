@@ -1651,6 +1651,7 @@ body {
   }
   .insights_title {
     height: fit-content;
+    margin-left: 0px;
   }
   .insights_title_h1 {
     display: none;
@@ -1713,11 +1714,12 @@ body {
     width: 100%;
     gap: 0.5rem;
     flex-wrap: wrap;
+    margin-left: 0px;
   }
   .insights_mapa {
     display: flex;
     flex-direction: column;
-    width: 89%;
+    width: 100%;
     height: fit-content;
     gap: 1vw;
   }
@@ -1733,6 +1735,7 @@ body {
   }
   .insights_contenido_principal {
     gap: 2rem;
+    margin-left: -40px;
   }
   .insights_datas_container_Grafica_Datas {
     margin-left: 2.5rem;
@@ -1760,10 +1763,10 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: -1.2rem;
-    gap: 12px;
+    gap: 0px;
   }
   .insigths_datas_info2_control {
-    width: 89%;
+    width: 92%;
     height: fit-content;
     margin-top: 1rem;
   }

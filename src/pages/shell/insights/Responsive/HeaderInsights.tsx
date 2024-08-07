@@ -6,11 +6,10 @@ export const HeaderInsights = ({title,description}) => {
     <Accordion className='insights_title_responsive'>
       <Accordion.Item key='Header' value='HeaderResponsive'>
         <Accordion.Control style={{
-          fontSize : '22px',
+          fontSize : '1.375rem',
           fontStyle : 'normal',
-          fontWeight : '700',
-          lineHeight : '140%',
-          color : '#000'
+          fontWeight : '700',          
+          color : 'var(--other-black, #000)'
         }}>{title}</Accordion.Control>
         <Accordion.Panel
         style={{
