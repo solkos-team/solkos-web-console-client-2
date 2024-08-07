@@ -1,13 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
-import Column from "rsuite/esm/Table/TableColumn";
 import { InsightsVault } from "../Components/InsightsVault";
+import UploadExcel from "../../../../components/excelFile/ExcelFile";
 
 export default function Process1Vault() {
   const [isAlertVisible, setAlertVisible] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const [excelData, setExcelData] = useState([]);
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -21,6 +22,11 @@ export default function Process1Vault() {
       console.log("Selected file:", file.name);
       // Aquí puedes manejar el archivo seleccionado
     }
+  };
+
+  const handleFileLoaded = (data) => {
+    setExcelData(data);
+    console.log("Datos del archivo cargado:", data);
   };
 
   const handleCloseAlert = () => {
@@ -66,45 +72,6 @@ export default function Process1Vault() {
 
       <InsightsVault />
 
-      {/* <div className="vault_information_3">
-        <img
-          src={"../../sampleData/exclamation.svg"}
-          alt="Descripción de la imagen"
-          style={{ width: "1rem", height: "1rem" }}
-        />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "5px",
-            flex: 100,
-          }}
-        >
-          <span
-            style={{
-              color: "#868E96",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              lineHeight: "145%",
-            }}
-          >
-            Cargar archivos
-          </span>
-          <span
-            style={{
-              color: "#000",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "21px",
-            }}
-          >
-            Selecciona o arrastra el archivo xls.
-          </span>
-        </div>
-      </div> */}
       {isAlertVisible && (
         <div
           className="vault_information_3"
@@ -178,19 +145,7 @@ export default function Process1Vault() {
         </div>
       )}
       <div className="vault_information_4">
-        <span
-          style={{
-            color: "#2393F4",
-            fontSize: "0.8rem",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "28px",
-            cursor: "pointer",
-          }}
-          onClick={handleFileClick}
-        >
-          CARGAR ARCHIVOS +
-        </span>
+        <UploadExcel onFileLoaded={handleFileLoaded} />
       </div>
       <input
         type="file"
