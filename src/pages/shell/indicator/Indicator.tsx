@@ -198,7 +198,7 @@ export default function Indicator() {
                       gap: "10px",
                       borderRadius: "8px",
                       border: "1px solid #88888B",
-                      background: "#FFF",
+                      background: "#F8F9FA",
                       justifyContent: "space-between",
                       flexWrap: "wrap",
                     }}
@@ -387,10 +387,10 @@ export default function Indicator() {
                       >
                         <div
                           style={{
-                            color: "#000005",
-                            fontSize: "20px",
+                            color: "#000",
+                            fontSize: "18px",
                             fontStyle: "normal",
-                            fontWeight: 500,
+                            fontWeight: 700,
                             lineHeight: "normal",
                           }}
                         >
@@ -406,7 +406,7 @@ export default function Indicator() {
                           }}
                         >
                           {totalCoolers === undefined || totalCoolers === null
-                            ? "de sin registro de enfriadores "
+                            ? "de 0 enfriadores "
                             : "de " +
                               totalCoolers?.toLocaleLowerCase() +
                               " enfriadores"}

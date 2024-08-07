@@ -175,7 +175,7 @@ export default function Alerts() {
                       gap: "10px",
                       borderRadius: "8px",
                       border: "1px solid #88888B",
-                      background: "#FFF",
+                      background: "#F8F9FA",
                       justifyContent: "space-between",
                       flexWrap: "wrap",
                     }}
@@ -270,9 +270,9 @@ export default function Alerts() {
                           style={{
                             color: "#000005",
                             // fontFamily: "DM Sans",
-                            fontSize: "20px",
+                            fontSize: "18px",
                             fontStyle: "normal",
-                            fontWeight: 500,
+                            fontWeight: 700,
                             lineHeight: "normal",
                           }}
                         >
@@ -289,7 +289,7 @@ export default function Alerts() {
                           }}
                         >
                           {totalCoolers === undefined || totalCoolers === null
-                            ? "de sin registro de enfriadores "
+                            ? "de 0 enfriadores "
                             : "de " +
                               totalCoolers?.toLocaleLowerCase() +
                               " enfriadores"}
