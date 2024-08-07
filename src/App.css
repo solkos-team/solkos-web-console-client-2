@@ -1966,6 +1966,9 @@ body {
     align-items: center;
     justify-content: center;
   }
+  .mantine-cxzxyw{
+    background-color: var(--gray-0, #F8F9FA);
+  }
 }
 /* Termina media */
 .drawerOutlets_Principal {
