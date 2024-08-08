@@ -263,20 +263,21 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       fontSize: "11px",
                       fontStyle: "normal",
                       fontWeight: 500,
-                      lineHeight: "normal",
+                      lineHeight: "normal",                      
                     }}
                   >
                     Sin registro
                   </div>
                 ) : (
                   <>
+                    <section style={{display:'flex',padding :'1px var(--borderRadius-tremor-small, 6px)',boxSizing:'border-box',width:'max-content',backgroundColor:'var(--blue-0, #E7F5FF)',borderRadius:'0.5rem'}}>
                     <div
                       style={{
-                        color: "#000005",
+                        color: "var(--blue-6, #2393F4)",
                         // fontFamily: "Inter",
-                        fontSize: "10px",
+                        fontSize: "0.563rem",
                         fontStyle: "normal",
-                        fontWeight: 500,
+                        fontWeight: 700,
                         lineHeight: "normal",
                       }}
                     >
@@ -284,6 +285,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                         timeZone: "UTC",
                       })}
                     </div>
+                    </section>
                   </>
                 )}
                 &nbsp;
@@ -343,7 +345,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "#88888B",
+                    color: "var(--gray-6, #868E96)",
                     // fontFamily: "DM Mono",
                     fontSize: "9px",
                     fontStyle: "normal",
@@ -361,16 +363,16 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     alignItems: "center",
                     gap: "4px",
                     borderRadius: "2px",
-                    background: "#D4DAE3",
+                    // background: "#D4DAE3",
                     height: "3px",
                   }}
                 >
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "var(--other-black, #000)",
                       fontSize: "8px",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "14px",
                     }}
                   >
@@ -405,7 +407,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "#88888B",
+                    color: "var(--gray-6, #868E96)",
                     // fontFamily: "DM Mono",
                     fontSize: "9px",
                     fontStyle: "normal",
@@ -423,16 +425,16 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     alignItems: "center",
                     gap: "4px",
                     borderRadius: "2px",
-                    background: "#D4DAE3",
+                    // background: "#D4DAE3",
                     height: "3px",
                   }}
                 >
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "var(--other-black, #000)",
                       fontSize: "8px",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "14px",
                     }}
                   >
@@ -466,7 +468,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "#88888B",
+                    color: "var(--gray-6, #868E96)",
                     // fontFamily: "DM Mono",
                     fontSize: "9px",
                     fontStyle: "normal",
@@ -484,16 +486,16 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     alignItems: "center",
                     gap: "4px",
                     borderRadius: "2px",
-                    background: "#D4DAE3",
+                    // background: "#D4DAE3",
                     height: "3px",
                   }}
                 >
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "var(--other-black, #000)",
                       fontSize: "8px",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "14px",
                     }}
                   >
@@ -513,7 +515,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "#88888B",
+                    color: "var(--gray-6, #868E96)",
                     // fontFamily: "DM Mono",
                     fontSize: "9px",
                     fontStyle: "normal",
@@ -531,17 +533,17 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     alignItems: "center",
                     gap: "4px",
                     borderRadius: "2px",
-                    background: "#D4DAE3",
+                    // background: "#D4DAE3",
                     height: "3px",
                   }}
                 >
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "var(--other-black, #000)",
                       // fontFamily: "DM Mono",
                       fontSize: "8px",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "14px",
                     }}
                   >
@@ -562,128 +564,8 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
         <section className="drawerBody">
           <section className="drawerMapaDescargar">
             <div className="drawerMapa">
-              <div className="drawerMapa_Mapa">
-                <MapComponentPv latitude={latitude} longitude={longitude} />
-              </div>
-              <div className="drawerMapa_Info">
-                <div
-                  style={{
-                    display: "flex",
-                    padding: "1px",
-                    boxSizing: "border-box",
-                    alignItems: "center",
-                    alignContent: "center",
-                    gap: "8px",
-                    alignSelf: "stretch",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    <img
-                      src={"../../sampleData/mappv.svg"}
-                      width={"15px"}
-                      alt="cooler"
-                    ></img>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Instalación
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    <img
-                      src={"../../sampleData/icon2.svg"}
-                      width={"15px"}
-                      alt="cooler"
-                    ></img>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Última ubicación
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "4px",
-                    }}
-                  >
-                    {/* <IconCircleX /> */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "4px", // Espacio entre los bloques
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: "8px", // Ancho de cada bloque
-                          height: "3px",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                      &nbsp;
-                      <div
-                        style={{
-                          width: "8px", // Ancho de cada bloque
-                          height: "3px",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                      &nbsp;
-                      <div
-                        style={{
-                          width: "8px", // Ancho de cada bloque
-                          height: "3px",
-                          background: "#ED5079",
-                        }}
-                      ></div>
-                    </div>
-
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "12px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "normal",
-                      }}
-                    >
-                      Distancia entre puntos
-                    </div>
-                  </div>
-                </div>
-              </div>
               <div className="drawerMapa_title">
+                <div style={{width:'max-content',height:'max-content',backgroundColor:'var(--kasmir-2, #C7CBD2)',display:'flex',alignItems:'center',justifyContent:'center',borderRadius:'0.25rem'}}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="26"
@@ -704,8 +586,12 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     stroke-linejoin="round"
                   />
                 </svg>
-                <h1 className="drawerMapa_title_h1">Ubicación en el mapa</h1>
+                </div>
+                <div className="drawerMapa_title_h1">Ubicación en el mapa</div>
               </div>
+              <div className="drawerMapa_Mapa">
+                <MapComponentPv latitude={latitude} longitude={longitude} />
+              </div>                            
               <div className="drawerMapa_Button">
                 <MapInsightsResponsive opened={toggleDrawer} />
                 <DrawerMap
