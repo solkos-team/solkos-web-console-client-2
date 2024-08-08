@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
 import { InsightsVault } from "../Components/InsightsVault";
+import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 
 export default function Stepper6() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -43,7 +44,7 @@ export default function Stepper6() {
           }}
         >
           <img
-            src={"../../sampleData/logovault.svg"}
+            src={VaultLogo}
             alt="Descripción de la imagen"
             style={{ width: "5rem", height: "3rem", marginTop: "-20px" }}
           />

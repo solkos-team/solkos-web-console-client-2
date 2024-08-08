@@ -8,6 +8,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../Components/DrawerVault";
+import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 
 export default function Stepper2() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,7 +51,7 @@ export default function Stepper2() {
         }}
       >
         <img
-          src={"../../sampleData/logovault.svg"}
+          src={VaultLogo}
           alt="Descripción de la imagen"
           style={{ width: "5rem", height: "3rem", marginTop: -20 }}
         />

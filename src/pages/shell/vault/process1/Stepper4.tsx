@@ -6,6 +6,7 @@ import { Stepper } from "@mantine/core";
 import { TextInput } from "@mantine/core";
 import { DrawerVault } from "../Components/DrawerVault";
 import { useDisclosure } from "@mantine/hooks";
+import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 
 export default function Stepper4() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -48,7 +49,7 @@ export default function Stepper4() {
         }}
       >
         <img
-          src={"../../sampleData/logovault.svg"}
+          src={VaultLogo}
           alt="Descripción de la imagen"
           style={{ width: "5rem", height: "3rem", marginTop: -20 }}
         />

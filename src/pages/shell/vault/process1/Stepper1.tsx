@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
 import { Stepper } from "@mantine/core";
+import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 
 export default function Stepper1() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -43,7 +44,7 @@ export default function Stepper1() {
         }}
       >
         <img
-          src={"../../sampleData/logovault.svg"}
+          src={VaultLogo}
           alt="Descripción de la imagen"
           style={{ width: "5rem", height: "3rem", marginTop: -20 }}
         />

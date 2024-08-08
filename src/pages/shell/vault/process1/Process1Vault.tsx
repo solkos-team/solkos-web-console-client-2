@@ -3,6 +3,7 @@ import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
 import { InsightsVault } from "../Components/InsightsVault";
 import UploadExcel from "../../../../components/excelFile/ExcelFile";
+import { VaultLogo } from '../../../../sampleData/Vault/VaultIcons'
 
 export default function Process1Vault() {
   const [isAlertVisible, setAlertVisible] = useState(true);
@@ -59,7 +60,7 @@ export default function Process1Vault() {
           }}
         >
           <img
-            src={"../../sampleData/logovault.svg"}
+            src={VaultLogo}
             alt="Descripción de la imagen"
             style={{ width: "5rem", height: "3rem", marginTop: "-20px" }}
           />
