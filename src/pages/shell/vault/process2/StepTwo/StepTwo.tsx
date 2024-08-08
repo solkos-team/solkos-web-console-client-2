@@ -5,6 +5,7 @@ import { RoadMap } from '../../Components/RoadMap'
 import { TextInput } from '@mantine/core'
 import { CoolerInterface } from '../../../../../interfaces/CoolerInterface'
 import { vaultProces2RemoveDuplicades } from '../../../../../Functions/Vault'
+import { VaultLogo } from '../../../../../sampleData/Vault/VaultIcons'
 
 export const StepTwo = ({ active, setActive, nextStep, prevStep, coolersToChange }) => {
     const [confirmationWord, setConfirmationWord] = useState("");
@@ -22,7 +23,7 @@ export const StepTwo = ({ active, setActive, nextStep, prevStep, coolersToChange
             {/* Section Title & Info */}
             <section className='section_Vault_Title'>
                 <img
-                    src={"../../sampleData/logovault.svg"}
+                    src={VaultLogo}
                     alt="Descripción de la imagen"
                     style={{ width: "5rem", height: "3rem", marginTop: -20 }}
                 />

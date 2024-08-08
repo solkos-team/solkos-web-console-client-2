@@ -1,12 +1,13 @@
 import React from 'react'
 import { InsightsVault } from '../../Components/InsightsVault'
+import { VaultLogo } from '../../../../../sampleData/Vault/VaultIcons'
 
 export const StepFinal = ({ active }) => {
     return (
         <section style={{ width: '100%', height: '100%', display: active == 3 ? 'flex' : 'none', flexDirection: 'column' }}>
             <section className='section_Vault_Title' >
                 <img
-                    src={"../../sampleData/logovault.svg"}
+                    src={VaultLogo}
                     alt="Descripción de la imagen"
                     style={{ width: "5rem", height: "3rem", marginTop: -20 }}
                 />
