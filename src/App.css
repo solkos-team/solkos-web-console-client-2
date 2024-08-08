@@ -1325,7 +1325,7 @@ body {
   align-items: flex-start;
   gap: 0.5rem;
   align-items: center;
-  align-content: center;
+  align-content: center;  
 }
 .login_principal_form_label1_1 {
   color: #3a3a3f;

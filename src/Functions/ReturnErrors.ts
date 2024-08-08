@@ -1,12 +1,12 @@
-const loginErrors = (error: string): string => {
+const loginErrors = (error: string) => {
     if (error.includes('404')) {
-        return 'Usuario o contraseña incorrectos. Inténtalo de nuevo.';
+        return {title:'Error de sesión',message : 'Usuario o contraseña incorrectos. Inténtalo de nuevo.'}
     } else if (error === 'Fetch error: Failed to fetch') {
-        return 'Error de red. No fue posible establecer conexión con el servidor. Intenta de nuevo más tarde. Si el problema persiste, contacta con el equipo de soporte de consola.';
+        return {title:'Error de Red',message : 'No fue posible iniciar sesión en Consola, debido a una falla de red. Verifica tu conexión a internet, si el problema persiste contacta al equipo de soporte.'}
     } else if (error.includes('504')) {
-        return 'No pudimos establecer una conexión con el servidor a tiempo.';
+        return {title:'Error de Red',message : 'No pudimos establecer una conexión con el servidor a tiempo.'}
     } else {
-        return error;
+        return {title:'Error',message : error};
     }
 }
 

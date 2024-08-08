@@ -1,4 +1,4 @@
-import { Button, PasswordInput, Input } from "@mantine/core";
+import { Button, PasswordInput, Input, Alert } from "@mantine/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { addPath } from "../../../app/works";
 import { addOrg } from "../../../app/organization";
 import { loginErrors } from "../../../Functions/ReturnErrors";
+import { AlertErrorLogin } from "../../../sampleData/Login/LoginIcons";
+
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -78,6 +80,7 @@ export const Login = () => {
       handleLogin();
     }
   };  
+  console.log(loginErrors(errorMessage).message)
   return (
     <>
       <div className="login_principal_body">
@@ -106,6 +109,15 @@ export const Login = () => {
                 Utiliza las credenciales proporcionadas por tu administrador
               </div>
             </div>
+            {errorMessage && (
+              <div
+                style={{ color: "red", width: '100%',display:'flex',alignItems:'center',justifyContent:'center' }}
+              >
+                <Alert icon={<img src={AlertErrorLogin}></img>} title={loginErrors(errorMessage).title} color="red" style={{width:'60%',textAlign:'left'}}>
+                  {loginErrors(errorMessage).message}
+                </Alert>
+              </div>
+              )}
             <div className="login_principal_form_label1">
               <div className="login_principal_form_label1_1">Correo</div>
               <Input
@@ -123,15 +135,7 @@ export const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 onKeyDown={handleKeyDown}
                 className="login_principal_form_label1_input1"
-              />
-
-              {errorMessage && (
-                <div
-                  style={{ color: "red", fontSize: "14px", marginTop: "8px" }}
-                >
-                  {loginErrors(errorMessage)}
-                </div>
-              )}
+              />              
             </div>
             <form onSubmit={handleSubmit} style={{ width: "60%" }}>
               <Button
