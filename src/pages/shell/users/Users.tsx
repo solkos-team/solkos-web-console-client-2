@@ -315,16 +315,7 @@ export default function Users() {
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            padding: "0px 2rem",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            alignSelf: "stretch",
-            width: "96.5%",
-          }}
-        >
+        <div className="users_descargar_container">
           <h1
             style={{
               color: "#000005",

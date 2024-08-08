@@ -1550,6 +1550,15 @@ body {
 .universal_search_principal_responsive {
   display: none;
 }
+.users_descargar_container{
+  display: flex;
+  padding: 0px 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  width: 96.5%;
+  
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -1969,6 +1978,9 @@ body {
   }
   .mantine-cxzxyw{
     background-color: var(--gray-0, #F8F9FA);
+  }
+  .users_descargar_container{
+    width: 75%;
   }
 }
 /* Termina media */
