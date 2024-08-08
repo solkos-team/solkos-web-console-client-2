@@ -1687,7 +1687,8 @@ body {
     align-self: auto;
   }
   .clt_search {
-    width: 100%;
+    width: 98%;
+    margin-left: 2rem;  
   }
   .clt_title_h1 {
     display: none;
