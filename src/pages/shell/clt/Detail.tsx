@@ -18,7 +18,7 @@ import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
 import { useDisclosure } from "@mantine/hooks";
 import { CoolviewIcon } from "../../../sampleData/icons";
 import { userVerify } from "../../../Functions/pathVerify";
-import { formatDrawerCoolview } from "../../../Functions/Coolview";
+import { formatDrawerCoolview, obtenerFechaMasReciente } from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -46,6 +46,7 @@ export default function CoolerDetail() {
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
   const [editSerie, setEditSerie] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [dateTelemetri, setDateTelemetri] = useState<Date | undefined>();
   const [serie, SetSerie] = useState(serial_number);
   const [inversionOpened, { open: openInversion, close: closeInversion }] =
     useDisclosure(false);
@@ -104,18 +105,14 @@ export default function CoolerDetail() {
   useEffect(() => {
     formatDrawerCoolview();
   }, [coolViewOpened]);
-  const [dateTelemetri, setDateTelemetri] = useState<Date>();
-  if (
-    coolersData?.activity?.find(
-      (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
-    )?.data.notified_at &&
-    mesLastStat == undefined
-  ) {
-    const mesLastStat = new Date(coolersData?.cooler.last_stat);
-    setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
-    setDateTelemetri(mesLastStat);
-  }
+  
+  useEffect(()=>{
+    if(isLoading == false){
+      setDateTelemetri(obtenerFechaMasReciente(coolersData?.cooler.last_stat,coolersData?.last_telemetry))
+    }
+  },[isLoading])
   const Role = localStorage.getItem("Role") || "";
+  
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (

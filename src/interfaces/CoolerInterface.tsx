@@ -154,6 +154,7 @@ export interface CoolerData {
     outlet_id: string;
     last_stat: string;
   };
+  last_telemetry:string;
   properties: {
     annual_decrement: {
       description: string;

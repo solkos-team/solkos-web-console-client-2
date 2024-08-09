@@ -16,6 +16,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { CoolviewIcon } from "../../../sampleData/icons";
 import { userVerify } from "../../../Functions/pathVerify";
 import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
+import { obtenerFechaMasReciente } from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -42,7 +43,7 @@ export default function CoolerDetailCC() {
   const [searchValue, setSearchValue] = useState("");
   const [mesLastStat, setMesLastStat] = useState<number>();
   const [coolersData, setCoolersData] = useState<CoolerData | null>(null);
-  const [dateTelemetri, setDateTelemetri] = useState<Date>();
+  const [dateTelemetri, setDateTelemetri] = useState<Date | undefined>();
   const [editSerie, setEditSerie] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [serie, SetSerie] = useState(serial_number);
@@ -79,23 +80,27 @@ export default function CoolerDetailCC() {
     setEditSerie(false);
   };
 
-  if (
-    coolersData?.activity?.find(
-      (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
-    )?.data.notified_at &&
-    mesLastStat == undefined
-  ) {
-    const mesLastStat = new Date(
-      coolersData?.activity?.find(
-        (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
-      )?.data.notified_at
-    );
-    setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
-    setDateTelemetri(mesLastStat);
-  }
+  // if (
+  //   coolersData?.activity?.find(
+  //     (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
+  //   )?.data.notified_at &&
+  //   mesLastStat == undefined
+  // ) {
+  //   const mesLastStat = new Date(
+  //     coolersData?.activity?.find(
+  //       (item) => item.data.class === "ASSET_MANAGEMENT_LAST_STAT"
+  //     )?.data.notified_at
+  //   );
+  //   setMesLastStat(mesLastStat.getMonth() + 1 ?? 1);
+  //   setDateTelemetri(mesLastStat);
+  // }
 
   const Role = localStorage.getItem("Role") || "";
-
+  useEffect(()=>{
+    if(isLoading == false){
+      setDateTelemetri(obtenerFechaMasReciente(coolersData?.cooler.last_stat,coolersData?.last_telemetry))
+    }
+  },[isLoading])
   return (
     <>
       {/* {localStorage.getItem("ORG") == "CALL CENTER" ? (
