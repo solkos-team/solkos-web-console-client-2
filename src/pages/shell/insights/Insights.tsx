@@ -16,7 +16,7 @@ export default function Insights() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
 
-  console.log(data);
+  
   const IndicadoresData =
     data?.insights?.INDICATOR?.algorithms.filter(
       (data) => data.class == "ASSET_MANAGEMENT_ACTIONABLE"

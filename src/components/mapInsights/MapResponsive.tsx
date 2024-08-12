@@ -140,7 +140,8 @@ import { pathVerify } from "../../Functions/pathVerify";
 import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
 import { fetchUniversal } from "../../utils/apiUtils";
 import polygonsData from "../../Functions/polyg.json";
-
+import { MapInsightsResponsive } from "../../pages/shell/insights/Responsive/MapInsightsResponsive";
+import { DrawerMap } from "../../pages/shell/insights/Responsive/DrawerMap";
 interface GeoJSON {
   type: string;
   features: GeoJSONFeature[];
@@ -169,6 +170,8 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const [zoom, setZoom] = useState(defaultProps.zoom);
   const body = { customer: dto, path: pathVerify() };
   const [geojson, setGeojson] = useState<GeoJSON | null>(null);
+  const [opened, setOpened] = useState(false);
+  const toggleDrawer = () => setOpened((flag) => !flag);
   const [selectedArea, setSelectedArea] = useState<string | null>(
     localStorage.getItem("selectedArea") || null
   );
@@ -515,25 +518,33 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   };
 
   return (
-    <div style={{ height: "100%", width: "100%" }}>
+    <div style={{ height: "100%", width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
       {isLoading ? (
         <SkeletonMapInsights />
       ) : (
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
-          defaultCenter={defaultProps.center}
-          defaultZoom={defaultProps.zoom}
-          options={{
-            gestureHandling: "greedy",
-            ...mapOptions,
-          }}
-          yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => {
-            setMapInstance(map);
-            setMapsInstance(maps);
-            handleApiLoaded2(map, maps);
-          }}
-        />
+        <>
+          <GoogleMapReact
+            bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
+            defaultCenter={defaultProps.center}
+            defaultZoom={defaultProps.zoom}
+            options={{
+              gestureHandling: "greedy",
+              ...mapOptions,
+            }}
+            yesIWantToUseGoogleMapApiInternals
+            onGoogleApiLoaded={({ map, maps }) => {
+              setMapInstance(map);
+              setMapsInstance(maps);
+              handleApiLoaded2(map, maps);
+            }}
+          />
+          <MapInsightsResponsive opened={toggleDrawer} />
+          <DrawerMap
+            opened={opened}
+            onClose={toggleDrawer}
+            handleApiLoaded={handleApiLoaded2}
+          />
+        </>
       )}
     </div>
   );

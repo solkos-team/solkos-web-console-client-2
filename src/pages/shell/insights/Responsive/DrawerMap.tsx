@@ -7,7 +7,7 @@ import { defaultProps } from '../../../../components/mapInsights/datos';
 export const DrawerMap = ({opened,onClose,handleApiLoaded}) => {
   return (
     <Drawer opened={opened} onClose={onClose} position="right" size="100%" >
-      <div style={{ width: "100%", height: "100%", backgroundColor: "red" }}>
+      <div style={{ width: "100%", height: "100%", backgroundColor: "" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
           defaultCenter={defaultProps.center}
