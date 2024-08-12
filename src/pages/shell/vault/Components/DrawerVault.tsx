@@ -1,8 +1,39 @@
-import { Drawer, Loader } from '@mantine/core'
-import React from 'react'
+import { Drawer, Loader, Skeleton } from '@mantine/core'
+import React, { useEffect, useState } from 'react'
+import { CoolerData } from '../../../../interfaces/CoolerInterface';
+import { fetchUniversalDetails } from '../../../../utils/apiUtils';
+import { useSelector } from 'react-redux';
+import { backgroundCircle, getBorderStyle, getColor, getStatusColor } from '../../../../Functions/Vault';
+import MapComponent2 from '../../../../components/map_2';
+import MapComponent from '../../../../components/map';
+import MapComponent1 from '../../../../components/map_1';
 
-export const DrawerVault = ({ opened, onCLose,cooler }) => {
-    // console.log(cooler)
+export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
+    console.log(Serial_ID)
+    const [cooler, setCooler] = useState<CoolerData>()
+    const [isLoading, setIsLoading] = useState(true);
+    const dto = useSelector((state: any) => state.organization);
+    const fetchData = async (serie?) => {
+        try {
+            const data = await fetchUniversalDetails(
+                "coolers",
+                serie,
+                "GET",
+                setIsLoading
+            );
+            setCooler(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+    useEffect(() => {
+        if (Serial_ID != undefined) {
+            fetchData(Serial_ID)
+        }
+    }, [Serial_ID])
+
+
     return (
         <Drawer
             opened={opened}
@@ -16,228 +47,110 @@ export const DrawerVault = ({ opened, onCLose,cooler }) => {
                     <section className="headerPrincipal">
                         <section className="headerContentIMG">
                             <section className="headerIMG">
-                                {/* {
-                        load == true
-                            ?
-                            <Loader color="gray" size="xs" />
-                            :
-                            <img
-                                // src={data?.Asset?.Url ?? ''}
-                                alt="cooler"
-                                width={"100%"}
-                                height={"100%"}
-                                loading='lazy'
-                                className="headerIMG__image"
-                                // onError={({ currentTarget }) => {
-                                //     currentTarget.onerror = null;
-                                //     currentTarget.src =ImgDefault}}
-                            />
-                    } */}
-                                <img
-                                    // src={data?.Asset?.Url ?? ''}
-                                    src="https://storage.googleapis.com/negocon-renders/default/default_cooler.webp"
-                                    alt="cooler"
-                                    width={"100%"}
-                                    height={"100%"}
-                                    loading='lazy'
-                                    className="headerIMG__image"
-                                    onError={({ currentTarget }) => {
-                                        currentTarget.onerror = null;
-                                        currentTarget.src =
-                                            "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
-                                    }}
-                                />
+                                {
+                                    isLoading == true
+                                        ?
+                                        <Loader color="gray" size="xs" />
+                                        :
+
+                                        <img
+                                            // src={data?.Asset?.Url ?? ''}
+                                            src={cooler?.asset?.url ?? ''}
+                                            alt="cooler"
+                                            width={"100%"}
+                                            height={"100%"}
+                                            loading='lazy'
+                                            className="headerIMG__image"
+                                            onError={({ currentTarget }) => {
+                                                currentTarget.onerror = null;
+                                                currentTarget.src =
+                                                    "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
+                                            }}
+                                        />
+                                }
                             </section>
                             <section className="headerDataIMG">
-                                <div className="headerDataIMGh1">
-                                    <div className="headerDataIMGh1p1">
-                                        {/* {
-                                load == true
-                                    ?
-                                    <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                                    :
-                                    // SerialNumber
-                                    data?.Cooler?.SerialNumber == undefined ? 'Sin registro' : data?.Cooler?.SerialNumber
-                            } */}
-                                        Sin registro
-                                    </div>
-                                    {/* {
-                            load == true
-                                ?
-                                <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                                :
-                                <>
-                                    <div className="headerDataIMGh1p2" 
-                                    style={{
-                                        width : 'max-content',
-                                        display : data?.Cooler?.Actionable ?? 'none',
-                                        color:
-                                            data?.Cooler?.Actionable === "Visita PdV"
-                                                ? "#DA7E05"
-                                                : data?.Cooler?.Actionable ===
-                                                    "Sin Riesgo"
-                                                    ? "#0F9F67"
-                                                    : data?.Cooler?.Actionable ===
-                                                        "Estatus sin venta" ||
-                                                        data?.Cooler?.Actionable ===
-                                                        "Acciones urgentes"
-                                                        ? "#F93448"
-                                                        : data?.Cooler?.Actionable ===
-                                                            "Actualizar Info"
-                                                            ? "#DA7E05"
-                                                            : "black",
-                                        border: `1px solid`,
-                                        borderColor: data?.Cooler?.Actionable === "Visita PdV"
-                                            ? "#DA7E05"
-                                            : data?.Cooler?.Actionable ===
-                                                "Sin Riesgo"
-                                                ? "#0F9F67"
-                                                : data?.Cooler?.Actionable ===
-                                                    "Estatus sin venta" ||
-                                                    data?.Cooler?.Actionable ===
-                                                    "Acciones urgentes"
-                                                    ? "#F93448"
-                                                    : data?.Cooler?.Actionable ===
-                                                        "Actualizar Info"
-                                                        ? "#DA7E05"
-                                                        : "black"
-                                    }}>
-                                        <img src={data?.Cooler.Actionable === "Sin Riesgo" ? (SinRiesgo) : data?.Cooler.Actionable === "Visita PdV" ? (VisitaPdV) : data?.Cooler.Actionable === "Estatus sin venta" || data?.Cooler.Actionable === "Acciones urgentes" ? (SnVentaAccUrg) : data?.Cooler.Actionable === "Actualizar Info" ? (ActualizarInfo) : ('') } alt='AlertLogo' style={{ width: "0.563rem", height: '0.563rem', marginTop: '0.15rem' }} />
-                                        {data?.Cooler?.Actionable == undefined ? 'Sin registro' : data?.Cooler?.Actionable}
-                                    </div>
-                                </>
-                        } */}
-
+                                <div style={{ width: '100%', height: '100%', backgroundColor: '' }}>
+                                    {
+                                        isLoading == true
+                                            ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                            : <div style={{
+                                                border: getBorderStyle(cooler, dto), borderRadius: '2px', width: 'max-content', height: 'max-content', padding: '1px', boxSizing: 'border-box', fontSize: '0.563rem', fontWeight: '700',
+                                                color: getColor(cooler, dto)
+                                            }}>{cooler?.cooler.actionable}</div>
+                                    }
 
                                 </div>
-                                <div className="headerDataIMGh2">
-                                    {/* {
-                            load == true
-                                ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                                // : ModelID
-                                : data?.Cooler?.ModelID == undefined ? 'Sin registro' : data?.Cooler?.ModelID
-                        } */}
-                                    Sin registro
+                                <div style={{ width: '100%', height: '100%', backgroundColor: '', color: 'var(--other-black, #000)', fontSize: '1.125rem', fontWeight: '700' }}>
+                                    {
+                                        isLoading == true
+                                            ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                            : cooler?.cooler.serial_number
+                                    }
                                 </div>
-                                <div className="headerDataIMGh2">
-                                    <div className="headerDataIMGh3"
-                                        style={{
-                                            background: ''
-                                            // data?.Cooler?.Status === "EN FALLA"
-                                            // ? "#FFC7CD"
-                                            // : data?.Cooler?.Status ===
-                                            //   "FUNCIONANDO CORRECTAMENTE"
-                                            // ? "#DFF9E3"
-                                            // : data?.Cooler?.Status ===
-                                            //   "FUNCIONANDO CON ALERTA"
-                                            // ? "#FEF5C7"
-                                            // : "#D4DAE3",
-                                            //   color:
-                                            //   data?.Cooler?.Status === "EN FALLA"
-                                            //     ? "#F93448"
-                                            //     : data?.Cooler?.Status ===
-                                            //       "FUNCIONANDO CORRECTAMENTE"
-                                            //     ? "#1D5E29"
-                                            //     : data?.Cooler?.Status ===
-                                            //       "FUNCIONANDO CON ALERTA"
-                                            //     ? "#451C03"
-                                            //     : "black",
-                                        }}>
-                                        {/* {
-                                load == true
-                                    ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                                    :
-                                    <>
-                                        <img src={RedPoint} alt="en falla" style={{ width: '0.25rem', height: '0.25rem', marginLeft: '0.25rem' }} />
-                                        { data?.Cooler?.Status == undefined ? 'Sin registro' : data?.Cooler?.Status }
-                                    </>
-                            } */}
-                                        Sin registro
-                                    </div>
+                                <div style={{ width: '100%', height: '100%', backgroundColor: '', color: 'var(--gray-6, #868E96)', fontSize: '0.563rem', fontWeight: '700' }}>
+                                    {
+                                        isLoading == true
+                                            ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                            : cooler?.cooler.model_id
+                                    }
                                 </div>
-                                <div className="headerDataIMGh2" style={{ display: 'flex', flexDirection: 'row', gap: '0.3rem' }}>
-                                    Leído por última vez el:
-                                    {/* {
-                            load == true
-                                ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                                :
-                                <div className="" style={{color:'#000005'}}>
-                                   
-                                    {  data?.Cooler?.LastRead == undefined ? 'Sin registro' : `${fechaFormateada.getDate().toString().padStart(2, '0')}/${(fechaFormateada.getMonth() + 1).toString().padStart(2, '0')}/${fechaFormateada.getFullYear()} ${fechaFormateada.getHours().toString().padStart(2, '0')}:${fechaFormateada.getMinutes().toString().padStart(2, '0')}`  }
+                                <div style={{ width: '100%', height: '100%', backgroundColor: '', }}>
+                                    {
+                                        isLoading == true
+                                            ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                            :
+                                            <div style={{ backgroundColor: getStatusColor(cooler), display: 'flex', fontSize: '0.563rem', gap: '0.25rem', whiteSpace: 'none', width: 'max-content', alignItems: 'center', borderRadius: '0.25rem', padding: '0.375rem', boxSizing: 'border-box' }}>
+                                                <div style={{ width: '5px', height: '5px', borderRadius: '5px', backgroundColor: backgroundCircle(cooler) }}></div>
+                                                {cooler?.cooler.status}
+                                            </div>
+                                    }
                                 </div>
-                        } */}
-                                    <div className="" style={{ color: '#000005' }}>
-
-                                        Sin registro
-                                    </div>
+                                <div style={{ width: '100%', height: '100%', backgroundColor: '', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                    {
+                                        isLoading == true
+                                            ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                            :
+                                            <>
+                                                <div style={{ color: 'var(--gray-6, #868E96)', fontSize: '0.75rem', fontWeight: '400', width: 'max-content', whiteSpace: 'nowrap' }}>Leído por última vez:</div>
+                                                <div style={{ backgroundColor: 'var(--blue-0, #E7F5FF)', padding: '0.375rem', boxSizing: 'border-box', color: 'var(--blue-6, #2393F4)', fontSize: '0.563rem', fontWeight: '700', width: 'max-content', whiteSpace: 'nowrap' }}>{cooler?.cooler.last_read}</div>
+                                            </>
+                                    }
                                 </div>
-                                {/* {
-                        load == true
-                            ? <Skeleton radius="xl" style={{ width: '4rem', height: '10px' }} />
-                            :
-                            <div className="headerDataIMGh4">
-                                
-                                { data?.Cooler?.DaysWithoutVisit == undefined  ? 'Sin registro' :  `${data?.Cooler?.DaysWithoutVisit} días sin visita`}                                
-                            </div>
-                    } */}
                             </section>
                         </section>
                         <section className="headerContentData">
                             <section className="headerContentDataContainer">
                                 <div className="headerContentData1">CANAL: </div>
-                                {/* {
-                        load == true
-                            ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                            :
-                            <div className="headerContentData2">
-                                { data?.Cooler?.Channel == undefined || data?.Cooler?.Channel == '' ?  'Sin registro' : data.Cooler.Channel }
-                            </div>
-                    } */}
-                                <div className="headerContentData2">
-                                    Sin registro
-                                </div>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                        : <div className="headerContentData2">{cooler?.cooler.channel}</div>
+                                }
                             </section>
                             <section className="headerContentDataContainer">
                                 <div className="headerContentData1">REGIÓN: </div>
-                                {/* {
-                        load == true
-                            ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                            :
-                            <div className="headerContentData2">
-                                { data?.Cooler?.Region == undefined || data?.Cooler?.Region == '' ?  'Sin registro' : data.Cooler.Region }
-                            </div>
-                    } */}
-                                <div className="headerContentData2">
-                                    Sin registro
-                                </div>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                        : <div className="headerContentData2">{cooler?.cooler.region}</div>
+                                }
                             </section>
                             <section className="headerContentDataContainer">
                                 <div className="headerContentData1">RUTA: </div>
-                                {/* {
-                        load == true
-                            ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                            :
-                            <div className="headerContentData2">
-                                { data?.Cooler?.Route == undefined || data?.Cooler?.Route == '' ? 'Sin registro' : data?.Cooler?.Route }
-                            </div>
-                    } */}
-                                <div className="headerContentData2">
-                                    Sin registro
-                                </div>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                        : <div className="headerContentData2">{cooler?.cooler.route}</div>
+                                }
                             </section>
                             <section className="headerContentDataContainer">
                                 <div className="headerContentData1">GERENCIA DE ZONA: </div>
-                                {/* {
-                        load == true
-                            ? <Skeleton radius="xl" style={{ width: '4rem', height: '50%' }} />
-                            :
-                            <div className="headerContentData2">
-                                { data?.Cooler?.Zone == undefined || data?.Cooler?.Zone == '' ? 'Sin registro' : data?.Cooler?.Zone }
-                            </div>
-                    } */}
-                                <div className="headerContentData2">
-                                    Sin registro
-                                </div>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="40%" radius="xl" />
+                                        : <div className="headerContentData2">{cooler?.cooler.zone}</div>
+                                }
                             </section>
                         </section>
                     </section>
@@ -256,20 +169,115 @@ export const DrawerVault = ({ opened, onCLose,cooler }) => {
                         <div className='vault_drawer_mapa_title_p'>Acerca del punto de venta</div>
                     </div>
                     <div className="vault_drawer_mapa_info">
-                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <div className='vault_drawer_mapa_info_p'>Nombre del PdV</div>
-                            <div className='vault_drawer_mapa_info_p2'>Pizza Planeta / 120151181</div>
+                            <div className='vault_drawer_mapa_info_p2'>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                        : `${cooler?.cooler.outlet_name} / ${cooler?.cooler.outlet_id}`
+                                }
+                            </div>
                         </div>
-                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <div className='vault_drawer_mapa_info_p'>Dirección</div>
-                            <div className='vault_drawer_mapa_info_p2'>Av Mexico 11 Santa Maria Aztahuacan iztapalapa</div>
+                            <div className='vault_drawer_mapa_info_p2'>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                        : cooler?.cooler.outlet_address
+                                }
+                            </div>
                         </div>
-                        <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <div className='vault_drawer_mapa_info_p'>Distancia al punto de instalación</div>
-                            <div className='vault_drawer_mapa_info_p2'>50m</div>
+                            <div className='vault_drawer_mapa_info_p2'>
+                                {
+                                    isLoading == true
+                                        ? <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                                        : `${cooler?.cooler.distance}m`
+                                }
+                            </div>
                         </div>
                     </div>
-                    <div className="vault_drawer_mapa_mapa"></div>
+                    <div className="vault_drawer_mapa_mapa">
+                        <div className="clt_actividad_principal_mapa">
+                            {isLoading == true ? (
+                                <Skeleton
+                                    height={10}
+                                    radius="xs"
+                                    style={{ width: "100%", height: "100%" }}
+                                />
+                            ) : cooler?.cooler?.last_latitude === null &&
+                                cooler?.cooler?.latitude === 0 ? (
+                                <>
+                                    <div
+                                        style={{
+                                            display: "inline-flex",
+                                            flexDirection: "column",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "8px",
+                                            width: "100%", // Esto hará que el div ocupe el 100% del ancho del contenedor padre
+                                            height: "100%",
+                                            backgroundImage: "url('../../sampleData/fondd.png')",
+                                            backgroundSize: "cover", // Esto asegurará que la imagen cubra todo el div
+                                            backgroundPosition: "center", // Esto centrará la imagen en el div
+                                        }}
+                                    >
+                                        <img
+                                            src={"../../sampleData/notmap.svg"}
+                                            alt="Descripción de la imagen"
+                                            style={{
+                                                width: "26px",
+                                                height: "26px",
+                                            }}
+                                        />
+                                        <text
+                                            style={{
+                                                color: "#ED5079",
+                                                fontSize: "12px",
+                                                fontStyle: "normal",
+                                                fontWeight: 400,
+                                                lineHeight: "155%",
+                                            }}
+                                        >
+                                            No hay datos de la ubicación
+                                        </text>
+                                    </div>
+                                </>
+                            ) : cooler?.cooler?.last_latitude != null &&
+                                cooler?.cooler?.latitude === 0 ? (
+                                <>
+                                    <div style={{ height: '100%' }}>
+                                        <MapComponent1
+                                            latitude={cooler?.cooler?.last_latitude}
+                                            longitude={cooler?.cooler?.last_longitude}
+                                        />
+                                    </div>
+                                </>
+                            ) : cooler?.cooler?.last_latitude === null &&
+                                cooler?.cooler?.latitude != 0 ? (
+                                <>
+                                    <div style={{ height: '100%' }}>
+                                        <MapComponent
+                                            latitude={cooler?.cooler?.latitude}
+                                            longitude={cooler?.cooler?.longitude}
+                                        />
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <MapComponent2
+                                        latitude={cooler?.cooler?.latitude}
+                                        longitude={cooler?.cooler?.longitude}
+                                        last_latitude={cooler?.cooler?.last_latitude}
+                                        last_longitude={cooler?.cooler?.last_longitude}
+                                    />
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </section>
             </section>
         </Drawer>
