@@ -78,7 +78,7 @@ export const MenuResponsive = ({ links,data ,setData,validaUser,saveOrganization
                 </div>                
               </div>
               <DrawerOrganizationResponsive opened={opened}
-            onClose={close} data={data} dt={dt} validaUser={validaUser} setData={setData} saveOrganization={saveOrganization}/>
+            onClose={close} data={data} dt={dt} validaUser={validaUser} setData={setData} saveOrganization={saveOrganization}/>            
             </div>
           </Navbar>
         }
