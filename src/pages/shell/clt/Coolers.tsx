@@ -302,7 +302,7 @@ export default function Coolers() {
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
-                marginRight: "-900px",
+                width: "100%",
               }}
             >
               <ExportToExcel

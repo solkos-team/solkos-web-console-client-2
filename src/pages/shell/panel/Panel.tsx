@@ -1092,7 +1092,12 @@ export default function Panel() {
   }, [region, zone, operative_unit, route]);
 
   useEffect(() => {
-    if (dto !== "KOF" && dto !== "KOF Colombia" && dto !== "KOF Guatemala") {
+    if (
+      dto !== "KOF" &&
+      dto !== "KOF Colombia" &&
+      dto !== "KOF Guatemala" &&
+      dto !== "ECO"
+    ) {
       navigate("/home");
     }
   }, [navigate, dto]);
@@ -1664,6 +1669,60 @@ export default function Panel() {
                           <br />
                           <TableauReport
                             url={`https://tableau.efemsa.com/views/KOFGuatemala/Detalle_Rutas?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
+                            token={data}
+                            options={options}
+                            parameters={parameters}
+                            query="?:embed=yes&:comments=no&:toolbar=no&:refresh=yes"
+                          />
+                        </>
+                      ) : (
+                        <div style={{ marginTop: 30 }}>
+                          No hay tableros disponibles para mostrar
+                        </div>
+                      )}
+                    </>
+                  </Tabs.Panel>
+                </div>
+              )}
+            </Tabs>
+          </div>
+        </>
+      ) : dto === "ECO" ? (
+        <>
+          <div>
+            <Tabs
+              color="teal"
+              value={activeTab || "first"} // Valor predeterminado
+              onTabChange={handleTabChange}
+              style={{ width: "94%" }}
+            >
+              <Tabs.List className="tabs-list">
+                <Tabs.Tab
+                  value="first"
+                  style={{ fontSize: ".9vw" }}
+                  disabled={!tabsEnabled}
+                >
+                  Aperturas
+                </Tabs.Tab>
+              </Tabs.List>
+              {isLoading ? (
+                <div style={{ marginTop: 30 }}>
+                  <Loader color="gray" size="xs" />
+                </div>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Tabs.Panel value="first">
+                    <>
+                      {dto === "ECO" ? (
+                        <>
+                          <br />
+                          <TableauReport
+                            url={`https://tableau.efemsa.com/views/Eco/ECO?:showAppBanner=false&:display_count=n&:showVizHome=n&:origin=viz_share_link&`}
                             token={data}
                             options={options}
                             parameters={parameters}

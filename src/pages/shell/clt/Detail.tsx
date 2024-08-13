@@ -18,7 +18,10 @@ import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
 import { useDisclosure } from "@mantine/hooks";
 import { CoolviewIcon } from "../../../sampleData/icons";
 import { userVerify } from "../../../Functions/pathVerify";
-import { formatDrawerCoolview, obtenerFechaMasReciente } from "../../../Functions/Coolview";
+import {
+  formatDrawerCoolview,
+  obtenerFechaMasReciente,
+} from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -105,14 +108,19 @@ export default function CoolerDetail() {
   useEffect(() => {
     formatDrawerCoolview();
   }, [coolViewOpened]);
-  
-  useEffect(()=>{
-    if(isLoading == false){
-      setDateTelemetri(obtenerFechaMasReciente(coolersData?.cooler.last_stat,coolersData?.last_telemetry))
+
+  useEffect(() => {
+    if (isLoading == false) {
+      setDateTelemetri(
+        obtenerFechaMasReciente(
+          coolersData?.cooler.last_stat,
+          coolersData?.last_telemetry
+        )
+      );
     }
-  },[isLoading])
+  }, [isLoading]);
   const Role = localStorage.getItem("Role") || "";
-  
+
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -242,102 +250,6 @@ export default function CoolerDetail() {
                           background: "#FFF",
                         }}
                       >
-                        {/* {isLoading == true ? (
-                          <Skeleton height={8} radius="xl" />
-                        ) : coolersData?.cooler.actionable === "Visita PdV" &&
-                          dto != "KOF Colombia" ? (
-                          <img
-                            src={"../../sampleData/p.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable === "Sin Riesgo" ||
-                          coolersData?.cooler.actionable === "SIN RIESGO" ? (
-                          <img
-                            src={"../../sampleData/sn.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                            "Estatus sin venta" ||
-                          coolersData?.cooler.actionable === "SIN VENTA" ||
-                          coolersData?.cooler.actionable ===
-                            "Acciones urgentes" ||
-                          coolersData?.cooler.actionable ===
-                            "SIN COINCIDENCIA" ? (
-                          <img
-                            src={"../../sampleData/a.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                          "Actualizar Info" ? (
-                          <img
-                            src={"../../sampleData/p.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                          "Actualizar dato" ? (
-                          <img
-                            src={"../../sampleData/actDat.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                          "Datos faltantes" ? (
-                          <img
-                            src={"../../sampleData/datFal.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable === "Monitoreo" ? (
-                          <img
-                            src={"../../sampleData/Mont.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable === "Movimiento" ? (
-                          <img
-                            src={"../../sampleData/mov1.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                            "Solicitar serv. correctivo" ||
-                          coolersData?.cooler.actionable ===
-                            "Solicitar serv. preventivos" ? (
-                          <img
-                            src={"../../sampleData/serCP.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                          "Seguimiento a equipo" ? (
-                          <img
-                            src={"../../sampleData/seguE.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable === "Visita PdV" ||
-                          coolersData?.cooler.actionable ===
-                            "VISITA PDV PARA LECTURA" ? (
-                          <img
-                            src={"../../sampleData/visitap.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : coolersData?.cooler.actionable ===
-                          "Visita PdV prioritaria" ? (
-                          <img
-                            src={"../../sampleData/visitapd.svg"}
-                            alt="Descripción de la imagen"
-                            style={{ width: "15px", height: "15px" }}
-                          />
-                        ) : (
-                          ""
-                        )} */}
-
                         <div
                           style={{
                             color:
@@ -1401,7 +1313,7 @@ export default function CoolerDetail() {
                 ) : coolersData?.cooler?.last_latitude != null &&
                   coolersData?.cooler?.latitude === 0 ? (
                   <>
-                    <div style={{height:'100%'}}>
+                    <div style={{ height: "100%" }}>
                       <MapComponent1
                         latitude={coolersData?.cooler?.last_latitude}
                         longitude={coolersData?.cooler?.last_longitude}
@@ -1411,7 +1323,7 @@ export default function CoolerDetail() {
                 ) : coolersData?.cooler?.last_latitude === null &&
                   coolersData?.cooler?.latitude != 0 ? (
                   <>
-                    <div style={{height:'100%'}}>
+                    <div style={{ height: "100%" }}>
                       <MapComponent
                         latitude={coolersData?.cooler?.latitude}
                         longitude={coolersData?.cooler?.longitude}

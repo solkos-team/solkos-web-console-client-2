@@ -16,7 +16,6 @@ export default function Insights() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
 
-  
   const IndicadoresData =
     data?.insights?.INDICATOR?.algorithms.filter(
       (data) => data.class == "ASSET_MANAGEMENT_ACTIONABLE"
@@ -711,7 +710,7 @@ export default function Insights() {
                   </section>
                 </div>
               </div>
-              <div className="insigths_datas_info2_mantenimiento">
+              <div className="insigths_datas_info2_control">
                 <div className="insigths_datas_info2_control_mantenimiento">
                   <div className="insigths_datas_info2_control_title">
                     <img
