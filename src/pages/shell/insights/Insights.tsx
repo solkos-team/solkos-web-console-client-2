@@ -15,11 +15,21 @@ export default function Insights() {
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
+  console.log(data?.asset_control?.total);
+  console.log(data?.asset_control?.algorithms);
+  const alertValue =
+    data?.maintenance?.find((item) => item.level === "ALERT")?.value || 0;
+  console.log(alertValue);
+  const failValue =
+    data?.maintenance?.find((item) => item.level === "FAIL")?.value || 0;
+  console.log(failValue);
 
-  const IndicadoresData =
-    data?.insights?.INDICATOR?.algorithms.filter(
-      (data) => data.class == "ASSET_MANAGEMENT_ACTIONABLE"
-    ) || [];
+  const totalMaintenanceValue = data?.maintenance?.reduce(
+    (sum, item) => sum + item.value,
+    0
+  );
+  console.log(totalMaintenanceValue);
+  const IndicadoresData = data?.asset_control?.algorithms || [];
   const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
   data?.summary.coolers.toLocaleString("es-MX") != null ||
   data?.summary.coolers.toLocaleString("es-MX") != undefined
@@ -542,10 +552,11 @@ export default function Insights() {
                           />
                         </div>
                       </>
-                    ) : sum2 == undefined && sum2 == undefined ? (
-                      "Sin registro"
+                    ) : data?.asset_control?.total === null ||
+                      data?.asset_control?.total === undefined ? (
+                      "0"
                     ) : (
-                      sum2.toLocaleString("es-MX")
+                      data?.asset_control?.total?.toLocaleString("es-MX")
                     )}
                   </h1>
                   <h1 className="insights_datas_kpi_title_data_h1">
@@ -740,14 +751,8 @@ export default function Insights() {
                             />
                           </div>
                         </>
-                      ) : data?.insights?.ALERT?.total == undefined &&
-                        data?.insights?.FAIL?.total == undefined ? (
-                        <div style={{ fontSize: ".9rem" }}>0</div>
                       ) : (
-                        (
-                          Number(data?.insights?.ALERT?.total ?? 0) +
-                          Number(data?.insights?.FAIL?.total ?? 0)
-                        ).toLocaleString("es-MX")
+                        totalMaintenanceValue?.toLocaleString("es-MX")
                       )}
                     </h1>
                     <h1 className="insights_datas_kpi_title_data_h1">
@@ -773,12 +778,9 @@ export default function Insights() {
                           className="insights_datas_info_mantenimiento_datos_barras_color_Fallas"
                           style={{
                             width: `${
-                              ((data?.insights?.FAIL?.total || 0) /
-                                (Number(data?.insights?.ALERT?.total) +
-                                  Number(data?.insights?.FAIL?.total))) *
-                              100
+                              (failValue / (alertValue + failValue)) * 100
                             }%`,
-                            backgroundColor: isLoading != true ? "#ffc4cc" : "",
+                            backgroundColor: !isLoading ? "#ffc4cc" : "",
                           }}
                           onClick={() => navigate("/home/fails")}
                         >
@@ -830,10 +832,10 @@ export default function Insights() {
                                 />
                               </div>
                             </>
-                          ) : data?.insights?.FAIL?.total === undefined ? (
+                          ) : failValue === 0 ? (
                             "0"
                           ) : (
-                            data?.insights?.FAIL?.total.toLocaleString("es-MX")
+                            failValue.toLocaleString("es-MX")
                           )}
                         </div>
                       </div>
@@ -873,7 +875,7 @@ export default function Insights() {
                                   </div>
                                 </>
                               ) : data?.insights?.ALERT?.level === undefined ? (
-                                "Sin registro"
+                                "Alertas"
                               ) : data?.insights?.ALERT?.level === "ALERT" ? (
                                 <span
                                   style={{
@@ -902,10 +904,10 @@ export default function Insights() {
                                 />
                               </div>
                             </>
-                          ) : data?.insights?.ALERT?.total === undefined ? (
-                            "Sin registro"
+                          ) : alertValue === 0 ? (
+                            "0"
                           ) : (
-                            data?.insights?.ALERT?.total.toLocaleString("es-MX")
+                            alertValue?.toLocaleString("es-MX")
                           )}
                         </div>
                       </div>

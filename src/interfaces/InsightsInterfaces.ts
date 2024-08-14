@@ -6,6 +6,16 @@ export interface Insights {
   assets_analytics: AssetsAnalytic[];
   geo_data: GeoDatum[];
   status_parque: statusParque[];
+  asset_control: AssetControl;
+  maintenance: Maintenance[];
+}
+interface Maintenance {
+  level: string;
+  value: number;
+}
+interface AssetControl {
+  algorithms: Algorithm[];
+  total: number;
 }
 export interface statusParque {
   name: string;

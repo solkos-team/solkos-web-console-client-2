@@ -121,6 +121,17 @@ export default function CoolerDetail() {
   }, [isLoading]);
   const Role = localStorage.getItem("Role") || "";
 
+  const [expand, setExpand] = useState(true);
+  const [expand2, setExpand2] = useState(false);
+
+  const toggleExpand = () => {
+    setExpand(!expand);
+  };
+
+  const toggleExpand2 = () => {
+    setExpand2(!expand2);
+  };
+
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -129,138 +140,91 @@ export default function CoolerDetail() {
         <PageFilter path="clt" disabledPath={true} />
       )}
       <section className="detail_principal_body">
-        <section className="detail_image_info">
-          <div className="detail_image_info_data">
-            <div className="detail_image_show">
-              {isLoading == true ? (
-                <div
-                  style={{ width: "50%", height: "50%", marginLeft: "2rem" }}
-                >
-                  <Skeleton height={90} radius="sm" />
-                </div>
-              ) : (
-                <img
-                  src={coolersData?.asset?.url}
-                  alt="cooler"
-                  width={"100%"}
-                  height={"85%"}
-                  onError={({ currentTarget }) => {
-                    currentTarget.onerror = null;
-                    currentTarget.src =
-                      "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
-                  }}
-                />
-              )}
-            </div>
-            <div className="detail_data_show">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "0.25rem",
-                  flex: 100,
-                  marginLeft: 10,
-                }}
-              >
+        <>
+          <section className="detail_image_info">
+            <div className="detail_image_info_data">
+              <div className="detail_image_show">
+                {isLoading == true ? (
+                  <div
+                    style={{ width: "50%", height: "50%", marginLeft: "2rem" }}
+                  >
+                    <Skeleton height={90} radius="sm" />
+                  </div>
+                ) : (
+                  <img
+                    src={coolersData?.asset?.url}
+                    alt="cooler"
+                    width={"100%"}
+                    height={"85%"}
+                    onError={({ currentTarget }) => {
+                      currentTarget.onerror = null;
+                      currentTarget.src =
+                        "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
+                    }}
+                  />
+                )}
+              </div>
+              <div className="detail_data_show_1">
                 <div
                   style={{
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
                     alignItems: "flex-start",
-                    alignSelf: "stretch",
+                    gap: "0.25rem",
+                    flex: 100,
+                    marginLeft: 10,
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
-                      alignItems: "center",
-                      gap: "0.625rem",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "flex-start",
+                      alignSelf: "stretch",
                     }}
                   >
                     <div
                       style={{
-                        color: "#000005",
-                        // fontFamily: "DM Sans",
-                        fontSize: "1.25rem",
-                        fontStyle: "normal",
-                        fontWeight: 700,
-                        lineHeight: "normal",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.625rem",
                       }}
                     >
-                      {coolersData?.cooler?.serial_number === undefined
-                        ? "Sin registro"
-                        : coolersData?.cooler?.serial_number}
-                    </div>
-
-                    <>
                       <div
                         style={{
-                          width: "max-content",
-                          display: "flex",
-                          padding: "4px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          gap: "4px",
-                          borderRadius: "2px",
-                          border:
-                            coolersData?.cooler.actionable === "Visita PdV" &&
-                            dto != "KOF Colombia"
-                              ? "1.5px solid #DA7E05"
-                              : coolersData?.cooler.actionable ===
-                                  "Sin Riesgo" ||
-                                coolersData?.cooler.actionable === "SIN RIESGO"
-                              ? "1.5px solid #40C057"
-                              : coolersData?.cooler.actionable ===
-                                  "Estatus sin venta" ||
-                                coolersData?.cooler.actionable ===
-                                  "SIN VENTA" ||
-                                coolersData?.cooler.actionable ===
-                                  "Acciones urgentes" ||
-                                coolersData?.cooler.actionable ===
-                                  "SIN COINCIDENCIA"
-                              ? "1.5px solid #FA5252"
-                              : coolersData?.cooler.actionable ===
-                                "Actualizar Info"
-                              ? "1.5px solid #DA7E05"
-                              : coolersData?.cooler.actionable ===
-                                  "Actualizar dato" ||
-                                coolersData?.cooler.actionable ===
-                                  "Datos faltantes" ||
-                                coolersData?.cooler.actionable ===
-                                  "Monitoreo" ||
-                                coolersData?.cooler.actionable === "Movimiento"
-                              ? "1.5px solid #1864AB"
-                              : coolersData?.cooler.actionable ===
-                                  "Solicitar serv. correctivo" ||
-                                coolersData?.cooler.actionable ===
-                                  "Solicitar serv. preventivos" ||
-                                coolersData?.cooler.actionable ===
-                                  "Seguimiento a equipo" ||
-                                coolersData?.cooler.actionable ===
-                                  "Visita PdV" ||
-                                coolersData?.cooler.actionable ===
-                                  "VISITA PDV PARA LECTURA"
-                              ? "1.5px solid #E67700"
-                              : coolersData?.cooler.actionable ===
-                                "Visita PdV prioritaria"
-                              ? "1.5px solid #C92A2A"
-                              : "1.5px solid black",
-                          background: "#FFF",
+                          color: "#000005",
+                          // fontFamily: "DM Sans",
+                          fontSize: "1.25rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "normal",
                         }}
                       >
+                        {coolersData?.cooler?.serial_number === undefined
+                          ? "Sin registro"
+                          : coolersData?.cooler?.serial_number}
+                      </div>
+
+                      <>
                         <div
                           style={{
-                            color:
+                            width: "max-content",
+                            display: "flex",
+                            padding: "4px",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            gap: "4px",
+                            borderRadius: "2px",
+                            border:
                               coolersData?.cooler.actionable === "Visita PdV" &&
                               dto != "KOF Colombia"
-                                ? "#DA7E05"
+                                ? "1.5px solid #DA7E05"
                                 : coolersData?.cooler.actionable ===
                                     "Sin Riesgo" ||
                                   coolersData?.cooler.actionable ===
                                     "SIN RIESGO"
-                                ? "#40C057"
+                                ? "1.5px solid #40C057"
                                 : coolersData?.cooler.actionable ===
                                     "Estatus sin venta" ||
                                   coolersData?.cooler.actionable ===
@@ -269,10 +233,10 @@ export default function CoolerDetail() {
                                     "Acciones urgentes" ||
                                   coolersData?.cooler.actionable ===
                                     "SIN COINCIDENCIA"
-                                ? "#FA5252"
+                                ? "1.5px solid #FA5252"
                                 : coolersData?.cooler.actionable ===
                                   "Actualizar Info"
-                                ? "#DA7E05"
+                                ? "1.5px solid #DA7E05"
                                 : coolersData?.cooler.actionable ===
                                     "Actualizar dato" ||
                                   coolersData?.cooler.actionable ===
@@ -281,7 +245,7 @@ export default function CoolerDetail() {
                                     "Monitoreo" ||
                                   coolersData?.cooler.actionable ===
                                     "Movimiento"
-                                ? "#1864AB"
+                                ? "1.5px solid #1864AB"
                                 : coolersData?.cooler.actionable ===
                                     "Solicitar serv. correctivo" ||
                                   coolersData?.cooler.actionable ===
@@ -292,408 +256,465 @@ export default function CoolerDetail() {
                                     "Visita PdV" ||
                                   coolersData?.cooler.actionable ===
                                     "VISITA PDV PARA LECTURA"
-                                ? "#E67700"
+                                ? "1.5px solid #E67700"
                                 : coolersData?.cooler.actionable ===
                                   "Visita PdV prioritaria"
-                                ? "#C92A2A"
-                                : "black",
-                            // fontFamily: "DM Sans",
-                            fontSize: "0.875rem",
-                            fontStyle: "normal",
-                            fontWeight: 600,
-                            lineHeight: "14px",
+                                ? "1.5px solid #C92A2A"
+                                : "1.5px solid black",
+                            background: "#FFF",
                           }}
                         >
-                          {coolersData?.cooler.actionable}
+                          <div
+                            style={{
+                              color:
+                                coolersData?.cooler.actionable ===
+                                  "Visita PdV" && dto != "KOF Colombia"
+                                  ? "#DA7E05"
+                                  : coolersData?.cooler.actionable ===
+                                      "Sin Riesgo" ||
+                                    coolersData?.cooler.actionable ===
+                                      "SIN RIESGO"
+                                  ? "#40C057"
+                                  : coolersData?.cooler.actionable ===
+                                      "Estatus sin venta" ||
+                                    coolersData?.cooler.actionable ===
+                                      "SIN VENTA" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Acciones urgentes" ||
+                                    coolersData?.cooler.actionable ===
+                                      "SIN COINCIDENCIA"
+                                  ? "#FA5252"
+                                  : coolersData?.cooler.actionable ===
+                                    "Actualizar Info"
+                                  ? "#DA7E05"
+                                  : coolersData?.cooler.actionable ===
+                                      "Actualizar dato" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Datos faltantes" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Monitoreo" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Movimiento"
+                                  ? "#1864AB"
+                                  : coolersData?.cooler.actionable ===
+                                      "Solicitar serv. correctivo" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Solicitar serv. preventivos" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Seguimiento a equipo" ||
+                                    coolersData?.cooler.actionable ===
+                                      "Visita PdV" ||
+                                    coolersData?.cooler.actionable ===
+                                      "VISITA PDV PARA LECTURA"
+                                  ? "#E67700"
+                                  : coolersData?.cooler.actionable ===
+                                    "Visita PdV prioritaria"
+                                  ? "#C92A2A"
+                                  : "black",
+                              // fontFamily: "DM Sans",
+                              fontSize: "0.875rem",
+                              fontStyle: "normal",
+                              fontWeight: 600,
+                              lineHeight: "14px",
+                            }}
+                          >
+                            {coolersData?.cooler.actionable}
+                          </div>
                         </div>
-                      </div>
-                    </>
+                      </>
+                    </div>
                   </div>
-                </div>
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Mono",
-                    fontSize: "0.75rem",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  {coolersData?.cooler?.model_id === undefined ||
-                  coolersData?.cooler?.model_id === null
-                    ? "Sin registro"
-                    : coolersData?.cooler?.model_id}
-                </div>
-                {coolersData?.cooler?.status == undefined ||
-                coolersData?.cooler.status == "" ? (
                   <div
                     style={{
                       color: "#88888B",
+                      // fontFamily: "DM Mono",
                       fontSize: "0.75rem",
                       fontStyle: "normal",
                       fontWeight: 500,
                       lineHeight: "normal",
                     }}
                   >
-                    Sin registro
+                    {coolersData?.cooler?.model_id === undefined ||
+                    coolersData?.cooler?.model_id === null
+                      ? "Sin registro"
+                      : coolersData?.cooler?.model_id}
                   </div>
-                ) : (
-                  <>
+                  {coolersData?.cooler?.status == undefined ||
+                  coolersData?.cooler.status == "" ? (
+                    <div
+                      style={{
+                        color: "#88888B",
+                        fontSize: "0.75rem",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Sin registro
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "4px",
+                          fontSize: "0.625rem",
+                          // justifyContent: "center",
+                          alignItems: "center",
+                          gap: "4px",
+                          borderRadius: "2px",
+                          background:
+                            coolersData?.cooler?.status ===
+                            "FUNCIONANDO CORRECTAMENTE"
+                              ? "#B2F2BB"
+                              : coolersData?.cooler?.status ===
+                                "FUNCIONANDO CON ALERTA"
+                              ? "#FFEC99"
+                              : coolersData?.cooler?.status === "EN FALLA"
+                              ? "#FFC9C9"
+                              : coolersData?.cooler?.status ===
+                                "EN ESPERA DE SERVICIO"
+                              ? "#C7CBD2"
+                              : coolersData?.cooler?.status ===
+                                "EN ESPERA DE LECTURA"
+                              ? "#A5D8FF"
+                              : coolersData?.cooler?.status ===
+                                "SERVICIO NO EFECTIVO"
+                              ? "#FFC9C9"
+                              : coolersData?.cooler?.status ===
+                                "SERVICIO IMPRODUCTIVO"
+                              ? "#FFC9C9"
+                              : coolersData?.cooler?.status === "SIN DATOS"
+                              ? "#C7CBD2"
+                              : "#C7CBD2",
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "5px",
+                            height: "5px",
+                            borderRadius: "5px",
+                            background:
+                              coolersData?.cooler?.status ===
+                              "FUNCIONANDO CORRECTAMENTE"
+                                ? "#2B8A3E"
+                                : coolersData?.cooler?.status ===
+                                  "FUNCIONANDO CON ALERTA"
+                                ? "#E67700"
+                                : coolersData?.cooler?.status === "EN FALLA"
+                                ? "#E03131"
+                                : coolersData?.cooler?.status ===
+                                  "EN ESPERA DE SERVICIO"
+                                ? "#313A49"
+                                : coolersData?.cooler?.status ===
+                                  "EN ESPERA DE LECTURA"
+                                ? "#1864AB"
+                                : coolersData?.cooler?.status ===
+                                  "SERVICIO NO EFECTIVO"
+                                ? "#E03131"
+                                : coolersData?.cooler?.status ===
+                                  "SERVICIO IMPRODUCTIVO"
+                                ? "#E03131"
+                                : coolersData?.cooler?.status === "SIN DATOS"
+                                ? "#313A49"
+                                : "#313A49",
+                          }}
+                        ></div>
+                        <div
+                          style={{
+                            color:
+                              coolersData?.cooler?.status ===
+                              "FUNCIONANDO CORRECTAMENTE"
+                                ? "#2B8A3E"
+                                : coolersData?.cooler?.status ===
+                                  "FUNCIONANDO CON ALERTA"
+                                ? "#E67700"
+                                : coolersData?.cooler?.status === "EN FALLA"
+                                ? "#E03131"
+                                : coolersData?.cooler?.status ===
+                                  "EN ESPERA DE SERVICIO"
+                                ? "#313A49"
+                                : coolersData?.cooler?.status ===
+                                  "EN ESPERA DE LECTURA"
+                                ? "#1864AB"
+                                : coolersData?.cooler?.status ===
+                                  "SERVICIO NO EFECTIVO"
+                                ? "#E03131"
+                                : coolersData?.cooler?.status ===
+                                  "SERVICIO IMPRODUCTIVO"
+                                ? "#E03131"
+                                : coolersData?.cooler?.status === "SIN DATOS"
+                                ? "#313A49"
+                                : "#313A49",
+                            fontSize: "0.625.rem",
+                            fontStyle: "normal",
+                            fontWeight: 500,
+                            lineHeight: "14px",
+                          }}
+                        >
+                          {coolersData?.cooler?.status}
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px",
+                      alignSelf: "stretch",
+                      width: "30rem",
+                    }}
+                  >
+                    <div
+                      style={{
+                        color: "#88888B",
+                        // fontFamily: "Inter",
+                        fontSize: "0.75rem",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      Leído por última vez el:
+                    </div>
+
+                    <div
+                      style={{
+                        color: "#000005",
+                        // fontFamily: "Inter",
+                        fontSize: "0.75rem",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "normal",
+                      }}
+                    >
+                      {coolersData?.cooler?.last_read == undefined ||
+                      coolersData?.cooler?.last_read == null
+                        ? "Sin registro"
+                        : moment(
+                            new Date(coolersData?.cooler?.last_read)
+                          ).format("DD/MM/YYYY HH:mm")}
+                    </div>
                     <div
                       style={{
                         display: "flex",
-                        padding: "4px",
-                        fontSize: "0.625rem",
-                        // justifyContent: "center",
+                        padding: "5px",
+                        justifyContent: "center",
                         alignItems: "center",
                         gap: "4px",
                         borderRadius: "2px",
-                        background:
-                          coolersData?.cooler?.status ===
-                          "FUNCIONANDO CORRECTAMENTE"
-                            ? "#B2F2BB"
-                            : coolersData?.cooler?.status ===
-                              "FUNCIONANDO CON ALERTA"
-                            ? "#FFEC99"
-                            : coolersData?.cooler?.status === "EN FALLA"
-                            ? "#FFC9C9"
-                            : coolersData?.cooler?.status ===
-                              "EN ESPERA DE SERVICIO"
-                            ? "#C7CBD2"
-                            : coolersData?.cooler?.status ===
-                              "EN ESPERA DE LECTURA"
-                            ? "#A5D8FF"
-                            : coolersData?.cooler?.status ===
-                              "SERVICIO NO EFECTIVO"
-                            ? "#FFC9C9"
-                            : coolersData?.cooler?.status ===
-                              "SERVICIO IMPRODUCTIVO"
-                            ? "#FFC9C9"
-                            : coolersData?.cooler?.status === "SIN DATOS"
-                            ? "#C7CBD2"
-                            : "#C7CBD2",
+                        background: "#D4DAE3",
                       }}
                     >
                       <div
                         style={{
-                          width: "5px",
-                          height: "5px",
-                          borderRadius: "5px",
-                          background:
-                            coolersData?.cooler?.status ===
-                            "FUNCIONANDO CORRECTAMENTE"
-                              ? "#2B8A3E"
-                              : coolersData?.cooler?.status ===
-                                "FUNCIONANDO CON ALERTA"
-                              ? "#E67700"
-                              : coolersData?.cooler?.status === "EN FALLA"
-                              ? "#E03131"
-                              : coolersData?.cooler?.status ===
-                                "EN ESPERA DE SERVICIO"
-                              ? "#313A49"
-                              : coolersData?.cooler?.status ===
-                                "EN ESPERA DE LECTURA"
-                              ? "#1864AB"
-                              : coolersData?.cooler?.status ===
-                                "SERVICIO NO EFECTIVO"
-                              ? "#E03131"
-                              : coolersData?.cooler?.status ===
-                                "SERVICIO IMPRODUCTIVO"
-                              ? "#E03131"
-                              : coolersData?.cooler?.status === "SIN DATOS"
-                              ? "#313A49"
-                              : "#313A49",
-                        }}
-                      ></div>
-                      <div
-                        style={{
-                          color:
-                            coolersData?.cooler?.status ===
-                            "FUNCIONANDO CORRECTAMENTE"
-                              ? "#2B8A3E"
-                              : coolersData?.cooler?.status ===
-                                "FUNCIONANDO CON ALERTA"
-                              ? "#E67700"
-                              : coolersData?.cooler?.status === "EN FALLA"
-                              ? "#E03131"
-                              : coolersData?.cooler?.status ===
-                                "EN ESPERA DE SERVICIO"
-                              ? "#313A49"
-                              : coolersData?.cooler?.status ===
-                                "EN ESPERA DE LECTURA"
-                              ? "#1864AB"
-                              : coolersData?.cooler?.status ===
-                                "SERVICIO NO EFECTIVO"
-                              ? "#E03131"
-                              : coolersData?.cooler?.status ===
-                                "SERVICIO IMPRODUCTIVO"
-                              ? "#E03131"
-                              : coolersData?.cooler?.status === "SIN DATOS"
-                              ? "#313A49"
-                              : "#313A49",
-                          fontSize: "0.625.rem",
+                          color: "#313A49",
+                          // fontFamily: "DM Mono",
+                          fontSize: "0.75rem",
                           fontStyle: "normal",
                           fontWeight: 500,
                           lineHeight: "14px",
                         }}
                       >
-                        {coolersData?.cooler?.status}
+                        {" "}
+                        {coolersData?.cooler?.days_without_visit === null ||
+                        coolersData?.cooler?.days_without_visit === undefined
+                          ? "Sin registro"
+                          : coolersData?.cooler?.days_without_visit +
+                            " " +
+                            "días sin visita"}
                       </div>
-                    </div>
-                  </>
-                )}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                    alignSelf: "stretch",
-                    width: "30rem",
-                  }}
-                >
-                  <div
-                    style={{
-                      color: "#88888B",
-                      // fontFamily: "Inter",
-                      fontSize: "0.75rem",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    Leído por última vez el:
-                  </div>
-
-                  <div
-                    style={{
-                      color: "#000005",
-                      // fontFamily: "Inter",
-                      fontSize: "0.75rem",
-                      fontStyle: "normal",
-                      fontWeight: 500,
-                      lineHeight: "normal",
-                    }}
-                  >
-                    {coolersData?.cooler?.last_read == undefined ||
-                    coolersData?.cooler?.last_read == null
-                      ? "Sin registro"
-                      : moment(new Date(coolersData?.cooler?.last_read)).format(
-                          "DD/MM/YYYY HH:mm"
-                        )}
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "5px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "2px",
-                      background: "#D4DAE3",
-                    }}
-                  >
-                    <div
-                      style={{
-                        color: "#313A49",
-                        // fontFamily: "DM Mono",
-                        fontSize: "0.75rem",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "14px",
-                      }}
-                    >
-                      {" "}
-                      {coolersData?.cooler?.days_without_visit === null ||
-                      coolersData?.cooler?.days_without_visit === undefined
-                        ? "Sin registro"
-                        : coolersData?.cooler?.days_without_visit +
-                          " " +
-                          "días sin visita"}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="detail_data">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "6px",
-              }}
-            >
+            <div className="detail_data">
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  gap: "6px",
                 }}
               >
                 <div
                   style={{
-                    color: "#88888B",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
+                    display: "flex",
+                    justifyContent: "space-between",
                   }}
                 >
-                  CANAL:
+                  <div
+                    style={{
+                      color: "#88888B",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    CANAL:
+                  </div>
+                  <div
+                    style={{
+                      color: "#313A49",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                      background: "#D4DAE3",
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
+                    }}
+                  >
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={20} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.channel === undefined ||
+                      coolersData?.cooler?.channel === "" ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.channel
+                    )}
+                  </div>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    REGIÓN:
+                  </div>
+                  <div
+                    style={{
+                      color: "#313A49",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                      background: "#D4DAE3",
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
+                    }}
+                  >
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={20} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.region === "" ||
+                      coolersData?.cooler?.region === undefined ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.region
+                    )}
+                  </div>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    RUTA:
+                  </div>
+                  <div
+                    style={{
+                      color: "#313A49",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                      background: "#D4DAE3",
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
+                    }}
+                  >
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={20} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.route === "" ||
+                      coolersData?.cooler?.route === undefined ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.route
+                    )}
+                  </div>
+                </div>
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div
+                    style={{
+                      color: "#88888B",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    GERENCIA DE ZONA:
+                  </div>
+                  <div
+                    style={{
+                      color: "#313A49",
+                      fontSize: "0.625rem",
+                      fontWeight: 500,
+                      background: "#D4DAE3",
+                      borderRadius: "2px",
+                      padding: "4px",
+                      textAlign: "right",
+                      marginTop: "-4px",
+                    }}
+                  >
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={20} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.zone === "" ||
+                      coolersData?.cooler?.zone === undefined ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.zone
+                    )}
+                  </div>
                 </div>
                 <div
                   style={{
-                    color: "#313A49",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                    background: "#D4DAE3",
-                    borderRadius: "2px",
-                    padding: "4px",
-                    textAlign: "right",
-                    marginTop: "-4px",
+                    // display: userVerify(localStorage.getItem("USER") ?? ""),
+                    // display: Role === "root" ? "flex" : "none",
+                    display:
+                      Role === "root" && isLoading === false ? "flex" : "none",
+                    gap: "5px",
+                    background: "var(--blue-0, #E7F5FF)",
+                    // width: "fit-content",
+                    padding: "5px",
+                    boxSizing: "border-box",
+                    borderRadius: "5px",
+                    justifyContent: "center",
                   }}
                 >
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={20} radius="xl" />
-                    </div>
-                  ) : coolersData?.cooler?.channel === undefined ||
-                    coolersData?.cooler?.channel === "" ? (
-                    "Sin registro"
-                  ) : (
-                    coolersData?.cooler?.channel
-                  )}
+                  {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
+                  <div
+                    style={{
+                      color: "var(--blue-6, #2393F4)",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      cursor: "pointer",
+                    }}
+                    onClick={openCoolview}
+                  >
+                    Ver Coolview
+                  </div>
+                  <img src={CoolviewIcon} alt="CoolviewIcon" loading="lazy" />
                 </div>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    color: "#88888B",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                  }}
-                >
-                  REGIÓN:
-                </div>
-                <div
-                  style={{
-                    color: "#313A49",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                    background: "#D4DAE3",
-                    borderRadius: "2px",
-                    padding: "4px",
-                    textAlign: "right",
-                    marginTop: "-4px",
-                  }}
-                >
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={20} radius="xl" />
-                    </div>
-                  ) : coolersData?.cooler?.region === "" ||
-                    coolersData?.cooler?.region === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    coolersData?.cooler?.region
-                  )}
-                </div>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    color: "#88888B",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                  }}
-                >
-                  RUTA:
-                </div>
-                <div
-                  style={{
-                    color: "#313A49",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                    background: "#D4DAE3",
-                    borderRadius: "2px",
-                    padding: "4px",
-                    textAlign: "right",
-                    marginTop: "-4px",
-                  }}
-                >
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={20} radius="xl" />
-                    </div>
-                  ) : coolersData?.cooler?.route === "" ||
-                    coolersData?.cooler?.route === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    coolersData?.cooler?.route
-                  )}
-                </div>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div
-                  style={{
-                    color: "#88888B",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                  }}
-                >
-                  GERENCIA DE ZONA:
-                </div>
-                <div
-                  style={{
-                    color: "#313A49",
-                    fontSize: "0.625rem",
-                    fontWeight: 500,
-                    background: "#D4DAE3",
-                    borderRadius: "2px",
-                    padding: "4px",
-                    textAlign: "right",
-                    marginTop: "-4px",
-                  }}
-                >
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={20} radius="xl" />
-                    </div>
-                  ) : coolersData?.cooler?.zone === "" ||
-                    coolersData?.cooler?.zone === undefined ? (
-                    "Sin registro"
-                  ) : (
-                    coolersData?.cooler?.zone
-                  )}
-                </div>
-              </div>
-              <div
-                style={{
-                  // display: userVerify(localStorage.getItem("USER") ?? ""),
-                  // display: Role === "root" ? "flex" : "none",
-                  display:
-                    Role === "root" && isLoading === false ? "flex" : "none",
-                  gap: "5px",
-                  background: "var(--blue-0, #E7F5FF)",
-                  width: "fit-content",
-                  padding: "5px",
-                  boxSizing: "border-box",
-                  borderRadius: "5px",
-                }}
-              >
-                {/* <div style={{ display: isLoading == true ? 'none' : "flex",gap:'5px' }}> */}
-                <div
-                  style={{
-                    color: "var(--blue-6, #2393F4)",
-                    fontSize: "0.75rem",
-                    fontWeight: 500,
-                    cursor: "pointer",
-                  }}
-                  onClick={openCoolview}
-                >
-                  Ver Coolview
-                </div>
-                <img src={CoolviewIcon} alt="CoolviewIcon" loading="lazy" />
-              </div>
-              {/* <div style={{  justifyContent: "space-between" }}>
+                {/* <div style={{  justifyContent: "space-between" }}>
                 <Link
                   to={`/home/coolView/?device_id=${coolersData?.cooler.device_id}&date_from=${fechaAnterior}&date_to=${fechaActual}&clt=false`}
                   style={{ fontSize: "0.625rem" }}
@@ -701,9 +722,11 @@ export default function CoolerDetail() {
                   Ver en CoolView
                 </Link>
               </div> */}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </>
+
         <hr className="detail_hr" style={{ marginTop: 2 }} />
         <section
           className="detail_principal_body_content_detail"

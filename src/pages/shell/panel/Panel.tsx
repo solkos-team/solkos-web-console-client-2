@@ -1702,7 +1702,7 @@ export default function Panel() {
                   style={{ fontSize: ".9vw" }}
                   disabled={!tabsEnabled}
                 >
-                  Aperturas
+                  Actividad del parque
                 </Tabs.Tab>
               </Tabs.List>
               {isLoading ? (
