@@ -802,9 +802,7 @@ export default function Insights() {
                                     />
                                   </div>
                                 </>
-                              ) : data?.insights?.FAIL?.level === undefined ? (
-                                "Fallas"
-                              ) : data?.insights?.FAIL?.level === "FAIL" ? (
+                              ) : (
                                 <span
                                   style={{
                                     color: "#FA5252",
@@ -814,8 +812,6 @@ export default function Insights() {
                                 >
                                   Fallas
                                 </span>
-                              ) : (
-                                ""
                               )}
                             </div>
                           </Tooltip>
@@ -874,9 +870,7 @@ export default function Insights() {
                                     />
                                   </div>
                                 </>
-                              ) : data?.insights?.ALERT?.level === undefined ? (
-                                "Alertas"
-                              ) : data?.insights?.ALERT?.level === "ALERT" ? (
+                              ) : (
                                 <span
                                   style={{
                                     color: "#E67700",
@@ -886,8 +880,6 @@ export default function Insights() {
                                 >
                                   Alertas
                                 </span>
-                              ) : (
-                                ""
                               )}
                             </div>
                           </Tooltip>
