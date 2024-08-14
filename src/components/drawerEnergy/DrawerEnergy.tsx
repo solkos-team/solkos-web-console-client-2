@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { IconArrowRight } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
-import { Drawer } from "@mantine/core";
+import { Drawer, MultiSelect } from "@mantine/core";
 import { BarChart, Card } from "@tremor/react";
 import { GastosEnergia, PromedioConsumoEnergia } from "../../sampleData/icons";
+import { RightArrowIcon } from "../../sampleData/Detail/DrawerGastosEnergia/DrawerGastosDeEnergia";
 
 export default function DrawerEnergy({ opened, onClose, coolersData }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -60,228 +61,51 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title={<div style={{color:'var(--other-black, #000)',fontSize:'1.375rem',fontStyle:'normal',fontWeight:'500',lineHeight:'140%'}}>Gastos de energía</div>}
+      title={<div style={{ color: 'var(--other-black, #000)', fontSize: '1.375rem', fontStyle: 'normal', fontWeight: '500', lineHeight: '140%' }}>Gastos de energía</div>}
       position="bottom"
       size="35rem"
     >
       <section className="clt_detail_drawer_energy">
         <section className="clt_detail_drawer_energy_data">
-          <div
-            style={{
-              display: "flex",
-              padding: "10px",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "5px",
-              flex: 100,
-              alignSelf: "stretch",
-              borderRadius: '8px',
-              border: '1px solid var(--gray-4, #CED4DA)',
-              background: 'var(--gray-0, #F8F9FA)',
-              width: "90%",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "4px",
-                alignSelf: "stretch",
-                marginBottom: "-10px",
-              }}
-            >
-              <section style={{display:'flex',flex:'row',gap:'0.625rem',alignItems:'center'}}>
-              <img
-                src={PromedioConsumoEnergia}
-                width={"13px"}
-                alt="cooler"
-                style={{ width: "15px", height: "15px" }}
-              ></img>
-              <div
-                style={{
-                  color: "var(--other-black, #000)",
-                  fontSize: "1rem",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "145%",
-                }}
-              >
-                Promedio de consumo de energía diario
-              </div>
-              </section>
-              
-              <div
-                style={{
-                  color: "var(--gray-6, #868E96)",
-                  fontSize: "0.75rem",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "155%",
-                }}
-              >
-                Visión general del rendimiento energético.
-              </div>
+          <div style={{ width: '100%', height: '10%', backgroundColor: '', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ width: '1.625rem', height: '100%', backgroundColor: 'var(--kasmir-2, #C7CBD2)', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <img src={PromedioConsumoEnergia} alt="" style={{ height: '100%' }} />
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                alignContent: "flex-start",
-                gap: "20px",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                  width: "max-content",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "28px",
-                  }}
-                >
-                  Costo en energía
+            <div style={{ width: 'max-content', height: 'max-content', fontSize: '1rem', color: 'var(--other-black, #000)', fontWeight: '400' }}>Consumo de energía por mes</div>
+          </div>
+          <div style={{ width: '100%', height: '10%', backgroundColor: '', color: 'var(--gray-6, #868E96)', fontSize: '0.75rem', fontWeight: '400' }}>Visión general del rendimiento energético.</div>
+          <div style={{ width: '100%', height: '80%', backgroundColor: '', display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ width: '32%', height: '100%', backgroundColor: '' }}></div>
+            <div style={{ width: '32%', height: '100%', backgroundColor: '', display: 'flex', gap: '0.5rem', flexDirection: 'column' }}>
+              <section style={{ width: '100%', height: '50%', backgroundColor: '', display: 'flex', flexDirection: 'row', gap: '0.5rem' }}>
+                <div style={{ width: '50%', height: '100%', backgroundColor: '', display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ color: 'var(--gray-7, #495057)', fontSize: '0.875rem', fontWeight: '400' }}>Costo en energía</div>
+                  <div style={{ color: 'var(--other-black, #000)', fontSize: '1rem', fontWeight: '700' }}>
+                    {coolersData?.properties?.energy_cost.value === undefined
+                      ? "Sin registro"
+                      : "$" +
+                      `${coolersData?.properties?.energy_cost.value.toLocaleString(
+                        "es-MX"
+                      )}`}
+                  </div>
                 </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.625rem",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "28px",
-                  }}
-                >
-                  {coolersData?.properties?.energy_cost.value === undefined
-                    ? "Sin registro"
-                    : "$" +
-                    `${coolersData?.properties?.energy_cost.value.toLocaleString(
-                      "es-MX"
-                    )}`}
+                <div style={{ width: '50%', height: '100%', backgroundColor: '' }}>
+                  <div style={{ color: 'var(--gray-7, #495057)', fontSize: '0.875rem', fontWeight: '400' }}>Referencia de consumo</div>
+                  <div style={{ color: 'var(--other-black, #000)', fontSize: '1rem', fontWeight: '700' }}>
+                    {coolersData?.properties?.power_consumption_reference
+                      .value === undefined
+                      ? "Sin registro"
+                      : (coolersData?.properties?.power_consumption_reference.value).toFixed(
+                        2
+                      ) +
+                      " " +
+                      "KW/h"}
+                  </div>
                 </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                  width: "max-content",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    fontSize: "0.875rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "28px",
-                  }}
-                >
-                  Consumo de energía
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    fontSize: "1.625rem",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "28px",
-                  }}
-                >
-                  {coolersData?.properties?.energy_consumption.value ===
-                    undefined
-                    ? "Sin registro"
-                    : `${(coolersData?.properties?.energy_consumption.value).toFixed(
-                      2
-                    ) +
-                    " " +
-                    "KW/h"
-                    }`}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                  width: "max-content",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    fontSize: "0.875rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "28px",
-                  }}
-                >
-                  Referencia de consumo de energía
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.625rem",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "28px",
-                  }}
-                >
-                  {coolersData?.properties?.power_consumption_reference
-                    .value === undefined
-                    ? "Sin registro"
-                    : (coolersData?.properties?.power_consumption_reference.value).toFixed(
-                      2
-                    ) +
-                    " " +
-                    "KW/h"}
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                  alignItems: "flex-start",
-                  width: "max-content",
-                }}
-              >
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "28px",
-                  }}
-                >
-                  Promedio de emisiones de C02
-                </div>
-                <div
-                  style={{
-                    color: "#000005",
-                    // fontFamily: "DM Sans",
-                    fontSize: "1.625rem",
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "28px",
-                  }}
-                >
+              </section>
+              <div style={{ width: '100%', height: '50%', backgroundColor: '', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ color: 'var(--gray-7, #495057)', fontSize: '0.875rem', fontWeight: '400' }}>Promedio de emisiones ce C02</div>
+                <div style={{ color: 'var(--other-black, #000)', fontSize: '1rem', fontWeight: '700' }}>
                   {coolersData?.properties?.average_C02_emissions.value ===
                     undefined
                     ? "Sin registro"
@@ -294,131 +118,45 @@ export default function DrawerEnergy({ opened, onClose, coolersData }) {
                 </div>
               </div>
             </div>
-            <br></br>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                gap: "4px",
-                alignSelf: "stretch",
-              }}
-            >
-              <a
-                href="https://app.cfe.mx/Aplicaciones/CCFE/Tarifas/TarifasCRENegocio/Tarifas/PequenaDemandaBT.aspx"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  textDecoration: "none", // Elimina el subrayado del enlace
-                  color: "#3E83FF",
-                  fontSize: "0.875rem",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "normal",
-                  marginTop: "-80px",
-                }}
-                target="_blank"
-              >
-                Ver referencias de la CFE
-                <IconArrowRight
-                  style={{ width: "12px", height: "12px", color: "#3E83FF" }}
-                />
-              </a>
+            <div style={{ width: '32%', height: '100%', backgroundColor: '', display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
+              <div style={{ width: 'max-content', height: 'fit-content', display: 'flex', gap: '0.625rem', backgroundColor: '' }}>
+                <div style={{ color: 'var(--blue-6, #2393F4)', fontSize: '0.875rem', fontWeight: '400' }}>Ver referencias de la CFE</div>
+                <img src={RightArrowIcon} alt="RightArrowIcon" />
+              </div>
             </div>
           </div>
         </section>
         <section className="clt_detail_drawer_energy_grap">
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              height: "max-content",
-              padding: "24px",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "16px",
-              borderRadius: '8px',
-              border: '1px solid var(--gray-4, #CED4DA)',
-              background: 'var(--gray-0, #F8F9FA)',
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "4px",
-                alignSelf: "stretch",
-              }}
-            >
-              <section style={{display:'flex',flex:'row',gap:'0.625rem',alignItems:'center'}}>
-              <img
-                src={GastosEnergia}
-                width={"15px"}
-                height={"15px"}
-                alt="cooler"
-              ></img>
-              <div
-                style={{
-                  color: "#3A3A3F",
-                  // fontFamily: "DM Sans",
-                  fontSize: "1rem",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
-                }}
-              >
-                Consumo de energía por mes
-              </div>
-              </section>
-              <div
-                style={{
-                  color: "var(--gray-6, #868E96)",
-                  fontSize: "0.75rem",
-                  fontStyle: "normal",
-                  fontWeight: 400,
-                  lineHeight: "155%",
-                }}
-              >
-                Consumo de energía consumida por cada mes.
-              </div>
+          <div style={{ width: '100%', height: '10%', backgroundColor: '', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <div style={{ width: '1.625rem', height: '100%', backgroundColor: 'var(--kasmir-2, #C7CBD2)', borderRadius: '4px' }}>
+              <img src={PromedioConsumoEnergia} alt="" />
             </div>
-            <div>
-              {coolersData?.properties?.energy_consumption_month_1.value ===
-                0 ? (
-                <div
-                  style={{ marginLeft: 500, marginTop: 100, fontSize: "1rem" }}
-                >
-                  Sin información para mostrar
-                </div>
-              ) : (
-                <>
-                  <div
-                    style={{
-                      width: "800px",
-                      height: "100%",
-                      marginTop: -110,
-                      marginLeft: 130,
-                    }}
-                  >
-                    <Card style={{ backgroundColor: "transparent" }}>
-                      <BarChart
-                        className="h-60"
-                        data={chartdata}
-                        index="name"
-                        categories={["Consumo de energía"]}
-                        colors={["blue"]}
-                        valueFormatter={valueFormatter}
-                        yAxisWidth={100}
-                      />
-                    </Card>
-                  </div>
-                </>
-              )}
-            </div>
+            <div style={{ width: 'max-content', height: 'max-content', fontSize: '1rem', color: 'var(--other-black, #000)', fontWeight: '400' }}>Consumo de energía por mes</div>
+          </div>
+          <div style={{ width: '100%', height: '10%', backgroundColor: '', color: ' var(--gray-6, #868E96)', fontSize: '0.75rem', fontWeight: '400' }}>Consumo de energía consumida durante el mes:</div>
+          {/* Select data grafico */}
+          <div style={{ width: '100%', height: '15%', backgroundColor: '', display: 'flex' }}>
+            <MultiSelect
+              placeholder="Pick value"
+              data={['Junio', 'Julio', 'Agosto']}
+              clearable
+              style={{ width: '15%', height: '100%' }}
+            />
+          </div>
+          {/* Grafico */}
+          <div style={{ width: '100%', height: '65%', backgroundColor: '' }}>
+            <BarChart
+              style={{ width: '100%', height: '100%' }}
+              data={chartdata}
+              index="name"
+              categories={["Consumo de energía"]}
+              colors={["blue"]}
+              valueFormatter={valueFormatter}
+              yAxisWidth={100}
+            />
           </div>
         </section>
-      </section>     
+      </section>
     </Drawer>
   );
 }
