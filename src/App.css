@@ -929,7 +929,7 @@ body {
 .clt_actividad_principal_title_nombre {
   width: 100%;
   height: 7%;
-  border-bottom: #cacaca 1px solid;
+  /* border-bottom: #cacaca 1px solid; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -939,13 +939,19 @@ body {
 .clt_actividad_principal_title_nombre_h1 {
   font-size: 0.75rem;
   font-weight: 400;
-  color: #88888b;
+  color: #868e96;
+  margin-top: 0.3rem;
+}
+.clt_actividad_principal_title_nombre_h1_h2 {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #495057;
   margin-top: 0.3rem;
 }
 .clt_actividad_principal_title_nombre_h1_detail {
   font-size: 0.65rem;
   font-weight: 400;
-  color: #88888b;
+  color: #868e96;
   margin-top: 0.3rem;
 }
 .clt_actividad_principal_mapa {
@@ -1177,6 +1183,12 @@ body {
   flex-direction: row;
   margin-left: -3rem;
 }
+@media only screen and (max-width: 780px) {
+  .detail_image_info_data {
+    width: 100%;
+  }
+}
+
 /* Estilo para vista normal */
 .detail_data {
   width: 20%;

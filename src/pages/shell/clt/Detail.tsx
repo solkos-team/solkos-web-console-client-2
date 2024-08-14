@@ -38,6 +38,15 @@ moment.locale("es", {
     "Noviembre",
     "Diciembre",
   ],
+  weekdays: [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+  ],
 });
 
 export default function CoolerDetail() {
@@ -191,21 +200,6 @@ export default function CoolerDetail() {
                         gap: "0.625rem",
                       }}
                     >
-                      <div
-                        style={{
-                          color: "#000005",
-                          // fontFamily: "DM Sans",
-                          fontSize: "1.25rem",
-                          fontStyle: "normal",
-                          fontWeight: 700,
-                          lineHeight: "normal",
-                        }}
-                      >
-                        {coolersData?.cooler?.serial_number === undefined
-                          ? "Sin registro"
-                          : coolersData?.cooler?.serial_number}
-                      </div>
-
                       <>
                         <div
                           style={{
@@ -326,11 +320,43 @@ export default function CoolerDetail() {
                   </div>
                   <div
                     style={{
-                      color: "#88888B",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "flex-start",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "0.625rem",
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#000005",
+                          // fontFamily: "DM Sans",
+                          fontSize: "1.25rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "normal",
+                        }}
+                      >
+                        {coolersData?.cooler?.serial_number === undefined
+                          ? "Sin registro"
+                          : coolersData?.cooler?.serial_number}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      color: "#868E96",
                       // fontFamily: "DM Mono",
                       fontSize: "0.75rem",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "normal",
                     }}
                   >
@@ -448,7 +474,7 @@ export default function CoolerDetail() {
                                 : "#313A49",
                             fontSize: "0.625.rem",
                             fontStyle: "normal",
-                            fontWeight: 500,
+                            fontWeight: 700,
                             lineHeight: "14px",
                           }}
                         >
@@ -476,27 +502,38 @@ export default function CoolerDetail() {
                         lineHeight: "normal",
                       }}
                     >
-                      Leído por última vez el:
+                      Leído por última vez:
                     </div>
-
                     <div
                       style={{
-                        color: "#000005",
-                        // fontFamily: "Inter",
-                        fontSize: "0.75rem",
-                        fontStyle: "normal",
-                        fontWeight: 500,
-                        lineHeight: "normal",
+                        display: "flex",
+                        padding: "1px 10px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        gap: "6px",
+                        borderRadius: "8px",
+                        background: "#E7F5FF",
                       }}
                     >
-                      {coolersData?.cooler?.last_read == undefined ||
-                      coolersData?.cooler?.last_read == null
-                        ? "Sin registro"
-                        : moment(
-                            new Date(coolersData?.cooler?.last_read)
-                          ).format("DD/MM/YYYY HH:mm")}
+                      <div
+                        style={{
+                          color: "#2393F4",
+                          // fontFamily: "Inter",
+                          fontSize: "0.75rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "normal",
+                        }}
+                      >
+                        {coolersData?.cooler?.last_read == undefined ||
+                        coolersData?.cooler?.last_read == null
+                          ? "Sin registro"
+                          : moment(new Date(coolersData?.cooler?.last_read))
+                              .locale("es") // Establecer el idioma a español
+                              .format("dddd D MMMM, YYYY")}
+                      </div>
                     </div>
-                    <div
+                    {/* <div
                       style={{
                         display: "flex",
                         padding: "5px",
@@ -525,7 +562,7 @@ export default function CoolerDetail() {
                             " " +
                             "días sin visita"}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -546,20 +583,20 @@ export default function CoolerDetail() {
                 >
                   <div
                     style={{
-                      color: "#88888B",
+                      color: "#868E96",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
+                      fontWeight: 700,
                     }}
                   >
                     CANAL:
                   </div>
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "#000",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
-                      background: "#D4DAE3",
-                      borderRadius: "2px",
+                      fontWeight: 700,
+                      // background: "#D4DAE3",
+                      // borderRadius: "2px",
                       padding: "4px",
                       textAlign: "right",
                       marginTop: "-4px",
@@ -582,20 +619,20 @@ export default function CoolerDetail() {
                 >
                   <div
                     style={{
-                      color: "#88888B",
+                      color: "#868E96",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
+                      fontWeight: 700,
                     }}
                   >
                     REGIÓN:
                   </div>
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "#000",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
-                      background: "#D4DAE3",
-                      borderRadius: "2px",
+                      fontWeight: 700,
+                      // background: "#D4DAE3",
+                      // borderRadius: "2px",
                       padding: "4px",
                       textAlign: "right",
                       marginTop: "-4px",
@@ -618,20 +655,20 @@ export default function CoolerDetail() {
                 >
                   <div
                     style={{
-                      color: "#88888B",
+                      color: "#868E96",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
+                      fontWeight: 700,
                     }}
                   >
                     RUTA:
                   </div>
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "#000",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
-                      background: "#D4DAE3",
-                      borderRadius: "2px",
+                      fontWeight: 700,
+                      // background: "#D4DAE3",
+                      // borderRadius: "2px",
                       padding: "4px",
                       textAlign: "right",
                       marginTop: "-4px",
@@ -654,20 +691,20 @@ export default function CoolerDetail() {
                 >
                   <div
                     style={{
-                      color: "#88888B",
+                      color: "#868E96",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
+                      fontWeight: 700,
                     }}
                   >
                     GERENCIA DE ZONA:
                   </div>
                   <div
                     style={{
-                      color: "#313A49",
+                      color: "#000",
                       fontSize: "0.625rem",
-                      fontWeight: 500,
-                      background: "#D4DAE3",
-                      borderRadius: "2px",
+                      fontWeight: 700,
+                      // background: "#D4DAE3",
+                      // borderRadius: "2px",
                       padding: "4px",
                       textAlign: "right",
                       marginTop: "-4px",
@@ -727,7 +764,7 @@ export default function CoolerDetail() {
           </section>
         </>
 
-        <hr className="detail_hr" style={{ marginTop: 2 }} />
+        <hr className="detail_hr" style={{ marginTop: 10 }} />
         <section
           className="detail_principal_body_content_detail"
           // style={{ background: "red" }}
@@ -741,11 +778,20 @@ export default function CoolerDetail() {
               // style={{ background: "yellow" }}
             >
               <div className="clt_actividad_principal_title_detail">
-                <img
-                  src={"../../sampleData/actividad.svg"}
-                  alt="Descripción de la imagen"
-                  style={{ width: "1.2rem", height: "1.2rem" }}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    borderRadius: "4px",
+                    background: "#C7CBD2",
+                  }}
+                >
+                  <img
+                    src={"../../sampleData/notification.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "1.2rem", height: "1.2rem" }}
+                  />
+                </div>
+
                 <h1 className="clt_actividad_principal_title_h1_detail">
                   Actividad del enfriador
                 </h1>
@@ -899,7 +945,10 @@ export default function CoolerDetail() {
                                             ? "Sin registro"
                                             : moment
                                                 .utc(order.data.close_at)
-                                                .format("DD/MM/YYYY HH:mm")
+                                                .locale("es") // Configura el idioma a español
+                                                .format(
+                                                  "D [de] MMMM [de] YYYY HH:mm"
+                                                )
                                           : order.data.status === "O,O" ||
                                             order.data.status === "C,C"
                                           ? order.data.received_at ===
@@ -908,7 +957,10 @@ export default function CoolerDetail() {
                                             ? "Sin registro"
                                             : moment
                                                 .utc(order.data.received_at)
-                                                .format("DD/MM/YYYY HH:mm")
+                                                .locale("es") // Configura el idioma a español
+                                                .format(
+                                                  "D [de] MMMM [de] YYYY HH:mm"
+                                                )
                                           : "Sin registro"}
                                       </div>
                                       <div
@@ -918,16 +970,28 @@ export default function CoolerDetail() {
                                           alignItems: "center",
                                           gap: "4px",
                                           borderRadius: "2px",
-                                          background: "#D4DAE3",
+                                          border: "1px solid #DEE2E6",
+                                          // background: "#D4DAE3",
                                           marginLeft: "auto",
                                         }}
                                       >
                                         <div
                                           style={{
-                                            color: "#313A49",
+                                            width: "4px",
+                                            height: "4px",
+                                            background:
+                                              order.data.status === "O,O"
+                                                ? "#2393F4"
+                                                : "#868E96",
+                                            borderRadius: "2px",
+                                          }}
+                                        ></div>
+                                        <div
+                                          style={{
+                                            color: "#495057",
                                             fontSize: "0.438rem",
                                             fontStyle: "normal",
-                                            fontWeight: 400,
+                                            fontWeight: 700,
                                             lineHeight: "14px",
                                           }}
                                         >
@@ -937,77 +1001,95 @@ export default function CoolerDetail() {
                                         </div>
                                       </div>
                                     </div>
+
                                     <div
                                       style={{
-                                        color: "#000005",
-                                        // fontFamily: "DM Sans",
                                         display: "flex",
+                                        justifyContent: "space-between",
                                         alignItems: "center",
-                                        fontSize: "0.75em",
-                                        fontStyle: "normal",
-                                        fontWeight: 600,
-                                        lineHeight: "normal",
-                                        textAlign: "left",
-                                        marginTop: "-5px",
+                                        alignSelf: "stretch",
                                       }}
                                     >
                                       <div>
-                                        <p>Orden: {order.data.id}</p>
-                                      </div>
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "2px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background: "#BCDAFF",
-                                          marginLeft: 10,
-                                        }}
-                                      >
-                                        {order.data.service_id === "1003" ? (
-                                          <>
-                                            <img
-                                              src={"../../sampleData/mov2.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : (
-                                          <>
-                                            <img
-                                              src={"../../sampleData/so.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        )}
-
                                         <div
                                           style={{
-                                            color: "#3E83FF",
-                                            fontSize: "0.5rem",
+                                            color: "#000005",
+                                            // fontFamily: "DM Sans",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            fontSize: "0.75em",
                                             fontStyle: "normal",
-                                            fontWeight: 400,
+                                            fontWeight: 600,
+                                            lineHeight: "normal",
+                                            textAlign: "left",
+                                            marginTop: "-5px",
                                           }}
                                         >
-                                          {order.data.service_id === "1004"
-                                            ? "ORDEN DE INSTALACIÓN"
-                                            : order.data.service_id === "1003"
-                                            ? "ORDEN DE MOVIMIENTO"
-                                            : "ORDEN DE SERVICIO"}
+                                          <div>
+                                            <p>Orden: {order.data.id}</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div>
+                                        {" "}
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            padding: "2px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "4px",
+                                            borderRadius: "2px",
+                                            background: "#BCDAFF",
+                                            marginLeft: 10,
+                                          }}
+                                        >
+                                          {order.data.service_id === "1003" ? (
+                                            <>
+                                              <img
+                                                src={
+                                                  "../../sampleData/mov2.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : (
+                                            <>
+                                              <img
+                                                src={"../../sampleData/so.svg"}
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          )}
+
+                                          <div
+                                            style={{
+                                              color: "#3E83FF",
+                                              fontSize: "0.5rem",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                            }}
+                                          >
+                                            {order.data.service_id === "1004"
+                                              ? "ORDEN DE INSTALACIÓN"
+                                              : order.data.service_id === "1003"
+                                              ? "ORDEN DE MOVIMIENTO"
+                                              : "ORDEN DE SERVICIO"}
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
+
                                     <div
                                       style={{
                                         color: "#000005",
@@ -1051,134 +1133,160 @@ export default function CoolerDetail() {
                                         ? "Sin registro"
                                         : moment
                                             .utc(order.data.notified_at)
-                                            .format("DD/MM/YYYY HH:mm")}
+                                            .locale("es") // Configura el idioma a español
+                                            .format(
+                                              "D [de] MMMM [de] YYYY HH:mm"
+                                            )}
                                     </div>
+                                    {/* ************************************************************************ */}
 
+                                    {/* ************************************************************************ */}
                                     <div
                                       style={{
-                                        color: "#000005",
-                                        // fontFamily: "DM Sans",
                                         display: "flex",
+                                        justifyContent: "space-between",
                                         alignItems: "center",
-                                        fontSize: "0.75rem",
-                                        fontStyle: "normal",
-                                        fontWeight: 600,
-                                        lineHeight: "normal",
-                                        textAlign: "left",
+                                        alignSelf: "stretch",
                                       }}
                                     >
                                       <div>
-                                        {order.data.algorithm ===
-                                        "COMPRESSOR_FAIL"
-                                          ? "Falla asociada al compresor"
-                                          : order.data.algorithm ===
-                                            "TEMPERATURE_FAIL"
-                                          ? "Alta temperatura"
-                                          : order.data.algorithm ===
-                                            "VOLTAGE_FAIL"
-                                          ? "Posible daño eléctrico"
-                                          : order.data.algorithm ===
-                                            "FREEZING_FAIL"
-                                          ? "Evaporador bloqueado"
-                                          : order.data.algorithm ===
-                                            "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
-                                          ? "Alta demanda del compresor"
-                                          : order.data.algorithm ===
-                                            "DISCONNECTION_ALERT"
-                                          ? "Desconexión"
-                                          : order.data.algorithm ===
-                                            "HIGH_TEMPERATURE_ALERT"
-                                          ? "Alta temperatura"
-                                          : order.data.algorithm ===
-                                            "VOLTAGE_ALERT"
-                                          ? "Bajo/Alto voltaje"
-                                          : order.data.algorithm}
-                                      </div>
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          padding: "2px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          gap: "4px",
-                                          borderRadius: "2px",
-                                          background:
-                                            order.data.level === "ALERT"
-                                              ? "#FEF5C7"
-                                              : order.data.level === "FAIL"
-                                              ? "#FFC7CD"
-                                              : "#BCDAFF",
-                                          marginLeft: 10,
-                                        }}
-                                      >
-                                        {order.data.level === "ALERT" ? (
-                                          <>
-                                            {" "}
-                                            <img
-                                              src={
-                                                "../../sampleData/alert3.svg"
-                                              }
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : order.data.level === "FAIL" ? (
-                                          <>
-                                            {" "}
-                                            <img
-                                              src={"../../sampleData/fail3.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : order.data.level === "INDICATOR" ? (
-                                          <>
-                                            {" "}
-                                            <img
-                                              src={"../../sampleData/ind3.svg"}
-                                              alt="Descripción de la imagen"
-                                              style={{
-                                                width: ".9vw",
-                                                height: ".9vw",
-                                                lineHeight: "14px",
-                                              }}
-                                            />
-                                          </>
-                                        ) : (
-                                          ""
-                                        )}
-
+                                        {" "}
                                         <div
                                           style={{
-                                            color:
-                                              order.data.level === "ALERT"
-                                                ? "#451C03"
-                                                : order.data.level === "FAIL"
-                                                ? "#F93448"
-                                                : "#3E83FF",
-                                            fontSize: "0.5rem",
+                                            color: "#000005",
+                                            // fontFamily: "DM Sans",
+                                            display: "flex",
+                                            alignItems: "center",
+                                            fontSize: "0.75rem",
                                             fontStyle: "normal",
-                                            fontWeight: 400,
+                                            fontWeight: 600,
+                                            lineHeight: "normal",
+                                            textAlign: "left",
                                           }}
                                         >
-                                          {order.data.level === "ALERT"
-                                            ? "ALERTA"
-                                            : order.data.level === "FAIL"
-                                            ? "FALLA"
-                                            : order.data.level === "INDICATOR"
-                                            ? "CONTROL DE ACTIVOS"
-                                            : order.data.level}
+                                          <div>
+                                            {order.data.algorithm ===
+                                            "COMPRESSOR_FAIL"
+                                              ? "Falla asociada al compresor"
+                                              : order.data.algorithm ===
+                                                "TEMPERATURE_FAIL"
+                                              ? "Alta temperatura"
+                                              : order.data.algorithm ===
+                                                "VOLTAGE_FAIL"
+                                              ? "Posible daño eléctrico"
+                                              : order.data.algorithm ===
+                                                "FREEZING_FAIL"
+                                              ? "Evaporador bloqueado"
+                                              : order.data.algorithm ===
+                                                "COMPRESSOR_RUN_TIME_EXCEEDED_ALERT"
+                                              ? "Alta demanda del compresor"
+                                              : order.data.algorithm ===
+                                                "DISCONNECTION_ALERT"
+                                              ? "Desconexión"
+                                              : order.data.algorithm ===
+                                                "HIGH_TEMPERATURE_ALERT"
+                                              ? "Alta temperatura"
+                                              : order.data.algorithm ===
+                                                "VOLTAGE_ALERT"
+                                              ? "Bajo/Alto voltaje"
+                                              : order.data.algorithm}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div>
+                                        {" "}
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            padding: "2px",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            gap: "4px",
+                                            borderRadius: "2px",
+                                            background:
+                                              order.data.level === "ALERT"
+                                                ? "#FEF5C7"
+                                                : order.data.level === "FAIL"
+                                                ? "#FFC7CD"
+                                                : "#BCDAFF",
+                                            marginLeft: 10,
+                                          }}
+                                        >
+                                          {order.data.level === "ALERT" ? (
+                                            <>
+                                              {" "}
+                                              <img
+                                                src={
+                                                  "../../sampleData/alert3.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : order.data.level === "FAIL" ? (
+                                            <>
+                                              {" "}
+                                              <img
+                                                src={
+                                                  "../../sampleData/fail3.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : order.data.level ===
+                                            "INDICATOR" ? (
+                                            <>
+                                              {" "}
+                                              <img
+                                                src={
+                                                  "../../sampleData/ind3.svg"
+                                                }
+                                                alt="Descripción de la imagen"
+                                                style={{
+                                                  width: ".9vw",
+                                                  height: ".9vw",
+                                                  lineHeight: "14px",
+                                                }}
+                                              />
+                                            </>
+                                          ) : (
+                                            ""
+                                          )}
+
+                                          <div
+                                            style={{
+                                              color:
+                                                order.data.level === "ALERT"
+                                                  ? "#451C03"
+                                                  : order.data.level === "FAIL"
+                                                  ? "#F93448"
+                                                  : "#3E83FF",
+                                              fontSize: "0.5rem",
+                                              fontStyle: "normal",
+                                              fontWeight: 400,
+                                            }}
+                                          >
+                                            {order.data.level === "ALERT"
+                                              ? "ALERTA"
+                                              : order.data.level === "FAIL"
+                                              ? "FALLA"
+                                              : order.data.level === "INDICATOR"
+                                              ? "CONTROL DE ACTIVOS"
+                                              : order.data.level}
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
+                                    {/* ************************************************************************ */}
                                   </>
                                 )}
                               </div>
@@ -1199,11 +1307,21 @@ export default function CoolerDetail() {
                 className="clt_actividad_principal_title_detail"
                 // style={{ background: "red" }}
               >
-                <img
-                  src={"../../sampleData/buildings.svg"}
-                  alt="Descripción de la imagen"
-                  style={{ width: "1.2rem", height: "1.2rem" }}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    borderRadius: "4px",
+                    background: "#C7CBD2",
+                  }}
+                >
+                  {" "}
+                  <img
+                    src={"../../sampleData/building-store-2.svg"}
+                    alt="Descripción de la imagen"
+                    style={{ width: "1.2rem", height: "1.2rem" }}
+                  />
+                </div>
+
                 <h1 className="clt_actividad_principal_title_h1_detail">
                   Acerca del punto de venta
                 </h1>
@@ -1214,9 +1332,9 @@ export default function CoolerDetail() {
                 // style={{ background: "blue" }}
               >
                 <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Nombre PdV
+                  Nombre del PdV
                 </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
+                <h1 className="clt_actividad_principal_title_nombre_h1_h2">
                   {isLoading == true ? (
                     <div style={{ width: "100%", height: "100%" }}>
                       <Skeleton height={15} radius="sm" />
@@ -1245,7 +1363,7 @@ export default function CoolerDetail() {
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   Dirección
                 </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
+                <h1 className="clt_actividad_principal_title_nombre_h1_h2">
                   {isLoading == true ? (
                     <div style={{ width: "100%", height: "100%" }}>
                       <Skeleton height={20} radius="xl" />
@@ -1265,7 +1383,7 @@ export default function CoolerDetail() {
                 <h1 className="clt_actividad_principal_title_nombre_h1">
                   Distancia al punto de instalación
                 </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1">
+                <h1 className="clt_actividad_principal_title_nombre_h1_h2">
                   {isLoading == true ? (
                     <div style={{ width: "100%", height: "100%" }}>
                       <Skeleton height={10} radius="xl" />
