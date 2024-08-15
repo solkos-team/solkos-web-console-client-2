@@ -214,6 +214,10 @@ export default function Users() {
   const currentUserRole = Role;
 
   console.log(totalData);
+
+  const EMAIL = sessionStorage.getItem("Email");
+  console.log(EMAIL);
+
   return (
     <div>
       {dto === "CALL CENTER" ? (
@@ -360,13 +364,22 @@ export default function Users() {
               <div>
                 <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
-              <Button
-                style={{ background: "#ED5079" }}
-                onClick={toggleDrawer}
-                className="colaboradores_button"
-              >
-                Nuevo colaborador
-              </Button>
+              {dto === "KOF Guatemala" &&
+              EMAIL != "mayrabarronr91@gmail.com" &&
+              Role != "root" ? (
+                <></>
+              ) : (
+                <>
+                  {" "}
+                  <Button
+                    style={{ background: "#ED5079" }}
+                    onClick={toggleDrawer}
+                    className="colaboradores_button"
+                  >
+                    Nuevo colaborador
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -379,8 +392,8 @@ export default function Users() {
             alignItems: "flex-start",
             gap: "32px",
             alignSelf: "stretch",
-            marginLeft:'-55px',
-            width:'100%'
+            marginLeft: "-55px",
+            width: "100%",
           }}
         >
           <div
@@ -439,7 +452,16 @@ export default function Users() {
                 <th scope="col">Correo</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Path</th>
-                <th scope="col">Acciones</th>
+                {dto === "KOF Guatemala" &&
+                EMAIL != "mayrabarronr91@gmail.com" &&
+                Role != "root" ? (
+                  <></>
+                ) : (
+                  <>
+                    {" "}
+                    <th scope="col">Acciones</th>
+                  </>
+                )}
               </tr>
             </thead>
             {!isLoading && (
@@ -510,55 +532,68 @@ export default function Users() {
                               </div>
                             )}
                           </td>
-                          <td data-label="Acciones">
-                            {isLoading == true ? (
-                              <>
-                                <Skeleton height={20} radius="sm" width="90%" />
-                              </>
-                            ) : (
-                              <>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "20px",
-                                  }}
-                                >
-                                  <img
-                                    src={"../../sampleData/edit.svg"}
-                                    alt="Descripción de la imagen"
-                                    style={{
-                                      width: "18px",
-                                      height: "18px",
-                                      color: "#3E83FF",
-                                      fontSize: "14px",
-                                      fontStyle: "normal",
-                                      fontWeight: 400,
-                                      display: "flex",
-                                      cursor: "pointer",
-                                    }}
-                                    onClick={() => {
-                                      toggleDrawerEdit();
-                                      setDataUsersEdit(user);
-                                    }}
-                                  />
+                          {dto === "KOF Guatemala" &&
+                          EMAIL != "mayrabarronr91@gmail.com" &&
+                          Role != "root" ? (
+                            <></>
+                          ) : (
+                            <>
+                              {" "}
+                              <td data-label="Acciones">
+                                {isLoading == true ? (
+                                  <>
+                                    <Skeleton
+                                      height={20}
+                                      radius="sm"
+                                      width="90%"
+                                    />
+                                  </>
+                                ) : (
+                                  <>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "20px",
+                                      }}
+                                    >
+                                      <img
+                                        src={"../../sampleData/edit.svg"}
+                                        alt="Descripción de la imagen"
+                                        style={{
+                                          width: "18px",
+                                          height: "18px",
+                                          color: "#3E83FF",
+                                          fontSize: "14px",
+                                          fontStyle: "normal",
+                                          fontWeight: 400,
+                                          display: "flex",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                          toggleDrawerEdit();
+                                          setDataUsersEdit(user);
+                                        }}
+                                      />
 
-                                  <img
-                                    src={"../../sampleData/delete.svg"}
-                                    alt="Descripción de la imagen"
-                                    style={{
-                                      width: "18px",
-                                      height: "18px",
-                                      cursor: "pointer",
-                                    }}
-                                    onClick={() => {
-                                      deleteUserDrawer(user.id);
-                                    }}
-                                  />
-                                </div>
-                              </>
-                            )}
-                          </td>
+                                      <img
+                                        src={"../../sampleData/delete.svg"}
+                                        alt="Descripción de la imagen"
+                                        style={{
+                                          width: "18px",
+                                          height: "18px",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                          deleteUserDrawer(user.id);
+                                        }}
+                                      />
+                                    </div>
+                                  </>
+                                )}
+                              </td>
+                            </>
+                          )}
                         </tr>
                       ))}
                     <DrawerNewUser
