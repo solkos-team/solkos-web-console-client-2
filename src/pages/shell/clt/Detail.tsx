@@ -1498,14 +1498,33 @@ export default function CoolerDetail() {
                   className="clt_actividad_principal_title_detail"
                   style={{ marginTop: -10 }}
                 >
-                  <img
-                    src={"../../sampleData/actividad.svg"}
-                    alt="Descripción de la imagen"
-                    style={{ width: "1.2rem", height: "1.2rem" }}
-                  />
-                  <h1 className="clt_actividad_principal_title_h1_detail">
-                    Inversión total en el enfriador
-                  </h1>
+                  <div
+                    style={{
+                      display: "flex",
+                      borderRadius: "4px",
+                      background: "#C7CBD2",
+                    }}
+                  >
+                    {" "}
+                    <img
+                      src={"../../sampleData/coin.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.2rem", height: "1.2rem" }}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      alignSelf: "stretch",
+                    }}
+                  >
+                    <h1 className="clt_actividad_principal_title_h1_detail">
+                      Inversión total en el enfriador
+                    </h1>
+                    <div>a</div>
+                  </div>
                 </div>
                 <div className="details-container">
                   <div className="detail-item">
