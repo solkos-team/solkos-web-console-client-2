@@ -20,6 +20,7 @@ import { CoolviewIcon } from "../../../sampleData/icons";
 import { userVerify } from "../../../Functions/pathVerify";
 import {
   formatDrawerCoolview,
+  getDates,
   obtenerFechaMasReciente,
 } from "../../../Functions/Coolview";
 
@@ -140,7 +141,14 @@ export default function CoolerDetail() {
   const toggleExpand2 = () => {
     setExpand2(!expand2);
   };
-
+  const [url2,seturl2 ] = useState<string>()
+  useEffect(()=>{
+    if(isLoading  == false){
+      if(dateTelemetri != undefined){
+        seturl2(`https://solkos-coolview-2.firebaseapp.com?device_id=${coolersData?.cooler?.serial_number}&start_date=${getDates(dateTelemetri!.getDate()+1,dateTelemetri!.getMonth()+1,dateTelemetri!.getFullYear())[1]}&end_date=${getDates(dateTelemetri!.getDate()+1,dateTelemetri!.getMonth()+1,dateTelemetri!.getFullYear())[0]}&clt=false`)
+      }
+    }
+  },[isLoading,dateTelemetri])  
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -1660,6 +1668,7 @@ export default function CoolerDetail() {
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler?.serial_number}
         dateStat={dateTelemetri}
+        url2={url2}
       />
     </>
   );

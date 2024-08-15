@@ -13,6 +13,7 @@ export const coolviewDrawer = ({
   onClose,
   CoolerId,
   dateStat,
+  url2
 }) => {
   const [telemetriaStatus,setTelemetriaStatus] = useState(true)
   const [URL, setURL] = useState<string>("");
@@ -46,7 +47,7 @@ export const coolviewDrawer = ({
       className="drawerCoolview"
     >
       <section className="coolview_printipal">
-        <iframe src={URL} width="100%" height="100%" frameBorder="0" />
+        <iframe src={url2} width="100%" height="100%" frameBorder="0" />
       </section>
     </Drawer>
   ) : (
