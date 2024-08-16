@@ -87,7 +87,7 @@ function getDates(day, month, year) {
   ];
 }
 const obtenerFechaMasReciente = (fechaStrA?: string, fechaStrB?: string) => {
-    if (fechaStrA === undefined && fechaStrB === undefined) {
+    if (fechaStrA === undefined && fechaStrB === undefined || fechaStrA == null && fechaStrB == null) {
         return undefined;
       }
       if (fechaStrA === undefined) {
