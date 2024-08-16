@@ -341,6 +341,7 @@ export const fetchUniversalTables2 = async (
   componentURL: string,
   data?: any,
   setIsLoading?: (loading: boolean) => void,
+  isLoading?: boolean,
   detailsID?: string,
   CRUD?: string,
   setErrorMessage?: (error: string) => void
@@ -349,7 +350,7 @@ export const fetchUniversalTables2 = async (
   detailsID ? url + "/" + detailsID : url;
   // Actualiza el estado de carga si se proporciona la función setIsLoading
   if (setIsLoading) {
-    setIsLoading(true);
+    setIsLoading(!isLoading);
   }
 
   const headers: HeadersInit = {

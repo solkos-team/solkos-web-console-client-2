@@ -1,4 +1,4 @@
-import { Button, PasswordInput, Input, Alert } from "@mantine/core";
+import { Button, PasswordInput, Input, Alert, Loader } from "@mantine/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -48,12 +48,13 @@ export const Login = () => {
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversalTables2("login", body, setIsLoading,
+      const data = await fetchUniversalTables2("login", body, setIsLoading,isLoading,
         undefined,
         'POST',
         setErrorMessage);            
       pushUserConfig(data);
     } catch (error) {
+      setIsLoading(!false)
       console.error("Error fetching login:", error);
     }
   };
@@ -79,8 +80,7 @@ export const Login = () => {
       event.preventDefault();
       handleLogin();
     }
-  };  
-  console.log(loginErrors(errorMessage).message)
+  };    
   return (
     <>
       <div className="login_principal_body">
@@ -142,7 +142,11 @@ export const Login = () => {
                 className="login_principal_form_button_ini"
                 onClick={handleLogin}
               >
-                Iniciar sesión
+                {
+                  isLoading == false 
+                  ? <Loader color="gray" size="xs" />
+                  : 'Iniciar sesión'
+                }
               </Button>
             </form>
           </div>
