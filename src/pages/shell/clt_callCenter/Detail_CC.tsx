@@ -16,7 +16,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { CoolviewIcon } from "../../../sampleData/icons";
 import { userVerify } from "../../../Functions/pathVerify";
 import { coolviewDrawer as DrawerCoolview } from "../coolView/coolviewDrawer";
-import { obtenerFechaMasReciente } from "../../../Functions/Coolview";
+import { getDates, obtenerFechaMasReciente } from "../../../Functions/Coolview";
 
 moment.locale("es", {
   months: [
@@ -51,7 +51,7 @@ export default function CoolerDetailCC() {
     useDisclosure(false);
   const [energyOpened, { open: openEnergy, close: closeEnergy }] =
     useDisclosure(false);
-
+    const [url2, seturl2] = useState<string>();
   const fetchData = async (serie?) => {
     try {
       const data = await fetchUniversalDetails(
@@ -101,6 +101,29 @@ export default function CoolerDetailCC() {
       setDateTelemetri(obtenerFechaMasReciente(coolersData?.cooler.last_stat,coolersData?.last_telemetry))
     }
   },[isLoading])
+  useEffect(() => {
+    if (isLoading == false) {
+      if (dateTelemetri != undefined) {
+        seturl2(
+          `https://solkos-coolview-2.firebaseapp.com?device_id=${
+            coolersData?.cooler?.serial_number
+          }&start_date=${
+            getDates(
+              dateTelemetri!.getDate() + 1,
+              dateTelemetri!.getMonth() + 1,
+              dateTelemetri!.getFullYear()
+            )[1]
+          }&end_date=${
+            getDates(
+              dateTelemetri!.getDate() + 1,
+              dateTelemetri!.getMonth() + 1,
+              dateTelemetri!.getFullYear()
+            )[0]
+          }&clt=false`
+        );
+      }
+    }
+  }, [isLoading, dateTelemetri]);
   return (
     <>
       {/* {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -1355,6 +1378,7 @@ export default function CoolerDetailCC() {
         onClose={closeCoolview}
         CoolerId={coolersData?.cooler?.serial_number}
         dateStat={dateTelemetri}
+        url2={url2}
       />
     </>
   );

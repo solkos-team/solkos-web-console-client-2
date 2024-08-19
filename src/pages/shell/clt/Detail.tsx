@@ -170,8 +170,7 @@ export default function CoolerDetail() {
       }
     }
   }, [isLoading, dateTelemetri]);
-
-  console.log(coolersData?.cooler);
+  
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
