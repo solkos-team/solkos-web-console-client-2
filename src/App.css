@@ -2851,3 +2851,7 @@ body {
     display: flex; /* Mostrar el ícono sólo en vista móvil */
   }
 }
+
+.mantine-vos779{
+  background-color: var(--gray-0, #F8F9FA);  
+}

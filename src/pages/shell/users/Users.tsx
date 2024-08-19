@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { validateAndExecute } from "../../../Functions/pathVerify";
 import PageFilter from "../../../components/pageFilter";
 import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
-import { Button, Center, Drawer, TextInput } from "@mantine/core";
+import { Button, Center, Drawer, Modal, TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import DrawerUsers from "../../../components/drawerUsers/DrawerUsers";
 import DrawerNewUser from "../../../components/drawerNewUser/DrawerNewUser";
@@ -46,9 +46,8 @@ export default function Users() {
   const [totalData, setTotalData] = useState<String | number>(0);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
   const Role = localStorage.getItem("Role") || "";
-  console.log(Role);
-
   useEffect(() => {
     if (location.pathname === "/home/users") {
       localStorage.removeItem("searchTags");
@@ -76,11 +75,11 @@ export default function Users() {
     data === null || data === undefined
       ? []
       : data.map((user) => ({
-          Nombre: user.name,
-          Email: user.email,
-          Cliente: user.customer,
-          Path: user.path.toString(),
-        }));
+        Nombre: user.name,
+        Email: user.email,
+        Cliente: user.customer,
+        Path: user.path.toString(),
+      }));
   };
   const filteredUsers = dataUsers ? filterCoolers(dataUsers, searchValue) : [];
   const pathVerify = () => {
@@ -140,7 +139,7 @@ export default function Users() {
   const [userDelteID, setUserDelteID] = useState();
   const deleteUserDrawer = async (id) => {
     setUserDelteID(id);
-    setIsDelete(true);
+    setModalDelete(true)
   };
 
   const deleteUser = async () => {
@@ -150,6 +149,7 @@ export default function Users() {
       setDeleteStatus(true);
       setIsDeleteAlertOpen(true);
       setIsDelete(false);
+      setModalDelete(false)
     } catch (error) {
       console.error("Error", error);
       setDeleteStatus(false);
@@ -210,14 +210,8 @@ export default function Users() {
     }
     return rows;
   };
-
   const currentUserRole = Role;
-
-  console.log(totalData);
-
   const EMAIL = sessionStorage.getItem("Email");
-  console.log(EMAIL);
-
   return (
     <div>
       {dto === "CALL CENTER" ? (
@@ -365,8 +359,8 @@ export default function Users() {
                 <ExportToExcel datos={dataUsers} nombre={"Users"} />
               </div>
               {dto === "KOF Guatemala" &&
-              EMAIL != "mayrabarronr91@gmail.com" &&
-              Role != "root" ? (
+                EMAIL != "mayrabarronr91@gmail.com" &&
+                Role != "root" ? (
                 <></>
               ) : (
                 <>
@@ -453,8 +447,8 @@ export default function Users() {
                 <th scope="col">Cliente</th>
                 <th scope="col">Path</th>
                 {dto === "KOF Guatemala" &&
-                EMAIL != "mayrabarronr91@gmail.com" &&
-                Role != "root" ? (
+                  EMAIL != "mayrabarronr91@gmail.com" &&
+                  Role != "root" ? (
                   <></>
                 ) : (
                   <>
@@ -533,8 +527,8 @@ export default function Users() {
                             )}
                           </td>
                           {dto === "KOF Guatemala" &&
-                          EMAIL != "mayrabarronr91@gmail.com" &&
-                          Role != "root" ? (
+                            EMAIL != "mayrabarronr91@gmail.com" &&
+                            Role != "root" ? (
                             <></>
                           ) : (
                             <>
@@ -584,9 +578,12 @@ export default function Users() {
                                           height: "18px",
                                           cursor: "pointer",
                                         }}
-                                        onClick={() => {
-                                          deleteUserDrawer(user.id);
-                                        }}
+                                        // onClick={() => {
+                                        //   deleteUserDrawer(user.id);
+                                        // }}
+                                        onClick={() => { 
+                                          deleteUserDrawer(user.id)
+                                           }}
                                       />
                                     </div>
                                   </>
@@ -905,6 +902,53 @@ export default function Users() {
           </Alert>
         </div>
       )}
+      <section>
+        {modalDelete && (
+          <Modal opened={modalDelete} onClose={() => { setModalDelete(false) }} centered
+            title={<div style={{color:'var(--other-black, #000)',fontSize:'1rem',fontWeight:'400'}}>Eliminar usuario</div>}
+            className="users_modal"
+            style={{
+              border: "1px solid #CED4DA",
+              borderRadius: "16px",
+              padding: "1rem",
+            }} >
+            <section style={{ width: '100%', height: '100%', backgroundColor: '',display:'flex',flexDirection:'column',gap:'8px' }}>
+              <div style={{ width: '100%', height: '10%', backgroundColor: '', display: 'flex', alignItems: 'center', justifyContent: 'center',color:'var(--other-black, #000)',fontSize:'1.125rem',fontWeight:'400' }}>¿Estás seguro de eliminar a este usuario?</div>
+              <div style={{ width: '100%', height: '90%', backgroundColor: '' ,display:'flex',flexDirection:'column',gap:'8px'}}>
+                <div style={{ width: "100%" }}>
+                  <Button
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#FFF5F5",
+                      color: "#FA5252",
+                    }}
+                    onClick={() => {
+                      deleteUser();
+                    }}
+                  >
+                    Si, eliminar
+                  </Button>
+                </div>
+                <div style={{ width: "100%" }}>
+                  <Button
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#F1F3F5",
+                      color: "#212529",
+                    }}
+                    variant="filled"
+                    onClick={() => {
+                      setModalDelete(false)
+                    }}
+                  >
+                    No, cancelar
+                  </Button>
+                </div>
+              </div>
+            </section>
+          </Modal>
+        )}
+      </section>
     </div>
   );
 }
