@@ -21,6 +21,7 @@ import { TextInput, Skeleton } from "@mantine/core";
 import { DrawerHeaderResponsive } from "../../pages/shell/outlets/DrawerHeaderResponsive";
 import { MapInsightsResponsive } from "../../pages/shell/insights/Responsive/MapInsightsResponsive";
 import { DrawerMap } from "../../pages/shell/outlets/DrawerMap";
+import { getBorderStyle, getBorderStyle2, getColor2 } from "../../Functions/Vault";
 
 export default function DrawerO({ opened, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
@@ -43,6 +44,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     days_without_visitC,
     last_read,
     num_coolers,
+    actionable
   } = outletDetails;
   const lastReadDate = new Date(last_read);
   const lastIndex = currentPage * Number(datosPorPagina);
@@ -166,8 +168,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               alt="Descripción de la imagen"
               style={{ width: "40px", height: "40px", cursor: "pointer" }}
             />
-            <div
-              style={{
+            <div style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
@@ -175,6 +176,13 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 flex: 100,
               }}
             >
+              <div 
+              style={{width:'max-content',height:'max-content',background:'',padding:'2px',boxSizing:'border-box', fontSize:'0.625rem',borderRadius:'2px',
+                border: getBorderStyle2(actionable,dto),
+                color : getColor2(actionable,dto)
+              }}>
+                {actionable ?? 'Sin registro'}
+              </div>
               <div
                 style={{
                   display: "flex",

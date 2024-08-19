@@ -126,6 +126,7 @@ export interface InsightsData {
 }
 
 export interface CoolerData {
+  actionable: string;
   cooler: {
     actionable: string;
     serial_number: string;
