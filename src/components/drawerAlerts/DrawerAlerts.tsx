@@ -68,7 +68,11 @@ export default function DrawerA({
   console.log(selectedAlgorithm);
   const fetchData = async () => {
     try {
-      const data = await fetchUniversalTables("coolers", body, setIsLoading);
+      const data = await fetchUniversalTables(
+        "alerts_drawer",
+        body,
+        setIsLoading
+      );
       const datos = await data.json();
       const totalData = data.headers.get("pagination-count");
       setTotalData(Number(totalData) || 0);
