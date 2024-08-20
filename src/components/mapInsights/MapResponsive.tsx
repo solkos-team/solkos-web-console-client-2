@@ -168,7 +168,16 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [zoom, setZoom] = useState(defaultProps.zoom);
-  const body = { customer: dto, path: pathVerify() };
+  const body = {
+    customer: dto,
+    path: pathVerify(),
+    map_coolers:
+      (dto === "HEINEKEN" && pathVerify().length >= 3) ||
+      (dto !== "HEINEKEN" && pathVerify().length >= 4)
+        ? true
+        : false,
+  };
+
   const [geojson, setGeojson] = useState<GeoJSON | null>(null);
   const [opened, setOpened] = useState(false);
   const toggleDrawer = () => setOpened((flag) => !flag);
@@ -518,13 +527,24 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   };
 
   return (
-    <div style={{ height: "100%", width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
       {isLoading ? (
         <SkeletonMapInsights />
       ) : (
         <>
           <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
+            bootstrapURLKeys={{
+              key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
+            }}
             defaultCenter={defaultProps.center}
             defaultZoom={defaultProps.zoom}
             options={{
