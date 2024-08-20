@@ -296,7 +296,7 @@ export default function Insights() {
                   </div>
                   <div className="insights_datas_kpi_data_data">
                     <div className="insights_datas_kpi_data_data_1">
-                      Frecuencia
+                      Frecuencia ritmo
                     </div>
                     <div
                       className="insights_datas_kpi_data_data_2"
@@ -338,6 +338,58 @@ export default function Insights() {
                       ) : (
                         data.assets_analytics[1].value.toLocaleString("es-MX") +
                         " Enfriadores"
+                      )}
+                    </div>
+                  </div>
+                  <div className="insights_datas_kpi_data_data">
+                    <div className="insights_datas_kpi_data_data_1">
+                      Frec. Últ. 7 días
+                    </div>
+                    <div
+                      className="insights_datas_kpi_data_data_2"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      {isLoading ? (
+                        <Skeleton height={15} mt={6} width="55%" radius="xs" />
+                      ) : (
+                        <>
+                          <div
+                            style={{
+                              marginRight: "4px",
+                              color: "color-del-0%",
+                            }}
+                          >
+                            0%
+                          </div>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <div
+                              style={{
+                                width: "8px",
+                                height: "8px",
+                                backgroundColor: "#FA5252",
+                                borderRadius: "50%",
+                                marginRight: "5px", // Espacio entre el círculo y el texto
+                              }}
+                            ></div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="insights_datas_kpi_data_data_3">
+                      {isLoading == true ? (
+                        <>
+                          <Skeleton
+                            height={15}
+                            mt={6}
+                            width="55%"
+                            radius="xs"
+                          />
+                        </>
+                      ) : (
+                        "0 Enfriadores"
                       )}
                     </div>
                   </div>

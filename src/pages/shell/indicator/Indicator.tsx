@@ -7,6 +7,7 @@ import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import { useDisclosure } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
+import { Level } from "../../../interfaces/InsightsInterfaces";
 
 export default function Indicator() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -19,7 +20,7 @@ export default function Indicator() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = { customer: dto, path: pathVerify() };
+  const body = { customer: dto, path: pathVerify(), level: "INDICATOR" };
   const fetchData = async () => {
     try {
       setIsLoading(true);
