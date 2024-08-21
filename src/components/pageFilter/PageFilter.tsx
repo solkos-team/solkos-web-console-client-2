@@ -42,20 +42,38 @@ export default function (props) {
   const dataSelect =
     dto === "HEINEKEN"
       ? options.filter((option) => option !== "Ruta")
-      : // : dto === "ECO"
-        // ? options.filter((option) => option !== "Unidad Operativa")
-        options;
+      : dto === "ECO"
+      ? options.filter((option) => option !== "Unidad Operativa")
+      : options;
   const [data, setData] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
   const [filterVisibility, setFilterVisibility] = useState<boolean>(true);
   const [customer, setCustomer] = useState(dto);
   const navigate = useNavigate();
+  // const checkVisibilityPath = () => {
+  //   const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
+
+  //   if (dto === "HEINEKEN" && pathVerify().length >= 3) {
+  //     setFilterVisibility(false);
+  //   } else if (dto === "HEINEKEN" && pathVerify().length < 3) {
+  //     setFilterVisibility(true);
+  //   } else if (pathVerify().length >= 4) {
+  //     setFilterVisibility(false);
+  //   } else {
+  //     setFilterVisibility(true);
+  //   }
+  // };
+
   const checkVisibilityPath = () => {
     const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
 
-    if (dto === "HEINEKEN" && pathVerify().length >= 3) {
+    // Verifica si dto es "HEINEKEN" o "ECO"
+    if ((dto === "HEINEKEN" || dto === "ECO") && pathVerify().length >= 3) {
       setFilterVisibility(false);
-    } else if (dto === "HEINEKEN" && pathVerify().length < 3) {
+    } else if (
+      (dto === "HEINEKEN" || dto === "ECO") &&
+      pathVerify().length < 3
+    ) {
       setFilterVisibility(true);
     } else if (pathVerify().length >= 4) {
       setFilterVisibility(false);
