@@ -170,7 +170,7 @@ export default function CoolerDetail() {
       }
     }
   }, [isLoading, dateTelemetri]);
-  
+
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -380,7 +380,7 @@ export default function CoolerDetail() {
                             style={{
                               color: "#000005",
                               // fontFamily: "DM Sans",
-                              fontSize: "1.25rem",
+                              fontSize: "1.125rem",
                               fontStyle: "normal",
                               fontWeight: 700,
                               lineHeight: "normal",
@@ -396,7 +396,7 @@ export default function CoolerDetail() {
                         style={{
                           color: "#868E96",
                           // fontFamily: "DM Mono",
-                          fontSize: "0.75rem",
+                          fontSize: "0.563  rem",
                           fontStyle: "normal",
                           fontWeight: 700,
                           lineHeight: "normal",
@@ -426,7 +426,7 @@ export default function CoolerDetail() {
                             style={{
                               display: "flex",
                               padding: "4px",
-                              fontSize: "0.625rem",
+                              fontSize: "0.563rem",
                               // justifyContent: "center",
                               alignItems: "center",
                               gap: "4px",
@@ -516,7 +516,7 @@ export default function CoolerDetail() {
                                       "SIN DATOS"
                                     ? "#313A49"
                                     : "#313A49",
-                                fontSize: "0.625.rem",
+                                fontSize: "0.563rem",
                                 fontStyle: "normal",
                                 fontWeight: 700,
                                 lineHeight: "14px",
@@ -540,7 +540,7 @@ export default function CoolerDetail() {
                           style={{
                             color: "#88888B",
                             // fontFamily: "Inter",
-                            fontSize: "0.75rem",
+                            fontSize: "0.72rem",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -563,7 +563,7 @@ export default function CoolerDetail() {
                             style={{
                               color: "#2393F4",
                               // fontFamily: "Inter",
-                              fontSize: "0.75rem",
+                              fontSize: "0.6rem",
                               fontStyle: "normal",
                               fontWeight: 700,
                               lineHeight: "normal",
@@ -577,36 +577,6 @@ export default function CoolerDetail() {
                                   .format("dddd D MMMM, YYYY")}
                           </div>
                         </div>
-                        {/* <div
-                      style={{
-                        display: "flex",
-                        padding: "5px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "4px",
-                        borderRadius: "2px",
-                        background: "#D4DAE3",
-                      }}
-                    >
-                      <div
-                        style={{
-                          color: "#313A49",
-                          // fontFamily: "DM Mono",
-                          fontSize: "0.75rem",
-                          fontStyle: "normal",
-                          fontWeight: 500,
-                          lineHeight: "14px",
-                        }}
-                      >
-                        {" "}
-                        {coolersData?.cooler?.days_without_visit === null ||
-                        coolersData?.cooler?.days_without_visit === undefined
-                          ? "Sin registro"
-                          : coolersData?.cooler?.days_without_visit +
-                            " " +
-                            "días sin visita"}
-                      </div>
-                    </div> */}
                       </div>
                     </div>
                   </div>
@@ -628,7 +598,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                         }}
                       >
@@ -637,7 +607,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -667,7 +637,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                         }}
                       >
@@ -676,7 +646,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -706,7 +676,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                         }}
                       >
@@ -715,7 +685,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -745,7 +715,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                         }}
                       >
@@ -754,7 +724,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.625rem",
+                          fontSize: "0.563rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
