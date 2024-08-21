@@ -129,9 +129,6 @@
 // ****************************************************************************************************************************************************
 // ****************************************************************************************************************************************************
 
-// import React, { useEffect, useState } from "react";
-// import GoogleMapReact from "google-map-react";
-
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { defaultProps, mapOptions } from "./datos";

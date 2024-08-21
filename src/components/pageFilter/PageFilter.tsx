@@ -42,7 +42,9 @@ export default function (props) {
   const dataSelect =
     dto === "HEINEKEN"
       ? options.filter((option) => option !== "Ruta")
-      : options;
+      : // : dto === "ECO"
+        // ? options.filter((option) => option !== "Unidad Operativa")
+        options;
   const [data, setData] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
   const [filterVisibility, setFilterVisibility] = useState<boolean>(true);
