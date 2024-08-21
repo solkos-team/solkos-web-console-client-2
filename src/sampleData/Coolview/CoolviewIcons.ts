@@ -1,4 +1,5 @@
 //@ts-ignore
 import LogoCoolview from '../Coolview/CoolviewPrincipalLogoDrawer.svg'
-
-export { LogoCoolview}
+//@ts-ignore
+import SolkosSymbol from '../Coolview/solkosSymbol.svg'
+export { LogoCoolview,SolkosSymbol}
