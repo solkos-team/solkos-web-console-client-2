@@ -348,7 +348,7 @@ export default function CoolerDetail() {
                                       ? "#C92A2A"
                                       : "black",
                                   // fontFamily: "DM Sans",
-                                  fontSize: "0.875rem",
+                                  fontSize: "0.688rem",
                                   fontStyle: "normal",
                                   fontWeight: 600,
                                   lineHeight: "14px",
@@ -380,7 +380,7 @@ export default function CoolerDetail() {
                             style={{
                               color: "#000005",
                               // fontFamily: "DM Sans",
-                              fontSize: "1.125rem",
+                              fontSize: "1.375rem",
                               fontStyle: "normal",
                               fontWeight: 700,
                               lineHeight: "normal",
@@ -396,7 +396,7 @@ export default function CoolerDetail() {
                         style={{
                           color: "#868E96",
                           // fontFamily: "DM Mono",
-                          fontSize: "0.563  rem",
+                          fontSize: "0.75rem",
                           fontStyle: "normal",
                           fontWeight: 700,
                           lineHeight: "normal",
@@ -426,7 +426,7 @@ export default function CoolerDetail() {
                             style={{
                               display: "flex",
                               padding: "4px",
-                              fontSize: "0.563rem",
+                              fontSize: "0.688rem",
                               // justifyContent: "center",
                               alignItems: "center",
                               gap: "4px",
@@ -516,7 +516,7 @@ export default function CoolerDetail() {
                                       "SIN DATOS"
                                     ? "#313A49"
                                     : "#313A49",
-                                fontSize: "0.563rem",
+                                fontSize: "0.688rem",
                                 fontStyle: "normal",
                                 fontWeight: 700,
                                 lineHeight: "14px",
@@ -540,7 +540,7 @@ export default function CoolerDetail() {
                           style={{
                             color: "#88888B",
                             // fontFamily: "Inter",
-                            fontSize: "0.72rem",
+                            fontSize: "0.875rem",
                             fontStyle: "normal",
                             fontWeight: 500,
                             lineHeight: "normal",
@@ -563,7 +563,7 @@ export default function CoolerDetail() {
                             style={{
                               color: "#2393F4",
                               // fontFamily: "Inter",
-                              fontSize: "0.6rem",
+                              fontSize: "0.688rem",
                               fontStyle: "normal",
                               fontWeight: 700,
                               lineHeight: "normal",
@@ -598,7 +598,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                         }}
                       >
@@ -607,7 +607,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -637,7 +637,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                         }}
                       >
@@ -646,7 +646,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -676,7 +676,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                         }}
                       >
@@ -685,7 +685,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -715,7 +715,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#868E96",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                         }}
                       >
@@ -724,7 +724,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "#000",
-                          fontSize: "0.563rem",
+                          fontSize: "0.75rem",
                           fontWeight: 700,
                           // background: "#D4DAE3",
                           // borderRadius: "2px",
@@ -766,7 +766,7 @@ export default function CoolerDetail() {
                       <div
                         style={{
                           color: "var(--blue-6, #2393F4)",
-                          fontSize: "0.75rem",
+                          fontSize: "0.875rem",
                           fontWeight: 500,
                           cursor: "pointer",
                         }}
@@ -835,7 +835,7 @@ export default function CoolerDetail() {
                     <p
                       style={{
                         fontWeight: "bold",
-                        fontSize: "0.75em",
+                        fontSize: "0.75rem",
                         marginTop: 130,
                       }}
                     >
@@ -964,7 +964,7 @@ export default function CoolerDetail() {
                                       <div
                                         style={{
                                           color: "#88888B",
-                                          fontSize: "0.75em",
+                                          fontSize: "0.563rem",
                                           fontStyle: "normal",
                                           fontWeight: 500,
                                           lineHeight: "normal",
@@ -1020,7 +1020,7 @@ export default function CoolerDetail() {
                                         <div
                                           style={{
                                             color: "#495057",
-                                            fontSize: "0.438rem",
+                                            fontSize: "0.5rem",
                                             fontStyle: "normal",
                                             fontWeight: 700,
                                             lineHeight: "14px",
@@ -1048,7 +1048,7 @@ export default function CoolerDetail() {
                                             // fontFamily: "DM Sans",
                                             display: "flex",
                                             alignItems: "center",
-                                            fontSize: "0.75em",
+                                            fontSize: "0.875rem",
                                             fontStyle: "normal",
                                             fontWeight: 600,
                                             lineHeight: "normal",
@@ -1153,7 +1153,7 @@ export default function CoolerDetail() {
                                     <div
                                       style={{
                                         color: "#88888B",
-                                        fontSize: "0.75rem",
+                                        fontSize: "0.6rem",
                                         fontStyle: "normal",
                                         fontWeight: 500,
                                         lineHeight: "normal",
@@ -1188,7 +1188,7 @@ export default function CoolerDetail() {
                                             // fontFamily: "DM Sans",
                                             display: "flex",
                                             alignItems: "center",
-                                            fontSize: "0.75rem",
+                                            fontSize: "0.875rem",
                                             fontStyle: "normal",
                                             fontWeight: 600,
                                             lineHeight: "normal",
@@ -1301,7 +1301,7 @@ export default function CoolerDetail() {
                                                   : order.data.level === "FAIL"
                                                   ? "#F93448"
                                                   : "#3E83FF",
-                                              fontSize: "0.5rem",
+                                              fontSize: "0.563rem",
                                               fontStyle: "normal",
                                               fontWeight: 400,
                                             }}
@@ -1436,6 +1436,7 @@ export default function CoolerDetail() {
                   )}
                 </h1>
               </div>
+              <br></br>
 
               <div className="clt_actividad_principal_mapa">
                 {isLoading == true ? (
@@ -1584,18 +1585,17 @@ export default function CoolerDetail() {
                           padding: "8px",
                           background: "#FFC7CD",
                           borderRadius: "8px",
-                          width: "10px",
-                          height: "10px",
                         }}
                       >
                         <IconArrowDownRight
                           style={{
                             color: "#F93448",
-                            width: "1vw",
-                            height: "10px",
+                            width: "10px", // Ajusta el tamaño del ícono aquí
+                            height: "10px", // Ajusta el tamaño del ícono aquí
                           }}
                         />
                       </div>
+
                       <div
                         style={{
                           color: "var(--red-6, #FA5252)",

@@ -119,7 +119,9 @@ const MapComponent1 = ({ latitude, longitude }) => {
         onClick={openGoogleMaps}
       >
         <IconMap size={17} style={{ color: "#FFFFFF" }} />
-        <span style={{ marginLeft: "8px", color: "#FFFFFF", fontSize: 12 }}>
+        <span
+          style={{ marginLeft: "8px", color: "#FFFFFF", fontSize: "0.75rem" }}
+        >
           Ver en maps
         </span>{" "}
       </div>

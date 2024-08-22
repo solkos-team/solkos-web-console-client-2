@@ -874,7 +874,7 @@ body {
 }
 .clt_actividad_principal_title_h1_detail {
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #3a3a3f;
 }
 
@@ -937,13 +937,13 @@ body {
   box-sizing: border-box;
 }
 .clt_actividad_principal_title_nombre_h1 {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: #868e96;
   margin-top: 0.3rem;
 }
 .clt_actividad_principal_title_nombre_h1_h2 {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: #495057;
   margin-top: 0.3rem;
@@ -2613,10 +2613,11 @@ body {
 }
 .detail-label {
   color: #88888b;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  white-space: nowrap;
 }
 .detail-value {
   color: #000;
