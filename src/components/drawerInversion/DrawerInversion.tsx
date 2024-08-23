@@ -6,7 +6,11 @@ import { Tabs } from "@mantine/core";
 import { Drawer } from "@mantine/core";
 import { BarChart } from "@tremor/react";
 import Plot from "react-plotly.js";
-import { CostoAcumulado, Depreciacion, PromedioConsumoEnergia } from "../../sampleData/icons";
+import {
+  CostoAcumulado,
+  Depreciacion,
+  PromedioConsumoEnergia,
+} from "../../sampleData/icons";
 
 export default function DrawerInversion({ opened, onClose, coolersData }) {
   const [mostrarVentanaEmergente, setMostrarVentanaEmergente] = useState(false);
@@ -36,7 +40,19 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
     <Drawer
       opened={opened}
       onClose={onClose}
-      title={<div style={{color:'var(--other-black, #000)',fontSize:'1.375rem',fontWeight:'500',lineHeight:'140%',fontStyle:'normal'}}>Desglose económico</div>}
+      title={
+        <div
+          style={{
+            color: "var(--other-black, #000)",
+            fontSize: "1.375rem",
+            fontWeight: "500",
+            lineHeight: "140%",
+            fontStyle: "normal",
+          }}
+        >
+          Desglose económico
+        </div>
+      }
       position="bottom"
       size="95%"
     >
@@ -52,9 +68,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               gap: "10px",
               flex: 100,
               alignSelf: "stretch",
-              borderRadius: '8px',
-              border: '1px solid var(--gray-4, #CED4DA)',
-              background: 'var(--gray-0, #F8F9FA)',
+              borderRadius: "8px",
+              border: "1px solid var(--gray-4, #CED4DA)",
+              background: "var(--gray-0, #F8F9FA)",
               width: "60%",
               height: "100%",
               boxSizing: "border-box",
@@ -84,11 +100,22 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                     alignItems: "center",
                   }}
                 >
-                  <img
-                    src={PromedioConsumoEnergia}
-                    alt="cooler"
-                    style={{ width: "15px", height: "15px" }}
-                  ></img>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background: "#C7CBD2",
+                    }}
+                  >
+                    <img
+                      src={PromedioConsumoEnergia}
+                      alt="cooler"
+                      style={{ width: "26px", height: "26px" }}
+                    ></img>
+                  </div>
+
                   <div
                     style={{
                       color: "var(--other-black, #000)",
@@ -97,7 +124,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "145%",
-                      marginLeft: 5,                      
+                      marginLeft: 5,
                     }}
                   >
                     Inversión total en el enfriador
@@ -127,8 +154,8 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   // alignItems: "flex-end",
                   // alignContent: "flex-end",
                   gap: "0.5rem",
-                  flexWrap: "wrap",                  
-                  flexDirection:'column'
+                  flexWrap: "wrap",
+                  flexDirection: "column",
                 }}
               >
                 <div
@@ -159,7 +186,7 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       `${coolersData?.properties?.total_ownership_expense.value.toLocaleString(
                         "es-MX"
                       )}`}
-                </div>                
+                </div>
               </div>
             </div>
             <div
@@ -279,9 +306,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               gap: "16px",
               flex: 100,
               alignSelf: "stretch",
-              borderRadius: '8px',
-              border: '1px solid var(--gray-4, #CED4DA)',
-              background: 'var(--gray-0, #F8F9FA)',
+              borderRadius: "8px",
+              border: "1px solid var(--gray-4, #CED4DA)",
+              background: "var(--gray-0, #F8F9FA)",
               width: "100%",
               height: "100%",
               boxSizing: "border-box",
@@ -306,11 +333,21 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={Depreciacion}
-                    alt="cooler"
-                    style={{ width: "15px", height: "15px" }}
-                  ></img>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background: "#C7CBD2",
+                    }}
+                  >
+                    <img
+                      src={Depreciacion}
+                      alt="cooler"
+                      style={{ width: "26px", height: "26px" }}
+                    ></img>
+                  </div>
                   <div
                     style={{
                       color: "var(--other-black, #000)",
@@ -337,106 +374,113 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 >
                   Valor del enfriador a lo largo del tiempo.
                 </div>
-                <section style={{display:'flex',flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
-                <div
+                <section
                   style={{
                     display: "flex",
-                    minWidth: "160px",
-                    maxWidth: "400px",                    
-                    gap: "12px",
-                    flexWrap: "wrap",
-                    flexDirection:'column'
+                    flexDirection: "row",
+                    width: "100%",
+                    justifyContent: "space-between",
                   }}
                 >
                   <div
                     style={{
-                      color: "var(--gray-7, #495057)",
-                      fontSize: "1rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "155%",
+                      display: "flex",
+                      minWidth: "160px",
+                      maxWidth: "400px",
+                      gap: "12px",
+                      flexWrap: "wrap",
+                      flexDirection: "column",
                     }}
                   >
-                    Valor actual de depreciación
-                  </div>
-                  <div
-                    style={{
-                      color: "var(--other-black, #000)",
-                      fontSize: "1.25rem",
-                      fontStyle: "normal",
-                      fontWeight: 700,
-                      lineHeight: "155%",
-                    }}
-                  >
-                    {coolersData?.properties?.present_value_of_depreciation
-                      .value === undefined
-                      ? "Sin registro"
-                      : "$" +
-                        `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString(
-                          "es-MX"
-                        )}`}
-                  </div>                  
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "flex-start" }}>
                     <div
                       style={{
-                        display: "flex",
-                        padding: "8px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "4px",
-                        borderRadius: "8px",
-                        background: "#FFC7CD",
-                        width: "10px",
-                        height: "10px",
+                        color: "var(--gray-7, #495057)",
+                        fontSize: "1rem",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "155%",
                       }}
                     >
-                      <IconArrowDownRight
-                        style={{
-                          color: "#F93448",
-                          width: "1vw",
-                          height: "10px",
-                        }}
-                      />
+                      Valor actual de depreciación
+                    </div>
+                    <div
+                      style={{
+                        color: "var(--other-black, #000)",
+                        fontSize: "1.25rem",
+                        fontStyle: "normal",
+                        fontWeight: 700,
+                        lineHeight: "155%",
+                      }}
+                    >
+                      {coolersData?.properties?.present_value_of_depreciation
+                        .value === undefined
+                        ? "Sin registro"
+                        : "$" +
+                          `${coolersData?.properties?.present_value_of_depreciation.value.toLocaleString(
+                            "es-MX"
+                          )}`}
                     </div>
                   </div>
                   <div
                     style={{
-                      color: "var(--red-6, #FA5252)",
-                      // fontFamily: "DM Sans",
-                      fontSize: "0.75rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "155%",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
                     }}
                   >
-                    {coolersData?.properties?.annual_decrement.value ===
-                    undefined
-                      ? "Sin registro"
-                      : "$" +
-                        `${coolersData?.properties?.annual_decrement.value.toLocaleString(
-                          "es-MX"
-                        )}`}
+                    <div style={{ display: "flex", alignItems: "flex-start" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          padding: "8px",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          gap: "4px",
+                          borderRadius: "8px",
+                          background: "#FFC7CD",
+                          width: "10px",
+                          height: "10px",
+                        }}
+                      >
+                        <IconArrowDownRight
+                          style={{
+                            color: "#F93448",
+                            width: "1vw",
+                            height: "10px",
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        color: "var(--red-6, #FA5252)",
+                        // fontFamily: "DM Sans",
+                        fontSize: "0.75rem",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "155%",
+                      }}
+                    >
+                      {coolersData?.properties?.annual_decrement.value ===
+                      undefined
+                        ? "Sin registro"
+                        : "$" +
+                          `${coolersData?.properties?.annual_decrement.value.toLocaleString(
+                            "es-MX"
+                          )}`}
+                    </div>
+                    <div
+                      style={{
+                        color: "var(--gray-6, #868E96)",
+                        fontSize: "0.75rem",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        lineHeight: "155%",
+                      }}
+                    >
+                      Decremento anual
+                    </div>
                   </div>
-                  <div
-                    style={{
-                      color: "var(--gray-6, #868E96)",
-                      fontSize: "0.75rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      lineHeight: "155%",
-                    }}
-                  >
-                    Decremento anual
-                  </div>
-                </div>
                 </section>
               </div>
               <div
@@ -459,12 +503,14 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                 ></div>
               </div>
             </div>
+
             <div
               style={{
                 display: "flex",
                 alignItems: "center",
                 gap: "16px",
                 alignSelf: "stretch",
+                marginTop: 15,
               }}
             >
               <div
@@ -788,9 +834,9 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
               flexDirection: "column",
               alignItems: "flex-start",
               gap: "10px",
-              borderRadius: '8px',
-              border: '1px solid var(--gray-4, #CED4DA)',
-              background: 'var(--gray-0, #F8F9FA)',
+              borderRadius: "8px",
+              border: "1px solid var(--gray-4, #CED4DA)",
+              background: "var(--gray-0, #F8F9FA)",
               width: "100%",
               height: "100%",
               boxSizing: "border-box",
@@ -814,23 +860,37 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   alignSelf: "stretch",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <img
-                    src={CostoAcumulado}
-                    alt="cooler"
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <div
                     style={{
-                      width: "15px",
-                      height: "15px",
-                      marginRight: "5px",
-                    }} // Agregamos margen derecho para separar el icono del texto
-                  />
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "10px",
+                      borderRadius: "4px",
+                      background: "#C7CBD2",
+                    }}
+                  >
+                    <img
+                      src={CostoAcumulado}
+                      alt="cooler"
+                      style={{ width: "26px", height: "26px" }}
+                    ></img>
+                  </div>
+
                   <div
                     style={{
                       color: "var(--other-black, #000)",
+                      // fontFamily: "DM Sans",
                       fontSize: "1rem",
                       fontStyle: "normal",
                       fontWeight: 400,
                       lineHeight: "145%",
+                      marginLeft: 5,
                     }}
                   >
                     Costo acumulado por servicio
@@ -850,100 +910,85 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                   concepto de servicio
                 </div>
               </div>
-
+            </div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "16px",
+                flex: 100,
+              }}
+            >
               <div
                 style={{
                   display: "flex",
-                  minWidth: "160px",
-                  maxWidth: "400px",
-                  alignItems: "flex-end",
-                  alignContent: "flex-end",
-                  gap: "12px",
-                  flexWrap: "wrap",
+                  padding: "0px",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
                 }}
               >
                 <div
                   style={{
-                    color: "#000005",
+                    alignSelf: "stretch",
+                    color: "var(--gray-7, #495057)",
                     // fontFamily: "DM Sans",
-                    fontSize: "1.625rem",
+                    fontSize: "1rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
+                    fontWeight: 400,
+                    lineHeight: "155%",
+                  }}
+                >
+                  Gasto total por servicio
+                </div>
+                <div
+                  style={{
+                    alignSelf: "stretch",
+                    color: "var(--other-black, #000)",
+                    fontSize: "1.25rem",
+                    fontStyle: "normal",
+                    fontWeight: 700,
+                    lineHeight: "155%",
+                    marginRight: 75,
                   }}
                 >
                   {coolersData?.properties?.total_expense_service.value ===
                   undefined
                     ? "Sin registro"
-                    : `${coolersData?.properties?.total_expense_service.value.toLocaleString(
+                    : "$" +
+                      `${coolersData?.properties?.total_expense_service.value.toLocaleString(
                         "es-MX"
                       )}`}
-                </div>
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Gasto total por servicio
                 </div>
               </div>
               <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                style={{
+                  display: "flex",
+                  // width: "168px",
+                  padding: "8px",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
               >
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      padding: "8px",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      gap: "4px",
-                      borderRadius: "8px",
-                      background: "#FFC7CD",
-                      width: "10px",
-                      height: "10px",
-                    }}
-                  >
-                    <IconArrowDownRight
-                      style={{
-                        color: "#F93448",
-                        width: "16px",
-                        height: "16px",
-                      }}
-                    />
-                  </div>
-                </div>
                 <div
                   style={{
-                    color: "#F93448",
-                    // fontFamily: "DM Sans",
+                    alignSelf: "stretch",
+                    color: "var(--gray-7, #495057)",
                     fontSize: "1rem",
                     fontStyle: "normal",
                     fontWeight: 400,
-                    lineHeight: "14px",
+                    lineHeight: "155%",
                   }}
                 >
-                  (+ $
-                  {coolersData?.properties?.annual_decrement.value === undefined
-                    ? "Sin registro"
-                    : `${coolersData?.properties?.annual_decrement.value.toLocaleString(
-                        "es-MX"
-                      )}`}
-                  )
+                  Gasto del año en curso
                 </div>
                 <div
                   style={{
-                    color: "#000005",
+                    color: "var(--other-black, #000)",
                     // fontFamily: "DM Sans",
-                    fontSize: "1rem",
+                    fontSize: "1.25rem",
                     fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "14px",
+                    fontWeight: 700,
+                    lineHeight: "155%",
                   }}
                 >
                   {coolersData?.properties?.total_expense_service_last_year
@@ -953,18 +998,6 @@ export default function DrawerInversion({ opened, onClose, coolersData }) {
                       `${coolersData?.properties?.total_expense_service_last_year.value.toLocaleString(
                         "es-MX"
                       )}`}
-                </div>
-                <div
-                  style={{
-                    color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "0.875rem",
-                    fontStyle: "normal",
-                    fontWeight: 400,
-                    lineHeight: "14px",
-                  }}
-                >
-                  Gasto del año en curso
                 </div>
               </div>
             </div>

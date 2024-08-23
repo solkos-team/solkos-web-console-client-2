@@ -135,6 +135,8 @@ export default function Insights() {
                     </>
                   ) : data?.summary.operative_units === undefined ? (
                     "Sin registro"
+                  ) : dto === "ECO" ? (
+                    0
                   ) : (
                     data?.summary.operative_units.toLocaleString("es-MX")
                   )}
