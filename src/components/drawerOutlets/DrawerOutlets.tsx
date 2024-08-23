@@ -21,7 +21,39 @@ import { TextInput, Skeleton } from "@mantine/core";
 import { DrawerHeaderResponsive } from "../../pages/shell/outlets/DrawerHeaderResponsive";
 import { MapInsightsResponsive } from "../../pages/shell/insights/Responsive/MapInsightsResponsive";
 import { DrawerMap } from "../../pages/shell/outlets/DrawerMap";
-import { getBorderStyle, getBorderStyle2, getColor2 } from "../../Functions/Vault";
+import moment from "moment";
+import "moment/locale/es";
+import {
+  getBorderStyle,
+  getBorderStyle2,
+  getColor2,
+} from "../../Functions/Vault";
+
+moment.locale("es", {
+  months: [
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
+  ],
+  weekdays: [
+    "Domingo",
+    "Lunes",
+    "Martes",
+    "Miércoles",
+    "Jueves",
+    "Viernes",
+    "Sábado",
+  ],
+});
 
 export default function DrawerO({ opened, onClose, outletDetails }) {
   const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
@@ -44,7 +76,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
     days_without_visitC,
     last_read,
     num_coolers,
-    actionable
+    actionable,
   } = outletDetails;
   const lastReadDate = new Date(last_read);
   const lastIndex = currentPage * Number(datosPorPagina);
@@ -166,9 +198,15 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               onClick={onClose}
               src={"../../sampleData/pv2.svg"}
               alt="Descripción de la imagen"
-              style={{ width: "40px", height: "40px", cursor: "pointer" }}
+              style={{
+                width: "40px",
+                height: "40px",
+                cursor: "pointer",
+                marginRight: "10px",
+              }}
             />
-            <div style={{
+            <div
+              style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-start",
@@ -176,12 +214,20 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 flex: 100,
               }}
             >
-              <div 
-              style={{width:'max-content',height:'max-content',background:'',padding:'2px',boxSizing:'border-box', fontSize:'0.625rem',borderRadius:'2px',
-                border: getBorderStyle2(actionable,dto),
-                color : getColor2(actionable,dto)
-              }}>
-                {actionable ?? 'Sin registro'}
+              <div
+                style={{
+                  width: "max-content",
+                  height: "max-content",
+                  padding: "2px",
+                  boxSizing: "border-box",
+                  fontSize: "0.625rem",
+                  borderRadius: "2px",
+                  fontWeight: 500,
+                  border: getBorderStyle2(actionable, dto),
+                  color: getColor2(actionable, dto),
+                }}
+              >
+                {actionable ?? "Sin registro"}
               </div>
               <div
                 style={{
@@ -190,19 +236,28 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   justifyContent: "center",
                   alignItems: "flex-start",
                   alignSelf: "stretch",
+                  width: "100%",
                 }}
               >
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    width: "100%",
+                  }}
                 >
                   <div
                     style={{
                       color: "#000005",
-                      // fontFamily: "DM Sans",
-                      fontSize: "12px",
+                      fontSize: "1.125rem",
                       fontStyle: "normal",
                       fontWeight: 700,
                       lineHeight: "normal",
+                      width: "100%",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
                     }}
                   >
                     {outlet_name}
@@ -215,30 +270,31 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   <div
                     style={{
                       color: "#000005",
-                      // fontFamily: "DM Sans",
                       fontSize: "12px",
                       fontStyle: "normal",
                       fontWeight: 700,
                       lineHeight: "normal",
+                      width: "100%",
                     }}
                   >
                     Sin registro
                   </div>
                 ) : (
-                  <>
-                    <div
-                      style={{
-                        color: "#88888B",
-                        // fontFamily: "DM Sans",
-                        fontSize: "10px",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        lineHeight: "20px",
-                      }}
-                    >
-                      {outlet_address}
-                    </div>
-                  </>
+                  <div
+                    style={{
+                      color: "#88888B",
+                      fontSize: "0.563rem",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "20px",
+                      width: "100%",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {outlet_address}
+                  </div>
                 )}
               </div>
               <div
@@ -252,8 +308,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 <div
                   style={{
                     color: "#88888B",
-                    // fontFamily: "DM Sans",
-                    fontSize: "11px",
+                    fontSize: "0.75rem",
                     fontStyle: "normal",
                     fontWeight: 500,
                     lineHeight: "normal",
@@ -267,7 +322,6 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   <div
                     style={{
                       color: "#88888B",
-                      // fontFamily: "DM Sans",
                       fontSize: "11px",
                       fontStyle: "normal",
                       fontWeight: 500,
@@ -277,33 +331,32 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     Sin registro
                   </div>
                 ) : (
-                  <>
-                    <section
+                  <section
+                    style={{
+                      display: "flex",
+                      padding: "1px var(--borderRadius-tremor-small, 6px)",
+                      boxSizing: "border-box",
+                      width: "max-content",
+                      backgroundColor: "var(--blue-0, #E7F5FF)",
+                      borderRadius: "0.5rem",
+                    }}
+                  >
+                    <div
                       style={{
-                        display: "flex",
-                        padding: "1px var(--borderRadius-tremor-small, 6px)",
-                        boxSizing: "border-box",
-                        width: "max-content",
-                        backgroundColor: "var(--blue-0, #E7F5FF)",
-                        borderRadius: "0.5rem",
+                        color: "var(--blue-6, #2393F4)",
+                        fontSize: "0.563rem",
+                        fontStyle: "normal",
+                        fontWeight: 700,
+                        lineHeight: "normal",
                       }}
                     >
-                      <div
-                        style={{
-                          color: "var(--blue-6, #2393F4)",
-                          // fontFamily: "Inter",
-                          fontSize: "0.563rem",
-                          fontStyle: "normal",
-                          fontWeight: 700,
-                          lineHeight: "normal",
-                        }}
-                      >
-                        {lastReadDate.toLocaleDateString("es-MX", {
-                          timeZone: "UTC",
-                        })}
-                      </div>
-                    </section>
-                  </>
+                      {lastReadDate == undefined || lastReadDate == null
+                        ? "Sin registro"
+                        : moment(new Date(lastReadDate))
+                            .locale("es") // Establecer el idioma a español
+                            .format("dddd D MMMM, YYYY")}
+                    </div>
+                  </section>
                 )}
                 &nbsp;
                 {days_without_visitC === undefined ||
@@ -311,37 +364,35 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 days_without_visitC === null ? (
                   ""
                 ) : (
-                  <>
+                  <div
+                    style={{
+                      display: "flex",
+                      padding: "8px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      gap: "4px",
+                      borderRadius: "2px",
+                      background: "#D4DAE3",
+                    }}
+                  >
                     <div
                       style={{
-                        display: "flex",
-                        padding: "8px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "4px",
-                        borderRadius: "2px",
-                        background: "#D4DAE3",
+                        color: "#313A49",
+                        fontSize: "10px",
+                        fontStyle: "normal",
+                        fontWeight: 500,
+                        lineHeight: "12px",
+                        height: "10px",
                       }}
                     >
-                      <div
-                        style={{
-                          color: "#313A49",
-                          // fontFamily: "DM Mono",
-                          fontSize: "10px",
-                          fontStyle: "normal",
-                          fontWeight: 500,
-                          lineHeight: "12px",
-                          height: "10px",
-                        }}
-                      >
-                        {`${days_without_visitC} días sin visita`}
-                      </div>
+                      {`${days_without_visitC} días sin visita`}
                     </div>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
           </div>
+
           <div className="drawerHeaderInfo">
             <div
               style={{
@@ -350,6 +401,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 alignItems: "flex-start",
                 // gap: "3px",
                 alignSelf: "stretch",
+                marginTop: 25,
               }}
             >
               <div
@@ -362,11 +414,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "var(--gray-6, #868E96)",
+                    color: "#868E96",
                     // fontFamily: "DM Mono",
-                    fontSize: "9px",
+                    fontSize: "0.563rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     lineHeight: "14px",
                   }}
                 >
@@ -398,18 +450,29 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                     channel === null ? (
                       <div
                         style={{
-                          color: "#88888B",
+                          color: "#000",
                           // fontFamily: "DM Mono",
-                          fontSize: "9px",
+                          fontSize: "0.563rem",
                           fontStyle: "normal",
-                          fontWeight: 500,
+                          fontWeight: 700,
                           lineHeight: "14px",
                         }}
                       >
                         Sin registro
                       </div>
                     ) : (
-                      `${channel}`
+                      <div
+                        style={{
+                          color: "#000",
+                          // fontFamily: "DM Mono",
+                          fontSize: "0.563rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "14px",
+                        }}
+                      >
+                        {channel}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -424,11 +487,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "var(--gray-6, #868E96)",
+                    color: "#868E96",
                     // fontFamily: "DM Mono",
-                    fontSize: "9px",
+                    fontSize: "0.563rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     lineHeight: "14px",
                   }}
                 >
@@ -470,7 +533,18 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                         Sin registro
                       </div>
                     ) : (
-                      `${region}`
+                      <div
+                        style={{
+                          color: "#000",
+                          // fontFamily: "DM Mono",
+                          fontSize: "0.563rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "14px",
+                        }}
+                      >
+                        {region}
+                      </div>
                     )}
                   </div>
                 </div>
@@ -485,11 +559,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "var(--gray-6, #868E96)",
+                    color: "#868E96",
                     // fontFamily: "DM Mono",
-                    fontSize: "9px",
+                    fontSize: "0.563rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     lineHeight: "14px",
                   }}
                 >
@@ -516,9 +590,22 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       lineHeight: "14px",
                     }}
                   >
-                    {route === undefined || route === "" || route === null
-                      ? "Sin registros"
-                      : `${route}`}
+                    {route === undefined || route === "" || route === null ? (
+                      "Sin registros"
+                    ) : (
+                      <div
+                        style={{
+                          color: "#000",
+                          // fontFamily: "DM Mono",
+                          fontSize: "0.563rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "14px",
+                        }}
+                      >
+                        {route}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -532,11 +619,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               >
                 <div
                   style={{
-                    color: "var(--gray-6, #868E96)",
+                    color: "#868E96",
                     // fontFamily: "DM Mono",
-                    fontSize: "9px",
+                    fontSize: "0.563rem",
                     fontStyle: "normal",
-                    fontWeight: 500,
+                    fontWeight: 700,
                     lineHeight: "14px",
                   }}
                 >
@@ -564,9 +651,22 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                       lineHeight: "14px",
                     }}
                   >
-                    {zone === undefined || zone === "" || zone === null
-                      ? "Sin registros"
-                      : `${zone}`}
+                    {zone === undefined || zone === "" || zone === null ? (
+                      "Sin registros"
+                    ) : (
+                      <div
+                        style={{
+                          color: "#000",
+                          // fontFamily: "DM Mono",
+                          fontSize: "0.563rem",
+                          fontStyle: "normal",
+                          fontWeight: 700,
+                          lineHeight: "14px",
+                        }}
+                      >
+                        {zone}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -635,7 +735,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
               <div
                 style={{
                   display: "flex",
-                  padding: "0px 64px",
+                  padding: "0px 35px",
                   justifyContent: "space-between",
                   alignItems: "center",
                 }}
@@ -649,11 +749,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 >
                   <div
                     style={{
-                      color: "#88888B",
+                      color: "#ADB5BD",
                       // fontFamily: "DM Sans",
-                      fontSize: "10px",
+                      fontSize: "0.563REM",
                       fontStyle: "normal",
-                      fontWeight: 500,
+                      fontWeight: 700,
                       lineHeight: "155%",
                     }}
                   >
@@ -661,11 +761,11 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   </div>
                   <div
                     style={{
-                      color: "#000005",
+                      color: "#101113",
                       // fontFamily: "DM Sans",
-                      fontSize: "12px",
+                      fontSize: "0.875",
                       fontStyle: "normal",
-                      fontWeight: 300,
+                      fontWeight: 400,
                       lineHeight: "155%",
                     }}
                   >
@@ -709,12 +809,21 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 <table className="table_responsive">
                   <thead>
                     <tr>
-                      <th scope="col">ESTATUS</th>
-                      <th scope="col">SERIE</th>
-                      <th scope="col">MODELO</th>
-                      <th scope="col">DIAS SIN VISITA</th>
-                      <th scope="col">CONTROL DE ACTIVOS</th>
-                      <th scope="col">ACCIONES</th>
+                      <th scope="col" style={{ color: "#000" }}>
+                        SERIE
+                      </th>
+                      <th scope="col" style={{ color: "#000" }}>
+                        MODELO
+                      </th>
+                      <th scope="col" style={{ color: "#000" }}>
+                        DIAS SIN VISITA
+                      </th>
+                      <th scope="col" style={{ color: "#000" }}>
+                        CONTROL DE ACTIVOS
+                      </th>
+                      <th scope="col" style={{ color: "#000" }}>
+                        ACCIONES
+                      </th>
                     </tr>
                   </thead>
                   {filteredCoolers != undefined ? (
@@ -728,127 +837,6 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                               navigate(`/home/clt/${cooler.serial_number}`);
                             }}
                           >
-                            <td data-label="ESTATUS" title={cooler.status}>
-                              {isLoading == true ? (
-                                <>
-                                  <Skeleton
-                                    height={20}
-                                    radius="sm"
-                                    width="90%"
-                                  />
-                                </>
-                              ) : cooler.status === "" ||
-                                cooler.status === null ||
-                                cooler.status === undefined ? (
-                                "Sin registro"
-                              ) : (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    // justifyContent: "center",
-                                    alignItems: "center",
-                                    gap: "4px",
-                                    padding: "4px",
-                                    borderRadius: "2px",
-                                    background:
-                                      cooler?.status ===
-                                      "FUNCIONANDO CORRECTAMENTE"
-                                        ? "#B2F2BB"
-                                        : cooler?.status ===
-                                          "FUNCIONANDO CON ALERTA"
-                                        ? "#FFEC99"
-                                        : cooler?.status === "EN FALLA"
-                                        ? "#FFC9C9"
-                                        : cooler?.status ===
-                                          "EN ESPERA DE SERVICIO"
-                                        ? "#C7CBD2"
-                                        : cooler?.status ===
-                                          "EN ESPERA DE LECTURA"
-                                        ? "#A5D8FF"
-                                        : cooler?.status ===
-                                          "SERVICIO NO EFECTIVO"
-                                        ? "#FFC9C9"
-                                        : cooler?.status ===
-                                          "SERVICIO IMPRODUCTIVO"
-                                        ? "#FFC9C9"
-                                        : cooler?.status === "SIN DATOS"
-                                        ? "#C7CBD2"
-                                        : "#C7CBD2",
-                                    width: "fit-content",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      width: "4px",
-                                      height: "4px",
-                                      borderRadius: "5px",
-                                      background:
-                                        cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
-                                          ? "#2B8A3E"
-                                          : cooler?.status ===
-                                            "FUNCIONANDO CON ALERTA"
-                                          ? "#E67700"
-                                          : cooler?.status === "EN FALLA"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE SERVICIO"
-                                          ? "#313A49"
-                                          : "EN ESPERA DE LECTURA"
-                                          ? "#1864AB"
-                                          : cooler?.status ===
-                                            "SERVICIO NO EFECTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "SERVICIO IMPRODUCTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status === "SIN DATOS"
-                                          ? "#313A49"
-                                          : "#313A49",
-                                    }}
-                                  ></div>
-                                  <div
-                                    style={{
-                                      color:
-                                        cooler?.status ===
-                                        "FUNCIONANDO CORRECTAMENTE"
-                                          ? "#2B8A3E"
-                                          : cooler?.status ===
-                                            "FUNCIONANDO CON ALERTA"
-                                          ? "#E67700"
-                                          : cooler?.status === "EN FALLA"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE SERVICIO"
-                                          ? "#313A49"
-                                          : cooler?.status ===
-                                            "EN ESPERA DE LECTURA"
-                                          ? "#1864AB"
-                                          : cooler?.status ===
-                                            "SERVICIO NO EFECTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status ===
-                                            "SERVICIO IMPRODUCTIVO"
-                                          ? "#E03131"
-                                          : cooler?.status === "SIN DATOS"
-                                          ? "#313A49"
-                                          : "#313A49",
-                                      fontSize: "8px",
-                                      fontStyle: "normal",
-                                      fontWeight: 500,
-                                      lineHeight: "14px",
-                                      maxWidth: "80px",
-                                      whiteSpace: "nowrap",
-                                      overflow: "hidden",
-                                      textOverflow: "ellipsis",
-                                    }}
-                                  >
-                                    {cooler.status}
-                                  </div>
-                                </div>
-                              )}
-                            </td>
-
                             <td data-label="SERIE" title={cooler.serial_number}>
                               {isLoading == true ? (
                                 <>
@@ -863,7 +851,9 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                 cooler.serial_number === undefined ? (
                                 "Sin registro"
                               ) : (
-                                cooler.serial_number
+                                <div style={{ color: "#868E96" }}>
+                                  {cooler.serial_number}
+                                </div>
                               )}
                             </td>
                             <td data-label="Modelo" title={cooler.model_id}>
@@ -880,7 +870,9 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                                 cooler.model_id === undefined ? (
                                 "Sin registro"
                               ) : (
-                                cooler.model_id
+                                <div style={{ color: "#868E96" }}>
+                                  {cooler.model_id}
+                                </div>
                               )}
                             </td>
                             <td
