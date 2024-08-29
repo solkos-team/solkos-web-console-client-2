@@ -206,46 +206,34 @@ export default function Insights() {
                     <div className="insights_datas_kpi_data_data_1">
                       Cobertura
                     </div>
-                    <div
-                      className="insights_datas_kpi_data_data_2"
-                      // style={{ marginTop: "-8px" }}
-                    >
+                    <div className="insights_datas_kpi_data_data_2">
                       {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="50%"
-                            radius="xs"
-                          />
-                        </>
+                        <Skeleton height={15} mt={6} width="50%" radius="xs" />
                       ) : !data ||
                         !Array.isArray(data.assets_analytics) ||
-                        data.assets_analytics === null ||
-                        data.assets_analytics[2]?.percentage === undefined ? (
+                        data.assets_analytics === null ? (
                         "Sin registro"
                       ) : (
-                        data.assets_analytics[2].percentage.toFixed(1) + "%"
+                        (
+                          data.assets_analytics.find(
+                            (item) => item.class === "ASSET_MANAGEMENT_COVERAGE"
+                          )?.percentage || 0
+                        ).toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
                       {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="50%"
-                            radius="xs"
-                          />
-                        </>
+                        <Skeleton height={15} mt={6} width="50%" radius="xs" />
                       ) : !data ||
                         data.assets_analytics === null ||
-                        !Array.isArray(data.assets_analytics) ||
-                        data.assets_analytics[2]?.value === undefined ? (
+                        !Array.isArray(data.assets_analytics) ? (
                         "Sin registro"
                       ) : (
-                        data.assets_analytics[2].value.toLocaleString("es-MX") +
-                        " Enfriadores"
+                        data.assets_analytics
+                          .find(
+                            (item) => item.class === "ASSET_MANAGEMENT_COVERAGE"
+                          )
+                          ?.value.toLocaleString("es-MX") + " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -253,46 +241,36 @@ export default function Insights() {
                     <div className="insights_datas_kpi_data_data_1">
                       Coincidencia
                     </div>
-                    <div
-                      className="insights_datas_kpi_data_data_2"
-                      // style={{ marginTop: "-8px" }}
-                    >
+                    <div className="insights_datas_kpi_data_data_2">
                       {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="60%"
-                            radius="xs"
-                          />
-                        </>
+                        <Skeleton height={15} mt={6} width="60%" radius="xs" />
                       ) : !data ||
                         data.assets_analytics === null ||
-                        !Array.isArray(data.assets_analytics) ||
-                        data.assets_analytics[0]?.percentage === undefined ? (
+                        !Array.isArray(data.assets_analytics) ? (
                         "Sin registro"
                       ) : (
-                        data.assets_analytics[0].percentage.toFixed(1) + "%"
+                        (
+                          data.assets_analytics.find(
+                            (item) =>
+                              item.class === "ASSET_MANAGEMENT_COINCIDENCE"
+                          )?.percentage || 0
+                        ).toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="60%"
-                            radius="xs"
-                          />
-                        </>
+                      {isLoading ? (
+                        <Skeleton height={15} mt={6} width="60%" radius="xs" />
                       ) : !data ||
-                        data.assets_analytics === null ||
                         !Array.isArray(data.assets_analytics) ||
-                        data.assets_analytics[0]?.value === undefined ? (
+                        data.assets_analytics === null ? (
                         "Sin registro"
                       ) : (
-                        data.assets_analytics[0].value.toLocaleString("es-MX") +
-                        " Enfriadores"
+                        (
+                          data.assets_analytics.find(
+                            (item) =>
+                              item.class === "ASSET_MANAGEMENT_COINCIDENCE"
+                          )?.value || 0
+                        ).toLocaleString("es-MX") + " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -300,46 +278,36 @@ export default function Insights() {
                     <div className="insights_datas_kpi_data_data_1">
                       Frecuencia ritmo
                     </div>
-                    <div
-                      className="insights_datas_kpi_data_data_2"
-                      // style={{ marginTop: "-8px" }}
-                    >
+                    <div className="insights_datas_kpi_data_data_2">
                       {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="55%"
-                            radius="xs"
-                          />
-                        </>
+                        <Skeleton height={15} mt={6} width="55%" radius="xs" />
                       ) : !data ||
                         data.assets_analytics === null ||
-                        !Array.isArray(data.assets_analytics) ||
-                        data.assets_analytics[1]?.percentage === undefined ? (
+                        !Array.isArray(data.assets_analytics) ? (
                         "Sin registro"
                       ) : (
-                        data.assets_analytics[1].percentage.toFixed(1) + "%"
+                        (
+                          data.assets_analytics.find(
+                            (item) =>
+                              item.class === "ASSET_MANAGEMENT_FREQUENCY"
+                          )?.percentage || 0
+                        ).toFixed(1) + "%"
                       )}
                     </div>
                     <div className="insights_datas_kpi_data_data_3">
                       {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="55%"
-                            radius="xs"
-                          />
-                        </>
+                        <Skeleton height={15} mt={6} width="55%" radius="xs" />
                       ) : !data ||
                         data.assets_analytics === null ||
-                        !Array.isArray(data.assets_analytics) ||
-                        data.assets_analytics[1]?.value === undefined ? (
+                        !Array.isArray(data.assets_analytics) ? (
                         "Sin registro"
                       ) : (
-                        data.assets_analytics[1].value.toLocaleString("es-MX") +
-                        " Enfriadores"
+                        data.assets_analytics
+                          .find(
+                            (item) =>
+                              item.class === "ASSET_MANAGEMENT_FREQUENCY"
+                          )
+                          ?.value.toLocaleString("es-MX") + " Enfriadores"
                       )}
                     </div>
                   </div>
@@ -351,36 +319,6 @@ export default function Insights() {
                       className="insights_datas_kpi_data_data_2"
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      {isLoading ? (
-                        <Skeleton height={15} mt={6} width="55%" radius="xs" />
-                      ) : (
-                        <>
-                          <div
-                            style={{
-                              marginRight: "4px",
-                              color: "color-del-0%",
-                            }}
-                          >
-                            0%
-                          </div>
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <div
-                              style={{
-                                width: "8px",
-                                height: "8px",
-                                backgroundColor: "#FA5252",
-                                borderRadius: "50%",
-                                marginRight: "5px", // Espacio entre el círculo y el texto
-                              }}
-                            ></div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    <div className="insights_datas_kpi_data_data_3">
                       {isLoading == true ? (
                         <>
                           <Skeleton
@@ -391,8 +329,94 @@ export default function Insights() {
                           />
                         </>
                       ) : (
-                        "0 Enfriadores"
+                        <>
+                          {
+                            !data ||
+                            data.assets_analytics === null ||
+                            !Array.isArray(data.assets_analytics) ||
+                            data.assets_analytics[3]?.percentage ===
+                              undefined ? (
+                              <>
+                                <div>0%</div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      width: "8px",
+                                      height: "8px",
+                                      backgroundColor: "#FA5252",
+                                      borderRadius: "50%",
+                                      marginRight: "5px",
+                                    }}
+                                  ></div>
+                                </div>
+                              </>
+                            ) : (
+                              data.assets_analytics[3].percentage.toFixed(1) +
+                              "%"
+                            )
+
+                            // "0%"
+                          }
+
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <div
+                              style={{
+                                width: "8px",
+                                height: "8px",
+                                backgroundColor:
+                                  !data ||
+                                  (data?.assets_analytics[3]?.percentage > 0 &&
+                                    data?.assets_analytics[3]?.percentage < 60)
+                                    ? "#FA5252"
+                                    : data?.assets_analytics[3]?.percentage >
+                                        60 &&
+                                      data?.assets_analytics[3]?.percentage < 80
+                                    ? "#E67700"
+                                    : data?.assets_analytics[3]?.percentage >=
+                                        80 &&
+                                      data?.assets_analytics[3]?.percentage <=
+                                        100
+                                    ? "#40C057"
+                                    : "",
+                                borderRadius: "50%",
+                                marginRight: "5px",
+                              }}
+                            ></div>
+                          </div>
+                        </>
                       )}
+                    </div>
+
+                    <div className="insights_datas_kpi_data_data_3">
+                      {
+                        isLoading == true ? (
+                          <>
+                            <Skeleton
+                              height={15}
+                              mt={6}
+                              width="55%"
+                              radius="xs"
+                            />
+                          </>
+                        ) : !data ||
+                          data.assets_analytics === null ||
+                          !Array.isArray(data.assets_analytics) ||
+                          data.assets_analytics[3]?.value === undefined ? (
+                          "0 Enfriadores"
+                        ) : (
+                          data.assets_analytics[3].value.toLocaleString(
+                            "es-MX"
+                          ) + " Enfriadores"
+                        )
+                        // "0 Enfriadores"
+                      }
                     </div>
                   </div>
                 </div>

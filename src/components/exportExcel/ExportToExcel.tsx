@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button,Menu, Badge,Loader } from "@mantine/core";
+import { Button, Menu, Badge, Loader } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
 import * as XLSX from "xlsx/xlsx";
 import { fetchUniversalTables } from "../../utils/apiUtils";
@@ -9,11 +9,12 @@ export const ExportToExcel = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingPath, setIsLoadingPath] = useState(true);
   const dt = useSelector((state: any) => state.works);
-  const [fileStateTotal,setFileState] = useState<string>()
-  const [fileStateTotalPath,setFileStatePath] = useState<string>()
-  const [total,setTotal] = useState<number>()
-  const [totalPath,setTotalPath] = useState<number>()
-  const typeRole = localStorage.getItem('Role')
+  const [fileStateTotal, setFileState] = useState<string>();
+  const [fileStateTotalPath, setFileStatePath] = useState<string>();
+  const [total, setTotal] = useState<number>();
+  console.log(total);
+  const [totalPath, setTotalPath] = useState<number>();
+  const typeRole = localStorage.getItem("Role");
   const exportToExcel = () => {
     let wb = XLSX.utils.book_new();
     let ws = XLSX.utils.json_to_sheet(props.datos);
@@ -58,11 +59,11 @@ export const ExportToExcel = (props) => {
       ].join(":")
     );
   };
-   const pathVerify = () => {
-     return dt.length == 0 ? [] : JSON.parse(dt);
-   };
-  
-  const fetchData = async (path,setInfo,setLoad,setT) => {
+  const pathVerify = () => {
+    return dt.length == 0 ? [] : JSON.parse(dt);
+  };
+
+  const fetchData = async (path, setInfo, setLoad, setT) => {
     const body = {
       customer: props.body?.customer,
       class: props.body?.class,
@@ -72,36 +73,40 @@ export const ExportToExcel = (props) => {
       page_number: -1,
     };
     try {
-      const data = await fetchUniversalTables(props.component, body,setLoad);      
+      const data = await fetchUniversalTables("alerts_drawer", body, setLoad);
       const URL_EXCEL_FILE = data.headers.get("pagination-url");
       const TOTAL_EXCEL_FILE = data.headers.get("pagination-count");
-      setInfo(URL_EXCEL_FILE ? URL_EXCEL_FILE : '')
-      setT(Number(TOTAL_EXCEL_FILE))
-      setLoad(false);      
+      setInfo(URL_EXCEL_FILE ? URL_EXCEL_FILE : "");
+      setT(Number(TOTAL_EXCEL_FILE));
+      setLoad(false);
     } catch (error) {
       console.error("Error", error);
     }
   };
-  const getData = () =>{ 
-     if(pathVerify()){
-       fetchData([],setFileState,setIsLoading,setTotal)
-     }
-     if(pathVerify().length > 0 ){
-      fetchData(pathVerify(),setFileStatePath,setIsLoadingPath,setTotalPath)
-     }
-  }
+  const getData = () => {
+    if (pathVerify()) {
+      fetchData([], setFileState, setIsLoading, setTotal);
+    }
+    if (pathVerify().length > 0) {
+      fetchData(pathVerify(), setFileStatePath, setIsLoadingPath, setTotalPath);
+    }
+  };
   return (
     <Menu shadow="md" width={230}>
       <Menu.Target>
         <Button
-        onClick={()=>{props.component != undefined || props.body != undefined ? getData() : ''}}
-        disabled={
-          props.datos === null ||
+          onClick={() => {
+            props.component != undefined || props.body != undefined
+              ? getData()
+              : "";
+          }}
+          disabled={
+            props.datos === null ||
             props.datos.length === 0 ||
             props.datos === undefined
-            ? true
-            : false
-        }
+              ? true
+              : false
+          }
           style={{
             color: "#3E83FF",
             fontSize: "15px",
@@ -109,12 +114,15 @@ export const ExportToExcel = (props) => {
             fontWeight: 300,
             lineHeight: "100%",
             backgroundColor: "transparent",
-            visibility : props.datos === null ||
-            props.datos.length === 0 ||
-            props.datos === undefined
-            ? 'hidden'
-            : 'visible'
-          }}>Descargar&nbsp;
+            visibility:
+              props.datos === null ||
+              props.datos.length === 0 ||
+              props.datos === undefined
+                ? "hidden"
+                : "visible",
+          }}
+        >
+          Descargar&nbsp;
           <IconDownload size={20} />
         </Button>
       </Menu.Target>
@@ -122,22 +130,50 @@ export const ExportToExcel = (props) => {
       <Menu.Dropdown>
         <Menu.Label>Descarga de Información</Menu.Label>
         {/* <Menu.Item onClick={(e) => download(e)}> */}
-        <Menu.Item style={{display: props.component == undefined || props.body == undefined || typeRole == 'path_user' ? "none" : ''}}>
-          {isLoading == true 
-          ? <>Cargando datos... <Loader color="gray"size="xs" /></>
-          : <a style={{color:"#000"}} href={fileStateTotal} download>
-            Todos los datos <Badge >{total?.toLocaleString("en-US")}</Badge>
-            </a>}                    
+        <Menu.Item
+          style={{
+            display:
+              props.component == undefined ||
+              props.body == undefined ||
+              typeRole == "path_user"
+                ? "none"
+                : "",
+          }}
+        >
+          {isLoading == true ? (
+            <>
+              Cargando datos... <Loader color="gray" size="xs" />
+            </>
+          ) : (
+            <a style={{ color: "#000" }} href={fileStateTotal} download>
+              Todos los datos <Badge>{total?.toLocaleString("en-US")}</Badge>
+            </a>
+          )}
         </Menu.Item>
-        <Menu.Item style={{display: pathVerify().length > 0 && props.component != undefined  ? '' : 'none'}}>
-          {isLoadingPath == true 
-          ? <>Cargando datos... <Loader color="gray"size="xs" /></>
-          : <a style={{color:"#000"}} href={fileStateTotalPath} download>
-            Datos conforme filtro <Badge >{totalPath?.toLocaleString("en-US")}</Badge>
-            </a>}                    
+        <Menu.Item
+          style={{
+            display:
+              pathVerify().length > 0 && props.component != undefined
+                ? ""
+                : "none",
+          }}
+        >
+          {isLoadingPath == true ? (
+            <>
+              Cargando datos... <Loader color="gray" size="xs" />
+            </>
+          ) : (
+            <a style={{ color: "#000" }} href={fileStateTotalPath} download>
+              Datos conforme filtro{" "}
+              <Badge>{totalPath?.toLocaleString("en-US")}</Badge>
+            </a>
+          )}
           {/* Vista Actual<Badge size="sm">{props.datos.lenght}</Badge> */}
         </Menu.Item>
-        <Menu.Item style={{display: props.component != undefined ? '' : ''}} onClick={exportToExcel}>
+        <Menu.Item
+          style={{ display: props.component != undefined ? "" : "" }}
+          onClick={exportToExcel}
+        >
           Datos actuales
         </Menu.Item>
       </Menu.Dropdown>
@@ -145,8 +181,8 @@ export const ExportToExcel = (props) => {
   );
 };
 
-
-{/* <Group>
+{
+  /* <Group>
       <Button
         disabled={
           props.datos === null ||
@@ -168,4 +204,5 @@ export const ExportToExcel = (props) => {
         Descargar&nbsp;
         <IconDownload size={20} />
       </Button>
-</Group> */}
+</Group> */
+}

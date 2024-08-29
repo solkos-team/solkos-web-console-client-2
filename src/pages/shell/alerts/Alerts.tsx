@@ -15,6 +15,7 @@ export default function Alerts() {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
+  const [aggValue, setAggValue] = useState<number | null>(null);
   const navigate = useNavigate();
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
@@ -24,6 +25,11 @@ export default function Alerts() {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
+      const aggItem = data.find((item: any) => item.class === "AGG");
+      if (aggItem) {
+        console.log("Valor de AGG:", aggItem.value);
+        setAggValue(aggItem.value); // Guarda el valor en el estado si es necesario
+      }
       setAlertsData(data);
       console.log(data);
     } catch (error) {
@@ -42,6 +48,9 @@ export default function Alerts() {
   }, []);
 
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("");
+
+  const formattedAggValue =
+    aggValue !== null ? aggValue.toLocaleString() : null;
 
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;
@@ -288,11 +297,9 @@ export default function Alerts() {
                             lineHeight: "normal",
                           }}
                         >
-                          {totalCoolers === undefined || totalCoolers === null
+                          {aggValue === undefined || aggValue === null
                             ? "de 0 enfriadores "
-                            : "de " +
-                              totalCoolers?.toLocaleLowerCase() +
-                              " enfriadores"}
+                            : "de " + formattedAggValue + " enfriadores"}
                         </div>
                       </div>
                       {/* ***** */}

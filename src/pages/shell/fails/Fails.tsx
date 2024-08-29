@@ -14,16 +14,22 @@ export default function Fails() {
   const totalCoolers = sessionStorage.getItem("TtlCoolers");
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
+  const [aggValue, setAggValue] = useState<number | null>(null);
   const navigate = useNavigate();
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = { customer: dto, path: pathVerify() };
+  const body = { customer: dto, path: pathVerify(), level: "FAIL" };
   const fetchData = async () => {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
-      // console.log(data);
+      const aggItem = data.find((item: any) => item.class === "AGG");
+      if (aggItem) {
+        console.log("Valor de AGG:", aggItem.value);
+        setAggValue(aggItem.value); // Guarda el valor en el estado si es necesario
+      }
+      console.log(data);
       setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
@@ -36,6 +42,9 @@ export default function Fails() {
   }, [dt, dto]);
 
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
+
+  const formattedAggValue =
+    aggValue !== null ? aggValue.toLocaleString() : null;
 
   // Page (Body)
   useEffect(() => {
@@ -301,11 +310,9 @@ export default function Fails() {
                             lineHeight: "normal",
                           }}
                         >
-                          {totalCoolers === undefined || totalCoolers === null
+                          {aggValue === undefined || aggValue === null
                             ? "de 0 enfriadores "
-                            : "de " +
-                              totalCoolers?.toLocaleLowerCase() +
-                              " enfriadores"}
+                            : "de " + formattedAggValue + " enfriadores"}
                         </div>
                       </div>
                       {/* ***** */}
