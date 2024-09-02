@@ -50,7 +50,7 @@ export default function Alerts() {
   const [selectedAlgorithm, setSelectedAlgorithm] = useState<string>("");
 
   const formattedAggValue =
-    aggValue !== null ? aggValue.toLocaleString() : null;
+    aggValue !== null ? aggValue.toLocaleString("es-MX") : null;
 
   const [selectedAlgorithmValues, setSelectedAlgorithmValues] = useState<{
     value: number;

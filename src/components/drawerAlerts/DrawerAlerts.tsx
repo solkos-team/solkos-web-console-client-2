@@ -160,6 +160,8 @@ export default function DrawerA({
   // console.log(coolersData);
   totalData === undefined ? 0 : totalData;
 
+  console.log(level);
+
   return (
     <Drawer
       opened={opened}

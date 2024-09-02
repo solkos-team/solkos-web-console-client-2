@@ -44,7 +44,7 @@ export default function Fails() {
   const [isLoading, setIsLoading] = useState(true); // Estado para controlar la carga
 
   const formattedAggValue =
-    aggValue !== null ? aggValue.toLocaleString() : null;
+    aggValue !== null ? aggValue.toLocaleString("es-MX") : null;
 
   // Page (Body)
   useEffect(() => {

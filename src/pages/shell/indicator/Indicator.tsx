@@ -47,7 +47,7 @@ export default function Indicator() {
 
   console.log(aggValue);
   const formattedAggValue =
-    aggValue !== null ? aggValue.toLocaleString() : null;
+    aggValue !== null ? aggValue.toLocaleString("es-MX") : null;
   // Page (Body)
   useEffect(() => {
     document.addEventListener("click", function (event) {

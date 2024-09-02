@@ -51,6 +51,24 @@ export default function Insights() {
     navigateModules(dto, navigate);
   }, [navigate, dto]);
 
+  const assetData = data?.assets_analytics?.find(
+    (item) => item.class === "ASSET_MANAGEMENT_FREQUENCY_7"
+  );
+
+  const percentage = assetData?.percentage;
+
+  const backgroundColor = !data
+    ? "" // Default color or empty string when data is undefined
+    : percentage === undefined
+    ? "#FA5252" // Default color when percentage is undefined
+    : percentage > 0 && percentage < 60
+    ? "#FA5252"
+    : percentage >= 60 && percentage < 80
+    ? "#E67700"
+    : percentage >= 80 && percentage <= 100
+    ? "#40C057"
+    : "";
+
   return (
     <div className="insights_principal_container">
       <PageFilter status={isLoading} />
@@ -311,7 +329,7 @@ export default function Insights() {
                       )}
                     </div>
                   </div>
-                  <div className="insights_datas_kpi_data_data">
+                  {/* <div className="insights_datas_kpi_data_data">
                     <div className="insights_datas_kpi_data_data_1">
                       Frec. Últ. 7 días
                     </div>
@@ -417,6 +435,96 @@ export default function Insights() {
                         )
                         // "0 Enfriadores"
                       }
+                    </div>
+                  </div> */}
+                  <div className="insights_datas_kpi_data_data">
+                    <div className="insights_datas_kpi_data_data_1">
+                      Frec. Últ. 7 días
+                    </div>
+                    <div
+                      className="insights_datas_kpi_data_data_2"
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      {isLoading ? (
+                        <>
+                          <Skeleton
+                            height={15}
+                            mt={6}
+                            width="55%"
+                            radius="xs"
+                          />
+                        </>
+                      ) : (
+                        <>
+                          {(() => {
+                            const item = data?.assets_analytics?.find(
+                              (item) =>
+                                item.class === "ASSET_MANAGEMENT_FREQUENCY_7"
+                            );
+                            return !item || item.percentage === undefined ? (
+                              <>
+                                <div>0%</div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      width: "8px",
+                                      height: "8px",
+                                      backgroundColor: "#FA5252",
+                                      borderRadius: "50%",
+                                      marginRight: "5px",
+                                    }}
+                                  ></div>
+                                </div>
+                              </>
+                            ) : (
+                              item.percentage.toFixed(1) + "%"
+                            );
+                          })()}
+
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
+                          >
+                            <div
+                              style={{
+                                width: "8px",
+                                height: "8px",
+                                backgroundColor: backgroundColor,
+                                borderRadius: "50%",
+                                marginRight: "5px",
+                              }}
+                            ></div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="insights_datas_kpi_data_data_3">
+                      {isLoading ? (
+                        <>
+                          <Skeleton
+                            height={15}
+                            mt={6}
+                            width="55%"
+                            radius="xs"
+                          />
+                        </>
+                      ) : (
+                        (() => {
+                          const item = data?.assets_analytics?.find(
+                            (item) =>
+                              item.class === "ASSET_MANAGEMENT_FREQUENCY_7"
+                          );
+                          return !item || item.value === undefined
+                            ? "0 Enfriadores"
+                            : item.value.toLocaleString("es-MX") +
+                                " Enfriadores";
+                        })()
+                      )}
                     </div>
                   </div>
                 </div>
