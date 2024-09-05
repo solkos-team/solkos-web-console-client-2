@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { IconMap } from "@tabler/icons-react";
-import { mapOptions } from "../mapInsights/datos";
 
 interface Marker {
   setMap(map: any): void;
@@ -197,7 +196,6 @@ const MapComponent2 = ({
         options={{
           gestureHandling: "greedy",
           fullscreenControl: false,
-          ...mapOptions,
         }}
       />
       <div

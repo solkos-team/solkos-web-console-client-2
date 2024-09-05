@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { IconMap } from "@tabler/icons-react";
-import { mapOptions } from "../mapInsights/datos";
 
 const MapComponent1 = ({ latitude, longitude }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
@@ -103,7 +102,6 @@ const MapComponent1 = ({ latitude, longitude }) => {
         options={{
           gestureHandling: "greedy",
           fullscreenControl: false,
-          ...mapOptions,
         }}
       />
       <div
