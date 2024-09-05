@@ -1357,86 +1357,95 @@ export default function CoolerDetail() {
                   Acerca del punto de venta
                 </h1>
               </div>
-
               <div
-                className="clt_actividad_principal_title_nombre"
-                // style={{ background: "blue" }}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                  width: "100%",
+                  // background: "blue",
+                  height: "35%",
+                }}
               >
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Nombre del PdV
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1_h2">
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={15} radius="sm" />
-                    </div>
-                  ) : coolersData?.cooler?.outlet_name === undefined ||
-                    coolersData?.cooler?.outlet_name === "" ? (
-                    "Sin registro"
-                  ) : (
-                    coolersData?.cooler?.outlet_name
-                  )}
-                  {coolersData?.cooler?.outlet_id === undefined ||
-                  coolersData?.cooler?.outlet_id === "" ? (
-                    " / Sin registro"
-                  ) : (
-                    <span>
-                      {" "}
-                      / <strong>{coolersData?.cooler?.outlet_id}</strong>
-                    </span>
-                  )}
-                </h1>
+                <div
+                  className="clt_actividad_principal_title_nombre"
+                  // style={{ background: "blue" }}
+                >
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    Nombre del PdV
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1_h2">
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={15} radius="sm" />
+                      </div>
+                    ) : coolersData?.cooler?.outlet_name === undefined ||
+                      coolersData?.cooler?.outlet_name === "" ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.outlet_name
+                    )}
+                    {coolersData?.cooler?.outlet_id === undefined ||
+                    coolersData?.cooler?.outlet_id === "" ? (
+                      " / Sin registro"
+                    ) : (
+                      <span>
+                        {" "}
+                        / <strong>{coolersData?.cooler?.outlet_id}</strong>
+                      </span>
+                    )}
+                  </h1>
+                </div>
+                <div
+                  className="clt_actividad_principal_title_nombre"
+                  // style={{ background: "pink" }}
+                >
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    Dirección
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1_h2">
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={20} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.outlet_address === "" ||
+                      coolersData?.cooler?.outlet_address == undefined ? (
+                      "Sin registro"
+                    ) : (
+                      coolersData?.cooler?.outlet_address
+                    )}
+                  </h1>
+                </div>
+                <div
+                  className="clt_actividad_principal_title_nombre"
+                  // style={{ background: "purple" }}
+                >
+                  <h1 className="clt_actividad_principal_title_nombre_h1">
+                    Distancia al punto de instalación
+                  </h1>
+                  <h1 className="clt_actividad_principal_title_nombre_h1_h2">
+                    {isLoading == true ? (
+                      <div style={{ width: "100%", height: "100%" }}>
+                        <Skeleton height={10} radius="xl" />
+                      </div>
+                    ) : coolersData?.cooler?.distance === undefined ||
+                      coolersData?.cooler?.distance === null ? (
+                      "Sin registro"
+                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                        coolersData?.cooler.latitude === 0) ||
+                      coolersData?.cooler.latitude === undefined ? (
+                      "Sin posición de instalación"
+                    ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
+                        coolersData?.cooler.last_latitude === 0) ||
+                      coolersData?.cooler.last_latitude === undefined ||
+                      coolersData?.cooler.last_latitude === null ? (
+                      "Sin posición de última visita"
+                    ) : (
+                      `${coolersData?.cooler?.distance.toFixed(0)} metros`
+                    )}
+                  </h1>
+                </div>
               </div>
-              <div
-                className="clt_actividad_principal_title_nombre"
-                // style={{ background: "pink" }}
-              >
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Dirección
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1_h2">
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={20} radius="xl" />
-                    </div>
-                  ) : coolersData?.cooler?.outlet_address === "" ||
-                    coolersData?.cooler?.outlet_address == undefined ? (
-                    "Sin registro"
-                  ) : (
-                    coolersData?.cooler?.outlet_address
-                  )}
-                </h1>
-              </div>
-              <div
-                className="clt_actividad_principal_title_nombre"
-                // style={{ background: "purple" }}
-              >
-                <h1 className="clt_actividad_principal_title_nombre_h1">
-                  Distancia al punto de instalación
-                </h1>
-                <h1 className="clt_actividad_principal_title_nombre_h1_h2">
-                  {isLoading == true ? (
-                    <div style={{ width: "100%", height: "100%" }}>
-                      <Skeleton height={10} radius="xl" />
-                    </div>
-                  ) : coolersData?.cooler?.distance === undefined ||
-                    coolersData?.cooler?.distance === null ? (
-                    "Sin registro"
-                  ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
-                      coolersData?.cooler.latitude === 0) ||
-                    coolersData?.cooler.latitude === undefined ? (
-                    "Sin posición de instalación"
-                  ) : (Number(coolersData?.cooler?.distance.toFixed(0)) < 0 &&
-                      coolersData?.cooler.last_latitude === 0) ||
-                    coolersData?.cooler.last_latitude === undefined ||
-                    coolersData?.cooler.last_latitude === null ? (
-                    "Sin posición de última visita"
-                  ) : (
-                    `${coolersData?.cooler?.distance.toFixed(0)} metros`
-                  )}
-                </h1>
-              </div>
-              <br></br>
 
               <div className="clt_actividad_principal_mapa">
                 {isLoading == true ? (
