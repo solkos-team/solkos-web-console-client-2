@@ -1,12 +1,12 @@
-import { Drawer } from '@mantine/core'
-import React from 'react'
+import { Drawer } from "@mantine/core";
+import React from "react";
 import GoogleMapReact from "google-map-react";
-import { defaultProps } from '../../../../components/mapInsights/datos';
+import { defaultProps } from "../../../../components/mapInsights/datos";
+import { mapOptions } from "../../../../components/mapInsights/datos";
 
-
-export const DrawerMap = ({opened,onClose,handleApiLoaded}) => {
+export const DrawerMap = ({ opened, onClose, handleApiLoaded }) => {
   return (
-    <Drawer opened={opened} onClose={onClose} position="right" size="100%" >
+    <Drawer opened={opened} onClose={onClose} position="right" size="100%">
       <div style={{ width: "100%", height: "100%", backgroundColor: "" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
@@ -17,6 +17,7 @@ export const DrawerMap = ({opened,onClose,handleApiLoaded}) => {
             fullscreenControl: false,
             scaleControl: false,
             zoomControl: false,
+            ...mapOptions,
           }}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
@@ -28,12 +29,12 @@ export const DrawerMap = ({opened,onClose,handleApiLoaded}) => {
             left: "50%",
             transform: "translateX(-50%)",
             backgroundColor: "var(--pink-6, #ED5079)",
-            display : 'flex',
-            justifyContent : 'center',
-            alignItems : 'center',
-            gap :'10px',
-            borderRadius:'2rem',
-            color : '#FFFF'                    
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            borderRadius: "2rem",
+            color: "#FFFF",
           }}
           onClick={onClose}
         >
@@ -63,4 +64,4 @@ export const DrawerMap = ({opened,onClose,handleApiLoaded}) => {
       </div>
     </Drawer>
   );
-}
+};

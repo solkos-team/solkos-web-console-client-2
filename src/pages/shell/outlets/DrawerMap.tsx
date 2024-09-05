@@ -1,11 +1,11 @@
-import { Drawer } from '@mantine/core'
-import React, { useState } from 'react'
+import { Drawer } from "@mantine/core";
+import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
-import { defaultProps } from '../../../components/mapInsights/datos';
-import { IconMap } from '@tabler/icons-react';
+import { defaultProps } from "../../../components/mapInsights/datos";
+import { IconMap } from "@tabler/icons-react";
+import { mapOptions } from "../../../components/mapInsights/datos";
 
-
-export const DrawerMap = ({opened,onClose,latitude,longitude}) => {
+export const DrawerMap = ({ opened, onClose, latitude, longitude }) => {
   const [map, setMap] = useState(null);
   const handleApiLoaded = (map, maps) => {
     setMap(map);
@@ -23,17 +23,17 @@ export const DrawerMap = ({opened,onClose,latitude,longitude}) => {
     });
   };
 
-    const openGoogleMaps = () => {
-        //@ts-ignore
-        if (window.google && window.google.maps) {
-          const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-          window.open(url, "_blank");
-        } else {
-          console.error("La API de Google Maps no se ha cargado completamente.");
-        }
-      };
+  const openGoogleMaps = () => {
+    //@ts-ignore
+    if (window.google && window.google.maps) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+      window.open(url, "_blank");
+    } else {
+      console.error("La API de Google Maps no se ha cargado completamente.");
+    }
+  };
   return (
-    <Drawer opened={opened} onClose={onClose} position="right" size="100%" >
+    <Drawer opened={opened} onClose={onClose} position="right" size="100%">
       <div style={{ width: "100%", height: "100%", backgroundColor: "red" }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w" }}
@@ -45,23 +45,24 @@ export const DrawerMap = ({opened,onClose,latitude,longitude}) => {
             fullscreenControl: false,
             scaleControl: false,
             zoomControl: false,
+            ...mapOptions,
           }}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         />
         <div
-        style={{
-          position: "absolute",
-          top: "25px",
-          right: "10px",
-        }}
-      >
-        <IconMap
-          size={30}
-          style={{ color: "#666666", cursor: "pointer" }}
-          onClick={openGoogleMaps}
-        />
-      </div>
+          style={{
+            position: "absolute",
+            top: "25px",
+            right: "10px",
+          }}
+        >
+          <IconMap
+            size={30}
+            style={{ color: "#666666", cursor: "pointer" }}
+            onClick={openGoogleMaps}
+          />
+        </div>
         <button
           style={{
             position: "absolute",
@@ -69,12 +70,12 @@ export const DrawerMap = ({opened,onClose,latitude,longitude}) => {
             left: "50%",
             transform: "translateX(-50%)",
             backgroundColor: "var(--pink-6, #ED5079)",
-            display : 'flex',
-            justifyContent : 'center',
-            alignItems : 'center',
-            gap :'10px',
-            borderRadius:'2rem',
-            color : '#FFFF'                    
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            borderRadius: "2rem",
+            color: "#FFFF",
           }}
           onClick={onClose}
         >
@@ -103,5 +104,5 @@ export const DrawerMap = ({opened,onClose,latitude,longitude}) => {
         </style>
       </div>
     </Drawer>
-  )
-}
+  );
+};

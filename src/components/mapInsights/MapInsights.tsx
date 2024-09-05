@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { fetchUniversal } from "../../utils/apiUtils";
 import { CoolerInterface as Cooler } from "../../interfaces/CoolerInterface";
 import { SkeletonMapInsights } from "../skeletonMapInsights/SkeletonMapInsights";
+import { mapOptions } from "./datos";
+
 const MapInsightsComponent = ({ items, data }) => {
   const [googleMapsLoaded, setGoogleMapsLoaded] = useState(false);
   const [coolersData, setCoolersData] = useState<Cooler[]>();
@@ -126,6 +128,7 @@ const MapInsightsComponent = ({ items, data }) => {
           options={{
             gestureHandling: "greedy",
             fullscreenControl: false,
+            ...mapOptions,
           }}
         />
       )}
