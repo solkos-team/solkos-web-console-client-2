@@ -1589,9 +1589,10 @@ body {
   flex-direction: row;
   padding: 1rem;
   box-sizing: border-box;
+  /* background: pink; */
 }
 .drawerHeaderInfo {
-  width: 100%;
+  width: 60%;
   height: 100%;
   background-color: #fff;
   display: flex;
@@ -2100,7 +2101,7 @@ body {
 }
 .drawerMapaDescargar {
   width: 100%;
-  height: 35%;
+  height: 55%;
   padding: 4px;
   box-sizing: border-box;
   display: flex;
@@ -2139,13 +2140,28 @@ body {
   width: 100%;
   height: 10%;
 }
+/* .drawerTabla_Tabla {
+  width: 100%;
+
+  height: auto;
+
+  padding: 0rem 1rem;
+} */
+
 .drawerTabla_Tabla {
   width: 100%;
-  height: 80%;
+  max-height: 70%;
+  height: auto;
+  padding: 0rem 1rem;
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: auto;
+  box-sizing: border-box; /* Asegura que padding y borde se incluyan en el tamaño */
 }
+
 .drawerTABLA {
   width: 100% !important;
-  height: 65% !important;
+  height: 100% !important;
   overflow-x: auto;
   scrollbar-width: thin;
 }

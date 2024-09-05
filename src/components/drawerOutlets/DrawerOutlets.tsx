@@ -24,6 +24,7 @@ import { DrawerMap } from "../../pages/shell/outlets/DrawerMap";
 import moment from "moment";
 import "moment/locale/es";
 import {
+  backgroundCircle,
   getBorderStyle,
   getBorderStyle2,
   getColor2,
@@ -190,8 +191,33 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
       title=""
       position="right"
       size="40rem"
+      withCloseButton={false}
     >
-      <section className="drawerOutlets_Principal">
+      <div style={{ position: "absolute", left: "1rem", top: "1rem" }}>
+        <button
+          style={{
+            display: "flex",
+            padding: "0.313rem",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "0.625rem",
+            alignSelf: "stretch",
+            borderRadius: "0.25rem",
+            border: "0.063rem solid #CED4DA",
+            background: "transparent",
+            cursor: "pointer",
+          }}
+          onClick={onClose}
+        >
+          <img
+            src={"../../sampleData/CloseDrawer.svg"}
+            alt="Close"
+            style={{ width: "1.125rem", height: "1.125rem" }}
+          />
+        </button>
+      </div>
+
+      <section className="drawerOutlets_Principal" style={{ marginTop: 45 }}>
         <section className="drawerHeader">
           <div className="drawerHeaderImg">
             <img
@@ -393,7 +419,10 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
             </div>
           </div>
 
-          <div className="drawerHeaderInfo">
+          <div
+            className="drawerHeaderInfo"
+            // style={{ background: "red" }}
+          >
             <div
               style={{
                 display: "flex",
@@ -679,7 +708,10 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
           />
         </section>
         <section className="drawerBody">
-          <section className="drawerMapaDescargar">
+          <section
+            className="drawerMapaDescargar"
+            // style={{ background: "pink" }}
+          >
             <div className="drawerMapa">
               <div className="drawerMapa_title">
                 <div
@@ -789,7 +821,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                 </div>
               </div>
             </div>
-            <div className="drawerTabla_Buscador">
+            {/* <div className="drawerTabla_Buscador">
               <section
                 style={{
                   visibility: inputState() > 1 ? "visible" : "hidden",
@@ -803,7 +835,7 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   style={{ width: "100%", height: "100%" }}
                 />
               </section>
-            </div>
+            </div> */}
             <div className="drawerTabla_Tabla">
               <div className="drawerTABLA">
                 <table className="table_responsive">
