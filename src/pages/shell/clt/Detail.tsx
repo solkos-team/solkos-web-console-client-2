@@ -808,7 +808,7 @@ export default function CoolerDetail() {
               className="clt_actividad_principal_actividad_detail"
               // style={{ background: "yellow" }}
             >
-              <div className="clt_actividad_principal_title_detail2">
+              <div className="clt_actividad_principal_title_detail">
                 <div
                   style={{
                     display: "flex",
@@ -1083,8 +1083,8 @@ export default function CoolerDetail() {
                                                 }
                                                 alt="Descripción de la imagen"
                                                 style={{
-                                                  width: "0.5625rem",
-                                                  height: "0.5625rem",
+                                                  width: ".9vw",
+                                                  height: ".9vw",
                                                   lineHeight: "14px",
                                                 }}
                                               />
@@ -1095,8 +1095,8 @@ export default function CoolerDetail() {
                                                 src={"../../sampleData/so.svg"}
                                                 alt="Descripción de la imagen"
                                                 style={{
-                                                  width: "0.5625rem",
-                                                  height: "0.5625rem",
+                                                  width: ".9vw",
+                                                  height: ".9vw",
                                                   lineHeight: "14px",
                                                 }}
                                               />
@@ -1252,8 +1252,8 @@ export default function CoolerDetail() {
                                                 }
                                                 alt="Descripción de la imagen"
                                                 style={{
-                                                  width: "0.5625rem",
-                                                  height: "0.5625rem",
+                                                  width: ".9vw",
+                                                  height: ".9vw",
                                                   lineHeight: "14px",
                                                 }}
                                               />
@@ -1267,8 +1267,8 @@ export default function CoolerDetail() {
                                                 }
                                                 alt="Descripción de la imagen"
                                                 style={{
-                                                  width: "0.5625rem",
-                                                  height: "0.5625rem",
+                                                  width: ".9vw",
+                                                  height: ".9vw",
                                                   lineHeight: "14px",
                                                 }}
                                               />
@@ -1283,8 +1283,8 @@ export default function CoolerDetail() {
                                                 }
                                                 alt="Descripción de la imagen"
                                                 style={{
-                                                  width: "0.5625rem",
-                                                  height: ".5625rem",
+                                                  width: ".9vw",
+                                                  height: ".9vw",
                                                   lineHeight: "14px",
                                                 }}
                                               />
@@ -1335,7 +1335,7 @@ export default function CoolerDetail() {
               // style={{ background: "red" }}
             >
               <div
-                className="clt_actividad_principal_title_detail2"
+                className="clt_actividad_principal_title_detail"
                 // style={{ background: "red" }}
               >
                 <div
@@ -1357,7 +1357,7 @@ export default function CoolerDetail() {
                   Acerca del punto de venta
                 </h1>
               </div>
-              {/* <div> */}
+
               <div
                 className="clt_actividad_principal_title_nombre"
                 // style={{ background: "blue" }}
@@ -1436,7 +1436,6 @@ export default function CoolerDetail() {
                   )}
                 </h1>
               </div>
-              {/* </div> */}
               <br></br>
 
               <div className="clt_actividad_principal_mapa">
