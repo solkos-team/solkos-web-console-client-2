@@ -1357,16 +1357,7 @@ export default function CoolerDetail() {
                   Acerca del punto de venta
                 </h1>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1rem",
-                  width: "100%",
-                  // background: "blue",
-                  height: "35%",
-                }}
-              >
+              <div className="container">
                 <div
                   className="clt_actividad_principal_title_nombre"
                   // style={{ background: "blue" }}
