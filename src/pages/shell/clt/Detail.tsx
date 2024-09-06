@@ -1701,7 +1701,8 @@ export default function CoolerDetail() {
                     <div className="detail-label">Consumo de energía</div>
                     <div className="detail-value">
                       {coolersData?.properties?.energy_consumption?.value ===
-                      undefined
+                        undefined ||
+                      coolersData?.properties?.energy_consumption?.value === 0
                         ? "Sin registro"
                         : `${
                             coolersData?.properties?.energy_consumption.value.toFixed(
@@ -1718,7 +1719,9 @@ export default function CoolerDetail() {
                     </div>
                     <div className="detail-value">
                       {coolersData?.properties?.power_consumption_reference
-                        ?.value === undefined
+                        ?.value === undefined ||
+                      coolersData?.properties?.power_consumption_reference
+                        ?.value === 0
                         ? "Sin registro"
                         : `${
                             coolersData?.properties?.power_consumption_reference.value.toFixed(
@@ -1732,7 +1735,9 @@ export default function CoolerDetail() {
                   <div className="detail-item">
                     <div className="detail-label">Gasto en energía</div>
                     <div className="detail-value">
-                      {coolersData?.properties?.energy_cost?.value === undefined
+                      {coolersData?.properties?.energy_cost?.value ===
+                        undefined ||
+                      coolersData?.properties?.energy_cost?.value === 0
                         ? "Sin registro"
                         : "$" +
                           `${coolersData?.properties?.energy_cost.value.toLocaleString(
