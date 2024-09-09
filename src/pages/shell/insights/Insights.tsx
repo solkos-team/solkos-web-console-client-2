@@ -963,9 +963,12 @@ export default function Insights() {
                         <div
                           className="insights_datas_info_mantenimiento_datos_barras_color_Fallas"
                           style={{
-                            width: `${
-                              (failValue / (alertValue + failValue)) * 100
-                            }%`,
+                            width:
+                              alertValue + failValue > 0
+                                ? `${
+                                    (failValue / (alertValue + failValue)) * 100
+                                  }%`
+                                : "0%",
                             backgroundColor: !isLoading ? "#ffc4cc" : "",
                           }}
                           onClick={() => navigate("/home/fails")}
@@ -1028,13 +1031,15 @@ export default function Insights() {
                         <div
                           className="insights_datas_info_mantenimiento_datos_barras_color_Alertas"
                           style={{
-                            width: `${
-                              ((data?.insights?.ALERT?.total || 0) /
-                                (Number(data?.insights?.ALERT?.total) +
-                                  Number(data?.insights?.FAIL?.total))) *
-                              100
-                            }%`,
-                            backgroundColor: isLoading != true ? "#FFF3BF" : "",
+                            width:
+                              alertValue + failValue > 0
+                                ? `${
+                                    (alertValue / (alertValue + failValue)) *
+                                    100
+                                  }%`
+                                : "0%", // Asegura que el width sea "0%" cuando el total sea 0
+                            backgroundColor:
+                              isLoading !== true ? "#FFF3BF" : "",
                           }}
                           onClick={() => navigate("/home/alerts")}
                         >
