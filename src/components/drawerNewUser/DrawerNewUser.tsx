@@ -256,7 +256,7 @@ export default function DrawerNewUser({
       size="40rem"
       withCloseButton={false}
     >
-      <div style={{ position: "absolute", left: "1rem", top: "1rem" }}>
+      <div style={{ position: "absolute", left: "2rem", top: "1rem" }}>
         <button
           style={{
             display: "flex",
@@ -282,7 +282,9 @@ export default function DrawerNewUser({
       <section className="users_principal" style={{ marginTop: "1rem" }}>
         <section className="users_content">
           <section className="users_title">
-            <h1 className="users_title_h1">Nuevo Usuario</h1>
+            <h1 className="users_title_h1" style={{ padding: "0rem 1rem" }}>
+              Nuevo Usuario
+            </h1>
           </section>
           <div
             style={{
@@ -303,7 +305,7 @@ export default function DrawerNewUser({
             style={{
               // background: "red",
               display: "flex",
-              padding: "1rem 2rem",
+              padding: "1rem 1rem",
               flexDirection: "column",
               justifyContent: "space-between",
               alignItems: "center",
