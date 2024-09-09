@@ -88,8 +88,32 @@ export default function DrawerUsers({
       onClose={oncloseDrawerEdit}
       position="right"
       size="40rem"
+      withCloseButton={false}
     >
-      <section className="users_principal">
+      <div style={{ position: "absolute", left: "2rem", top: "1rem" }}>
+        <button
+          style={{
+            display: "flex",
+            padding: "0.313rem",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "0.625rem",
+            alignSelf: "stretch",
+            borderRadius: "0.25rem",
+            border: "0.063rem solid #CED4DA",
+            background: "transparent",
+            cursor: "pointer",
+          }}
+          onClick={oncloseDrawerEdit}
+        >
+          <img
+            src={"../../sampleData/CloseDrawer.svg"}
+            alt="Close"
+            style={{ width: "1.125rem", height: "1.125rem" }}
+          />
+        </button>
+      </div>
+      <section className="users_principal" style={{ marginTop: "1rem" }}>
         <section className="users_content">
           <section className="users_title">
             <h1 className="users_title_h1">Información de Usuario</h1>
@@ -109,7 +133,10 @@ export default function DrawerUsers({
               style={{ background: "#CACACA", height: "1px", width: "105%" }}
             ></div>
           </div>
-          <section className="users_form">
+          <section
+            className="users_form"
+            // style={{ background: "yellow" }}
+          >
             <section
               style={{
                 width: "100%",
@@ -117,6 +144,7 @@ export default function DrawerUsers({
                 display: "flex",
                 flexDirection: "column",
                 gap: "1rem",
+                // background: "red",
               }}
             >
               <section className="users_form_1">
