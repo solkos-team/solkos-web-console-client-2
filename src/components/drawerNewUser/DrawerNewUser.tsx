@@ -378,7 +378,7 @@ export default function DrawerNewUser({
                     onChange={(e) => setEmail(e.target.value)}
                     icon={
                       <img
-                        src={"../../sampleData/user_1.svg"}
+                        src={"../../sampleData/at.svg"}
                         alt="Descripción de la imagen"
                         // style={{ width: "1.813rem", height: "1.813rem" }}
                       />
