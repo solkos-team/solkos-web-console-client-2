@@ -581,7 +581,10 @@ export default function CoolerDetail() {
                     </div>
                   </div>
                 </div>
-                <div className="detail_data">
+                <div
+                  className="detail_data"
+                  // style={{ background: "yellow" }}
+                >
                   <div
                     style={{
                       display: "flex",
