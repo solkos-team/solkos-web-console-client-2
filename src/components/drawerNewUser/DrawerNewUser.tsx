@@ -254,8 +254,32 @@ export default function DrawerNewUser({
       onClose={oncloseDrawer}
       position="right"
       size="40rem"
+      withCloseButton={false}
     >
-      <section className="users_principal">
+      <div style={{ position: "absolute", left: "1rem", top: "1rem" }}>
+        <button
+          style={{
+            display: "flex",
+            padding: "0.313rem",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "0.625rem",
+            alignSelf: "stretch",
+            borderRadius: "0.25rem",
+            border: "0.063rem solid #CED4DA",
+            background: "transparent",
+            cursor: "pointer",
+          }}
+          onClick={oncloseDrawer}
+        >
+          <img
+            src={"../../sampleData/CloseDrawer.svg"}
+            alt="Close"
+            style={{ width: "1.125rem", height: "1.125rem" }}
+          />
+        </button>
+      </div>
+      <section className="users_principal" style={{ marginTop: "1rem" }}>
         <section className="users_content">
           <section className="users_title">
             <h1 className="users_title_h1">Nuevo Usuario</h1>
@@ -275,25 +299,102 @@ export default function DrawerNewUser({
               style={{ background: "#CACACA", height: "1px", width: "105%" }}
             ></div>
           </div>
-          <section className="users_form">
-            <section className="users_form_1">
-              <Input.Wrapper label="Nombre" description="" error="">
-                <Input value={name} onChange={(e) => setName(e.target.value)} />
-              </Input.Wrapper>
-            </section>
-            <section className="users_form_1">
-              <Input.Wrapper label="Correo" description="" error="">
-                <Input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Input.Wrapper>
-            </section>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <section className="users_form_button">
+          <section
+            style={{
+              // background: "red",
+              display: "flex",
+              padding: "1rem 2rem",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flex: 100,
+              alignSelf: "stretch",
+            }}
+          >
+            <div
+              style={{
+                // background: "blue",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "1rem",
+                alignSelf: "stretch",
+              }}
+            >
+              <div
+                style={{
+                  // background: "green",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  gap: "0.313rem",
+                  flex: 100,
+                  width: "100%",
+                }}
+              >
+                <Input.Wrapper
+                  label="Nombre"
+                  description=""
+                  error=""
+                  style={{ width: "100%" }}
+                >
+                  <Input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    icon={
+                      <img
+                        src={"../../sampleData/user_1.svg"}
+                        alt="Descripción de la imagen"
+                        // style={{ width: "1.813rem", height: "1.813rem" }}
+                      />
+                    }
+                  />
+                </Input.Wrapper>
+              </div>
+              <div
+                style={{
+                  // background: "green",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "flex-start",
+                  gap: "0.313rem",
+                  flex: 100,
+                  width: "100%",
+                }}
+              >
+                <Input.Wrapper
+                  label="Correo"
+                  description=""
+                  error=""
+                  style={{ width: "100%" }}
+                >
+                  <Input
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    icon={
+                      <img
+                        src={"../../sampleData/user_1.svg"}
+                        alt="Descripción de la imagen"
+                        // style={{ width: "1.813rem", height: "1.813rem" }}
+                      />
+                    }
+                  />
+                </Input.Wrapper>
+              </div>
+            </div>{" "}
+            <div
+              style={{
+                // background: "pink",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: "0.5rem",
+                alignSelf: "stretch",
+              }}
+            >
               <Button
                 style={{
                   background: "#FFF5F5",
@@ -324,8 +425,6 @@ export default function DrawerNewUser({
                   Cancelar
                 </div>
               </Button>
-            </section>
-            <section className="users_form_button" style={{ marginTop: -20 }}>
               <Button
                 style={{
                   background: "#E7F5FF",
@@ -356,7 +455,7 @@ export default function DrawerNewUser({
                   Guardar
                 </div>
               </Button>
-            </section>{" "}
+            </div>
           </section>
         </section>
       </section>
