@@ -360,6 +360,7 @@ export default function Users() {
               </div>
               {dto === "KOF Guatemala" &&
               EMAIL != "mayrabarronr91@gmail.com" &&
+              EMAIL != "tgtkimberly.lopez@kof.com.mx" &&
               Role != "root" ? (
                 <></>
               ) : (
@@ -448,6 +449,7 @@ export default function Users() {
                 <th scope="col">Path</th>
                 {dto === "KOF Guatemala" &&
                 EMAIL != "mayrabarronr91@gmail.com" &&
+                EMAIL != "tgtkimberly.lopez@kof.com.mx" &&
                 Role != "root" ? (
                   <></>
                 ) : (
@@ -528,6 +530,7 @@ export default function Users() {
                           </td>
                           {dto === "KOF Guatemala" &&
                           EMAIL != "mayrabarronr91@gmail.com" &&
+                          EMAIL != "tgtkimberly.lopez@kof.com.mx" &&
                           Role != "root" ? (
                             <></>
                           ) : (
@@ -646,6 +649,347 @@ export default function Users() {
           deleteUserDrawer={deleteUserDrawer}
         ></DrawerUsers>
       )}
+      {isUpdateOpen && (
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            zIndex: 9999,
+            marginLeft: "-width",
+            marginTop: "-height",
+          }}
+        >
+          <Alert
+            title={
+              updateStatus == true
+                ? "Usuario actualizado"
+                : "Usuario no actualizado"
+            }
+            onClose={closeAlert}
+            closeButtonLabel="Cerrar"
+            style={{
+              backgroundColor: "#FFFF",
+              borderColor: "#88888B",
+              color: updateStatus == true ? "#6ea2ff" : "#ED5079",
+            }}
+          >
+            {updateStatus == true
+              ? "El usuario ha sido actualizado exitosamente."
+              : "Error al actualizar el usuario"}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                marginTop: 10,
+              }}
+            >
+              <Button
+                onClick={closeAlert}
+                size="xs"
+                style={{
+                  marginLeft: 5,
+                  backgroundColor: "#ED5079",
+                  color: "white",
+                }}
+              >
+                X
+              </Button>
+            </div>
+          </Alert>
+        </div>
+      )}
+      {isAlertOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <Alert
+            variant="light"
+            color="gray"
+            title="Usuario creado"
+            className="custom-alert"
+            style={{
+              border: "1px solid #CED4DA",
+              background: "#F8F9FA",
+              borderRadius: "16px",
+              width: "130%",
+              position: "relative",
+              padding: "1rem",
+            }}
+          >
+            <button
+              onClick={closeAlert}
+              style={{
+                position: "absolute",
+                top: "0px",
+                right: "5px",
+                background: "none",
+                border: "none",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+                outline: "none",
+              }}
+            >
+              &times;
+            </button>{" "}
+            <br />
+            <div>
+              <img
+                src={"../../sampleData/user-check.svg"}
+                alt="Descripción de la imagen"
+                style={{ width: "30px", height: "25px" }}
+              />
+              <div style={{ color: "#2393F4" }}>Usuario creado</div>
+            </div>
+            <p></p>
+          </Alert>
+        </div>
+      )}
+
+      {isDelete == true && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "45%",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+          className="alert-container"
+        >
+          <Alert
+            variant="light"
+            color="gray"
+            title="Eliminar usuario"
+            className="custom-alert"
+            style={{
+              border: "1px solid #CED4DA",
+              background: "#F8F9FA",
+              borderRadius: "16px",
+              width: "110%",
+              position: "relative",
+              padding: "1rem",
+            }}
+          >
+            <button
+              onClick={() => setIsDelete(false)}
+              style={{
+                position: "absolute",
+                top: "-10px",
+                right: "-10px",
+                background: "none",
+                border: "none",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+                outline: "none",
+              }}
+            >
+              &times;
+            </button>
+            ¿Estás seguro de eliminar a este usuario?
+            <br />
+            <p></p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                width: "100%",
+              }}
+            >
+              <div style={{ width: "100%" }}>
+                <Button
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#FFF5F5",
+                    color: "#FA5252",
+                  }}
+                  onClick={() => {
+                    deleteUser();
+                  }}
+                >
+                  Si, eliminar
+                </Button>
+              </div>
+              <div style={{ width: "100%" }}>
+                <Button
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#F1F3F5",
+                    color: "#212529",
+                  }}
+                  variant="filled"
+                  onClick={() => {
+                    setIsDelete(false);
+                  }}
+                >
+                  No, cancelar
+                </Button>
+              </div>
+            </div>
+          </Alert>
+        </div>
+      )}
+      {isDeleteAlertOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "45%",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-end",
+          }}
+        >
+          <Alert
+            variant="light"
+            color="gray"
+            title="Eliminar usuario"
+            className="custom-alert"
+            style={{
+              border: "1px solid #CED4DA",
+              background: "#F8F9FA",
+              borderRadius: "16px",
+              width: "130%",
+              position: "relative",
+              padding: "1rem",
+            }}
+          >
+            <button
+              onClick={() => setIsDeleteAlertOpen(false)}
+              style={{
+                position: "absolute",
+                top: "0px",
+                right: "5px",
+                background: "none",
+                border: "none",
+                fontSize: "1.5rem",
+                cursor: "pointer",
+                outline: "none",
+              }}
+            >
+              &times;
+            </button>{" "}
+            <br />
+            <div>
+              <img
+                src={"../../sampleData/deluser.svg"}
+                alt="Descripción de la imagen"
+                style={{ width: "30px", height: "25px" }}
+              />
+              <div style={{ color: "#FA5252" }}>Usuario eliminado</div>
+            </div>
+            <p></p>
+          </Alert>
+        </div>
+      )}
+      <section>
+        {modalDelete && (
+          <Modal
+            opened={modalDelete}
+            onClose={() => {
+              setModalDelete(false);
+            }}
+            centered
+            title={
+              <div
+                style={{
+                  color: "var(--other-black, #000)",
+                  fontSize: "1rem",
+                  fontWeight: "400",
+                }}
+              >
+                Eliminar usuario
+              </div>
+            }
+            className="users_modal"
+            style={{
+              border: "1px solid #CED4DA",
+              borderRadius: "16px",
+              padding: "1rem",
+            }}
+          >
+            <section
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundColor: "",
+                display: "flex",
+                flexDirection: "column",
+                gap: "8px",
+              }}
+            >
+              <div
+                style={{
+                  width: "100%",
+                  height: "10%",
+                  backgroundColor: "",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "var(--other-black, #000)",
+                  fontSize: "1.125rem",
+                  fontWeight: "400",
+                }}
+              >
+                ¿Estás seguro de eliminar a este usuario?
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  height: "90%",
+                  backgroundColor: "",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "8px",
+                }}
+              >
+                <div style={{ width: "100%" }}>
+                  <Button
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#FFF5F5",
+                      color: "#FA5252",
+                    }}
+                    onClick={() => {
+                      deleteUser();
+                    }}
+                  >
+                    Si, eliminar
+                  </Button>
+                </div>
+                <div style={{ width: "100%" }}>
+                  <Button
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#F1F3F5",
+                      color: "#212529",
+                    }}
+                    variant="filled"
+                    onClick={() => {
+                      setModalDelete(false);
+                    }}
+                  >
+                    No, cancelar
+                  </Button>
+                </div>
+              </div>
+            </section>
+          </Modal>
+        )}
+      </section>
     </div>
   );
 }
