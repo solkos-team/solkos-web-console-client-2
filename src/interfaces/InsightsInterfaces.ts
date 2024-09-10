@@ -10,7 +10,7 @@ export interface Insights {
   maintenance: Maintenance[];
 }
 interface Maintenance {
-  level: string;
+  last_alert: string;
   value: number;
 }
 interface AssetControl {

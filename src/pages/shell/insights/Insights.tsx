@@ -18,10 +18,10 @@ export default function Insights() {
   console.log(data?.asset_control?.total);
   console.log(data?.asset_control?.algorithms);
   const alertValue =
-    data?.maintenance?.find((item) => item.level === "ALERT")?.value || 0;
+    data?.maintenance?.find((item) => item.last_alert === "ALERT")?.value || 0;
   console.log(alertValue);
   const failValue =
-    data?.maintenance?.find((item) => item.level === "FAIL")?.value || 0;
+    data?.maintenance?.find((item) => item.last_alert === "FAIL")?.value || 0;
   console.log(failValue);
 
   const totalMaintenanceValue = data?.maintenance?.reduce(
