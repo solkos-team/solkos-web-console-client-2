@@ -17,6 +17,7 @@ import { Modal, Button } from "@mantine/core";
 import { UniversalSearch } from "../universalSearch/UniversalSearch";
 
 export default function (props) {
+  const [dataSelectLoaded, setDataSelectLoaded] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [noMatchMessage, setNoMatchMessage] = useState("");
   const dto = useSelector((state: any) => state.organization);
@@ -38,13 +39,51 @@ export default function (props) {
   //   "Ruta",
   // ]);
 
-  const options = ["Región", "Zona", "Unidad Operativa", "Ruta"];
-  const dataSelect =
-    dto === "HEINEKEN"
-      ? options.filter((option) => option !== "Ruta")
-      : dto === "ECO"
-      ? options.filter((option) => option !== "Unidad Operativa")
-      : options;
+  const [dataSelect, setDataSelect] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Obtener el token de localStorage
+        const token = localStorage.getItem("Token"); // Reemplaza 'yourTokenKey' con la clave correcta
+
+        const response = await fetch(
+          "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/hierachy",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Añadir el token al encabezado
+            },
+            body: JSON.stringify({ customer: dto }),
+          }
+        );
+
+        if (response.ok) {
+          const result = await response.json();
+          // El resultado es directamente el array
+          setDataSelect(result); // No necesitas acceder a result.data
+          setDataSelectLoaded(true);
+        } else {
+          console.error("Error in response:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  // console.log(dataSelect);
+  // console.log(dataSelect.length);
+
+  // const options = ["Región", "Zona", "Unidad Operativa", "Ruta"];
+  // const dataSelect =
+  //   dto === "HEINEKEN"
+  //     ? options.filter((option) => option !== "Ruta")
+  //     : dto === "ECO"
+  //     ? options.filter((option) => option !== "Unidad Operativa")
+  //     : options;
   const [data, setData] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
   const [filterVisibility, setFilterVisibility] = useState<boolean>(true);
@@ -65,17 +104,7 @@ export default function (props) {
   // };
 
   const checkVisibilityPath = () => {
-    const dataLocalStorage = JSON.parse(localStorage.getItem("PATH") || "[]");
-
-    // Verifica si dto es "HEINEKEN" o "ECO"
-    if ((dto === "HEINEKEN" || dto === "ECO") && pathVerify().length >= 3) {
-      setFilterVisibility(false);
-    } else if (
-      (dto === "HEINEKEN" || dto === "ECO") &&
-      pathVerify().length < 3
-    ) {
-      setFilterVisibility(true);
-    } else if (pathVerify().length >= 4) {
+    if (dataSelectLoaded && pathVerify().length >= dataSelect.length) {
       setFilterVisibility(false);
     } else {
       setFilterVisibility(true);
@@ -98,6 +127,12 @@ export default function (props) {
   };
 
   // console.log(pathVerify().length);
+
+  useEffect(() => {
+    if (dataSelectLoaded) {
+      checkVisibilityPath();
+    }
+  }, [dataSelectLoaded, pathVerify().length, dataSelect.length]);
 
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
@@ -210,19 +245,22 @@ export default function (props) {
     }
 
     if (value !== "") {
-      if (index === 3) {
+      // Asegurarse de que dataSelect está cargado antes de verificar
+      if (dataSelectLoaded && index === dataSelect.length - 1) {
         setFilterVisibility(false);
         setStatusDelete(false);
       }
+
       setData((current) => [...current, value]);
       localStorage.setItem("PATH", JSON.stringify([...data, value]));
-      // console.log(data);
-      // console.log(value);
       setOpened(false);
       setValue("");
-      if (index !== 3) {
+
+      if (index < dataSelect.length - 1) {
+        // Dinámico basado en dataSelect.length
         setIndex(index + 1);
       }
+
       setStatusDelete(false);
       setFilterVisibility(false);
     }
@@ -243,7 +281,7 @@ export default function (props) {
     dataZone.splice(i, 1);
     setStatusDelete(!statusDelete);
     setIndex(data.length);
-    if (i == 3) {
+    if (i === dataSelect.length - 1) {
       setFilterVisibility(true);
     }
     setValue("");

@@ -37,11 +37,12 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const body = {
     customer: dto,
     path: pathVerify(),
-    map_coolers:
-      (dto === "HEINEKEN" && pathVerify().length >= 3) ||
-      (dto !== "HEINEKEN" && pathVerify().length >= 4)
-        ? true
-        : false,
+    map_coolers: pathVerify().length >= 4 ? true : false,
+    // map_coolers:
+    //   (dto === "HEINEKEN" && pathVerify().length >= 3) ||
+    //   (dto !== "HEINEKEN" && pathVerify().length >= 4)
+    //     ? true
+    //     : false,
   };
 
   const [geojson, setGeojson] = useState<GeoJSON | null>(null);

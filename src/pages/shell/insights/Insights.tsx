@@ -153,8 +153,6 @@ export default function Insights() {
                     </>
                   ) : data?.summary.operative_units === undefined ? (
                     "Sin registro"
-                  ) : dto === "ECO" ? (
-                    0
                   ) : (
                     data?.summary.operative_units.toLocaleString("es-MX")
                   )}
@@ -325,118 +323,12 @@ export default function Insights() {
                             (item) =>
                               item.class === "ASSET_MANAGEMENT_FREQUENCY"
                           )
-                          ?.value.toLocaleString("es-MX") + " Enfriadores"
+                          ?.value?.toLocaleString("es-MX") + " Enfriadores" ??
+                        "0" + " Enfriadores"
                       )}
                     </div>
                   </div>
-                  {/* <div className="insights_datas_kpi_data_data">
-                    <div className="insights_datas_kpi_data_data_1">
-                      Frec. Últ. 7 días
-                    </div>
-                    <div
-                      className="insights_datas_kpi_data_data_2"
-                      style={{ display: "flex", alignItems: "center" }}
-                    >
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton
-                            height={15}
-                            mt={6}
-                            width="55%"
-                            radius="xs"
-                          />
-                        </>
-                      ) : (
-                        <>
-                          {
-                            !data ||
-                            data.assets_analytics === null ||
-                            !Array.isArray(data.assets_analytics) ||
-                            data.assets_analytics[3]?.percentage ===
-                              undefined ? (
-                              <>
-                                <div>0%</div>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      width: "8px",
-                                      height: "8px",
-                                      backgroundColor: "#FA5252",
-                                      borderRadius: "50%",
-                                      marginRight: "5px",
-                                    }}
-                                  ></div>
-                                </div>
-                              </>
-                            ) : (
-                              data.assets_analytics[3].percentage.toFixed(1) +
-                              "%"
-                            )
 
-                            // "0%"
-                          }
-
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <div
-                              style={{
-                                width: "8px",
-                                height: "8px",
-                                backgroundColor:
-                                  !data ||
-                                  (data?.assets_analytics[3]?.percentage > 0 &&
-                                    data?.assets_analytics[3]?.percentage < 60)
-                                    ? "#FA5252"
-                                    : data?.assets_analytics[3]?.percentage >
-                                        60 &&
-                                      data?.assets_analytics[3]?.percentage < 80
-                                    ? "#E67700"
-                                    : data?.assets_analytics[3]?.percentage >=
-                                        80 &&
-                                      data?.assets_analytics[3]?.percentage <=
-                                        100
-                                    ? "#40C057"
-                                    : "",
-                                borderRadius: "50%",
-                                marginRight: "5px",
-                              }}
-                            ></div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-
-                    <div className="insights_datas_kpi_data_data_3">
-                      {
-                        isLoading == true ? (
-                          <>
-                            <Skeleton
-                              height={15}
-                              mt={6}
-                              width="55%"
-                              radius="xs"
-                            />
-                          </>
-                        ) : !data ||
-                          data.assets_analytics === null ||
-                          !Array.isArray(data.assets_analytics) ||
-                          data.assets_analytics[3]?.value === undefined ? (
-                          "0 Enfriadores"
-                        ) : (
-                          data.assets_analytics[3].value.toLocaleString(
-                            "es-MX"
-                          ) + " Enfriadores"
-                        )
-                        // "0 Enfriadores"
-                      }
-                    </div>
-                  </div> */}
                   <div className="insights_datas_kpi_data_data">
                     <div className="insights_datas_kpi_data_data_1">
                       Frec. Últ. 7 días
@@ -482,23 +374,27 @@ export default function Insights() {
                                 </div>
                               </>
                             ) : (
-                              item.percentage.toFixed(1) + "%"
+                              <div style={{ display: "flex" }}>
+                                {item.percentage.toFixed(1) + "%"}
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                  }}
+                                >
+                                  <div
+                                    style={{
+                                      width: "8px",
+                                      height: "8px",
+                                      backgroundColor: backgroundColor,
+                                      borderRadius: "50%",
+                                      marginRight: "5px",
+                                    }}
+                                  ></div>
+                                </div>
+                              </div>
                             );
                           })()}
-
-                          <div
-                            style={{ display: "flex", alignItems: "center" }}
-                          >
-                            <div
-                              style={{
-                                width: "8px",
-                                height: "8px",
-                                backgroundColor: backgroundColor,
-                                borderRadius: "50%",
-                                marginRight: "5px",
-                              }}
-                            ></div>
-                          </div>
                         </>
                       )}
                     </div>
