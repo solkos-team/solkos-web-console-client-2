@@ -26,10 +26,10 @@ export default function Indicator() {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
-      console.log(data);
+      // console.log(data);
       const aggItem = data.find((item: any) => item.class === "AGG");
       if (aggItem) {
-        console.log("Valor de AGG:", aggItem.value);
+        // console.log("Valor de AGG:", aggItem.value);
         setAggValue(aggItem.value); // Guarda el valor en el estado si es necesario
       }
       setCoolersData(data);
@@ -45,7 +45,7 @@ export default function Indicator() {
 
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(aggValue);
+  // console.log(aggValue);
   const formattedAggValue =
     aggValue !== null ? aggValue.toLocaleString("es-MX") : null;
   // Page (Body)

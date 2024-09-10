@@ -58,7 +58,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
       setIsLoading(true);
 
       const data = await fetchUniversal("insights", body, setIsLoading);
-      console.log("API Response Data:", data);
+      // console.log("API Response Data:", data);
 
       if (data) {
         if (data.polygon_data) {
@@ -207,7 +207,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 
           setSelectedArea(selectedValue);
           localStorage.setItem("selectedArea", selectedValue); // Guardar en localStorage
-          console.log("Clic en:", selectedValue);
+          // console.log("Clic en:", selectedValue);
 
           const splitValues: string[] = selectedValue
             .split(",")

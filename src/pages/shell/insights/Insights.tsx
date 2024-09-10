@@ -15,20 +15,20 @@ export default function Insights() {
   const navigate = useNavigate();
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
-  console.log(data?.asset_control?.total);
-  console.log(data?.asset_control?.algorithms);
+  // console.log(data?.asset_control?.total);
+  // console.log(data?.asset_control?.algorithms);
   const alertValue =
     data?.maintenance?.find((item) => item.last_alert === "ALERT")?.value || 0;
-  console.log(alertValue);
+  // console.log(alertValue);
   const failValue =
     data?.maintenance?.find((item) => item.last_alert === "FAIL")?.value || 0;
-  console.log(failValue);
+  // console.log(failValue);
 
   const totalMaintenanceValue = data?.maintenance?.reduce(
     (sum, item) => sum + item.value,
     0
   );
-  console.log(totalMaintenanceValue);
+  // console.log(totalMaintenanceValue);
   const IndicadoresData = data?.asset_control?.algorithms || [];
   const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
   data?.summary.coolers.toLocaleString("es-MX") != null ||

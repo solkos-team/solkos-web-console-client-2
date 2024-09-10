@@ -12,7 +12,7 @@ export const ExportToExcel = (props) => {
   const [fileStateTotal, setFileState] = useState<string>();
   const [fileStateTotalPath, setFileStatePath] = useState<string>();
   const [total, setTotal] = useState<number>();
-  console.log(total);
+  // console.log(total);
   const [totalPath, setTotalPath] = useState<number>();
   const typeRole = localStorage.getItem("Role");
   const exportToExcel = () => {

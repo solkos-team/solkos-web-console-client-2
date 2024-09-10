@@ -74,10 +74,10 @@ export default function DrawerA({
       );
       const datos = await data.json();
       const totalData = data.headers.get("pagination-count");
-      console.log(totalData);
+      // console.log(totalData);
       setTotalData(Number(totalData) || 0);
       setCoolersData(datos);
-      console.log(datos);
+      // console.log(datos);
       setIsLoading(false);
     } catch (error) {
       console.error("Error:", error);
@@ -160,7 +160,7 @@ export default function DrawerA({
   // console.log(coolersData);
   totalData === undefined ? 0 : totalData;
 
-  console.log(level);
+  // console.log(level);
 
   return (
     <Drawer

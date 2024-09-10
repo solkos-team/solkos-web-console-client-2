@@ -97,7 +97,7 @@ export default function (props) {
     setMostrarVentanaEmergente(true);
   };
 
-  console.log(pathVerify().length);
+  // console.log(pathVerify().length);
 
   const handleCloseVentanaEmergente = () => {
     setMostrarVentanaEmergente(false);
@@ -140,7 +140,7 @@ export default function (props) {
   pathVerify().length === 0 ? getPaths() : "";
   dto === customer ? "" : clearPath();
 
-  console.log(pathVerify().length);
+  // console.log(pathVerify().length);
   // Ctrl + x
   useEffect(() => {
     dispatch(addPath());
@@ -194,7 +194,7 @@ export default function (props) {
     };
   }, [mostrarVentanaEmergente, value]);
 
-  console.log(dt.length);
+  // console.log(dt.length);
   const verSelectData = (value) => {
     if (variableGuardada !== "" && variableGuardada !== null) {
       const splitValues = variableGuardada
@@ -216,8 +216,8 @@ export default function (props) {
       }
       setData((current) => [...current, value]);
       localStorage.setItem("PATH", JSON.stringify([...data, value]));
-      console.log(data);
-      console.log(value);
+      // console.log(data);
+      // console.log(value);
       setOpened(false);
       setValue("");
       if (index !== 3) {
@@ -539,7 +539,7 @@ export default function (props) {
     const lastValue = item.searchItem.split(",").pop().trim();
 
     // Verificar en consola el valor seleccionado
-    console.log("Último valor seleccionado del historial:", lastValue);
+    // console.log("Último valor seleccionado del historial:", lastValue);
 
     // Llamar a fetchToken con el último valor
     fetchToken(lastValue)

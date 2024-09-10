@@ -27,11 +27,11 @@ export default function Alerts() {
       const data = await fetchUniversal("alerts", body);
       const aggItem = data.find((item: any) => item.class === "AGG");
       if (aggItem) {
-        console.log("Valor de AGG:", aggItem.value);
+        // console.log("Valor de AGG:", aggItem.value);
         setAggValue(aggItem.value); // Guarda el valor en el estado si es necesario
       }
       setAlertsData(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error:", error);
     } finally {

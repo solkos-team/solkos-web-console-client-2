@@ -47,7 +47,7 @@ const UploadExcel = ({ onFileLoaded }) => {
             });
 
           // Muestra el contenido del archivo como objetos
-          console.log("Contenido del archivo (objetos):", dataObjects);
+          // console.log("Contenido del archivo (objetos):", dataObjects);
 
           // Llama a la función onFileLoaded con los datos del archivo
           if (onFileLoaded) {

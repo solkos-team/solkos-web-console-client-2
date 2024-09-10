@@ -65,7 +65,7 @@ export default function Panel() {
 
   useEffect(() => {
     const handleTabChange = async (tab: string) => {
-      console.log("Current tab:", tab);
+      // console.log("Current tab:", tab);
       setActiveTab(tab);
       await fetchToken();
       setTabsEnabled(false);
