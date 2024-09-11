@@ -446,3 +446,40 @@ export const fetchSearchUniversal = async (URL, setIsLoading, data) => {
     throw error;
   }
 };
+
+export const fetchVaulInsights = async (componentURL, setIsLoading, data) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
+
+  const url = `${baseUrl}${componentURL}`; // Construir la URL completa
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${
+      sessionStorage.getItem("Token") ?? localStorage.getItem("Token")
+    }`,
+  };
+
+  const cuerpo = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(url, cuerpo);
+    if (!response.ok) {
+      throw new Error("Error fetching search universal");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  } finally {
+    if (setIsLoading) {
+      setIsLoading(false); // Asegura que se detenga el estado de carga
+    }
+  }
+};

@@ -1,6 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchVaulInsights } from "../../../../utils/apiUtils";
+import { useSelector } from "react-redux";
+
+interface VaultData {
+  bloqueados: number;
+  a_bloquear: number;
+  a_desbloquear: number;
+  desbloqueados: number;
+  total: number;
+}
 
 export const InsightsVault = () => {
+  const dto = useSelector((state: any) => state.organization);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState<VaultData | null>(null);
+
+  const body = {
+    customer: dto,
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+
+        const result = await fetchVaulInsights(
+          "/vault_insights",
+          setIsLoading,
+          body
+        );
+        setData(result);
+        console.log(result);
+      } catch (error) {
+        console.error("Error fetching vault insights:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [dto]);
+
+  if (data === null) {
+    return <div>Loading...</div>; // Loading state
+  }
+
+  // Destructuring data
+  const { bloqueados, a_bloquear, a_desbloquear, desbloqueados, total } = data;
+
+  // Calculate the total value
+  const totalValue = bloqueados + a_bloquear + a_desbloquear + desbloqueados;
+
+  // Calculate widths as a percentage of the total value
+  const blockedWidth = (bloqueados / totalValue) * 100;
+  const toBlockWidth = (a_bloquear / totalValue) * 100;
+  const toUnlockWidth = (a_desbloquear / totalValue) * 100;
+  const unlockedWidth = (desbloqueados / totalValue) * 100;
+
   return (
     <section className="vault_information_2">
       <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
@@ -34,23 +89,34 @@ export const InsightsVault = () => {
         </span>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-        }}
-      >
+      <div style={{ display: "flex", width: "100%" }}>
         <div
-          style={{ width: "40%", height: "22px", background: "#FFE3E3" }}
+          style={{
+            width: `${blockedWidth}%`,
+            height: "22px",
+            background: "#FFE3E3",
+          }}
         ></div>
         <div
-          style={{ width: "20%", height: "22px", background: "#FFE8CC" }}
+          style={{
+            width: `${toBlockWidth}%`,
+            height: "22px",
+            background: "#FFE8CC",
+          }}
         ></div>
         <div
-          style={{ width: "25%", height: "22px", background: "#FFF3BF" }}
+          style={{
+            width: `${toUnlockWidth}%`,
+            height: "22px",
+            background: "#FFF3BF",
+          }}
         ></div>
         <div
-          style={{ width: "15%", height: "22px", background: "#D3F9D8" }}
+          style={{
+            width: `${unlockedWidth}%`,
+            height: "22px",
+            background: "#D3F9D8",
+          }}
         ></div>
       </div>
 
@@ -110,7 +176,7 @@ export const InsightsVault = () => {
               lineHeight: "145%",
             }}
           >
-            75
+            {bloqueados}
           </span>
         </div>
         <div
@@ -148,7 +214,7 @@ export const InsightsVault = () => {
               lineHeight: "145%",
             }}
           >
-            75
+            {a_bloquear}
           </span>
         </div>
         <div
@@ -186,7 +252,7 @@ export const InsightsVault = () => {
               lineHeight: "145%",
             }}
           >
-            75
+            {a_desbloquear}
           </span>
         </div>
         <div
@@ -224,7 +290,7 @@ export const InsightsVault = () => {
               lineHeight: "145%",
             }}
           >
-            75
+            {desbloqueados}
           </span>
         </div>
         <div
@@ -262,7 +328,7 @@ export const InsightsVault = () => {
               lineHeight: "145%",
             }}
           >
-            75
+            {total}
           </span>
         </div>
       </div>
