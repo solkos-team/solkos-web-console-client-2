@@ -934,12 +934,27 @@ export default function (props) {
                       label={`Selecciona la ${dataSelect[pathVerify().length]}`}
                       placeholder="Seleccionar"
                       searchable
-                      defaultChecked
+                      // defaultChecked
                       data={dataZone[0]}
                       // value={value}
                       onChange={setValue}
                       // nothingFound="Dato no encontrado"
-                      // dropdownPosition="flip"
+                      dropdownPosition="flip"
+                      styles={(theme) => ({
+                        dropdown: {
+                          width: 200, // Ajusta el ancho del dropdown
+                          maxHeight: 300, // Ajusta la altura máxima
+                          overflowY: "auto", // Habilita el desplazamiento vertical si el contenido excede maxHeight
+                          position: "absolute", // Cambia la posición si es necesario
+                          top: "100%", // Ajusta la posición según sea necesario
+                          left: 0, // Ajusta la posición horizontal
+                        },
+                        item: {
+                          width: 200, // Ancho de las opciones
+                          padding: theme.spacing.xs, // Espacio interno
+                          boxSizing: "border-box", // Incluye el padding en el ancho
+                        },
+                      })}
                     />
                   )}
                 </Popover.Dropdown>
