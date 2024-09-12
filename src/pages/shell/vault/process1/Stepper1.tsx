@@ -7,9 +7,25 @@ import { useLocation } from "react-router-dom";
 
 export default function Stepper1() {
   const location = useLocation();
-  const vaultData = location.state?.vaultData;
+
+  // Recupera los datos desde location.state o localStorage
+  const [vaultData, setVaultData] = useState(() => {
+    const localStorageData = localStorage.getItem("vaultData");
+    return (
+      location.state?.vaultData ||
+      (localStorageData ? JSON.parse(localStorageData) : null)
+    );
+  });
 
   console.log("Datos recibidos en Stepper1:", vaultData);
+  console.log(vaultData?.entradas?.total);
+
+  useEffect(() => {
+    // Si hay datos en vaultData, guárdalos en localStorage
+    if (vaultData) {
+      localStorage.setItem("vaultData", JSON.stringify(vaultData));
+    }
+  }, [vaultData]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -179,7 +195,9 @@ export default function Stepper1() {
                   textAlign: "right",
                 }}
               >
-                100
+                {vaultData?.entradas?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.entradas?.total}
               </span>
             </div>
             <div
@@ -247,7 +265,9 @@ export default function Stepper1() {
                   textAlign: "right",
                 }}
               >
-                98
+                {vaultData?.entradas_validas?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.entradas_validas?.total}
               </span>
             </div>
             <div
@@ -316,7 +336,9 @@ export default function Stepper1() {
                   textAlign: "right",
                 }}
               >
-                70
+                {vaultData?.activar_vault?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.activar_vault?.total}
               </span>
             </div>
             <div
@@ -384,7 +406,9 @@ export default function Stepper1() {
                   textAlign: "right",
                 }}
               >
-                28
+                {vaultData?.desactivar_vault?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.desactivar_vault?.total}
               </span>
             </div>
           </div>

@@ -7,8 +7,20 @@ import { TextInput } from "@mantine/core";
 import { DrawerVault } from "../Components/DrawerVault";
 import { useDisclosure } from "@mantine/hooks";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
+import { useLocation } from "react-router-dom";
 
 export default function Stepper4() {
+  const location = useLocation();
+  let vaultData = location.state?.vaultData;
+
+  // Si los datos no vienen de location.state, cargarlos desde localStorage
+  if (!vaultData) {
+    const storedVaultData = localStorage.getItem("vaultData");
+    vaultData = storedVaultData ? JSON.parse(storedVaultData) : null;
+  }
+
+  const coolers = vaultData?.activar_vault?.Coolers || [];
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
@@ -182,9 +194,9 @@ export default function Stepper4() {
               </thead>
               <tbody>
                 <tr>
-                  <td data-label="Estatus">D56191001431</td>
-                  <td data-label="Serie">B4A2EB</td>
-                  <td data-label="Última Visita">04/07/2024</td>
+                  <td data-label="Estatus">-----</td>
+                  <td data-label="Serie">REEMPLAZAR</td>
+                  <td data-label="Última Visita">-----</td>
                 </tr>
               </tbody>
             </table>

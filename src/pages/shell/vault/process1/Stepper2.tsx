@@ -9,8 +9,20 @@ import { TextInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../Components/DrawerVault";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
+import { useLocation } from "react-router-dom";
 
 export default function Stepper2() {
+  const location = useLocation();
+  let vaultData = location.state?.vaultData;
+
+  // Si los datos no vienen de location.state, cargarlos desde localStorage
+  if (!vaultData) {
+    const storedVaultData = localStorage.getItem("vaultData");
+    vaultData = storedVaultData ? JSON.parse(storedVaultData) : null;
+  }
+
+  const coolers = vaultData?.activar_vault?.Coolers || [];
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
@@ -192,34 +204,36 @@ export default function Stepper2() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td data-label="Estatus">D56191001431</td>
-                  <td data-label="Serie">B4A2EB</td>
-                  <td data-label="Última Visita">04/07/2024</td>
-                  <td data-label="Acciones">
-                    <div
-                      style={{
-                        color: "#3E83FF",
-                        fontSize: "0.8rem",
-                        fontStyle: "normal",
-                        fontWeight: 400,
-                        display: "flex",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        open();
-                      }}
-                    >
-                      Ver más
-                      <IconArrowRight
+                {coolers.map((cooler, index) => (
+                  <tr key={index}>
+                    <td>{cooler.serie || "Sin registro"}</td>{" "}
+                    <td>{cooler.mac || "Sin registro"}</td>
+                    <td>{cooler.ultima_visita || "Sin registro"}</td>{" "}
+                    <td>
+                      <div
                         style={{
                           color: "#3E83FF",
-                          width: "1.0rem",
+                          fontSize: "0.8rem",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          display: "flex",
+                          cursor: "pointer",
                         }}
-                      />
-                    </div>
-                  </td>
-                </tr>
+                        onClick={() => {
+                          open();
+                        }}
+                      >
+                        Ver más
+                        <IconArrowRight
+                          style={{
+                            color: "#3E83FF",
+                            width: "1.0rem",
+                          }}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -252,7 +266,7 @@ export default function Stepper2() {
             Continuar
           </Button>
         </div>
-        {/* <DrawerVault opened={opened} onCLose={close}  /> */}
+        {/* <DrawerVault opened={opened} onCLose={close} Serial_ID={""} /> */}
       </div>
     </section>
   );

@@ -15,13 +15,13 @@ interface ExcelData {
 
 export default function Process1Vault() {
   const [isAlertVisible, setAlertVisible] = useState(true);
-  const [isFileUploaded, setIsFileUploaded] = useState(false); // Nuevo estado para controlar si se subió un archivo
+  const [isFileUploaded, setIsFileUploaded] = useState(false); // Estado para controlar si se subió un archivo
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   // Define que excelData es un array de objetos de tipo ExcelData
   const [excelData, setExcelData] = useState<ExcelData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Estado para controlar la carga del fetch
   const [data, setData] = useState(null);
   const dto = useSelector((state: any) => state.organization);
 
@@ -81,7 +81,7 @@ export default function Process1Vault() {
         );
 
         try {
-          setIsLoading(true);
+          setIsLoading(true); // Activar el estado de carga
 
           const result = await fetchVaulValidate(
             "vault_validate", // URL corregida
@@ -93,7 +93,7 @@ export default function Process1Vault() {
         } catch (error) {
           console.error("Error fetching vault insights:", error);
         } finally {
-          setIsLoading(false);
+          setIsLoading(false); // Desactivar el estado de carga
         }
       }
     };
@@ -221,7 +221,7 @@ export default function Process1Vault() {
             onClick={() => {
               navigate(`/home/Stepper1`, { state: { vaultData: data } });
             }}
-            disabled={!isFileUploaded}
+            disabled={isLoading || !isFileUploaded}
           >
             Continuar
           </Button>

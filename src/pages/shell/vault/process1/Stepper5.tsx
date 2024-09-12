@@ -3,8 +3,20 @@ import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
 import { Stepper, TextInput, Group } from "@mantine/core";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
+import { useLocation } from "react-router-dom";
 
 export default function Stepper5() {
+  const location = useLocation();
+  let vaultData = location.state?.vaultData;
+
+  // Si los datos no vienen de location.state, cargarlos desde localStorage
+  if (!vaultData) {
+    const storedVaultData = localStorage.getItem("vaultData");
+    vaultData = storedVaultData ? JSON.parse(storedVaultData) : null;
+  }
+
+  const coolers = vaultData?.activar_vault?.Coolers || [];
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -191,7 +203,9 @@ export default function Stepper5() {
                   textAlign: "right",
                 }}
               >
-                100
+                {vaultData?.entradas?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.entradas?.total}
               </span>
             </div>
             <div
@@ -259,7 +273,9 @@ export default function Stepper5() {
                   textAlign: "right",
                 }}
               >
-                98
+                {vaultData?.entradas_validas?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.entradas_validas?.total}
               </span>
             </div>
             <div
@@ -328,7 +344,9 @@ export default function Stepper5() {
                   textAlign: "right",
                 }}
               >
-                70
+                {vaultData?.activar_vault?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.activar_vault?.total}
               </span>
             </div>
             <div
@@ -396,7 +414,9 @@ export default function Stepper5() {
                   textAlign: "right",
                 }}
               >
-                28
+                {vaultData?.desactivar_vault?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.desactivar_vault?.total}
               </span>
             </div>
             <br></br>
