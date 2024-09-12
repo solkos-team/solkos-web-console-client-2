@@ -452,7 +452,7 @@ export const fetchVaulInsights = async (componentURL, setIsLoading, data) => {
     setIsLoading(true);
   }
 
-  const url = `${baseUrl}${componentURL}`; // Construir la URL completa
+  const url = `${baseUrl}${componentURL}`;
 
   const headers = {
     "Content-Type": "application/json",
@@ -470,7 +470,44 @@ export const fetchVaulInsights = async (componentURL, setIsLoading, data) => {
   try {
     const response = await fetch(url, cuerpo);
     if (!response.ok) {
-      throw new Error("Error fetching search universal");
+      throw new Error("Error fetching vault insights");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  } finally {
+    if (setIsLoading) {
+      setIsLoading(false);
+    }
+  }
+};
+
+export const fetchVaulValidate = async (componentURL, setIsLoading, data) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
+
+  const url = `${baseUrl}${componentURL}`;
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${
+      sessionStorage.getItem("Token") ?? localStorage.getItem("Token")
+    }`,
+  };
+
+  const cuerpo = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(url, cuerpo);
+    if (!response.ok) {
+      throw new Error("Error fetching vault insights");
     }
 
     const responseData = await response.json();

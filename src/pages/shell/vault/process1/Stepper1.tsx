@@ -3,8 +3,14 @@ import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
 import { Stepper } from "@mantine/core";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
+import { useLocation } from "react-router-dom";
 
 export default function Stepper1() {
+  const location = useLocation();
+  const vaultData = location.state?.vaultData;
+
+  console.log("Datos recibidos en Stepper1:", vaultData);
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 

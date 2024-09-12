@@ -4,12 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { InsightsVault } from "../Components/InsightsVault";
 import UploadExcel from "../../../../components/excelFile/ExcelFile";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
+import { fetchVaulValidate } from "../../../../utils/apiUtils";
+import { useSelector } from "react-redux";
+
+// Define una interfaz para los datos del archivo Excel
+interface ExcelData {
+  device_id: string | boolean;
+  estatus: string | boolean;
+}
 
 export default function Process1Vault() {
   const [isAlertVisible, setAlertVisible] = useState(true);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const [excelData, setExcelData] = useState([]);
+
+  // Define que excelData es un array de objetos de tipo ExcelData
+  const [excelData, setExcelData] = useState<ExcelData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const dto = useSelector((state: any) => state.organization);
 
   const handleFileClick = () => {
     if (fileInputRef.current) {
@@ -25,7 +38,7 @@ export default function Process1Vault() {
     }
   };
 
-  const handleFileLoaded = (data) => {
+  const handleFileLoaded = (data: ExcelData[]) => {
     setExcelData(data);
     console.log("Datos del archivo cargado:", data);
   };
@@ -47,6 +60,43 @@ export default function Process1Vault() {
   const [isVisible, setIsVisible] = useState(true);
 
   if (!isVisible) return null;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (excelData.length > 0) {
+        const body = {
+          coolers: excelData.map((item) => ({
+            device_id: String(item.device_id || ""), // Convertir a cadena
+            estatus:
+              item.estatus === "true" || item.estatus === true ? true : false,
+          })),
+        };
+
+        // Loguear el body para múltiples coolers
+        console.log(
+          "Estructura del body con múltiples coolers:",
+          JSON.stringify(body, null, 2)
+        );
+
+        try {
+          setIsLoading(true);
+
+          const result = await fetchVaulValidate(
+            "vault_validate", // URL corregida
+            setIsLoading,
+            body
+          );
+          setData(result);
+          console.log(result);
+        } catch (error) {
+          console.error("Error fetching vault insights:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+    fetchData();
+  }, [dto, excelData]);
 
   return (
     <section style={{ marginTop: -40, marginLeft: -20 }}>
@@ -167,7 +217,7 @@ export default function Process1Vault() {
               background: "#ED5079",
             }}
             onClick={() => {
-              navigate(`/home/Stepper1`);
+              navigate(`/home/Stepper1`, { state: { vaultData: data } });
             }}
           >
             Continuar

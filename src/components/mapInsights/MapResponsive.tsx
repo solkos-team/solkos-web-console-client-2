@@ -59,7 +59,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
       setIsLoading(true);
 
       const data = await fetchUniversal("insights", body, setIsLoading);
-      // console.log("API Response Data:", data);
+      console.log("API Response Data:", data);
 
       if (data) {
         if (data.polygon_data) {

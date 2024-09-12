@@ -31,7 +31,7 @@ export const InsightsVault = () => {
           body
         );
         setData(result);
-        console.log(result);
+        // console.log(result);
       } catch (error) {
         console.error("Error fetching vault insights:", error);
       } finally {

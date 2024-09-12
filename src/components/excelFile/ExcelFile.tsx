@@ -11,7 +11,7 @@ const UploadExcel = ({ onFileLoaded }) => {
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
     if (!isExcel) {
-      message.error("Solo puedes cargar archivos Excel!");
+      message.error("Solo puedes cargar archivos Excel");
       return Upload.LIST_IGNORE;
     }
 
