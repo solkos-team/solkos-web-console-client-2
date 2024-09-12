@@ -15,7 +15,6 @@ interface ExcelData {
 
 export default function Process1Vault() {
   const [isAlertVisible, setAlertVisible] = useState(true);
-  const [isFileUploaded, setIsFileUploaded] = useState(false); // Nuevo estado para controlar si se subió un archivo
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -42,7 +41,6 @@ export default function Process1Vault() {
   const handleFileLoaded = (data: ExcelData[]) => {
     setExcelData(data);
     console.log("Datos del archivo cargado:", data);
-    setIsFileUploaded(true); // Cambiar el estado a true cuando se sube un archivo
   };
 
   const handleCloseAlert = () => {
@@ -221,7 +219,6 @@ export default function Process1Vault() {
             onClick={() => {
               navigate(`/home/Stepper1`, { state: { vaultData: data } });
             }}
-            disabled={!isFileUploaded}
           >
             Continuar
           </Button>
