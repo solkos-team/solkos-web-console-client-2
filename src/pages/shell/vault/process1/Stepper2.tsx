@@ -38,191 +38,199 @@ export default function Stepper2() {
   }, []);
 
   return (
-    <div
-      className="insights_principal_container"
-      style={{ height: "90%", padding: "0 0rem", marginTop: 30 }} // Mantener el padding a la derecha
-    >
+    <section style={{ marginTop: -40, marginLeft: -20 }}>
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          alignSelf: "stretch",
-        }}
-      >
-        <img
-          src={VaultLogo}
-          alt="Descripción de la imagen"
-          style={{ width: "5rem", height: "3rem", marginTop: -20 }}
-        />
-        <span style={{ color: "#88888B", fontSize: ".8rem" }}>
-          Haz seguimiento de todos los parámetros de cada uno de tus
-          enfriadores.
-        </span>
-      </div>
-      <br></br>
-      <div>
-        <Stepper
-          active={2}
-          onStepClick={setActive}
-          radius="xs"
-          size="xs"
-          className="hide-on-mobile"
-        >
-          <Stepper.Step label="Revisión inicial" description=""></Stepper.Step>
-          <Stepper.Step label="Activar vault" description=""></Stepper.Step>
-          <Stepper.Step label="Desactivar vault" description=""></Stepper.Step>
-          <Stepper.Step label="Errores" description=""></Stepper.Step>
-          <Stepper.Step label="Revisión final" description=""></Stepper.Step>
-          <Stepper.Completed>
-            Completed, click back button to get to previous step
-          </Stepper.Completed>
-        </Stepper>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flex: 100,
-          alignSelf: "stretch",
-          marginTop: -100,
-        }}
+        className="vault_Information_Container2"
+        style={{ height: 530, marginTop: 10 }}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
-            gap: "8px",
-            width: "100%",
-            maxWidth: "1200px",
-            // background: "red",
-            padding: "16px",
-            boxSizing: "border-box",
+            alignItems: "flex-start",
+            alignSelf: "stretch",
           }}
         >
-          {/* Contenido del stepper */}
+          <img
+            src={VaultLogo}
+            alt="Descripción de la imagen"
+            style={{ width: "5rem", height: "3rem", marginTop: -20 }}
+          />
+          <span style={{ color: "#88888B", fontSize: ".8rem" }}>
+            Haz seguimiento de todos los parámetros de cada uno de tus
+            enfriadores.
+          </span>
+        </div>
+        <br></br>
+        <div style={{ width: "70%" }}>
+          <Stepper
+            active={2}
+            onStepClick={setActive}
+            radius="xs"
+            size="xs"
+            className="hide-on-mobile"
+          >
+            <Stepper.Step
+              label="Revisión inicial"
+              description=""
+            ></Stepper.Step>
+            <Stepper.Step label="Activar vault" description=""></Stepper.Step>
+            <Stepper.Step
+              label="Desactivar vault"
+              description=""
+            ></Stepper.Step>
+            <Stepper.Step label="Errores" description=""></Stepper.Step>
+            <Stepper.Step label="Revisión final" description=""></Stepper.Step>
+            <Stepper.Completed>
+              Completed, click back button to get to previous step
+            </Stepper.Completed>
+          </Stepper>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 100,
+            alignSelf: "stretch",
+            marginTop: -100,
+          }}
+        >
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "8px",
               width: "100%",
-              textAlign: "left",
-              gap: "4px",
+              maxWidth: "1200px",
+              // background: "red",
+              padding: "16px",
+              boxSizing: "border-box",
             }}
           >
-            <span
+            {/* Contenido del stepper */}
+            <div
               style={{
-                display: "block",
-                fontSize: "0.5rem",
-                fontStyle: "normal",
-                fontWeight: 700,
-                lineHeight: "14px",
+                width: "100%",
+                textAlign: "left",
+                gap: "4px",
               }}
             >
-              TABLA
-            </span>
-            <span
+              <span
+                style={{
+                  display: "block",
+                  fontSize: "0.5rem",
+                  fontStyle: "normal",
+                  fontWeight: 700,
+                  lineHeight: "14px",
+                }}
+              >
+                TABLA
+              </span>
+              <span
+                style={{
+                  display: "block",
+                  fontSize: "0.875rem",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "155%",
+                }}
+              >
+                Enfriadores
+              </span>
+            </div>
+            <TextInput
+              // value={searchValue}
+              // onChange={(event) => handleSearchChange(event)}
+              // onKeyDown={handleKeyDown}
+              type="text"
+              placeholder="Busca por Serie/ Id Coolector / Mac"
               style={{
-                display: "block",
-                fontSize: "0.875rem",
+                fontSize: "0.8rem",
                 fontStyle: "normal",
-                fontWeight: 400,
-                lineHeight: "155%",
+                fontWeight: 500,
+                lineHeight: "1,8rem",
+                width: "98%",
+                paddingRight: "2.5rem",
+                margin: 0,
+                borderRadius: "4px",
+                color: "#88888B",
               }}
-            >
-              Enfriadores
-            </span>
-          </div>
-          <TextInput
-            // value={searchValue}
-            // onChange={(event) => handleSearchChange(event)}
-            // onKeyDown={handleKeyDown}
-            type="text"
-            placeholder="Busca por Serie/ Id Coolector / Mac"
-            style={{
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 500,
-              lineHeight: "1,8rem",
-              width: "98%",
-              paddingRight: "2.5rem",
-              margin: 0,
-              borderRadius: "4px",
-              color: "#88888B",
-            }}
-          />
-          <br></br>
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Serie</th>
-                <th scope="col">Mac</th>
-                <th scope="col">Última visita</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-label="Estatus">D56191001431</td>
-                <td data-label="Serie">B4A2EB</td>
-                <td data-label="Última Visita">04/07/2024</td>
-                <td data-label="Acciones">
-                  <div
-                    style={{
-                      color: "#3E83FF",
-                      fontSize: "0.8rem",
-                      fontStyle: "normal",
-                      fontWeight: 400,
-                      display: "flex",
-                      cursor: "pointer",
-                    }}
-                    onClick={() => {
-                      open();
-                    }}
-                  >
-                    Ver más
-                    <IconArrowRight
+            />
+            <br></br>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Serie</th>
+                  <th scope="col">Mac</th>
+                  <th scope="col">Última visita</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-label="Estatus">D56191001431</td>
+                  <td data-label="Serie">B4A2EB</td>
+                  <td data-label="Última Visita">04/07/2024</td>
+                  <td data-label="Acciones">
+                    <div
                       style={{
                         color: "#3E83FF",
-                        width: "1.0rem",
+                        fontSize: "0.8rem",
+                        fontStyle: "normal",
+                        fontWeight: 400,
+                        display: "flex",
+                        cursor: "pointer",
                       }}
-                    />
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                      onClick={() => {
+                        open();
+                      }}
+                    >
+                      Ver más
+                      <IconArrowRight
+                        style={{
+                          color: "#3E83FF",
+                          width: "1.0rem",
+                        }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>{" "}
+        <div className="button-container">
+          <Button
+            className="button"
+            style={{
+              fontSize: "0.8rem",
+              color: "#ED5079",
+              background: "white",
+            }}
+            onClick={() => {
+              navigate(`/home/Stepper1`);
+            }}
+          >
+            Regresar
+          </Button>
+          <Button
+            className="continue-button"
+            style={{
+              fontSize: "0.8rem",
+              color: "white",
+              background: "#ED5079",
+            }}
+            onClick={() => {
+              navigate(`/home/Stepper3`);
+            }}
+          >
+            Continuar
+          </Button>
         </div>
-      </div>{" "}
-      <div className="button-container">
-        <Button
-          className="button"
-          style={{
-            fontSize: "0.8rem",
-            color: "#ED5079",
-            background: "white",
-          }}
-          onClick={() => {
-            navigate(`/home/Stepper1`);
-          }}
-        >
-          Regresar
-        </Button>
-        <Button
-          className="continue-button"
-          style={{
-            fontSize: "0.8rem",
-            color: "white",
-            background: "#ED5079",
-          }}
-          onClick={() => {
-            navigate(`/home/Stepper3`);
-          }}
-        >
-          Continuar
-        </Button>
+        {/* <DrawerVault opened={opened} onCLose={close}  /> */}
       </div>
-      <DrawerVault opened={opened} onCLose={close} />
-    </div>
+    </section>
   );
 }

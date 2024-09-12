@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchVaulInsights } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
+import { SkeletonInsightsVault } from "../../../../components/skeletonInsightsVault/SkeletonInisghtsVault";
 
 interface VaultData {
   bloqueados: number;
@@ -41,7 +42,7 @@ export const InsightsVault = () => {
   }, [dto]);
 
   if (data === null) {
-    return <div>Loading...</div>; // Loading state
+    return <SkeletonInsightsVault></SkeletonInsightsVault>;
   }
 
   // Destructuring data

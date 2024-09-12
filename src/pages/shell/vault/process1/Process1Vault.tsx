@@ -50,7 +50,7 @@ export default function Process1Vault() {
 
   return (
     <section style={{ marginTop: -40, marginLeft: -20 }}>
-      <div className="vault_Information_Container2" style={{ height: 550 }}>
+      <div className="vault_Information_Container2" style={{ height: 540 }}>
         <div className="vault_information_1" style={{ marginLeft: -10 }}>
           <div
             style={{
