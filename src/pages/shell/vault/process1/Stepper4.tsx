@@ -39,7 +39,7 @@ export default function Stepper4() {
     <section style={{ marginTop: -40, marginLeft: -20 }}>
       <div
         className="vault_Information_Container2"
-        style={{ height: 530, marginTop: 10 }}
+        style={{ height: 540, marginTop: 10 }}
       >
         <div
           style={{
@@ -49,11 +49,26 @@ export default function Stepper4() {
             alignSelf: "stretch",
           }}
         >
-          <img
-            src={VaultLogo}
-            alt="Descripción de la imagen"
-            style={{ width: "5rem", height: "3rem", marginTop: -20 }}
-          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.313rem",
+            }}
+          >
+            <span
+              style={{
+                color: "#000005",
+                fontSize: "1.375rem",
+                fontStyle: "normal",
+                fontWeight: "700",
+                lineHeight: "140%",
+              }}
+            >
+              Enfriadores no encontrados
+            </span>
+          </div>
           <span style={{ color: "#88888B", fontSize: ".8rem" }}>
             Haz seguimiento de todos los parámetros de cada uno de tus
             enfriadores.

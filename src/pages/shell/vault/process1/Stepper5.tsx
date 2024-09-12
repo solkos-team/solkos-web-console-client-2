@@ -51,7 +51,7 @@ export default function Stepper5() {
     <section style={{ marginTop: -40, marginLeft: -20 }}>
       <div
         className="vault_Information_Container2"
-        style={{ height: 510, marginTop: 10 }}
+        style={{ height: 538, marginTop: 10 }}
       >
         <div
           style={{
@@ -64,7 +64,10 @@ export default function Stepper5() {
           <img
             src={VaultLogo}
             alt="Descripción de la imagen"
-            style={{ width: "5rem", height: "3rem", marginTop: -20 }}
+            style={{
+              width: "3.688rem",
+              height: "1.125rem",
+            }}
           />
           <span style={{ color: "#88888B", fontSize: ".8rem" }}>
             Proceder con los cambios.

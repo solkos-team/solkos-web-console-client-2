@@ -39,7 +39,7 @@ export default function Stepper3() {
     <section style={{ marginTop: -40, marginLeft: -20 }}>
       <div
         className="vault_Information_Container2"
-        style={{ height: 530, marginTop: 10 }}
+        style={{ height: 540, marginTop: 10 }}
       >
         <div
           style={{
@@ -49,18 +49,41 @@ export default function Stepper3() {
             alignSelf: "stretch",
           }}
         >
-          <img
-            src={VaultLogo}
-            alt="Descripción de la imagen"
-            style={{ width: "5rem", height: "3rem", marginTop: -20 }}
-          />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "0.313rem",
+            }}
+          >
+            <span
+              style={{
+                color: "#000005",
+                fontSize: "1.375rem",
+                fontStyle: "normal",
+                fontWeight: "700",
+                lineHeight: "140%",
+              }}
+            >
+              Enfriadores a desactivar
+            </span>
+            <img
+              src={VaultLogo}
+              alt="Descripción de la imagen"
+              style={{
+                width: "3.688rem",
+                height: "1.125rem",
+              }}
+            />
+          </div>
           <span style={{ color: "#88888B", fontSize: ".8rem" }}>
             Haz seguimiento de todos los parámetros de cada uno de tus
             enfriadores.
           </span>
         </div>
         <br></br>
-        <div style={{ width: "70%" }}>
+        <div style={{ width: "80%" }}>
           <Stepper
             active={3}
             onStepClick={setActive}

@@ -50,7 +50,7 @@ export default function Process1Vault() {
 
   return (
     <section style={{ marginTop: -40, marginLeft: -20 }}>
-      <div className="vault_Information_Container2" style={{ height: 540 }}>
+      <div className="vault_Information_Container2" style={{ height: 550 }}>
         <div className="vault_information_1" style={{ marginLeft: -10 }}>
           <div
             style={{
@@ -63,7 +63,10 @@ export default function Process1Vault() {
             <img
               src={VaultLogo}
               alt="Descripción de la imagen"
-              style={{ width: "5rem", height: "3rem", marginTop: "-20px" }}
+              style={{
+                width: "3.688rem",
+                height: "1.125rem",
+              }}
             />
             <span style={{ color: "#88888B", fontSize: ".8rem" }}>
               Haz seguimiento de todos los parámetros de cada uno de tus
