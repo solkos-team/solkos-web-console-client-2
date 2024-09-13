@@ -45,8 +45,32 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
       title=""
       position="right"
       size="40rem"
+      withCloseButton={false}
     >
-      <section className="vault_drawer_container">
+      <div style={{ position: "absolute", left: "1rem", top: "1rem" }}>
+        <button
+          style={{
+            display: "flex",
+            padding: "0.313rem",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "0.625rem",
+            alignSelf: "stretch",
+            borderRadius: "0.25rem",
+            border: "0.063rem solid #CED4DA",
+            background: "transparent",
+            cursor: "pointer",
+          }}
+          onClick={onCLose}
+        >
+          <img
+            src={"../../sampleData/CloseDrawer.svg"}
+            alt="Close"
+            style={{ width: "1.125rem", height: "1.125rem" }}
+          />
+        </button>
+      </div>
+      <section className="vault_drawer_container" style={{ marginTop: "3rem" }}>
         <section className="vault_drawer_header">
           <section className="headerPrincipal">
             <section className="headerContentIMG">
