@@ -12,6 +12,7 @@ import {
 import MapComponent2 from "../../../../components/map_2";
 import MapComponent from "../../../../components/map";
 import MapComponent1 from "../../../../components/map_1";
+import moment from "moment";
 
 export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   // console.log(Serial_ID)
@@ -114,7 +115,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                         color: getColor(cooler, dto),
                       }}
                     >
-                      {cooler?.cooler.actionable}
+                      {cooler?.cooler.actionable ?? 'Sin registro'}
                     </div>
                   )}
                 </div>
@@ -131,7 +132,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   {isLoading == true ? (
                     <Skeleton height={8} mt={6} width="70%" radius="xl" />
                   ) : (
-                    cooler?.cooler.serial_number
+                    cooler?.cooler.serial_number ?? 'Sin registro'
                   )}
                 </div>
                 <div
@@ -147,7 +148,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   {isLoading == true ? (
                     <Skeleton height={8} mt={6} width="70%" radius="xl" />
                   ) : (
-                    cooler?.cooler.model_id
+                    cooler?.cooler.model_id ?? 'Sin registro'
                   )}
                 </div>
                 <div
@@ -178,7 +179,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                           backgroundColor: backgroundCircle(cooler),
                         }}
                       ></div>
-                      {cooler?.cooler.status}
+                      {cooler?.cooler.status ?? 'Sin registro'}
                     </div>
                   )}
                 </div>
@@ -219,7 +220,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                           whiteSpace: "nowrap",
                         }}
                       >
-                        {cooler?.cooler.last_read}
+                        {cooler?.cooler.last_read === null || undefined ? 'Sin registro' : moment(new Date(String(cooler?.cooler.last_read))).locale("es").format("dddd D MMMM, YYYY")}
                       </div>
                     </>
                   )}
@@ -233,7 +234,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.channel}
+                    {cooler?.cooler.channel ?? 'Sin registro'}
                   </div>
                 )}
               </section>
@@ -243,7 +244,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.region}
+                    {cooler?.cooler.region ?? 'Sin registro'}
                   </div>
                 )}
               </section>
@@ -253,7 +254,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.route}
+                    {cooler?.cooler.route ?? 'Sin registro'}
                   </div>
                 )}
               </section>
@@ -263,7 +264,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="40%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.zone}
+                    {cooler?.cooler.zone ?? 'Sin registro'}
                   </div>
                 )}
               </section>
@@ -309,7 +310,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  `${cooler?.cooler.outlet_name} / ${cooler?.cooler.outlet_id}`
+                  `${cooler?.cooler.outlet_name ?? 'Sin registro'} / ${cooler?.cooler.outlet_id ?? 'Sin registro'}`
                 )}
               </div>
             </div>
@@ -325,7 +326,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  cooler?.cooler.outlet_address
+                  cooler?.cooler.outlet_address ?? 'Sin registro'
                 )}
               </div>
             </div>
@@ -343,7 +344,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  `${cooler?.cooler.distance}m`
+                  `${cooler?.cooler.distance ?? 0}m`
                 )}
               </div>
             </div>
