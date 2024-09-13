@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 export default function Stepper3() {
   const location = useLocation();
   let vaultData = location.state?.vaultData;
+  const [selectedSerialID, setSelectedSerialID] = useState("");
 
   // Si los datos no vienen de location.state, cargarlos desde localStorage
   if (!vaultData) {
@@ -219,6 +220,7 @@ export default function Stepper3() {
                         }}
                         onClick={() => {
                           open();
+                          setSelectedSerialID(cooler.mac);
                         }}
                       >
                         Ver más
@@ -264,7 +266,11 @@ export default function Stepper3() {
             Continuar
           </Button>
         </div>
-        {/* <DrawerVault opened={opened} onCLose={close} /> */}
+        <DrawerVault
+          opened={opened}
+          onCLose={close}
+          Serial_ID={selectedSerialID}
+        />
       </div>
     </section>
   );

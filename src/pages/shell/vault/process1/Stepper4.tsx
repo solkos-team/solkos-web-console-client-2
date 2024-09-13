@@ -230,7 +230,6 @@ export default function Stepper4() {
             Continuar
           </Button>
         </div>
-        {/* <DrawerVault opened={opened} onCLose={close} /> */}
       </div>
     </section>
   );
