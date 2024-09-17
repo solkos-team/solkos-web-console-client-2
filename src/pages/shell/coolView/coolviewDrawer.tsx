@@ -60,20 +60,13 @@ export const coolviewDrawer = ({
           <img
             src={LogoCoolview}
             alt={"LogoCoolview"}
-            className="CoolviewLogo"
-          />
-          <img src={SolkosSymbol} alt={"LogoCoolview"} className="" />
-          <span
-            style={{
-              color: "#000005",
-              fontSize: "0.8rem",
-              fontStyle: "normal",
-              fontWeight: 700,
-              whiteSpace: "nowrap",
-            }}
-          >
-            Consola Solkos
-          </span>
+            // className="CoolviewLogo"
+            style={{height:'50px'}}
+          />    
+          <div>
+            <div style={{color:'var(--other-black, #000)',fontSize:'1.375rem'}}>Coolview</div>
+            <div style={{color:'var(--Neutral-Outline, #88888B)',fontSize:'0.625rem'}}>Visualización avanzada de telemetría</div>
+          </div>      
         </div>
       }
       position="bottom"
@@ -83,7 +76,8 @@ export const coolviewDrawer = ({
       className="drawerCoolview"
     >
       <section className="coolview_printipal">
-        <iframe src={url2} width="100%" height="100%" frameBorder="0" />
+        <iframe src={url2} width="100%" height="95%" frameBorder="0" />
+        <div style={{width:'100%',height:'15%',background:'',color:'var(--Neutral-Outline, #88888B)',display:'flex',alignItems:'center',justifyContent:'center'}}>powered by solkos</div>
       </section>
     </Drawer>
   ) : (
@@ -91,11 +85,25 @@ export const coolviewDrawer = ({
       opened={opened}
       onClose={onClose}
       title={
-        <img
-          src={LogoCoolview}
-          alt={"LogoCoolview"}
-          className="CoolviewLogo"
-        ></img>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            gap: "4px",
+          }}
+        >
+          <img
+            src={LogoCoolview}
+            alt={"LogoCoolview"}
+            // className="CoolviewLogo"
+            style={{height:'50px'}}
+          />    
+          <div>
+            <div style={{color:'var(--other-black, #000)',fontSize:'1.375rem'}}>Coolview</div>
+            <div style={{color:'var(--Neutral-Outline, #88888B)',fontSize:'0.625rem'}}>Visualización avanzada de telemetría</div>
+          </div>      
+        </div>
       }
       position="bottom"
       size="76%"
