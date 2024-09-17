@@ -13,6 +13,7 @@ import MapComponent2 from "../../../../components/map_2";
 import MapComponent from "../../../../components/map";
 import MapComponent1 from "../../../../components/map_1";
 import moment from "moment";
+import { Carousel } from "rsuite";
 
 export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   // console.log(Serial_ID)
@@ -131,7 +132,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   {isLoading == true ? (
                     <Skeleton height={8} mt={6} width="70%" radius="xl" />
                   ) : (
-                    cooler?.cooler.serial_number === "" || null || undefined ? 'Sin registro':cooler?.cooler.serial_number
+                    cooler?.cooler.serial_number === "" || null || undefined ? 'Sin registro' : cooler?.cooler.serial_number
                   )}
                 </div>
                 <div
@@ -147,7 +148,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   {isLoading == true ? (
                     <Skeleton height={8} mt={6} width="70%" radius="xl" />
                   ) : (
-                    cooler?.cooler.model_id === "" || null || undefined ? 'Sin registro':cooler?.cooler.model_id
+                    cooler?.cooler.model_id === "" || null || undefined ? 'Sin registro' : cooler?.cooler.model_id
                   )}
                 </div>
                 <div
@@ -178,7 +179,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                           backgroundColor: backgroundCircle(cooler),
                         }}
                       ></div>
-                      {cooler?.cooler.status === "" ||cooler?.cooler.status == null || cooler?.cooler.status == undefined ? 'Sin registro':cooler?.cooler.status}
+                      {cooler?.cooler.status === "" || cooler?.cooler.status == null || cooler?.cooler.status == undefined ? 'Sin registro' : cooler?.cooler.status}
                     </div>
                   )}
                 </div>
@@ -233,7 +234,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.channel === "" || null || undefined ? 'Sin registro':cooler?.cooler.channel}
+                    {cooler?.cooler.channel === "" || null || undefined ? 'Sin registro' : cooler?.cooler.channel}
                   </div>
                 )}
               </section>
@@ -243,7 +244,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.region === "" || null || undefined ? 'Sin registro':cooler?.cooler.region}
+                    {cooler?.cooler.region === "" || null || undefined ? 'Sin registro' : cooler?.cooler.region}
                   </div>
                 )}
               </section>
@@ -253,7 +254,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.route === "" || null || undefined ? 'Sin registro':cooler?.cooler.route}
+                    {cooler?.cooler.route === "" || null || undefined ? 'Sin registro' : cooler?.cooler.route}
                   </div>
                 )}
               </section>
@@ -263,7 +264,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   <Skeleton height={8} mt={6} width="40%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.zone === "" || null || undefined ? 'Sin registro':cooler?.cooler.zone}
+                    {cooler?.cooler.zone === "" || null || undefined ? 'Sin registro' : cooler?.cooler.zone}
                   </div>
                 )}
               </section>
@@ -274,7 +275,38 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
           <div className="vault_drawer_mapa_title">
             <p>Registro</p>
           </div>
-          <div className="vault_drawer_registro_stepper"></div>
+          <div className="vault_drawer_registro_stepper">
+            <Carousel style={{width:'100%',height:'100%'}}  placement="bottom" shape="bar" autoplay>
+              {/* <img src=
+                "https://media.geeksforgeeks.org/wp-content/uploads/20210425122739/2.png"
+                height="150"
+              />
+              <img src=
+                "https://media.geeksforgeeks.org/wp-content/uploads/20210425122716/1.png"
+                height="150"
+              /> */}
+              <div style={{width:'100%',background:'red',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+              </div>
+              <div style={{width:'100%',background:'blue',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+              </div>
+              <div style={{width:'100%',background:'aqua',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+              </div>
+              <div style={{width:'100%',background:'green',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
+                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+              </div>
+            </Carousel>
+          </div>
         </section>
         <section className="vault_drawer_mapa">
           <div className="vault_drawer_mapa_title">
@@ -309,7 +341,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  `${cooler?.cooler.outlet_name === "" || null || undefined ? 'Sin registro':cooler?.cooler.outlet_name} / ${cooler?.cooler.outlet_id === "" || null || undefined ? 'Sin registro':cooler?.cooler.outlet_id}`
+                  `${cooler?.cooler.outlet_name === "" || null || undefined ? 'Sin registro' : cooler?.cooler.outlet_name} / ${cooler?.cooler.outlet_id === "" || null || undefined ? 'Sin registro' : cooler?.cooler.outlet_id}`
                 )}
               </div>
             </div>
@@ -325,7 +357,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  cooler?.cooler.outlet_address === "" || null || undefined ? 'Sin registro':cooler?.cooler.outlet_address
+                  cooler?.cooler.outlet_address === "" || null || undefined ? 'Sin registro' : cooler?.cooler.outlet_address
                 )}
               </div>
             </div>
@@ -343,7 +375,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                cooler!.cooler?.distance < 0 || undefined || null ? "Sin registro" :`${cooler?.cooler.distance}m`
+                  cooler!.cooler?.distance < 0 || undefined || null ? "Sin registro" : `${cooler?.cooler.distance}m`
                 )}
               </div>
             </div>
