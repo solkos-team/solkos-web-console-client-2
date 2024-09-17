@@ -98,6 +98,7 @@ export default function Stepper1() {
               description=""
             ></Stepper.Step>
             <Stepper.Step label="Errores" description=""></Stepper.Step>
+            <Stepper.Step label="Duplicados" description=""></Stepper.Step>
             <Stepper.Step label="Revisión final" description=""></Stepper.Step>
             <Stepper.Completed>
               Completed, click back button to get to previous step
@@ -409,6 +410,76 @@ export default function Stepper1() {
                 {vaultData?.desactivar_vault?.total === undefined
                   ? "Sin registro"
                   : vaultData?.desactivar_vault?.total}
+              </span>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "16px",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "16px",
+                }}
+              >
+                <img
+                  src={"../../sampleData/blue_1.svg"}
+                  alt="Descripción de la imagen"
+                />
+                <span
+                  style={{
+                    color: "#3A3A3F",
+                    fontSize: ".9rem",
+                    fontStyle: "normal",
+                    fontWeight: 600,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Duplicados
+                </span>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                gap: "16px",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <span
+                style={{
+                  color: "#88888B",
+                  fontSize: ".8rem",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  lineHeight: "normal",
+                }}
+              >
+                Enfriadores
+              </span>
+              <span
+                style={{
+                  color: "#3A3A3F",
+                  fontSize: ".9rem",
+                  fontStyle: "normal",
+                  fontWeight: 600,
+                  lineHeight: "normal",
+                  textAlign: "right",
+                }}
+              >
+                {vaultData?.duplicados?.total === undefined
+                  ? "Sin registro"
+                  : vaultData?.duplicados?.total}
               </span>
             </div>
           </div>

@@ -9,7 +9,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 import { useLocation } from "react-router-dom";
 
-export default function Stepper4() {
+export default function Stepper4_1() {
   const location = useLocation();
   let vaultData = location.state?.vaultData;
   const [searchValue, setSearchValue] = useState("");
@@ -97,7 +97,7 @@ export default function Stepper4() {
         <br></br>
         <div style={{ width: "80%" }}>
           <Stepper
-            active={4}
+            active={5}
             onStepClick={setActive}
             radius="xs"
             size="xs"
@@ -199,13 +199,39 @@ export default function Stepper4() {
                   <th scope="col">Serie</th>
                   <th scope="col">Mac</th>
                   <th scope="col">Última visita</th>
+                  <th scope="col">Subido</th>
+                  <th scope="col">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredCoolers.map((cooler, index) => (
                   <tr key={index}>
                     <td>-</td> <td>{cooler.mac || "Sin registro"}</td>
-                    <td>-</td>{" "}
+                    <td>-</td> <td>-</td>{" "}
+                    <td>
+                      <div
+                        style={{
+                          color: "#3E83FF",
+                          fontSize: "0.8rem",
+                          fontStyle: "normal",
+                          fontWeight: 400,
+                          display: "flex",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => {
+                          open();
+                          setSelectedSerialID(cooler.mac);
+                        }}
+                      >
+                        Ver más
+                        <IconArrowRight
+                          style={{
+                            color: "#3E83FF",
+                            width: "1.0rem",
+                          }}
+                        />
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -234,12 +260,17 @@ export default function Stepper4() {
               background: "#ED5079",
             }}
             onClick={() => {
-              navigate(`/home/Stepper4_1`);
+              navigate(`/home/Stepper5`);
             }}
           >
             Continuar
           </Button>
         </div>
+        <DrawerVault
+          opened={opened}
+          onCLose={close}
+          Serial_ID={selectedSerialID}
+        />
       </div>
     </section>
   );

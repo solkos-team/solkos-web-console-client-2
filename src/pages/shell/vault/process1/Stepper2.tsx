@@ -15,6 +15,7 @@ export default function Stepper2() {
   const location = useLocation();
   let vaultData = location.state?.vaultData;
   const [selectedSerialID, setSelectedSerialID] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   // Si los datos no vienen de location.state, cargarlos desde localStorage
   if (!vaultData) {
@@ -49,6 +50,12 @@ export default function Stepper2() {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  const filteredCoolers = coolers.filter(
+    (cooler) =>
+      cooler.mac?.toLowerCase().includes(searchValue.toLowerCase()) ||
+      cooler.serie?.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <section style={{ marginTop: -40, marginLeft: -20 }}>
@@ -116,6 +123,7 @@ export default function Stepper2() {
               description=""
             ></Stepper.Step>
             <Stepper.Step label="Errores" description=""></Stepper.Step>
+            <Stepper.Step label="Duplicados" description=""></Stepper.Step>
             <Stepper.Step label="Revisión final" description=""></Stepper.Step>
             <Stepper.Completed>
               Completed, click back button to get to previous step
@@ -129,7 +137,8 @@ export default function Stepper2() {
             alignItems: "center",
             flex: 100,
             alignSelf: "stretch",
-            marginTop: -100,
+            // marginTop: -100,
+            // background: "red",
           }}
         >
           <div
@@ -143,6 +152,7 @@ export default function Stepper2() {
               // background: "red",
               padding: "16px",
               boxSizing: "border-box",
+              minHeight: "340px",
             }}
           >
             {/* Contenido del stepper */}
@@ -177,9 +187,8 @@ export default function Stepper2() {
               </span>
             </div>
             <TextInput
-              // value={searchValue}
-              // onChange={(event) => handleSearchChange(event)}
-              // onKeyDown={handleKeyDown}
+              value={searchValue}
+              onChange={(event) => setSearchValue(event.currentTarget.value)}
               type="text"
               placeholder="Busca por Serie/ Id Coolector / Mac"
               style={{
@@ -195,7 +204,8 @@ export default function Stepper2() {
               }}
             />
             <br></br>
-            <table>
+
+            <table style={{ tableLayout: "fixed", width: "100%" }}>
               <thead>
                 <tr>
                   <th scope="col">Serie</th>
@@ -205,7 +215,7 @@ export default function Stepper2() {
                 </tr>
               </thead>
               <tbody>
-                {coolers.map((cooler, index) => (
+                {filteredCoolers.map((cooler, index) => (
                   <tr key={index}>
                     <td>{cooler.serie || "Sin registro"}</td>{" "}
                     <td>{cooler.mac || "Sin registro"}</td>

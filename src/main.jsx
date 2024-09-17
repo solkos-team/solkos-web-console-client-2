@@ -37,6 +37,7 @@ import Stepper3 from "./pages/shell/vault/process1/Stepper3.tsx";
 import Stepper4 from "./pages/shell/vault/process1/Stepper4.tsx";
 import Stepper5 from "./pages/shell/vault/process1/Stepper5.tsx";
 import Stepper6 from "./pages/shell/vault/process1/Stepper6.tsx";
+import Stepper4_1 from "./pages/shell/vault/process1/Stepper4_1.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -65,6 +66,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                 <Route path="/home/Stepper2" element={<Stepper2 />} />
                 <Route path="/home/Stepper3" element={<Stepper3 />} />
                 <Route path="/home/Stepper4" element={<Stepper4 />} />
+                <Route path="/home/Stepper4_1" element={<Stepper4_1 />} />
                 <Route path="/home/Stepper5" element={<Stepper5 />} />
                 <Route path="/home/Stepper6" element={<Stepper6 />} />
                 {/* Proceso 2 vault */}
