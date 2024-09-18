@@ -21,7 +21,7 @@ export default function Stepper3() {
     vaultData = storedVaultData ? JSON.parse(storedVaultData) : null;
   }
 
-  const coolers = vaultData?.activar_vault?.Coolers || [];
+  const coolers = vaultData?.desactivar_vault?.Coolers || [];
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ export default function Stepper3() {
   const filteredCoolers = coolers.filter(
     (cooler) =>
       cooler.mac?.toLowerCase().includes(searchValue.toLowerCase()) ||
-      cooler.serie?.toLowerCase().includes(searchValue.toLowerCase())
+      cooler.serial_number?.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -201,49 +201,60 @@ export default function Stepper3() {
               }}
             />
             <br></br>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Serie</th>
-                  <th scope="col">Mac</th>
-                  <th scope="col">Última visita</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredCoolers.map((cooler, index) => (
-                  <tr key={index}>
-                    <td>{cooler.serie || "Sin registro"}</td>{" "}
-                    <td>{cooler.mac || "Sin registro"}</td>
-                    <td>{cooler.ultima_visita || "Sin registro"}</td>{" "}
-                    <td>
-                      <div
-                        style={{
-                          color: "#3E83FF",
-                          fontSize: "0.8rem",
-                          fontStyle: "normal",
-                          fontWeight: 400,
-                          display: "flex",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => {
-                          open();
-                          setSelectedSerialID(cooler.mac);
-                        }}
-                      >
-                        Ver más
-                        <IconArrowRight
+            <div
+              style={{ width: "100%", maxHeight: "200px", overflowY: "auto" }}
+              className="custom-scroll"
+            >
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Serie</th>
+                    <th scope="col">Mac</th>
+                    <th scope="col">Última visita</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredCoolers.map((cooler, index) => (
+                    <tr key={index}>
+                      <td>{cooler.serial_number || "Sin registro"}</td>{" "}
+                      <td>{cooler.mac || "Sin registro"}</td>
+                      <td>
+                        {cooler.last_read
+                          ? new Date(cooler.last_read).toLocaleDateString(
+                              "es-ES"
+                            )
+                          : "Sin registro"}
+                      </td>
+                      <td>
+                        <div
                           style={{
                             color: "#3E83FF",
-                            width: "1.0rem",
+                            fontSize: "0.8rem",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            display: "flex",
+                            cursor: "pointer",
                           }}
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                          onClick={() => {
+                            open();
+                            setSelectedSerialID(cooler.mac);
+                          }}
+                        >
+                          Ver más
+                          <IconArrowRight
+                            style={{
+                              color: "#3E83FF",
+                              width: "1.0rem",
+                            }}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>{" "}
         <div className="button-container">

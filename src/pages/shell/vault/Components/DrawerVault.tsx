@@ -1,6 +1,9 @@
 import { Drawer, Loader, Skeleton, Tooltip } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import { CoolerData, Vault_Markers } from "../../../../interfaces/CoolerInterface";
+import {
+  CoolerData,
+  Vault_Markers,
+} from "../../../../interfaces/CoolerInterface";
 import { fetchUniversalDetails } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import {
@@ -14,7 +17,10 @@ import MapComponent from "../../../../components/map";
 import MapComponent1 from "../../../../components/map_1";
 import moment from "moment";
 import { Carousel } from "rsuite";
-import { VaultLock, VaultUnlock } from "../../../../sampleData/Vault/VaultIcons";
+import {
+  VaultLock,
+  VaultUnlock,
+} from "../../../../sampleData/Vault/VaultIcons";
 
 export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   // console.log(Serial_ID)
@@ -22,9 +28,18 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   const [isLoading, setIsLoading] = useState(true);
   const dto = useSelector((state: any) => state.organization);
   const nombresMeses = [
-    'Enero', 'Febrero', 'Marzo', 'Abril',
-    'Mayo', 'Junio', 'Julio', 'Agosto',
-    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    "Enero",
+    "Febrero",
+    "Marzo",
+    "Abril",
+    "Mayo",
+    "Junio",
+    "Julio",
+    "Agosto",
+    "Septiembre",
+    "Octubre",
+    "Noviembre",
+    "Diciembre",
   ];
   const fetchData = async (serie?) => {
     try {
@@ -45,27 +60,27 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
       fetchData(Serial_ID);
     }
   }, [Serial_ID]);
-const registros : Vault_Markers[] = [
-  {
-    "cooler_id": "001BC501F6BB",
-    "flag": true,
-    "date_time": "2024-09-04T23:48:22.263Z",
-    "user_id": 'Alicia W'
-  },
-  {
-    "cooler_id": "001BC501F6BB",
-    "flag": false,
-    "date_time": "2024-09-01T23:48:22.263Z",
-    "user_id": 'Mayra b'
-  },
-  {
-    "cooler_id": "001BC501F6BB",
-    "flag": false,
-    "date_time": "2024-08-10T23:48:22.263Z",
-    "user_id": 'Jose i'
-  }
-]
-console.log(cooler)
+  const registros: Vault_Markers[] = [
+    {
+      cooler_id: "001BC501F6BB",
+      flag: true,
+      date_time: "2024-09-04T23:48:22.263Z",
+      user_id: "Alicia W",
+    },
+    {
+      cooler_id: "001BC501F6BB",
+      flag: false,
+      date_time: "2024-09-01T23:48:22.263Z",
+      user_id: "Mayra b",
+    },
+    {
+      cooler_id: "001BC501F6BB",
+      flag: false,
+      date_time: "2024-08-10T23:48:22.263Z",
+      user_id: "Jose i",
+    },
+  ];
+  // console.log(cooler)
   return (
     <Drawer
       opened={opened}
@@ -141,7 +156,7 @@ console.log(cooler)
                         color: getColor(cooler, dto),
                       }}
                     >
-                      {cooler?.cooler.actionable ?? 'Sin registro'}
+                      {cooler?.cooler.actionable ?? "Sin registro"}
                     </div>
                   )}
                 </div>
@@ -157,8 +172,12 @@ console.log(cooler)
                 >
                   {isLoading == true ? (
                     <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                  ) : cooler?.cooler.serial_number === "" ||
+                    null ||
+                    undefined ? (
+                    "Sin registro"
                   ) : (
-                    cooler?.cooler.serial_number === "" || null || undefined ? 'Sin registro' : cooler?.cooler.serial_number
+                    cooler?.cooler.serial_number
                   )}
                 </div>
                 <div
@@ -173,8 +192,10 @@ console.log(cooler)
                 >
                   {isLoading == true ? (
                     <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                  ) : cooler?.cooler.model_id === "" || null || undefined ? (
+                    "Sin registro"
                   ) : (
-                    cooler?.cooler.model_id === "" || null || undefined ? 'Sin registro' : cooler?.cooler.model_id
+                    cooler?.cooler.model_id
                   )}
                 </div>
                 <div
@@ -205,7 +226,11 @@ console.log(cooler)
                           backgroundColor: backgroundCircle(cooler),
                         }}
                       ></div>
-                      {cooler?.cooler.status === "" || cooler?.cooler.status == null || cooler?.cooler.status == undefined ? 'Sin registro' : cooler?.cooler.status}
+                      {cooler?.cooler.status === "" ||
+                      cooler?.cooler.status == null ||
+                      cooler?.cooler.status == undefined
+                        ? "Sin registro"
+                        : cooler?.cooler.status}
                     </div>
                   )}
                 </div>
@@ -246,7 +271,11 @@ console.log(cooler)
                           whiteSpace: "nowrap",
                         }}
                       >
-                        {cooler?.cooler.last_read === null || undefined || "" ? 'Sin registro' : moment(new Date(String(cooler?.cooler.last_read))).locale("es").format("dddd D MMMM, YYYY")}
+                        {cooler?.cooler.last_read === null || undefined || ""
+                          ? "Sin registro"
+                          : moment(new Date(String(cooler?.cooler.last_read)))
+                              .locale("es")
+                              .format("dddd D MMMM, YYYY")}
                       </div>
                     </>
                   )}
@@ -260,7 +289,9 @@ console.log(cooler)
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.channel === "" || null || undefined ? 'Sin registro' : cooler?.cooler.channel}
+                    {cooler?.cooler.channel === "" || null || undefined
+                      ? "Sin registro"
+                      : cooler?.cooler.channel}
                   </div>
                 )}
               </section>
@@ -270,7 +301,9 @@ console.log(cooler)
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.region === "" || null || undefined ? 'Sin registro' : cooler?.cooler.region}
+                    {cooler?.cooler.region === "" || null || undefined
+                      ? "Sin registro"
+                      : cooler?.cooler.region}
                   </div>
                 )}
               </section>
@@ -280,7 +313,9 @@ console.log(cooler)
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.route === "" || null || undefined ? 'Sin registro' : cooler?.cooler.route}
+                    {cooler?.cooler.route === "" || null || undefined
+                      ? "Sin registro"
+                      : cooler?.cooler.route}
                   </div>
                 )}
               </section>
@@ -290,7 +325,9 @@ console.log(cooler)
                   <Skeleton height={8} mt={6} width="40%" radius="xl" />
                 ) : (
                   <div className="headerContentData2">
-                    {cooler?.cooler.zone === "" || null || undefined ? 'Sin registro' : cooler?.cooler.zone}
+                    {cooler?.cooler.zone === "" || null || undefined
+                      ? "Sin registro"
+                      : cooler?.cooler.zone}
                   </div>
                 )}
               </section>
@@ -302,21 +339,78 @@ console.log(cooler)
             <p>Registro</p>
           </div>
           <div className="vault_drawer_registro_stepper">
-            {
-              cooler?.vault_markers == null || cooler.vault_markers == undefined ? <h1 style={{fontSize:'0.75rem',color:'var(--gray-6, #868e96)'}}>Sin registros</h1>
-                :
-                <Carousel style={{ width: '100%', height: '100%' }} placement="bottom" shape="bar" autoplay>
-                  {
-                    cooler?.vault_markers.map((registro, index) => (
-                      <div style={{ width: '100%', background: '', height: '100%', display: 'flex', gap: '0.25rem', flexDirection: 'column', alignItems: 'center' }} title={registro.flag == true ? `Bloqueado por ${registro.user_id}` : `Desbloqueado por ${registro.user_id}`} key={index}>
-                        <div style={{ width: '50%', height: '15%', background: '', color: 'var(--gray-6, #868E96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{new Date(registro.date_time).getFullYear()}</div>
-                        <div style={{ width: '50%', height: '75%', background: '' }}> <img src={registro.flag == true ? VaultLock : VaultUnlock} alt="VaultIcon" style={{ width: '100%', height: '98%' }} /> </div>
-                        <div style={{ width: '50%', height: '10%', background: '', color: 'var(--gray-6, #868E96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{`${new Date(registro.date_time).getDate()} ${nombresMeses[new Date(registro.date_time).getMonth()]}`}</div>
-                      </div>
-                    ))
-                  }
-                </Carousel>
-            }            
+            {cooler?.vault_markers == null ||
+            cooler.vault_markers == undefined ? (
+              <h1
+                style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}
+              >
+                Sin registros
+              </h1>
+            ) : (
+              <Carousel
+                style={{ width: "100%", height: "100%" }}
+                placement="bottom"
+                shape="bar"
+                autoplay
+              >
+                {cooler?.vault_markers.map((registro, index) => (
+                  <div
+                    style={{
+                      width: "100%",
+                      background: "",
+                      height: "100%",
+                      display: "flex",
+                      gap: "0.25rem",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                    title={
+                      registro.flag == true
+                        ? `Bloqueado por ${registro.user_id}`
+                        : `Desbloqueado por ${registro.user_id}`
+                    }
+                    key={index}
+                  >
+                    <div
+                      style={{
+                        width: "50%",
+                        height: "15%",
+                        background: "",
+                        color: "var(--gray-6, #868E96)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {new Date(registro.date_time).getFullYear()}
+                    </div>
+                    <div
+                      style={{ width: "50%", height: "75%", background: "" }}
+                    >
+                      {" "}
+                      <img
+                        src={registro.flag == true ? VaultLock : VaultUnlock}
+                        alt="VaultIcon"
+                        style={{ width: "100%", height: "98%" }}
+                      />{" "}
+                    </div>
+                    <div
+                      style={{
+                        width: "50%",
+                        height: "10%",
+                        background: "",
+                        color: "var(--gray-6, #868E96)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >{`${new Date(registro.date_time).getDate()} ${
+                      nombresMeses[new Date(registro.date_time).getMonth()]
+                    }`}</div>
+                  </div>
+                ))}
+              </Carousel>
+            )}
           </div>
         </section>
         <section className="vault_drawer_mapa">
@@ -352,7 +446,15 @@ console.log(cooler)
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  `${cooler?.cooler.outlet_name === "" || null || undefined ? 'Sin registro' : cooler?.cooler.outlet_name} / ${cooler?.cooler.outlet_id === "" || null || undefined ? 'Sin registro' : cooler?.cooler.outlet_id}`
+                  `${
+                    cooler?.cooler.outlet_name === "" || null || undefined
+                      ? "Sin registro"
+                      : cooler?.cooler.outlet_name
+                  } / ${
+                    cooler?.cooler.outlet_id === "" || null || undefined
+                      ? "Sin registro"
+                      : cooler?.cooler.outlet_id
+                  }`
                 )}
               </div>
             </div>
@@ -367,8 +469,12 @@ console.log(cooler)
               <div className="vault_drawer_mapa_info_p2">
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                ) : cooler?.cooler.outlet_address === "" ||
+                  null ||
+                  undefined ? (
+                  "Sin registro"
                 ) : (
-                  cooler?.cooler.outlet_address === "" || null || undefined ? 'Sin registro' : cooler?.cooler.outlet_address
+                  cooler?.cooler.outlet_address
                 )}
               </div>
             </div>
@@ -385,8 +491,10 @@ console.log(cooler)
               <div className="vault_drawer_mapa_info_p2">
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
+                ) : cooler!.cooler?.distance < 0 || undefined || null ? (
+                  "Sin registro"
                 ) : (
-                  cooler!.cooler?.distance < 0 || undefined || null ? "Sin registro" : `${cooler?.cooler.distance}m`
+                  `${cooler?.cooler.distance}m`
                 )}
               </div>
             </div>

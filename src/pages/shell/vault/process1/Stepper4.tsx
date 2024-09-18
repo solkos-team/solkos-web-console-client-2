@@ -21,7 +21,7 @@ export default function Stepper4() {
     vaultData = storedVaultData ? JSON.parse(storedVaultData) : null;
   }
 
-  const coolers = vaultData?.activar_vault?.Coolers || [];
+  const coolers = vaultData?.entradas_invalidas?.Coolers || [];
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ export default function Stepper4() {
   const filteredCoolers = coolers.filter(
     (cooler) =>
       cooler.mac?.toLowerCase().includes(searchValue.toLowerCase()) ||
-      cooler.serie?.toLowerCase().includes(searchValue.toLowerCase())
+      cooler.serial_number?.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   return (
@@ -193,23 +193,28 @@ export default function Stepper4() {
               }}
             />
             <br></br>
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Serie</th>
-                  <th scope="col">Mac</th>
-                  <th scope="col">Última visita</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredCoolers.map((cooler, index) => (
-                  <tr key={index}>
-                    <td>-</td> <td>{cooler.mac || "Sin registro"}</td>
-                    <td>-</td>{" "}
+            <div
+              style={{ width: "100%", maxHeight: "200px", overflowY: "auto" }}
+              className="custom-scroll"
+            >
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Serie</th>
+                    <th scope="col">Mac</th>
+                    <th scope="col">Última visita</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {filteredCoolers.map((cooler, index) => (
+                    <tr key={index}>
+                      <td>-</td> <td>{cooler.mac || "Sin registro"}</td>
+                      <td>-</td>{" "}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>{" "}
         <div className="button-container">

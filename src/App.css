@@ -2895,9 +2895,29 @@ body {
 .mantine-16xmw63.mantine-Select-itemsWrapper {
   padding: 0px;
 }
-.gm-style-cc{
-  display: none !important;  
+.gm-style-cc {
+  display: none !important;
 }
-.rs-carousel-slider-after, .rs-carousel-slider-item{
-  background-color: var(--gray-0, #F8F9FA) !important;
+.rs-carousel-slider-after,
+.rs-carousel-slider-item {
+  background-color: var(--gray-0, #f8f9fa) !important;
+}
+/* ****************** */
+/* Estilos para la clase custom-scroll */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #cacaca;
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

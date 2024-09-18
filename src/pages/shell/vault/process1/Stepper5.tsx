@@ -115,6 +115,7 @@ export default function Stepper5() {
         <br></br>
         <br></br>
         <br></br>
+
         <div
           style={{
             display: "flex",
@@ -490,7 +491,6 @@ export default function Stepper5() {
                   : vaultData?.duplicados?.total}
               </span>
             </div>
-            <br></br>
             <div
               style={{
                 display: "flex",
