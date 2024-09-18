@@ -14,6 +14,7 @@ import MapComponent from "../../../../components/map";
 import MapComponent1 from "../../../../components/map_1";
 import moment from "moment";
 import { Carousel } from "rsuite";
+import { VaultLock, VaultUnlock } from "../../../../sampleData/Vault/VaultIcons";
 
 export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   // console.log(Serial_ID)
@@ -276,34 +277,16 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
             <p>Registro</p>
           </div>
           <div className="vault_drawer_registro_stepper">
-            <Carousel style={{width:'100%',height:'100%'}}  placement="bottom" shape="bar" autoplay>
-              {/* <img src=
-                "https://media.geeksforgeeks.org/wp-content/uploads/20210425122739/2.png"
-                height="150"
-              />
-              <img src=
-                "https://media.geeksforgeeks.org/wp-content/uploads/20210425122716/1.png"
-                height="150"
-              /> */}
-              <div style={{width:'100%',background:'red',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+            <Carousel style={{width:'100%',height:'100%'}}  placement="bottom" shape="bar"  autoplay>
+              <div style={{width:'100%',background:'',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
+                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>2024</div>
+                <div style={{width:'50%',height:'70%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultLock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
+                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
               </div>
-              <div style={{width:'100%',background:'blue',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
-              </div>
-              <div style={{width:'100%',background:'aqua',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
-              </div>
-              <div style={{width:'100%',background:'green',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'80%',background:'yellow'}}></div>
-                <div style={{width:'50%',height:'10%',background:'yellow'}}></div>
+              <div style={{width:'100%',background:'',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
+                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>2024</div>
+                <div style={{width:'50%',height:'70%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultUnlock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
+                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
               </div>
             </Carousel>
           </div>

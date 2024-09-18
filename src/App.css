@@ -2895,3 +2895,6 @@ body {
 .gm-style-cc{
   display: none !important;  
 }
+.rs-carousel-slider-after, .rs-carousel-slider-item{
+  background-color: var(--gray-0, #F8F9FA) !important;
+}

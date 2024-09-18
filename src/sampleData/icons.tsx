@@ -5,6 +5,7 @@ import GastosEnergia from '../sampleData/Detail/DrawerGastosEnergia/GastosEnergi
 import PromedioConsumoEnergia from '../sampleData/Detail/DrawerGastosEnergia/PromedioConsumoEnergia.svg'
 import CostoAcumulado from '../sampleData/Detail/DesgloseEconomico/CostoAcumulado.svg'
 import Depreciacion from '../sampleData/Detail/DesgloseEconomico/Depreciacion.svg'
+
 export {
     AcercaDeLosEquiposIcon,
     MapOpen,
