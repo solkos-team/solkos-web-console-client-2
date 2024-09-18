@@ -201,6 +201,7 @@ export interface CoolerData {
     url: string;
     is_default: boolean;
   };
+  vault_markers : Vault_Markers
 }
 export interface ActivityItem {
   type: string;
@@ -208,4 +209,10 @@ export interface ActivityItem {
   level: string;
   close_at: string;
   service_id: string;
+}
+export interface Vault_Markers {
+  cooler_id : string;
+  date_time : string;
+  flag : boolean;
+  user_id : string | null | number;
 }

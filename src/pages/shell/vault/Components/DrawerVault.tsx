@@ -1,6 +1,6 @@
-import { Drawer, Loader, Skeleton } from "@mantine/core";
+import { Drawer, Loader, Skeleton, Tooltip } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import { CoolerData } from "../../../../interfaces/CoolerInterface";
+import { CoolerData, Vault_Markers } from "../../../../interfaces/CoolerInterface";
 import { fetchUniversalDetails } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import {
@@ -21,6 +21,11 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   const [cooler, setCooler] = useState<CoolerData>();
   const [isLoading, setIsLoading] = useState(true);
   const dto = useSelector((state: any) => state.organization);
+  const nombresMeses = [
+    'Enero', 'Febrero', 'Marzo', 'Abril',
+    'Mayo', 'Junio', 'Julio', 'Agosto',
+    'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  ];
   const fetchData = async (serie?) => {
     try {
       const data = await fetchUniversalDetails(
@@ -40,7 +45,27 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
       fetchData(Serial_ID);
     }
   }, [Serial_ID]);
-
+const registros : Vault_Markers[] = [
+  {
+    "cooler_id": "001BC501F6BB",
+    "flag": true,
+    "date_time": "2024-09-04T23:48:22.263Z",
+    "user_id": 'Alicia W'
+  },
+  {
+    "cooler_id": "001BC501F6BB",
+    "flag": false,
+    "date_time": "2024-09-01T23:48:22.263Z",
+    "user_id": 'Mayra b'
+  },
+  {
+    "cooler_id": "001BC501F6BB",
+    "flag": false,
+    "date_time": "2024-08-10T23:48:22.263Z",
+    "user_id": 'Jose i'
+  }
+]
+console.log(cooler)
   return (
     <Drawer
       opened={opened}
@@ -277,18 +302,21 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
             <p>Registro</p>
           </div>
           <div className="vault_drawer_registro_stepper">
-            <Carousel style={{width:'100%',height:'100%'}}  placement="bottom" shape="bar"  autoplay>
-              <div style={{width:'100%',background:'',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
-                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>2024</div>
-                <div style={{width:'50%',height:'75%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultLock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
-                <div style={{width:'50%',height:'10%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
-              </div>
-              <div style={{width:'100%',background:'',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
-                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>2024</div>
-                <div style={{width:'50%',height:'75%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultUnlock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
-                <div style={{width:'50%',height:'10%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
-              </div>
-            </Carousel>
+            {
+              cooler?.vault_markers == null || cooler.vault_markers == undefined ? <h1 style={{fontSize:'0.75rem',color:'var(--gray-6, #868e96)'}}>Sin registros</h1>
+                :
+                <Carousel style={{ width: '100%', height: '100%' }} placement="bottom" shape="bar" autoplay>
+                  {
+                    registros.map((registro, index) => (
+                      <div style={{ width: '100%', background: '', height: '100%', display: 'flex', gap: '0.25rem', flexDirection: 'column', alignItems: 'center' }} title={registro.flag == true ? `Bloqueado por ${registro.user_id}` : `Desbloqueado por ${registro.user_id}`} key={index}>
+                        <div style={{ width: '50%', height: '15%', background: '', color: 'var(--gray-6, #868E96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{new Date(registro.date_time).getFullYear()}</div>
+                        <div style={{ width: '50%', height: '75%', background: '' }}> <img src={registro.flag == true ? VaultLock : VaultUnlock} alt="VaultIcon" style={{ width: '100%', height: '98%' }} /> </div>
+                        <div style={{ width: '50%', height: '10%', background: '', color: 'var(--gray-6, #868E96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{`${new Date(registro.date_time).getDate()} ${nombresMeses[new Date(registro.date_time).getMonth()]}`}</div>
+                      </div>
+                    ))
+                  }
+                </Carousel>
+            }            
           </div>
         </section>
         <section className="vault_drawer_mapa">
