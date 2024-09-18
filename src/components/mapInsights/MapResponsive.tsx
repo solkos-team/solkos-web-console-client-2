@@ -34,10 +34,65 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
   const [zoom, setZoom] = useState(defaultProps.zoom);
+  const [dataSelect, setDataSelect] = useState([]);
+  const [dataSelectLoaded, setDataSelectLoaded] = useState(false);
+  const [renamedResult, setRenamedResult] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Obtener el token de localStorage
+        const token = localStorage.getItem("Token");
+
+        const response = await fetch(
+          "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/hierachy",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Añadir el token al encabezado
+            },
+            body: JSON.stringify({ customer: dto }),
+          }
+        );
+
+        if (response.ok) {
+          const result = await response.json();
+          console.log("Datos originales:", result);
+
+          // Mapear los nombres de los campos
+          const renamedResult = result.map((item) => {
+            if (item === "Region") return "region";
+            if (item === "Zona") return "zone";
+            if (item === "Unidad Operativa") return "operative_unit";
+            if (item === "Ruta") return "route";
+            return item; // Retornar el valor original si no coincide con los anteriores
+          });
+
+          // Guardar el resultado renombrado en el estado
+          setDataSelect(result); // Guardar los datos originales si los necesitas
+          setRenamedResult(renamedResult); // Guardar los datos renombrados
+          setDataSelectLoaded(true);
+
+          console.log("Datos renombrados:", renamedResult);
+        } else {
+          console.error("Error in response:", response.status);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [dto, dt]);
+
+  // Fuera del useEffect puedes utilizar renamedResult
+  console.log("Datos renombrados fuera del useEffect:", renamedResult);
+
   const body = {
     customer: dto,
     path: pathVerify(),
-    map_coolers: pathVerify().length >= 4 ? true : false,
+    map_coolers: pathVerify().length >= dataSelect.length ? true : false,
     // map_coolers:
     //   (dto === "HEINEKEN" && pathVerify().length >= 3) ||
     //   (dto !== "HEINEKEN" && pathVerify().length >= 4)
@@ -191,22 +246,41 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
             feature.properties;
           let selectedValue = "";
 
-          if (type === "region") {
+          const hasProperty = (prop) => renamedResult.includes(prop);
+
+          if (type === "region" && hasProperty("region")) {
             selectedValue = region;
-          } else if (type === "zone") {
+          } else if (
+            type === "zone" &&
+            hasProperty("region") &&
+            hasProperty("zone")
+          ) {
             selectedValue = `${region}, ${zone}`;
-          } else if (type === "operative_unit") {
+          } else if (
+            type === "operative_unit" &&
+            hasProperty("region") &&
+            hasProperty("zone") &&
+            hasProperty("operative_unit")
+          ) {
             selectedValue = `${region}, ${zone}, ${operative_unit}`;
-          } else if (type === "route") {
-            selectedValue = `${region}, ${zone}, ${operative_unit}, ${route}`;
+          } else if (
+            type === "route" &&
+            hasProperty("region") &&
+            hasProperty("zone") &&
+            hasProperty("route")
+          ) {
+            selectedValue = hasProperty("operative_unit")
+              ? `${region}, ${zone}, ${operative_unit}, ${route}`
+              : `${region}, ${zone}, ${route}`;
           } else if (type === "coolers") {
             if (serial_number) {
-              window.open(`/home/clt/${serial_number}`, "_blank"); // Abrir en una nueva pestaña
+              window.open(`/home/clt/${serial_number}`, "_blank");
             }
             return; // Evita realizar otras acciones para coolers
           }
 
           setSelectedArea(selectedValue);
+          console.log("Propiedades ya verificadas:", selectedValue);
           localStorage.setItem("selectedArea", selectedValue); // Guardar en localStorage
           // console.log("Clic en:", selectedValue);
 

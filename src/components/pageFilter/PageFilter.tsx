@@ -45,7 +45,7 @@ export default function (props) {
     const fetchData = async () => {
       try {
         // Obtener el token de localStorage
-        const token = localStorage.getItem("Token"); // Reemplaza 'yourTokenKey' con la clave correcta
+        const token = localStorage.getItem("Token");
 
         const response = await fetch(
           "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/hierachy",
@@ -73,7 +73,7 @@ export default function (props) {
     };
 
     fetchData();
-  }, []);
+  }, [dto, dt]);
   // console.log(dataSelect);
   // console.log(dataSelect.length);
 
@@ -155,7 +155,7 @@ export default function (props) {
   const getPaths = async (dataLocalStorage?) => {
     dataLocalStorage === undefined ? (dataLocalStorage = []) : dataLocalStorage;
     const body = { customer: dto, path: dataLocalStorage };
-    if (data.length < 4 && opened == true && status == false) {
+    if (data.length < dataSelect.length && opened == true && status == false) {
       setStatus(true);
       try {
         const data = await fetchUniversal("paths", body, setIsLoading);
@@ -187,7 +187,11 @@ export default function (props) {
     const dataLocalStorage: any = JSON.parse(
       localStorage.getItem("PATH") || "[]"
     );
-    if (index >= 4 || data.length >= 4 || dataLocalStorage.length >= 4) {
+    if (
+      index >= dataSelect.length ||
+      data.length >= dataSelect.length ||
+      dataLocalStorage.length >= dataSelect.length
+    ) {
       setFilterVisibility(false);
     }
     const handleKeyDown = (event) => {
