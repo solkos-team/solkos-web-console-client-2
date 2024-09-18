@@ -221,7 +221,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 
   useEffect(() => {
     fetchData();
-    console.log("useEffect ejecutado con dt:", dt, "y dto:", dto);
+    // console.log("useEffect ejecutado con dt:", dt, "y dto:", dto);
   }, [dt, dto]);
 
   const handleApiLoaded2 = (map, maps) => {
