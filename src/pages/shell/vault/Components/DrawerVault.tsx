@@ -280,13 +280,13 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
             <Carousel style={{width:'100%',height:'100%'}}  placement="bottom" shape="bar"  autoplay>
               <div style={{width:'100%',background:'',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
                 <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>2024</div>
-                <div style={{width:'50%',height:'70%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultLock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
-                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
+                <div style={{width:'50%',height:'75%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultLock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
+                <div style={{width:'50%',height:'10%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
               </div>
               <div style={{width:'100%',background:'',height:'100%',display:'flex',gap:'0.25rem',flexDirection:'column',alignItems:'center'}}>
                 <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>2024</div>
-                <div style={{width:'50%',height:'70%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultUnlock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
-                <div style={{width:'50%',height:'15%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
+                <div style={{width:'50%',height:'75%',background:'',borderBottom:'1px solid var(--gray-4, #CED4DA)'}}> <img src={VaultUnlock} alt="VaultIcon" style={{width:'100%',height:'98%'}}/> </div>
+                <div style={{width:'50%',height:'10%',background:'',color:'var(--gray-6, #868E96)',display:'flex',alignItems:'center',justifyContent:'center'}}>1 mar</div>
               </div>
             </Carousel>
           </div>
