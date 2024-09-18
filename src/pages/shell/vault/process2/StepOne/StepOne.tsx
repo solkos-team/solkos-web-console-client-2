@@ -3,7 +3,7 @@ import { TagInput } from "rsuite";
 import { ButtonNext } from "../../Components/ButtonNext";
 import { ButtonBack } from "../../Components/ButtonBack";
 import { RoadMap } from "../../Components/RoadMap";
-import { Skeleton, Switch } from "@mantine/core";
+import { Button, Skeleton, Switch } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../../Components/DrawerVault";
@@ -34,10 +34,6 @@ export const StepOne = ({
   const [pageNumber, setPageNumber] = useState(1);
   const dto = useSelector((state: any) => state.organization);
   const dt = useSelector((state: any) => state.works);
-  // if(visibilityTable == true){
-  //   // @ts-ignore
-  //   setActive(1)
-  // }else{setActive(0)}
 
   const handleTagChange = (newTags) => {
     setTags(newTags);
@@ -48,6 +44,7 @@ export const StepOne = ({
     path: pathVerify(),
     page_number: pageNumber,
     page_size: 25,
+    filter_by : tags
   };
   const fetchData = async () => {
     try {
@@ -85,7 +82,6 @@ export const StepOne = ({
     };
   }, []);
   const handleSwitchChange = (index: number, data: any) => {
-    // setCoolersToChange(prevData=>[...prevData,{device_id:data.device_id,estatus:data.estatus}])
     setCoolersToChange((prevData) => [...prevData, data]);
     setCoolersData((prevData) => {
       const updatedData = [...prevData];
@@ -99,6 +95,7 @@ export const StepOne = ({
       SetCoolerDrawer(undefined);
     }
   }, [opened]);
+
   return (
     <section
       style={{
@@ -176,33 +173,36 @@ export const StepOne = ({
             }}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginLeft: "10px", // Espacio entre el botón y el texto con la imagen
-          }}
-        >
-          <text
+        <section style={{ display: 'flex', flexDirection: 'row', marginTop: '1rem' }}>
+          <Button style={{color: "white",background: "#ED5079"}} disabled={tags.length === 0 ? true : false} onClick={()=>{ tags.length > 0 ? setVisibilityTable(!visibilityTable) :'' }} >Buscar Coolers</Button>
+          <div
             style={{
-              color: "#ED5079",
-              fontSize: ".9rem",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "28px",
-              cursor: "pointer",
-              marginRight: "5px", // Espacio entre el texto y la imagen
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "10px",
             }}
-            onClick={() => setVisibilityTable((o) => !o)}
           >
-            Ir a vista con tabla{"   "}
-          </text>
-          <img
-            src={"../../sampleData/table.svg"}
-            alt="Descripción de la imagen"
-            style={{ width: "18px", height: "15px", marginTop: 6 }}
-          />
-        </div>
+            <text
+              style={{
+                color: "#ED5079",
+                fontSize: ".9rem",
+                fontStyle: "normal",
+                fontWeight: 400,
+                lineHeight: "28px",
+                cursor: "pointer",
+                marginRight: "5px", // Espacio entre el texto y la imagen
+              }}
+              onClick={() => setVisibilityTable((o) => !o)}
+            >
+              Ir a vista con tabla{"   "}
+            </text>
+            <img
+              src={"../../sampleData/table.svg"}
+              alt="Descripción de la imagen"
+              style={{ width: "18px", height: "15px", marginTop: 6 }}
+            />
+          </div>
+        </section>
       </section>
       {/* Seccion Tabla */}
       <section

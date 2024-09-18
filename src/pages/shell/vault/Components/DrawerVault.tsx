@@ -307,7 +307,7 @@ console.log(cooler)
                 :
                 <Carousel style={{ width: '100%', height: '100%' }} placement="bottom" shape="bar" autoplay>
                   {
-                    registros.map((registro, index) => (
+                    cooler?.vault_markers.map((registro, index) => (
                       <div style={{ width: '100%', background: '', height: '100%', display: 'flex', gap: '0.25rem', flexDirection: 'column', alignItems: 'center' }} title={registro.flag == true ? `Bloqueado por ${registro.user_id}` : `Desbloqueado por ${registro.user_id}`} key={index}>
                         <div style={{ width: '50%', height: '15%', background: '', color: 'var(--gray-6, #868E96)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{new Date(registro.date_time).getFullYear()}</div>
                         <div style={{ width: '50%', height: '75%', background: '' }}> <img src={registro.flag == true ? VaultLock : VaultUnlock} alt="VaultIcon" style={{ width: '100%', height: '98%' }} /> </div>

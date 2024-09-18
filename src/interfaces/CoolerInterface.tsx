@@ -201,7 +201,7 @@ export interface CoolerData {
     url: string;
     is_default: boolean;
   };
-  vault_markers : Vault_Markers
+  vault_markers : Vault_Markers[]
 }
 export interface ActivityItem {
   type: string;
