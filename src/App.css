@@ -2063,11 +2063,11 @@ body {
   .users_descargar_container {
     width: 75%;
   }
-  .drawerCoolview {
+  /* .drawerCoolview {
     max-width: 100% !important;
     left: 0px !important;
     height: 100% !important;
-  }
+  } */
   .drawerDetail {
     max-width: 100% !important;
     height: 100% !important;
@@ -2195,10 +2195,10 @@ body {
 .no-border-input {
   border: none !important;
 }
-.drawerCoolview {
+/* .drawerCoolview {
   max-width: 98%;
   left: 67px;
-}
+} */
 
 .section_Vault_Title {
   width: 100%;
