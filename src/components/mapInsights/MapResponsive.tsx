@@ -39,7 +39,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const [renamedResult, setRenamedResult] = useState<string[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData1 = async () => {
       try {
         // Obtener el token de localStorage
         const token = localStorage.getItem("Token");
@@ -83,7 +83,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
       }
     };
 
-    fetchData();
+    fetchData1();
   }, [dto, dt]);
 
   // Fuera del useEffect puedes utilizar renamedResult
@@ -193,16 +193,19 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
           setGeojson(geoJsonData);
         } else {
           console.warn("No polygon_data found in API response");
+          setGeojson(null); // Limpia el estado del mapa
         }
 
         setData(data);
       } else {
         console.error("No data found in API response");
+        setGeojson(null); // Limpia el estado del mapa
       }
 
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setGeojson(null); // Limpia el estado del mapa
       setIsLoading(false);
     }
   };
@@ -218,6 +221,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 
   useEffect(() => {
     fetchData();
+    console.log("useEffect ejecutado con dt:", dt, "y dto:", dto);
   }, [dt, dto]);
 
   const handleApiLoaded2 = (map, maps) => {
