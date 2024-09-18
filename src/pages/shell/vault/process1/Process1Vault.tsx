@@ -41,7 +41,7 @@ export default function Process1Vault() {
 
   const handleFileLoaded = (data: ExcelData[]) => {
     setExcelData(data);
-    console.log("Datos del archivo cargado:", data);
+    // console.log("Datos del archivo cargado:", data);
     setIsFileUploaded(true); // Cambiar el estado a true cuando se sube un archivo
   };
 
@@ -89,7 +89,7 @@ export default function Process1Vault() {
             body
           );
           setData(result);
-          console.log(result);
+          // console.log(result);
         } catch (error) {
           console.error("Error fetching vault insights:", error);
         } finally {

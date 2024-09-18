@@ -58,7 +58,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
 
         if (response.ok) {
           const result = await response.json();
-          console.log("Datos originales:", result);
+          // console.log("Datos originales:", result);
 
           // Mapear los nombres de los campos
           const renamedResult = result.map((item) => {
@@ -74,7 +74,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
           setRenamedResult(renamedResult); // Guardar los datos renombrados
           setDataSelectLoaded(true);
 
-          console.log("Datos renombrados:", renamedResult);
+          // console.log("Datos renombrados:", renamedResult);
         } else {
           console.error("Error in response:", response.status);
         }
@@ -87,7 +87,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   }, [dto, dt]);
 
   // Fuera del useEffect puedes utilizar renamedResult
-  console.log("Datos renombrados fuera del useEffect:", renamedResult);
+  // console.log("Datos renombrados fuera del useEffect:", renamedResult);
 
   const body = {
     customer: dto,
@@ -114,7 +114,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
       setIsLoading(true);
 
       const data = await fetchUniversal("insights", body, setIsLoading);
-      console.log("API Response Data:", data);
+      // console.log("API Response Data:", data);
 
       if (data) {
         if (data.polygon_data) {
@@ -280,7 +280,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
           }
 
           setSelectedArea(selectedValue);
-          console.log("Propiedades ya verificadas:", selectedValue);
+          // console.log("Propiedades ya verificadas:", selectedValue);
           localStorage.setItem("selectedArea", selectedValue); // Guardar en localStorage
           // console.log("Clic en:", selectedValue);
 

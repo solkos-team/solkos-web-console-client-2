@@ -628,7 +628,7 @@ export default function (props) {
     // Desestructuramos item y renombramos translatedItem a foundString
     const { coincidence, translatedItem: foundString } = item;
 
-    console.log("Opción seleccionada:", coincidence);
+    // console.log("Opción seleccionada:", coincidence);
 
     // Dividir la cadena por comas y obtener el último elemento del array resultante
     const parts = coincidence.split(",");
