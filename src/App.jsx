@@ -936,6 +936,7 @@ function App() {
   const saveOrganization = (ORG) => {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
+      localStorage.setItem('PATH','[]')
       dispatch(addOrg());
       setOpened(false);
     }
