@@ -12,6 +12,7 @@
   "dependencies": {
     "@googlemaps/markerclusterer": "^2.5.3",
     "@heroicons/react": "^1.0.6",
+    "@lottiefiles/react-lottie-player": "^3.5.4",
     "@mantine/core": "^5.4.0",
     "@mantine/hooks": "^5.4.0",
     "@mantine/modals": "^5.4.0",

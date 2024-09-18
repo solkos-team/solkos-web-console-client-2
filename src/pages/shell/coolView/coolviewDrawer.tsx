@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Drawer } from "@mantine/core";
-import {
-  formatDrawerCoolview,
-  getDates,
-  updateTelemetriaStatus,
-} from "../../../Functions/Coolview";
-import {
-  LogoCoolview,
-  SolkosSymbol,
-} from "../../../sampleData/Coolview/CoolviewIcons";
+import {formatDrawerCoolview,getDates,updateTelemetriaStatus,} from "../../../Functions/Coolview";
+import {CoolviewAnimationOpen, LogoCoolview,} from "../../../sampleData/Coolview/CoolviewIcons";
 import { IconInfoCircle } from "@tabler/icons-react";
+import {Player} from '@lottiefiles/react-lottie-player'
 
 export const coolviewDrawer = ({
   opened,
@@ -20,6 +14,7 @@ export const coolviewDrawer = ({
 }) => {
   const [telemetriaStatus, setTelemetriaStatus] = useState(true);
   const [URL, setURL] = useState<string>("");
+  const [isLoading,setIsLoading] = useState(false)
   const mesToday = new Date();
   if (dateStat != undefined && URL == "") {
     setURL(
@@ -40,15 +35,21 @@ export const coolviewDrawer = ({
   }
 
   updateTelemetriaStatus(dateStat, telemetriaStatus, setTelemetriaStatus);
+  
   useEffect(() => {
-    formatDrawerCoolview();
+    setIsLoading(true)
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 5000)
+    return () => clearTimeout(timer)
   }, [opened]);
-  formatDrawerCoolview();
+  
   return telemetriaStatus === true ? (
     <Drawer
       opened={opened}
       onClose={onClose}
       title={
+        isLoading == true ? '' :   
         <div
           style={{
             display: "flex",
@@ -76,7 +77,13 @@ export const coolviewDrawer = ({
       className="drawerCoolview"
     >
       <section className="coolview_printipal">
-        <iframe src={url2} width="100%" height="95%" frameBorder="0" />
+        {
+          isLoading == true ? 
+          <div style={{width:'100%',height:'95%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <Player src={CoolviewAnimationOpen} autoplay style={{width:'100%',height:'100%'}} />
+          </div>
+          : <iframe src={url2} width="100%" height="95%" frameBorder="0" />
+        }
         <div style={{width:'100%',height:'15%',background:'',color:'var(--Neutral-Outline, #88888B)',display:'flex',alignItems:'center',justifyContent:'center'}}>powered by solkos</div>
       </section>
     </Drawer>
@@ -84,10 +91,11 @@ export const coolviewDrawer = ({
     <Drawer
       opened={opened}
       onClose={onClose}
-      title={
+      title={    
+        isLoading == true ? '' :    
         <div
           style={{
-            display: "flex",
+            display:  "flex",
             width: "100%",
             alignItems: "center",
             gap: "4px",
@@ -111,25 +119,32 @@ export const coolviewDrawer = ({
       overlayBlur={0}
       className="drawerCoolview"
     >
-      <section
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Alert
-          variant="light"
-          color={"yellow"}
-          title={"Sin telemetria"}
-          icon={<IconInfoCircle />}
+      {
+        isLoading == true 
+        ? <section style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
+          <Player src={CoolviewAnimationOpen} autoplay style={{width:'100%',height:'100%'}}></Player>
+        </section>  
+        :
+        <section
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          Lo sentimos,se realizo la consulta exitosamente, pero este enfriador
-          no posee telemetria para mostrar en Coolview.
-        </Alert>
-      </section>
+          <Alert
+            variant="light"
+            color={"yellow"}
+            title={"Sin telemetria"}
+            icon={<IconInfoCircle />}
+          >
+            Lo sentimos,se realizo la consulta exitosamente, pero este enfriador
+            no posee telemetria para mostrar en Coolview.
+          </Alert>
+        </section>
+      }
     </Drawer>
   );
 };
