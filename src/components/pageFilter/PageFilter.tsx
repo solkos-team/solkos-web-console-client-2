@@ -73,7 +73,7 @@ export default function (props) {
     };
 
     fetchData();
-  }, [dto, dt]);
+  }, [dto]);
   // console.log(dataSelect);
   // console.log(dataSelect.length);
 
