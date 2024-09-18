@@ -20,14 +20,15 @@ export default function Alerts() {
   const pathVerify = () => {
     return dt.length == 0 ? [] : JSON.parse(dt);
   };
-  const body = { customer: dto, path: pathVerify() };
+  const body = { customer: dto, path: pathVerify(), level: "ALERT" };
   const fetchData = async () => {
     try {
       setIsLoading(true);
       const data = await fetchUniversal("alerts", body);
+      console.log(data);
       const aggItem = data.find((item: any) => item.class === "AGG");
       if (aggItem) {
-        // console.log("Valor de AGG:", aggItem.value);
+        console.log("Valor de AGG:", aggItem.value);
         setAggValue(aggItem.value); // Guarda el valor en el estado si es necesario
       }
       setAlertsData(data);
