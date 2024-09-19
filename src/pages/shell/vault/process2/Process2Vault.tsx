@@ -19,7 +19,7 @@ export const Process2Vault = () => {
     <section className='insights_principal_container' style={{height:'90%'}}>
       <StepOne active={active} setActive={setActive} nextStep={nextStep} prevStep={prevStep} coolersToChange={coolersToChange} setCoolersToChange={setCoolersToChange}  coolersData={coolersData} setCoolersData={setCoolersData} />
       <StepTwo active={active} setActive={setActive} nextStep={nextStep} prevStep={prevStep} coolersToChange={coolersToChange} />
-      <StepFinal active={active} />
+      <StepFinal active={active} coolersToChange={coolersToChange}  />
     </section>
   )
 }

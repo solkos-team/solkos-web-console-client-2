@@ -95,7 +95,6 @@ export const StepOne = ({
       SetCoolerDrawer(undefined);
     }
   }, [opened]);
-
   return (
     <section
       style={{
@@ -208,7 +207,7 @@ export const StepOne = ({
       <section
         ref={containerRef}
         style={{
-          height: "50vh", // 50% de la altura del viewport
+          height: "47vh", // 50% de la altura del viewport
           overflowY: "auto", // Agrega una barra de desplazamiento vertical si es necesario
           scrollbarWidth: "thin",
           visibility: visibilityTable == false ? "hidden" : "visible",
@@ -436,7 +435,7 @@ export const StepOne = ({
       {/* Seccion botones */}
       <section className="section_Vault_Buttons">
         <ButtonBack prevStep={prevStep} active={active} />
-        <ButtonNext nextStep={nextStep} active={true} />
+        <ButtonNext nextStep={nextStep} active={coolersToChange.length == 0 ? false : true} />
       </section>
       <DrawerVault opened={opened} onCLose={close} Serial_ID={coolerDrawer} />
     </section>

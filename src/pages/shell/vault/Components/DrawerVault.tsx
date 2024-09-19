@@ -48,28 +48,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
     if (Serial_ID != undefined) {
       fetchData(Serial_ID);
     }
-  }, [Serial_ID]);
-  const registros: Vault_Markers[] = [
-    {
-      cooler_id: "001BC501F6BB",
-      flag: true,
-      date_time: "2024-09-04T23:48:22.263Z",
-      user_id: "Alicia W",
-    },
-    {
-      cooler_id: "001BC501F6BB",
-      flag: false,
-      date_time: "2024-09-01T23:48:22.263Z",
-      user_id: "Mayra b",
-    },
-    {
-      cooler_id: "001BC501F6BB",
-      flag: false,
-      date_time: "2024-08-10T23:48:22.263Z",
-      user_id: "Jose i",
-    },
-  ];
-  console.log(cooler?.vault_markers.length)
+  }, [Serial_ID]); 
   return (
     <Drawer
       opened={opened}
