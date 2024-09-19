@@ -2923,3 +2923,12 @@ body {
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.coolview-drawer {
+  opacity: 0; /* Comienza invisible */
+  transition: opacity 5s ease-in; /* Efecto de transición de 5 segundos */
+}
+
+.coolview-drawer.visible {
+  opacity: 1; /* Se vuelve visible */
+}
