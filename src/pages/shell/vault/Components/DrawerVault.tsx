@@ -69,7 +69,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
       user_id: "Jose i",
     },
   ];
-  // console.log(cooler)
+  console.log(cooler?.vault_markers.length)
   return (
     <Drawer
       opened={opened}
@@ -327,84 +327,12 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
           <div className="vault_drawer_mapa_title">
             <p>Registro</p>
           </div>
-          <div className="vault_drawer_registro_stepper">
-            {/* {cooler?.vault_markers == null ||
-            cooler.vault_markers == undefined ? (
-              <h1
-                style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}
-              >
-                Sin registros
-              </h1>
-            ) : (
-              <Carousel
-                style={{ width: "100%", height: "100%" }}
-                placement="bottom"
-                shape="bar"
-                autoplay
-              >
-                {cooler?.vault_markers.map((registro, index) => (
-                  <div
-                    style={{
-                      width: "100%",
-                      background: "",
-                      height: "100%",
-                      display: "flex",
-                      gap: "0.25rem",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                    title={
-                      registro.flag == true
-                        ? `Bloqueado por ${registro.user_id}`
-                        : `Desbloqueado por ${registro.user_id}`
-                    }
-                    key={index}
-                  >
-                    <div
-                      style={{
-                        width: "50%",
-                        height: "15%",
-                        background: "",
-                        color: "var(--gray-6, #868E96)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {new Date(registro.date_time).getFullYear()}
-                    </div>
-                    <div
-                      style={{ width: "50%", height: "75%", background: "" }}
-                    >
-                      {" "}
-                      <img
-                        src={registro.flag == true ? VaultLock : VaultUnlock}
-                        alt="VaultIcon"
-                        style={{ width: "100%", height: "98%" }}
-                      />{" "}
-                    </div>
-                    <div
-                      style={{
-                        width: "50%",
-                        height: "10%",
-                        background: "",
-                        color: "var(--gray-6, #868E96)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >{`${new Date(registro.date_time).getDate()} ${
-                      nombresMeses[new Date(registro.date_time).getMonth()]
-                    }`}</div>
-                  </div>
-                ))}
-              </Carousel>
-            )} */}
+          <div className="vault_drawer_registro_stepper">            
               {
                 cooler?.vault_markers == null || cooler.vault_markers == undefined 
                 ? <h1 style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}>Sin registros</h1>
                 :
-                  (<Carousel mx="auto" withIndicators style={{width:'100%',height:'100%'}} height='100%' slideSize="33.333333%" slideGap="md" align="center" controlSize={14}>
+                  (<Carousel mx="auto" withIndicators style={{width:'100%',height:'100%'}} height='100%' slideSize="33.333333%" slideGap="md" align={cooler?.vault_markers.length == 1 ? "center" : "start"} controlSize={14}>
                   {
                     cooler.vault_markers.map((registro, index) => (
                       <Carousel.Slide key={index}>
