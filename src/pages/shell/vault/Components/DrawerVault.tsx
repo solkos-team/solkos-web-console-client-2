@@ -1,26 +1,15 @@
 import { Drawer, Loader, Skeleton, Tooltip } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import {
-  CoolerData,
-  Vault_Markers,
-} from "../../../../interfaces/CoolerInterface";
+import { CoolerData, Vault_Markers, } from "../../../../interfaces/CoolerInterface";
 import { fetchUniversalDetails } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
-import {
-  backgroundCircle,
-  getBorderStyle,
-  getColor,
-  getStatusColor,
-} from "../../../../Functions/Vault";
+import { backgroundCircle, getBorderStyle, getColor, getStatusColor, } from "../../../../Functions/Vault";
 import MapComponent2 from "../../../../components/map_2";
 import MapComponent from "../../../../components/map";
 import MapComponent1 from "../../../../components/map_1";
 import moment from "moment";
-import { Carousel } from "rsuite";
-import {
-  VaultLock,
-  VaultUnlock,
-} from "../../../../sampleData/Vault/VaultIcons";
+import { Carousel } from '@mantine/carousel';
+import { VaultLock, VaultUnlock } from "../../../../sampleData/Vault/VaultIcons";
 
 export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   // console.log(Serial_ID)
@@ -227,8 +216,8 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                         }}
                       ></div>
                       {cooler?.cooler.status === "" ||
-                      cooler?.cooler.status == null ||
-                      cooler?.cooler.status == undefined
+                        cooler?.cooler.status == null ||
+                        cooler?.cooler.status == undefined
                         ? "Sin registro"
                         : cooler?.cooler.status}
                     </div>
@@ -274,8 +263,8 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                         {cooler?.cooler.last_read === null || undefined || ""
                           ? "Sin registro"
                           : moment(new Date(String(cooler?.cooler.last_read)))
-                              .locale("es")
-                              .format("dddd D MMMM, YYYY")}
+                            .locale("es")
+                            .format("dddd D MMMM, YYYY")}
                       </div>
                     </>
                   )}
@@ -339,7 +328,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
             <p>Registro</p>
           </div>
           <div className="vault_drawer_registro_stepper">
-            {cooler?.vault_markers == null ||
+            {/* {cooler?.vault_markers == null ||
             cooler.vault_markers == undefined ? (
               <h1
                 style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}
@@ -410,7 +399,25 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                   </div>
                 ))}
               </Carousel>
-            )}
+            )} */}
+              {
+                cooler?.vault_markers == null || cooler.vault_markers == undefined 
+                ? <h1 style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}>Sin registros</h1>
+                :
+                  (<Carousel mx="auto" withIndicators style={{width:'100%',height:'100%'}} height='100%' slideSize="33.333333%" slideGap="md" align="center" controlSize={14}>
+                  {
+                    cooler.vault_markers.map((registro, index) => (
+                      <Carousel.Slide key={index}>
+                        <section style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <div style={{ width: '100%', height: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: "var(--gray-6, #868E96)", }}>{new Date(registro.date_time).getFullYear()}</div>
+                          <div style={{ width: '100%', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderBottom:'1px solid var(--Brand-muted, #BFDBFE)' }}><img src={registro.flag == true ? VaultLock : VaultUnlock} alt="VaultIcon" style={{ width: "100%", height: "100%" }} /></div>
+                          <div style={{ width: '100%', height: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: "var(--gray-6, #868E96)", }}>{`${new Date(registro.date_time).getDate()} ${nombresMeses[new Date(registro.date_time).getMonth()]}`}</div>
+                        </section>
+                      </Carousel.Slide>
+                    ))
+                  }                                            
+                  </Carousel>)
+              }
           </div>
         </section>
         <section className="vault_drawer_mapa">
@@ -446,14 +453,12 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  `${
-                    cooler?.cooler.outlet_name === "" || null || undefined
-                      ? "Sin registro"
-                      : cooler?.cooler.outlet_name
-                  } / ${
-                    cooler?.cooler.outlet_id === "" || null || undefined
-                      ? "Sin registro"
-                      : cooler?.cooler.outlet_id
+                  `${cooler?.cooler.outlet_name === "" || null || undefined
+                    ? "Sin registro"
+                    : cooler?.cooler.outlet_name
+                  } / ${cooler?.cooler.outlet_id === "" || null || undefined
+                    ? "Sin registro"
+                    : cooler?.cooler.outlet_id
                   }`
                 )}
               </div>
