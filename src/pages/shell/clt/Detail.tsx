@@ -6,7 +6,7 @@ import { IconArrowDownRight } from "@tabler/icons-react";
 import PageFilter from "../../../components/pageFilter";
 import { Tooltip, Skeleton, Center } from "@mantine/core";
 import { Link } from "react-router-dom";
-import { fetchUniversalDetails } from "../../../utils/apiUtils";
+import { COOLVIEW_LINK, fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
 import "moment/locale/es";
 import { useMediaQuery } from "@mantine/hooks";
@@ -147,11 +147,12 @@ export default function CoolerDetail() {
   const toggleExpand2 = () => {
     setExpand2(!expand2);
   };
+  
   useEffect(() => {
     if (isLoading == false) {
       if (dateTelemetri != undefined) {
         seturl2(
-          `https://solkos-coolview-2.firebaseapp.com?device_id=${
+          `${COOLVIEW_LINK}?device_id=${
             coolersData?.cooler?.serial_number
           }&start_date=${
             getDates(

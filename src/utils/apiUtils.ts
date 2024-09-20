@@ -6,7 +6,10 @@ import { FetchOptions } from "../interfaces/ApiInterfaces";
 // QA
 const baseUrl =
   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
-
+/////////////////////////////////// COOLVIEW LINKS ////////////////////////////
+const COOLVIEW_PROD = 'https://solkos-coolview-2.firebaseapp.com'
+const COOLVIEW_QA = 'https://solkos-coolview-2-qa.firebaseapp.com/'
+export const COOLVIEW_LINK = COOLVIEW_PROD
 export const fetchCoolers = async (path, setIsLoading?, id?) => {
   if (setIsLoading) {
     setIsLoading(!false);
