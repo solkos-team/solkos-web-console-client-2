@@ -43,7 +43,17 @@ export const coolviewDrawer = ({
     }, 5000)
     return () => clearTimeout(timer)
   }, [opened]);
-  
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Espera un poco antes de hacer visible el iframe
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100); // Tiempo en milisegundos para iniciar la visibilidad
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return telemetriaStatus === true ? (
     <Drawer
       opened={opened}
@@ -80,9 +90,9 @@ export const coolviewDrawer = ({
         {
           isLoading == true ? 
           <div style={{width:'100%',height:'95%',display:'flex',alignItems:'center',justifyContent:'center'}}>
-            <Player src={CoolviewAnimationOpen} autoplay style={{width:'100%',height:'100%'}} />
+            <Player src={CoolviewAnimationOpen} autoplay style={{ height: '300px', width: '300px' }} loop/>
           </div>
-          : <iframe src={url2} width="100%" height="95%" frameBorder="0" />
+          : <iframe src={url2} width="100%" height="95%" frameBorder="0" className={`coolview-drawer ${isVisible ? 'visible' : ''}`}/>
         }
         <div style={{width:'100%',height:'15%',background:'',color:'var(--Neutral-Outline, #88888B)',display:'flex',alignItems:'center',justifyContent:'center'}}>powered by solkos</div>
       </section>
@@ -122,7 +132,7 @@ export const coolviewDrawer = ({
       {
         isLoading == true 
         ? <section style={{width:'100%',height:'100%',display:'flex',justifyContent:'center',alignItems:'center'}}>
-          <Player src={CoolviewAnimationOpen} autoplay style={{width:'100%',height:'100%'}}></Player>
+          <Player src={CoolviewAnimationOpen} autoplay style={{ height: '300px', width: '300px' }} loop></Player>
         </section>  
         :
         <section
