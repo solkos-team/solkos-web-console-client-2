@@ -702,7 +702,8 @@ function App() {
         ))}
       </>
     ) : Name === "Mayra Barrón Reséndiz" ||
-      Name === "Jose Ivan Perez Ugalde" ? (
+      Name === "Jose Ivan Perez Ugalde" ||
+      Name === "Alberto Alvarez" ? (
       <>
         {routesVault.map((item) => (
           <div key={item.label}>
