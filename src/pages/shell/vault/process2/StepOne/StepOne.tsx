@@ -103,16 +103,17 @@ export const StepOne = ({
         display: active <= 1 ? "flex" : "none",
         flexDirection: "column",
         alignItems: "center",
+        gap:'0.5rem'
       }}
     >
       {/* Seccion RoadMap */}
-
+      <section style={{width:'100%',height:'28%',background:'',display:'flex',alignItems:'center'}}>
       {visibilityTable == false ? (
-        <section style={{ width: "100%", display: "flex" }}>
-          <InsightsVault />
+        <section style={{ width: "100%", display: "flex",height:'100%' }}>
+          <InsightsVault activateSkeleton={true} />
         </section>
       ) : (
-        <section className="vault_section_roadmap">
+        <section style={{width:'100%',height:'max-content',background:'',display:'flex',alignItems:'center',justifyContent:'center'}}>
           <RoadMap
             active={active}
             setActive={setActive}
@@ -121,6 +122,7 @@ export const StepOne = ({
           />
         </section>
       )}
+      </section>
       {/* Seccion Buscador */}
       <section
         style={{
@@ -130,14 +132,15 @@ export const StepOne = ({
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
+          gap:'0.5rem'
         }}
       >
         <img
           src={"../../sampleData/logovault.svg"}
           alt="Descripción de la imagen"
-          style={{ width: "5rem", height: "3rem" }}
+          style={{ width: "5rem", height: "33%",marginTop:'-0.25rem' }}
         />
-        <div className="vault_tag">
+        <div className="vault_tag" style={{height:'33%'}}>
           <TagInput
             value={tags}
             trigger={["Enter", "Space", "Comma"]}
@@ -172,7 +175,7 @@ export const StepOne = ({
             }}
           />
         </div>
-        <section style={{ display: 'flex', flexDirection: 'row', marginTop: '1rem' }}>
+        <section style={{ display: 'flex', flexDirection: 'row', marginTop: '1rem',height:'33%' }}>
           <Button style={{color: "white",background: "#ED5079"}} disabled={tags.length === 0 ? true : false} onClick={()=>{ tags.length > 0 ? setVisibilityTable(!visibilityTable) :'' }} >Buscar Coolers</Button>
           <div
             style={{
@@ -207,7 +210,7 @@ export const StepOne = ({
       <section
         ref={containerRef}
         style={{
-          height: "47vh", // 50% de la altura del viewport
+          height: "45vh", // 50% de la altura del viewport
           overflowY: "auto", // Agrega una barra de desplazamiento vertical si es necesario
           scrollbarWidth: "thin",
           visibility: visibilityTable == false ? "hidden" : "visible",

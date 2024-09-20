@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchVaulInsights } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { SkeletonInsightsVault } from "../../../../components/skeletonInsightsVault/SkeletonInisghtsVault";
+import { Skeleton } from "@mantine/core";
 
 interface VaultData {
   bloqueados: number;
@@ -11,10 +12,10 @@ interface VaultData {
   total: number;
 }
 
-export const InsightsVault = () => {
+export const InsightsVault = ({activateSkeleton}:{activateSkeleton?:any}) => {  
   const dto = useSelector((state: any) => state.organization);
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<VaultData | null>(null);
+  const [data, setData] = useState<VaultData | null | any>(null);
 
   const body = {
     customer: dto,
@@ -41,9 +42,16 @@ export const InsightsVault = () => {
     fetchData();
   }, [dto]);
 
-  if (data === null) {
-    return <SkeletonInsightsVault></SkeletonInsightsVault>;
+  if (data === null && activateSkeleton == undefined ) {
+    return <SkeletonInsightsVault></SkeletonInsightsVault>;    
   }
+  if (data === null && activateSkeleton != undefined ) {
+    return <Skeleton style={{width:'100%',height:'100%'}}/>
+  }
+
+  // if(data === null && activateSkeleton != undefined){
+  //   return <Skeleton style={{width:'100%',height:'100%'}}/>
+  // }
 
   // Destructuring data
   const { bloqueados, a_bloquear, a_desbloquear, desbloqueados, total } = data;
