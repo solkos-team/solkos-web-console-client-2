@@ -171,6 +171,72 @@ const routes = [
     icon: <img src={"../../sampleData/user.svg"} />,
   },
 ];
+const routesVault = [
+  {
+    label: "Cooler Insights",
+    icon: <img src={"../../sampleData/insights.svg"} />,
+    initiallyOpened: true,
+    links: [
+      {
+        label: "Insights",
+        link: "/home/insights",
+        icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Indicadores",
+        link: "/home/indicator",
+        icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Fallas",
+        link: "/home/fails",
+        icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Alertas",
+        link: "/home/alerts",
+        icon: <img src={"../../sampleData/alert.svg"} alt="cooler"></img>,
+      },
+    ],
+  },
+  {
+    link: "/home/clt",
+    label: "Cooler Life Tracking",
+    icon: <img src={"../../sampleData/devices.svg"} />,
+  },
+  {
+    link: "/home/outlets",
+    label: "Puntos de venta",
+    icon: <img src={"../../sampleData/pv.svg"} />,
+  },
+  {
+    link: "/home/panel",
+    label: "Tableros",
+    icon: <img src={"../../sampleData/tableros.svg"} />,
+  },
+  {
+    link: "/home/users",
+    label: "Colaboradores",
+    icon: <img src={"../../sampleData/user.svg"} />,
+  },
+  {
+    label: "Vault",
+    icon: <img src={"../../sampleData/insights.svg"} />,
+    initiallyOpened: true,
+    links: [
+      {
+        label: "Procedimiento 1",
+        link: "/home/Process1Vault",
+        icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+      },
+      {
+        label: "Procedimiento 2",
+        link: "/home/Process2Vault",
+        icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
+      },
+    ],
+  },
+];
 
 const routes1 = [
   {
@@ -635,13 +701,196 @@ function App() {
           </div>
         ))}
       </>
-    ) : // ||localStorage.getItem("ORG") === "KOF Colombia"
-    localStorage.getItem("ORG") === "KOF" ||
+    ) : Name === "Mayra Barrón Reséndiz" ||
+      Name === "Jose Ivan Perez Ugalde" ? (
+      <>
+        {routesVault.map((item) => (
+          <div key={item.label}>
+            {item.label === "Cooler Insights" && item.links ? (
+              <div style={{ whiteSpace: "nowrap" }}>
+                <Tooltip label={item.label}>
+                  <div
+                    onClick={() => {
+                      setCoolerInsightsOpen(!coolerInsightsOpen);
+                    }}
+                    className={cx(classes.link, {
+                      [classes.linkActive]: coolerInsightsOpen,
+                    })}
+                  >
+                    {item.icon}
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: opened2 === true ? "none" : "",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    {coolerInsightsOpen ? (
+                      <img
+                        src={a1}
+                        style={{
+                          marginLeft:
+                            opened2 === true
+                              ? 1
+                              : opened2 == false && menuResponsive == true
+                              ? 240
+                              : 40,
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={a2}
+                        style={{
+                          marginLeft:
+                            opened2 === true
+                              ? 1
+                              : opened2 == false && menuResponsive == true
+                              ? 240
+                              : 40,
+                        }}
+                      />
+                    )}
+                  </div>
+                </Tooltip>
+                {coolerInsightsOpen && (
+                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
+                    {item.links.map((option) => (
+                      <NavLink
+                        to={option.link}
+                        className={classes.link}
+                        key={option.label}
+                        activate={true.toString()} // Convert boolean to string
+                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                      >
+                        <Tooltip label={option.label}>
+                          <div>
+                            {option.icon && option.icon}{" "}
+                            <span
+                              style={{
+                                marginLeft: 10,
+                                display: opened2 === true ? "none" : "",
+                              }}
+                            >
+                              {option.label}
+                            </span>
+                          </div>
+                        </Tooltip>
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : item.label === "Vault" && item.links ? (
+              <div style={{ whiteSpace: "nowrap" }}>
+                <Tooltip label={item.label}>
+                  <div
+                    onClick={() => {
+                      setVaultOpen(!vaultOpen);
+                    }}
+                    className={cx(classes.link, {
+                      [classes.linkActive]: vaultOpen,
+                    })}
+                  >
+                    {item.icon}
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: opened2 === true ? "none" : "",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    {vaultOpen ? (
+                      <img
+                        src={a1}
+                        style={{
+                          marginLeft:
+                            opened2 === true
+                              ? 1
+                              : opened2 == false && menuResponsive == true
+                              ? 240
+                              : 40,
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={a2}
+                        style={{
+                          marginLeft:
+                            opened2 === true
+                              ? 1
+                              : opened2 == false && menuResponsive == true
+                              ? 240
+                              : 40,
+                        }}
+                      />
+                    )}
+                  </div>
+                </Tooltip>
+                {vaultOpen && (
+                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
+                    {item.links.map((option) => (
+                      <NavLink
+                        to={option.link}
+                        className={classes.link}
+                        key={option.label}
+                        activate={true.toString()} // Convert boolean to string
+                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+                      >
+                        <Tooltip label={option.label}>
+                          <div>
+                            {option.icon && option.icon}{" "}
+                            <span
+                              style={{
+                                marginLeft: 10,
+                                display: opened2 === true ? "none" : "",
+                              }}
+                            >
+                              {option.label}
+                            </span>
+                          </div>
+                        </Tooltip>
+                      </NavLink>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink
+                className={({ isActive }) =>
+                  cx(classes.link, { [classes.linkActive]: isActive })
+                }
+                to={item.link || "/"}
+                onClick={() => {
+                  setActive(item.label);
+                  closeCoolerInsights();
+                }}
+              >
+                <Tooltip label={item.label}>
+                  <div>
+                    {item.icon}
+                    <span
+                      style={{
+                        marginLeft: 10,
+                        display: opened2 === true ? "none" : "",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                </Tooltip>
+              </NavLink>
+            )}
+          </div>
+        ))}
+      </>
+    ) : localStorage.getItem("ORG") === "KOF" ||
       localStorage.getItem("ORG") === "KOF Colombia" ||
       localStorage.getItem("ORG") === "KOF Guatemala" ||
       localStorage.getItem("ORG") === "ECO" ? (
       <>
-        {updatedRoutes.map((item) => (
+        {routes.map((item) => (
           <div key={item.label}>
             {item.label === "Cooler Insights" && item.links ? (
               <div style={{ whiteSpace: "nowrap" }}>
@@ -936,7 +1185,7 @@ function App() {
   const saveOrganization = (ORG) => {
     if (ORG) {
       localStorage.setItem("ORG", ORG);
-      localStorage.setItem('PATH','[]')
+      localStorage.setItem("PATH", "[]");
       dispatch(addOrg());
       setOpened(false);
     }
