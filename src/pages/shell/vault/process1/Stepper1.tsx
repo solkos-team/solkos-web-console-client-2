@@ -17,8 +17,8 @@ export default function Stepper1() {
     );
   });
 
-  // console.log("Datos recibidos en Stepper1:", vaultData);
-  // console.log(vaultData?.entradas?.total);
+  console.log("Datos recibidos en Stepper1:", vaultData);
+  console.log(vaultData?.entradas?.total);
 
   useEffect(() => {
     // Si hay datos en vaultData, guárdalos en localStorage

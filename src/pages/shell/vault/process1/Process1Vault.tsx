@@ -7,21 +7,24 @@ import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 import { fetchVaulValidate } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 
-// Define una interfaz para los datos del archivo Excel
-interface ExcelData {
+interface OriginalExcelData {
+  mac: string | boolean;
+  estatus: string | boolean;
+}
+
+interface TransformedExcelData {
   device_id: string | boolean;
   estatus: string | boolean;
 }
 
 export default function Process1Vault() {
   const [isAlertVisible, setAlertVisible] = useState(true);
-  const [isFileUploaded, setIsFileUploaded] = useState(false); // Estado para controlar si se subió un archivo
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  // Define que excelData es un array de objetos de tipo ExcelData
-  const [excelData, setExcelData] = useState<ExcelData[]>([]);
-  const [isLoading, setIsLoading] = useState(false); // Estado para controlar la carga del fetch
+  const [excelData, setExcelData] = useState<TransformedExcelData[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState(null);
   const dto = useSelector((state: any) => state.organization);
 
@@ -33,16 +36,35 @@ export default function Process1Vault() {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
     if (file) {
       console.log("Selected file:", file.name);
-      // Aquí puedes manejar el archivo seleccionado
+
+      // Limpiar los datos anteriores
+      setExcelData([]); // Resetea los datos previos
+      setData(null); // Limpiar el resultado anterior si es necesario
+      setIsFileUploaded(false); // Restablecer el estado de carga de archivo
     }
   };
 
-  const handleFileLoaded = (data: ExcelData[]) => {
-    setExcelData(data);
-    // console.log("Datos del archivo cargado:", data);
-    setIsFileUploaded(true); // Cambiar el estado a true cuando se sube un archivo
+  const handleFileLoaded = (data: OriginalExcelData[]) => {
+    // console.log("Datos originales del archivo cargado:", data);
+
+    // Limpiar excelData antes de cargar nuevos datos
+    setExcelData([]);
+
+    // Realizar la transformación
+    const transformedData = data.map((item) => ({
+      device_id: item.mac || "", //
+      estatus: item.estatus === true || item.estatus === "true",
+    }));
+
+    // Agregar los datos transformados
+    setExcelData(transformedData);
+    // console.log("Datos del archivo cargado (transformados):", transformedData);
+
+    // Cambiar el estado a true cuando se sube un archivo
+    setIsFileUploaded(true);
   };
 
   const handleCloseAlert = () => {
@@ -50,10 +72,8 @@ export default function Process1Vault() {
   };
 
   useEffect(() => {
-    // Añadir overflow hidden al montar el componente
     document.body.style.overflow = "hidden";
 
-    // Eliminar overflow hidden al desmontar el componente
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -68,32 +88,30 @@ export default function Process1Vault() {
       if (excelData.length > 0) {
         const body = {
           coolers: excelData.map((item) => ({
-            device_id: String(item.device_id || ""), // Convertir a cadena
+            device_id: String(item.device_id || ""),
             estatus:
               item.estatus === "true" || item.estatus === true ? true : false,
           })),
         };
 
-        // Loguear el body para múltiples coolers
         console.log(
           "Estructura del body con múltiples coolers:",
           JSON.stringify(body, null, 2)
         );
 
         try {
-          setIsLoading(true); // Activar el estado de carga
+          setIsLoading(true);
 
           const result = await fetchVaulValidate(
-            "vault_validate", // URL corregida
+            "vault_validate",
             setIsLoading,
             body
           );
           setData(result);
-          // console.log(result);
         } catch (error) {
           console.error("Error fetching vault insights:", error);
         } finally {
-          setIsLoading(false); // Desactivar el estado de carga
+          setIsLoading(false);
         }
       }
     };
