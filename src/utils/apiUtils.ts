@@ -1,15 +1,38 @@
+import { FetchOptions } from "../interfaces/ApiInterfaces";
+
+// **********************************************************************************
+// ******************************* PRODUCTIVO ***************************************
+
 // PRODUCTIVO
 // const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 
-import { FetchOptions } from "../interfaces/ApiInterfaces";
+// PRODUCTIVO ---- VAULT
+// const baseUrlVault =
+//   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
+
+// **********************************************************************************
+// ******************************* QA ***********************************************
 
 // QA
 const baseUrl =
   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
-/////////////////////////////////// COOLVIEW LINKS ////////////////////////////
-const COOLVIEW_PROD = 'https://solkos-coolview-2.firebaseapp.com'
-const COOLVIEW_QA = 'https://solkos-coolview-2-qa.firebaseapp.com/'
-export const COOLVIEW_LINK = COOLVIEW_PROD
+
+// QA ----- VAULT
+const baseUrlVault =
+  "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
+
+// **********************************************************************************
+// **************************** COOLVIEW ********************************************
+
+const COOLVIEW_PROD = "https://solkos-coolview-2.firebaseapp.com";
+
+const COOLVIEW_QA = "https://solkos-coolview-2-qa.firebaseapp.com/";
+
+export const COOLVIEW_LINK = COOLVIEW_QA;
+
+// **********************************************************************************
+// **********************************************************************************
+
 export const fetchCoolers = async (path, setIsLoading?, id?) => {
   if (setIsLoading) {
     setIsLoading(!false);
@@ -455,7 +478,7 @@ export const fetchVaulInsights = async (componentURL, setIsLoading, data) => {
     setIsLoading(true);
   }
 
-  const url = `${baseUrl}${componentURL}`;
+  const url = `${baseUrlVault}${componentURL}`;
 
   const headers = {
     "Content-Type": "application/json",
@@ -492,7 +515,44 @@ export const fetchVaulValidate = async (componentURL, setIsLoading, data) => {
     setIsLoading(true);
   }
 
-  const url = `${baseUrl}${componentURL}`;
+  const url = `${baseUrlVault}${componentURL}`;
+
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${
+      sessionStorage.getItem("Token") ?? localStorage.getItem("Token")
+    }`,
+  };
+
+  const cuerpo = {
+    method: "POST",
+    headers,
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(url, cuerpo);
+    if (!response.ok) {
+      throw new Error("Error fetching vault insights");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  } finally {
+    if (setIsLoading) {
+      setIsLoading(false);
+    }
+  }
+};
+
+export const fetchVaul = async (componentURL, setIsLoading, data) => {
+  if (setIsLoading) {
+    setIsLoading(true);
+  }
+
+  const url = `${baseUrlVault}${componentURL}`;
 
   const headers = {
     "Content-Type": "application/json",

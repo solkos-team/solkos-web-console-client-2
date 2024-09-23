@@ -1,13 +1,17 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import { Button } from "rsuite";
 import { useNavigate } from "react-router-dom";
 import { Stepper, TextInput, Group } from "@mantine/core";
 import { VaultLogo } from "../../../../sampleData/Vault/VaultIcons";
 import { useLocation } from "react-router-dom";
+import { fetchVaul } from "../../../../utils/apiUtils";
 
 export default function Stepper5() {
   const location = useLocation();
   let vaultData = location.state?.vaultData;
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [data, setData] = useState(null);
 
   // Si los datos no vienen de location.state, cargarlos desde localStorage
   if (!vaultData) {
@@ -16,15 +20,7 @@ export default function Stepper5() {
   }
 
   const coolers = vaultData?.activar_vault?.Coolers || [];
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-
-  const handleFileClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
 
   const [active, setActive] = useState(5);
   const [confirmationWord, setConfirmationWord] = useState("");
@@ -37,8 +33,6 @@ export default function Stepper5() {
       navigate(`/home/Stepper6`);
     }
   };
-  const prevStep = () =>
-    setActive((current) => (current > 0 ? current - 1 : current));
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setConfirmationWord(event.currentTarget.value);
@@ -49,15 +43,42 @@ export default function Stepper5() {
     }
   };
 
-  useEffect(() => {
-    // Añadir overflow hidden al montar el componente
-    document.body.style.overflow = "hidden";
+  const body = useMemo(() => {
+    const coolersActivar = vaultData?.activar_vault?.Coolers || [];
+    const coolersDesactivar = vaultData?.desactivar_vault?.Coolers || [];
 
-    // Eliminar overflow hidden al desmontar el componente
-    return () => {
-      document.body.style.overflow = "auto";
+    const coolers = [
+      ...coolersActivar.map((cooler) => ({
+        device_id: cooler.mac,
+        estatus: true,
+      })),
+      ...coolersDesactivar.map((cooler) => ({
+        device_id: cooler.mac,
+        estatus: false,
+      })),
+    ];
+
+    return {
+      coolers,
     };
-  }, []);
+  }, [vaultData]);
+
+  console.log("Body generado:", body);
+
+  // Función para ejecutar el fetch cuando se haga clic en "Continuar"
+  const handleFetch = async () => {
+    try {
+      setIsLoading(true);
+      const result = await fetchVaul("vault", setIsLoading, body);
+      // console.log(result);
+      console.log("Fetch ejecutado con éxito:", result);
+      setData(result);
+    } catch (error) {
+      console.error("Error fetching vault insights:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <section style={{ marginTop: -40, marginLeft: -20 }}>
@@ -556,8 +577,17 @@ export default function Stepper5() {
               color: "white",
               background: "#ED5079",
             }}
-            onClick={nextStep}
-            disabled={!isConfirmed}
+            onClick={async () => {
+              await handleFetch(); // Llama a handleFetch
+              if (data) {
+                // Verifica si data contiene resultados exitosos
+                console.log(data);
+                nextStep(); // Solo avanza al siguiente paso si fue exitoso
+              } else {
+                console.error("No se recibió datos válidos después del fetch");
+              }
+            }}
+            disabled={!isConfirmed || isLoading} // Deshabilita si no está confirmado o si está cargando
           >
             Continuar
           </Button>
