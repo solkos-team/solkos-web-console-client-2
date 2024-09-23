@@ -317,7 +317,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                       <Carousel.Slide key={index}>
                         <section style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                           <div style={{ width: '100%', height: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: "var(--gray-6, #868E96)", }}>{new Date(registro.date_time).getFullYear()}</div>
-                          <div style={{ width: '100%', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderBottom:'1px solid var(--Brand-muted, #BFDBFE)' }}><img src={registro.flag == true ? VaultLock : VaultUnlock} alt="VaultIcon" style={{ width: "100%", height: "100%" }} /></div>
+                          <div style={{ width: '100%', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',borderBottom:'1px solid var(--Brand-muted, #BFDBFE)' }}><img src={registro.flag == true ? VaultUnlock :  VaultLock} alt="VaultIcon" style={{ width: "100%", height: "100%" }} /></div>
                           <div style={{ width: '100%', height: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: "var(--gray-6, #868E96)", }}>{`${new Date(registro.date_time).getDate()} ${nombresMeses[new Date(registro.date_time).getMonth()]}`}</div>
                         </section>
                       </Carousel.Slide>

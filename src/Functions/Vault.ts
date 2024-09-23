@@ -181,4 +181,11 @@ const backgroundCircle = (coolersData: CoolerData | undefined): string => {
   // Retornar el color basado en el mapa o el color por defecto
   return colorMap[status] || "#313A49";
 };
-export { vaultProces2RemoveDuplicades,getBorderStyle,getColor,getStatusColor,backgroundCircle ,getBorderStyle2,getColor2}
+// transformar datos a estructura correcta para la peticion
+const vaultProces2TransformData = (array) => {
+  return array.map(item => ({
+      device_id: item.device_id,
+      estatus: item.estatus
+  }));
+}
+export { vaultProces2RemoveDuplicades,getBorderStyle,getColor,getStatusColor,backgroundCircle ,getBorderStyle2,getColor2,vaultProces2TransformData}

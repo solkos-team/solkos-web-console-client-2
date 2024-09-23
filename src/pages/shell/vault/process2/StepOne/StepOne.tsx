@@ -94,7 +94,7 @@ export const StepOne = ({
     if (!opened) {
       SetCoolerDrawer(undefined);
     }
-  }, [opened]);
+  }, [opened]);  
   return (
     <section
       style={{

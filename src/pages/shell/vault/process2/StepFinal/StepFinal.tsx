@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { InsightsVault } from '../../Components/InsightsVault'
 import { VaultLogo } from '../../../../../sampleData/Vault/VaultIcons'
 import { CoolerInterface } from '../../../../../interfaces/CoolerInterface'
 import { Button } from '@mantine/core'
+import { vaultProces2TransformData } from '../../../../../Functions/Vault'
+import { fetchUniversal } from '../../../../../utils/apiUtils'
 
-export const StepFinal = ({ active,coolersToChange } : { active : number,coolersToChange : CoolerInterface[]}) => {
-    console.log(coolersToChange)
+export const StepFinal = ({ active, coolersToChange }: { active: number, coolersToChange: CoolerInterface[] }) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [coolerData, setCoolersData] = useState([])
+    const body = { "coolers": vaultProces2TransformData(coolersToChange) }
+    // console.log(body)
+    const fetchData = async () => {
+        try {
+            const data = await fetchUniversal("vault", body, setIsLoading);
+            setIsLoading(false);
+            setCoolersData(data)
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+    useEffect(() => {
+    }, [])
     return (
         <section style={{ width: '100%', height: '100%', display: active == 3 ? 'flex' : 'none', flexDirection: 'column' }}>
             <section className='section_Vault_Title' >
@@ -16,10 +32,10 @@ export const StepFinal = ({ active,coolersToChange } : { active : number,coolers
                 />
                 <div className='vault_h2_description'>Proceder con los cambios.</div>
             </section>
-            <section style={{width:'100%',height:'30%',display:'flex'}}>
+            <section style={{ width: '100%', height: '30%', display: 'flex' }}>
                 <InsightsVault />
             </section>
-            <section style={{width:'100%',height:'50%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <section style={{ width: '100%', height: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <section className="vault_container_final">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40px" height="40px" viewBox="0 0 24 24" fill="none">
                         <rect width="24" height="24" rx="4" fill="#B2F2BB" />
@@ -30,7 +46,7 @@ export const StepFinal = ({ active,coolersToChange } : { active : number,coolers
                     </div>
                 </section>
             </section>
-            <section style={{width:'100%',height:'10%',display:'flex',justifyContent:'end'}}> <Button style={{color: "#FFFF",background: "#ED5079", }} onClick={()=>{window.location.href = window.location.href}}>Finalizar</Button> </section>
+            <section style={{ width: '100%', height: '10%', display: 'flex', justifyContent: 'end' }}> <Button style={{ color: "#FFFF", background: "#ED5079", }} onClick={() => { window.location.href = window.location.href }}>Finalizar</Button> </section>
         </section>
     )
 }
