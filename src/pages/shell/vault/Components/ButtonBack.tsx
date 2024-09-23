@@ -8,7 +8,7 @@ export const ButtonBack = ({prevStep,active}) => {
       style={{
         color: "#ED5079",
         background: "#FFFF", 
-        visibility : active == 0 ? 'hidden' : 'visible'     
+        visibility : active == 1 ? 'hidden' : 'visible'     
       }}
       onClick={prevStep}
     >

@@ -12,8 +12,7 @@ export const Process2Vault = () => {
   const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));  
   const [coolersToChange,setCoolersToChange] = useState<CoolerInterface[]>([]) 
-  const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
-  // console.log(coolersToChange)
+  const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);  
   
   return (
     <section className='insights_principal_container' style={{height:'90%'}}>
