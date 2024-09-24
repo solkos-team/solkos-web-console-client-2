@@ -1,36 +1,27 @@
 import { FetchOptions } from "../interfaces/ApiInterfaces";
 
-// **********************************************************************************
-// ******************************* PRODUCTIVO ***************************************
-
-// PRODUCTIVO
-// const baseUrl = "https://universal-console-server-b7agk5thba-uc.a.run.app";
-
-// PRODUCTIVO ---- VAULT
-// const baseUrlVault =
-//   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
-
-// **********************************************************************************
-// ******************************* QA ***********************************************
-
-// QA
-const baseUrl =
-  "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
-
-// QA ----- VAULT
-const baseUrlVault =
-  "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
-
-// **********************************************************************************
 // **************************** COOLVIEW ********************************************
 
 const COOLVIEW_PROD = "https://solkos-coolview-2.firebaseapp.com";
-
 const COOLVIEW_QA = "https://solkos-coolview-2-qa.firebaseapp.com/";
 
 export const COOLVIEW_LINK = COOLVIEW_QA;
 
-// **********************************************************************************
+// ***************************** CONSOLA *********************************************
+const CONSOLA_PROD = "https://universal-console-server-b7agk5thba-uc.a.run.app";
+const CONSOLA_QA =
+  "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
+
+const baseUrl = CONSOLA_QA;
+
+// **************************** VAULT ***********************************************
+const VAULT_PROD =
+  "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
+const VAULT_QA =
+  "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
+
+const baseUrlVault = VAULT_QA;
+
 // **********************************************************************************
 
 export const fetchCoolers = async (path, setIsLoading?, id?) => {
