@@ -1,7 +1,7 @@
 import { Drawer, Loader, Skeleton, Tooltip } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { CoolerData, Vault_Markers, } from "../../../../interfaces/CoolerInterface";
-import { fetchUniversalDetails } from "../../../../utils/apiUtils";
+import { fetchUniversalDetails, fetchUniversalDetailsVault } from "../../../../utils/apiUtils";
 import { useSelector } from "react-redux";
 import { backgroundCircle, getBorderStyle, getColor, getStatusColor, } from "../../../../Functions/Vault";
 import MapComponent2 from "../../../../components/map_2";
@@ -32,7 +32,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
   ];
   const fetchData = async (serie?) => {
     try {
-      const data = await fetchUniversalDetails(
+      const data = await fetchUniversalDetailsVault(
         "coolers",
         serie,
         "GET",

@@ -291,6 +291,40 @@ export const fetchUniversalDetails = async (
     throw error;
   }
 };
+export const fetchUniversalDetailsVault = async (
+  componentURL,
+  detailsID?,
+  CRUD?,
+  setIsLoading?
+) => {
+  detailsID == undefined ? (detailsID = "") : detailsID;
+  const url = `${baseUrlVault}/${componentURL}/${detailsID}`;
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${
+      sessionStorage.getItem("Token") ?? localStorage.getItem("Token")
+    }`,
+  };
+  const cuerpo = {
+    method: "GET",
+    headers,
+  };
+  try {
+    const response = await fetch(url, cuerpo);
+
+    if (!response.ok) {
+      throw new Error("Error fetching alerts data");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
 export const fetchDeleteUsers = async (componentURL, detailsID?, CRUD?) => {
   const url = `${baseUrl}/${componentURL}/${Number(detailsID)}`;
   const headers = {
