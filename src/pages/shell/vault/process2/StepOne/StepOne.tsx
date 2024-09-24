@@ -305,7 +305,7 @@ export const StepOne = ({
                   <tr key={index}>
                     <td data-label="Vault">
                       <Switch
-                        checked={cooler.last_marker}
+                        checked={cooler.estatus}
                         onLabel="ON"
                         offLabel="OFF"
                         color="gray"

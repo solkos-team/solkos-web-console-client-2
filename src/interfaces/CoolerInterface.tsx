@@ -47,7 +47,6 @@ export interface CoolerInterface {
     };
   };
   estatus : boolean;
-  last_marker : boolean;
 }
 export interface statusParque {
   name: string;
