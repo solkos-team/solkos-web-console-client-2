@@ -4,16 +4,17 @@ import { VaultLogo } from '../../../../../sampleData/Vault/VaultIcons'
 import { CoolerInterface } from '../../../../../interfaces/CoolerInterface'
 import { Button } from '@mantine/core'
 import { vaultProces2TransformData } from '../../../../../Functions/Vault'
-import { fetchUniversal } from '../../../../../utils/apiUtils'
+import { fetchUniversal, fetchVaul } from '../../../../../utils/apiUtils'
 
 export const StepFinal = ({ active, coolersToChange }: { active: number, coolersToChange: CoolerInterface[] }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [coolerData, setCoolersData] = useState([])
     const body = { "coolers": vaultProces2TransformData(coolersToChange) }
-    // console.log(body)
+    console.log(body)
     const fetchData = async () => {
         try {
-            const data = await fetchUniversal("vault", body, setIsLoading);
+            // const data = await fetchUniversal("vault", body, setIsLoading);
+            const data = await fetchVaul("vault", body, setIsLoading);
             setIsLoading(false);
             setCoolersData(data)
         } catch (error) {
@@ -21,6 +22,7 @@ export const StepFinal = ({ active, coolersToChange }: { active: number, coolers
         }
     };
     useEffect(() => {
+        // fetchData()
     }, [])
     return (
         <section style={{ width: '100%', height: '100%', display: active == 3 ? 'flex' : 'none', flexDirection: 'column' }}>

@@ -256,6 +256,43 @@ export const fetchUniversal = async (
     throw error;
   }
 };
+export const fetchUniversalVault = async (
+  componentURL,
+  data?,
+  setIsLoading?,
+  detailsID?,
+  CRUD?
+) => {
+  const url = `${baseUrlVault}/${componentURL}`;
+  detailsID ? url + "/" + detailsID : url;
+
+  if (setIsLoading) {
+    setIsLoading(!false);
+  }
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${
+      sessionStorage.getItem("Token") ?? localStorage.getItem("Token")
+    }`,
+  };
+  const cuerpo = {
+    method: CRUD ? CRUD : "POST",
+    headers,
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(url, cuerpo);
+
+    if (!response.ok) {
+      throw new Error("Error fetching alerts data");
+    }
+
+    const responseData = await response.json();
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const fetchUniversalDetails = async (
   componentURL,

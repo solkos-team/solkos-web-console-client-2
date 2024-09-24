@@ -8,7 +8,7 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../../Components/DrawerVault";
 import { InsightsVault } from "../../Components/InsightsVault";
-import { fetchUniversal } from "../../../../../utils/apiUtils";
+import { fetchUniversal, fetchUniversalVault } from "../../../../../utils/apiUtils";
 import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
 import { useSelector } from "react-redux";
 import { pathVerify } from "../../../../../Functions/pathVerify";
@@ -48,11 +48,12 @@ export const StepOne = ({
   };
   const fetchData = async () => {
     try {
-      const data = await fetchUniversal("vaultlist", body, setIsLoading);
+      const data = await fetchUniversalVault("vaultlist", body, setIsLoading);
       setIsLoading(false);
       data != null
-        ? setCoolersData((prevData) => [...prevData, ...data])
-        : setCoolersData(undefined);
+         ? setCoolersData((prevData) => [...prevData, ...data])
+         : setCoolersData(undefined);
+      setCoolersData(data)
     } catch (error) {
       console.error("Error:", error);
     }
