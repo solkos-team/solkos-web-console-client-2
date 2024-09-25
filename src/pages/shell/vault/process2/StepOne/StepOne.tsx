@@ -13,6 +13,7 @@ import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
 import { useSelector } from "react-redux";
 import { pathVerify } from "../../../../../Functions/pathVerify";
 import moment from "moment";
+import { vaultProces2RemoveDuplicades } from "../../../../../Functions/Vault";
 
 export const StepOne = ({
   active,
@@ -23,9 +24,7 @@ export const StepOne = ({
   setCoolersToChange,
   coolersData,
   setCoolersData,
-}) => {
-  // const [coolersData, setCoolersData] = useState<CoolerInterface[]>([]);
-  // const [coolersToChange,setCoolersToChange] = useState<CoolerInterface[]>([])
+}) => {  
   const [coolerDrawer, SetCoolerDrawer] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
@@ -440,7 +439,7 @@ export const StepOne = ({
       {/* Seccion botones */}
       <section className="section_Vault_Buttons">
         <ButtonBack prevStep={prevStep} active={active} />
-        <ButtonNext nextStep={nextStep} active={coolersToChange.length == 0 ? false : true} />
+        <ButtonNext nextStep={nextStep} active={vaultProces2RemoveDuplicades(coolersToChange).length == 0 ? false : true} />
       </section>
       <DrawerVault opened={opened} onCLose={close} Serial_ID={coolerDrawer} />
     </section>

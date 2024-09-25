@@ -1,12 +1,20 @@
 import { CoolerData, CoolerInterface } from "../interfaces/CoolerInterface";
 
+
 function vaultProces2RemoveDuplicades(coolers: CoolerInterface[]): CoolerInterface[] {
-  const deviceIdCount = new Map<string, number>();
+  const seenDeviceIds = new Set<string>();
+  const uniqueCoolers: CoolerInterface[] = [];
+
   for (const cooler of coolers) {
-    deviceIdCount.set(cooler.device_id, (deviceIdCount.get(cooler.device_id) || 0) + 1);
+    if (!seenDeviceIds.has(cooler.device_id)) {
+      seenDeviceIds.add(cooler.device_id);
+      uniqueCoolers.push(cooler);
+    }
   }
-  return coolers.filter(cooler => deviceIdCount.get(cooler.device_id) === 1);
+
+  return uniqueCoolers;
 }
+
 const getBorderStyle = (cooler: CoolerData | undefined, dto: string): string => {
   if (!cooler) return "1.5px solid black";  
   const actionable = cooler.cooler.actionable 

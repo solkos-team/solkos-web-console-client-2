@@ -4,6 +4,7 @@ import { StepTwo } from './StepTwo/StepTwo';
 import { Stepper } from '@mantine/core';
 import { StepFinal } from './StepFinal/StepFinal';
 import { CoolerInterface } from '../../../../interfaces/CoolerInterface';
+import { vaultProces2RemoveDuplicades } from '../../../../Functions/Vault';
 
 export const Process2Vault = () => {
   //logica boton
