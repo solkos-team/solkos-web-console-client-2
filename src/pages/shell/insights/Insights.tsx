@@ -31,8 +31,7 @@ export default function Insights() {
   // console.log(totalMaintenanceValue);
   const IndicadoresData = data?.asset_control?.algorithms || [];
   const sum2 = IndicadoresData.reduce((prev, curr) => prev + curr.value, 0);
-  data?.summary.coolers.toLocaleString("es-MX") != null ||
-  data?.summary.coolers.toLocaleString("es-MX") != undefined
+  data?.summary.coolers != null || data?.summary.coolers != undefined
     ? sessionStorage.setItem(
         "TtlCoolers",
         data?.summary.coolers.toLocaleString("es-MX")
@@ -123,7 +122,8 @@ export default function Insights() {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : data?.summary.coolers === undefined ? (
+                  ) : data?.summary.coolers === undefined ||
+                    data?.summary.coolers === null ? (
                     "Sin registro"
                   ) : (
                     data?.summary.coolers.toLocaleString("es-MX")
@@ -137,7 +137,8 @@ export default function Insights() {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : data?.summary.routes === undefined ? (
+                  ) : data?.summary.routes === undefined ||
+                    data?.summary.routes === null ? (
                     "Sin registro"
                   ) : (
                     data?.summary.routes.toLocaleString("es-MX")
@@ -151,7 +152,8 @@ export default function Insights() {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : data?.summary.operative_units === undefined ? (
+                  ) : data?.summary.operative_units === undefined ||
+                    data?.summary.operative_units === null ? (
                     "Sin registro"
                   ) : (
                     data?.summary.operative_units.toLocaleString("es-MX")
@@ -165,7 +167,8 @@ export default function Insights() {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : data?.summary.zones === undefined ? (
+                  ) : data?.summary.zones === undefined ||
+                    data?.summary.zones === null ? (
                     "Sin registro"
                   ) : (
                     data?.summary.zones.toLocaleString("es-MX")
@@ -179,7 +182,8 @@ export default function Insights() {
                     <>
                       <Skeleton height={15} mt={6} width="100%" radius="xs" />
                     </>
-                  ) : data?.summary.regions === undefined ? (
+                  ) : data?.summary.regions === undefined ||
+                    data?.summary.regions === null ? (
                     "Sin registro"
                   ) : (
                     data?.summary.regions.toLocaleString("es-MX")

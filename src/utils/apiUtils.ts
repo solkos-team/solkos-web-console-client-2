@@ -1,12 +1,5 @@
 import { FetchOptions } from "../interfaces/ApiInterfaces";
 
-// **************************** COOLVIEW ********************************************
-
-const COOLVIEW_PROD = "https://solkos-coolview-2.firebaseapp.com";
-const COOLVIEW_QA = "https://solkos-coolview-2-qa.firebaseapp.com/";
-
-export const COOLVIEW_LINK = COOLVIEW_QA;
-
 // ***************************** CONSOLA *********************************************
 const CONSOLA_PROD = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 const CONSOLA_QA =
@@ -22,7 +15,14 @@ const VAULT_QA =
 
 const baseUrlVault = VAULT_QA;
 
-// **********************************************************************************
+// **************************** COOLVIEW ********************************************
+
+const COOLVIEW_PROD = "https://solkos-coolview-2.firebaseapp.com";
+const COOLVIEW_QA = "https://solkos-coolview-2-qa.firebaseapp.com/";
+
+export const COOLVIEW_LINK = COOLVIEW_QA;
+
+// *********************************************************************************
 
 export const fetchCoolers = async (path, setIsLoading?, id?) => {
   if (setIsLoading) {
