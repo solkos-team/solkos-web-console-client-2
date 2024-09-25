@@ -144,7 +144,7 @@ export default function Panel() {
                   /> */}
                   Detalle de Rutas
                 </Tabs.Tab>
-                <Tabs.Tab
+                {/* <Tabs.Tab
                   value="second"
                   style={{ fontSize: ".9vw" }}
                   disabled={!tabsEnabled}
@@ -157,7 +157,7 @@ export default function Panel() {
                   disabled={!tabsEnabled}
                 >
                   KPI's Históricos
-                </Tabs.Tab>
+                </Tabs.Tab> */}
               </Tabs.List>
               {isLoading ? (
                 <div style={{ marginTop: 30 }}>
@@ -191,7 +191,7 @@ export default function Panel() {
                     </>
                   </Tabs.Panel>
 
-                  <Tabs.Panel value="second">
+                  {/* <Tabs.Panel value="second">
                     <>
                       {dto === "KOF" ? (
                         <>
@@ -230,7 +230,7 @@ export default function Panel() {
                         </div>
                       )}
                     </>
-                  </Tabs.Panel>
+                  </Tabs.Panel> */}
                 </div>
               )}
             </Tabs>
