@@ -28,7 +28,8 @@ export const StepFinal = ({
   };
   useEffect(() => {
     active == 3 ? fetchData() : "";
-  }, []);
+  }, [active]);
+  console.log(active)
   return (
     <section
       style={{
