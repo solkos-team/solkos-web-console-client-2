@@ -47,6 +47,7 @@ export const StepOne = ({
     filter_by : tags
   };
   const fetchData = async () => {
+    setVisibilityTable(true)
     try {
       const data = await fetchUniversalVault("vaultlist", body, setIsLoading);
       setIsLoading(false);
@@ -177,7 +178,7 @@ export const StepOne = ({
           />
         </div>
         <section style={{ display: 'flex', flexDirection: 'row', marginTop: '1rem',height:'33%' }}>
-          <Button style={{color: "white",background: "#ED5079"}} disabled={tags.length === 0 ? true : false} onClick={()=>{ tags.length > 0 ? setVisibilityTable(!visibilityTable) :'' }} >Buscar Coolers</Button>
+          <Button style={{color: "white",background: "#ED5079"}} disabled={tags.length === 0 ? true : false} onClick={()=>{ tags.length > 0 ? fetchData() :'' }} >Buscar Coolers</Button>
           <div
             style={{
               display: "flex",
