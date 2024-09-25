@@ -72,4 +72,21 @@ const tagStyles = (value, tagElements) => {
     }
   }
 };
-export { pathVerify, userVerify, validateAndExecute, tagStyles };
+const tagStylesVault = (value, tagElements) => {
+  if (value) {
+    const indexData =
+      value
+        .filter((item) => item.device_id === "NO ENCONTRADO")
+        .map((item) => item.serial_number) ?? null;
+    const tags = tagElements ?? null;
+    if (indexData != null && tags != null) {
+      tags.forEach((tag) => {
+        if (indexData.includes(tag.getAttribute("title"))) {
+          (tag as HTMLElement).style.backgroundColor = "#F93448";
+          (tag as HTMLElement).style.color = "#fff";
+        }
+      });
+    }
+  }
+};
+export { pathVerify, userVerify, validateAndExecute, tagStyles ,tagStylesVault};

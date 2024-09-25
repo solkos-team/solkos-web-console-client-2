@@ -11,7 +11,7 @@ import { InsightsVault } from "../../Components/InsightsVault";
 import { fetchUniversal, fetchUniversalVault } from "../../../../../utils/apiUtils";
 import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
 import { useSelector } from "react-redux";
-import { pathVerify } from "../../../../../Functions/pathVerify";
+import { pathVerify, tagStyles, tagStylesVault } from "../../../../../Functions/pathVerify";
 import moment from "moment";
 import { vaultProces2RemoveDuplicades } from "../../../../../Functions/Vault";
 
@@ -49,6 +49,10 @@ export const StepOne = ({
     setVisibilityTable(true)
     try {
       const data = await fetchUniversalVault("vaultlist", body, setIsLoading);
+      const tagElements = document.querySelectorAll(
+        ".rs-picker-tag-list .rs-tag"
+      );
+      tagStylesVault(data ?? [], tagElements);
       setIsLoading(false);
       data != null
          ? setCoolersData((prevData) => [...prevData, ...data])
@@ -301,7 +305,8 @@ export const StepOne = ({
               {coolersData == null || coolersData == undefined ? (
                 <div style={{ width: "100%" }}>Sin registros</div>
               ) : (
-                coolersData?.map((cooler, index) => (
+                coolersData?.filter((cooler)=> cooler?.device_id !== "NO ENCONTRADO")
+                .map((cooler, index) => (
                   <tr key={index}>
                     <td data-label="Vault">
                       <Switch
