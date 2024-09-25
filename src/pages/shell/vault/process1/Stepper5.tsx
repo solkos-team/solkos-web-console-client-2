@@ -70,11 +70,12 @@ export default function Stepper5() {
     try {
       setIsLoading(true);
       const result = await fetchVaul("vault", setIsLoading, body);
-      // console.log(result);
       console.log("Fetch ejecutado con éxito:", result);
-      setData(result);
+      setData(result); // Almacena los datos en el estado
+      return result; // Devuelve el resultado para poder usarlo
     } catch (error) {
       console.error("Error fetching vault insights:", error);
+      return null; // Retorna null en caso de error
     } finally {
       setIsLoading(false);
     }
@@ -578,11 +579,10 @@ export default function Stepper5() {
               background: "#ED5079",
             }}
             onClick={async () => {
-              await handleFetch(); // Llama a handleFetch
-              if (data) {
-                // Verifica si data contiene resultados exitosos
-                console.log(data);
-                nextStep(); // Solo avanza al siguiente paso si fue exitoso
+              const fetchResult = await handleFetch(); // Espera el resultado del fetch
+              if (fetchResult) {
+                console.log(fetchResult); // Datos recibidos con éxito
+                navigate("/home/Stepper6"); // Redirige si los datos son válidos
               } else {
                 console.error("No se recibió datos válidos después del fetch");
               }
