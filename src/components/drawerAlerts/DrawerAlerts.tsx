@@ -705,7 +705,7 @@ export default function DrawerA({
                   datos={filterCoolersDataDownload(coolersData)}
                   nombre={"Enfriadores_" + selectedAlgorithm}
                   body={body}
-                  component="coolers"
+                  component="alerts_drawer"
                 />
               </div>
             </div>

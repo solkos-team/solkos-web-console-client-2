@@ -73,7 +73,7 @@ export const ExportToExcel = (props) => {
       page_number: -1,
     };
     try {
-      const data = await fetchUniversalTables("alerts_drawer", body, setLoad);
+      const data = await fetchUniversalTables(props.component, body, setLoad);
       const URL_EXCEL_FILE = data.headers.get("pagination-url");
       const TOTAL_EXCEL_FILE = data.headers.get("pagination-count");
       setInfo(URL_EXCEL_FILE ? URL_EXCEL_FILE : "");
