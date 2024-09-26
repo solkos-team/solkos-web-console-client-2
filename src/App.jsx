@@ -225,12 +225,12 @@ const routesVault = [
     initiallyOpened: true,
     links: [
       {
-        label: "Procedimiento 1",
+        label: "Vault por excel",
         link: "/home/Process1Vault",
         icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
       },
       {
-        label: "Procedimiento 2",
+        label: "Gestión manual",
         link: "/home/Process2Vault",
         icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
       },
@@ -348,12 +348,12 @@ function App() {
               icon: <img src={"../../sampleData/insig.svg"} alt="cooler"></img>,
             },
             {
-              label: "Procedimiento 1",
+              label: "Vault por excel",
               link: "/home/Process1Vault",
               icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
             },
             {
-              label: "Procedimiento 2",
+              label: "Gestión manual",
               link: "/home/Process2Vault",
               icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
             },
@@ -703,7 +703,10 @@ function App() {
       </>
     ) : Name === "Mayra Barrón Reséndiz" ||
       Name === "Jose Ivan Perez Ugalde" ||
-      Name === "Alberto Alvarez" ? (
+      Name === "Alberto Alvarez" ||
+      Name === "Ruben Valenzuela Medel" ||
+      Name === "Flavio Rocha Serrano" ||
+      Name === "Jesus Angel Soria Lopez" ? (
       <>
         {routesVault.map((item) => (
           <div key={item.label}>
