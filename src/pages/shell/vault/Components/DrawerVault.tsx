@@ -48,7 +48,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
     if (Serial_ID != undefined) {
       fetchData(Serial_ID);
     }
-  }, [Serial_ID]); 
+  }, [Serial_ID]);   
   return (
     <Drawer
       opened={opened}
@@ -308,12 +308,20 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
           </div>
           <div className="vault_drawer_registro_stepper">            
               {
-                cooler?.vault_markers == null || cooler.vault_markers == undefined 
-                ? <h1 style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}>Sin registros</h1>
+                isLoading == true  ? <Skeleton height={10} mt={6} width="100%" style={{height:'100%'}}  />
+                : cooler?.vault_markers == null || cooler.vault_markers == undefined 
+                ? <h1 style={{ fontSize: "0.75rem", color: "var(--gray-6, #868e96)" }}>Sin registros</h1>                
                 :
                   (<Carousel mx="auto" withIndicators style={{width:'100%',height:'100%'}} height='100%' slideSize="33.333333%" slideGap="md" align={cooler?.vault_markers.length == 1 ? "center" : "start"} controlSize={14}>
                   {
-                    cooler.vault_markers.map((registro, index) => (
+                    cooler.vault_markers
+                    .sort((a, b) => {
+                      const dateA = new Date(a.date_time);
+                      const dateB = new Date(b.date_time);
+                      // @ts-ignore
+                      return dateB - dateA
+                    })
+                    .map((registro, index) => (
                       <Carousel.Slide key={index}>
                         <section style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
                           <div style={{ width: '100%', height: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: "var(--gray-6, #868E96)", }}>{new Date(registro.date_time).getFullYear()}</div>
