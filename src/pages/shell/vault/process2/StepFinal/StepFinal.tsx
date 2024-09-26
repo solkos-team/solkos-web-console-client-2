@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { InsightsVault } from "../../Components/InsightsVault";
 import { VaultLogo } from "../../../../../sampleData/Vault/VaultIcons";
 import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
@@ -6,13 +6,7 @@ import { Button, Loader, Skeleton } from "@mantine/core";
 import { vaultProces2TransformData } from "../../../../../Functions/Vault";
 import { fetchUniversal, fetchVaul } from "../../../../../utils/apiUtils";
 
-export const StepFinal = ({
-    active,
-    coolersToChange,
-}: {
-    active: number;
-    coolersToChange: CoolerInterface[];
-}) => {
+export const StepFinal = ({active,coolersToChange,}: {active: number;coolersToChange: CoolerInterface[];}) => {
     const [isLoading, setIsLoading] = useState(true);
     const [coolerData, setCoolersData] = useState([]);
     const [error,setError] = useState<string | null>()

@@ -8,17 +8,10 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../../Components/DrawerVault";
 import { InsightsVault } from "../../Components/InsightsVault";
-import {
-  fetchUniversal,
-  fetchUniversalVault,
-} from "../../../../../utils/apiUtils";
+import {fetchUniversal,fetchUniversalVault} from "../../../../../utils/apiUtils";
 import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
 import { useSelector } from "react-redux";
-import {
-  pathVerify,
-  tagStyles,
-  tagStylesVault,
-} from "../../../../../Functions/pathVerify";
+import {pathVerify,tagStyles,tagStylesVault,} from "../../../../../Functions/pathVerify";
 import moment from "moment";
 import { vaultProces2RemoveDuplicades } from "../../../../../Functions/Vault";
 
@@ -40,6 +33,7 @@ export const StepOne = ({
   const [pageNumber, setPageNumber] = useState(1);
   const dto = useSelector((state: any) => state.organization);
   const dt = useSelector((state: any) => state.works);
+  const coolerDataRef = useRef<CoolerInterface[]>([])
 
   const handleTagChange = (newTags) => {
     setTags(newTags);
@@ -59,6 +53,7 @@ export const StepOne = ({
       const tagElements = document.querySelectorAll(
         ".rs-picker-tag-list .rs-tag"
       );
+      coolerDataRef.current = [...coolerDataRef.current,...data]
       tagStylesVault(data ?? [], tagElements);
       setIsLoading(false);
       data != null
@@ -93,20 +88,35 @@ export const StepOne = ({
       }
     };
   }, []);
-  const handleSwitchChange = (index: number, data: any) => {
-    setCoolersToChange((prevData) => [...prevData, data]);
+
+  const handleSwitchChange = (index: number, cooler: any) => {
+    const newStatus = !cooler.estatus
     setCoolersData((prevData) => {
-      const updatedData = [...prevData];
-      updatedData[index].estatus = !updatedData[index].estatus;
+      const updatedData = [...prevData]
+      updatedData[index].estatus = newStatus
       return updatedData;
+    })
+    setCoolersToChange((prevData) => {
+      const exists = prevData.find(c => c.device_id === cooler.device_id);   
+      if (newStatus) {
+        if (!exists) {
+          return [...prevData, { ...cooler, estatus: newStatus }]
+        }
+      } else {
+        if (exists) {
+          return prevData.filter(c => c.device_id !== cooler.device_id)
+        }
+      }
+      return prevData
     });
   };
-
+  
   useEffect(() => {
     if (!opened) {
       SetCoolerDrawer(undefined);
     }
   }, [opened]);
+
   return (
     <section
       style={{
