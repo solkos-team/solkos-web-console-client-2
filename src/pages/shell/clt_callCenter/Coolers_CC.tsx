@@ -13,6 +13,7 @@ import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import moment from "moment";
 import "moment/locale/es";
 import { miniSerializeError } from "@reduxjs/toolkit";
+import { ExportToExcel } from "../../../components/exportExcel/ExportToExcel";
 import { tagStyles } from "../../../Functions/pathVerify";
 
 moment.locale("es", {
@@ -123,7 +124,7 @@ export default function CoolersCC() {
     if (showTable) {
       fetchData();
     }
-  }, [showTable, currentPage, datosPorPagina, changeAsc, dto]);
+  }, [showTable, currentPage, datosPorPagina, changeAsc, dto, dt]);
 
   useEffect(() => {
     const storedTags = localStorage.getItem("searchTags");
@@ -159,7 +160,7 @@ export default function CoolersCC() {
           <td data-label="# Enfriadores">
             <Skeleton height={20} radius="sm" width="90%" />
           </td>
-          <td data-label="Cliente">
+          <td data-label="# Enfriadores">
             <Skeleton height={20} radius="sm" width="90%" />
           </td>
           <td data-label="Última visita">
@@ -181,11 +182,10 @@ export default function CoolersCC() {
   };
 
   useEffect(() => {
-    if (dto !== "CALL CENTER") {
-      navigate("/home");
+    if (dto === "CALL CENTER") {
+      navigate("/home/clt_callCenter");
     }
   }, [navigate, dto]);
-
   return (
     <div>
       {/* <PageFilter status={isLoading} /> */}
@@ -243,12 +243,7 @@ export default function CoolersCC() {
             marginLeft: "-1.5%",
           }}
         >
-          <div
-            style={{
-              position: "relative",
-              width: "60%",
-            }}
-          >
+          <div className="clt_search">
             <TagInput
               value={tags}
               trigger={["Enter", "Space", "Comma"]}
@@ -330,16 +325,22 @@ export default function CoolersCC() {
 
         {showTable && (
           <>
-            <section
+            <div
               style={{
-                padding: "1rem 0rem",
-                marginLeft: -55,
-                width: "100%",
-                height: "100%",
-                overflowY: "auto",
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "98%",
               }}
             >
-              <table>
+              <ExportToExcel
+                datos={coolersData ?? []}
+                nombre={"Cooler Life Tracking"}
+                body={body}
+                component="coolers"
+              />
+            </div>
+            <section className="clt_table_container">
+              <table className="table_responsive">
                 <thead>
                   <tr>
                     <th scope="col">Estatus</th>
@@ -770,7 +771,7 @@ export default function CoolersCC() {
                             ) : (
                               <div>
                                 <Link
-                                  to={`/home/clt_callCenter/${cooler.serial_number}`}
+                                  to={`/home/clt/${cooler.serial_number}`}
                                   target="_blank"
                                 >
                                   <div
