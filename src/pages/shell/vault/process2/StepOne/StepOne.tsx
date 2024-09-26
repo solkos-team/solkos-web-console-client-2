@@ -8,10 +8,17 @@ import { IconArrowRight } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerVault } from "../../Components/DrawerVault";
 import { InsightsVault } from "../../Components/InsightsVault";
-import { fetchUniversal, fetchUniversalVault } from "../../../../../utils/apiUtils";
+import {
+  fetchUniversal,
+  fetchUniversalVault,
+} from "../../../../../utils/apiUtils";
 import { CoolerInterface } from "../../../../../interfaces/CoolerInterface";
 import { useSelector } from "react-redux";
-import { pathVerify, tagStyles, tagStylesVault } from "../../../../../Functions/pathVerify";
+import {
+  pathVerify,
+  tagStyles,
+  tagStylesVault,
+} from "../../../../../Functions/pathVerify";
 import moment from "moment";
 import { vaultProces2RemoveDuplicades } from "../../../../../Functions/Vault";
 
@@ -24,7 +31,7 @@ export const StepOne = ({
   setCoolersToChange,
   coolersData,
   setCoolersData,
-}) => {  
+}) => {
   const [coolerDrawer, SetCoolerDrawer] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
@@ -43,10 +50,10 @@ export const StepOne = ({
     path: pathVerify(),
     page_number: pageNumber,
     page_size: 25,
-    filter_by : tags
+    filter_by: tags,
   };
   const fetchData = async () => {
-    setVisibilityTable(true)
+    setVisibilityTable(true);
     try {
       const data = await fetchUniversalVault("vaultlist", body, setIsLoading);
       const tagElements = document.querySelectorAll(
@@ -55,9 +62,9 @@ export const StepOne = ({
       tagStylesVault(data ?? [], tagElements);
       setIsLoading(false);
       data != null
-         ? setCoolersData((prevData) => [...prevData, ...data])
-         : setCoolersData(undefined);
-      setCoolersData(data)
+        ? setCoolersData((prevData) => [...prevData, ...data])
+        : setCoolersData(undefined);
+      setCoolersData(data);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -99,7 +106,7 @@ export const StepOne = ({
     if (!opened) {
       SetCoolerDrawer(undefined);
     }
-  }, [opened]);  
+  }, [opened]);
   return (
     <section
       style={{
@@ -108,25 +115,42 @@ export const StepOne = ({
         display: active <= 1 ? "flex" : "none",
         flexDirection: "column",
         alignItems: "center",
-        gap:'0.5rem'
+        gap: "0.5rem",
       }}
     >
       {/* Seccion RoadMap */}
-      <section style={{width:'100%',height:'28%',background:'',display:'flex',alignItems:'center'}}>
-      {visibilityTable == false ? (
-        <section style={{ width: "100%", display: "flex",height:'100%' }}>
-          <InsightsVault activateSkeleton={true} />
-        </section>
-      ) : (
-        <section style={{width:'100%',height:'max-content',background:'',display:'flex',alignItems:'center',justifyContent:'center'}}>
-          <RoadMap
-            active={active}
-            setActive={setActive}
-            nextStep={nextStep}
-            prevStep={prevStep}
-          />
-        </section>
-      )}
+      <section
+        style={{
+          width: "100%",
+          height: "28%",
+          background: "",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        {visibilityTable == false ? (
+          <section style={{ width: "100%", display: "flex", height: "100%" }}>
+            <InsightsVault activateSkeleton={true} />
+          </section>
+        ) : (
+          <section
+            style={{
+              width: "100%",
+              height: "max-content",
+              background: "",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <RoadMap
+              active={active}
+              setActive={setActive}
+              nextStep={nextStep}
+              prevStep={prevStep}
+            />
+          </section>
+        )}
       </section>
       {/* Seccion Buscador */}
       <section
@@ -137,15 +161,15 @@ export const StepOne = ({
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap:'0.5rem'
+          gap: "0.5rem",
         }}
       >
         <img
           src={"../../sampleData/logovault.svg"}
           alt="Descripción de la imagen"
-          style={{ width: "5rem", height: "33%",marginTop:'-0.25rem' }}
+          style={{ width: "5rem", height: "33%", marginTop: "-0.25rem" }}
         />
-        <div className="vault_tag" style={{height:'33%'}}>
+        <div className="vault_tag" style={{ height: "33%" }}>
           <TagInput
             value={tags}
             trigger={["Enter", "Space", "Comma"]}
@@ -180,8 +204,23 @@ export const StepOne = ({
             }}
           />
         </div>
-        <section style={{ display: 'flex', flexDirection: 'row', marginTop: '1rem',height:'33%' }}>
-          <Button style={{color: "white",background: "#ED5079"}} disabled={tags.length === 0 ? true : false} onClick={()=>{ tags.length > 0 ? fetchData() :'' }} >Buscar Coolers</Button>
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "1rem",
+            height: "33%",
+          }}
+        >
+          <Button
+            style={{ color: "white", background: "#ED5079" }}
+            disabled={tags.length === 0 ? true : false}
+            onClick={() => {
+              tags.length > 0 ? fetchData() : "";
+            }}
+          >
+            Buscar Coolers
+          </Button>
           <div
             style={{
               display: "flex",
@@ -215,6 +254,7 @@ export const StepOne = ({
       <section
         ref={containerRef}
         style={{
+          // background: "pink",
           height: "45vh", // 50% de la altura del viewport
           overflowY: "auto", // Agrega una barra de desplazamiento vertical si es necesario
           scrollbarWidth: "thin",
@@ -229,6 +269,7 @@ export const StepOne = ({
               width: "100%",
               borderCollapse: "collapse",
               tableLayout: "fixed",
+              height: "auto",
             }}
           >
             <thead>
@@ -305,137 +346,138 @@ export const StepOne = ({
               {coolersData == null || coolersData == undefined ? (
                 <div style={{ width: "100%" }}>Sin registros</div>
               ) : (
-                coolersData?.filter((cooler)=> cooler?.device_id !== "NO ENCONTRADO")
-                .map((cooler, index) => (
-                  <tr key={index}>
-                    <td data-label="Vault">
-                      <Switch
-                        checked={cooler.estatus}
-                        onLabel="ON"
-                        offLabel="OFF"
-                        color="gray"
-                        onChange={() => handleSwitchChange(index, cooler)}
-                      />
-                    </td>
-                    <td data-label="Serie">
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton height={20} radius="sm" width="90%" />
-                        </>
-                      ) : cooler.serial_number == undefined ||
-                        cooler.serial_number == "" ? (
-                        <div
-                          style={{
-                            fontSize: "0.75rem",
-                            color: "var(--gray-6, #868E96)",
-                            fontWeight: "400",
-                          }}
-                        >
-                          {"Sin registro"}
-                        </div>
-                      ) : (
-                        <>
-                          <div
-                            style={{
-                              fontSize: "0.75rem",
-                              color: "var(--gray-6, #868E96)",
-                              fontWeight: "400",
-                            }}
-                          >
-                            {cooler.serial_number}
-                          </div>
-                        </>
-                      )}
-                    </td>
-                    <td data-label="Modelo">
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton height={20} radius="sm" width="90%" />
-                        </>
-                      ) : cooler.model_id == undefined ||
-                        cooler.model_id == "" ? (
-                        <div
-                          style={{
-                            fontSize: "0.75rem",
-                            color: "var(--gray-6, #868E96)",
-                            fontWeight: "400",
-                          }}
-                        >
-                          {"Sin registro"}
-                        </div>
-                      ) : (
-                        <>
-                          <div
-                            style={{
-                              fontSize: "0.75rem",
-                              color: "var(--gray-6, #868E96)",
-                              fontWeight: "400",
-                            }}
-                          >
-                            {cooler.model_id}
-                          </div>
-                        </>
-                      )}
-                    </td>
-                    <td data-label="Última Visita">
-                      {isLoading == true ? (
-                        <>
-                          <Skeleton height={20} radius="sm" width="90%" />
-                        </>
-                      ) : cooler.last_read == undefined ||
-                        cooler.last_read == "" ? (
-                        <div
-                          style={{
-                            fontSize: "0.75rem",
-                            color: "var(--gray-6, #868E96)",
-                            fontWeight: "400",
-                          }}
-                        >
-                          {"Sin registro"}
-                        </div>
-                      ) : (
-                        <>
-                          <div
-                            style={{
-                              fontSize: "0.75rem",
-                              color: "var(--gray-6, #868E96)",
-                              fontWeight: "400",
-                            }}
-                          >
-                            {moment(new Date(cooler?.last_read)).format(
-                              "DD/MM/YYYY"
-                            )}
-                          </div>
-                        </>
-                      )}
-                    </td>
-                    <td data-label="Prioridad">Prioridad</td>
-                    <td data-label="Acciones">
-                      <div
-                        style={{
-                          color: "var(--blue-6, #2393F4)",
-                          fontSize: "0.8rem",
-                          fontStyle: "normal",
-                          fontWeight: 400,
-                          display: "flex",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => {
-                          open();
-                          SetCoolerDrawer(cooler.serial_number);
-                        }}
-                      >
-                        Ver más
-                        <IconArrowRight
-                          style={{
-                            color: "#3E83FF",
-                            width: "1.0rem",
-                          }}
+                coolersData
+                  ?.filter((cooler) => cooler?.device_id !== "NO ENCONTRADO")
+                  .map((cooler, index) => (
+                    <tr key={index}>
+                      <td data-label="Vault">
+                        <Switch
+                          checked={cooler.estatus}
+                          onLabel="ON"
+                          offLabel="OFF"
+                          color="gray"
+                          onChange={() => handleSwitchChange(index, cooler)}
                         />
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                      </td>
+                      <td data-label="Serie">
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.serial_number == undefined ||
+                          cooler.serial_number == "" ? (
+                          <div
+                            style={{
+                              fontSize: "0.75rem",
+                              color: "var(--gray-6, #868E96)",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {"Sin registro"}
+                          </div>
+                        ) : (
+                          <>
+                            <div
+                              style={{
+                                fontSize: "0.75rem",
+                                color: "var(--gray-6, #868E96)",
+                                fontWeight: "400",
+                              }}
+                            >
+                              {cooler.serial_number}
+                            </div>
+                          </>
+                        )}
+                      </td>
+                      <td data-label="Modelo">
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.model_id == undefined ||
+                          cooler.model_id == "" ? (
+                          <div
+                            style={{
+                              fontSize: "0.75rem",
+                              color: "var(--gray-6, #868E96)",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {"Sin registro"}
+                          </div>
+                        ) : (
+                          <>
+                            <div
+                              style={{
+                                fontSize: "0.75rem",
+                                color: "var(--gray-6, #868E96)",
+                                fontWeight: "400",
+                              }}
+                            >
+                              {cooler.model_id}
+                            </div>
+                          </>
+                        )}
+                      </td>
+                      <td data-label="Última Visita">
+                        {isLoading == true ? (
+                          <>
+                            <Skeleton height={20} radius="sm" width="90%" />
+                          </>
+                        ) : cooler.last_read == undefined ||
+                          cooler.last_read == "" ? (
+                          <div
+                            style={{
+                              fontSize: "0.75rem",
+                              color: "var(--gray-6, #868E96)",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {"Sin registro"}
+                          </div>
+                        ) : (
+                          <>
+                            <div
+                              style={{
+                                fontSize: "0.75rem",
+                                color: "var(--gray-6, #868E96)",
+                                fontWeight: "400",
+                              }}
+                            >
+                              {moment(new Date(cooler?.last_read)).format(
+                                "DD/MM/YYYY"
+                              )}
+                            </div>
+                          </>
+                        )}
+                      </td>
+                      <td data-label="Prioridad">Prioridad</td>
+                      <td data-label="Acciones">
+                        <div
+                          style={{
+                            color: "var(--blue-6, #2393F4)",
+                            fontSize: "0.8rem",
+                            fontStyle: "normal",
+                            fontWeight: 400,
+                            display: "flex",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            open();
+                            SetCoolerDrawer(cooler.serial_number);
+                          }}
+                        >
+                          Ver más
+                          <IconArrowRight
+                            style={{
+                              color: "#3E83FF",
+                              width: "1.0rem",
+                            }}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))
               )}
             </tbody>
           </table>
@@ -444,7 +486,14 @@ export const StepOne = ({
       {/* Seccion botones */}
       <section className="section_Vault_Buttons">
         <ButtonBack prevStep={prevStep} active={active} />
-        <ButtonNext nextStep={nextStep} active={vaultProces2RemoveDuplicades(coolersToChange).length == 0 ? false : true} />
+        <ButtonNext
+          nextStep={nextStep}
+          active={
+            vaultProces2RemoveDuplicades(coolersToChange).length == 0
+              ? false
+              : true
+          }
+        />
       </section>
       <DrawerVault opened={opened} onCLose={close} Serial_ID={coolerDrawer} />
     </section>
