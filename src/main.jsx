@@ -48,7 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Router>
             <Routes>
               <Route path="" element={<Login />}></Route>
-              <Route path="/politicas" element={<Politicas />} />
+              <Route path="/politicas-de-privacidad" element={<Politicas />} />
               <Route path="/home" element={<App />}>
                 <Route index path="/home" element={<Insights />} />
                 {/* Insights */}
