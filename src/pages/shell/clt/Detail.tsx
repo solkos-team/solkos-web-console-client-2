@@ -171,7 +171,7 @@ export default function CoolerDetail() {
       }
     }
   }, [isLoading, dateTelemetri]);
-
+  console.log(coolersData)
   return (
     <>
       {localStorage.getItem("ORG") == "CALL CENTER" ? (
@@ -213,6 +213,7 @@ export default function CoolerDetail() {
                           currentTarget.src =
                             "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
                         }}
+                        style={{opacity: coolersData?.vault_markers != null ?  coolersData?.vault_markers[coolersData.vault_markers.length-1].flag == false ? '' : '0.2' : ''}}
                       />
                     )}
                   </div>

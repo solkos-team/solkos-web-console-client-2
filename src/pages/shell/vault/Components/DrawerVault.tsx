@@ -115,6 +115,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                       currentTarget.src =
                         "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
                     }}
+                    style={{opacity: cooler?.vault_markers != null ?  cooler?.vault_markers[cooler.vault_markers.length-1].flag == false ? '' : '0.2' : ''}}
                   />
                 )}
               </section>
