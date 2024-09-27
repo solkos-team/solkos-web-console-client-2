@@ -38,6 +38,7 @@ import Stepper4 from "./pages/shell/vault/process1/Stepper4.tsx";
 import Stepper5 from "./pages/shell/vault/process1/Stepper5.tsx";
 import Stepper6 from "./pages/shell/vault/process1/Stepper6.tsx";
 import Stepper4_1 from "./pages/shell/vault/process1/Stepper4_1.tsx";
+import Politicas from "./pages/shell/politicas/politicas.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -47,6 +48,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Router>
             <Routes>
               <Route path="" element={<Login />}></Route>
+              <Route path="/politicas" element={<Politicas />} />
               <Route path="/home" element={<App />}>
                 <Route index path="/home" element={<Insights />} />
                 {/* Insights */}
