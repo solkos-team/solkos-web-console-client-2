@@ -279,7 +279,7 @@ export const StepOne = ({
               width: "100%",
               borderCollapse: "collapse",
               tableLayout: "fixed",
-              height: "auto",
+              height: "max-content",
             }}
           >
             <thead>
@@ -327,18 +327,7 @@ export const StepOne = ({
                   }}
                 >
                   Última Visita
-                </th>
-                <th
-                  scope="col"
-                  style={{
-                    position: "sticky",
-                    top: "0",
-                    backgroundColor: "white",
-                    zIndex: "1",
-                  }}
-                >
-                  Prioridad
-                </th>
+                </th>                
                 <th
                   scope="col"
                   style={{
@@ -460,8 +449,7 @@ export const StepOne = ({
                             </div>
                           </>
                         )}
-                      </td>
-                      <td data-label="Prioridad">Prioridad</td>
+                      </td>                      
                       <td data-label="Acciones">
                         <div
                           style={{
