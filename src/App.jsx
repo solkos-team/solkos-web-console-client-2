@@ -221,18 +221,35 @@ const routesVault = [
   },
   {
     label: "Vault",
-    icon: <img src={"../../sampleData/insights.svg"} />,
+    icon: (
+      <img
+        src={"../../sampleData/vault.png"}
+        style={{ height: "1.3rem", width: "1.2rem" }}
+      />
+    ),
     initiallyOpened: true,
     links: [
       {
         label: "Vault por excel",
         link: "/home/Process1Vault",
-        icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+        icon: (
+          <img
+            src={"../../sampleData/table-import.svg"}
+            alt="cooler"
+            style={{ height: "1rem" }}
+          ></img>
+        ),
       },
       {
         label: "Gestión manual",
         link: "/home/Process2Vault",
-        icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
+        icon: (
+          <img
+            src={"../../sampleData/row-insert.svg"}
+            alt="cooler"
+            style={{ height: "1rem" }}
+          ></img>
+        ),
       },
     ],
   },
@@ -339,7 +356,7 @@ function App() {
         ...prevRoutes,
         {
           label: "Vault",
-          icon: <img src={"../../sampleData/insights.svg"} />,
+          icon: <img src={"../../sampleData/row-insert.svg"} />,
           initiallyOpened: true,
           links: [
             {
@@ -350,12 +367,24 @@ function App() {
             {
               label: "Vault por excel",
               link: "/home/Process1Vault",
-              icon: <img src={"../../sampleData/ind.svg"} alt="cooler"></img>,
+              icon: (
+                <img
+                  src={"../../sampleData/table-import.svg"}
+                  alt="cooler"
+                  style={{ height: "1rem" }}
+                ></img>
+              ),
             },
             {
               label: "Gestión manual",
               link: "/home/Process2Vault",
-              icon: <img src={"../../sampleData/fails.svg"} alt="cooler"></img>,
+              icon: (
+                <img
+                  src={"../../sampleData/row-insert.svg"}
+                  alt="cooler"
+                  style={{ height: "1rem" }}
+                ></img>
+              ),
             },
           ],
         },
