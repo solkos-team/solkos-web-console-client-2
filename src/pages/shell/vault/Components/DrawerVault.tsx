@@ -14,6 +14,7 @@ import {
   getBorderStyle,
   getColor,
   getStatusColor,
+  getVaultDate,
 } from "../../../../Functions/Vault";
 import MapComponent2 from "../../../../components/map_2";
 import MapComponent from "../../../../components/map";
@@ -63,6 +64,8 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
       fetchData(Serial_ID);
     }
   }, [Serial_ID]);
+  
+
   return (
     <Drawer
       opened={opened}
@@ -115,7 +118,7 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                       currentTarget.src =
                         "https://storage.googleapis.com/negocon-renders/default/default_cooler.webp";
                     }}
-                    style={{opacity: cooler?.vault_markers != null ?  cooler?.vault_markers[cooler.vault_markers.length-1].flag == false ? '' : '0.2' : ''}}
+                    style={{ opacity: cooler?.vault_markers != null ? getVaultDate(cooler?.vault_markers).flag == false ? '' : '0.2' : '' }}
                   />
                 )}
               </section>
@@ -210,8 +213,8 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                         }}
                       ></div>
                       {cooler?.cooler.status === "" ||
-                      cooler?.cooler.status == null ||
-                      cooler?.cooler.status == undefined
+                        cooler?.cooler.status == null ||
+                        cooler?.cooler.status == undefined
                         ? "Sin registro"
                         : cooler?.cooler.status}
                     </div>
@@ -257,8 +260,8 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                         {cooler?.cooler.last_read === null || undefined || ""
                           ? "Sin registro"
                           : moment(new Date(String(cooler?.cooler.last_read)))
-                              .locale("es")
-                              .format("dddd D MMMM, YYYY")}
+                            .locale("es")
+                            .format("dddd D MMMM, YYYY")}
                       </div>
                     </>
                   )}
@@ -406,9 +409,8 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                             justifyContent: "center",
                             color: "var(--gray-6, #868E96)",
                           }}
-                        >{`${new Date(registro.date_time).getDate()} ${
-                          nombresMeses[new Date(registro.date_time).getMonth()]
-                        }`}</div>
+                        >{`${new Date(registro.date_time).getDate()} ${nombresMeses[new Date(registro.date_time).getMonth()]
+                          }`}</div>
                       </section>
                     </Carousel.Slide>
                   ))}
@@ -449,14 +451,12 @@ export const DrawerVault = ({ opened, onCLose, Serial_ID }) => {
                 {isLoading == true ? (
                   <Skeleton height={8} mt={6} width="70%" radius="xl" />
                 ) : (
-                  `${
-                    cooler?.cooler.outlet_name === "" || null || undefined
-                      ? "Sin registro"
-                      : cooler?.cooler.outlet_name
-                  } / ${
-                    cooler?.cooler.outlet_id === "" || null || undefined
-                      ? "Sin registro"
-                      : cooler?.cooler.outlet_id
+                  `${cooler?.cooler.outlet_name === "" || null || undefined
+                    ? "Sin registro"
+                    : cooler?.cooler.outlet_name
+                  } / ${cooler?.cooler.outlet_id === "" || null || undefined
+                    ? "Sin registro"
+                    : cooler?.cooler.outlet_id
                   }`
                 )}
               </div>

@@ -196,4 +196,12 @@ const vaultProces2TransformData = (array) => {
       estatus: item.estatus
   }));
 }
-export { vaultProces2RemoveDuplicades,getBorderStyle,getColor,getStatusColor,backgroundCircle ,getBorderStyle2,getColor2,vaultProces2TransformData}
+
+const getVaultDate = (records: any | null) => {
+  if (records.length === 0) return null;
+
+  return records.reduce((latest, current) => {
+    return new Date(current.date_time) > new Date(latest.date_time) ? current : latest;
+  });
+};
+export { vaultProces2RemoveDuplicades,getBorderStyle,getColor,getStatusColor,backgroundCircle ,getBorderStyle2,getColor2,vaultProces2TransformData,getVaultDate}
