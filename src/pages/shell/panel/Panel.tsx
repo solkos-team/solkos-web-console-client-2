@@ -92,6 +92,7 @@ export default function Panel() {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
   };
+
   return (
     <section>
       <PageFilter />
