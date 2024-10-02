@@ -170,6 +170,40 @@ const routes = [
     label: "Colaboradores",
     icon: <img src={"../../sampleData/user.svg"} />,
   },
+  {
+    label: "Vault",
+    icon: (
+      <img
+        src={"../../sampleData/vault.png"}
+        style={{ height: "1.3rem", width: "1.2rem" }}
+      />
+    ),
+    initiallyOpened: true,
+    links: [
+      {
+        label: "Vault por excel",
+        link: "/home/Process1Vault",
+        icon: (
+          <img
+            src={"../../sampleData/table-import.svg"}
+            alt="cooler"
+            style={{ height: "1rem" }}
+          ></img>
+        ),
+      },
+      {
+        label: "Gestión manual",
+        link: "/home/Process2Vault",
+        icon: (
+          <img
+            src={"../../sampleData/row-insert.svg"}
+            alt="cooler"
+            style={{ height: "1rem" }}
+          ></img>
+        ),
+      },
+    ],
+  },
 ];
 const routesVault = [
   {
@@ -730,195 +764,196 @@ function App() {
           </div>
         ))}
       </>
-    ) : Name === "Mayra Barrón Reséndiz" ||
-      Name === "Jose Ivan Perez Ugalde" ||
-      Name === "Alberto Alvarez" ||
-      Name === "Ruben Valenzuela Medel" ||
-      Name === "Flavio Rocha Serrano" ||
-      Name === "Jesus Angel Soria Lopez" ? (
-      <>
-        {routesVault.map((item) => (
-          <div key={item.label}>
-            {item.label === "Cooler Insights" && item.links ? (
-              <div style={{ whiteSpace: "nowrap" }}>
-                <Tooltip label={item.label}>
-                  <div
-                    onClick={() => {
-                      setCoolerInsightsOpen(!coolerInsightsOpen);
-                    }}
-                    className={cx(classes.link, {
-                      [classes.linkActive]: coolerInsightsOpen,
-                    })}
-                  >
-                    {item.icon}
-                    <span
-                      style={{
-                        marginLeft: 10,
-                        display: opened2 === true ? "none" : "",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                    {coolerInsightsOpen ? (
-                      <img
-                        src={a1}
-                        style={{
-                          marginLeft:
-                            opened2 === true
-                              ? 1
-                              : opened2 == false && menuResponsive == true
-                              ? 240
-                              : 40,
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={a2}
-                        style={{
-                          marginLeft:
-                            opened2 === true
-                              ? 1
-                              : opened2 == false && menuResponsive == true
-                              ? 240
-                              : 40,
-                        }}
-                      />
-                    )}
-                  </div>
-                </Tooltip>
-                {coolerInsightsOpen && (
-                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
-                    {item.links.map((option) => (
-                      <NavLink
-                        to={option.link}
-                        className={classes.link}
-                        key={option.label}
-                        activate={true.toString()} // Convert boolean to string
-                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
-                      >
-                        <Tooltip label={option.label}>
-                          <div>
-                            {option.icon && option.icon}{" "}
-                            <span
-                              style={{
-                                marginLeft: 10,
-                                display: opened2 === true ? "none" : "",
-                              }}
-                            >
-                              {option.label}
-                            </span>
-                          </div>
-                        </Tooltip>
-                      </NavLink>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : item.label === "Vault" && item.links ? (
-              <div style={{ whiteSpace: "nowrap" }}>
-                <Tooltip label={item.label}>
-                  <div
-                    onClick={() => {
-                      setVaultOpen(!vaultOpen);
-                    }}
-                    className={cx(classes.link, {
-                      [classes.linkActive]: vaultOpen,
-                    })}
-                  >
-                    {item.icon}
-                    <span
-                      style={{
-                        marginLeft: 10,
-                        display: opened2 === true ? "none" : "",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                    {vaultOpen ? (
-                      <img
-                        src={a1}
-                        style={{
-                          marginLeft:
-                            opened2 === true
-                              ? 1
-                              : opened2 == false && menuResponsive == true
-                              ? 240
-                              : 40,
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={a2}
-                        style={{
-                          marginLeft:
-                            opened2 === true
-                              ? 1
-                              : opened2 == false && menuResponsive == true
-                              ? 240
-                              : 40,
-                        }}
-                      />
-                    )}
-                  </div>
-                </Tooltip>
-                {vaultOpen && (
-                  <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
-                    {item.links.map((option) => (
-                      <NavLink
-                        to={option.link}
-                        className={classes.link}
-                        key={option.label}
-                        activate={true.toString()} // Convert boolean to string
-                        onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
-                      >
-                        <Tooltip label={option.label}>
-                          <div>
-                            {option.icon && option.icon}{" "}
-                            <span
-                              style={{
-                                marginLeft: 10,
-                                display: opened2 === true ? "none" : "",
-                              }}
-                            >
-                              {option.label}
-                            </span>
-                          </div>
-                        </Tooltip>
-                      </NavLink>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <NavLink
-                className={({ isActive }) =>
-                  cx(classes.link, { [classes.linkActive]: isActive })
-                }
-                to={item.link || "/"}
-                onClick={() => {
-                  setActive(item.label);
-                  closeCoolerInsights();
-                }}
-              >
-                <Tooltip label={item.label}>
-                  <div>
-                    {item.icon}
-                    <span
-                      style={{
-                        marginLeft: 10,
-                        display: opened2 === true ? "none" : "",
-                      }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                </Tooltip>
-              </NavLink>
-            )}
-          </div>
-        ))}
-      </>
-    ) : localStorage.getItem("ORG") === "KOF" ||
+    ) : // )
+    // : Name === "Mayra Barrón Reséndiz" ||
+    //   Name === "Jose Ivan Perez Ugalde" ||
+    //   Name === "Alberto Alvarez" ||
+    //   Name === "Ruben Valenzuela Medel" ||
+    //   Name === "Flavio Rocha Serrano" ||
+    //   Name === "Jesus Angel Soria Lopez" ? (
+    //   <>
+    //     {routesVault.map((item) => (
+    //       <div key={item.label}>
+    //         {item.label === "Cooler Insights" && item.links ? (
+    //           <div style={{ whiteSpace: "nowrap" }}>
+    //             <Tooltip label={item.label}>
+    //               <div
+    //                 onClick={() => {
+    //                   setCoolerInsightsOpen(!coolerInsightsOpen);
+    //                 }}
+    //                 className={cx(classes.link, {
+    //                   [classes.linkActive]: coolerInsightsOpen,
+    //                 })}
+    //               >
+    //                 {item.icon}
+    //                 <span
+    //                   style={{
+    //                     marginLeft: 10,
+    //                     display: opened2 === true ? "none" : "",
+    //                   }}
+    //                 >
+    //                   {item.label}
+    //                 </span>
+    //                 {coolerInsightsOpen ? (
+    //                   <img
+    //                     src={a1}
+    //                     style={{
+    //                       marginLeft:
+    //                         opened2 === true
+    //                           ? 1
+    //                           : opened2 == false && menuResponsive == true
+    //                           ? 240
+    //                           : 40,
+    //                     }}
+    //                   />
+    //                 ) : (
+    //                   <img
+    //                     src={a2}
+    //                     style={{
+    //                       marginLeft:
+    //                         opened2 === true
+    //                           ? 1
+    //                           : opened2 == false && menuResponsive == true
+    //                           ? 240
+    //                           : 40,
+    //                     }}
+    //                   />
+    //                 )}
+    //               </div>
+    //             </Tooltip>
+    //             {coolerInsightsOpen && (
+    //               <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
+    //                 {item.links.map((option) => (
+    //                   <NavLink
+    //                     to={option.link}
+    //                     className={classes.link}
+    //                     key={option.label}
+    //                     activate={true.toString()} // Convert boolean to string
+    //                     onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+    //                   >
+    //                     <Tooltip label={option.label}>
+    //                       <div>
+    //                         {option.icon && option.icon}{" "}
+    //                         <span
+    //                           style={{
+    //                             marginLeft: 10,
+    //                             display: opened2 === true ? "none" : "",
+    //                           }}
+    //                         >
+    //                           {option.label}
+    //                         </span>
+    //                       </div>
+    //                     </Tooltip>
+    //                   </NavLink>
+    //                 ))}
+    //               </div>
+    //             )}
+    //           </div>
+    //         ) : item.label === "Vault" && item.links ? (
+    //           <div style={{ whiteSpace: "nowrap" }}>
+    //             <Tooltip label={item.label}>
+    //               <div
+    //                 onClick={() => {
+    //                   setVaultOpen(!vaultOpen);
+    //                 }}
+    //                 className={cx(classes.link, {
+    //                   [classes.linkActive]: vaultOpen,
+    //                 })}
+    //               >
+    //                 {item.icon}
+    //                 <span
+    //                   style={{
+    //                     marginLeft: 10,
+    //                     display: opened2 === true ? "none" : "",
+    //                   }}
+    //                 >
+    //                   {item.label}
+    //                 </span>
+    //                 {vaultOpen ? (
+    //                   <img
+    //                     src={a1}
+    //                     style={{
+    //                       marginLeft:
+    //                         opened2 === true
+    //                           ? 1
+    //                           : opened2 == false && menuResponsive == true
+    //                           ? 240
+    //                           : 40,
+    //                     }}
+    //                   />
+    //                 ) : (
+    //                   <img
+    //                     src={a2}
+    //                     style={{
+    //                       marginLeft:
+    //                         opened2 === true
+    //                           ? 1
+    //                           : opened2 == false && menuResponsive == true
+    //                           ? 240
+    //                           : 40,
+    //                     }}
+    //                   />
+    //                 )}
+    //               </div>
+    //             </Tooltip>
+    //             {vaultOpen && (
+    //               <div style={{ marginLeft: opened2 === true ? 5 : 20 }}>
+    //                 {item.links.map((option) => (
+    //                   <NavLink
+    //                     to={option.link}
+    //                     className={classes.link}
+    //                     key={option.label}
+    //                     activate={true.toString()} // Convert boolean to string
+    //                     onClick={closeCoolerInsights} // Cierra Cooler Insights al hacer clic en una subruta
+    //                   >
+    //                     <Tooltip label={option.label}>
+    //                       <div>
+    //                         {option.icon && option.icon}{" "}
+    //                         <span
+    //                           style={{
+    //                             marginLeft: 10,
+    //                             display: opened2 === true ? "none" : "",
+    //                           }}
+    //                         >
+    //                           {option.label}
+    //                         </span>
+    //                       </div>
+    //                     </Tooltip>
+    //                   </NavLink>
+    //                 ))}
+    //               </div>
+    //             )}
+    //           </div>
+    //         ) : (
+    //           <NavLink
+    //             className={({ isActive }) =>
+    //               cx(classes.link, { [classes.linkActive]: isActive })
+    //             }
+    //             to={item.link || "/"}
+    //             onClick={() => {
+    //               setActive(item.label);
+    //               closeCoolerInsights();
+    //             }}
+    //           >
+    //             <Tooltip label={item.label}>
+    //               <div>
+    //                 {item.icon}
+    //                 <span
+    //                   style={{
+    //                     marginLeft: 10,
+    //                     display: opened2 === true ? "none" : "",
+    //                   }}
+    //                 >
+    //                   {item.label}
+    //                 </span>
+    //               </div>
+    //             </Tooltip>
+    //           </NavLink>
+    //         )}
+    //       </div>
+    //     ))}
+    //   </>
+    localStorage.getItem("ORG") === "KOF" ||
       localStorage.getItem("ORG") === "KOF Colombia" ||
       localStorage.getItem("ORG") === "KOF Guatemala" ||
       localStorage.getItem("ORG") === "ECO" ? (
