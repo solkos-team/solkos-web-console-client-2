@@ -212,7 +212,7 @@ export default function CoolerDetail() {
                         <img
                           src={coolersData?.asset?.url}
                           alt="cooler"
-                          width={"100%"}
+                          width={dto === "KOF Colombia" ? "55%" : "100%"}
                           height={"85%"}
                           onError={({ currentTarget }) => {
                             console.log(
