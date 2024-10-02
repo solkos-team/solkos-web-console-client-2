@@ -321,42 +321,10 @@ export default function Insights() {
                             return !item || item.percentage === undefined ? (
                               <>
                                 <div>0%</div>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      width: "8px",
-                                      height: "8px",
-                                      backgroundColor: "#FA5252",
-                                      borderRadius: "50%",
-                                      marginRight: "5px",
-                                    }}
-                                  ></div>
-                                </div>
                               </>
                             ) : (
                               <div style={{ display: "flex" }}>
                                 {item.percentage.toFixed(1) + "%"}
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  <div
-                                    style={{
-                                      width: "8px",
-                                      height: "8px",
-                                      backgroundColor: backgroundColor,
-                                      borderRadius: "50%",
-                                      marginRight: "5px",
-                                    }}
-                                  ></div>
-                                </div>
                               </div>
                             );
                           })()}
