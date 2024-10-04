@@ -494,11 +494,11 @@ export default function CoolerDetail() {
                               lineHeight: "normal",
                             }}
                           >
-                            {coolersData?.cooler?.last_read == undefined ||
-                            coolersData?.cooler?.last_read == null
+                            {coolersData?.last_telemetry == undefined ||
+                            coolersData?.last_telemetry == null
                               ? "Sin registro"
-                              : moment(new Date(coolersData?.cooler?.last_read))
-                                  .locale("es") // Establecer el idioma a español
+                              : moment(new Date(coolersData?.last_telemetry))
+                                  .locale("es")
                                   .format("dddd D MMMM, YYYY")}
                           </div>
                         </div>
@@ -1451,11 +1451,11 @@ export default function CoolerDetail() {
                       lineHeight: "normal",
                     }}
                   >
-                    {coolersData?.last_telemetry == undefined ||
-                    coolersData?.last_telemetry == null
+                    {coolersData?.cooler?.last_read == undefined ||
+                    coolersData?.cooler?.last_read == null
                       ? "Sin registro"
-                      : moment(new Date(coolersData?.last_telemetry))
-                          .locale("es")
+                      : moment(new Date(coolersData?.cooler?.last_read))
+                          .locale("es") // Establecer el idioma a español
                           .format("dddd D MMMM, YYYY")}
                   </div>
                 </div>
