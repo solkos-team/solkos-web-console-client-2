@@ -333,6 +333,40 @@ const routes1 = [
     label: "Colaboradores",
     icon: <img src={"../../sampleData/user.svg"} />,
   },
+  {
+    label: "Vault",
+    icon: (
+      <img
+        src={"../../sampleData/vault.png"}
+        style={{ height: "1.3rem", width: "1.2rem" }}
+      />
+    ),
+    initiallyOpened: true,
+    links: [
+      {
+        label: "Vault por excel",
+        link: "/home/Process1Vault",
+        icon: (
+          <img
+            src={"../../sampleData/table-import.svg"}
+            alt="cooler"
+            style={{ height: "1rem" }}
+          ></img>
+        ),
+      },
+      {
+        label: "Gestión manual",
+        link: "/home/Process2Vault",
+        icon: (
+          <img
+            src={"../../sampleData/row-insert.svg"}
+            alt="cooler"
+            style={{ height: "1rem" }}
+          ></img>
+        ),
+      },
+    ],
+  },
 ];
 
 const routes2 = [
