@@ -87,27 +87,31 @@ export const StepOne = ({
         container.removeEventListener("scroll", handleScroll);
       }
     };
-  }, []);
-
+  }, []);    
+  
   const handleSwitchChange = (index: number, cooler: any) => {
-    const newStatus = !cooler.estatus
+    const newStatus = !cooler.estatus;
     setCoolersData((prevData) => {
       const updatedData = [...prevData]
       updatedData[index].estatus = newStatus
-      return updatedData;
+      return updatedData
     })
     setCoolersToChange((prevData) => {
-      const exists = prevData.find(c => c.device_id === cooler.device_id);   
+      const exists = prevData.find(c => c.device_id === cooler.device_id)  
       if (newStatus) {
         if (!exists) {
           return [...prevData, { ...cooler, estatus: newStatus }]
-        }
-      } else {
-        if (exists) {
+        } else {
           return prevData.filter(c => c.device_id !== cooler.device_id)
         }
-      }
-      return prevData
+      } else {
+        if (!exists) {
+          return [...prevData, { ...cooler, estatus: newStatus }]
+        } else {
+          return prevData.filter(c => c.device_id !== cooler.device_id)
+        }
+      }  
+      return prevData;
     });
   };
   
@@ -116,7 +120,7 @@ export const StepOne = ({
       SetCoolerDrawer(undefined);
     }
   }, [opened]);
-
+  
   return (
     <section
       style={{
