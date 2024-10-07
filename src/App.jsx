@@ -414,6 +414,7 @@ function App() {
   const dt = useSelector((state) => state.organization);
   const dto = useSelector((state) => state.works);
   // console.log(Name);
+  const customersTD = ["KOF", "Grupo Jumex"];
 
   // *******************************
   const [updatedRoutes, setUpdatedRoutes] = useState(routes);
@@ -1643,77 +1644,83 @@ function App() {
                           {/* Contenido del menú de cambio de organización */}
                           {data === undefined
                             ? "Sin registros"
-                            : data.map((nombre, index) =>
-                                JSON.parse(validaUser).length == 0 ? (
-                                  <div
-                                    style={{
-                                      // display: "flex",
-                                      padding: "10px 12px",
-                                      alignItems: "center",
-                                      gap: "10px",
-                                      alignSelf: "stretch",
-                                      display:
-                                        JSON.parse(validaUser).length === 0
-                                          ? ""
-                                          : "none",
-                                    }}
-                                    key={index}
-                                    onChange={setData}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "10px",
-                                        flex: "100",
-                                        fontSize: "12px",
-                                        textDecorationColor:
-                                          dt === nombre ? "#ec547c" : "",
-                                        color:
-                                          dt === nombre ? "#ec547c" : "black",
-                                        cursor: "pointer",
-                                      }}
-                                      onClick={() => {
-                                        saveOrganization(nombre);
-                                      }}
-                                    >
-                                      {nombre}
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <div
-                                    style={{
-                                      // display: "flex",
-                                      padding: "10px 12px",
-                                      alignItems: "center",
-                                      gap: "10px",
-                                      alignSelf: "stretch",
-                                      display: dt === nombre ? "" : "none",
-                                    }}
-                                    key={index}
-                                    onChange={setData}
-                                  >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: "10px",
-                                        flex: "100",
-                                        fontSize: "14px",
-                                        textDecorationColor:
-                                          dt === nombre ? "#ec547c" : "",
-                                        color: dt === nombre ? "#ec547c" : "",
-                                        cursor: "pointer",
-                                      }}
-                                      onClick={() => {
-                                        saveOrganization(nombre);
-                                      }}
-                                    >
-                                      {nombre}
-                                    </div>
-                                  </div>
+                            : data
+                                .filter((customers) =>
+                                  Name === "Transformación Digital"
+                                    ? customersTD.includes(customers)
+                                    : data
                                 )
-                              )}
+                                .map((nombre, index) =>
+                                  JSON.parse(validaUser).length == 0 ? (
+                                    <div
+                                      style={{
+                                        // display: "flex",
+                                        padding: "10px 12px",
+                                        alignItems: "center",
+                                        gap: "10px",
+                                        alignSelf: "stretch",
+                                        display:
+                                          JSON.parse(validaUser).length === 0
+                                            ? ""
+                                            : "none",
+                                      }}
+                                      key={index}
+                                      onChange={setData}
+                                    >
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          gap: "10px",
+                                          flex: "100",
+                                          fontSize: "12px",
+                                          textDecorationColor:
+                                            dt === nombre ? "#ec547c" : "",
+                                          color:
+                                            dt === nombre ? "#ec547c" : "black",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                          saveOrganization(nombre);
+                                        }}
+                                      >
+                                        {nombre}
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div
+                                      style={{
+                                        // display: "flex",
+                                        padding: "10px 12px",
+                                        alignItems: "center",
+                                        gap: "10px",
+                                        alignSelf: "stretch",
+                                        display: dt === nombre ? "" : "none",
+                                      }}
+                                      key={index}
+                                      onChange={setData}
+                                    >
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          alignItems: "center",
+                                          gap: "10px",
+                                          flex: "100",
+                                          fontSize: "14px",
+                                          textDecorationColor:
+                                            dt === nombre ? "#ec547c" : "",
+                                          color: dt === nombre ? "#ec547c" : "",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                          saveOrganization(nombre);
+                                        }}
+                                      >
+                                        {nombre}
+                                      </div>
+                                    </div>
+                                  )
+                                )}
                         </div>
                         <div
                           style={{
