@@ -715,6 +715,7 @@ export default function Panel() {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<string>("tab0");
   const [tabsEnabled, setTabsEnabled] = useState(true);
+  const URL = `https://us-central1-imberalink-238816.cloudfunctions.net/get-trusted-ticket-cors-test`;
 
   const dt = useSelector((state: any) => state.works);
   const dto = useSelector((state: any) => state.organization);
@@ -731,41 +732,22 @@ export default function Panel() {
   const fetchToken = useCallback(async () => {
     try {
       setIsLoading(true);
-      const URL = "https://tableau.efemsa.com/trusted";
-      const headers = {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      };
-      const body = JSON.stringify({
-        username: "solkos",
-        server: "https://tableau.efemsa.com",
-      });
-
-      const response = await fetch(URL, {
-        method: "POST",
-        headers: headers,
-        body: body,
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error en la solicitud: ${response.statusText}`);
-      }
-
-      const token = await response.text();
-      setData(token);
-      setError(null);
-    } catch (err) {
-      console.error(err);
-      setError("Sin conexión a internet.");
+      const data = await tableauFetch(URL, setIsLoading); // Utiliza tableauFetch con la URL correcta
+      const datos = await data;
+      setData(datos); // Almacena los datos recibidos
+      setError(null); // Limpia cualquier error previo
+    } catch (error) {
+      console.error(error);
+      setError("Sin conexión a internet."); // Maneja errores
     } finally {
-      setIsLoading(false);
+      setIsLoading(false); // Asegura que el estado de carga se actualice
     }
   }, []);
 
   // Token fetching on tab change or path updates
   useEffect(() => {
     fetchToken();
-  }, [fetchToken, region, zone, operative_unit, route]);
+  }, [region, zone, operative_unit, route, dt, dto]);
 
   // Navigation based on organization changes
   useEffect(() => {
