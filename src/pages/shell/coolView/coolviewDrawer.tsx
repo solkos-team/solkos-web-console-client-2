@@ -74,8 +74,8 @@ export const coolviewDrawer = ({
             visibility: isLoading == true ? 'hidden' : 'visible'
           }}
         >
-          <div>
-            <div style={{ color: 'var(--other-black, #000)', fontSize: '1.375rem', display: 'flex', alignItems: 'center' }}>
+          <div style={{display:'flex',flexDirection:'column',marginLeft:'2rem'}}>
+            <div style={{ color: 'var(--other-black, #000)', fontSize: '1.375rem', display: 'flex', alignItems: 'center',gap:'0.5rem' }}>
               <img
                 src={LogoCoolview}
                 alt={"LogoCoolview"}
@@ -83,7 +83,7 @@ export const coolviewDrawer = ({
               />
               Coolview
             </div>
-            <div style={{ color: 'var(--Neutral-Outline, #88888B)', fontSize: '0.625rem', marginLeft: '2rem' }}>Visualización avanzada de telemetría</div>
+            <h1 style={{ color: 'var(--Neutral-Outline, #88888B)', fontSize: '0.625rem', marginLeft: '2.5rem' }}>Visualización avanzada de telemetría</h1>
           </div>
         </div>
       }
@@ -115,11 +115,12 @@ export const coolviewDrawer = ({
             display: "flex",
             width: "100%",
             alignItems: "center",
-            gap: "0.5rem",
+            gap: "4px",
             visibility: isLoading == true ? 'hidden' : 'visible'
           }}
-        >          
-            <div style={{ color: 'var(--other-black, #000)', fontSize: '1.375rem',height:'fit-content' }}>
+        >
+          <div style={{display:'flex',flexDirection:'column',marginLeft:'2rem'}}>
+            <div style={{ color: 'var(--other-black, #000)', fontSize: '1.375rem', display: 'flex', alignItems: 'center',gap:'0.5rem' }}>
               <img
                 src={LogoCoolview}
                 alt={"LogoCoolview"}
@@ -127,7 +128,8 @@ export const coolviewDrawer = ({
               />
               Coolview
             </div>
-            <div style={{ color: 'var(--Neutral-Outline, #88888B)', fontSize: '0.625rem', marginLeft: '2rem',height:'fit-content' }}>Visualización avanzada de telemetría</div>          
+            <h1 style={{ color: 'var(--Neutral-Outline, #88888B)', fontSize: '0.625rem', marginLeft: '2.5rem' }}>Visualización avanzada de telemetría</h1>
+          </div>
         </div>
       }
       position="bottom"
