@@ -13,7 +13,7 @@ const VAULT_PROD =
 const VAULT_QA =
   "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
 
-const baseUrlVault = VAULT_QA;
+const baseUrlVault = VAULT_PROD;
 
 // **************************** COOLVIEW ********************************************
 
