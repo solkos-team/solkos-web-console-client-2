@@ -544,7 +544,7 @@ export default function Stepper5() {
                     lineHeight: "normal",
                   }}
                 >
-                  Para proceder con los cambios escribir la contraseña
+                  Escribe CONFIRMAR para continuar
                 </span>
               </div>
             </div>
