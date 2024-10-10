@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { IconArrowDownRight } from "@tabler/icons-react";
 import PageFilter from "../../../components/pageFilter";
 import { Tooltip, Skeleton, Center } from "@mantine/core";
+import { IconHelp } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { COOLVIEW_LINK, fetchUniversalDetails } from "../../../utils/apiUtils";
 import moment from "moment";
@@ -471,7 +472,7 @@ export default function CoolerDetail() {
                             lineHeight: "normal",
                           }}
                         >
-                          Leído por última vez:
+                          Estatus actualizado al:
                         </div>
                         <div
                           style={{
@@ -502,6 +503,30 @@ export default function CoolerDetail() {
                                   .format("dddd D MMMM, YYYY")}
                           </div>
                         </div>
+                        <Tooltip
+                          label={
+                            <div
+                              style={{
+                                maxWidth: "250px",
+                                whiteSpace: "normal",
+                                wordWrap: "break-word",
+                                textAlign: "justify",
+                              }}
+                            >
+                              Esta fecha refleja la última recolección completa
+                              de telemetría del enfriador. Se actualiza
+                              únicamente cuando se obtienen todos los datos.
+                            </div>
+                          }
+                          position="right"
+                          withArrow
+                        >
+                          <IconHelp
+                            size={16}
+                            color="#88888B"
+                            style={{ cursor: "pointer" }}
+                          />
+                        </Tooltip>
                       </div>
                     </div>
                   </div>
@@ -1428,7 +1453,7 @@ export default function CoolerDetail() {
                     marginTop: "0.25rem",
                   }}
                 >
-                  Última visita :
+                  Última ubicación leída:
                 </div>
                 <div
                   style={{
@@ -1459,6 +1484,34 @@ export default function CoolerDetail() {
                           .format("dddd D MMMM, YYYY")}
                   </div>
                 </div>
+                <Tooltip
+                  label={
+                    <div
+                      style={{
+                        maxWidth: "250px",
+                        whiteSpace: "normal",
+                        wordWrap: "break-word",
+                        textAlign: "justify",
+                      }}
+                    >
+                      Esta fecha se actualiza cada vez que se visita el punto de
+                      venta. Si no coincide con la fecha de “Estatus actualizado
+                      al:”, significa que se hizo una lectura parcial del
+                      enfriador.
+                    </div>
+                  }
+                  position="right"
+                  withArrow
+                  // styles={{
+                  //   tooltip: { backgroundColor: "#f0f0f0", color: "#000" },
+                  // }}
+                >
+                  <IconHelp
+                    size={16}
+                    color="#88888B"
+                    style={{ cursor: "pointer" }}
+                  />
+                </Tooltip>
               </div>
               <div className="container">
                 <div className="clt_actividad_principal_title_nombre">
