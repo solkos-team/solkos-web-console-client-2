@@ -975,7 +975,7 @@ export default function Panel() {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <Tabs.Panel value="tab0">
                   {renderTableauReport(
-                    "https://tableau.efemsa.com/views/KOFGuatemala/Detalle_Rutas"
+                    "https://tableau.efemsa.com/views/KOF_Guatemala/Detalle_Rutas"
                   )}
                 </Tabs.Panel>
               </div>
