@@ -22,6 +22,10 @@ export default function Insights() {
   // console.log(alertValue);
   const failValue =
     data?.maintenance?.find((item) => item.last_alert === "FAIL")?.value || 0;
+
+  const atendidosValue =
+    data?.maintenance?.find((item) => item.last_alert === "ATENDIDOS")?.value ||
+    0;
   // console.log(failValue);
 
   const totalMaintenanceValue = data?.maintenance?.reduce(
@@ -716,13 +720,18 @@ export default function Insights() {
                       const order = [
                         "Sin Riesgo",
                         "SIN RIESGO",
+                        "SIN RIESGO SIN VENTA",
                         "Visita PdV",
+                        "VISITA PDV SIN VENTA",
                         "VISITA PDV PARA LECTURA",
+                        "CON MOVIMIENTO",
                         "Actualizar Info",
                         "Estatus sin venta",
                         "SIN VENTA",
                         "Acciones urgentes",
                         "SIN COINCIDENCIA",
+                        "EN BODEGA",
+                        "PDV POR ASIGNAR",
                       ];
                       const indexA = order.indexOf(a.algorithm);
                       const indexB = order.indexOf(b.algorithm);
@@ -888,11 +897,18 @@ export default function Insights() {
                           className="insights_datas_info_mantenimiento_datos_barras_color_Fallas"
                           style={{
                             width:
-                              alertValue + failValue > 0
+                              Math.max(failValue, failValue, atendidosValue) > 0
                                 ? `${
-                                    (failValue / (alertValue + failValue)) * 100
+                                    (failValue /
+                                      Math.max(
+                                        alertValue,
+                                        failValue,
+                                        atendidosValue
+                                      )) *
+                                    100
                                   }%`
                                 : "0%",
+
                             backgroundColor: !isLoading ? "#ffc4cc" : "",
                           }}
                           onClick={() => navigate("/home/fails")}
@@ -956,12 +972,19 @@ export default function Insights() {
                           className="insights_datas_info_mantenimiento_datos_barras_color_Alertas"
                           style={{
                             width:
-                              alertValue + failValue > 0
+                              Math.max(alertValue, failValue, atendidosValue) >
+                              0
                                 ? `${
-                                    (alertValue / (alertValue + failValue)) *
+                                    (alertValue /
+                                      Math.max(
+                                        alertValue,
+                                        failValue,
+                                        atendidosValue
+                                      )) *
                                     100
                                   }%`
-                                : "0%", // Asegura que el width sea "0%" cuando el total sea 0
+                                : "0%",
+
                             backgroundColor:
                               isLoading !== true ? "#FFF3BF" : "",
                           }}
@@ -1015,6 +1038,83 @@ export default function Insights() {
                             "0"
                           ) : (
                             alertValue?.toLocaleString("es-MX")
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        key={2}
+                        className="insights_datas_info_mantenimiento_datos_barras"
+                      >
+                        <div
+                          className="insights_datas_info_mantenimiento_datos_barras_color_Alertas"
+                          style={{
+                            width:
+                              Math.max(alertValue, failValue, atendidosValue) >
+                              0
+                                ? `${
+                                    (atendidosValue /
+                                      Math.max(
+                                        alertValue,
+                                        failValue,
+                                        atendidosValue
+                                      )) *
+                                    100
+                                  }%`
+                                : "0%",
+
+                            backgroundColor:
+                              isLoading !== true ? "#D3F9D8" : "",
+                          }}
+                          onClick={() => navigate("/home/fails")}
+                        >
+                          <Tooltip label="Ver más">
+                            <div
+                              className="insights_datas_info_mantenimiento_datos_barras_title"
+                              onClick={() => navigate("/home/alerts")}
+                            >
+                              {isLoading == true ? (
+                                <>
+                                  <div
+                                    style={{ width: "2rem", height: "1rem" }}
+                                  >
+                                    <Skeleton
+                                      height={15}
+                                      mt={6}
+                                      width="400%"
+                                      radius="xs"
+                                    />
+                                  </div>
+                                </>
+                              ) : (
+                                <span
+                                  style={{
+                                    color: "#2B8A3E",
+                                    fontWeight: 400,
+                                    fontStyle: "normal",
+                                  }}
+                                >
+                                  Atendidos
+                                </span>
+                              )}
+                            </div>
+                          </Tooltip>
+                        </div>
+                        <div className="insights_datas_info_mantenimiento_datos_barras_cantidad">
+                          {isLoading == true ? (
+                            <>
+                              <div style={{ width: "2rem", height: "1rem" }}>
+                                <Skeleton
+                                  height={15}
+                                  mt={6}
+                                  width="100%"
+                                  radius="xs"
+                                />
+                              </div>
+                            </>
+                          ) : atendidosValue === 0 ? (
+                            "0"
+                          ) : (
+                            atendidosValue?.toLocaleString("es-MX")
                           )}
                         </div>
                       </div>
