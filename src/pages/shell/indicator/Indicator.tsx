@@ -183,13 +183,18 @@ export default function Indicator() {
                   const order = [
                     "Sin Riesgo",
                     "SIN RIESGO",
+                    "SIN RIESGO SIN VENTA",
                     "Visita PdV",
+                    "VISITA PDV SIN VENTA",
                     "VISITA PDV PARA LECTURA",
+                    "CON MOVIMIENTO",
                     "Actualizar Info",
                     "Estatus sin venta",
                     "SIN VENTA",
                     "Acciones urgentes",
                     "SIN COINCIDENCIA",
+                    "EN BODEGA",
+                    "PDV POR ASIGNAR",
                   ];
                   const indexA = order.indexOf(a.algorithm);
                   const indexB = order.indexOf(b.algorithm);
@@ -238,8 +243,7 @@ export default function Indicator() {
                             gap: "10px",
                             borderRadius: "4px",
                             border:
-                              cooler.algorithm === "Sin Riesgo" ||
-                              cooler.algorithm === "SIN RIESGO"
+                              cooler.algorithm === "Sin Riesgo"
                                 ? "1px solid #40C057"
                                 : cooler.algorithm === "Sin Riesgo" ||
                                   cooler.algorithm ===
@@ -247,25 +251,21 @@ export default function Indicator() {
                                   cooler.algorithm ===
                                     "Solicitar serv. preventivo" ||
                                   cooler.algorithm === "Seguimiento a equipo" ||
-                                  cooler.algorithm === "Visita PdV" ||
-                                  cooler.algorithm === "VISITA PDV PARA LECTURA"
+                                  cooler.algorithm === "Visita PdV"
                                 ? "1px solid #E67700"
                                 : cooler.algorithm === "Estatus sin venta" ||
                                   cooler.algorithm === "SIN VENTA" ||
-                                  cooler.algorithm === "Acciones urgentes" ||
-                                  cooler.algorithm === "SIN COINCIDENCIA"
+                                  cooler.algorithm === "Acciones urgentes"
                                 ? "1px solid #FA5252"
                                 : "1px",
                             background:
-                              cooler.algorithm === "Sin Riesgo" ||
-                              cooler.algorithm === "SIN RIESGO"
+                              cooler.algorithm === "Sin Riesgo"
                                 ? "#C0F2C8"
                                 : cooler.algorithm === "Actualizar Info"
                                 ? "#FEF5C7"
                                 : cooler.algorithm === "Estatus sin venta" ||
                                   cooler.algorithm === "SIN VENTA" ||
-                                  cooler.algorithm === "Acciones urgentes" ||
-                                  cooler.algorithm === "SIN COINCIDENCIA"
+                                  cooler.algorithm === "Acciones urgentes"
                                 ? "#FFF5F5"
                                 : cooler.algorithm === "Visita PdV" &&
                                   dto != "KOF Colombia"
@@ -280,16 +280,25 @@ export default function Indicator() {
                                   cooler.algorithm ===
                                     "Solicitar serv. preventivo" ||
                                   cooler.algorithm === "Seguimiento a equipo" ||
-                                  cooler.algorithm === "Visita PdV" ||
-                                  cooler.algorithm === "VISITA PDV PARA LECTURA"
+                                  cooler.algorithm === "Visita PdV"
                                 ? "#FFF9DB"
                                 : cooler.algorithm === "Visita PdV prioritaria"
                                 ? "#FFC9C9"
+                                : cooler.algorithm === "SIN RIESGO" ||
+                                  cooler.algorithm === "SIN RIESGO SIN VENTA" ||
+                                  cooler.algorithm === "VISITA PDV SIN VENTA" ||
+                                  cooler.algorithm === "EN BODEGA" ||
+                                  cooler.algorithm === "PDV POR ASIGNAR"
+                                ? "#A5D8FF"
+                                : cooler.algorithm ===
+                                    "VISITA PDV PARA LECTURA" ||
+                                  cooler.algorithm === "SIN COINCIDENCIA" ||
+                                  cooler.algorithm === "CON MOVIMIENTO"
+                                ? "#FFEC99"
                                 : "",
                           }}
                         >
-                          {cooler.algorithm === "Sin Riesgo" ||
-                          cooler.algorithm === "SIN RIESGO" ? (
+                          {cooler.algorithm === "Sin Riesgo" ? (
                             <img
                               src={"../../sampleData/circle-check.svg"}
                               alt="Descripción de la imagen"
@@ -303,8 +312,7 @@ export default function Indicator() {
                             />
                           ) : cooler.algorithm === "Estatus sin venta" ||
                             cooler.algorithm === "SIN VENTA" ||
-                            cooler.algorithm === "Acciones urgentes" ||
-                            cooler.algorithm === "SIN COINCIDENCIA" ? (
+                            cooler.algorithm === "Acciones urgentes" ? (
                             <img
                               src={"../../sampleData/alert-circle2.svg"}
                               alt="Descripción de la imagen"
@@ -356,8 +364,7 @@ export default function Indicator() {
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "Visita PdV" ||
-                            cooler.algorithm === "VISITA PDV PARA LECTURA" ? (
+                          ) : cooler.algorithm === "Visita PdV" ? (
                             <img
                               src={"../../sampleData/building-store.svg"}
                               alt="Descripción de la imagen"
@@ -366,6 +373,54 @@ export default function Indicator() {
                           ) : cooler.algorithm === "Visita PdV prioritaria" ? (
                             <img
                               src={"../../sampleData/visitapd.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "EN BODEGA" ? (
+                            <img
+                              src={"../../sampleData/6.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "VISITA PDV SIN VENTA" ? (
+                            <img
+                              src={"../../sampleData/3.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "CON MOVIMIENTO" ? (
+                            <img
+                              src={"../../sampleData/8.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "PDV POR ASIGNAR" ? (
+                            <img
+                              src={"../../sampleData/7.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "SIN RIESGO SIN VENTA" ? (
+                            <img
+                              src={"../../sampleData/2.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "SIN RIESGO" ? (
+                            <img
+                              src={"../../sampleData/1.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "VISITA PDV PARA LECTURA" ? (
+                            <img
+                              src={"../../sampleData/4.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "SIN COINCIDENCIA" ? (
+                            <img
+                              src={"../../sampleData/5.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
