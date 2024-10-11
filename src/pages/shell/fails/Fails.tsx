@@ -183,7 +183,8 @@ export default function Fails() {
                     cooler.algorithm === "Falla asociada al compresor" ||
                     cooler.algorithm === "Evaporador bloqueado" ||
                     cooler.algorithm === "Alta temperatura" ||
-                    cooler.algorithm === "Posible daño eléctrico"
+                    cooler.algorithm === "Posible daño eléctrico" ||
+                    cooler.algorithm === "ATENDIDOS"
                 )
 
                 .map((cooler, index) => (
@@ -230,8 +231,14 @@ export default function Fails() {
                             alignItems: "center",
                             gap: "10px",
                             borderRadius: "4px",
-                            border: "1px solid #FA5252",
-                            background: "#FFF5F5",
+                            border:
+                              cooler.algorithm === "ATENDIDOS"
+                                ? "1px solid #E67700"
+                                : "1px solid #FA5252",
+                            background:
+                              cooler.algorithm === "ATENDIDOS"
+                                ? "#FEF5C7"
+                                : "#FFF5F5",
                           }}
                         >
                           {cooler.algorithm ===
@@ -258,6 +265,12 @@ export default function Fails() {
                           ) : cooler.algorithm === "Evaporador bloqueado" ? (
                             <img
                               src={"../../sampleData/evaporador-off.svg"}
+                              alt="Descripción de la imagen"
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                          ) : cooler.algorithm === "ATENDIDOS" ? (
+                            <img
+                              src={"../../sampleData/tool2.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
@@ -310,7 +323,9 @@ export default function Fails() {
                             lineHeight: "normal",
                           }}
                         >
-                          {aggValue === undefined || aggValue === null
+                          {cooler.algorithm === "ATENDIDOS"
+                            ? "de " + cooler.value + " enfriadores"
+                            : aggValue === undefined || aggValue === null
                             ? "de 0 enfriadores "
                             : "de " + formattedAggValue + " enfriadores"}
                         </div>
