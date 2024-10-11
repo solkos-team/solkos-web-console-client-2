@@ -446,20 +446,14 @@ export default function Outlets() {
                                         gap: "4px",
                                         borderRadius: "2px",
                                         border:
-                                          outlet.actionable === "Visita PdV" ||
-                                          outlet.actionable ===
-                                            "VISITA PDV PARA LECTURA"
+                                          outlet.actionable === "Visita PdV"
                                             ? "1.5px solid #E67700"
-                                            : outlet.actionable ===
-                                                "Sin Riesgo" ||
-                                              outlet.actionable === "SIN RIESGO"
+                                            : outlet.actionable === "Sin Riesgo"
                                             ? "1.5px solid #40C057"
                                             : outlet.actionable ===
                                                 "Toma de Decisiones" ||
                                               outlet.actionable ===
-                                                "Acciones urgentes" ||
-                                              outlet.actionable ===
-                                                "SIN COINCIDENCIA"
+                                                "Acciones urgentes"
                                             ? "1.5px solid #F93448"
                                             : outlet.actionable ===
                                               "Actualizar Info"
@@ -486,160 +480,40 @@ export default function Outlets() {
                                             : outlet.actionable ===
                                               "Visita PdV prioritaria"
                                             ? "1.5px solid #C92A2A"
+                                            : outlet.actionable ===
+                                                "SIN RIESGO" ||
+                                              outlet.actionable ===
+                                                "SIN RIESGO SIN VENTA" ||
+                                              outlet.actionable ===
+                                                "VISITA PDV SIN VENTA" ||
+                                              outlet.actionable ===
+                                                "EN BODEGA" ||
+                                              outlet.actionable ===
+                                                "PDV POR ASIGNAR"
+                                            ? "1.5px solid #2393F4"
+                                            : outlet.actionable ===
+                                                "VISITA PDV PARA LECTURA" ||
+                                              outlet.actionable ===
+                                                "SIN COINCIDENCIA" ||
+                                              outlet.actionable ===
+                                                "CON MOVIMIENTO"
+                                            ? "1.5px solid #FAB005"
                                             : "1.5px solid black",
                                         background: "#FFF",
                                       }}
                                     >
-                                      {/* {outlet.actionable === "Visita PdV" &&
-                                      dto != "KOF Colombia" ? (
-                                        <img
-                                          src={"../../sampleData/p.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable === "Sin Riesgo" ||
-                                        outlet.actionable === "SIN RIESGO" ? (
-                                        <img
-                                          src={"../../sampleData/sn.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                          "Toma de Decisiones" ||
-                                        outlet.actionable ===
-                                          "Acciones urgentes" ||
-                                        outlet.actionable ===
-                                          "SIN COINCIDENCIA" ? (
-                                        <img
-                                          src={"../../sampleData/a.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                        "Actualizar Info" ? (
-                                        <img
-                                          src={"../../sampleData/p.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                        "Actualizar dato" ? (
-                                        <img
-                                          src={"../../sampleData/actDat.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                        "Datos faltantes" ? (
-                                        <img
-                                          src={"../../sampleData/datFal.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable === "Monitoreo" ? (
-                                        <img
-                                          src={"../../sampleData/Mont.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable === "Movimiento" ? (
-                                        <img
-                                          src={"../../sampleData/mov1.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                          "Solicitar serv. correctivo" ||
-                                        outlet.actionable ===
-                                          "Solicitar serv. preventivos" ? (
-                                        <img
-                                          src={"../../sampleData/serCP.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                        "Seguimiento a equipo" ? (
-                                        <img
-                                          src={"../../sampleData/seguE.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable === "Visita PdV" ||
-                                        outlet.actionable ===
-                                          "VISITA PDV PARA LECTURA" ? (
-                                        <img
-                                          src={"../../sampleData/visitap.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : outlet.actionable ===
-                                          "Visita PdV prioritaria" ||
-                                        outlet.actionable ===
-                                          "VISITA PDV PARA LECTURA" ? (
-                                        <img
-                                          src={"../../sampleData/visitapd.svg"}
-                                          alt="Descripción de la imagen"
-                                          style={{
-                                            width: "15px",
-                                            height: "15px",
-                                          }}
-                                        />
-                                      ) : (
-                                        ""
-                                      )} */}
-
                                       <div
                                         style={{
                                           color:
-                                            outlet.actionable ===
-                                              "Visita PdV" ||
-                                            outlet.actionable ===
-                                              "VISITA PDV PARA LECTURA"
+                                            outlet.actionable === "Visita PdV"
                                               ? "#E67700"
                                               : outlet.actionable ===
-                                                  "Sin Riesgo" ||
-                                                outlet.actionable ===
-                                                  "SIN RIESGO"
+                                                "Sin Riesgo"
                                               ? "#40C057"
                                               : outlet.actionable ===
                                                   "Toma de Decisiones" ||
                                                 outlet.actionable ===
-                                                  "Acciones urgentes" ||
-                                                outlet.actionable ===
-                                                  "SIN COINCIDENCIA"
+                                                  "Acciones urgentes"
                                               ? "#F93448"
                                               : outlet.actionable ===
                                                 "Actualizar Info"
@@ -667,9 +541,26 @@ export default function Outlets() {
                                               : outlet.actionable ===
                                                 "Visita PdV prioritaria"
                                               ? "#C92A2A"
+                                              : outlet.actionable ===
+                                                  "SIN RIESGO" ||
+                                                outlet.actionable ===
+                                                  "SIN RIESGO SIN VENTA" ||
+                                                outlet.actionable ===
+                                                  "VISITA PDV SIN VENTA" ||
+                                                outlet.actionable ===
+                                                  "EN BODEGA" ||
+                                                outlet.actionable ===
+                                                  "PDV POR ASIGNAR"
+                                              ? "#2393F4"
+                                              : outlet.actionable ===
+                                                  "VISITA PDV PARA LECTURA" ||
+                                                outlet.actionable ===
+                                                  "SIN COINCIDENCIA" ||
+                                                outlet.actionable ===
+                                                  "CON MOVIMIENTO"
+                                              ? "#FAB005"
                                               : "black",
-                                          // fontFamily: "DM Sans",
-                                          // fontSize: "1vw",
+
                                           fontStyle: "normal",
                                           fontWeight: 600,
                                           lineHeight: "14px",
