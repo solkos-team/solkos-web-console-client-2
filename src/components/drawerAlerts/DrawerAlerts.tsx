@@ -51,13 +51,17 @@ export default function DrawerA({
         : selectedAlgorithm === "Posible daño eléctrico"
         ? "VOLTAGE_FAIL"
         : selectedAlgorithm === "SIN RIESGO"
-        ? "Sin Riesgo"
+        ? "SIN RIESGO"
+        : selectedAlgorithm === "SIN RIESGO SIN VENTA"
+        ? "SIN RIESGO SIN VENTA"
         : selectedAlgorithm === "SIN VENTA"
         ? "Estatus sin venta"
         : selectedAlgorithm === "VISITA PDV PARA LECTURA"
-        ? "Visita PdV"
+        ? "VISITA PDV PARA LECTURA"
         : selectedAlgorithm === "SIN COINCIDENCIA"
-        ? "Acciones urgentes" || "Actualizar Info"
+        ? "SIN COINCIDENCIA"
+        : selectedAlgorithm === "ATENDIDOS"
+        ? "ATENDIDOS"
         : selectedAlgorithm,
     ],
     path: pathVerify(),
@@ -229,39 +233,36 @@ export default function DrawerA({
                     gap: "10px",
                     borderRadius: "4px",
                     border:
-                      selectedAlgorithm === "Sin Riesgo" ||
-                      selectedAlgorithm === "SIN RIESGO"
+                      selectedAlgorithm === "Sin Riesgo"
                         ? "1px solid #40C057"
                         : selectedAlgorithm === "Solicitar serv. correctivo" ||
                           selectedAlgorithm === "Solicitar serv. preventivo" ||
                           selectedAlgorithm === "Seguimiento a equipo" ||
-                          selectedAlgorithm === "Visita PdV" ||
-                          selectedAlgorithm === "VISITA PDV PARA LECTURA"
+                          selectedAlgorithm === "Visita PdV"
                         ? "1px solid #E67700"
                         : selectedAlgorithm === "Estatus sin venta" ||
                           selectedAlgorithm === "SIN VENTA" ||
-                          selectedAlgorithm === "Acciones urgentes" ||
-                          selectedAlgorithm === "SIN COINCIDENCIA"
+                          selectedAlgorithm === "Acciones urgentes"
                         ? "1px solid #FA5252"
+                        : selectedAlgorithm === "ATENDIDOS"
+                        ? "1px solid #E67700"
                         : level === "FAIL"
                         ? "1px solid #FA5252"
                         : level === "ALERT"
                         ? "1px solid #E67700"
                         : "",
                     background:
-                      level === "ALERT"
+                      level === "ALERT" || selectedAlgorithm === "ATENDIDOS"
                         ? "#FEF5C7"
                         : level === "FAIL"
                         ? "#FFF5F5"
                         : selectedAlgorithm === "Actualizar Info"
                         ? "#FEF5C7"
-                        : selectedAlgorithm === "Sin Riesgo" ||
-                          selectedAlgorithm === "SIN RIESGO"
+                        : selectedAlgorithm === "Sin Riesgo"
                         ? "#EBFBEE"
                         : selectedAlgorithm === "Estatus sin venta" ||
                           selectedAlgorithm === "SIN VENTA" ||
-                          selectedAlgorithm === "Acciones urgentes" ||
-                          selectedAlgorithm === "SIN COINCIDENCIA"
+                          selectedAlgorithm === "Acciones urgentes"
                         ? "#FFF5F5"
                         : selectedAlgorithm === "Visita PdV" &&
                           dto != "KOF Colombia"
@@ -274,16 +275,24 @@ export default function DrawerA({
                         : selectedAlgorithm === "Solicitar serv. correctivo" ||
                           selectedAlgorithm === "Solicitar serv. preventivo" ||
                           selectedAlgorithm === "Seguimiento a equipo" ||
-                          selectedAlgorithm === "Visita PdV" ||
-                          selectedAlgorithm === "VISITA PDV PARA LECTURA"
+                          selectedAlgorithm === "Visita PdV"
                         ? "#FFF9DB"
                         : selectedAlgorithm === "Visita PdV prioritaria"
                         ? "#FFC9C9"
+                        : selectedAlgorithm === "SIN RIESGO" ||
+                          selectedAlgorithm === "SIN RIESGO SIN VENTA" ||
+                          selectedAlgorithm === "VISITA PDV SIN VENTA" ||
+                          selectedAlgorithm === "EN BODEGA" ||
+                          selectedAlgorithm === "PDV POR ASIGNAR"
+                        ? "#A5D8FF"
+                        : selectedAlgorithm === "VISITA PDV PARA LECTURA" ||
+                          selectedAlgorithm === "SIN COINCIDENCIA" ||
+                          selectedAlgorithm === "CON MOVIMIENTO"
+                        ? "#FFEC99"
                         : "",
                   }}
                 >
-                  {selectedAlgorithm === "Sin Riesgo" ||
-                  selectedAlgorithm === "SIN RIESGO" ? (
+                  {selectedAlgorithm === "Sin Riesgo" ? (
                     <img
                       src={"../../sampleData/circle-check.svg"}
                       alt="Descripción de la imagen"
@@ -297,8 +306,7 @@ export default function DrawerA({
                     />
                   ) : selectedAlgorithm === "Estatus sin venta" ||
                     selectedAlgorithm === "SIN VENTA" ||
-                    selectedAlgorithm === "Acciones urgentes" ||
-                    selectedAlgorithm === "SIN COINCIDENCIA" ? (
+                    selectedAlgorithm === "Acciones urgentes" ? (
                     <img
                       src={"../../sampleData/alert-circle2.svg"}
                       alt="Descripción de la imagen"
@@ -403,8 +411,7 @@ export default function DrawerA({
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
-                  ) : selectedAlgorithm === "Visita PdV" ||
-                    selectedAlgorithm === "VISITA PDV PARA LECTURA" ? (
+                  ) : selectedAlgorithm === "Visita PdV" ? (
                     <img
                       src={"../../sampleData/building-store.svg"}
                       alt="Descripción de la imagen"
@@ -413,6 +420,60 @@ export default function DrawerA({
                   ) : selectedAlgorithm === "Visita PdV prioritaria" ? (
                     <img
                       src={"../../sampleData/visitapd.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "EN BODEGA" ? (
+                    <img
+                      src={"../../sampleData/6.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "VISITA PDV SIN VENTA" ? (
+                    <img
+                      src={"../../sampleData/3.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "CON MOVIMIENTO" ? (
+                    <img
+                      src={"../../sampleData/8.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "PDV POR ASIGNAR" ? (
+                    <img
+                      src={"../../sampleData/7.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "SIN RIESGO SIN VENTA" ? (
+                    <img
+                      src={"../../sampleData/2.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "SIN RIESGO" ? (
+                    <img
+                      src={"../../sampleData/1.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "SIN COINCIDENCIA" ? (
+                    <img
+                      src={"../../sampleData/5.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "VISITA PDV PARA LECTURA" ? (
+                    <img
+                      src={"../../sampleData/4.svg"}
+                      alt="Descripción de la imagen"
+                      style={{ width: "1.813rem", height: "1.813rem" }}
+                    />
+                  ) : selectedAlgorithm === "ATENDIDOS" ? (
+                    <img
+                      src={"../../sampleData/tool2.svg"}
                       alt="Descripción de la imagen"
                       style={{ width: "1.813rem", height: "1.813rem" }}
                     />
@@ -447,7 +508,7 @@ export default function DrawerA({
                       // border: "1px solid #FA5252",
                       borderRadius: "8px",
                       background:
-                        level === "ALERT"
+                        level === "ALERT" || selectedAlgorithm === "ATENDIDOS"
                           ? "#FEF5C7"
                           : level === "INDICATOR"
                           ? "#BCDAFF"
@@ -467,6 +528,12 @@ export default function DrawerA({
                         alt="Descripción de la imagen"
                         style={{ width: "16px", height: "16px" }}
                       />
+                    ) : selectedAlgorithm === "ATENDIDOS" ? (
+                      <img
+                        src={"../../sampleData/tool2.svg"}
+                        alt="Descripción de la imagen"
+                        style={{ width: "16px", height: "16px" }}
+                      />
                     ) : (
                       <img
                         src={"../../sampleData/fail1.svg"}
@@ -480,9 +547,10 @@ export default function DrawerA({
                         color:
                           level === "INDICATOR"
                             ? "#2393F4"
-                            : level === "FAIL"
-                            ? "#FA5252"
-                            : "#E67700",
+                            : level === "ALERT" ||
+                              selectedAlgorithm === "ATENDIDOS"
+                            ? "#E67700"
+                            : "#FA5252",
                         // fontFamily: "Space Mono",
                         fontSize: "12px",
                         fontStyle: "normal",
@@ -494,6 +562,8 @@ export default function DrawerA({
                         ? "Alertas"
                         : level === "INDICATOR"
                         ? "Control de activos"
+                        : selectedAlgorithm === "ATENDIDOS"
+                        ? "Atendidos"
                         : "Fallas"}
                     </div>
                   </div>
@@ -830,15 +900,13 @@ export default function DrawerA({
                                     cooler.actionable === "Visita PdV" &&
                                     dto != "KOF Colombia"
                                       ? "1.5px solid #DA7E05"
-                                      : cooler.actionable === "Sin Riesgo" ||
-                                        cooler.actionable === "SIN RIESGO"
+                                      : cooler.actionable === "Sin Riesgo"
                                       ? "1.5px solid #40C057"
                                       : cooler.actionable ===
                                           "Estatus sin venta" ||
                                         cooler.actionable === "SIN VENTA" ||
                                         cooler.actionable ===
-                                          "Acciones urgentes" ||
-                                        cooler.actionable === "SIN COINCIDENCIA"
+                                          "Acciones urgentes"
                                       ? "1.5px solid #FA5252"
                                       : cooler.actionable === "Actualizar Info"
                                       ? "1.5px solid #DA7E05"
@@ -855,13 +923,25 @@ export default function DrawerA({
                                           "Solicitar serv. preventivos" ||
                                         cooler.actionable ===
                                           "Seguimiento a equipo" ||
-                                        cooler.actionable === "Visita PdV" ||
-                                        cooler.actionable ===
-                                          "VISITA PDV PARA LECTURA"
+                                        cooler.actionable === "Visita PdV"
                                       ? "1.5px solid #E67700"
                                       : cooler.actionable ===
                                         "Visita PdV prioritaria"
                                       ? "1.5px solid #C92A2A"
+                                      : cooler.actionable === "SIN RIESGO" ||
+                                        cooler.actionable ===
+                                          "SIN RIESGO SIN VENTA" ||
+                                        cooler.actionable ===
+                                          "VISITA PDV SIN VENTA" ||
+                                        cooler.actionable === "EN BODEGA" ||
+                                        cooler.actionable === "PDV POR ASIGNAR"
+                                      ? "1.5px solid #2393F4"
+                                      : cooler.actionable ===
+                                          "VISITA PDV PARA LECTURA" ||
+                                        cooler.actionable ===
+                                          "SIN COINCIDENCIA" ||
+                                        cooler.actionable === "CON MOVIMIENTO"
+                                      ? "1.5px solid #FAB005"
                                       : "1.5px solid black",
                                   background: "#FFF",
                                 }}
@@ -874,17 +954,14 @@ export default function DrawerA({
                                       cooler.actionable === "Visita PdV" &&
                                       dto != "KOF Colombia"
                                         ? "#DA7E05"
-                                        : cooler.actionable === "Sin Riesgo" ||
-                                          cooler.actionable === "SIN RIESGO"
+                                        : cooler.actionable === "Sin Riesgo"
                                         ? "#40C057"
                                         : cooler.actionable ===
                                             "Estatus sin venta" ||
                                           cooler.actionable === "SIN VENTA" ||
                                           cooler.actionable ===
                                             "Acciones urgentes" ||
-                                          cooler.actionable === "SIN VENTA" ||
-                                          cooler.actionable ===
-                                            "SIN COINCIDENCIA"
+                                          cooler.actionable === "SIN VENTA"
                                         ? "#FA5252"
                                         : cooler.actionable ===
                                           "Actualizar Info"
@@ -902,13 +979,26 @@ export default function DrawerA({
                                             "Solicitar serv. preventivos" ||
                                           cooler.actionable ===
                                             "Seguimiento a equipo" ||
-                                          cooler.actionable === "Visita PdV" ||
-                                          cooler.actionable ===
-                                            "VISITA PDV PARA LECTURA"
+                                          cooler.actionable === "Visita PdV"
                                         ? "#E67700"
                                         : cooler.actionable ===
                                           "Visita PdV prioritaria"
                                         ? "#C92A2A"
+                                        : cooler.actionable === "SIN RIESGO" ||
+                                          cooler.actionable ===
+                                            "SIN RIESGO SIN VENTA" ||
+                                          cooler.actionable ===
+                                            "VISITA PDV SIN VENTA" ||
+                                          cooler.actionable === "EN BODEGA" ||
+                                          cooler.actionable ===
+                                            "PDV POR ASIGNAR"
+                                        ? "#2393F4"
+                                        : cooler.actionable ===
+                                            "VISITA PDV PARA LECTURA" ||
+                                          cooler.actionable ===
+                                            "SIN COINCIDENCIA" ||
+                                          cooler.actionable === "CON MOVIMIENTO"
+                                        ? "#FAB005"
                                         : "black",
                                     fontStyle: "normal",
                                     fontWeight: 600,
