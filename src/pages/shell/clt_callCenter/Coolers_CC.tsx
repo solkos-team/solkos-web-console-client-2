@@ -578,16 +578,13 @@ export default function CoolersCC() {
                                       cooler.actionable === "Visita PdV" &&
                                       dto != "KOF Colombia"
                                         ? "1.5px solid #DA7E05"
-                                        : cooler.actionable === "Sin Riesgo" ||
-                                          cooler.actionable === "SIN RIESGO"
+                                        : cooler.actionable === "Sin Riesgo"
                                         ? "1.5px solid #40C057"
                                         : cooler.actionable ===
                                             "Estatus sin venta" ||
                                           cooler.actionable === "SIN VENTA" ||
                                           cooler.actionable ===
-                                            "Acciones urgentes" ||
-                                          cooler.actionable ===
-                                            "SIN COINCIDENCIA"
+                                            "Acciones urgentes"
                                         ? "1.5px solid #FA5252"
                                         : cooler.actionable ===
                                           "Actualizar Info"
@@ -605,126 +602,43 @@ export default function CoolersCC() {
                                             "Solicitar serv. preventivos" ||
                                           cooler.actionable ===
                                             "Seguimiento a equipo" ||
-                                          cooler.actionable === "Visita PdV" ||
-                                          cooler.actionable ===
-                                            "VISITA PDV PARA LECTURA"
+                                          cooler.actionable === "Visita PdV"
                                         ? "1.5px solid #E67700"
                                         : cooler.actionable ===
                                           "Visita PdV prioritaria"
                                         ? "1.5px solid #C92A2A"
+                                        : cooler.actionable === "SIN RIESGO" ||
+                                          cooler.actionable ===
+                                            "SIN RIESGO SIN VENTA" ||
+                                          cooler.actionable ===
+                                            "VISITA PDV SIN VENTA" ||
+                                          cooler.actionable === "EN BODEGA" ||
+                                          cooler.actionable ===
+                                            "PDV POR ASIGNAR"
+                                        ? "1.5px solid #2393F4"
+                                        : cooler.actionable ===
+                                            "VISITA PDV PARA LECTURA" ||
+                                          cooler.actionable ===
+                                            "SIN COINCIDENCIA" ||
+                                          cooler.actionable === "CON MOVIMIENTO"
+                                        ? "1.5px solid #FAB005"
                                         : "1.5px solid black",
                                     background: "#FFF",
                                   }}
                                 >
-                                  {/* {cooler.actionable === "Visita PdV" &&
-                                  dto != "KOF Colombia" ? (
-                                    <img
-                                      src={"../../sampleData/p.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable === "Sin Riesgo" ||
-                                    cooler.actionable === "SIN RIESGO" ? (
-                                    <img
-                                      src={"../../sampleData/sn.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                      "Estatus sin venta" ||
-                                    cooler.actionable === "SIN VENTA" ||
-                                    cooler.actionable === "Acciones urgentes" ||
-                                    cooler.actionable === "SIN COINCIDENCIA" ? (
-                                    <img
-                                      src={"../../sampleData/a.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                    "Actualizar Info" ? (
-                                    <img
-                                      src={"../../sampleData/p.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                    "Actualizar dato" ? (
-                                    <img
-                                      src={"../../sampleData/actDat.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                    "Datos faltantes" ? (
-                                    <img
-                                      src={"../../sampleData/datFal.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable === "Monitoreo" ? (
-                                    <img
-                                      src={"../../sampleData/Mont.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable === "Movimiento" ? (
-                                    <img
-                                      src={"../../sampleData/mov1.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                      "Solicitar serv. correctivo" ||
-                                    cooler.actionable ===
-                                      "Solicitar serv. preventivos" ? (
-                                    <img
-                                      src={"../../sampleData/serCP.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                    "Seguimiento a equipo" ? (
-                                    <img
-                                      src={"../../sampleData/seguE.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable === "Visita PdV" ||
-                                    cooler.actionable ===
-                                      "VISITA PDV PARA LECTURA" ? (
-                                    <img
-                                      src={"../../sampleData/visitap.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : cooler.actionable ===
-                                    "Visita PdV prioritaria" ? (
-                                    <img
-                                      src={"../../sampleData/visitapd.svg"}
-                                      alt="Descripción de la imagen"
-                                      style={{ width: "15px", height: "15px" }}
-                                    />
-                                  ) : (
-                                    ""
-                                  )} */}
-
                                   <div
                                     style={{
                                       color:
                                         cooler.actionable === "Visita PdV" &&
                                         dto != "KOF Colombia"
                                           ? "#DA7E05"
-                                          : cooler.actionable ===
-                                              "Sin Riesgo" ||
-                                            cooler.actionable === "SIN RIESGO"
+                                          : cooler.actionable === "Sin Riesgo"
                                           ? "#40C057"
                                           : cooler.actionable ===
                                               "Estatus sin venta" ||
                                             cooler.actionable === "SIN VENTA" ||
                                             cooler.actionable ===
-                                              "Acciones urgentes" ||
-                                            cooler.actionable ===
-                                              "SIN COINCIDENCIA"
+                                              "Acciones urgentes"
                                           ? "#FA5252"
                                           : cooler.actionable ===
                                             "Actualizar Info"
@@ -742,14 +656,28 @@ export default function CoolersCC() {
                                               "Solicitar serv. preventivos" ||
                                             cooler.actionable ===
                                               "Seguimiento a equipo" ||
-                                            cooler.actionable ===
-                                              "Visita PdV" ||
-                                            cooler.actionable ===
-                                              "VISITA PDV PARA LECTURA"
+                                            cooler.actionable === "Visita PdV"
                                           ? "#E67700"
                                           : cooler.actionable ===
                                             "Visita PdV prioritaria"
                                           ? "#C92A2A"
+                                          : cooler.actionable ===
+                                              "SIN RIESGO" ||
+                                            cooler.actionable ===
+                                              "SIN RIESGO SIN VENTA" ||
+                                            cooler.actionable ===
+                                              "VISITA PDV SIN VENTA" ||
+                                            cooler.actionable === "EN BODEGA" ||
+                                            cooler.actionable ===
+                                              "PDV POR ASIGNAR"
+                                          ? "#2393F4"
+                                          : cooler.actionable ===
+                                              "VISITA PDV PARA LECTURA" ||
+                                            cooler.actionable ===
+                                              "SIN COINCIDENCIA" ||
+                                            cooler.actionable ===
+                                              "CON MOVIMIENTO"
+                                          ? "#FAB005"
                                           : "black",
 
                                       fontStyle: "normal",
@@ -771,7 +699,7 @@ export default function CoolersCC() {
                             ) : (
                               <div>
                                 <Link
-                                  to={`/home/clt/${cooler.serial_number}`}
+                                  to={`/home/clt_callCenter/${cooler.serial_number}`}
                                   target="_blank"
                                 >
                                   <div
