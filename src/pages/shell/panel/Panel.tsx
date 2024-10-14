@@ -751,7 +751,7 @@ export default function Panel() {
 
   // Navigation based on organization changes
   useEffect(() => {
-    if (!["KOF", "KOF Colombia", "KOF Guatemala", "ECO"].includes(dto)) {
+    if (!["KOF", "KOF Colombia", "ECO"].includes(dto)) {
       navigate("/home");
     } else if (dto === "CALL CENTER") {
       navigate("/home/clt_callCenter");
