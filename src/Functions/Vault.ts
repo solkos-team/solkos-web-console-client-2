@@ -1,7 +1,8 @@
 import { CoolerData, CoolerInterface } from "../interfaces/CoolerInterface";
 
-
-function vaultProces2RemoveDuplicades(coolers: CoolerInterface[]): CoolerInterface[] {
+function vaultProces2RemoveDuplicades(
+  coolers: CoolerInterface[]
+): CoolerInterface[] {
   const seenDeviceIds = new Set<string>();
   const uniqueCoolers: CoolerInterface[] = [];
 
@@ -15,29 +16,38 @@ function vaultProces2RemoveDuplicades(coolers: CoolerInterface[]): CoolerInterfa
   return uniqueCoolers;
 }
 
-const getBorderStyle = (cooler: CoolerData | undefined, dto: string): string => {
-  if (!cooler) return "1.5px solid black";  
-  const actionable = cooler.cooler.actionable 
+const getBorderStyle = (
+  cooler: CoolerData | undefined,
+  dto: string
+): string => {
+  if (!cooler) return "1.5px solid black";
+  const actionable = cooler.cooler.actionable;
 
   // Definir el mapa de estilos de borde basado en las acciones
   const borderStyles: { [key: string]: string } = {
     "Visita PdV": "1.5px solid #DA7E05",
     "Sin Riesgo": "1.5px solid #40C057",
-    "SIN RIESGO": "1.5px solid #40C057",
     "Estatus sin venta": "1.5px solid #FA5252",
     "SIN VENTA": "1.5px solid #FA5252",
     "Acciones urgentes": "1.5px solid #FA5252",
-    "SIN COINCIDENCIA": "1.5px solid #FA5252",
     "Actualizar Info": "1.5px solid #DA7E05",
     "Actualizar dato": "1.5px solid #1864AB",
     "Datos faltantes": "1.5px solid #1864AB",
-    "Monitoreo": "1.5px solid #1864AB",
-    "Movimiento": "1.5px solid #1864AB",
+    Monitoreo: "1.5px solid #1864AB",
+    Movimiento: "1.5px solid #1864AB",
     "Solicitar serv. correctivo": "1.5px solid #E67700",
     "Solicitar serv. preventivos": "1.5px solid #E67700",
     "Seguimiento a equipo": "1.5px solid #E67700",
-    "VISITA PDV PARA LECTURA": "1.5px solid #E67700",
-    "Visita PdV prioritaria": "1.5px solid #C92A2A"
+    "Visita PdV prioritaria": "1.5px solid #C92A2A",
+    // *********************************************
+    "SIN RIESGO": "1.5px solid #2393F4",
+    "SIN RIESGO SIN VENTA": "1.5px solid #2393F4",
+    "VISITA PDV SIN VENTA": "1.5px solid #2393F4",
+    "EN BODEGA": "1.5px solid #2393F4",
+    "PDV POR ASIGNAR": "1.5px solid #2393F4",
+    "VISITA PDV PARA LECTURA": "1.5px solid #FAB005",
+    "SIN COINCIDENCIA": "1.5px solid #FAB005",
+    "CON MOVIMIENTO": "1.5px solid #FAB005",
   };
 
   // Verificar la condición especial para "Visita PdV"
@@ -49,28 +59,34 @@ const getBorderStyle = (cooler: CoolerData | undefined, dto: string): string => 
   return borderStyles[actionable] || "1.5px solid black";
 };
 const getBorderStyle2 = (cooler: any | undefined, dto: string): string => {
-  if (!cooler) return "1.5px solid black";  
-  const actionable = cooler 
+  if (!cooler) return "1.5px solid black";
+  const actionable = cooler;
 
   // Definir el mapa de estilos de borde basado en las acciones
   const borderStyles: { [key: string]: string } = {
     "Visita PdV": "1.5px solid #DA7E05",
     "Sin Riesgo": "1.5px solid #40C057",
-    "SIN RIESGO": "1.5px solid #40C057",
     "Estatus sin venta": "1.5px solid #FA5252",
     "SIN VENTA": "1.5px solid #FA5252",
     "Acciones urgentes": "1.5px solid #FA5252",
-    "SIN COINCIDENCIA": "1.5px solid #FA5252",
     "Actualizar Info": "1.5px solid #DA7E05",
     "Actualizar dato": "1.5px solid #1864AB",
     "Datos faltantes": "1.5px solid #1864AB",
-    "Monitoreo": "1.5px solid #1864AB",
-    "Movimiento": "1.5px solid #1864AB",
+    Monitoreo: "1.5px solid #1864AB",
+    Movimiento: "1.5px solid #1864AB",
     "Solicitar serv. correctivo": "1.5px solid #E67700",
     "Solicitar serv. preventivos": "1.5px solid #E67700",
     "Seguimiento a equipo": "1.5px solid #E67700",
-    "VISITA PDV PARA LECTURA": "1.5px solid #E67700",
-    "Visita PdV prioritaria": "1.5px solid #C92A2A"
+    "Visita PdV prioritaria": "1.5px solid #C92A2A",
+    // ****************************************
+    "SIN RIESGO": "1.5px solid #2393F4",
+    "SIN RIESGO SIN VENTA": "1.5px solid #2393F4",
+    "VISITA PDV SIN VENTA": "1.5px solid #2393F4",
+    "EN BODEGA": "1.5px solid #2393F4",
+    "PDV POR ASIGNAR": "1.5px solid #2393F4",
+    "VISITA PDV PARA LECTURA": "1.5px solid #FAB005",
+    "SIN COINCIDENCIA": "1.5px solid #FAB005",
+    "CON MOVIMIENTO": "1.5px solid #FAB005",
   };
 
   // Verificar la condición especial para "Visita PdV"
@@ -90,21 +106,27 @@ const getColor = (cooler: CoolerData | undefined, dto: string): string => {
   const colorMap: { [key: string]: string } = {
     "Visita PdV": "#DA7E05",
     "Sin Riesgo": "#40C057",
-    "SIN RIESGO": "#40C057",
     "Estatus sin venta": "#FA5252",
     "SIN VENTA": "#FA5252",
     "Acciones urgentes": "#FA5252",
-    "SIN COINCIDENCIA": "#FA5252",
     "Actualizar Info": "#DA7E05",
     "Actualizar dato": "#1864AB",
     "Datos faltantes": "#1864AB",
-    "Monitoreo": "#1864AB",
-    "Movimiento": "#1864AB",
+    Monitoreo: "#1864AB",
+    Movimiento: "#1864AB",
     "Solicitar serv. correctivo": "#E67700",
     "Solicitar serv. preventivos": "#E67700",
     "Seguimiento a equipo": "#E67700",
-    "VISITA PDV PARA LECTURA": "#E67700",
-    "Visita PdV prioritaria": "#C92A2A"
+    "Visita PdV prioritaria": "#C92A2A",
+    // *********************************
+    "SIN RIESGO": "#2393F4",
+    "SIN RIESGO SIN VENTA": "#2393F4",
+    "VISITA PDV SIN VENTA": "#2393F4",
+    "EN BODEGA": "#2393F4",
+    "PDV POR ASIGNAR": "#2393F4",
+    "VISITA PDV PARA LECTURA": "#FAB005",
+    "SIN COINCIDENCIA": "#FAB005",
+    "CON MOVIMIENTO": "#FAB005",
   };
 
   // Verificar la condición especial para "Visita PdV"
@@ -124,21 +146,27 @@ const getColor2 = (cooler: any | undefined, dto: string): string => {
   const colorMap: { [key: string]: string } = {
     "Visita PdV": "#DA7E05",
     "Sin Riesgo": "#40C057",
-    "SIN RIESGO": "#40C057",
     "Estatus sin venta": "#FA5252",
     "SIN VENTA": "#FA5252",
     "Acciones urgentes": "#FA5252",
-    "SIN COINCIDENCIA": "#FA5252",
     "Actualizar Info": "#DA7E05",
     "Actualizar dato": "#1864AB",
     "Datos faltantes": "#1864AB",
-    "Monitoreo": "#1864AB",
-    "Movimiento": "#1864AB",
+    Monitoreo: "#1864AB",
+    Movimiento: "#1864AB",
     "Solicitar serv. correctivo": "#E67700",
     "Solicitar serv. preventivos": "#E67700",
     "Seguimiento a equipo": "#E67700",
-    "VISITA PDV PARA LECTURA": "#E67700",
-    "Visita PdV prioritaria": "#C92A2A"
+    "Visita PdV prioritaria": "#C92A2A",
+    // **********************************
+    "SIN RIESGO": "#2393F4",
+    "SIN RIESGO SIN VENTA": "#2393F4",
+    "VISITA PDV SIN VENTA": "#2393F4",
+    "EN BODEGA": "#2393F4",
+    "PDV POR ASIGNAR": "#2393F4",
+    "VISITA PDV PARA LECTURA": "#FAB005",
+    "SIN COINCIDENCIA": "#FAB005",
+    "CON MOVIMIENTO": "#FAB005",
   };
 
   // Verificar la condición especial para "Visita PdV"
@@ -163,7 +191,7 @@ const getStatusColor = (coolersData: CoolerData | undefined): string => {
     "EN ESPERA DE LECTURA": "#A5D8FF",
     "SERVICIO NO EFECTIVO": "#FFC9C9",
     "SERVICIO IMPRODUCTIVO": "#FFC9C9",
-    "SIN DATOS": "#C7CBD2"
+    "SIN DATOS": "#C7CBD2",
   };
 
   // Retornar el color basado en el mapa o el color por defecto
@@ -183,7 +211,7 @@ const backgroundCircle = (coolersData: CoolerData | undefined): string => {
     "EN ESPERA DE LECTURA": "#1864AB",
     "SERVICIO NO EFECTIVO": "#E03131",
     "SERVICIO IMPRODUCTIVO": "#E03131",
-    "SIN DATOS": "#313A49"
+    "SIN DATOS": "#313A49",
   };
 
   // Retornar el color basado en el mapa o el color por defecto
@@ -191,17 +219,29 @@ const backgroundCircle = (coolersData: CoolerData | undefined): string => {
 };
 // transformar datos a estructura correcta para la peticion
 const vaultProces2TransformData = (array) => {
-  return array.map(item => ({
-      device_id: item.device_id,
-      estatus: item.estatus
+  return array.map((item) => ({
+    device_id: item.device_id,
+    estatus: item.estatus,
   }));
-}
+};
 
 const getVaultDate = (records: any | null) => {
   if (records.length === 0) return null;
 
   return records.reduce((latest, current) => {
-    return new Date(current.date_time) > new Date(latest.date_time) ? current : latest;
+    return new Date(current.date_time) > new Date(latest.date_time)
+      ? current
+      : latest;
   });
 };
-export { vaultProces2RemoveDuplicades,getBorderStyle,getColor,getStatusColor,backgroundCircle ,getBorderStyle2,getColor2,vaultProces2TransformData,getVaultDate}
+export {
+  vaultProces2RemoveDuplicades,
+  getBorderStyle,
+  getColor,
+  getStatusColor,
+  backgroundCircle,
+  getBorderStyle2,
+  getColor2,
+  vaultProces2TransformData,
+  getVaultDate,
+};

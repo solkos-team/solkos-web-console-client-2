@@ -472,10 +472,7 @@ export default function Outlets() {
                                                 "Solicitar serv. preventivos" ||
                                               outlet.actionable ===
                                                 "Seguimiento a equipo" ||
-                                              outlet.actionable ===
-                                                "Visita PdV" ||
-                                              outlet.actionable ===
-                                                "VISITA PDV PARA LECTURA"
+                                              outlet.actionable === "Visita PdV"
                                             ? "1.5px solid #E67700"
                                             : outlet.actionable ===
                                               "Visita PdV prioritaria"
@@ -534,9 +531,7 @@ export default function Outlets() {
                                                 outlet.actionable ===
                                                   "Seguimiento a equipo" ||
                                                 outlet.actionable ===
-                                                  "Visita PdV" ||
-                                                outlet.actionable ===
-                                                  "VISITA PDV PARA LECTURA"
+                                                  "Visita PdV"
                                               ? "#E67700"
                                               : outlet.actionable ===
                                                 "Visita PdV prioritaria"
