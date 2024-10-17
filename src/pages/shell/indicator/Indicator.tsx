@@ -9,6 +9,8 @@ import { useDisclosure } from "@mantine/hooks";
 import { useNavigate } from "react-router-dom";
 import { Level } from "../../../interfaces/InsightsInterfaces";
 
+declare var Tally: any;
+
 export default function Indicator() {
   const [opened, { open, close }] = useDisclosure(false);
   const [coolersData, setCoolersData] = useState<Cooler[] | null>(null);
@@ -84,6 +86,23 @@ export default function Indicator() {
       navigate("/home/clt_callCenter");
     }
   }, [navigate, dto]);
+
+  useEffect(() => {
+    // Carga el script de Tally
+    const script = document.createElement("script");
+    script.src = "https://tally.so/widgets/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openTallyPopup = () => {
+    const formId = "w4oP8d"; // ID de formulario
+    Tally.openPopup(formId);
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -636,6 +655,12 @@ export default function Indicator() {
           level={selectedAlgorithmValues.level}
         />
       )}
+      <button className="floating-button" onClick={openTallyPopup}>
+        <img
+          src={"../../sampleData/ticket.svg"}
+          alt="Descripción de la imagen"
+        />
+      </button>
     </div>
   );
 }

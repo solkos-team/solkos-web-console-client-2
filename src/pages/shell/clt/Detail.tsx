@@ -55,6 +55,8 @@ moment.locale("es", {
   ],
 });
 
+declare var Tally: any;
+
 export default function CoolerDetail() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const dto = useSelector((state: any) => state.organization);
@@ -177,6 +179,23 @@ export default function CoolerDetail() {
   useEffect(() => {
     document.title = `Consola Solkos ${serial_number}`;
   }, []);
+
+  useEffect(() => {
+    // Carga el script de Tally
+    const script = document.createElement("script");
+    script.src = "https://tally.so/widgets/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openTallyPopup = () => {
+    const formId = "w4oP8d"; // ID de formulario
+    Tally.openPopup(formId);
+  };
 
   return (
     <>
@@ -1954,6 +1973,12 @@ export default function CoolerDetail() {
         dateStat={dateTelemetri}
         url2={url2}
       />
+      <button className="floating-button" onClick={openTallyPopup}>
+        <img
+          src={"../../sampleData/ticket.svg"}
+          alt="Descripción de la imagen"
+        />
+      </button>
     </>
   );
 }

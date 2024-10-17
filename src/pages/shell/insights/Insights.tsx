@@ -9,6 +9,9 @@ import { MapInsightsResponsive } from "./Responsive/MapInsightsResponsive";
 import { useSelector } from "react-redux";
 import { MapResponsive } from "../../../components/mapInsights/MapResponsive";
 import { navigateModules } from "../../../Functions/Routing";
+
+declare var Tally: any;
+
 export default function Insights() {
   const [data, setData] = useState<InsightsIT | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +74,23 @@ export default function Insights() {
     : percentage >= 80 && percentage <= 100
     ? "#40C057"
     : "";
+
+  useEffect(() => {
+    // Carga el script de Tally
+    const script = document.createElement("script");
+    script.src = "https://tally.so/widgets/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openTallyPopup = () => {
+    const formId = "w4oP8d"; // ID de formulario
+    Tally.openPopup(formId);
+  };
 
   return (
     <div className="insights_principal_container">
@@ -1125,6 +1145,12 @@ export default function Insights() {
             </section>
           </section>
         </section>
+        <button className="floating-button" onClick={openTallyPopup}>
+          <img
+            src={"../../sampleData/ticket.svg"}
+            alt="Descripción de la imagen"
+          />
+        </button>
       </section>
     </div>
   );

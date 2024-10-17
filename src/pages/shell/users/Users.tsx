@@ -18,6 +18,8 @@ import { PaginationComponent } from "../../../components/Pagination/PaginationCo
 import { SkeletonTableUsers } from "../../../components/skeletonTableUsers/SkeletonTableUsers";
 import { HeaderInsights } from "../insights/Responsive/HeaderInsights";
 
+declare var Tally: any;
+
 export default function Users() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [opened, setOpened] = useState(false);
@@ -212,6 +214,23 @@ export default function Users() {
   };
   const currentUserRole = Role;
   const EMAIL = sessionStorage.getItem("Email");
+
+  useEffect(() => {
+    // Carga el script de Tally
+    const script = document.createElement("script");
+    script.src = "https://tally.so/widgets/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openTallyPopup = () => {
+    const formId = "w4oP8d"; // ID de formulario
+    Tally.openPopup(formId);
+  };
   return (
     <div>
       {dto === "CALL CENTER" ? (
@@ -989,6 +1008,12 @@ export default function Users() {
             </section>
           </Modal>
         )}
+        <button className="floating-button" onClick={openTallyPopup}>
+          <img
+            src={"../../sampleData/ticket.svg"}
+            alt="Descripción de la imagen"
+          />
+        </button>
       </section>
     </div>
   );

@@ -34,6 +34,8 @@ moment.locale("es", {
   ],
 });
 
+declare var Tally: any;
+
 export default function Coolers() {
   const [showTable, setShowTable] = useState(false);
   const [tableViewClicked, setTableViewClicked] = useState(false);
@@ -184,6 +186,23 @@ export default function Coolers() {
       navigate("/home/clt_callCenter");
     }
   }, [navigate, dto]);
+
+  useEffect(() => {
+    // Carga el script de Tally
+    const script = document.createElement("script");
+    script.src = "https://tally.so/widgets/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openTallyPopup = () => {
+    const formId = "w4oP8d"; // ID de formulario
+    Tally.openPopup(formId);
+  };
   return (
     <div>
       <PageFilter status={isLoading} />
@@ -727,6 +746,12 @@ export default function Coolers() {
           </>
         )}
       </div>
+      <button className="floating-button" onClick={openTallyPopup}>
+        <img
+          src={"../../sampleData/ticket.svg"}
+          alt="Descripción de la imagen"
+        />
+      </button>
     </div>
   );
 }

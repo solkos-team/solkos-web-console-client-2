@@ -8,6 +8,8 @@ import { SkeletonCards } from "../../../components/skeletonCards/SkeletonCards";
 import { CoolerInterface as Cooler } from "../../../interfaces/CoolerInterface";
 import { useNavigate } from "react-router-dom";
 
+declare var Tally: any;
+
 export default function Alerts() {
   const [isLoading, setIsLoading] = useState(true);
   const [opened, { open, close }] = useDisclosure(false);
@@ -70,6 +72,23 @@ export default function Alerts() {
       navigate("/home/clt_callCenter");
     }
   }, [navigate, dto]);
+
+  useEffect(() => {
+    // Carga el script de Tally
+    const script = document.createElement("script");
+    script.src = "https://tally.so/widgets/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const openTallyPopup = () => {
+    const formId = "w4oP8d"; // ID de formulario
+    Tally.openPopup(formId);
+  };
 
   return (
     <div>
@@ -470,6 +489,12 @@ export default function Alerts() {
           level={selectedAlgorithmValues.level}
         />
       )}
+      <button className="floating-button" onClick={openTallyPopup}>
+        <img
+          src={"../../sampleData/ticket.svg"}
+          alt="Descripción de la imagen"
+        />
+      </button>
     </div>
   );
 }

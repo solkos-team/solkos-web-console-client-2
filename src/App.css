@@ -1839,9 +1839,7 @@ body {
   .insights_datas_container_Grafica {
     width: 30%;
   }
-  /* .insights_datas_kpi_data_data{
-    
-  } */
+
   .insights_datas_kpi_data_data_1 {
     font-weight: 500;
     font-size: 0.8rem;
@@ -2934,7 +2932,29 @@ body {
   opacity: 1; /* Se vuelve visible */
 }
 
-
-.mantine-oqtyjo{
+.mantine-oqtyjo {
   display: none !important;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  background-color: #cacaca;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 3.125rem;
+  height: 3.125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+.floating-button:hover {
+  background-color: #a5a4a4;
 }
