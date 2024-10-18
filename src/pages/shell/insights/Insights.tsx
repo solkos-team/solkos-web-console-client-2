@@ -762,32 +762,31 @@ export default function Insights() {
                       );
 
                       return (
-                        <div
-                          key={index}
-                          style={{
-                            display: "flex",
-                            padding: "0px",
-                            gap: "16px",
-                            alignSelf: "stretch",
-                            marginBottom: "16px",
-                            boxSizing: "border-box",
-                          }}
-                        >
+                        <Tooltip key={index} label="Ver más">
                           <div
-                            className="insights_datas_info_mantenimiento_datos_barras_color_Fallas"
                             style={{
-                              width: `${(algorithm.value / max) * 100}%`,
-                              background: isLoading != true ? "#D0EBFF" : "",
+                              display: "flex",
+                              padding: "0px",
+                              gap: "16px",
+                              alignSelf: "stretch",
+                              marginBottom: "16px",
+                              boxSizing: "border-box",
                             }}
+                            onClick={() => navigate("/home/indicator")}
                           >
-                            <div className="insights_datas_info_mantenimiento_datos_barras_title">
-                              {isLoading == true ? (
-                                <>
+                            <div
+                              className="insights_datas_info_mantenimiento_datos_barras_color_Fallas"
+                              style={{
+                                width: `${(algorithm.value / max) * 100}%`,
+                                background: isLoading !== true ? "#D0EBFF" : "",
+                              }}
+                            >
+                              <div className="insights_datas_info_mantenimiento_datos_barras_title">
+                                {isLoading === true ? (
                                   <div
                                     style={{
                                       width: "2rem",
                                       height: "1rem",
-                                      // marginLeft: -10,
                                     }}
                                   >
                                     <Skeleton
@@ -797,34 +796,32 @@ export default function Insights() {
                                       radius="xs"
                                     />
                                   </div>
-                                </>
-                              ) : (
-                                <span
-                                  style={{
-                                    color: "#2393F4",
-                                    fontWeight: 400,
-                                    fontStyle: "normal",
-                                  }}
-                                >
-                                  {algorithm.algorithm}
-                                </span>
-                              )}
+                                ) : (
+                                  <span
+                                    style={{
+                                      color: "#2393F4",
+                                      fontWeight: 400,
+                                      fontStyle: "normal",
+                                    }}
+                                  >
+                                    {algorithm.algorithm}
+                                  </span>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                          <div
-                            style={{
-                              color: "#000005",
-                              fontSize: "0.75rem",
-                              fontWeight: 400,
-                              lineHeight: "15.62px",
-                              marginLeft: "auto",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {isLoading == true ? (
-                              <>
+                            <div
+                              style={{
+                                color: "#000005",
+                                fontSize: "0.75rem",
+                                fontWeight: 400,
+                                lineHeight: "15.62px",
+                                marginLeft: "auto",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                              }}
+                            >
+                              {isLoading === true ? (
                                 <div style={{ width: "2rem", height: "1rem" }}>
                                   <Skeleton
                                     height={15}
@@ -833,31 +830,17 @@ export default function Insights() {
                                     radius="xs"
                                   />
                                 </div>
-                              </>
-                            ) : algorithm.value === undefined ? (
-                              "Sin registro"
-                            ) : (
-                              algorithm.value.toLocaleString("es-MX")
-                            )}
+                              ) : algorithm.value === undefined ? (
+                                "Sin registro"
+                              ) : (
+                                algorithm.value.toLocaleString("es-MX")
+                              )}
+                            </div>
                           </div>
-                        </div>
+                        </Tooltip>
                       );
                     })}
                   </div>
-                  <section
-                    className="insights_datas_mantenimiento_VerDetalles_principal"
-                    style={{ display: isLoading == true ? "none" : "" }}
-                    onClick={() => navigate("/home/indicator")}
-                  >
-                    <div className="insights_datas_mantenimiento_VerDetalles_h1">
-                      Ver detalles
-                    </div>
-                    <img
-                      src={"../../sampleData/arrow_b.png"}
-                      alt="Descripción de la imagen"
-                      style={{ marginTop: 4 }}
-                    />
-                  </section>
                 </div>
               </div>
               <div className="insigths_datas_info2_control">
