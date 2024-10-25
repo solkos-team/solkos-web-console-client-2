@@ -114,13 +114,13 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
       setIsLoading(true);
 
       const data = await fetchUniversal("insights", body, setIsLoading);
-      // console.log("API Response Data:", data);
+      console.log("API Response Data:", data);
 
       if (data) {
-        if (data.polygon_data) {
+        if (data.polygon_data && data.polygon_data.polygons) {
           const geoJsonData = {
             type: "FeatureCollection",
-            features: data.polygon_data
+            features: data.polygon_data.polygons
               .map((polygon) => {
                 if (polygon.type === "coolers") {
                   return polygon.coolers.map((cooler) => ({
