@@ -112,7 +112,6 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
   const fetchData = async () => {
     try {
       setIsLoading(true);
-
       const data = await fetchUniversal("insights", body, setIsLoading);
       console.log("API Response Data:", data);
 
@@ -193,19 +192,19 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
           setGeojson(geoJsonData);
         } else {
           console.warn("No polygon_data found in API response");
-          setGeojson(null); // Limpia el estado del mapa
+          setGeojson(null);
         }
 
         setData(data);
       } else {
         console.error("No data found in API response");
-        setGeojson(null); // Limpia el estado del mapa
+        setGeojson(null);
       }
 
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
-      setGeojson(null); // Limpia el estado del mapa
+      setGeojson(null);
       setIsLoading(false);
     }
   };
@@ -480,6 +479,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
+        position: "relative",
       }}
     >
       {isLoading ? (
@@ -490,8 +490,8 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
             bootstrapURLKeys={{
               key: "AIzaSyBYTHbWcKL5Apx4_l9_eM-LcRZlMXWjl2w",
             }}
-            defaultCenter={defaultProps.center}
-            defaultZoom={defaultProps.zoom}
+            defaultCenter={{ lat: 0, lng: 0 }} // Centro inicial
+            defaultZoom={8} // Zoom inicial
             options={{
               gestureHandling: "greedy",
               ...mapOptions,
@@ -501,8 +501,132 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
               setMapInstance(map);
               setMapsInstance(maps);
               handleApiLoaded2(map, maps);
+
+              // Ajustar el centro y el zoom si no hay polígonos
+              if (
+                (data?.polygon_data?.type === "region" ||
+                  data?.polygon_data?.type === "route") &&
+                !data.polygon_data.polygons
+              ) {
+                map.setCenter({ lat: 23.6345, lng: -102.5528 }); // Centro en México
+                map.setZoom(8); // Ajustar el zoom para ver México
+              }
             }}
           />
+
+          {/* Mostrar mensaje si polygon_data es "region" y polygons es null */}
+          {data?.polygon_data?.type === "region" &&
+            !data.polygon_data.polygons && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "white",
+                  zIndex: 10,
+                  borderRadius: "8px",
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "inline-flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    width: "20rem",
+                  }}
+                >
+                  <img
+                    src={"../../sampleData/map_icon.svg"}
+                    alt="Descripción de la imagen"
+                    style={{
+                      width: "26px",
+                      height: "26px",
+                    }}
+                  />
+                  <div
+                    style={{
+                      color: "#2393F4",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "155%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <div>
+                      No hay datos disponibles para mostrar la Cobertura.
+                    </div>
+                    <div>
+                      No pudimos mostrar la cobertura en el mapa porque no
+                      tenemos información de los equipos.
+                    </div>
+                    <div>Todo lo demás funciona correctamente.</div>
+                  </div>
+                </div>
+              </div>
+            )}
+          {/* Mostrar mensaje si polygon_data es "route" y polygons es null */}
+          {data?.polygon_data?.type === "route" &&
+            !data.polygon_data.polygons && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "60%", // Cambia la posición si necesitas que no se sobreponga
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "white",
+                  zIndex: 10,
+                  borderRadius: "8px",
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <div
+                  style={{
+                    display: "inline-flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    width: "20rem",
+                  }}
+                >
+                  <img
+                    src={"../../sampleData/map_icon.svg"}
+                    alt="Descripción de la imagen"
+                    style={{
+                      width: "26px",
+                      height: "26px",
+                    }}
+                  />
+                  <div
+                    style={{
+                      color: "#2393F4",
+                      fontSize: "12px",
+                      fontStyle: "normal",
+                      fontWeight: 400,
+                      lineHeight: "155%",
+                      textAlign: "center",
+                    }}
+                  >
+                    <div>No se pueden mostrar las rutas</div>
+                    <div>
+                      No tenemos lecturas disponibles por lo que no podemos
+                      mostrar las rutas en el mapa.Todo lo demás funciona
+                      correctamente.
+                    </div>
+                    <div>
+                      Te sugerimos verificar las lecturas de las rutas e
+                      intentar de nuevo más tarde.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
           <MapInsightsResponsive opened={toggleDrawer} />
           <DrawerMap
             opened={opened}
