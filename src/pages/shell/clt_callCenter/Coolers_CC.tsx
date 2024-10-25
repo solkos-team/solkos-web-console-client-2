@@ -91,10 +91,12 @@ export default function CoolersCC() {
     page_size: Number(datosPorPagina),
     page_number: currentPage,
     filter_by: tags,
-    order_by: {
-      asc: changeAsc,
-      name: "last_read",
-    },
+    order_by: [
+      {
+        asc: changeAsc,
+        name: "last_read",
+      },
+    ],
   };
 
   const fetchData = async () => {
