@@ -3,7 +3,7 @@ import { FetchOptions } from "../interfaces/ApiInterfaces";
 // ***************************** CONSOLA *********************************************
 const CONSOLA_PROD = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 const CONSOLA_QA =
-  "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
+  "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
 
 const baseUrl = CONSOLA_QA;
 
