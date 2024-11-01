@@ -201,19 +201,19 @@ export default function Indicator() {
                 .sort((a, b) => {
                   const order = [
                     "Sin Riesgo",
-                    "SIN RIESGO",
-                    "SIN RIESGO SIN VENTA",
+                    "Sin riesgo",
+                    "Sin riesgo - sin venta",
                     "Visita PdV",
-                    "VISITA PDV SIN VENTA",
-                    "VISITA PDV PARA LECTURA",
-                    "CON MOVIMIENTO",
+                    "Visita PdV - sin venta",
+                    "Visita PdV para lectura",
+                    "Con movimiento",
                     "Actualizar Info",
                     "Estatus sin venta",
                     "SIN VENTA",
                     "Acciones urgentes",
-                    "SIN COINCIDENCIA",
-                    "EN BODEGA",
-                    "PDV POR ASIGNAR",
+                    "Sin coincidencia",
+                    "En bodega",
+                    "PdV por asignar",
                   ];
                   const indexA = order.indexOf(a.algorithm);
                   const indexB = order.indexOf(b.algorithm);
@@ -303,16 +303,18 @@ export default function Indicator() {
                                 ? "#FFF9DB"
                                 : cooler.algorithm === "Visita PdV prioritaria"
                                 ? "#FFC9C9"
-                                : cooler.algorithm === "SIN RIESGO" ||
-                                  cooler.algorithm === "SIN RIESGO SIN VENTA" ||
-                                  cooler.algorithm === "VISITA PDV SIN VENTA" ||
-                                  cooler.algorithm === "EN BODEGA" ||
-                                  cooler.algorithm === "PDV POR ASIGNAR"
+                                : cooler.algorithm === "Sin riesgo" ||
+                                  cooler.algorithm ===
+                                    "Sin riesgo - sin venta" ||
+                                  cooler.algorithm ===
+                                    "Visita PdV - sin venta" ||
+                                  cooler.algorithm === "En bodega" ||
+                                  cooler.algorithm === "PdV por asignar"
                                 ? "#A5D8FF"
                                 : cooler.algorithm ===
-                                    "VISITA PDV PARA LECTURA" ||
-                                  cooler.algorithm === "SIN COINCIDENCIA" ||
-                                  cooler.algorithm === "CON MOVIMIENTO"
+                                    "Visita PdV para lectura" ||
+                                  cooler.algorithm === "Sin coincidencia" ||
+                                  cooler.algorithm === "Con movimiento"
                                 ? "#FFEC99"
                                 : "",
                           }}
@@ -395,49 +397,49 @@ export default function Indicator() {
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "EN BODEGA" ? (
+                          ) : cooler.algorithm === "En bodega" ? (
                             <img
                               src={"../../sampleData/6.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "VISITA PDV SIN VENTA" ? (
+                          ) : cooler.algorithm === "Visita PdV - sin venta" ? (
                             <img
                               src={"../../sampleData/3.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "CON MOVIMIENTO" ? (
+                          ) : cooler.algorithm === "Con movimiento" ? (
                             <img
                               src={"../../sampleData/8.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "PDV POR ASIGNAR" ? (
+                          ) : cooler.algorithm === "PdV por asignar" ? (
                             <img
                               src={"../../sampleData/7.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "SIN RIESGO SIN VENTA" ? (
+                          ) : cooler.algorithm === "Sin riesgo - sin venta" ? (
                             <img
                               src={"../../sampleData/2.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "SIN RIESGO" ? (
+                          ) : cooler.algorithm === "Sin riesgo" ? (
                             <img
                               src={"../../sampleData/1.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "VISITA PDV PARA LECTURA" ? (
+                          ) : cooler.algorithm === "Visita PdV para lectura" ? (
                             <img
                               src={"../../sampleData/4.svg"}
                               alt="Descripción de la imagen"
                               style={{ width: "18px", height: "18px" }}
                             />
-                          ) : cooler.algorithm === "SIN COINCIDENCIA" ? (
+                          ) : cooler.algorithm === "Sin coincidencia" ? (
                             <img
                               src={"../../sampleData/5.svg"}
                               alt="Descripción de la imagen"

@@ -497,22 +497,22 @@ export default function Outlets() {
                                               "Visita PdV prioritaria"
                                             ? "1.5px solid #C92A2A"
                                             : outlet.actionable ===
-                                                "SIN RIESGO" ||
+                                                "Sin riesgo" ||
                                               outlet.actionable ===
-                                                "SIN RIESGO SIN VENTA" ||
+                                                "Sin riesgo - sin venta" ||
                                               outlet.actionable ===
-                                                "VISITA PDV SIN VENTA" ||
+                                                "Visita PdV - sin venta" ||
                                               outlet.actionable ===
-                                                "EN BODEGA" ||
+                                                "En bodega" ||
                                               outlet.actionable ===
-                                                "PDV POR ASIGNAR"
+                                                "PdV por asignar"
                                             ? "1.5px solid #2393F4"
                                             : outlet.actionable ===
-                                                "VISITA PDV PARA LECTURA" ||
+                                                "Visita PdV para lectura" ||
                                               outlet.actionable ===
-                                                "SIN COINCIDENCIA" ||
+                                                "Sin coincidencia" ||
                                               outlet.actionable ===
-                                                "CON MOVIMIENTO"
+                                                "Con movimiento"
                                             ? "1.5px solid #FAB005"
                                             : "1.5px solid black",
                                         background: "#FFF",
@@ -556,22 +556,22 @@ export default function Outlets() {
                                                 "Visita PdV prioritaria"
                                               ? "#C92A2A"
                                               : outlet.actionable ===
-                                                  "SIN RIESGO" ||
+                                                  "Sin riesgo" ||
                                                 outlet.actionable ===
-                                                  "SIN RIESGO SIN VENTA" ||
+                                                  "Sin riesgo - sin venta" ||
                                                 outlet.actionable ===
-                                                  "VISITA PDV SIN VENTA" ||
+                                                  "Visita PdV - sin venta" ||
                                                 outlet.actionable ===
-                                                  "EN BODEGA" ||
+                                                  "En bodega" ||
                                                 outlet.actionable ===
-                                                  "PDV POR ASIGNAR"
+                                                  "PdV por asignar"
                                               ? "#2393F4"
                                               : outlet.actionable ===
-                                                  "VISITA PDV PARA LECTURA" ||
+                                                  "Visita PdV para lectura" ||
                                                 outlet.actionable ===
-                                                  "SIN COINCIDENCIA" ||
+                                                  "Sin coincidencia" ||
                                                 outlet.actionable ===
-                                                  "CON MOVIMIENTO"
+                                                  "Con movimiento"
                                               ? "#FAB005"
                                               : "black",
 

@@ -850,17 +850,17 @@ export default function CoolerDetail() {
                                 order.data.algorithm === "Estatus sin venta" ||
                                 order.data.algorithm === "Visita PdV" ||
                                 order.data.algorithm === "Acciones urgentes" ||
-                                order.data.algorithm === "SIN RIESGO" ||
+                                order.data.algorithm === "Sin riesgo" ||
                                 order.data.algorithm ===
-                                  "SIN RIESGO SIN VENTA" ||
+                                  "Sin riesgo - sin venta" ||
                                 order.data.algorithm ===
-                                  "VISITA PDV SIN VENTA" ||
+                                  "Visita PdV sin venta" ||
                                 order.data.algorithm ===
-                                  "VISITA PDV PARA LECTURA" ||
-                                order.data.algorithm === "SIN COINCIDENCIA" ||
-                                order.data.algorithm === "EN BODEGA" ||
-                                order.data.algorithm === "PDV POR ASIGNAR" ||
-                                order.data.algorithm === "CON MOVIMIENTO"))
+                                  "Visita PdV para lectura" ||
+                                order.data.algorithm === "Sin coincidencia" ||
+                                order.data.algorithm === "En bodega" ||
+                                order.data.algorithm === "PdV por asignar" ||
+                                order.data.algorithm === "Con movimiento"))
                         )
                         .sort((a, b) => {
                           let aDate, bDate;
@@ -1397,19 +1397,19 @@ export default function CoolerDetail() {
                           : coolersData?.cooler.actionable ===
                             "Visita PdV prioritaria"
                           ? "1.5px solid #C92A2A"
-                          : coolersData?.cooler.actionable === "SIN RIESGO" ||
+                          : coolersData?.cooler.actionable === "Sin riesgo" ||
                             coolersData?.cooler.actionable ===
-                              "SIN RIESGO SIN VENTA" ||
+                              "Sin riesgo - sin venta" ||
                             coolersData?.cooler.actionable ===
-                              "VISITA PDV SIN VENTA" ||
-                            coolersData?.cooler.actionable === "EN BODEGA" ||
-                            coolersData?.cooler.actionable === "PDV POR ASIGNAR"
+                              "Visita PdV - sin venta" ||
+                            coolersData?.cooler.actionable === "En bodega" ||
+                            coolersData?.cooler.actionable === "PdV por asignar"
                           ? "1.5px solid #2393F4"
                           : coolersData?.cooler.actionable ===
-                              "VISITA PDV PARA LECTURA" ||
+                              "Visita PdV para lectura" ||
                             coolersData?.cooler.actionable ===
-                              "SIN COINCIDENCIA" ||
-                            coolersData?.cooler.actionable === "CON MOVIMIENTO"
+                              "Sin coincidencia" ||
+                            coolersData?.cooler.actionable === "Con movimiento"
                           ? "1.5px solid #FAB005"
                           : "1.5px solid black",
                       background: "#FFF",
@@ -1450,21 +1450,21 @@ export default function CoolerDetail() {
                             : coolersData?.cooler.actionable ===
                               "Visita PdV prioritaria"
                             ? "#C92A2A"
-                            : coolersData?.cooler.actionable === "SIN RIESGO" ||
+                            : coolersData?.cooler.actionable === "Sin riesgo" ||
                               coolersData?.cooler.actionable ===
-                                "SIN RIESGO SIN VENTA" ||
+                                "Sin riesgo - sin venta" ||
                               coolersData?.cooler.actionable ===
-                                "VISITA PDV SIN VENTA" ||
-                              coolersData?.cooler.actionable === "EN BODEGA" ||
+                                "Visita PdV - sin venta" ||
+                              coolersData?.cooler.actionable === "En bodega" ||
                               coolersData?.cooler.actionable ===
-                                "PDV POR ASIGNAR"
+                                "PdV por asignar"
                             ? "#2393F4"
                             : coolersData?.cooler.actionable ===
-                                "VISITA PDV PARA LECTURA" ||
+                                "Visita PdV para lectura" ||
                               coolersData?.cooler.actionable ===
-                                "SIN COINCIDENCIA" ||
+                                "Sin coincidencia" ||
                               coolersData?.cooler.actionable ===
-                                "CON MOVIMIENTO"
+                                "Con movimiento"
                             ? "#FAB005"
                             : "black",
                         // fontFamily: "DM Sans",
