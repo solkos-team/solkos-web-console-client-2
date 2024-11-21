@@ -753,7 +753,7 @@ export default function Panel() {
 
   // Navigation based on organization changes
   useEffect(() => {
-    if (!["KOF", "KOF Colombia", "ECO", "KOF Guatemala"].includes(dto)) {
+    if (!["KOF", "ECO", "KOF Guatemala"].includes(dto)) {
       navigate("/home");
     } else if (dto === "CALL CENTER") {
       navigate("/home/clt_callCenter");
@@ -1043,12 +1043,12 @@ export default function Panel() {
         </div>
       )}
 
-      <button className="floating-button" onClick={openTallyPopup}>
+      {/* <button className="floating-button" onClick={openTallyPopup}>
         <img
           src={"../../sampleData/ticket.svg"}
           alt="Descripción de la imagen"
         />
-      </button>
+      </button> */}
     </section>
   );
 }

@@ -516,12 +516,12 @@ export default function Fails() {
           level={selectedAlgorithmValues.level}
         />
       )}
-      <button className="floating-button" onClick={openTallyPopup}>
+      {/* <button className="floating-button" onClick={openTallyPopup}>
         <img
           src={"../../sampleData/ticket.svg"}
           alt="Descripción de la imagen"
         />
-      </button>
+      </button> */}
     </div>
   );
 }

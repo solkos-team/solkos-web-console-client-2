@@ -748,12 +748,12 @@ export default function Coolers() {
           </>
         )}
       </div>
-      <button className="floating-button" onClick={openTallyPopup}>
+      {/* <button className="floating-button" onClick={openTallyPopup}>
         <img
           src={"../../sampleData/ticket.svg"}
           alt="Descripción de la imagen"
         />
-      </button>
+      </button> */}
     </div>
   );
 }

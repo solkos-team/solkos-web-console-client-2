@@ -249,8 +249,75 @@ export default function DrawerO({ opened, onClose, outletDetails }) {
                   fontSize: "0.625rem",
                   borderRadius: "2px",
                   fontWeight: 500,
-                  border: getBorderStyle2(actionable, dto),
-                  color: getColor2(actionable, dto),
+                  border:
+                    actionable === "Visita PdV"
+                      ? "1.5px solid #E67700"
+                      : actionable === "Sin Riesgo"
+                      ? "1.5px solid #40C057"
+                      : actionable === "Estatus sin venta" ||
+                        actionable === "SIN VENTA" ||
+                        actionable === "Acciones urgentes"
+                      ? "1.5px solid #FA5252"
+                      : actionable === "Actualizar Info"
+                      ? "1.5px solid #DA7E05"
+                      : actionable === "Actualizar dato" ||
+                        actionable === "Datos faltantes" ||
+                        actionable === "Monitoreo" ||
+                        actionable === "Movimiento"
+                      ? "1.5px solid #1864AB"
+                      : actionable === "Solicitar serv. correctivo" ||
+                        actionable === "Solicitar serv. preventivos" ||
+                        actionable === "Seguimiento a equipo" ||
+                        actionable === "Visita PdV"
+                      ? "1.5px solid #E67700"
+                      : actionable === "Visita PdV prioritaria"
+                      ? "1.5px solid #C92A2A"
+                      : actionable === "Sin riesgo" ||
+                        actionable === "Sin riesgo - sin venta" ||
+                        actionable === "Visita PdV - sin venta" ||
+                        actionable === "En bodega" ||
+                        actionable === "PdV por asignar"
+                      ? "1.5px solid #2393F4"
+                      : actionable === "Visita PdV para lectura" ||
+                        actionable === "Sin coincidencia" ||
+                        actionable === "Con movimiento"
+                      ? "1.5px solid #FAB005"
+                      : "1.5px solid black",
+                  background: "#FFF",
+                  color:
+                    actionable === "Visita PdV"
+                      ? "#E67700"
+                      : actionable === "Sin Riesgo"
+                      ? "#40C057"
+                      : actionable === "Estatus sin venta" ||
+                        actionable === "SIN VENTA" ||
+                        actionable === "Acciones urgentes"
+                      ? "#FA5252"
+                      : actionable === "Actualizar Info"
+                      ? "#DA7E05"
+                      : actionable === "Actualizar dato" ||
+                        actionable === "Datos faltantes" ||
+                        actionable === "Monitoreo" ||
+                        actionable === "Movimiento"
+                      ? "#1864AB"
+                      : actionable === "Solicitar serv. correctivo" ||
+                        actionable === "Solicitar serv. preventivos" ||
+                        actionable === "Seguimiento a equipo" ||
+                        actionable === "Visita PdV"
+                      ? "#E67700"
+                      : actionable === "Visita PdV prioritaria"
+                      ? "#C92A2A"
+                      : actionable === "Sin riesgo" ||
+                        actionable === "Sin riesgo - sin venta" ||
+                        actionable === "Visita PdV - sin venta" ||
+                        actionable === "En bodega" ||
+                        actionable === "PdV por asignar"
+                      ? "#2393F4"
+                      : actionable === "Visita PdV para lectura" ||
+                        actionable === "Sin coincidencia" ||
+                        actionable === "Con movimiento"
+                      ? "#FAB005"
+                      : "black",
                 }}
               >
                 {actionable ?? "Sin registro"}

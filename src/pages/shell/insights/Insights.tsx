@@ -736,26 +736,41 @@ export default function Insights() {
                         Cantidad
                       </div>
                     </div>
-                    {IndicadoresData.sort((a, b) => {
-                      const order = [
-                        "Sin Riesgo",
-                        "SIN RIESGO",
-                        "SIN RIESGO SIN VENTA",
-                        "Visita PdV",
-                        "VISITA PDV SIN VENTA",
-                        "VISITA PDV PARA LECTURA",
-                        "CON MOVIMIENTO",
-                        "Actualizar Info",
-                        "Estatus sin venta",
-                        "SIN VENTA",
-                        "Acciones urgentes",
-                        "SIN COINCIDENCIA",
-                        "EN BODEGA",
-                        "PDV POR ASIGNAR",
-                      ];
-                      const indexA = order.indexOf(a.algorithm);
-                      const indexB = order.indexOf(b.algorithm);
-                      return indexA - indexB;
+                    {IndicadoresData.sort((a: any, b: any) => {
+                      if (dto !== "KOF Colombia") {
+                        const order = [
+                          "Sin riesgo",
+                          "Sin riesgo - sin venta",
+                          "Visita PdV - sin venta",
+                          "Visita PdV para lectura",
+                          "Con movimiento",
+                          "Sin coincidencia",
+                          "En bodega",
+                          "PdV por asignar",
+                        ];
+                        const indexA = order.indexOf(a.algorithm);
+                        const indexB = order.indexOf(b.algorithm);
+                        return indexA - indexB;
+                      } else {
+                        const orderColombia = [
+                          "Sin riesgo",
+                          "Monitoreo",
+                          "Solicitar serv. preventivo",
+                          "Solicitar serv. correctivo",
+                          "Rectificar datos",
+                          "Datos faltantes",
+                          "Visita PdV",
+                          "Visita PdV prioritaria",
+                          "Movimiento",
+                        ];
+                        const indexAColombia = orderColombia.indexOf(
+                          a.algorithm
+                        );
+                        const indexBColombia = orderColombia.indexOf(
+                          b.algorithm
+                        );
+                        return indexAColombia - indexBColombia;
+                      }
                     }).map((algorithm, index) => {
                       const max = Math.max(
                         ...IndicadoresData.map((alg) => alg.value)
@@ -1128,12 +1143,12 @@ export default function Insights() {
             </section>
           </section>
         </section>
-        <button className="floating-button" onClick={openTallyPopup}>
+        {/* <button className="floating-button" onClick={openTallyPopup}>
           <img
             src={"../../sampleData/ticket.svg"}
             alt="Descripción de la imagen"
           />
-        </button>
+        </button> */}
       </section>
     </div>
   );
