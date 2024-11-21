@@ -93,7 +93,7 @@ export default function DrawerA({
 
   // console.log(level);
   useEffect(() => {
-    value != 0 ? fetchData() : "";
+    fetchData();
   }, [dt, datosPorPagina, opened, currentPage]);
 
   const filterCoolersDataDownload = (coolersData) => {
