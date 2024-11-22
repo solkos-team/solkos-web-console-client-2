@@ -5,7 +5,7 @@ const CONSOLA_PROD = "https://universal-console-server-b7agk5thba-uc.a.run.app";
 const CONSOLA_QA =
   "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
 
-const baseUrl = CONSOLA_QA;
+const baseUrl = CONSOLA_PROD;
 
 // **************************** VAULT ***********************************************
 const VAULT_PROD =
@@ -20,7 +20,7 @@ const baseUrlVault = VAULT_PROD;
 const COOLVIEW_PROD = "https://solkos-coolview-2.firebaseapp.com";
 const COOLVIEW_QA = "https://solkos-coolview-2-qa.firebaseapp.com/";
 
-export const COOLVIEW_LINK = COOLVIEW_QA;
+export const COOLVIEW_LINK = COOLVIEW_PROD;
 
 // *********************************************************************************
 

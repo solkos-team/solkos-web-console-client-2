@@ -42,7 +42,8 @@ export default function DrawerA({
         ? "HIGH_TEMPERATURE_ALERT"
         : selectedAlgorithm === "Desconexión"
         ? "DISCONNECTION_ALERT"
-        : selectedAlgorithm === "Falla asociada al compresor"
+        : // **************
+        selectedAlgorithm === "Falla asociada al compresor"
         ? "COMPRESSOR_FAIL"
         : selectedAlgorithm === "Evaporador bloqueado"
         ? "FREEZING_FAIL"
@@ -50,17 +51,8 @@ export default function DrawerA({
         ? "TEMPERATURE_FAIL"
         : selectedAlgorithm === "Posible daño eléctrico"
         ? "VOLTAGE_FAIL"
-        : selectedAlgorithm === "SIN RIESGO"
-        ? "SIN RIESGO"
-        : selectedAlgorithm === "SIN RIESGO SIN VENTA"
-        ? "SIN RIESGO SIN VENTA"
-        : selectedAlgorithm === "SIN VENTA"
-        ? "Estatus sin venta"
-        : selectedAlgorithm === "VISITA PDV PARA LECTURA"
-        ? "VISITA PDV PARA LECTURA"
-        : selectedAlgorithm === "SIN COINCIDENCIA"
-        ? "SIN COINCIDENCIA"
-        : selectedAlgorithm === "ATENDIDOS"
+        : // *****************
+        selectedAlgorithm === "ATENDIDOS"
         ? "ATENDIDOS"
         : selectedAlgorithm,
     ],
