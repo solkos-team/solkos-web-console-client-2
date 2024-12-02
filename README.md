@@ -13,6 +13,6 @@ Currently, two official plugins are available:
 
 firebase deploy --only hosting:solkos-console2-prd
 
-## QA
+<!-- ## QA
 
-firebase deploy --only hosting:solkos-console-2
+firebase deploy --only hosting:solkos-console-2 -->

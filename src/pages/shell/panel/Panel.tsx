@@ -753,7 +753,7 @@ export default function Panel() {
 
   // Navigation based on organization changes
   useEffect(() => {
-    if (!["KOF", "ECO", "KOF Guatemala"].includes(dto)) {
+    if (!["KOF", "ECO", "KOF Guatemala", "KOF Colombia"].includes(dto)) {
       navigate("/home");
     } else if (dto === "CALL CENTER") {
       navigate("/home/clt_callCenter");
@@ -835,18 +835,18 @@ export default function Panel() {
           >
             <Tabs.List className="tabs-list">
               {[
-                "Actividad del parque",
-                "Control activos",
-                "Lect Gerente",
-                "% Parque reparado",
-                "Cumplimiento mto",
-                "Cumplimiento mto sucursal",
-                "Cumplimiento mto piso",
-                "Tiempo respuesta",
-                "Reincidencia",
-                "Equipos reincidentes",
-                "Detalle O.S",
-                "O.S por activo",
+                "Indicadores Mto",
+                "Indicadores Solkos",
+                // "Lect Gerente",
+                // "% Parque reparado",
+                // "Cumplimiento mto",
+                // "Cumplimiento mto sucursal",
+                // "Cumplimiento mto piso",
+                // "Tiempo respuesta",
+                // "Reincidencia",
+                // "Equipos reincidentes",
+                // "Detalle O.S",
+                // "O.S por activo",
               ].map((tab, index) => (
                 <Tabs.Tab
                   key={index}
@@ -867,15 +867,15 @@ export default function Panel() {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <Tabs.Panel value="tab0">
                   {renderTableauReport(
-                    "https://tableau.efemsa.com/views/Actividadparque/ActividaddelParque"
+                    "https://tableau.efemsa.com/views/IndicadoresMto/IndicadoresMantenimiento"
                   )}
                 </Tabs.Panel>
                 <Tabs.Panel value="tab1">
                   {renderTableauReport(
-                    "https://tableau.efemsa.com/views/Controlactivos/ControlActivos"
+                    "https://tableau.efemsa.com/views/KOF_Colombia/ActividaddelParque"
                   )}
                 </Tabs.Panel>
-                <Tabs.Panel value="tab2">
+                {/* <Tabs.Panel value="tab2">
                   {renderTableauReport(
                     "https://tableau.efemsa.com/views/Lect_Gerente-Zona/Reportes/Solkos/_0"
                   )}
@@ -924,7 +924,7 @@ export default function Panel() {
                   {renderTableauReport(
                     "https://tableau.efemsa.com/views/O_Sporactivo/O_Sporactivo"
                   )}
-                </Tabs.Panel>
+                </Tabs.Panel> */}
               </div>
             )}
           </Tabs>
