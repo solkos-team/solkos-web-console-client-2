@@ -661,7 +661,8 @@ export default function CoolerDetailCC() {
                         // display: userVerify(localStorage.getItem("USER") ?? ""),
                         // display: Role === "root" ? "flex" : "none",
                         display:
-                          Role === "root" && isLoading === false
+                          (Role === "root" || dto === "CALL CENTER") &&
+                          isLoading === false
                             ? "flex"
                             : "none",
                         gap: "5px",
