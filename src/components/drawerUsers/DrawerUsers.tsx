@@ -33,7 +33,7 @@ export default function DrawerUsers({
     // const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
 
     // QA
-    const url = `https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
+    const url = `https://universal-console-server-b7agk5thba-uc.a.run.app/users/${id}`;
     const data = {
       name: nameUser,
       email: emailUser,

@@ -2,16 +2,12 @@ import { FetchOptions } from "../interfaces/ApiInterfaces";
 
 // ***************************** CONSOLA *********************************************
 const CONSOLA_PROD = "https://universal-console-server-b7agk5thba-uc.a.run.app";
-const CONSOLA_QA =
-  "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
 
 const baseUrl = CONSOLA_PROD;
 
 // **************************** VAULT ***********************************************
 const VAULT_PROD =
   "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/";
-const VAULT_QA =
-  "https://qa-test-2---universal-console-server-b7agk5thba-uc.a.run.app/";
 
 const baseUrlVault = VAULT_PROD;
 

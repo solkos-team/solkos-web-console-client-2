@@ -45,7 +45,7 @@ export const MapResponsive = ({ data, setData, isLoading, setIsLoading }) => {
         const token = localStorage.getItem("Token");
 
         const response = await fetch(
-          "https://qa-test---universal-console-server-b7agk5thba-uc.a.run.app/hierachy",
+          "https://universal-console-server-b7agk5thba-uc.a.run.app/hierachy",
           {
             method: "POST",
             headers: {
